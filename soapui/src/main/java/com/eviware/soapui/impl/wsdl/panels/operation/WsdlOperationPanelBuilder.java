@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.panels.operation;
 
-import com.eviware.soapui.config.AnonymousTypeConfig;
 import com.eviware.soapui.impl.EmptyPanelBuilder;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.support.components.JPropertiesTable;

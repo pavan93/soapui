@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.tools;
 
-import com.eviware.soapui.config.MaliciousAttachmentConfig;
-
 import java.util.ArrayList;
 import java.util.List;
 

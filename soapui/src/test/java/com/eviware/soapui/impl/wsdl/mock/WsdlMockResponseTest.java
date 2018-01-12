@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.mock;
 
-import com.eviware.soapui.config.CompressedStringConfig;
-import com.eviware.soapui.config.MockResponseConfig;
-import com.eviware.soapui.config.SettingsConfig;
 import com.eviware.soapui.impl.settings.XmlBeansSettingsImpl;
 import com.eviware.soapui.impl.wsdl.support.CompressionSupport;
 import com.eviware.soapui.model.mock.MockResponse;

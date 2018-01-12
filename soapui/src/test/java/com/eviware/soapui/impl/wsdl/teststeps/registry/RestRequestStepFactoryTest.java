@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.registry;
 
-import com.eviware.soapui.config.RestRequestStepConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.utils.ModelItemFactory;

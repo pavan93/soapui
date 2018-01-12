@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.ModelItemConfig;
-import com.eviware.soapui.config.PropertiesTypeConfig;
 import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;

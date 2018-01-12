@@ -17,7 +17,6 @@
 package com.eviware.soapui.support.editor.inspectors.auth;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.OAuth2FlowConfig;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.impl.rest.actions.oauth.GetOAuthAccessTokenAction;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;

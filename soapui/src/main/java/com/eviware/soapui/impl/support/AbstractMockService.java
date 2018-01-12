@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.BaseMockServiceConfig;
 import com.eviware.soapui.impl.rest.mock.RestMockService;
 import com.eviware.soapui.impl.wsdl.AbstractTestPropertyHolderWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlProject;

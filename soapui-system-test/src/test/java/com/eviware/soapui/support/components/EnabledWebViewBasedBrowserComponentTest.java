@@ -1,7 +1,6 @@
 package com.eviware.soapui.support.components;
 
 import com.smartbear.soapui.utils.IntegrationTest;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 

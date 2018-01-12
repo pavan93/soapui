@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.mock.dispatch;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.MockOperationQueryMatchDispatchConfig;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.mock.DispatchException;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockOperation;

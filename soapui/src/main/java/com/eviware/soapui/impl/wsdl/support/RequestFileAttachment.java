@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support;
 
-import com.eviware.soapui.config.AttachmentConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;
 import com.eviware.soapui.impl.wsdl.WsdlAttachmentContainer;

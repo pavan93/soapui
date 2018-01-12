@@ -18,7 +18,6 @@ package com.eviware.soapui.impl.wsdl.actions.monitor;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.analytics.Analytics;
-import com.eviware.soapui.analytics.SoapUIActions;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.monitor.ContentTypes;
 import com.eviware.soapui.impl.wsdl.monitor.SoapMonitor;

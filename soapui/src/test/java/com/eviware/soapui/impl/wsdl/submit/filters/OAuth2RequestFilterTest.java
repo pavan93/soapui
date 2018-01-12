@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.submit.filters;
 
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.impl.rest.OAuth2ProfileContainer;
 import com.eviware.soapui.impl.rest.RestRequest;
@@ -41,8 +40,6 @@ import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.eviware.soapui.config.CredentialsConfig.AuthType.O_AUTH_2_0;
-import static com.eviware.soapui.config.CredentialsConfig.AuthType.PREEMPTIVE;
 import static com.eviware.soapui.utils.CommonMatchers.anEmptyArray;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;

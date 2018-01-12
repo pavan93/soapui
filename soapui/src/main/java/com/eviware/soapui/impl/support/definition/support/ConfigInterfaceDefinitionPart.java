@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.support.definition.support;
 
-import com.eviware.soapui.config.DefinitionCacheTypeConfig;
-import com.eviware.soapui.config.DefintionPartConfig;
 import com.eviware.soapui.impl.support.definition.InterfaceDefinitionPart;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.w3c.dom.Node;

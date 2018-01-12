@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.submit.filters;
 
-import com.eviware.soapui.config.CredentialsConfig.AuthType;
-import com.eviware.soapui.config.CredentialsConfig.AuthType.Enum;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.BaseHttpRequestTransport;

@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.jms.header;
 
-import com.eviware.soapui.config.JMSDeliveryModeTypeConfig;
-import com.eviware.soapui.config.JMSHeaderConfConfig;
 import com.eviware.soapui.impl.wsdl.submit.transports.jms.JMSHeader;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 

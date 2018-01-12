@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.AttachmentConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.StringToStringMapConfig;
 import com.eviware.soapui.impl.rest.RestRepresentation.Type;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;

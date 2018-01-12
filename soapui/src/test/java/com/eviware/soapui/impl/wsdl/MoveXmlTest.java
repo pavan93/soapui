@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl;
 
-import com.eviware.soapui.config.TestCaseConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import org.apache.xmlbeans.XmlCursor;
 import org.junit.Test;
 

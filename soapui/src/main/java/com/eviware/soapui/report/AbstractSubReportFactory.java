@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.report;
 
-import com.eviware.soapui.config.ReportTypeConfig;
 import com.eviware.soapui.plugins.SoapUIFactory;
 
 public abstract class AbstractSubReportFactory implements SubReportFactory, SoapUIFactory {

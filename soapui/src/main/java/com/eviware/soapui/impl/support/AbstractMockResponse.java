@@ -17,9 +17,6 @@
 package com.eviware.soapui.impl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.BaseMockResponseConfig;
-import com.eviware.soapui.config.CompressedStringConfig;
-import com.eviware.soapui.config.HeaderConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.MutableWsdlAttachmentContainer;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;

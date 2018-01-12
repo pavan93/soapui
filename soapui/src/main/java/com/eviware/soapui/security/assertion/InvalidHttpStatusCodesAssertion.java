@@ -17,7 +17,6 @@
 package com.eviware.soapui.security.assertion;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionCategoryMapping;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionListEntry;

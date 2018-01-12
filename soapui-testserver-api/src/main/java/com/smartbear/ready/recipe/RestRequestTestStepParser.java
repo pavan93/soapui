@@ -1,7 +1,5 @@
 package com.smartbear.ready.recipe;
 
-import com.eviware.soapui.config.AccessTokenPositionConfig;
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.actions.RestServiceBuilder;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.impl.rest.RestRequest;

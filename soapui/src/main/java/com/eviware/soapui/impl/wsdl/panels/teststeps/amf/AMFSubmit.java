@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.panels.teststeps.amf;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestCaseConfig;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.AMFRequestTestStep;
 import com.eviware.soapui.model.iface.Submit;

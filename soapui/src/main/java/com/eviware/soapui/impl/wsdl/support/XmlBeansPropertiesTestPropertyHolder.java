@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.PropertiesTypeConfig;
-import com.eviware.soapui.config.PropertyConfig;
 import com.eviware.soapui.impl.wsdl.MutableTestPropertyHolder;
 import com.eviware.soapui.impl.wsdl.support.wsdl.UrlWsdlLoader;
 import com.eviware.soapui.model.ModelItem;

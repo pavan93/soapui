@@ -18,9 +18,6 @@ package com.eviware.soapui.support.factory;
 
 import com.eviware.soapui.DefaultSoapUICore;
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SoapUIFactoriesConfig;
-import com.eviware.soapui.config.SoapUIFactoryConfig;
-import com.eviware.soapui.config.SoapuiFactoriesDocumentConfig;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.support.editor.inspectors.jms.property;
 
-import com.eviware.soapui.config.JMSPropertyConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.submit.transports.jms.JMSEndpoint;
 import com.eviware.soapui.impl.wsdl.submit.transports.jms.util.JMSUtils;

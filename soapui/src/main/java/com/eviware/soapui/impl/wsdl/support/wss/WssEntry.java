@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wss;
 
-import com.eviware.soapui.config.WSSEntryConfig;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
 import com.eviware.soapui.support.registry.RegistryEntry;
 import org.apache.ws.security.message.WSSecHeader;

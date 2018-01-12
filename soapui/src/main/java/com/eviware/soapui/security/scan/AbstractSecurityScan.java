@@ -17,9 +17,6 @@
 package com.eviware.soapui.security.scan;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlSubmitContext;
 import com.eviware.soapui.impl.wsdl.support.assertions.AssertableConfig;

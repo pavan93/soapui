@@ -19,10 +19,6 @@ package com.eviware.soapui.impl.wadl.inference.schema;
 import com.eviware.soapui.impl.wadl.inference.schema.particles.AttributeParticle;
 import com.eviware.soapui.impl.wadl.inference.schema.particles.ElementParticle;
 import com.eviware.soapui.impl.wadl.inference.schema.particles.ReferenceParticle;
-import com.eviware.soapui.inferredSchema.AttributeParticleConfig;
-import com.eviware.soapui.inferredSchema.ElementParticleConfig;
-import com.eviware.soapui.inferredSchema.ParticleConfig;
-import com.eviware.soapui.inferredSchema.ReferenceParticleConfig;
 import org.apache.xmlbeans.XmlException;
 
 import javax.xml.namespace.QName;

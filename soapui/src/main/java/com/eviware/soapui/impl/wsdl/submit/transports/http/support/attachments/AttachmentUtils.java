@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.PartsConfig;
-import com.eviware.soapui.config.PartsConfig.Part;
 import com.eviware.soapui.impl.wsdl.AttachmentContainer;
 import com.eviware.soapui.impl.wsdl.HttpAttachmentPart;
 import com.eviware.soapui.impl.wsdl.WsdlAttachmentContainer;

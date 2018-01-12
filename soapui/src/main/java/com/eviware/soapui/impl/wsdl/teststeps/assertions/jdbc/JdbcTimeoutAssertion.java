@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.assertions.jdbc;
 
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionCategoryMapping;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionListEntry;

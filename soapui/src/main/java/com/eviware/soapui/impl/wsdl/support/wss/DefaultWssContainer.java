@@ -16,10 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wss;
 
-import com.eviware.soapui.config.IncomingWssConfig;
-import com.eviware.soapui.config.KeyMaterialCryptoConfig;
-import com.eviware.soapui.config.OutgoingWssConfig;
-import com.eviware.soapui.config.WssContainerConfig;
 import com.eviware.soapui.impl.wsdl.support.ExternalDependency;
 import com.eviware.soapui.impl.wsdl.support.wss.crypto.CryptoType;
 import com.eviware.soapui.impl.wsdl.support.wss.crypto.KeyMaterialWssCrypto;

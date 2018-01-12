@@ -38,13 +38,6 @@ import com.eviware.x.form.XFormFactory;
 import com.eviware.x.form.XFormField;
 import com.eviware.x.form.XFormFieldListener;
 import com.eviware.x.form.XFormTextField;
-import org.jboss.jbosswsTools.ConfigurationDocument;
-import org.jboss.jbosswsTools.ConfigurationType;
-import org.jboss.jbosswsTools.GlobalType;
-import org.jboss.jbosswsTools.PkgNSType;
-import org.jboss.jbosswsTools.WsdlToJavaType;
-import org.jboss.jbosswsTools.WsdlToJavaType.ParameterStyle;
-import org.jboss.jbosswsTools.WsxmlType;
 import org.w3c.dom.Element;
 
 import java.io.File;

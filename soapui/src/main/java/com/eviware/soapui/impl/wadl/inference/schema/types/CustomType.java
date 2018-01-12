@@ -19,7 +19,6 @@ package com.eviware.soapui.impl.wadl.inference.schema.types;
 import com.eviware.soapui.impl.wadl.inference.schema.Context;
 import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.schema.Type;
-import com.eviware.soapui.inferredSchema.CustomTypeConfig;
 import org.apache.xmlbeans.SchemaTypeLoader;
 import org.apache.xmlbeans.SchemaTypeSystem;
 import org.apache.xmlbeans.XmlBeans;

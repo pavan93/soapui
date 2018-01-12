@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support;
 
-import com.eviware.soapui.config.AttachmentConfig;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse;
 
 import java.io.File;

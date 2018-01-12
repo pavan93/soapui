@@ -1,6 +1,5 @@
 package com.smartbear.ready.recipe;
 
-import com.eviware.soapui.config.AbstractRequestConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.support.FileAttachment;
 import com.eviware.soapui.impl.wsdl.teststeps.TestRequest;

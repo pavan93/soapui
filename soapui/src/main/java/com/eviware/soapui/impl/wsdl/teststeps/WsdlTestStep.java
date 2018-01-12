@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps;
 
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;

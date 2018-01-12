@@ -17,11 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AnonymousTypeConfig;
-import com.eviware.soapui.config.DefinitionCacheConfig;
-import com.eviware.soapui.config.DefinitionCacheTypeConfig;
-import com.eviware.soapui.config.DefintionPartConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.impl.support.definition.DefinitionLoader;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;

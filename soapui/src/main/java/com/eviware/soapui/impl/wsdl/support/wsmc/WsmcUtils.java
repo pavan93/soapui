@@ -17,9 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wsmc;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.HttpRequestConfig;
-import com.eviware.soapui.config.WsaConfigConfig;
-import com.eviware.soapui.config.WsrmConfigConfig;
 import com.eviware.soapui.impl.support.wsa.WsaRequest;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.WsdlSubmit;

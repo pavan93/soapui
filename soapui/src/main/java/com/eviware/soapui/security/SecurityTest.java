@@ -17,10 +17,6 @@
 package com.eviware.soapui.security;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.SecurityTestConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
-import com.eviware.soapui.config.TestStepSecurityTestConfig;
 import com.eviware.soapui.impl.wsdl.AbstractTestPropertyHolderWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.ModelItem;

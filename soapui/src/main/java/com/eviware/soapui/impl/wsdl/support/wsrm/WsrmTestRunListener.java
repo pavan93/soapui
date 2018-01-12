@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wsrm;
 
-import com.eviware.soapui.config.WsrmVersionTypeConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.support.soap.SoapVersion;
 import com.eviware.soapui.impl.wsdl.support.wsmc.WsmcInjection;

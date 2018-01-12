@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestResource;

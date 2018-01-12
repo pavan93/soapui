@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wss;
 
-import com.eviware.soapui.config.WSSEntryConfig;
 import com.eviware.soapui.impl.wsdl.support.wss.entries.AutomaticSAMLEntry;
 import com.eviware.soapui.impl.wsdl.support.wss.entries.EncryptionEntry;
 import com.eviware.soapui.impl.wsdl.support.wss.entries.ManualSAMLEntry;

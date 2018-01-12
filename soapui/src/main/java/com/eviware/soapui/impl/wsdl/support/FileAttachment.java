@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AttachmentConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.teststeps.BeanPathPropertySupport;
 import com.eviware.soapui.support.Tools;

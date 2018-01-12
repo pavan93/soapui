@@ -27,8 +27,6 @@ import org.apache.xmlbeans.SchemaTypeLoader;
 import org.apache.xmlbeans.XmlBeans;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
-import org.w3.x2003.x05.soapEnvelope.EnvelopeDocument;
-import org.w3.x2003.x05.soapEnvelope.FaultDocument;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;

@@ -19,8 +19,6 @@ package com.eviware.soapui.impl;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.SoapUIActions;
-import com.eviware.soapui.config.InterfaceConfig;
-import com.eviware.soapui.config.WsdlInterfaceConfig;
 import com.eviware.soapui.impl.support.definition.support.InvalidDefinitionException;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;

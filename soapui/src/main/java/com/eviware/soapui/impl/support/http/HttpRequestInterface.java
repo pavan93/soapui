@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.support.http;
 
-import com.eviware.soapui.config.AbstractRequestConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;

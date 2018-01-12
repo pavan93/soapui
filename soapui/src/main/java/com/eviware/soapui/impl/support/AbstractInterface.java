@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.EndpointsConfig;
-import com.eviware.soapui.config.InterfaceConfig;
 import com.eviware.soapui.impl.support.definition.support.AbstractDefinitionContext;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlProject;

@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.support.types;
 
-import com.eviware.soapui.config.StringListConfig;
 import com.eviware.soapui.support.StringUtils;
 import org.apache.xmlbeans.XmlException;
 

@@ -17,10 +17,6 @@
 package com.eviware.soapui.security.assertion;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CrossSiteScriptingScanConfig;
-import com.eviware.soapui.config.HttpRequestConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.support.HttpUtils;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionListEntry;
 import com.eviware.soapui.impl.wsdl.panels.teststeps.support.AbstractGroovyEditorModel;

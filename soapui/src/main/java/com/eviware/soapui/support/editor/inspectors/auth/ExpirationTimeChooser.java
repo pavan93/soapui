@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.support.editor.inspectors.auth;
 
-import com.eviware.soapui.config.TimeUnitConfig;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import org.apache.commons.lang.WordUtils;
 

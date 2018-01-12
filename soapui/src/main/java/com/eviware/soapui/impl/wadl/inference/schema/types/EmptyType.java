@@ -22,7 +22,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Settings;
 import com.eviware.soapui.impl.wadl.inference.schema.Type;
 import com.eviware.soapui.impl.wadl.inference.schema.content.EmptyContent;
 import com.eviware.soapui.impl.wadl.inference.support.TypeInferrer;
-import com.eviware.soapui.inferredSchema.EmptyTypeConfig;
 import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;

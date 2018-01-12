@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.assertions;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.TestAssertionRegistry;
 import com.eviware.soapui.model.testsuite.Assertable;

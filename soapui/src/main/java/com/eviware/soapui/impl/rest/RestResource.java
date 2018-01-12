@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.OldRestRequestConfig;
-import com.eviware.soapui.config.RestMethodConfig;
-import com.eviware.soapui.config.RestResourceConfig;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.rest.support.RestRequestConverter;

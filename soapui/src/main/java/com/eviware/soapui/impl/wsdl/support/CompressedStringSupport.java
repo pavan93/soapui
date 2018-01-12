@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CompressedStringConfig;
 import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.Tools;
 import org.apache.commons.codec.binary.Base64;

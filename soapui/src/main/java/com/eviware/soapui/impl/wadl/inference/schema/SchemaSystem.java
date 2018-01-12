@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wadl.inference.schema;
 
 import com.eviware.soapui.impl.wadl.inference.ConflictHandler;
-import com.eviware.soapui.inferredSchema.SchemaConfig;
-import com.eviware.soapui.inferredSchema.SchemaSetConfig;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;

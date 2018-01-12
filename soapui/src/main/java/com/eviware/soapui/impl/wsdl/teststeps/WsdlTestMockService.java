@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps;
 
-import com.eviware.soapui.config.MockServiceConfig;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockService;
 
 public class WsdlTestMockService extends WsdlMockService {

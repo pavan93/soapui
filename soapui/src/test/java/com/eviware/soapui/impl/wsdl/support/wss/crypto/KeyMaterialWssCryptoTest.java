@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wss.crypto;
 
-import com.eviware.soapui.config.KeyMaterialCryptoConfig;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.support.wss.DefaultWssContainer;
 import com.eviware.soapui.support.SoapUIException;

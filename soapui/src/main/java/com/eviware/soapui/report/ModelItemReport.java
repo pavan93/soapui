@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.report;
 
-import com.eviware.soapui.config.ReportTypeConfig;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.support.types.StringToObjectMap;

@@ -17,11 +17,6 @@
 package com.eviware.soapui.impl.wsdl.loadtest;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.LoadStrategyConfig;
-import com.eviware.soapui.config.LoadTestAssertionConfig;
-import com.eviware.soapui.config.LoadTestConfig;
-import com.eviware.soapui.config.LoadTestLimitTypesConfig;
-import com.eviware.soapui.config.LoadTestLimitTypesConfig.Enum;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.loadtest.assertions.AbstractLoadTestAssertion;
 import com.eviware.soapui.impl.wsdl.loadtest.assertions.LoadTestAssertionRegistry;

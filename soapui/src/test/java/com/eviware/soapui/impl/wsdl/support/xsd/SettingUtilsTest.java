@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.xsd;
 
-import com.eviware.soapui.config.StringListConfig;
 import org.junit.Test;
 
 import javax.xml.namespace.QName;

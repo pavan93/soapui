@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.assertions;
 
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.WsdlSubmitContext;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XQueryContainsAssertion;
 import com.eviware.soapui.model.iface.SubmitContext;

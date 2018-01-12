@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.submit.filters;
 
-import com.eviware.soapui.config.EndpointConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.endpoint.DefaultEndpointStrategy;
 import com.eviware.soapui.impl.wsdl.endpoint.DefaultEndpointStrategy.EndpointDefaults;

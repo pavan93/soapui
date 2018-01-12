@@ -20,7 +20,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Content;
 import com.eviware.soapui.impl.wadl.inference.schema.Context;
 import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.support.TypeInferrer;
-import com.eviware.soapui.inferredSchema.EmptyContentConfig;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 

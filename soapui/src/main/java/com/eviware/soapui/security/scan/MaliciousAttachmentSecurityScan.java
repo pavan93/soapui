@@ -17,11 +17,6 @@
 package com.eviware.soapui.security.scan;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.MaliciousAttachmentConfig;
-import com.eviware.soapui.config.MaliciousAttachmentElementConfig;
-import com.eviware.soapui.config.MaliciousAttachmentSecurityScanConfig;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.AttachmentContainer;
 import com.eviware.soapui.model.ModelItem;

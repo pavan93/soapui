@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.endpoint;
 
-import com.eviware.soapui.config.EndpointConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.support.http.HttpRequestTestStep;

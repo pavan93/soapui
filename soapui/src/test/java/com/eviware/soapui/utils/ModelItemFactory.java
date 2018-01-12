@@ -16,22 +16,6 @@
 
 package com.eviware.soapui.utils;
 
-import com.eviware.soapui.config.MockOperationConfig;
-import com.eviware.soapui.config.MockResponseConfig;
-import com.eviware.soapui.config.MockServiceConfig;
-import com.eviware.soapui.config.OAuth2ProfileConfig;
-import com.eviware.soapui.config.OAuth2ProfileContainerConfig;
-import com.eviware.soapui.config.OperationConfig;
-import com.eviware.soapui.config.RESTMockResponseConfig;
-import com.eviware.soapui.config.RESTMockServiceConfig;
-import com.eviware.soapui.config.RestMethodConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.RestResourceConfig;
-import com.eviware.soapui.config.RestServiceConfig;
-import com.eviware.soapui.config.TestCaseConfig;
-import com.eviware.soapui.config.TestStepConfig;
-import com.eviware.soapui.config.TestSuiteConfig;
-import com.eviware.soapui.config.WsdlInterfaceConfig;
 import com.eviware.soapui.impl.WorkspaceImpl;
 import com.eviware.soapui.impl.rest.DefaultOAuth2ProfileContainer;
 import com.eviware.soapui.impl.rest.OAuth2Profile;

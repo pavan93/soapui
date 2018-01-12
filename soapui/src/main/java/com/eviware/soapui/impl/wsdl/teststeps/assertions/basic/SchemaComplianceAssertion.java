@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps.assertions.basic;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.rest.RestResource;
 import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.support.AbstractInterface;

@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.panels.testcase;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.actions.teststep.RunFromTestStepAction;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;

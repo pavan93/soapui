@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.rest.support.handlers;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AbstractRequestConfig;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.support.MediaTypeHandler;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;

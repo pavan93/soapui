@@ -17,11 +17,6 @@
 package com.eviware.soapui.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.ModelItemConfig;
-import com.eviware.soapui.config.ProjectConfig;
-import com.eviware.soapui.config.RegexConfig;
-import com.eviware.soapui.config.RestParametersConfig;
-import com.eviware.soapui.config.SearchPatternsDocumentConfig;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.rest.support.XmlBeansRestParamsTestPropertyHolder;

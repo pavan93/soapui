@@ -24,11 +24,7 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
-import org.w3.x2007.x05.addressing.metadata.AddressingDocument.Addressing;
 import org.w3c.dom.Element;
-import org.xmlsoap.schemas.ws.x2004.x09.policy.OptionalType;
-import org.xmlsoap.schemas.ws.x2004.x09.policy.Policy;
-import org.xmlsoap.schemas.ws.x2004.x09.policy.PolicyDocument;
 
 import javax.wsdl.Definition;
 import javax.wsdl.extensions.ElementExtensible;

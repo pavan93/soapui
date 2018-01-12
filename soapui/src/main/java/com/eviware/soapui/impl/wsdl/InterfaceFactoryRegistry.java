@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl;
 
-import com.eviware.soapui.config.InterfaceConfig;
 import com.eviware.soapui.impl.InterfaceFactory;
 import com.eviware.soapui.impl.WsdlInterfaceFactory;
 import com.eviware.soapui.impl.rest.RestServiceFactory;

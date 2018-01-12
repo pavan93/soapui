@@ -16,10 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps;
 
-import com.eviware.soapui.config.GotoConditionConfig;
-import com.eviware.soapui.config.GotoConditionTypeConfig;
-import com.eviware.soapui.config.GotoStepConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.support.http.HttpRequestTestStep;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;

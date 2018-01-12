@@ -19,7 +19,6 @@ package com.eviware.soapui.impl.wadl.inference.support;
 import com.eviware.soapui.impl.wadl.inference.ConflictHandler;
 import com.eviware.soapui.impl.wadl.inference.InferredSchema;
 import com.eviware.soapui.impl.wadl.inference.schema.SchemaSystem;
-import com.eviware.soapui.inferredSchema.SchemaSetConfig;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.SchemaTypeSystem;
 import org.apache.xmlbeans.XmlBeans;

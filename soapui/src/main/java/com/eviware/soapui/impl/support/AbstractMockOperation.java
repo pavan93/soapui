@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.support;
 
-import com.eviware.soapui.config.BaseMockOperationConfig;
-import com.eviware.soapui.config.MockOperationDispatchStyleConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.mock.dispatch.MockOperationDispatchRegistry;
 import com.eviware.soapui.impl.wsdl.mock.dispatch.MockOperationDispatcher;

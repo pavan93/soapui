@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.jms.property;
 
-import com.eviware.soapui.config.JMSPropertiesConfConfig;
-import com.eviware.soapui.config.JMSPropertyConfig;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 
 import java.beans.PropertyChangeListener;

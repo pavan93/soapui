@@ -16,7 +16,6 @@
 
 package com.eviware.soapui;
 
-import com.eviware.soapui.config.SoapuiSettingsDocumentConfig;
 import com.eviware.soapui.impl.rest.panels.request.inspectors.representations.RestRepresentationsInspectorFactory;
 import com.eviware.soapui.impl.rest.panels.request.inspectors.schema.InferredSchemaInspectorFactory;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.SwingToolHost;

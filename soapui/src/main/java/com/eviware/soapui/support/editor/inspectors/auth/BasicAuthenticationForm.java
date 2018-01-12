@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.support.editor.inspectors.auth;
 
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.support.components.SimpleBindingForm;
 import com.jgoodies.binding.PresentationModel;

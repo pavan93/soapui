@@ -17,7 +17,6 @@
 package com.eviware.soapui.security.registry;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SecurityScanConfig;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.security.ui.SecurityConfigurationDialogBuilder;
 import com.eviware.soapui.support.types.StringToStringMap;

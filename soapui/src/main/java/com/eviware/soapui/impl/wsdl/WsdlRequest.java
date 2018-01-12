@@ -17,10 +17,6 @@
 package com.eviware.soapui.impl.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
-import com.eviware.soapui.config.WsdlRequestConfig;
-import com.eviware.soapui.config.WsrmVersionTypeConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.submit.RequestTransportRegistry;

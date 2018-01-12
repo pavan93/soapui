@@ -17,12 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.LoadTestConfig;
-import com.eviware.soapui.config.RunTestCaseRunModeTypeConfig;
-import com.eviware.soapui.config.RunTestCaseRunModeTypeConfig.Enum;
-import com.eviware.soapui.config.RunTestCaseStepConfig;
-import com.eviware.soapui.config.TestCaseConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder;
 import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder.PropertiesStepProperty;

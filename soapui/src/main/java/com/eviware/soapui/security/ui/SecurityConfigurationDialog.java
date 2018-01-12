@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.ui;
 
-import com.eviware.soapui.config.StrategyTypeConfig;
 import com.eviware.soapui.impl.wsdl.actions.project.SimpleDialog;
 import com.eviware.soapui.model.security.SecurityParametersTableModel;
 import com.eviware.soapui.model.security.SecurityScan;

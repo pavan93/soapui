@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.support;
 
-import com.eviware.soapui.config.CheckedParameterConfig;
-import com.eviware.soapui.config.CheckedParametersListConfig;
 import com.eviware.soapui.model.security.SecurityCheckedParameter;
 import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.security.SecurityScanParameterHolderListener;

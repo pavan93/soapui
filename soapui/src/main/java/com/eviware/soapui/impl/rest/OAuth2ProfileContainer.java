@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.OAuth2ProfileContainerConfig;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;
 

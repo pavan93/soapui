@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support;
 
-import com.eviware.soapui.config.AttachmentConfig;
 import com.eviware.soapui.model.iface.Attachment;
 import org.apache.xmlbeans.XmlObject;
 

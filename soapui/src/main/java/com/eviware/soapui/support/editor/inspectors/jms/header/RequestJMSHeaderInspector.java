@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.support.editor.inspectors.jms.header;
 
-import com.eviware.soapui.config.JMSDeliveryModeTypeConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.submit.transports.jms.JMSEndpoint;
 import com.eviware.soapui.support.components.SimpleBindingForm;

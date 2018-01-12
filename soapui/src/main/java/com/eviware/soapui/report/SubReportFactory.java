@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.report;
 
-import com.eviware.soapui.config.ReportTypeConfig;
-
 public interface SubReportFactory {
     public SubReport[] buildSubReports(ModelItemReport modelItem);
 

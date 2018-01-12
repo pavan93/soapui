@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.support;
 
-import com.eviware.soapui.config.AbstractRequestConfig;
 import com.eviware.soapui.model.iface.Request;
 
 public class EndpointSupport {

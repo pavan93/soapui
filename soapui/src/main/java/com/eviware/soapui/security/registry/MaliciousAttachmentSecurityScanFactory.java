@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.registry;
 
-import com.eviware.soapui.config.MaliciousAttachmentSecurityScanConfig;
-import com.eviware.soapui.config.SecurityScanConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStep;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.testsuite.TestStep;

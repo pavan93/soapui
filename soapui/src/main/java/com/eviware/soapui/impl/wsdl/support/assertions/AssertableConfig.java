@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.assertions;
 
-import com.eviware.soapui.config.TestAssertionConfig;
-
 import java.util.List;
 
 public interface AssertableConfig {

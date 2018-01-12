@@ -34,11 +34,6 @@ import com.eviware.x.form.XForm;
 import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormDialogBuilder;
 import com.eviware.x.form.XFormFactory;
-import com.sun.java.xml.ns.jaxRpc.ri.config.ConfigurationDocument;
-import com.sun.java.xml.ns.jaxRpc.ri.config.ConfigurationDocument.Configuration;
-import com.sun.java.xml.ns.jaxRpc.ri.config.NamespaceMappingRegistryType;
-import com.sun.java.xml.ns.jaxRpc.ri.config.NamespaceMappingType;
-import com.sun.java.xml.ns.jaxRpc.ri.config.WsdlType;
 
 import java.io.File;
 import java.io.IOException;

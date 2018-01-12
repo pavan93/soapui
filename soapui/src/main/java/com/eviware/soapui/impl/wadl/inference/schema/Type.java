@@ -20,11 +20,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.types.CustomType;
 import com.eviware.soapui.impl.wadl.inference.schema.types.EmptyType;
 import com.eviware.soapui.impl.wadl.inference.schema.types.SimpleType;
 import com.eviware.soapui.impl.wadl.inference.schema.types.TypeReferenceType;
-import com.eviware.soapui.inferredSchema.CustomTypeConfig;
-import com.eviware.soapui.inferredSchema.EmptyTypeConfig;
-import com.eviware.soapui.inferredSchema.SimpleTypeConfig;
-import com.eviware.soapui.inferredSchema.TypeConfig;
-import com.eviware.soapui.inferredSchema.TypeReferenceConfig;
 import org.apache.xmlbeans.XmlException;
 
 /**

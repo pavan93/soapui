@@ -17,10 +17,6 @@
 package com.eviware.soapui.security.scan;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.MalformedXmlAttributeConfig;
-import com.eviware.soapui.config.MalformedXmlConfig;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.security.SecurityCheckedParameter;

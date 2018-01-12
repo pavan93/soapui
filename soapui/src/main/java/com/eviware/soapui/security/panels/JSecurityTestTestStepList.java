@@ -17,7 +17,6 @@
 package com.eviware.soapui.security.panels;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SecurityScanConfig;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.security.SecurityScan;

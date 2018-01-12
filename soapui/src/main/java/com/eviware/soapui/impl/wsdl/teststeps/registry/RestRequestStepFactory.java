@@ -16,11 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.registry;
 
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.RestRequestStepConfig;
-import com.eviware.soapui.config.StringToStringMapConfig;
-import com.eviware.soapui.config.StringToStringMapConfig.Entry;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestResource;

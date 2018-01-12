@@ -17,12 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.MockOperationDispatchStyleConfig;
-import com.eviware.soapui.config.MockResponseConfig;
-import com.eviware.soapui.config.MockResponseStepConfig;
-import com.eviware.soapui.config.MockServiceConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;

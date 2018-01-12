@@ -17,9 +17,6 @@
 package com.eviware.soapui.impl.wsdl.actions.operation;
 
 import com.eviware.soapui.analytics.Analytics;
-import com.eviware.soapui.analytics.SoapUIActions;
-import com.eviware.soapui.config.MockResponseStepConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.actions.support.AbstractAddToTestCaseAction;
 import com.eviware.soapui.impl.wsdl.support.CompressedStringSupport;

@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wss.crypto;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.KeyMaterialCryptoConfig;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.support.ExternalDependency;
 import com.eviware.soapui.impl.wsdl.support.PathPropertyExternalDependency;

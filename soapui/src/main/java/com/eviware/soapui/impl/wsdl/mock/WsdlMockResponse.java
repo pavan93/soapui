@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl.mock;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AttachmentConfig;
-import com.eviware.soapui.config.MockResponseConfig;
 import com.eviware.soapui.impl.support.AbstractMockResponse;
 import com.eviware.soapui.impl.wsdl.HttpAttachmentPart;
 import com.eviware.soapui.impl.wsdl.WsdlContentPart;

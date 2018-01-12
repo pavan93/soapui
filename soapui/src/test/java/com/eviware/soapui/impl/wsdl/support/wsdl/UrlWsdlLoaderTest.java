@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wsdl;
 
-import com.eviware.soapui.config.DefinitionCacheConfig;
 import org.junit.Test;
 
 import java.io.File;

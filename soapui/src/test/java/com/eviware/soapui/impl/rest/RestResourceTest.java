@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.RestParameterConfig;
-import com.eviware.soapui.config.RestParametersConfig;
-import com.eviware.soapui.config.RestResourceConfig;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.wsdl.WsdlProject;

@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wsa;
 
-import com.eviware.soapui.config.MustUnderstandTypeConfig;
-import com.eviware.soapui.config.WsaConfigConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 
 import java.beans.PropertyChangeListener;

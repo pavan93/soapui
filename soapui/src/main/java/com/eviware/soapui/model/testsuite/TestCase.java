@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.model.testsuite;
 
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.model.TestModelItem;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.support.types.StringToObjectMap;

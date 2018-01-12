@@ -1,6 +1,5 @@
 package com.smartbear.ready.recipe;
 
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;

@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.model.environment;
 
-import com.eviware.soapui.config.ServiceConfig;
-
 public interface Service {
 
     public void setEnvironment(Environment environment);

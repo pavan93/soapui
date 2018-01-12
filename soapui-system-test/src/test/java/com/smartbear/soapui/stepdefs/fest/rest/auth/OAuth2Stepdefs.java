@@ -15,7 +15,6 @@
 */
 package com.smartbear.soapui.stepdefs.fest.rest.auth;
 
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.support.editor.inspectors.auth.OAuth2Form;
 import com.eviware.soapui.support.editor.inspectors.auth.OAuth2GetAccessTokenForm;

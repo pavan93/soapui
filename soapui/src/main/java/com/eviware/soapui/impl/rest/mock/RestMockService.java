@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.rest.mock;
 
-import com.eviware.soapui.config.RESTMockActionConfig;
-import com.eviware.soapui.config.RESTMockServiceConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestResource;

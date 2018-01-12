@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.actions.testcase;
 
-import com.eviware.soapui.config.WsrmVersionTypeConfig;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.settings.HttpSettings;

@@ -16,13 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.AccessTokenPositionConfig;
-import com.eviware.soapui.config.AccessTokenStatusConfig;
-import com.eviware.soapui.config.OAuth2FlowConfig;
-import com.eviware.soapui.config.OAuth2ProfileConfig;
-import com.eviware.soapui.config.RefreshAccessTokenMethodConfig;
-import com.eviware.soapui.config.StringListConfig;
-import com.eviware.soapui.config.TimeUnitConfig;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionsResult;

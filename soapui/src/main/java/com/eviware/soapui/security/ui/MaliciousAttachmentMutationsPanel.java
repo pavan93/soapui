@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.security.ui;
 
-import com.eviware.soapui.config.MaliciousAttachmentConfig;
-import com.eviware.soapui.config.MaliciousAttachmentElementConfig;
-import com.eviware.soapui.config.MaliciousAttachmentSecurityScanConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.iface.Attachment;

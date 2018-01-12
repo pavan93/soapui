@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.rest.actions.oauth;
 
-import com.eviware.soapui.config.OAuth2ProfileConfig;
 import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.ModelItemFactory;

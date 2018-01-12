@@ -37,15 +37,6 @@ import com.eviware.x.form.XForm;
 import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormDialogBuilder;
 import com.eviware.x.form.XFormFactory;
-import org.jboss.jbosswsTools.ConfigurationDocument;
-import org.jboss.jbosswsTools.ConfigurationType;
-import org.jboss.jbosswsTools.JavaToWsdlType;
-import org.jboss.jbosswsTools.MappingType;
-import org.jboss.jbosswsTools.NamespacesType;
-import org.jboss.jbosswsTools.ServiceType;
-import org.jboss.jbosswsTools.ServiceType.ParameterStyle;
-import org.jboss.jbosswsTools.ServiceType.Style;
-import org.jboss.jbosswsTools.WsxmlType;
 
 import java.io.File;
 import java.io.IOException;

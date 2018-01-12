@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl;
 
-import com.eviware.soapui.config.WsdlInterfaceConfig;
 import org.junit.Before;
 import org.junit.Test;
 

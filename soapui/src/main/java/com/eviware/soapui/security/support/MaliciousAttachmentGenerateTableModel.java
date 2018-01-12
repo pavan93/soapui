@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.support;
 
-import com.eviware.soapui.config.MaliciousAttachmentConfig;
 import com.eviware.soapui.support.UISupport;
 
 public class MaliciousAttachmentGenerateTableModel extends MaliciousAttachmentTableModel {

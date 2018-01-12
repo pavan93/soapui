@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.registry;
 
-import com.eviware.soapui.config.SecurityScanConfig;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.security.scan.AbstractSecurityScan;

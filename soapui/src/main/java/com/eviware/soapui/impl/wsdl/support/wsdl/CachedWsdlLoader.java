@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.support.wsdl;
 
-import com.eviware.soapui.config.DefinitionCacheConfig;
-import com.eviware.soapui.config.DefinitionCacheTypeConfig;
-import com.eviware.soapui.config.DefintionPartConfig;
 import com.eviware.soapui.impl.support.AbstractInterface;
 import com.eviware.soapui.impl.wsdl.support.Constants;
 import com.eviware.soapui.impl.wsdl.support.PathUtils;

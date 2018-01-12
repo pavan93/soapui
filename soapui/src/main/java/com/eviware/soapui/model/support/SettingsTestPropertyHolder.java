@@ -17,7 +17,6 @@
 package com.eviware.soapui.model.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.PropertiesTypeConfig;
 import com.eviware.soapui.impl.wsdl.MutableTestPropertyHolder;
 import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder;
 import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder.PropertiesStepProperty;

@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.loadtest.strategy;
 
-import com.eviware.soapui.config.LoadTestLimitTypesConfig;
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
 import com.eviware.soapui.model.testsuite.LoadTestRunContext;
 import com.eviware.soapui.model.testsuite.LoadTestRunner;

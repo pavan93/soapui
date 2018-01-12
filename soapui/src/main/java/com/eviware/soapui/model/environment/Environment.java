@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.model.environment;
 
-import com.eviware.soapui.config.ServiceConfig;
 import com.eviware.soapui.model.project.Project;
 
 public interface Environment {

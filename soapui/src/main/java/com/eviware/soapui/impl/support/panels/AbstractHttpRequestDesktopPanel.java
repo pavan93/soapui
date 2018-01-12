@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.support.panels;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;
 import com.eviware.soapui.impl.support.EndpointsComboBoxModel;

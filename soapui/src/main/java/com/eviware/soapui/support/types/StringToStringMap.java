@@ -17,7 +17,6 @@
 package com.eviware.soapui.support.types;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.StringToStringMapConfig;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl;
 
-import com.eviware.soapui.config.InterfaceConfig;
 import com.eviware.soapui.impl.support.AbstractInterface;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 

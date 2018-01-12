@@ -16,10 +16,6 @@
 
 package com.eviware.soapui.security;
 
-import com.eviware.soapui.config.ExecutionStrategyConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
-import com.eviware.soapui.config.StrategyTypeConfig.Enum;
-
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 

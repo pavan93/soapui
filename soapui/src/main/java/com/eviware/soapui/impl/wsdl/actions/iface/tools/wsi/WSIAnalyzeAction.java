@@ -33,15 +33,6 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 import org.apache.log4j.Logger;
-import org.wsI.testing.x2003.x03.analyzerConfig.AssertionResults;
-import org.wsI.testing.x2003.x03.analyzerConfig.Configuration;
-import org.wsI.testing.x2003.x03.analyzerConfig.ConfigurationDocument;
-import org.wsI.testing.x2003.x03.analyzerConfig.LogFile;
-import org.wsI.testing.x2003.x03.analyzerConfig.ReportFile;
-import org.wsI.testing.x2003.x03.analyzerConfig.WsdlElementReference;
-import org.wsI.testing.x2003.x03.analyzerConfig.WsdlElementType;
-import org.wsI.testing.x2003.x03.analyzerConfig.WsdlReference;
-import org.wsI.testing.x2003.x03.common.AddStyleSheet;
 
 import javax.swing.SwingUtilities;
 import javax.xml.transform.Source;

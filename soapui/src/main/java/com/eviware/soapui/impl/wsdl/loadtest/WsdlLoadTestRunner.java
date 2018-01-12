@@ -17,10 +17,6 @@
 package com.eviware.soapui.impl.wsdl.loadtest;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.LoadTestConfig;
-import com.eviware.soapui.config.LoadTestLimitTypesConfig;
-import com.eviware.soapui.config.SecurityTestConfig;
-import com.eviware.soapui.config.TestCaseConfig;
 import com.eviware.soapui.impl.wsdl.loadtest.log.LoadTestLogMessageEntry;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCaseRunner;

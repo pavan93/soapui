@@ -17,10 +17,6 @@
 package com.eviware.soapui.impl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SoapuiWorkspaceDocumentConfig;
-import com.eviware.soapui.config.WorkspaceProjectConfig;
-import com.eviware.soapui.config.WorkspaceProjectConfig.Status;
-import com.eviware.soapui.config.WorkspaceProjectConfig.Type;
 import com.eviware.soapui.impl.settings.XmlBeansSettingsImpl;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.WsdlProjectFactory;

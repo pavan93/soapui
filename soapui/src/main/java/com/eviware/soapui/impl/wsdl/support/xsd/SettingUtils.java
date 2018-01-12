@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.xsd;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.StringListConfig;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.types.StringList;
 

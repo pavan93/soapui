@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.support;
 
-import com.eviware.soapui.config.MaliciousAttachmentConfig;
 import com.eviware.soapui.security.tools.AttachmentElement;
 import com.eviware.soapui.security.ui.MaliciousAttachmentMutationsPanel.MutationTables;
 import com.eviware.x.impl.swing.JFormDialog;

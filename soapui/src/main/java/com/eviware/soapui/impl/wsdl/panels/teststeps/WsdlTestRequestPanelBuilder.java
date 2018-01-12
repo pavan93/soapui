@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.panels.teststeps;
 
-import com.eviware.soapui.config.CredentialsConfig.AuthType;
 import com.eviware.soapui.impl.EmptyPanelBuilder;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequest;

@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.rest;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RestResourceRepresentationConfig;
-import com.eviware.soapui.config.RestResourceRepresentationTypeConfig;
 import com.eviware.soapui.impl.rest.panels.request.inspectors.schema.InferredSchemaManager;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.rest.support.XmlBeansRestParamsTestPropertyHolder;

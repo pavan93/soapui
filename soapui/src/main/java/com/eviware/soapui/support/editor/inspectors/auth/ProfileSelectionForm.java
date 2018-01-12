@@ -18,7 +18,6 @@ package com.eviware.soapui.support.editor.inspectors.auth;
 
 import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.SoapUIActions;
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.rest.OAuth1Profile;
 import com.eviware.soapui.impl.rest.OAuth1ProfileContainer;
 import com.eviware.soapui.impl.rest.OAuth1ProfileListener;
@@ -68,8 +67,6 @@ import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_O_AUTH10;
 import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_O_AUTH10_FOR_TEST_REQUEST;
 import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_SPNEGO_KERBEROS_AUTH;
 import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_SPNEGO_KERBEROS_AUTH_FOR_TEST_REQUEST;
-import static com.eviware.soapui.config.CredentialsConfig.AuthType.NTLM;
-import static com.eviware.soapui.config.CredentialsConfig.AuthType.SPNEGO_KERBEROS;
 
 public class ProfileSelectionForm<T extends AbstractHttpRequest> extends AbstractXmlInspector {
 

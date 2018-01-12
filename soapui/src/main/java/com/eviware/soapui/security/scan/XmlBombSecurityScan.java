@@ -17,8 +17,6 @@
 package com.eviware.soapui.security.scan;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.XmlBombSecurityScanConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStepResult;
 import com.eviware.soapui.model.ModelItem;

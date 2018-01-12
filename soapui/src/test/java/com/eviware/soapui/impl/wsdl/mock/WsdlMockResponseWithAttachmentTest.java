@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.mock;
 
-import com.eviware.soapui.config.MockResponseConfig;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.support.MessageXmlObject;

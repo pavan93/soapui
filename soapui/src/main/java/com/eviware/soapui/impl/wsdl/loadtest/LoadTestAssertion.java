@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.loadtest;
 
-import com.eviware.soapui.config.LoadTestAssertionConfig;
 import com.eviware.soapui.model.testsuite.LoadTestRunContext;
 import com.eviware.soapui.model.testsuite.LoadTestRunner;
 import com.eviware.soapui.model.testsuite.TestCaseRunContext;

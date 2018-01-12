@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.RestResourceConfig;
-import com.eviware.soapui.config.RestServiceConfig;
 import com.eviware.soapui.impl.rest.panels.request.inspectors.schema.InferredSchemaManager;
 import com.eviware.soapui.impl.support.AbstractInterface;
 import com.eviware.soapui.impl.wadl.WadlDefinitionContext;

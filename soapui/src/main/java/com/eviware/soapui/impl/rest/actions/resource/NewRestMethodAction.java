@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.rest.actions.resource;
 
-import com.eviware.soapui.config.RestParametersConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestRequestInterface;

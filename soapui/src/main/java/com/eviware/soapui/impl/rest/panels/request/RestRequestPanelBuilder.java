@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.rest.panels.request;
 
-import com.eviware.soapui.config.CredentialsConfig.AuthType;
 import com.eviware.soapui.impl.EmptyPanelBuilder;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.support.components.JPropertiesTable;

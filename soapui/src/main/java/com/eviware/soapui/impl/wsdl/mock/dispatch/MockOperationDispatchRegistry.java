@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.mock.dispatch;
 
-import com.eviware.soapui.config.MockOperationDispatchStyleConfig;
 import com.eviware.soapui.model.mock.MockOperation;
 
 import java.util.HashMap;

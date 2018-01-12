@@ -17,14 +17,6 @@
 package com.eviware.soapui.impl.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.LoadTestConfig;
-import com.eviware.soapui.config.SecurityTestConfig;
-import com.eviware.soapui.config.TestCaseConfig;
-import com.eviware.soapui.config.TestCaseDocumentConfig;
-import com.eviware.soapui.config.TestStepSecurityTestConfig;
-import com.eviware.soapui.config.TestSuiteConfig;
-import com.eviware.soapui.config.TestSuiteRunTypesConfig;
-import com.eviware.soapui.config.TestSuiteRunTypesConfig.Enum;
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestSuiteRunner;

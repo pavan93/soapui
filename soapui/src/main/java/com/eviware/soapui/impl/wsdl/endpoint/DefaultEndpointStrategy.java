@@ -17,11 +17,6 @@
 package com.eviware.soapui.impl.wsdl.endpoint;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CredentialsConfig.AuthType;
-import com.eviware.soapui.config.CredentialsConfig.AuthType.Enum;
-import com.eviware.soapui.config.DefaultEndpointStrategyConfig;
-import com.eviware.soapui.config.EndpointConfig;
-import com.eviware.soapui.config.ProjectConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;
 import com.eviware.soapui.impl.support.AbstractInterface;

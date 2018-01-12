@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.submit.filters;
 
-import com.eviware.soapui.config.CredentialsConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.support.http.HttpClientSupport;
 import org.apache.http.auth.AuthScheme;

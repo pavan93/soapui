@@ -1,6 +1,5 @@
 package com.eviware.soapui.support.editor.inspectors.auth;
 
-import com.eviware.soapui.config.AccessTokenStatusConfig;
 import com.eviware.soapui.impl.rest.OAuth1Profile;
 
 import javax.annotation.Nonnull;

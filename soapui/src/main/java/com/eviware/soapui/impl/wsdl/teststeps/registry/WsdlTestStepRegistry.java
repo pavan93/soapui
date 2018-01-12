@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps.registry;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.support.factory.SoapUIFactoryRegistryListener;
 
 import java.util.ArrayList;

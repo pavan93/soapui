@@ -17,13 +17,13 @@
 package com.eviware.soapui.impl.wsdl.teststeps.assertions.basic;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionCategoryMapping;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionListEntry;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.support.assertions.AssertedXPathImpl;
 import com.eviware.soapui.impl.wsdl.support.assertions.AssertedXPathsContainer;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext;
+import com.eviware.soapui.impl.wsdl.teststeps.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFactory;
 import com.eviware.soapui.model.TestPropertyHolder;
@@ -37,11 +37,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringList;
 import com.eviware.soapui.support.xml.XmlUtils;
 import junit.framework.ComparisonFailure;
-import org.apache.xmlbeans.XmlAnySimpleType;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.apache.xmlbeans.XmlQName;
+import org.apache.xmlbeans.*;
 import org.apache.xmlbeans.impl.values.XmlValueDisconnectedException;
 import org.custommonkey.xmlunit.Diff;
 import org.custommonkey.xmlunit.XMLAssert;
@@ -49,7 +45,7 @@ import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  * Assertion that matches a specified XPath expression and its expected result
@@ -65,7 +61,7 @@ public class XPathContainsAssertion extends AbstractXmlContainsAssertion {
     public static final String DESCRIPTION = "Uses an XPath expression to select content from the target property and compares the result to an expected value. Applicable to any property containing XML.";
 
     public XPathContainsAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
-        super(assertionConfig, assertable, true, true, true, true);
+        super(TestAssertionConfig , true, true, true, true);
     }
 
     public String assertContent(String response, SubmitContext context, String type) throws AssertionException {

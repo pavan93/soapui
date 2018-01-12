@@ -17,9 +17,6 @@
 package com.eviware.soapui.security.scan;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CrossSiteScriptingScanConfig;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.RestRequestStepResult;
 import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStepResult;

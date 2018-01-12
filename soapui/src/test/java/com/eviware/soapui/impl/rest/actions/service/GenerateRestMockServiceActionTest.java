@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.rest.actions.service;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RestResourceConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestResource;
 import com.eviware.soapui.impl.rest.RestService;

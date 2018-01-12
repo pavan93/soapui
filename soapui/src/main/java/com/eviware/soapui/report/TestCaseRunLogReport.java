@@ -17,9 +17,6 @@
 package com.eviware.soapui.report;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.TestCaseRunLogDocumentConfig;
-import com.eviware.soapui.config.TestCaseRunLogDocumentConfig.TestCaseRunLog;
-import com.eviware.soapui.config.TestCaseRunLogDocumentConfig.TestCaseRunLog.TestCaseRunLogTestStep;
 import com.eviware.soapui.impl.support.http.HttpRequestTestStep;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.BaseHttpRequestTransport;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.ExtendedHttpMethod;

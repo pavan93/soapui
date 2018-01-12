@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.rest.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RestParameterConfig;
-import com.eviware.soapui.config.RestParametersConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestResource;
 import com.eviware.soapui.impl.wsdl.support.wsdl.UrlWsdlLoader;
@@ -79,6 +77,9 @@ public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyH
         }
 
         removeProeprtiesWithEmptyName(config); //Backward compatibility. Parameter with empty name was allowed in 4.6.2
+    }
+
+    public XmlBeansRestParamsTestPropertyHolder(RestMethod restMethod, boolean params) {
     }
 
     private void removeProeprtiesWithEmptyName(RestParametersConfig config) {

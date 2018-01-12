@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.registry;
 
-import com.eviware.soapui.config.PropertyTransfersStepConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.PropertyTransfersTestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;

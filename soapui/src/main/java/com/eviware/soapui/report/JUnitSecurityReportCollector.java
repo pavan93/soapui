@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.report;
 
-import com.eviware.soapui.junit.Testcase;
 import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestCaseRunner;

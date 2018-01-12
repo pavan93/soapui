@@ -18,9 +18,6 @@ package com.eviware.soapui.support.listener;
 
 import com.eviware.soapui.DefaultSoapUICore;
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.SoapUIListenerConfig;
-import com.eviware.soapui.config.SoapUIListenersConfig;
-import com.eviware.soapui.config.SoapuiListenersDocumentConfig;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;

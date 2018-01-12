@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.support.editor.inspectors.wsa;
 
-import com.eviware.soapui.config.MustUnderstandTypeConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.support.components.SimpleBindingForm;
 import com.eviware.soapui.support.editor.xml.XmlInspector;

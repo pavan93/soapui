@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.loadtest.assertions;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.LoadTestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.loadtest.LoadTestAssertion;
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
 import org.apache.log4j.Logger;

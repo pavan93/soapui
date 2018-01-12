@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.support.BindingImporter;

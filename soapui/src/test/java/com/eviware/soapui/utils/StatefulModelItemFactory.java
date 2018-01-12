@@ -16,10 +16,6 @@
 
 package com.eviware.soapui.utils;
 
-import com.eviware.soapui.config.RestMethodConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.TestCaseConfig;
-import com.eviware.soapui.config.TestSuiteConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestRequestInterface;

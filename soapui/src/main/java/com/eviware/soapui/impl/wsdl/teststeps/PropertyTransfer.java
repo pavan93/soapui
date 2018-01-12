@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps;
 
-import com.eviware.soapui.config.PropertyTransferConfig;
-import com.eviware.soapui.config.PropertyTransferTypesConfig;
 import com.eviware.soapui.impl.support.http.HttpRequestTestStep;
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.SubmitContext;

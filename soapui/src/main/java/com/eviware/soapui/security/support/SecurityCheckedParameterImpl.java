@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.support;
 
-import com.eviware.soapui.config.CheckedParameterConfig;
 import com.eviware.soapui.model.security.SecurityCheckedParameter;
 import org.apache.xmlbeans.SchemaType;
 

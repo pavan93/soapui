@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.security.scan;
 
-import com.eviware.soapui.config.FuzzerScanConfig;
-import com.eviware.soapui.config.SecurityScanConfig;
-import com.eviware.soapui.config.StrategyTypeConfig;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.iface.MessageExchange;

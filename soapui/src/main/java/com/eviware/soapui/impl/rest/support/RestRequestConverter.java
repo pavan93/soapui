@@ -17,20 +17,6 @@
 package com.eviware.soapui.impl.rest.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AttachmentConfig;
-import com.eviware.soapui.config.CompressedStringConfig;
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.HttpRequestConfig;
-import com.eviware.soapui.config.OldRestRequestConfig;
-import com.eviware.soapui.config.RestParameterConfig;
-import com.eviware.soapui.config.RestParametersConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.RestRequestStepConfig;
-import com.eviware.soapui.config.RestResourceRepresentationConfig;
-import com.eviware.soapui.config.SettingsConfig;
-import com.eviware.soapui.config.StringToStringMapConfig;
-import com.eviware.soapui.config.StringToStringMapConfig.Entry;
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRepresentation;
 import com.eviware.soapui.impl.rest.RestRequest;

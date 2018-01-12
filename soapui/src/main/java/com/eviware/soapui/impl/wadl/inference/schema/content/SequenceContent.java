@@ -22,9 +22,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Context;
 import com.eviware.soapui.impl.wadl.inference.schema.Particle;
 import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.schema.Settings;
-import com.eviware.soapui.inferredSchema.ParticleConfig;
-import com.eviware.soapui.inferredSchema.SequenceContentConfig;
-import com.eviware.soapui.inferredSchema.SequenceContentConfig.ComesBefore;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 

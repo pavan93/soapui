@@ -1,8 +1,5 @@
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.OAuth1ProfileConfig;
-import com.eviware.soapui.config.OAuth1ProfileContainerConfig;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStep;
 import com.eviware.soapui.model.iface.Interface;

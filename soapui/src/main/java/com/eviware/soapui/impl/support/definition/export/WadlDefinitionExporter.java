@@ -20,12 +20,6 @@ import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.support.definition.InterfaceDefinition;
 import com.eviware.soapui.impl.support.definition.InterfaceDefinitionPart;
 import com.eviware.soapui.impl.wsdl.support.Constants;
-import net.java.dev.wadl.x2009.x02.ApplicationDocument;
-import net.java.dev.wadl.x2009.x02.MethodDocument.Method;
-import net.java.dev.wadl.x2009.x02.RepresentationDocument.Representation;
-import net.java.dev.wadl.x2009.x02.ResourceDocument.Resource;
-import net.java.dev.wadl.x2009.x02.ResourcesDocument.Resources;
-import net.java.dev.wadl.x2009.x02.ResponseDocument.Response;
 import org.apache.xmlbeans.XmlObject;
 import org.w3c.dom.Element;
 

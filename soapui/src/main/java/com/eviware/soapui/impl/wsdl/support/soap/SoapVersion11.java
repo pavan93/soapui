@@ -27,7 +27,6 @@ import org.apache.xmlbeans.XmlBeans;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
-import org.xmlsoap.schemas.soap.envelope.EnvelopeDocument;
 
 import javax.xml.namespace.QName;
 import java.io.IOException;

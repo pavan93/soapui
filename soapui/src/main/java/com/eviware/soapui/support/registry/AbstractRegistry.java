@@ -17,7 +17,6 @@
 package com.eviware.soapui.support.registry;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RegistryEntryConfig;
 import com.eviware.soapui.support.StringUtils;
 
 import java.util.ArrayList;

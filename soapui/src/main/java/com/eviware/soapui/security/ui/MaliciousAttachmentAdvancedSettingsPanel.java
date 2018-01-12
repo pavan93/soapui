@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.ui;
 
-import com.eviware.soapui.config.MaliciousAttachmentSecurityScanConfig;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.x.form.XFormField;
 import com.eviware.x.form.XFormFieldListener;

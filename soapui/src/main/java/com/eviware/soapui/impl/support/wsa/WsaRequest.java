@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.support.wsa;
 
-import com.eviware.soapui.config.HttpRequestConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.support.http.HttpRequest;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;

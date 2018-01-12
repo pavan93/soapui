@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.ui;
 
-import com.eviware.soapui.config.InvalidSecurityScanConfig;
-import com.eviware.soapui.config.SchemaTypeForSecurityScanConfig;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;

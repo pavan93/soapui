@@ -18,7 +18,6 @@ package com.eviware.soapui.impl.wsdl.actions.iface.tools.axis1;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.analytics.Analytics;
-import com.eviware.soapui.analytics.SoapUIActions;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.AbstractToolsAction;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ArgumentBuilder;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessToolRunner;

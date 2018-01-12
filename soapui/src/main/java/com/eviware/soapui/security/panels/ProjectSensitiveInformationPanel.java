@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.panels;
 
-import com.eviware.soapui.config.ProjectConfig;
-import com.eviware.soapui.config.SensitiveInformationConfig;
 import com.eviware.soapui.model.security.SensitiveInformationTableModel;
 import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.security.SensitiveInformationPropertyHolder;

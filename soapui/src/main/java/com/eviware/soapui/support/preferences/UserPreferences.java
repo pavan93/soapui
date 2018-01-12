@@ -17,7 +17,6 @@
 package com.eviware.soapui.support.preferences;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.analytics.UniqueUserIdentifier;
 import com.smartbear.analytics.api.UserIdentificationInformation;
 
 import java.awt.Frame;

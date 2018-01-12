@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.rest.panels.mock;
 
-import com.eviware.soapui.config.MockOperationDispatchStyleConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.rest.mock.RestMockAction;
 import com.eviware.soapui.impl.rest.panels.request.TextPanelWithTopLabel;

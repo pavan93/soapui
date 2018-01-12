@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.settings;
 
-import com.eviware.soapui.config.SettingConfig;
-import com.eviware.soapui.config.SettingsConfig;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.settings.SettingsListener;

@@ -17,10 +17,6 @@
 package com.eviware.soapui.impl.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AbstractRequestConfig;
-import com.eviware.soapui.config.AttachmentConfig;
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.CredentialsConfig.AuthType;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.HttpAttachmentPart;

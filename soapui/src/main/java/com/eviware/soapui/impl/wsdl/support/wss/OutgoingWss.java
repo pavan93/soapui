@@ -17,8 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wss;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.OutgoingWssConfig;
-import com.eviware.soapui.config.WSSEntryConfig;
 import com.eviware.soapui.impl.wsdl.support.wss.entries.ManualSAMLEntry;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;

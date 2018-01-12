@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.support;
 
-import com.eviware.soapui.config.AbstractRequestConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.support.AbstractHttpRequest.RequestIconAnimator;
 import com.eviware.soapui.impl.wsdl.MutableAttachmentContainer;

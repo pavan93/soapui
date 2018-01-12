@@ -1,7 +1,5 @@
 package com.smartbear.ready.recipe;
 
-import com.eviware.soapui.config.MockResponseStepConfig;
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.support.CompressedStringSupport;

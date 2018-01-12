@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.mock;
 
-import com.eviware.soapui.config.MockServiceConfig;
 import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.testsuite.TestCase;
 import org.apache.log4j.Logger;

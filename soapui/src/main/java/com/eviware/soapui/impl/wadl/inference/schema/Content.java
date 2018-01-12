@@ -19,10 +19,6 @@ package com.eviware.soapui.impl.wadl.inference.schema;
 import com.eviware.soapui.impl.wadl.inference.schema.content.EmptyContent;
 import com.eviware.soapui.impl.wadl.inference.schema.content.SequenceContent;
 import com.eviware.soapui.impl.wadl.inference.schema.content.SimpleContent;
-import com.eviware.soapui.inferredSchema.ContentConfig;
-import com.eviware.soapui.inferredSchema.EmptyContentConfig;
-import com.eviware.soapui.inferredSchema.SequenceContentConfig;
-import com.eviware.soapui.inferredSchema.SimpleContentConfig;
 import org.apache.xmlbeans.XmlException;
 
 /**

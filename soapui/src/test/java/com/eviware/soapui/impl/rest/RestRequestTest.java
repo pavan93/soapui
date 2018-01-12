@@ -16,9 +16,6 @@
 
 package com.eviware.soapui.impl.rest;
 
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.StringListConfig;
 import com.eviware.soapui.impl.rest.actions.support.NewRestResourceActionBase;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;

@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.assertions.basic;
 
-import com.eviware.soapui.config.TestAssertionConfig;
+import com.eviware.soapui.impl.wsdl.teststeps.TestAssertionConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStep;
 import com.eviware.soapui.model.TestModelItem;
@@ -28,12 +28,8 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.model.support.XPathReference;
 import com.eviware.soapui.model.support.XPathReferenceContainer;
 import com.eviware.soapui.model.support.XPathReferenceImpl;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.components.JXToolBar;
@@ -48,7 +44,7 @@ import org.custommonkey.xmlunit.DifferenceEngine;
 import org.custommonkey.xmlunit.DifferenceListener;
 import org.w3c.dom.Node;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 

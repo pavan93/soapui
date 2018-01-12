@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.panels.support;
 
-import com.eviware.soapui.config.TestStepConfig;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.registry.WsdlTestStepFactory;
 import com.eviware.soapui.impl.wsdl.teststeps.registry.WsdlTestStepRegistry;

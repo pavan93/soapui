@@ -17,13 +17,6 @@
 package com.eviware.soapui.impl.wsdl.teststeps.registry;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.CredentialsConfig;
-import com.eviware.soapui.config.RequestStepConfig;
-import com.eviware.soapui.config.TestAssertionConfig;
-import com.eviware.soapui.config.TestStepConfig;
-import com.eviware.soapui.config.WsaConfigConfig;
-import com.eviware.soapui.config.WsdlRequestConfig;
-import com.eviware.soapui.config.WsrmConfigConfig;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;

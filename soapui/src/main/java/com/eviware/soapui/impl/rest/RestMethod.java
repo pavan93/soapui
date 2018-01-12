@@ -17,9 +17,6 @@
 package com.eviware.soapui.impl.rest;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.RestMethodConfig;
-import com.eviware.soapui.config.RestRequestConfig;
-import com.eviware.soapui.config.RestResourceRepresentationConfig;
 import com.eviware.soapui.impl.rest.RestRepresentation.Type;
 import com.eviware.soapui.impl.rest.support.OverlayRestParamsPropertyHolder;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;

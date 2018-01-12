@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.teststeps.assertions.basic;
 
-import com.eviware.soapui.config.TestAssertionConfig;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.utils.ModelItemFactory;
 import com.eviware.soapui.utils.StubbedDialogs;

@@ -17,9 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wsa;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AnonymousTypeConfig;
-import com.eviware.soapui.config.MustUnderstandTypeConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockRequest;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse;

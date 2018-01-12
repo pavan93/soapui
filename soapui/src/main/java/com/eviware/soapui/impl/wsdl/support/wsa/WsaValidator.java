@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.wsa;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AnonymousTypeConfig;
 import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.panels.teststeps.support.WsaAssertionConfiguration;
 import com.eviware.soapui.impl.wsdl.submit.WsdlMessageExchange;

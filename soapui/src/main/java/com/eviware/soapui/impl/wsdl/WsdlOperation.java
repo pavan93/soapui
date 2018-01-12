@@ -17,12 +17,6 @@
 package com.eviware.soapui.impl.wsdl;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AnonymousTypeConfig;
-import com.eviware.soapui.config.OperationConfig;
-import com.eviware.soapui.config.OperationTypesConfig;
-import com.eviware.soapui.config.PartsConfig.Part;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
-import com.eviware.soapui.config.WsdlRequestConfig;
 import com.eviware.soapui.impl.support.AbstractHttpOperation;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments.AttachmentUtils;
 import com.eviware.soapui.impl.wsdl.support.soap.SoapMessageBuilder;

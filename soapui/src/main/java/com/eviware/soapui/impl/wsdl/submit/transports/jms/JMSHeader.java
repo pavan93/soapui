@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.submit.transports.jms;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.JMSPropertyConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.support.jms.header.JMSHeaderConfig;
 import com.eviware.soapui.impl.wsdl.support.jms.property.JMSPropertiesConfig;

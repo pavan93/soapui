@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.panels.iface;
 
-import com.eviware.soapui.config.AnonymousTypeConfig;
-import com.eviware.soapui.config.WsaVersionTypeConfig;
 import com.eviware.soapui.impl.EmptyPanelBuilder;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.support.soap.SoapVersion;

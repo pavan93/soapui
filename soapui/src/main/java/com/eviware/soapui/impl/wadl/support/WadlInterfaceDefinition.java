@@ -20,7 +20,6 @@ import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.support.definition.DefinitionLoader;
 import com.eviware.soapui.impl.support.definition.support.InvalidDefinitionException;
 import com.eviware.soapui.impl.support.definition.support.XmlSchemaBasedInterfaceDefinition;
-import net.java.dev.wadl.x2009.x02.ApplicationDocument;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlObject;
 

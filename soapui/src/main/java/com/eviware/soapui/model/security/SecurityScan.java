@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.model.security;
 
-import com.eviware.soapui.config.SecurityScanConfig;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.testsuite.Assertable;
 import com.eviware.soapui.model.testsuite.TestStep;

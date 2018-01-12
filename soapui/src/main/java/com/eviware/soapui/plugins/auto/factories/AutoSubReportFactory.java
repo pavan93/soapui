@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.plugins.auto.factories;
 
-import com.eviware.soapui.config.ReportTypeConfig;
 import com.eviware.soapui.plugins.SoapUIFactory;
 import com.eviware.soapui.plugins.auto.PluginSubReport;
 import com.eviware.soapui.report.AbstractSubReportFactory;

@@ -16,8 +16,6 @@
 
 package com.eviware.soapui.security.ui;
 
-import com.eviware.soapui.config.MalformedXmlAttributeConfig;
-import com.eviware.soapui.config.MalformedXmlConfig;
 import com.eviware.x.form.XFormField;
 import com.eviware.x.form.XFormFieldListener;
 import com.eviware.x.form.support.ADialogBuilder;

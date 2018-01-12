@@ -18,8 +18,6 @@ package com.eviware.soapui.impl.wsdl.panels.loadtest;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.analytics.Analytics;
-import com.eviware.soapui.analytics.SoapUIActions;
-import com.eviware.soapui.config.LoadTestLimitTypesConfig;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.actions.loadtest.LoadTestOptionsAction;
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;

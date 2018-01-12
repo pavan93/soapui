@@ -23,9 +23,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.schema.Settings;
 import com.eviware.soapui.impl.wadl.inference.schema.Type;
 import com.eviware.soapui.impl.wadl.inference.schema.types.TypeReferenceType;
-import com.eviware.soapui.inferredSchema.ElementParticleConfig;
-import com.eviware.soapui.inferredSchema.MapEntryConfig;
-import com.eviware.soapui.inferredSchema.TypeConfig;
 import org.apache.xmlbeans.XmlException;
 
 import javax.xml.namespace.QName;

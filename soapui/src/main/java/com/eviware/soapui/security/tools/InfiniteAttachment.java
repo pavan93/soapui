@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.tools;
 
-import com.eviware.soapui.config.AttachmentConfig;
 import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;
 import com.eviware.soapui.impl.wsdl.support.RequestFileAttachment;
 import com.eviware.soapui.model.iface.Attachment;

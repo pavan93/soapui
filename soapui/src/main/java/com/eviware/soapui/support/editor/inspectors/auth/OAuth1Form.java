@@ -1,7 +1,6 @@
 package com.eviware.soapui.support.editor.inspectors.auth;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.config.AccessTokenStatusConfig;
 import com.eviware.soapui.impl.rest.OAuth1Profile;
 import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.UISupport;

@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.rest.mock;
 
 
-import com.eviware.soapui.config.RESTMockResponseConfig;
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.support.AbstractMockResponse;
 import com.eviware.soapui.impl.support.http.MediaType;
