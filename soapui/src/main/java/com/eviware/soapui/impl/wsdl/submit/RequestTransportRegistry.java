@@ -17,25 +17,7 @@
 package com.eviware.soapui.impl.wsdl.submit;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.wsdl.submit.filters.EndpointRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.EndpointStrategyRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.GlobalHttpHeadersRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.HttpAuthenticationRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.HttpCompressionRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.HttpPackagingResponseFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.HttpSettingsRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.OAuth2RequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.PostPackagingRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.PropertyExpansionRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.RemoveEmptyContentRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.RestRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.SoapHeadersRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.StripWhitespacesRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.WsaRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.WsdlPackagingRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.WsrmRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.WssAuthenticationRequestFilter;
-import com.eviware.soapui.impl.wsdl.submit.filters.WssRequestFilter;
+import com.eviware.soapui.impl.wsdl.submit.filters.*;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.HttpClientRequestTransport;
 import com.eviware.soapui.impl.wsdl.submit.transports.jms.HermesJmsRequestTransport;
 import com.eviware.soapui.model.iface.SubmitContext;
@@ -213,7 +195,7 @@ public class RequestTransportRegistry {
     }
 
     public static synchronized RequestTransport getTransport(String endpoint, SubmitContext submitContext)
-            throws MissingTransportException, CannotResolveJmsTypeException {
+            throws MissingTransportException {
         int ix = endpoint.indexOf("://");
         if (ix == -1) {
             throw new MissingTransportException("Missing protocol in endpoint [" + endpoint + "]");

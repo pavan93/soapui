@@ -29,14 +29,7 @@ import java.io.FileFilter;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveTask;
 
@@ -117,7 +110,7 @@ public class PluginManager {
         }
     }
 
-    private Collection<JarClassLoader> findDependentClassLoaders(File pluginFile) throws IOException {
+    private Collection<JarClassLoader> findDependentClassLoaders(File pluginFile) {
         if (resolver == null) {
             return Collections.emptySet();
         }
@@ -148,7 +141,7 @@ public class PluginManager {
     }
 
     public Plugin installPlugin(File pluginFile) throws IOException {
-        PluginInfo pluginInfo = pluginLoader.loadPluginInfoFrom(pluginFile, Collections.<JarClassLoader>emptySet());
+        PluginInfo pluginInfo = pluginLoader.loadPluginInfoFrom(pluginFile, Collections.emptySet());
         if (findInstalledVersionOf(pluginInfo) != null && !overwriteConfirmed(pluginInfo)) {
             return null;
         }
@@ -333,6 +326,13 @@ public class PluginManager {
         return dependentPlugins;
     }
 
+    interface FileOperations {
+
+        void copyFile(File sourceFile, File destinationFile) throws IOException;
+
+        boolean deleteFile(File fileToDelete) throws IOException;
+    }
+
     private class DefaultFileOperations implements FileOperations {
 
         @Override
@@ -341,7 +341,7 @@ public class PluginManager {
         }
 
         @Override
-        public boolean deleteFile(File fileToDelete) throws IOException {
+        public boolean deleteFile(File fileToDelete) {
             if (!fileToDelete.delete()) {
                 try {
                     FileUtils.write(pluginDeleteListFile, fileToDelete.getName() + "\r\n", true);
@@ -353,13 +353,6 @@ public class PluginManager {
             return true;
         }
 
-    }
-
-    static interface FileOperations {
-
-        void copyFile(File sourceFile, File destinationFile) throws IOException;
-
-        boolean deleteFile(File fileToDelete) throws IOException;
     }
 
     private class LoadPluginsTask extends RecursiveTask<List<Plugin>> {

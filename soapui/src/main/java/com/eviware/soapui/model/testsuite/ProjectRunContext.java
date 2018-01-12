@@ -23,7 +23,7 @@ import com.eviware.soapui.model.project.Project;
  */
 
 public interface ProjectRunContext extends TestRunContext {
-    public ProjectRunner getProjectRunner();
+    ProjectRunner getProjectRunner();
 
-    public Project getProject();
+    Project getProject();
 }

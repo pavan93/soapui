@@ -34,7 +34,7 @@ public class JsonXmlSerializerTest {
     }
 
     @Test
-    public void serializesJsonWithVanillaNames() throws Exception {
+    public void serializesJsonWithVanillaNames() {
         JSON parse = new JsonUtil().parseTrimmedText("{ name: 'Barack', surname: 'Obama', profession: 'president'}");
 
         assertThat(serializer.write(parse), is("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<o>" +
@@ -45,7 +45,7 @@ public class JsonXmlSerializerTest {
     }
 
     @Test
-    public void serializesJsonWithDollarSign() throws Exception {
+    public void serializesJsonWithDollarSign() {
         JSON parse = new JsonUtil().parseTrimmedText("{ $: 'value' }");
 
         assertThat(serializer.write(parse), is("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<o>" +

@@ -19,11 +19,7 @@ package com.eviware.soapui.impl.wsdl.actions.iface.tools.wsi;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.actions.SoapUIPreferencesAction;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.AbstractToolsAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ArgumentBuilder;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessToolRunner;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.RunnerContext;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ToolHost;
+import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.*;
 import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.plugins.ActionConfiguration;
@@ -34,13 +30,13 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 import org.apache.log4j.Logger;
 
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -127,7 +123,7 @@ public class WSIAnalyzeAction extends AbstractToolsAction<Interface> {
         return builder;
     }
 
-    private ConfigurationDocument createConfigFile(File reportFile, Settings settings, WsdlInterface iface) throws IOException {
+    private ConfigurationDocument createConfigFile(File reportFile, Settings settings, WsdlInterface iface) {
         ConfigurationDocument configDoc = ConfigurationDocument.Factory.newInstance();
         Configuration config = configDoc.addNewConfiguration();
 

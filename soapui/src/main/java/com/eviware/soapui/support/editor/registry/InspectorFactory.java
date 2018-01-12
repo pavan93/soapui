@@ -23,5 +23,5 @@ package com.eviware.soapui.support.editor.registry;
  */
 
 public interface InspectorFactory {
-    public String getInspectorId();
+    String getInspectorId();
 }

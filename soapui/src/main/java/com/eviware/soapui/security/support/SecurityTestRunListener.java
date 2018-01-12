@@ -32,23 +32,23 @@ import com.eviware.soapui.security.result.SecurityTestStepResult;
  */
 
 public interface SecurityTestRunListener extends SoapUIListener {
-    public void beforeRun(TestCaseRunner testRunner, SecurityTestRunContext runContext);
+    void beforeRun(TestCaseRunner testRunner, SecurityTestRunContext runContext);
 
-    public void afterRun(TestCaseRunner testRunner, SecurityTestRunContext runContext);
+    void afterRun(TestCaseRunner testRunner, SecurityTestRunContext runContext);
 
-    public void beforeStep(TestCaseRunner testRunner, SecurityTestRunContext runContext, TestStepResult testStepResult);
+    void beforeStep(TestCaseRunner testRunner, SecurityTestRunContext runContext, TestStepResult testStepResult);
 
-    public void afterStep(TestCaseRunner testRunner, SecurityTestRunContext runContext, SecurityTestStepResult result);
+    void afterStep(TestCaseRunner testRunner, SecurityTestRunContext runContext, SecurityTestStepResult result);
 
-    public void afterOriginalStep(TestCaseRunner testRunner, SecurityTestRunContext runContext,
-                                  SecurityTestStepResult result);
+    void afterOriginalStep(TestCaseRunner testRunner, SecurityTestRunContext runContext,
+                           SecurityTestStepResult result);
 
-    public void beforeSecurityScan(TestCaseRunner testRunner, SecurityTestRunContext runContext,
-                                   SecurityScan securityScan);
+    void beforeSecurityScan(TestCaseRunner testRunner, SecurityTestRunContext runContext,
+                            SecurityScan securityScan);
 
-    public void afterSecurityScan(TestCaseRunner testRunner, SecurityTestRunContext runContext,
-                                  SecurityScanResult securityScanResult);
+    void afterSecurityScan(TestCaseRunner testRunner, SecurityTestRunContext runContext,
+                           SecurityScanResult securityScanResult);
 
-    public void afterSecurityScanRequest(TestCaseRunner testRunner, SecurityTestRunContext runContext,
-                                         SecurityScanRequestResult securityScanReqResult);
+    void afterSecurityScanRequest(TestCaseRunner testRunner, SecurityTestRunContext runContext,
+                                  SecurityScanRequestResult securityScanReqResult);
 }

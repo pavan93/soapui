@@ -70,7 +70,7 @@ public class ToolMojo extends AbstractMojo
 		if( soapuiProperties != null && soapuiProperties.size() > 0 )
 			for( Object key : soapuiProperties.keySet() )
 			{
-				System.out.println( "Setting " + ( String )key + " value " + soapuiProperties.getProperty( ( String )key ) );
+                System.out.println("Setting " + key + " value " + soapuiProperties.getProperty((String) key));
 				System.setProperty( ( String )key, soapuiProperties.getProperty( ( String )key ) );
 			}
 		

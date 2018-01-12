@@ -24,5 +24,5 @@ import com.eviware.soapui.model.ModelItem;
  * @author lars
  */
 public interface ResultContainer {
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 }

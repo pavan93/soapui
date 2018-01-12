@@ -26,5 +26,5 @@ import com.eviware.soapui.model.testsuite.Assertable.AssertionStatus;
  * @author nebojsa.tasic
  */
 public interface PropertyAssertion {
-    public AssertionStatus assertProperty(String propertyName, MessageExchange messageExchange, SubmitContext context);
+    AssertionStatus assertProperty(String propertyName, MessageExchange messageExchange, SubmitContext context);
 }

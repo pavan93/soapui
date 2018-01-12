@@ -16,8 +16,8 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.JFrame;
-import java.awt.Frame;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.lang.reflect.InvocationHandler;
@@ -33,7 +33,7 @@ public class ModalFrameUtil {
             this.frame = frame;
         }
 
-        public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        public Object invoke(Object proxy, Method method, Object[] args) {
             return frame.isShowing();
         }
 
@@ -43,9 +43,9 @@ public class ModalFrameUtil {
             Class<?> clazz = Class.forName("java.awt.Conditional");
             Object conditional = Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, this);
             Method pumpMethod = Class.forName("java.awt.EventDispatchThread").getDeclaredMethod("pumpEvents",
-                    new Class[]{clazz});
+                    clazz);
             pumpMethod.setAccessible(true);
-            pumpMethod.invoke(Thread.currentThread(), new Object[]{conditional});
+            pumpMethod.invoke(Thread.currentThread(), conditional);
         }
     }
 

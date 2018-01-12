@@ -38,7 +38,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void trimsAccessTokenWhenSettingIt() throws Exception {
+    public void trimsAccessTokenWhenSettingIt() {
         String accessTokenWithoutWhitespace = "wuryew2347234987";
         profile.setAccessToken("\t" + accessTokenWithoutWhitespace + " \n");
 
@@ -46,7 +46,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void trimsAccessTokenUriWhenSettingIt() throws Exception {
+    public void trimsAccessTokenUriWhenSettingIt() {
         String accessTokenUriWithoutWhitespace = "wuryew2347234987";
         profile.setAccessTokenURI("\t" + accessTokenUriWithoutWhitespace + " \n");
 
@@ -54,7 +54,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void trimsAuthorizationUriWhenSettingIt() throws Exception {
+    public void trimsAuthorizationUriWhenSettingIt() {
         String authorizationUriWithoutWhitespace = "wuryew2347234987";
         profile.setAuthorizationURI("\t" + authorizationUriWithoutWhitespace + " \n");
 
@@ -62,7 +62,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void waitsForAccessTokenStatusChange() throws Exception {
+    public void waitsForAccessTokenStatusChange() {
         final String accessToken = "mock token";
         profile.setAccessTokenStatus(OAuth2Profile.AccessTokenStatus.WAITING_FOR_AUTHORIZATION);
 
@@ -83,7 +83,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void ignoresIntermediateAccessTokenStatusChanges() throws Exception {
+    public void ignoresIntermediateAccessTokenStatusChanges() {
         final String accessToken = "mock token";
         profile.setAccessTokenStatus(OAuth2Profile.AccessTokenStatus.WAITING_FOR_AUTHORIZATION);
 
@@ -106,7 +106,7 @@ public class OAuth2ProfileTest {
     }
 
     @Test
-    public void appliesTimeOutCorrectlyEvenOnMultipleStatusChanges() throws Exception {
+    public void appliesTimeOutCorrectlyEvenOnMultipleStatusChanges() {
         final String accessToken = "mock token";
         profile.setAccessTokenStatus(OAuth2Profile.AccessTokenStatus.WAITING_FOR_AUTHORIZATION);
 

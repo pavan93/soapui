@@ -71,7 +71,7 @@ public class OltuOAuth2ClientFacadeTest {
     }
 
     @Test
-    public void appendsAccessTokenToHeader() throws Exception {
+    public void appendsAccessTokenToHeader() {
         profileWithOnlyAccessToken.setAccessTokenPosition(OAuth2Profile.AccessTokenPosition.HEADER);
         String expectedAccessTokenValue = "Bearer " + profileWithOnlyAccessToken.getAccessToken();
         oltuClientFacade.applyAccessToken(profileWithOnlyAccessToken, httpRequest, "");
@@ -80,7 +80,7 @@ public class OltuOAuth2ClientFacadeTest {
     }
 
     @Test
-    public void appendsAccessTokenToHeaderByDefault() throws Exception {
+    public void appendsAccessTokenToHeaderByDefault() {
         String expectedAccessTokenValue = "Bearer " + profileWithOnlyAccessToken.getAccessToken();
         oltuClientFacade.applyAccessToken(profileWithOnlyAccessToken, httpRequest, "");
 
@@ -88,7 +88,7 @@ public class OltuOAuth2ClientFacadeTest {
     }
 
     @Test
-    public void appendsAccessTokenToQuery() throws Exception {
+    public void appendsAccessTokenToQuery() {
         profileWithOnlyAccessToken.setAccessTokenPosition(OAuth2Profile.AccessTokenPosition.QUERY);
         oltuClientFacade.applyAccessToken(profileWithOnlyAccessToken, httpRequest, "");
 
@@ -96,7 +96,7 @@ public class OltuOAuth2ClientFacadeTest {
     }
 
     @Test
-    public void appendsAccessTokenToBody() throws OAuth2Exception, IOException {
+    public void appendsAccessTokenToBody() throws IOException {
         String expectedBodyContent = "access_token=" + profileWithOnlyAccessToken.getAccessToken();
         profileWithOnlyAccessToken.setAccessTokenPosition(OAuth2Profile.AccessTokenPosition.BODY);
         oltuClientFacade.applyAccessToken(profileWithOnlyAccessToken, httpRequest, "");

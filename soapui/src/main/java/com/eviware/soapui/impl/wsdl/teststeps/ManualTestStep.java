@@ -195,19 +195,19 @@ public class ManualTestStep extends WsdlTestStepWithProperties implements Proper
     @AForm(description = "", name = "Run Manual TestStep", helpUrl = HelpUrls.MANUALTESTSTEP_HELP_URL)
     protected interface Form {
         @AField(name = "Description", description = "Describes the actions to perform", type = AFieldType.INFORMATION)
-        public final static String DESCRIPTION = "Description";
+        String DESCRIPTION = "Description";
 
         @AField(name = "Expected Result", description = "Describes the actions to perform", type = AFieldType.INFORMATION)
-        public final static String EXPECTED_DESULT = "Expected Result";
+        String EXPECTED_DESULT = "Expected Result";
 
         @AField(name = "Result", description = "an optional result description or value", type = AFieldType.STRINGAREA)
-        public final static String RESULT = "Result";
+        String RESULT = "Result";
 
         @AField(name = "URLs", description = "A list of URLs related to the result", type = AFieldType.STRINGLIST)
-        public final static String URLS = "URLs";
+        String URLS = "URLs";
 
         @AField(name = "Result Status", description = "The result status", type = AFieldType.ENUMERATION, values = {
                 "Pass", "Fail", "Unknown"})
-        public final static String STATUS = "Result Status";
+        String STATUS = "Result Status";
     }
 }

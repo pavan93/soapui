@@ -25,31 +25,31 @@ import com.eviware.soapui.support.types.StringToStringsMap;
  */
 
 public interface Response extends TypedContent {
-    public Request getRequest();
+    Request getRequest();
 
-    public String getRequestContent();
+    String getRequestContent();
 
-    public long getTimeTaken();
+    long getTimeTaken();
 
-    public Attachment[] getAttachments();
+    Attachment[] getAttachments();
 
-    public Attachment[] getAttachmentsForPart(String partName);
+    Attachment[] getAttachmentsForPart(String partName);
 
-    public StringToStringsMap getRequestHeaders();
+    StringToStringsMap getRequestHeaders();
 
-    public StringToStringsMap getResponseHeaders();
+    StringToStringsMap getResponseHeaders();
 
-    public long getTimestamp();
+    long getTimestamp();
 
-    public byte[] getRawRequestData();
+    byte[] getRawRequestData();
 
-    public byte[] getRawResponseData();
+    byte[] getRawResponseData();
 
-    public String getContentAsXml();
+    String getContentAsXml();
 
-    public String getProperty(String name);
+    String getProperty(String name);
 
-    public void setProperty(String name, String value);
+    void setProperty(String name, String value);
 
-    public String[] getPropertyNames();
+    String[] getPropertyNames();
 }

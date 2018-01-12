@@ -127,6 +127,6 @@ public class GenerateRestMockServiceAction extends AbstractSoapUIAction<RestServ
     @AForm(name = "Generate REST Mock Service", description = "Set name for the new REST Mock Service", helpUrl = HelpUrls.GENERATE_REST_MOCKSERVICE)
     protected interface Form {
         @AField(name = "MockService Name", description = "The Mock Service name", type = AField.AFieldType.STRING)
-        public final static String MOCKSERVICE_NAME = "MockService Name";
+        String MOCKSERVICE_NAME = "MockService Name";
     }
 }

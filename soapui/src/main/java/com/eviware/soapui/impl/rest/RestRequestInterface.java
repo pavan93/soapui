@@ -41,9 +41,9 @@ public interface RestRequestInterface extends HttpRequestInterface<RestRequestCo
         }
     }
 
-    public final static Logger log = Logger.getLogger(RestRequest.class);
-    public static final String DEFAULT_MEDIATYPE = "application/xml";
-    public static final String REST_XML_REQUEST = "restXmlRequest";
+    Logger log = Logger.getLogger(RestRequest.class);
+    String DEFAULT_MEDIATYPE = "application/xml";
+    String REST_XML_REQUEST = "restXmlRequest";
 
     RestMethod getRestMethod();
 

@@ -18,7 +18,6 @@ package com.eviware.soapui.support;
 
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 
-import java.io.IOException;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -29,11 +28,11 @@ import java.net.UnknownHostException;
  * @author joel.jonsson
  */
 public class HelpUrlChecker {
-    public static void main(String[] args) throws IllegalAccessException, InterruptedException, IOException {
+    public static void main(String[] args) throws IllegalAccessException {
         openHelpUrls(HelpUrls.class);
     }
 
-    private static void openHelpUrls(Class<?> helpUrlsClass) throws IllegalAccessException, InterruptedException, IOException {
+    private static void openHelpUrls(Class<?> helpUrlsClass) throws IllegalAccessException {
         for (Field field : helpUrlsClass.getDeclaredFields()) {
             String url = (String) field.get(null);
             if (!StringUtils.isNullOrEmpty(url)) {

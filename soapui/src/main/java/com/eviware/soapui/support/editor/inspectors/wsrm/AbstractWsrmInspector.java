@@ -25,10 +25,8 @@ import com.eviware.soapui.support.editor.views.xml.raw.RawXmlEditorFactory;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.jgoodies.binding.PresentationModel;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class AbstractWsrmInspector extends AbstractXmlInspector {
 
@@ -53,8 +51,6 @@ public abstract class AbstractWsrmInspector extends AbstractXmlInspector {
 
     public void buildContent(SimpleBindingForm form) {
     }
-
-    ;
 
     @Override
     public void release() {

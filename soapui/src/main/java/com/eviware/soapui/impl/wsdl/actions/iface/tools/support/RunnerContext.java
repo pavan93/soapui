@@ -27,15 +27,15 @@ public interface RunnerContext {
         RUNNING, FINISHED, ERROR
     }
 
-    public void log(String msg);
+    void log(String msg);
 
-    public void logError(String msg);
+    void logError(String msg);
 
-    public void setStatus(RunnerStatus status);
+    void disposeContext();
 
-    public void disposeContext();
+    RunnerStatus getStatus();
 
-    public RunnerStatus getStatus();
+    void setStatus(RunnerStatus status);
 
-    public String getTitle();
+    String getTitle();
 }

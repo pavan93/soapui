@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.security.tools;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
@@ -30,7 +29,7 @@ public class InfiniteInputStream extends InputStream {
     }
 
     @Override
-    public int read() throws IOException {
+    public int read() {
         if (bytesSent >= byteLimit) {
             return -1;
         }

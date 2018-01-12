@@ -53,15 +53,9 @@ import com.eviware.x.form.support.AField.AFieldType;
 import com.eviware.x.form.support.AForm;
 import com.eviware.x.form.support.XFormMultiSelectList;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -367,32 +361,32 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
     }
 
     @AForm(name = "Run TestCase Options", description = "Set options for the Run TestCase Step below", helpUrl = HelpUrls.RUNTESTCASESTEP_HELP_URL)
-    private static interface OptionsForm {
-        public static final String RUN_PRIMARY_TEST_CASE = "Run primary TestCase (fail if already running)";
-        public static final String CREATE_ISOLATED_COPY_FOR_EACH_RUN = "Create isolated copy for each run (Thread-Safe)";
-        public static final String RUN_SYNCHRONIZED_TESTCASE = "Run primary TestCase (wait for running to finish, Thread-Safe)";
+    private interface OptionsForm {
+        String RUN_PRIMARY_TEST_CASE = "Run primary TestCase (fail if already running)";
+        String CREATE_ISOLATED_COPY_FOR_EACH_RUN = "Create isolated copy for each run (Thread-Safe)";
+        String RUN_SYNCHRONIZED_TESTCASE = "Run primary TestCase (wait for running to finish, Thread-Safe)";
 
         @AField(name = "Target TestCase", description = "Selects the TestCase to run", type = AFieldType.ENUMERATION)
-        public static final String TESTCASE = "Target TestCase";
+        String TESTCASE = "Target TestCase";
 
         @AField(name = "Target TestSuite", description = "Selects the containing TestSuite to run", type = AFieldType.ENUMERATION)
-        public static final String TESTSUITE = "Target TestSuite";
+        String TESTSUITE = "Target TestSuite";
 
         @AField(name = "Return Properties", description = "Selects the properties that are return values", type = AFieldType.MULTILIST)
-        public static final String RETURN_PROPERTIES = "Return Properties";
+        String RETURN_PROPERTIES = "Return Properties";
 
         @AField(name = "Run Mode", description = "Sets how to run the target TestCase", type = AFieldType.RADIOGROUP, values = {
                 CREATE_ISOLATED_COPY_FOR_EACH_RUN, RUN_PRIMARY_TEST_CASE, RUN_SYNCHRONIZED_TESTCASE})
-        public static final String RUN_MODE = "Run Mode";
+        String RUN_MODE = "Run Mode";
 
         @AField(name = "Copy LoadTest Properties", description = "Copies LoadTest related properties to target context", type = AFieldType.BOOLEAN)
-        public static final String COPY_LOADTEST_PROPERTIES = "Copy LoadTest Properties";
+        String COPY_LOADTEST_PROPERTIES = "Copy LoadTest Properties";
 
         @AField(name = "Copy HTTP Session", description = "Copies HTTP Session to and from the target TestCase", type = AFieldType.BOOLEAN)
-        public static final String COPY_HTTP_SESSION = "Copy HTTP Session";
+        String COPY_HTTP_SESSION = "Copy HTTP Session";
 
         @AField(name = "Ignore Empty Properties", description = "Does not set empty TestCase property values", type = AFieldType.BOOLEAN)
-        public static final String IGNORE_EMPTY_PROPERTIES = "Ignore Empty Properties";
+        String IGNORE_EMPTY_PROPERTIES = "Ignore Empty Properties";
     }
 
     public void propertyChange(PropertyChangeEvent evt) {

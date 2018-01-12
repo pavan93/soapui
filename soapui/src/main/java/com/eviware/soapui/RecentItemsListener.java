@@ -19,7 +19,6 @@ package com.eviware.soapui;
 import com.eviware.soapui.impl.WorkspaceImpl;
 import com.eviware.soapui.impl.actions.ImportWsdlProjectAction;
 import com.eviware.soapui.impl.actions.SwitchWorkspaceAction;
-import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.model.iface.Operation;
@@ -43,10 +42,7 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.ui.desktop.DesktopListener;
 import com.eviware.soapui.ui.desktop.DesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import java.awt.event.ActionEvent;
@@ -203,7 +199,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
             return;
         }
 
-        String filePath = ((WsdlProject) project).getPath();
+        String filePath = project.getPath();
         if (filePath == null) {
             return;
         }
@@ -253,7 +249,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
             return;
         }
 
-        String filePath = ((WsdlProject) project).getPath();
+        String filePath = project.getPath();
 
         String recent = SoapUI.getSettings().getString(RECENT_PROJECTS_SETTING, null);
         StringToStringMap history = recent == null ? new StringToStringMap() : StringToStringMap.fromXml(recent);
@@ -306,13 +302,13 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
 
     private boolean dependsOnProject(ModelItem modelItem, Project project) {
         if (modelItem instanceof Interface) {
-            return ((Interface) modelItem).getProject() == project;
+            return modelItem.getProject() == project;
         } else if (modelItem instanceof Operation) {
             return ((Operation) modelItem).getInterface().getProject() == project;
         } else if (modelItem instanceof Request) {
             return ((Request) modelItem).getOperation().getInterface().getProject() == project;
         } else if (modelItem instanceof TestSuite) {
-            return ((TestSuite) modelItem).getProject() == project;
+            return modelItem.getProject() == project;
         } else if (modelItem instanceof TestCase) {
             return ((TestCase) modelItem).getTestSuite().getProject() == project;
         } else if (modelItem instanceof TestStep) {
@@ -514,10 +510,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
         if (item == null) {
             return false;
         }
-        if (item.getText().equals(EMPTYMARKER)) {
-            return true;
-        }
-        return false;
+        return item.getText().equals(EMPTYMARKER);
     }
 
 	/*

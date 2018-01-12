@@ -37,19 +37,13 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveDialog;
 import com.eviware.soapui.support.types.StringToStringMap;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import static com.eviware.soapui.impl.wsdl.WsdlProject.ProjectEncryptionStatus;
 import static com.eviware.soapui.impl.wsdl.WsdlProject.ProjectEncryptionStatus.NOT_ENCRYPTED;
@@ -73,7 +67,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
     private StringToStringMap projectOptions;
     private ResolveDialog resolver;
 
-    public WorkspaceImpl(String path, StringToStringMap projectOptions) throws XmlException, IOException {
+    public WorkspaceImpl(String path, StringToStringMap projectOptions) {
         if (projectOptions == null) {
             this.projectOptions = new StringToStringMap();
         } else {
@@ -126,7 +120,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         fireWorkspaceSwitched();
     }
 
-    public void loadWorkspace(File file) throws XmlException, IOException {
+    public void loadWorkspace(File file) {
         if (file.exists()) {
             log.info(messages.get("FailedToLoadWorkspaceFrom", file.getAbsolutePath()));
             workspaceConfig = SoapuiWorkspaceDocumentConfig.Factory.parse(file);
@@ -262,7 +256,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         return SaveStatus.SUCCESS;
     }
 
-    private void saveWorkspaceConfig(List<WorkspaceProjectConfig> projects) throws IOException {
+    private void saveWorkspaceConfig(List<WorkspaceProjectConfig> projects) {
         workspaceConfig.getSoapuiWorkspace().setProjectArray(
                 projects.toArray(new WorkspaceProjectConfig[projects.size()]));
         workspaceConfig.getSoapuiWorkspace().setSoapuiVersion(SoapUI.SOAPUI_VERSION);
@@ -329,7 +323,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         listeners.remove(listener);
     }
 
-    public Project importProject(String fileName) throws SoapUIException {
+    public Project importProject(String fileName) {
         File projectFile = new File(fileName);
         WsdlProject project = (WsdlProject) ProjectFactoryRegistry.getProjectFactory("wsdl").createNew(
                 projectFile.getAbsolutePath(), this);
@@ -357,7 +351,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         resolver.resolve(project);
     }
 
-    public WsdlProject createProject(String name) throws SoapUIException {
+    public WsdlProject createProject(String name) {
         File projectFile = new File(createProjectFileName(name));
         File file = UISupport.getFileDialogs().saveAs(this, messages.get("CreateProject.Title"), ".xml",
                 "XML Files (*.xml)", projectFile);
@@ -368,7 +362,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         return createProject(name, file);
     }
 
-    public WsdlProject createProject(String name, File file) throws SoapUIException {
+    public WsdlProject createProject(String name, File file) {
         File projectFile = file;
         while (projectFile != null && projectFile.exists()) {
             Boolean result = Boolean.FALSE;
@@ -469,7 +463,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         }
     }
 
-    public Project reloadProject(Project project) throws SoapUIException {
+    public Project reloadProject(Project project) {
         int ix = projectList.indexOf(project);
         if (ix == -1) {
             throw new RuntimeException("Project [" + project.getName() //$NON-NLS-1$
@@ -537,7 +531,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         return workspaceConfig.getSoapuiWorkspace().getDescription();
     }
 
-    public WsdlProject importRemoteProject(String url) throws SoapUIException {
+    public WsdlProject importRemoteProject(String url) {
         WsdlProject project = (WsdlProject) ProjectFactoryRegistry.getProjectFactory("wsdl").createNew(url, this);
         afterProjectImport(project);
 
@@ -582,7 +576,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         return availableProjects;
     }
 
-    public Project openProject(Project project) throws SoapUIException {
+    public Project openProject(Project project) {
         return reloadProject(project);
     }
 

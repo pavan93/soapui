@@ -29,14 +29,10 @@ import com.eviware.x.impl.swing.JComboBoxFormField;
 import org.apache.xmlbeans.SchemaType;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableRowSorter;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -316,9 +312,9 @@ public class InvalidTypesTable extends JPanel {
     protected interface AddParameterActionDialog {
 
         @AField(description = "Choose Type", name = "Choose type", type = AFieldType.ENUMERATION)
-        public final static String TYPE = "Choose type";
+        String TYPE = "Choose type";
 
         @AField(description = "Set a value", name = "Value", type = AFieldType.STRING)
-        public final static String VALUE = "Value";
+        String VALUE = "Value";
     }
 }

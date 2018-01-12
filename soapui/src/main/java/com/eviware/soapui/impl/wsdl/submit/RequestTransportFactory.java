@@ -17,7 +17,7 @@
 package com.eviware.soapui.impl.wsdl.submit;
 
 public interface RequestTransportFactory {
-    public RequestTransport newRequestTransport();
+    RequestTransport newRequestTransport();
 
-    public String getProtocol();
+    String getProtocol();
 }

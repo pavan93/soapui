@@ -30,38 +30,38 @@ import java.util.List;
  */
 public interface SAMLCallbackHandler extends CallbackHandler {
 
-    public abstract void setAlias(String alias);
+    String getAlias();
 
-    public abstract String getAlias();
+    void setAlias(String alias);
 
-    public abstract void setCrypto(Crypto crypto);
+    Crypto getCrypto();
 
-    public abstract Crypto getCrypto();
+    void setCrypto(Crypto crypto);
 
-    public abstract void setCustomAttributeValues(List<?> customAttributeValues);
+    void setCustomAttributeValues(List<?> customAttributeValues);
 
-    public abstract void setResource(String resource);
+    void setResource(String resource);
 
-    public abstract void setSubjectLocality(String ipAddress, String dnsAddress);
+    void setSubjectLocality(String ipAddress, String dnsAddress);
 
-    public abstract void setSubjectNameIDFormat(String subjectNameIDFormat);
+    void setSubjectNameIDFormat(String subjectNameIDFormat);
 
-    public abstract void setIssuer(String issuer);
+    void setIssuer(String issuer);
 
-    public void setSubjectName(String subjectName);
+    void setSubjectName(String subjectName);
 
-    public void setSubjectQualifier(String subjectQualifier);
+    void setSubjectQualifier(String subjectQualifier);
 
-    public abstract byte[] getEphemeralKey();
+    byte[] getEphemeralKey();
 
-    public abstract void setCerts(X509Certificate[] certs);
+    void setCerts(X509Certificate[] certs);
 
-    public abstract void setCertIdentifier(CERT_IDENTIFIER certIdentifier);
+    void setCertIdentifier(CERT_IDENTIFIER certIdentifier);
 
-    public abstract void setStatement(String statement);
+    void setStatement(String statement);
 
-    public abstract void setConfirmationMethod(String confMethod);
+    void setConfirmationMethod(String confMethod);
 
-    public abstract void setCustomAttributeName(String customAttributeName);
+    void setCustomAttributeName(String customAttributeName);
 
 }

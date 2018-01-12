@@ -16,17 +16,17 @@
 
 package com.eviware.soapui.support.components;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.List;
 
 public interface JInspectorPanel {
-    public <T extends Inspector> T addInspector(final T inspector);
+    <T extends Inspector> T addInspector(final T inspector);
 
     JComponent getComponent();
 
     void setDefaultDividerLocation(float v);
 
-    public void activate(Inspector inspector);
+    void activate(Inspector inspector);
 
     void setCurrentInspector(String s);
 

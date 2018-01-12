@@ -24,53 +24,53 @@ import javax.annotation.Nonnull;
 import java.util.List;
 
 public interface WssContainer extends PropertyExpansionContainer {
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 
-    public void addWssContainerListener(WssContainerListener listener);
+    void addWssContainerListener(WssContainerListener listener);
 
-    public void removeWssContainerListener(WssContainerListener listener);
+    void removeWssContainerListener(WssContainerListener listener);
 
-    public List<WssCrypto> getCryptoList();
+    List<WssCrypto> getCryptoList();
 
-    public WssCrypto addCrypto(String source, String password, @Nonnull CryptoType type);
+    WssCrypto addCrypto(String source, String password, @Nonnull CryptoType type);
 
-    public int getCryptoCount();
+    int getCryptoCount();
 
-    public void removeCrypto(@Nonnull WssCrypto crypto);
+    void removeCrypto(@Nonnull WssCrypto crypto);
 
-    public List<IncomingWss> getIncomingWssList();
+    List<IncomingWss> getIncomingWssList();
 
-    public IncomingWss addIncomingWss(String label);
+    IncomingWss addIncomingWss(String label);
 
-    public int getIncomingWssCount();
+    int getIncomingWssCount();
 
-    public IncomingWss getIncomingWssAt(int index);
+    IncomingWss getIncomingWssAt(int index);
 
-    public void removeIncomingWssAt(int row);
+    void removeIncomingWssAt(int row);
 
-    public List<OutgoingWss> getOutgoingWssList();
+    List<OutgoingWss> getOutgoingWssList();
 
-    public OutgoingWss addOutgoingWss(String label);
+    OutgoingWss addOutgoingWss(String label);
 
-    public int getOutgoingWssCount();
+    int getOutgoingWssCount();
 
-    public OutgoingWss getOutgoingWssAt(int index);
+    OutgoingWss getOutgoingWssAt(int index);
 
-    public void removeOutgoingWssAt(int row);
+    void removeOutgoingWssAt(int row);
 
-    public WssCrypto getCryptoByName(String cryptoName);
+    WssCrypto getCryptoByName(String cryptoName);
 
-    public WssCrypto getCryptoByName(String cryptoName, boolean outgoingWSSConfig);
+    WssCrypto getCryptoByName(String cryptoName, boolean outgoingWSSConfig);
 
-    public OutgoingWss getOutgoingWssByName(String outgoingName);
+    OutgoingWss getOutgoingWssByName(String outgoingName);
 
-    public IncomingWss getIncomingWssByName(String incomingName);
+    IncomingWss getIncomingWssByName(String incomingName);
 
-    public String[] getCryptoNames();
+    String[] getCryptoNames();
 
-    public String[] getOutgoingWssNames();
+    String[] getOutgoingWssNames();
 
-    public String[] getIncomingWssNames();
+    String[] getIncomingWssNames();
 
-    public void importConfig(WssContainer wssContainer);
+    void importConfig(WssContainer wssContainer);
 }

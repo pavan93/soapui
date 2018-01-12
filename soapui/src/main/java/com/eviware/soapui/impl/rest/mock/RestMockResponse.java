@@ -27,11 +27,9 @@ import com.eviware.soapui.model.iface.MessagePart;
 import com.eviware.soapui.model.mock.MockOperation;
 import com.eviware.soapui.model.mock.MockRequest;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
-import org.apache.ws.security.WSSecurityException;
 
 import java.beans.PropertyChangeListener;
 import java.io.File;
-import java.io.IOException;
 
 public class RestMockResponse extends AbstractMockResponse<RESTMockResponseConfig> implements MediaType {
     public final static String MOCKRESULT_PROPERTY = RestMockResponse.class.getName() + "@mockresult";
@@ -117,7 +115,7 @@ public class RestMockResponse extends AbstractMockResponse<RESTMockResponseConfi
     }
 
     @Override
-    public Attachment attachFile(File file, boolean cache) throws IOException {
+    public Attachment attachFile(File file, boolean cache) {
         return null;
     }
 
@@ -141,7 +139,7 @@ public class RestMockResponse extends AbstractMockResponse<RESTMockResponseConfi
     }
 
     @Override
-    protected String executeSpecifics(MockRequest request, String responseContent, WsdlMockRunContext context) throws IOException, WSSecurityException {
+    protected String executeSpecifics(MockRequest request, String responseContent, WsdlMockRunContext context) {
         return responseContent;
     }
 

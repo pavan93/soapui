@@ -91,7 +91,7 @@ public class HttpException extends IOException {
         try {
             Class[] paramsClasses = new Class[]{Throwable.class};
             Method initCause = Throwable.class.getMethod("initCause", paramsClasses);
-            initCause.invoke(this, new Object[]{cause});
+            initCause.invoke(this, cause);
         } catch (Exception e) {
             // The setCause method must not be available
         }

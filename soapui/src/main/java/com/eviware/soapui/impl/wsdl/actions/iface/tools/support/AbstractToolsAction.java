@@ -32,15 +32,10 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 import com.eviware.soapui.support.types.StringToStringMap;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormTextField;
+import com.eviware.x.form.*;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -69,7 +64,6 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
     // Configure behavior of this action:
     private boolean fixedWSDL = false;
     private Action toolsSettingsAction = new ShowIntegratedToolsSettingsAction();
-    ;
 
     public AbstractToolsAction(String name, String description) {
         super(name, description);
@@ -112,16 +106,16 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
 
         // Could reuse the dialog in Swing, but not in Eclipse.
         // if( dialog == null )
-        dialog = buildDialog((T) target);
+        dialog = buildDialog(target);
 
         if (dialog == null) {
             try {
-                generate(initValues((T) target, param), UISupport.getToolHost(), (T) target);
+                generate(initValues(target, param), UISupport.getToolHost(), target);
             } catch (Exception e1) {
                 UISupport.showErrorMessage(e1);
             }
         } else {
-            StringToStringMap values = initValues((T) target, param);
+            StringToStringMap values = initValues(target, param);
 
             dialog.setValues(values);
             dialog.setVisible(true);
@@ -145,7 +139,7 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         modelItem = target;
 
         try {
-            generate(initValues((T) target, param), UISupport.getToolHost(), (T) target);
+            generate(initValues(target, param), UISupport.getToolHost(), target);
         } catch (Exception e1) {
             UISupport.showErrorMessage(e1);
         }

@@ -33,34 +33,34 @@ import java.util.List;
 
 public interface MockService extends TestModelItem, Releasable, AnimatableItem, HasHelpUrl, MockServer, MockServiceScripts
 {
-    public final static String PATH_PROPERTY = MockService.class.getName() + "@path";
-    public final static String PORT_PROPERTY = MockService.class.getName() + "@port";
+    String PATH_PROPERTY = MockService.class.getName() + "@path";
+    String PORT_PROPERTY = MockService.class.getName() + "@port";
 
-    public WsdlProject getProject();
+    WsdlProject getProject();
 
-    public List<MockOperation> getMockOperationList();
+    List<MockOperation> getMockOperationList();
 
-    public int getMockOperationCount();
+    int getMockOperationCount();
 
-    public MockOperation getMockOperationAt(int index);
+    MockOperation getMockOperationAt(int index);
 
-    public MockOperation getMockOperationByName(String name);
+    MockOperation getMockOperationByName(String name);
 
-    public MockOperation addNewMockOperation(Operation operation);
+    MockOperation addNewMockOperation(Operation operation);
 
-    public void removeMockOperation(MockOperation mockOperation);
+    void removeMockOperation(MockOperation mockOperation);
 
-    public void addMockServiceListener(MockServiceListener listener);
+    void addMockServiceListener(MockServiceListener listener);
 
-    public void removeMockServiceListener(MockServiceListener listener);
+    void removeMockServiceListener(MockServiceListener listener);
 
-    public void fireMockOperationAdded(MockOperation mockOperation);
+    void fireMockOperationAdded(MockOperation mockOperation);
 
-    public void fireMockOperationRemoved(MockOperation mockOperation);
+    void fireMockOperationRemoved(MockOperation mockOperation);
 
-    public void fireMockResponseAdded(MockResponse mockResponse);
+    void fireMockResponseAdded(MockResponse mockResponse);
 
-    public void fireMockResponseRemoved(MockResponse mockResponse);
+    void fireMockResponseRemoved(MockResponse mockResponse);
 
-    public String getStringID();
+    String getStringID();
 }

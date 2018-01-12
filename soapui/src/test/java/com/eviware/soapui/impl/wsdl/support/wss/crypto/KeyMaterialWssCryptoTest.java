@@ -28,9 +28,7 @@ import org.mockito.MockitoAnnotations;
 import java.io.IOException;
 import java.security.KeyStore;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.when;
 
 /**
@@ -62,42 +60,42 @@ public class KeyMaterialWssCryptoTest {
     }
 
     @Test
-    public void testLoadingJKSKeystoreWithCorrectPassword() throws Exception {
+    public void testLoadingJKSKeystoreWithCorrectPassword() {
         loadCryptoSucessfully(CryptoType.KEYSTORE, "jks-test-key.jks", CORRECT_PASSWORD);
     }
 
     @Test
-    public void testLoadingJKSKeystoreWithNullPassword() throws Exception {
+    public void testLoadingJKSKeystoreWithNullPassword() {
         loadCryptoSucessfully(CryptoType.TRUSTSTORE, "jks-test-key.jks", null);
     }
 
     @Test
-    public void testLoadingJKSKeystoreWithBlankPassword() throws Exception {
+    public void testLoadingJKSKeystoreWithBlankPassword() {
         loadCryptoSucessfully(CryptoType.TRUSTSTORE, "jks-test-key.jks", "");
     }
 
     @Test
-    public void testLoadingJCEKSSKeystoreWithCorrectPassword() throws Exception {
+    public void testLoadingJCEKSSKeystoreWithCorrectPassword() {
         loadCryptoSucessfully(CryptoType.KEYSTORE, "jceks-test-key.jck", CORRECT_PASSWORD);
     }
 
     @Test
-    public void testLoadingPKCS12KeystoreWithCorrectPassword() throws Exception {
+    public void testLoadingPKCS12KeystoreWithCorrectPassword() {
         loadCryptoSucessfully(CryptoType.KEYSTORE, "pkcs12-test-key.p12", CORRECT_PASSWORD);
     }
 
     @Test
-    public void testLoadingJKSKeystoreWithIncorrectPassword() throws Exception {
+    public void testLoadingJKSKeystoreWithIncorrectPassword() {
         loadCryptoUnsucessfully(CryptoType.KEYSTORE, "jks-test-key.jks", INCORRECT_PASSWORD);
     }
 
     @Test
-    public void testLoadingJCEKSSKeystoreWithIncorrectPassword() throws Exception {
+    public void testLoadingJCEKSSKeystoreWithIncorrectPassword() {
         loadCryptoUnsucessfully(CryptoType.KEYSTORE, "jceks-test-key.jck", INCORRECT_PASSWORD);
     }
 
     @Test
-    public void testLoadingPKCS12KeystoreWithIncorrectPassword() throws Exception {
+    public void testLoadingPKCS12KeystoreWithIncorrectPassword() {
         loadCryptoUnsucessfully(CryptoType.KEYSTORE, "pkcs12-test-key.p12", INCORRECT_PASSWORD);
     }
 

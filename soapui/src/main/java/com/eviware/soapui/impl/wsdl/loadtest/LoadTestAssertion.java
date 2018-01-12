@@ -16,15 +16,11 @@
 
 package com.eviware.soapui.impl.wsdl.loadtest;
 
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 /**
  * Assertion for LoadTest runs
@@ -33,32 +29,32 @@ import javax.swing.ImageIcon;
  */
 
 public interface LoadTestAssertion extends PropertyChangeNotifier {
-    public final static String NAME_PROPERTY = LoadTestAssertion.class.getName() + "@name";
-    public final static String ICON_PROPERTY = LoadTestAssertion.class.getName() + "@icon";
-    public final static String CONFIGURATION_PROPERTY = LoadTestAssertion.class.getName() + "@configuration";
+    String NAME_PROPERTY = LoadTestAssertion.class.getName() + "@name";
+    String ICON_PROPERTY = LoadTestAssertion.class.getName() + "@icon";
+    String CONFIGURATION_PROPERTY = LoadTestAssertion.class.getName() + "@configuration";
 
-    public static final String ALL_TEST_STEPS = "- Total -";
-    public static final String ANY_TEST_STEP = "- Any -";
+    String ALL_TEST_STEPS = "- Total -";
+    String ANY_TEST_STEP = "- Any -";
 
-    public String getName();
+    String getName();
 
-    public ImageIcon getIcon();
+    ImageIcon getIcon();
 
-    public XmlObject getConfiguration();
+    XmlObject getConfiguration();
 
-    public void updateConfiguration(LoadTestAssertionConfig configuration);
+    void updateConfiguration(LoadTestAssertionConfig configuration);
 
-    public String assertResult(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestStepResult result,
-                               TestCaseRunner testRunner, TestCaseRunContext runContext);
+    String assertResult(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestStepResult result,
+                        TestCaseRunner testRunner, TestCaseRunContext runContext);
 
-    public String assertResults(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
-                                TestCaseRunContext runContext);
+    String assertResults(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
+                         TestCaseRunContext runContext);
 
-    public String getTargetStep();
+    String getTargetStep();
 
-    public void setTargetStep(String name);
+    void setTargetStep(String name);
 
-    public String getDescription();
+    String getDescription();
 
-    public void release();
+    void release();
 }

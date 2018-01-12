@@ -23,13 +23,10 @@ import com.eviware.soapui.impl.rest.actions.oauth.OAuth2TokenExtractor;
 import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.ContainerWalker;
 import com.eviware.soapui.utils.StubbedDialogsTestBase;
-import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.AbstractButton;
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -56,19 +53,19 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
 
     @Before
     public void setUp() throws Exception {
-        oAuth2Profile = createProfileWith(Collections.<String>emptyList());
+        oAuth2Profile = createProfileWith(Collections.emptyList());
         editor = new TestableOAuth2ScriptsEditor(oAuth2Profile);
         containerWalker = new ContainerWalker(editor);
         stubbedExtractor = new StubbedExtractor();
     }
 
     @Test
-    public void canBeInitializedWithoutExistingScripts() throws Exception {
+    public void canBeInitializedWithoutExistingScripts() {
         assertThat(editor.getJavaScripts(), is(Arrays.asList("", "")));
     }
 
     @Test
-    public void getsJavaScriptsEnteredByUser() throws Exception {
+    public void getsJavaScriptsEnteredByUser() {
         final String firstScript = "alert('first')";
         final String secondScript = "alert('second')";
 
@@ -86,7 +83,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void showsErrorMessageWhenInvalidScriptIsTested() throws Exception {
+    public void showsErrorMessageWhenInvalidScriptIsTested() {
         final String invalidScript = "this is clearly invalid";
 
         containerWalker.findTextComponent(OAuth2ScriptsEditor.DEFAULT_SCRIPT_NAMES[0]).setText(invalidScript);
@@ -128,7 +125,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void canAddScriptToEditor() throws Exception {
+    public void canAddScriptToEditor() {
         final String newScript = "callSomeFunction();";
         containerWalker.findButtonWithName(OAuth2ScriptsEditor.ADD_SCRIPT_BUTTON_NAME).doClick();
         containerWalker.rebuildIndex();
@@ -140,7 +137,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void updatesModelWhenAddingScript() throws Exception {
+    public void updatesModelWhenAddingScript() {
         final String newScript = "callSomeFunction();";
         containerWalker.findButtonWithName(OAuth2ScriptsEditor.ADD_SCRIPT_BUTTON_NAME).doClick();
         containerWalker.rebuildIndex();
@@ -152,7 +149,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void canRemoveScriptFromEditor() throws Exception {
+    public void canRemoveScriptFromEditor() {
         removeInputPanel("Input panel 2");
 
         List<String> javaScripts = editor.getJavaScripts();
@@ -160,7 +157,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void scriptRemovalRemovesSelectedScriptFromProfile() throws Exception {
+    public void scriptRemovalRemovesSelectedScriptFromProfile() {
         final String scriptToKeep = "first()";
         final String scriptToDiscard = "second()";
         oAuth2Profile.setAutomationJavaScripts(Arrays.asList(scriptToKeep, scriptToDiscard));
@@ -179,7 +176,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void disablesRemoveButtonAfterRemoval() throws Exception {
+    public void disablesRemoveButtonAfterRemoval() {
         editor.selectField(containerWalker.findComponent("Input panel 2", OAuth2ScriptsEditor.InputPanel.class));
         stubbedDialogs.mockConfirmWithReturnValue(true);
         AbstractButton removeButton = containerWalker.findButtonWithName(OAuth2ScriptsEditor.REMOVE_SCRIPT_BUTTON_NAME);
@@ -189,7 +186,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void doesNotRemoveScriptFromEditorIfActionIsCancelled() throws Exception {
+    public void doesNotRemoveScriptFromEditorIfActionIsCancelled() {
         editor.selectField(containerWalker.findComponent("Input panel 2", OAuth2ScriptsEditor.InputPanel.class));
         // this simulates that the user doesn't confirm the script removal
         stubbedDialogs.mockConfirmWithReturnValue(false);
@@ -200,7 +197,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void removeButtonEnabledOnlyWhenPanelIsSelected() throws Exception {
+    public void removeButtonEnabledOnlyWhenPanelIsSelected() {
         assertThat(containerWalker.findButtonWithName(OAuth2ScriptsEditor.REMOVE_SCRIPT_BUTTON_NAME),
                 is(not(enabled())));
         editor.selectField(containerWalker.findComponent("Input panel 2", OAuth2ScriptsEditor.InputPanel.class));
@@ -237,7 +234,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
         boolean shouldSimulateJavaScriptErrors = false;
 
         @Override
-        public void extractAccessToken(OAuth2Parameters parameters) throws URISyntaxException, MalformedURLException, OAuthSystemException {
+        public void extractAccessToken(OAuth2Parameters parameters) {
             simulateBrowserInteraction();
         }
 

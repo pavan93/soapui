@@ -36,7 +36,7 @@ import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.UISupport;
 import org.apache.log4j.Logger;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.io.File;
 import java.io.IOException;
@@ -316,19 +316,19 @@ public class WsdlMockOperation extends AbstractMockOperation<MockOperationConfig
     }
 
     public boolean isOneWay() {
-        return operation == null ? false : operation.isOneWay();
+        return operation != null && operation.isOneWay();
     }
 
     public boolean isNotification() {
-        return operation == null ? false : operation.isNotification();
+        return operation != null && operation.isNotification();
     }
 
     public boolean isSolicitResponse() {
-        return operation == null ? false : operation.isSolicitResponse();
+        return operation != null && operation.isSolicitResponse();
     }
 
     public boolean isUnidirectional() {
-        return operation == null ? false : operation.isUnidirectional();
+        return operation != null && operation.isUnidirectional();
     }
 
     public boolean isBidirectional() {

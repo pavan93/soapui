@@ -17,14 +17,7 @@
 package com.eviware.soapui.utils;
 
 import com.eviware.soapui.impl.WorkspaceImpl;
-import com.eviware.soapui.impl.rest.DefaultOAuth2ProfileContainer;
-import com.eviware.soapui.impl.rest.OAuth2Profile;
-import com.eviware.soapui.impl.rest.OAuth2ProfileContainer;
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.rest.mock.RestMockAction;
 import com.eviware.soapui.impl.rest.mock.RestMockResponse;
 import com.eviware.soapui.impl.rest.mock.RestMockService;
@@ -50,7 +43,7 @@ public class ModelItemFactory {
         return new RestRequest(makeRestMethod(), RestRequestConfig.Factory.newInstance(), false);
     }
 
-    public static RestRequest makeRestRequest(RestResource restResource) throws SoapUIException {
+    public static RestRequest makeRestRequest(RestResource restResource) {
         return new RestRequest(makeRestMethod(restResource), RestRequestConfig.Factory.newInstance(), false);
     }
 

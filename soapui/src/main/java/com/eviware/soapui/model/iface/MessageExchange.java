@@ -28,53 +28,53 @@ import com.eviware.soapui.support.types.StringToStringsMap;
  */
 
 public interface MessageExchange extends ResultContainer {
-    public Operation getOperation();
+    Operation getOperation();
 
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 
-    public long getTimestamp();
+    long getTimestamp();
 
-    public long getTimeTaken();
+    long getTimeTaken();
 
-    public String getEndpoint();
+    String getEndpoint();
 
-    public StringToStringMap getProperties();
+    StringToStringMap getProperties();
 
-    public String getRequestContent();
+    String getRequestContent();
 
-    public String getResponseContent();
+    String getResponseContent();
 
-    public String getRequestContentAsXml();
+    String getRequestContentAsXml();
 
-    public String getResponseContentAsXml();
+    String getResponseContentAsXml();
 
-    public StringToStringsMap getRequestHeaders();
+    StringToStringsMap getRequestHeaders();
 
-    public StringToStringsMap getResponseHeaders();
+    StringToStringsMap getResponseHeaders();
 
-    public Attachment[] getRequestAttachments();
+    Attachment[] getRequestAttachments();
 
-    public Attachment[] getResponseAttachments();
+    Attachment[] getResponseAttachments();
 
-    public String[] getMessages();
+    String[] getMessages();
 
-    public boolean isDiscarded();
+    boolean isDiscarded();
 
-    public boolean hasRawData();
+    boolean hasRawData();
 
-    public byte[] getRawRequestData();
+    byte[] getRawRequestData();
 
-    public byte[] getRawResponseData();
+    byte[] getRawResponseData();
 
-    public Attachment[] getRequestAttachmentsForPart(String partName);
+    Attachment[] getRequestAttachmentsForPart(String partName);
 
-    public Attachment[] getResponseAttachmentsForPart(String partName);
+    Attachment[] getResponseAttachmentsForPart(String partName);
 
-    public boolean hasRequest(boolean ignoreEmpty);
+    boolean hasRequest(boolean ignoreEmpty);
 
-    public boolean hasResponse();
+    boolean hasResponse();
 
-    public Response getResponse();
+    Response getResponse();
 
-    public String getProperty(String name);
+    String getProperty(String name);
 }

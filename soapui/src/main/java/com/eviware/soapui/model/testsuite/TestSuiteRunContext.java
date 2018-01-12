@@ -21,11 +21,11 @@ package com.eviware.soapui.model.testsuite;
  */
 
 public interface TestSuiteRunContext extends TestRunContext {
-    public TestCase getCurrentTestCase();
+    TestCase getCurrentTestCase();
 
-    public int getCurrentTestCaseIndex();
+    int getCurrentTestCaseIndex();
 
-    public TestSuiteRunner getTestSuiteRunner();
+    TestSuiteRunner getTestSuiteRunner();
 
-    public TestSuite getTestSuite();
+    TestSuite getTestSuite();
 }

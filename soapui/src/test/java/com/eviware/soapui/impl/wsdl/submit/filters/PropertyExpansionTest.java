@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
 public class PropertyExpansionTest {
 
     @Test
-    public void testExpansion() throws Exception {
+    public void testExpansion() {
         WsdlSubmitContext context = new WsdlSubmitContext(null);
 
         context.setProperty("test", "value");
@@ -55,7 +55,7 @@ public class PropertyExpansionTest {
     }
 
     @Test
-    public void testRecursiveExpansion() throws Exception {
+    public void testRecursiveExpansion() {
         WsdlSubmitContext context = new WsdlSubmitContext(null);
 
         context.setProperty("test", "value");
@@ -68,7 +68,7 @@ public class PropertyExpansionTest {
     }
 
     @Test
-    public void testNestedExpansion() throws Exception {
+    public void testNestedExpansion() {
         WsdlSubmitContext context = new WsdlSubmitContext(null);
 
         context.setProperty("test", "value");
@@ -86,7 +86,7 @@ public class PropertyExpansionTest {
     }
 
     @Test
-    public void testXPathExpansion() throws Exception {
+    public void testXPathExpansion() {
         WsdlSubmitContext context = new WsdlSubmitContext(null);
 
         context.setProperty("test", "<test><value>hello</value></test>");
@@ -94,7 +94,7 @@ public class PropertyExpansionTest {
     }
 
     @Test
-    public void testScopedPropertyExpansion() throws Exception {
+    public void testScopedPropertyExpansion() {
         WsdlProject project = new WsdlProject();
         project.addProperty("projectId").setValue("123");
         WsdlTestSuite testSuite = project.addNewTestSuite("TestSuite");

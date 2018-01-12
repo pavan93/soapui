@@ -21,15 +21,15 @@ import com.eviware.soapui.model.testsuite.TestStepResult;
 import java.io.PrintWriter;
 
 public interface TestRunLog {
-    public void clear();
+    void clear();
 
-    public void addText(String string);
+    void addText(String string);
 
-    public void addTestStepResult(TestStepResult stepResult);
+    void addTestStepResult(TestStepResult stepResult);
 
-    public void addBoldText(String string);
+    void addBoldText(String string);
 
-    public void release();
+    void release();
 
-    public void printLog(PrintWriter out);
+    void printLog(PrintWriter out);
 }

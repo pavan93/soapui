@@ -135,7 +135,7 @@ public abstract class AbstractSubmitContext<T extends ModelItem> implements Subm
     }
 
     public boolean hasProperty(String name) {
-        return properties == null ? false : properties.containsKey(name);
+        return properties != null && properties.containsKey(name);
     }
 
     public void resetProperties() {

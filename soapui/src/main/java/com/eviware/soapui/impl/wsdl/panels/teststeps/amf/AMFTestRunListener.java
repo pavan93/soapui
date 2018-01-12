@@ -19,11 +19,7 @@ package com.eviware.soapui.impl.wsdl.panels.teststeps.amf;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.AMFRequestTestStep;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunListener;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.StringUtils;
 import flex.messaging.io.amf.client.exceptions.ClientStatusException;
 import flex.messaging.io.amf.client.exceptions.ServerStatusException;
@@ -84,15 +80,7 @@ public class AMFTestRunListener implements TestRunListener {
      * @return boolean
      */
     private static boolean noAMFTestSteps(WsdlTestCase wsdlTestCase) {
-        if (wsdlTestCase.getTestStepsOfType(AMFRequestTestStep.class).isEmpty()) {
-            // wsdlTestCase.getConfig().setAmfAuthorisation( false );
-            // SoapUI.log( wsdlTestCase.getName()
-            // +
-            // " does not contain any AMF Test Step therefore AMF Authorisation is disabled!"
-            // );
-            return true;
-        }
-        return false;
+        return wsdlTestCase.getTestStepsOfType(AMFRequestTestStep.class).isEmpty();
     }
 
     public void beforeStep(TestCaseRunner testRunner, TestCaseRunContext runContext) {

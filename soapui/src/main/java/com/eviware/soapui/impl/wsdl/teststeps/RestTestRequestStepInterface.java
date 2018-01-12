@@ -22,13 +22,13 @@ import com.eviware.soapui.model.testsuite.Assertable;
 import com.eviware.soapui.model.testsuite.OperationTestStep;
 
 public interface RestTestRequestStepInterface extends HttpTestRequestStepInterface, OperationTestStep, Assertable {
-    public RestRequestStepConfig getRequestStepConfig();
+    RestRequestStepConfig getRequestStepConfig();
 
-    public String getService();
+    String getService();
 
-    public String getResourcePath();
+    String getResourcePath();
 
-    public RestMethod getRestMethod();
+    RestMethod getRestMethod();
 
-    public RestResource getResource();
+    RestResource getResource();
 }

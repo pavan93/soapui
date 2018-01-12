@@ -27,27 +27,23 @@ import java.io.PrintWriter;
  */
 
 public interface TestStepResult {
-    public enum TestStepStatus {
-        UNKNOWN, OK, FAILED, CANCELED
-    }
+    TestStepStatus getStatus();
 
-    public TestStepStatus getStatus();
-
-    public TestStep getTestStep();
+    TestStep getTestStep();
 
     /**
      * Returns a list of actions that can be applied to this result
      */
 
-    public ActionList getActions();
+    ActionList getActions();
 
-    public String[] getMessages();
+    String[] getMessages();
 
-    public Throwable getError();
+    Throwable getError();
 
-    public long getTimeTaken();
+    long getTimeTaken();
 
-    public long getTimeStamp();
+    long getTimeStamp();
 
     /**
      * Used for calculating throughput
@@ -55,20 +51,24 @@ public interface TestStepResult {
      * @return the number of bytes in this result
      */
 
-    public long getSize();
+    long getSize();
 
     /**
      * Writes this result to the specified writer, used for logging.
      */
 
-    public void writeTo(PrintWriter writer);
+    void writeTo(PrintWriter writer);
 
     /**
      * Can discard any result data that may be taking up memory. Timing-values
      * must not be discarded.
      */
 
-    public void discard();
+    void discard();
 
-    public boolean isDiscarded();
+    boolean isDiscarded();
+
+    enum TestStepStatus {
+        UNKNOWN, OK, FAILED, CANCELED
+    }
 }

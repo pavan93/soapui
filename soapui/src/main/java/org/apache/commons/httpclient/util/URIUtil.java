@@ -44,12 +44,12 @@
 
 package org.apache.commons.httpclient.util;
 
-import java.util.BitSet;
-
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.URIException;
+
+import java.util.BitSet;
 
 /**
  * The URI escape and character encoding and decoding utility.
@@ -210,7 +210,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodeAll(String unescaped) throws URIException {
+    public static String encodeAll(String unescaped) {
         return encodeAll(unescaped, URI.getDefaultProtocolCharset());
     }
 
@@ -226,8 +226,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeAll(String unescaped, String charset)
-            throws URIException {
+    public static String encodeAll(String unescaped, String charset) {
 
         return encode(unescaped, empty, charset);
     }
@@ -245,8 +244,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodeWithinAuthority(String unescaped)
-            throws URIException {
+    public static String encodeWithinAuthority(String unescaped) {
 
         return encodeWithinAuthority(unescaped, URI.getDefaultProtocolCharset());
     }
@@ -264,8 +262,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinAuthority(String unescaped, String charset)
-            throws URIException {
+    public static String encodeWithinAuthority(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_authority, charset);
     }
@@ -281,7 +278,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodePathQuery(String unescaped) throws URIException {
+    public static String encodePathQuery(String unescaped) {
         return encodePathQuery(unescaped, URI.getDefaultProtocolCharset());
     }
 
@@ -296,8 +293,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodePathQuery(String unescaped, String charset)
-            throws URIException {
+    public static String encodePathQuery(String unescaped, String charset) {
 
         int at = unescaped.indexOf('?');
         if (at < 0) {
@@ -322,8 +318,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodeWithinPath(String unescaped)
-            throws URIException {
+    public static String encodeWithinPath(String unescaped) {
 
         return encodeWithinPath(unescaped, URI.getDefaultProtocolCharset());
     }
@@ -342,8 +337,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinPath(String unescaped, String charset)
-            throws URIException {
+    public static String encodeWithinPath(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_path, charset);
     }
@@ -359,7 +353,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodePath(String unescaped) throws URIException {
+    public static String encodePath(String unescaped) {
         return encodePath(unescaped, URI.getDefaultProtocolCharset());
     }
 
@@ -374,8 +368,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodePath(String unescaped, String charset)
-            throws URIException {
+    public static String encodePath(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_abs_path, charset);
     }
@@ -394,8 +387,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodeWithinQuery(String unescaped)
-            throws URIException {
+    public static String encodeWithinQuery(String unescaped) {
 
         return encodeWithinQuery(unescaped, URI.getDefaultProtocolCharset());
     }
@@ -414,8 +406,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinQuery(String unescaped, String charset)
-            throws URIException {
+    public static String encodeWithinQuery(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_query, charset);
     }
@@ -434,7 +425,7 @@ public class URIUtil {
      * @see URI#getDefaultProtocolCharset
      * @see #encode
      */
-    public static String encodeQuery(String unescaped) throws URIException {
+    public static String encodeQuery(String unescaped) {
         return encodeQuery(unescaped, URI.getDefaultProtocolCharset());
     }
 
@@ -452,8 +443,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeQuery(String unescaped, String charset)
-            throws URIException {
+    public static String encodeQuery(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_query, charset);
     }
@@ -469,8 +459,7 @@ public class URIUtil {
      * @throws URIException if the default protocol charset is not supported
      * @see URI#getDefaultProtocolCharset
      */
-    public static String encode(String unescaped, BitSet allowed)
-            throws URIException {
+    public static String encode(String unescaped, BitSet allowed) {
 
         return encode(unescaped, allowed, URI.getDefaultProtocolCharset());
     }
@@ -486,7 +475,7 @@ public class URIUtil {
      * @return the escaped string
      */
     public static String encode(String unescaped, BitSet allowed,
-                                String charset) throws URIException {
+                                String charset) {
         byte[] rawdata = URLCodec.encodeUrl(allowed,
                 EncodingUtil.getBytes(unescaped, charset));
         return EncodingUtil.getAsciiString(rawdata);
@@ -547,8 +536,7 @@ public class URIUtil {
          * @throws URIException if the charset is not supported
          * @deprecated use org.apache.commons.codec.net.URLCodec
          */
-        public static char[] encode(String unescapedComponent, BitSet allowed, String charset)
-                throws URIException {
+        public static char[] encode(String unescapedComponent, BitSet allowed, String charset) {
 
             return URI.encode(unescapedComponent, allowed, charset);
         }

@@ -26,28 +26,13 @@ import com.eviware.soapui.support.resolver.ResolveContext.Resolver;
 import com.eviware.soapui.support.swing.JTableFactory;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractCellEditor;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -152,10 +137,7 @@ public class ResolveDialog {
             protected boolean handleOk() {
                 for (PathToResolve path : resolveContextTableModel.getContext().getPathsToResolve()) {
                     if (!path.isResolved()) {
-                        if (UISupport.confirm("There are unresolved paths, continue?", "Unresolved paths - Warning")) {
-                            return true;
-                        }
-                        return false;
+                        return UISupport.confirm("There are unresolved paths, continue?", "Unresolved paths - Warning");
                     }
                 }
                 return true;

@@ -26,11 +26,11 @@ import com.eviware.soapui.model.iface.SoapUIListener;
  */
 
 public interface TestSuiteRunListener extends SoapUIListener {
-    public void beforeRun(TestSuiteRunner testRunner, TestSuiteRunContext runContext);
+    void beforeRun(TestSuiteRunner testRunner, TestSuiteRunContext runContext);
 
-    public void afterRun(TestSuiteRunner testRunner, TestSuiteRunContext runContext);
+    void afterRun(TestSuiteRunner testRunner, TestSuiteRunContext runContext);
 
-    public void beforeTestCase(TestSuiteRunner testRunner, TestSuiteRunContext runContext, TestCase testCase);
+    void beforeTestCase(TestSuiteRunner testRunner, TestSuiteRunContext runContext, TestCase testCase);
 
-    public void afterTestCase(TestSuiteRunner testRunner, TestSuiteRunContext runContext, TestCaseRunner testCaseRunner);
+    void afterTestCase(TestSuiteRunner testRunner, TestSuiteRunContext runContext, TestCaseRunner testCaseRunner);
 }

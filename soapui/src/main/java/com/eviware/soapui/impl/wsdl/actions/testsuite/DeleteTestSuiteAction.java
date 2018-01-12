@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.actions.testsuite;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
@@ -43,7 +42,7 @@ public class DeleteTestSuiteAction extends AbstractSoapUIAction<WsdlTestSuite> {
         }
 
         if (UISupport.confirm("Remove TestSuite [" + testSuite.getName() + "] from project", "Remove TestSuite")) {
-            ((WsdlProject) testSuite.getProject()).removeTestSuite(testSuite);
+            testSuite.getProject().removeTestSuite(testSuite);
         }
     }
 }

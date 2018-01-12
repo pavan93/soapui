@@ -21,7 +21,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Context;
 import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.support.TypeInferrer;
 import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlException;
 
 /**
  * EmptyContent may not have any content, be it simpe or complex.
@@ -52,7 +51,7 @@ public class EmptyContent implements Content {
         return attrs;
     }
 
-    public Content validate(Context context) throws XmlException {
+    public Content validate(Context context) {
         XmlCursor cursor = context.getCursor();
         cursor.push();
         if (cursor.toParent() && cursor.toFirstChild()) {

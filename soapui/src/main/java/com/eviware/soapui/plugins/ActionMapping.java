@@ -18,11 +18,7 @@ package com.eviware.soapui.plugins;
 
 import org.apache.commons.lang.ObjectUtils;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Created by ole on 20/08/14.
@@ -54,5 +50,5 @@ public @interface ActionMapping {
 
     int toolbarIndex() default 0;
 
-    public enum Type {ACTION, GROUP, INSERT, SEPARATOR}
+    enum Type {ACTION, GROUP, INSERT, SEPARATOR}
 }

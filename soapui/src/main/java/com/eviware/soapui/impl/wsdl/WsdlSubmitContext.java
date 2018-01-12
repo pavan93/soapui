@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl;
 
-import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.settings.Settings;
@@ -36,7 +35,7 @@ public class WsdlSubmitContext extends AbstractSubmitContext {
     }
 
     public Object getProperty(String name) {
-        return getProperty(name, step, (WsdlTestCase) (step == null ? null : step.getTestCase()));
+        return getProperty(name, step, step == null ? null : step.getTestCase());
     }
 
     @Override

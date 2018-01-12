@@ -16,12 +16,7 @@
 
 package com.eviware.soapui.utils;
 
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
-import com.eviware.soapui.impl.rest.RestServiceFactory;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
@@ -43,11 +38,11 @@ public class StatefulModelItemFactory {
         }
     }
 
-    public RestRequest makeRestRequest() throws SoapUIException {
+    public RestRequest makeRestRequest() {
         return new RestRequest(makeRestMethod(), RestRequestConfig.Factory.newInstance(), false);
     }
 
-    public RestRequest makeRestRequest(RestResource restResource) throws SoapUIException {
+    public RestRequest makeRestRequest(RestResource restResource) {
         return new RestRequest(makeRestMethod(restResource), RestRequestConfig.Factory.newInstance(), false);
     }
 
@@ -55,7 +50,7 @@ public class StatefulModelItemFactory {
         return new RestMethod(restResource, RestMethodConfig.Factory.newInstance());
     }
 
-    public RestMethod makeRestMethod() throws SoapUIException {
+    public RestMethod makeRestMethod() {
         RestMethodConfig methodConfig = RestMethodConfig.Factory.newInstance();
         methodConfig.setName("Get");
         methodConfig.setMethod("GET");
@@ -75,7 +70,7 @@ public class StatefulModelItemFactory {
         return restMethod;
     }
 
-    public RestResource makeRestResource() throws SoapUIException {
+    public RestResource makeRestResource() {
         String serviceName = "Interface_" + UUID.randomUUID().toString();
         RestService service = (RestService) project.addNewInterface(serviceName, RestServiceFactory.REST_TYPE);
         service.setName(serviceName);
@@ -84,7 +79,7 @@ public class StatefulModelItemFactory {
     }
 
 
-    public WsdlTestCase makeTestCase() throws SoapUIException {
+    public WsdlTestCase makeTestCase() {
         return new WsdlTestCase(new WsdlTestSuite(project, TestSuiteConfig.Factory.newInstance()), TestCaseConfig.Factory.newInstance(), false);
     }
 }

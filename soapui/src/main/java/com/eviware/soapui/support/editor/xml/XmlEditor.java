@@ -33,7 +33,7 @@ public abstract class XmlEditor<T extends XmlDocument> extends Editor<T> {
 
     public boolean saveDocument(boolean validate) {
         XmlEditorView<?> currentView = (XmlEditorView<?>) getCurrentView();
-        return currentView == null ? true : currentView.saveDocument(validate);
+        return currentView == null || currentView.saveDocument(validate);
     }
 
     @SuppressWarnings("unchecked")

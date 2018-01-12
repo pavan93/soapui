@@ -18,7 +18,7 @@ package com.eviware.soapui.model;
 
 import com.eviware.soapui.ui.desktop.DesktopPanel;
 
-import java.awt.Component;
+import java.awt.*;
 
 /**
  * Behaviour for building ModelItem-related UI panels
@@ -27,11 +27,11 @@ import java.awt.Component;
  */
 
 public interface PanelBuilder<T extends ModelItem> {
-    public boolean hasOverviewPanel();
+    boolean hasOverviewPanel();
 
-    public Component buildOverviewPanel(T modelItem);
+    Component buildOverviewPanel(T modelItem);
 
-    public boolean hasDesktopPanel();
+    boolean hasDesktopPanel();
 
-    public DesktopPanel buildDesktopPanel(T modelItem);
+    DesktopPanel buildDesktopPanel(T modelItem);
 }

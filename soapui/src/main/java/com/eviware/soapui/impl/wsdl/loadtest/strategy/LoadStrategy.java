@@ -21,7 +21,7 @@ import com.eviware.soapui.model.testsuite.LoadTestRunListener;
 import com.eviware.soapui.model.testsuite.LoadTestRunner;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -31,21 +31,21 @@ import java.beans.PropertyChangeListener;
  */
 
 public interface LoadStrategy extends LoadTestRunListener {
-    public final static String CONFIGURATION_PROPERTY = "configuration_property";
+    String CONFIGURATION_PROPERTY = "configuration_property";
 
-    public void addConfigurationChangeListener(PropertyChangeListener listener);
+    void addConfigurationChangeListener(PropertyChangeListener listener);
 
-    public void removeConfigurationChangeListener(PropertyChangeListener listener);
+    void removeConfigurationChangeListener(PropertyChangeListener listener);
 
-    public XmlObject getConfig();
+    XmlObject getConfig();
 
-    public String getType();
+    String getType();
 
-    public JComponent getConfigurationPanel();
+    JComponent getConfigurationPanel();
 
-    public void updateConfig(XmlObject config);
+    void updateConfig(XmlObject config);
 
-    public boolean allowThreadCountChangeDuringRun();
+    boolean allowThreadCountChangeDuringRun();
 
-    public void recalculate(LoadTestRunner loadTestRunner, LoadTestRunContext context);
+    void recalculate(LoadTestRunner loadTestRunner, LoadTestRunContext context);
 }

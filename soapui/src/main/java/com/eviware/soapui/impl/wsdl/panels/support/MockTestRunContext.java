@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.panels.support;
 
-import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.settings.Settings;
@@ -100,7 +99,7 @@ public class MockTestRunContext extends AbstractSubmitContext<ModelItem> impleme
     }
 
     public Object getProperty(String name) {
-        return getProperty(name, testStep, testStep == null ? null : (WsdlTestCase) testStep.getTestCase());
+        return getProperty(name, testStep, testStep == null ? null : testStep.getTestCase());
     }
 
     public Object getProperty(String testStepName, String propertyName) {

@@ -59,7 +59,7 @@ public class OperationTreeNode extends AbstractModelItemTreeNode<Operation> {
     }
 
     public Operation getOperation() {
-        return (Operation) getModelItem();
+        return getModelItem();
     }
 
     public void requestAdded(Request request) {

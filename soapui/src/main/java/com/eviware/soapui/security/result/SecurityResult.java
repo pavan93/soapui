@@ -25,23 +25,12 @@ import com.eviware.soapui.support.action.swing.ActionList;
  */
 public interface SecurityResult {
     /**
-     * INITIALIZED - just started, for distinguishing if icon should be added in
-     * the security log UNKNOWN - when no assertions are added OK - finished with
-     * no errors/warnings FAILED CANCELED note:
-     * MISSING_ASSERTIONS,MISSING_PARAMETERS - are used only for indicating
-     * progress execution for security log entry icons
-     */
-    public enum ResultStatus {
-        INITIALIZED, UNKNOWN, OK, FAILED, CANCELED, MISSING_ASSERTIONS, MISSING_PARAMETERS, SKIPPED
-    }
-
-    /**
      * Gets type of specific result, i.e. SecurityTestStep, SecurityCheck or
      * SecurityCheckRequest used in displaying result details from SecurityLog
      *
      * @return
      */
-    public String getResultType();
+    String getResultType();
 
     /**
      * Gets execution progress status used for indicating icon color in the
@@ -51,15 +40,26 @@ public interface SecurityResult {
      *
      * @return
      */
-    public ResultStatus getExecutionProgressStatus();
+    ResultStatus getExecutionProgressStatus();
 
-    public ResultStatus getLogIconStatus();
+    ResultStatus getLogIconStatus();
 
-    public ResultStatus getStatus();
+    ResultStatus getStatus();
 
     /**
      * Returns a list of actions that can be applied to this result
      */
 
-    public ActionList getActions();
+    ActionList getActions();
+
+    /**
+     * INITIALIZED - just started, for distinguishing if icon should be added in
+     * the security log UNKNOWN - when no assertions are added OK - finished with
+     * no errors/warnings FAILED CANCELED note:
+     * MISSING_ASSERTIONS,MISSING_PARAMETERS - are used only for indicating
+     * progress execution for security log entry icons
+     */
+    enum ResultStatus {
+        INITIALIZED, UNKNOWN, OK, FAILED, CANCELED, MISSING_ASSERTIONS, MISSING_PARAMETERS, SKIPPED
+    }
 }

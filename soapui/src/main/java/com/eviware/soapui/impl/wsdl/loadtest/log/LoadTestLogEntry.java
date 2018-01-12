@@ -18,7 +18,7 @@ package com.eviware.soapui.impl.wsdl.loadtest.log;
 
 import com.eviware.soapui.support.action.swing.ActionList;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -28,23 +28,23 @@ import java.io.IOException;
  */
 
 public interface LoadTestLogEntry {
-    public String getMessage();
+    String getMessage();
 
-    public long getTimeStamp();
+    long getTimeStamp();
 
-    public String getType();
+    String getType();
 
-    public String getTargetStepName();
+    String getTargetStepName();
 
-    public ActionList getActions();
+    ActionList getActions();
 
-    public ImageIcon getIcon();
+    ImageIcon getIcon();
 
-    public boolean isError();
+    boolean isError();
 
-    public void discard();
+    void discard();
 
-    public boolean isDiscarded();
+    boolean isDiscarded();
 
-    public void exportToFile(String fileName) throws IOException;
+    void exportToFile(String fileName) throws IOException;
 }

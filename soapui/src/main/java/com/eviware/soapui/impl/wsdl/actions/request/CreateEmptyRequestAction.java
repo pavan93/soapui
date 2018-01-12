@@ -20,8 +20,7 @@ import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -42,7 +41,7 @@ public class CreateEmptyRequestAction extends AbstractAction {
 
     public void actionPerformed(ActionEvent e) {
         if (UISupport.confirm("Overwrite existing request?", "Create Empty")) {
-            WsdlInterface iface = (WsdlInterface) request.getOperation().getInterface();
+            WsdlInterface iface = request.getOperation().getInterface();
             request.setRequestContent(iface.getMessageBuilder().buildEmptyMessage());
         }
     }

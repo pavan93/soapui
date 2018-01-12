@@ -26,24 +26,24 @@ import com.eviware.soapui.support.listener.SoapUIListenerRegistry;
 import java.io.File;
 
 public interface SoapUICore {
-    public final static String DEFAULT_SETTINGS_FILE = "soapui-settings.xml";
+    String DEFAULT_SETTINGS_FILE = "soapui-settings.xml";
 
-    public Settings getSettings();
+    Settings getSettings();
 
-    public MockEngine getMockEngine();
+    MockEngine getMockEngine();
 
-    public SoapUIListenerRegistry getListenerRegistry();
+    SoapUIListenerRegistry getListenerRegistry();
 
-    public SoapUIActionRegistry getActionRegistry();
+    SoapUIActionRegistry getActionRegistry();
 
-    public SoapUIFactoryRegistry getFactoryRegistry();
+    SoapUIFactoryRegistry getFactoryRegistry();
 
-    public String saveSettings() throws Exception;
+    String saveSettings() throws Exception;
 
-    public Settings importSettings(File file) throws Exception;
+    Settings importSettings(File file) throws Exception;
 
-    public SoapUIExtensionClassLoader getExtensionClassLoader();
+    SoapUIExtensionClassLoader getExtensionClassLoader();
 
-    public SecurityScanRegistry getSecurityScanRegistry();
+    SecurityScanRegistry getSecurityScanRegistry();
 
 }

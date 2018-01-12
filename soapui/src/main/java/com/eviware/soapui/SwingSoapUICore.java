@@ -104,7 +104,7 @@ public class SwingSoapUICore extends DefaultSoapUICore {
         return result;
     }
 
-    protected String importSettingsOnStartup(String fileName) throws Exception {
+    protected String importSettingsOnStartup(String fileName) {
         if (UISupport.getDialogs().confirm("Missing SoapUI Settings, import from existing installation?",
                 "Import Preferences")) {
             while (true) {

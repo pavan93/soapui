@@ -59,19 +59,7 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.jdesktop.swingx.JXTable;
 import org.w3c.dom.Element;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTree;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.table.AbstractTableModel;
@@ -80,22 +68,14 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import javax.wsdl.BindingOperation;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * DesktopPanel for WsdlInterface. Loads all referenced wsdls/xsds for the
@@ -757,7 +737,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     protected interface NodeSelector {
-        public void selectNode(InspectItem item);
+        void selectNode(InspectItem item);
     }
 
     public class PartSelector implements NodeSelector {
@@ -939,7 +919,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
                     return operation.getName();
                 case 1: {
                     boolean in = WsdlUtils.isInputSoapEncoded(bindingOperation);
-                    boolean out = operation.isUnidirectional() ? false : WsdlUtils.isOutputSoapEncoded(bindingOperation);
+                    boolean out = !operation.isUnidirectional() && WsdlUtils.isOutputSoapEncoded(bindingOperation);
 
                     if (out && in) {
                         return "SOAP Encoding";

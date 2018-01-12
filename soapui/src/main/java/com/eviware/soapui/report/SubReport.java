@@ -17,11 +17,11 @@
 package com.eviware.soapui.report;
 
 public interface SubReport {
-    public String getNameInReport();
+    String getNameInReport();
 
-    public void release();
+    void release();
 
-    public void prepare();
+    void prepare();
 
-    public String getReportClassName();
+    String getReportClassName();
 }

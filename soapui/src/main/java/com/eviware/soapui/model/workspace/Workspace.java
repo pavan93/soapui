@@ -32,41 +32,41 @@ import java.util.List;
  */
 
 public interface Workspace extends ModelItem {
-    public Project getProjectAt(int index);
+    Project getProjectAt(int index);
 
-    public Project getProjectByName(String projectName);
+    Project getProjectByName(String projectName);
 
-    public int getProjectCount();
+    int getProjectCount();
 
-    public SaveStatus onClose();
+    SaveStatus onClose();
 
-    public SaveStatus save(boolean workspaceOnly);
+    SaveStatus save(boolean workspaceOnly);
 
-    public void addWorkspaceListener(WorkspaceListener listener);
+    void addWorkspaceListener(WorkspaceListener listener);
 
-    public void removeWorkspaceListener(WorkspaceListener listener);
+    void removeWorkspaceListener(WorkspaceListener listener);
 
-    public Project createProject(String name, File file) throws SoapUIException;
+    Project createProject(String name, File file) throws SoapUIException;
 
-    public void removeProject(Project project);
+    void removeProject(Project project);
 
-    public Project importProject(String filename) throws SoapUIException;
+    Project importProject(String filename) throws SoapUIException;
 
-    public Project importProject(InputStream inputStream);
+    Project importProject(InputStream inputStream);
 
-    public int getIndexOfProject(Project project);
+    int getIndexOfProject(Project project);
 
-    public String getPath();
+    String getPath();
 
-    public List<? extends Project> getProjectList();
+    List<? extends Project> getProjectList();
 
-    public void switchWorkspace(File newPath) throws SoapUIException;
+    void switchWorkspace(File newPath) throws SoapUIException;
 
-    public Project openProject(Project modelItem) throws SoapUIException;
+    Project openProject(Project modelItem) throws SoapUIException;
 
-    public void inspectProjects();
+    void inspectProjects();
 
-    public boolean isSupportInformationDialog();
+    boolean isSupportInformationDialog();
 
-    public void setSupportInformationDialog(boolean value);
+    void setSupportInformationDialog(boolean value);
 }

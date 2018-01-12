@@ -23,13 +23,7 @@ import com.eviware.soapui.impl.wsdl.teststeps.TestRequest;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.TestAssertionRegistry.AssertableType;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.iface.Attachment;
-import com.eviware.soapui.model.iface.Interface;
-import com.eviware.soapui.model.iface.MessagePart;
-import com.eviware.soapui.model.iface.Operation;
-import com.eviware.soapui.model.iface.Submit;
-import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.iface.SubmitListener;
+import com.eviware.soapui.model.iface.*;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.support.AbstractModelItem;
 import com.eviware.soapui.model.support.AnimatableItem;
@@ -41,7 +35,7 @@ import com.eviware.soapui.monitor.TestMonitor;
 import com.eviware.soapui.support.UISupport;
 import org.apache.log4j.Logger;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -93,7 +87,7 @@ public class JdbcRequest extends AbstractModelItem implements Assertable, TestRe
     }
 
     public String getRequestContent() {
-        return ((JdbcRequestTestStep) testStep).getQuery();
+        return testStep.getQuery();
     }
 
     public MessagePart[] getRequestParts() {
@@ -118,7 +112,7 @@ public class JdbcRequest extends AbstractModelItem implements Assertable, TestRe
     public void setEndpoint(String string) {
     }
 
-    public JdbcSubmit submit(SubmitContext submitContext, boolean async) throws SubmitException {
+    public JdbcSubmit submit(SubmitContext submitContext, boolean async) {
         return new JdbcSubmit(this, submitContext, async);
     }
 

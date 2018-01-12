@@ -21,8 +21,7 @@ import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestStep;
 
-import javax.swing.AbstractListModel;
-import javax.swing.ComboBoxModel;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -37,7 +36,6 @@ public class GotoTestStepsComboBoxModel extends AbstractListModel implements Com
     private final TestCase testCase;
     private GotoCondition condition;
     private InternalTestSuiteListener testSuiteListener = new InternalTestSuiteListener();
-    ;
     private InternalPropertyChangeListener propertyChangeListener = new InternalPropertyChangeListener();
 
     public GotoTestStepsComboBoxModel(TestCase testCase, GotoCondition condition) {

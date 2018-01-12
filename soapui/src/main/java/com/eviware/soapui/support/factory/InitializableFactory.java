@@ -17,5 +17,5 @@
 package com.eviware.soapui.support.factory;
 
 public interface InitializableFactory {
-    public void init(SoapUIFactoryConfig factoryConfig);
+    void init(SoapUIFactoryConfig factoryConfig);
 }

@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.support.action.swing;
 
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -27,33 +27,33 @@ import java.awt.event.KeyEvent;
  */
 
 public interface ActionList {
-    public int getActionCount();
+    int getActionCount();
 
-    public Action getActionAt(int index);
+    Action getActionAt(int index);
 
-    public Action getDefaultAction();
+    Action getDefaultAction();
 
-    public boolean hasDefaultAction();
+    void setDefaultAction(Action action);
 
-    public void performDefaultAction(ActionEvent event);
+    boolean hasDefaultAction();
 
-    public void addAction(Action action);
+    void performDefaultAction(ActionEvent event);
 
-    public void addSeparator();
+    void addAction(Action action);
 
-    public void insertAction(Action action, int index);
+    void addSeparator();
 
-    public void insertSeparator(int index);
+    void insertAction(Action action, int index);
 
-    public String getLabel();
+    void insertSeparator(int index);
 
-    public void clear();
+    String getLabel();
 
-    public void dispatchKeyEvent(KeyEvent e);
+    void clear();
 
-    public void addActions(ActionList defaultActions);
+    void dispatchKeyEvent(KeyEvent e);
 
-    public void setDefaultAction(Action action);
+    void addActions(ActionList defaultActions);
 
-    public void removeAction(int index);
+    void removeAction(int index);
 }

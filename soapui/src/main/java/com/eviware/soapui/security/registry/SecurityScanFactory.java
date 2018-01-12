@@ -21,22 +21,22 @@ import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.testsuite.TestStep;
 
 public interface SecurityScanFactory {
-    public SecurityScanConfig createNewSecurityScan(String name);
+    SecurityScanConfig createNewSecurityScan(String name);
 
-    public SecurityScan buildSecurityScan(TestStep testStep, SecurityScanConfig config, ModelItem parent);
+    SecurityScan buildSecurityScan(TestStep testStep, SecurityScanConfig config, ModelItem parent);
 
-    public String getSecurityScanType();
+    String getSecurityScanType();
 
     /**
      * True for test step on which this check could be applied.
      *
      * @return
      */
-    public boolean canCreate(TestStep testStep);
+    boolean canCreate(TestStep testStep);
 
-    public String getSecurityScanName();
+    String getSecurityScanName();
 
-    public String getSecurityScanDescription();
+    String getSecurityScanDescription();
 
-    public String getSecurityScanIconPath();
+    String getSecurityScanIconPath();
 }

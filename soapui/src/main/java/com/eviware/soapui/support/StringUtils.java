@@ -18,12 +18,7 @@ package com.eviware.soapui.support;
 
 import com.eviware.soapui.support.types.StringList;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.LineNumberReader;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
-import java.io.Writer;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -364,7 +359,7 @@ public class StringUtils {
         return buf.toString();
     }
 
-    public static String fixLineSeparator(String xml) throws UnsupportedEncodingException {
+    public static String fixLineSeparator(String xml) {
         if ("\r\n".equals(System.getProperty("line.separator"))) {
             xml = xml.replaceAll("\r[^\n]", System.getProperty("line.separator"));
         } else {

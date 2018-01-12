@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class RemoveEmptyContentRequestFilterTestCase {
 
     @Test
-    public void testRemoval() throws Exception {
+    public void testRemoval() {
         assertEquals(doRemoval("<test><testing/></test>"), "<test/>");
         assertEquals(doRemoval("<test><testing test=\"\"/></test>"), "<test/>");
 
@@ -44,7 +44,7 @@ public class RemoveEmptyContentRequestFilterTestCase {
 
     }
 
-    private String doRemoval(String request) throws Exception {
+    private String doRemoval(String request) {
         return RemoveEmptyContentRequestFilter.removeEmptyContent(request, null, true);
     }
 }

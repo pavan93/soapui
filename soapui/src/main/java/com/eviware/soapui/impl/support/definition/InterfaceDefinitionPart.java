@@ -18,11 +18,11 @@ package com.eviware.soapui.impl.support.definition;
 
 public interface InterfaceDefinitionPart {
 
-    public String getUrl();
+    String getUrl();
 
-    public String getType();
+    String getType();
 
-    public String getContent();
+    String getContent();
 
     boolean isRootPart();
 }

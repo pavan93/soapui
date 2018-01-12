@@ -23,7 +23,6 @@ import com.eviware.soapui.support.xml.XmlObjectTreeModel;
 import com.eviware.soapui.support.xml.XmlObjectTreeModel.XmlTreeNode;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlAnySimpleType;
-import org.apache.xmlbeans.XmlException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -55,7 +54,7 @@ public class EnumerationValuesExtractor {
         // extractEnumerationParameters( model.getRootNode() );
     }
 
-    public String extract() throws XmlException, Exception {
+    public String extract() {
 
         getNextChild(model.getRootNode());
 

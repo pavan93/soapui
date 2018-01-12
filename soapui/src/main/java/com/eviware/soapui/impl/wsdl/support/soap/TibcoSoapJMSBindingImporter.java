@@ -44,7 +44,7 @@ public class TibcoSoapJMSBindingImporter extends AbstractSoapBindingImporter {
     public boolean canImport(Binding binding) {
         List<?> list = binding.getExtensibilityElements();
         SOAPBinding soapBinding = WsdlUtils.getExtensiblityElement(list, SOAPBinding.class);
-        return soapBinding == null ? false : soapBinding.getTransportURI().startsWith(
+        return soapBinding != null && soapBinding.getTransportURI().startsWith(
                 "http://www.tibco.com/namespaces/ws/2004/soap/binding/JMS");
     }
 
@@ -67,7 +67,7 @@ public class TibcoSoapJMSBindingImporter extends AbstractSoapBindingImporter {
         Collections.sort(list, new BindingOperationComparator());
 
         for (Iterator<BindingOperation> iter = list.iterator(); iter.hasNext(); ) {
-            BindingOperation operation = (BindingOperation) iter.next();
+            BindingOperation operation = iter.next();
 
             // sanity check
             if (operation.getOperation() == null || operation.getOperation().isUndefined()) {

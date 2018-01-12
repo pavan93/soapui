@@ -28,27 +28,27 @@ import java.beans.PropertyChangeListener;
 
 public interface HttpTestRequestStepInterface extends PropertyChangeListener, PropertyExpansionContainer, Assertable,
         HttpRequestTestStep, ModelItem {
-    public WsdlTestStep clone(WsdlTestCase targetTestCase, String name);
+    WsdlTestStep clone(WsdlTestCase targetTestCase, String name);
 
-    public void release();
+    void release();
 
-    public void resetConfigOnMove(TestStepConfig config);
+    void resetConfigOnMove(TestStepConfig config);
 
-    public HttpTestRequestInterface<?> getTestRequest();
+    HttpTestRequestInterface<?> getTestRequest();
 
-    public void setName(String name);
+    void setName(String name);
 
-    public boolean dependsOn(AbstractWsdlModelItem<?> modelItem);
+    boolean dependsOn(AbstractWsdlModelItem<?> modelItem);
 
-    public void beforeSave();
+    void beforeSave();
 
-    public void setDescription(String description);
+    void setDescription(String description);
 
-    public String getDefaultSourcePropertyName();
+    String getDefaultSourcePropertyName();
 
-    public String getDefaultTargetPropertyName();
+    String getDefaultTargetPropertyName();
 
-    public void resolve(ResolveContext<?> context);
+    void resolve(ResolveContext<?> context);
 
-    public WsdlTestCase getTestCase();
+    WsdlTestCase getTestCase();
 }

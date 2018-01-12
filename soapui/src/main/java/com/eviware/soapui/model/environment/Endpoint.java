@@ -18,10 +18,10 @@ package com.eviware.soapui.model.environment;
 
 public interface Endpoint {
 
-    public void setService(Service service);
+    Service getService();
 
-    public Service getService();
+    void setService(Service service);
 
-    public EnvironmentEndpointConfig getConfig();
+    EnvironmentEndpointConfig getConfig();
 
 }

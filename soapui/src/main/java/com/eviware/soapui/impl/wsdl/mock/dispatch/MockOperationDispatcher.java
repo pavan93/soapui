@@ -22,15 +22,15 @@ import com.eviware.soapui.model.mock.MockRequest;
 import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.model.mock.MockResult;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface MockOperationDispatcher extends Releasable {
-    public MockResponse selectMockResponse(MockRequest request, MockResult result)
+    MockResponse selectMockResponse(MockRequest request, MockResult result)
             throws DispatchException;
 
-    public JComponent getEditorComponent();
+    JComponent getEditorComponent();
 
-    public void releaseEditorComponent();
+    void releaseEditorComponent();
 
-    public boolean hasDefaultResponse();
+    boolean hasDefaultResponse();
 }

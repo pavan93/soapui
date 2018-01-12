@@ -16,25 +16,18 @@
 
 package com.eviware.soapui.impl.rest.support;
 
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
-import com.eviware.soapui.impl.rest.RestServiceFactory;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import org.junit.Test;
 
 import static com.eviware.soapui.utils.CommonMatchers.anEmptyString;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class WadlImporterTest {
 
     @Test
-    public void testWadlImporter() throws Exception {
+    public void testWadlImporter() {
         WsdlProject project = new WsdlProject();
         RestService service = (RestService) project.addNewInterface("REST Service", RestServiceFactory.REST_TYPE);
         WadlImporter importer = new WadlImporter(service);

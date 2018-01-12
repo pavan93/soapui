@@ -18,7 +18,6 @@ package com.eviware.soapui.impl.rest.mock;
 
 import com.eviware.soapui.impl.support.AbstractMockRequest;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockRunContext;
-import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 
 import javax.servlet.http.HttpServletRequest;
@@ -30,7 +29,7 @@ public class RestMockRequest extends AbstractMockRequest {
     }
 
     @Override
-    public XmlObject getContentElement() throws XmlException {
+    public XmlObject getContentElement() {
         return null;
     }
 }

@@ -134,33 +134,52 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         }
     }
 
-    protected void afterUpdate(WsdlInterface iface) throws Exception {
-        if (dialog.getBooleanValue(Form.RECREATE_REQUESTS)) {
-            boolean buildOptional = dialog.getBooleanValue(Form.RECREATE_OPTIONAL);
-            boolean createBackups = dialog.getBooleanValue(Form.CREATE_BACKUPS);
-            boolean keepExisting = dialog.getBooleanValue(Form.KEEP_EXISTING);
-            boolean keepHeaders = dialog.getBooleanValue(Form.KEEP_HEADERS);
+    public static List<WsdlTestRequestStep> recreateTestRequests(WsdlInterface iface, boolean buildOptional,
+                                                                 boolean createBackups, boolean keepExisting, boolean keepHeaders) {
+        int count = 0;
 
-            List<ModelItem> updated = new ArrayList<ModelItem>();
+        List<WsdlTestRequestStep> result = new ArrayList<WsdlTestRequestStep>();
 
-            updated.addAll(recreateRequests(iface, buildOptional, createBackups, keepExisting, keepHeaders));
+        // now check testsuites..
+        for (TestSuite testSuite : iface.getProject().getTestSuiteList()) {
+            for (TestCase testCase : testSuite.getTestCaseList()) {
+                int testStepCount = testCase.getTestStepCount();
+                for (int c = 0; c < testStepCount; c++) {
+                    WsdlTestStep testStep = (WsdlTestStep) testCase.getTestStepAt(c);
+                    if (testStep instanceof WsdlTestRequestStep) {
+                        WsdlTestRequest testRequest = ((WsdlTestRequestStep) testStep).getTestRequest();
+                        if (testRequest != null && testRequest.getOperation() != null
+                                && testRequest.getOperation().getInterface() == iface) {
+                            String newRequest = testRequest.getOperation().createRequest(buildOptional);
 
-            if (dialog.getBooleanValue(Form.UPDATE_TESTREQUESTS)) {
-                updated.addAll(recreateTestRequests(iface, buildOptional, createBackups, keepExisting, keepHeaders));
+                            if (keepHeaders) {
+                                newRequest = SoapUtils.transferSoapHeaders(testRequest.getRequestContent(), newRequest,
+                                        iface.getSoapVersion());
+                            }
+
+                            if (keepExisting) {
+                                newRequest = XmlUtils.transferValues(testRequest.getRequestContent(), newRequest);
+                            }
+
+                            // changed?
+                            if (!newRequest.equals(testRequest.getRequestContent())) {
+                                if (createBackups) {
+                                    ((WsdlTestCase) testCase).importTestStep(testStep,
+                                            "Backup of [" + testStep.getName() + "]", -1, true).setDisabled(true);
+                                }
+
+                                testRequest.setRequestContent(newRequest);
+                                count++;
+
+                                result.add((WsdlTestRequestStep) testStep);
+                            }
+                        }
+                    }
+                }
             }
-
-            UISupport.showInfoMessage("Update of interface successfull, [" + updated.size()
-                    + "] Requests/TestRequests have" + " been updated.", "Update Definition");
-
-            if (dialog.getBooleanValue(Form.OPEN_LIST)) {
-                UISupport
-                        .showDesktopPanel(new ModelItemListDesktopPanel("Updated Requests/TestRequests",
-                                "The following Request/TestRequests where updated", updated.toArray(new ModelItem[updated
-                                .size()])));
-            }
-        } else {
-            UISupport.showInfoMessage("Update of interface successful", "Update Definition");
         }
+
+        return result;
     }
 
     public static List<Request> recreateRequests(WsdlInterface iface, boolean buildOptional, boolean createBackups,
@@ -204,81 +223,62 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         return result;
     }
 
-    public static List<WsdlTestRequestStep> recreateTestRequests(WsdlInterface iface, boolean buildOptional,
-                                                                 boolean createBackups, boolean keepExisting, boolean keepHeaders) {
-        int count = 0;
+    protected void afterUpdate(WsdlInterface iface) {
+        if (dialog.getBooleanValue(Form.RECREATE_REQUESTS)) {
+            boolean buildOptional = dialog.getBooleanValue(Form.RECREATE_OPTIONAL);
+            boolean createBackups = dialog.getBooleanValue(Form.CREATE_BACKUPS);
+            boolean keepExisting = dialog.getBooleanValue(Form.KEEP_EXISTING);
+            boolean keepHeaders = dialog.getBooleanValue(Form.KEEP_HEADERS);
 
-        List<WsdlTestRequestStep> result = new ArrayList<WsdlTestRequestStep>();
+            List<ModelItem> updated = new ArrayList<ModelItem>();
 
-        // now check testsuites..
-        for (TestSuite testSuite : iface.getProject().getTestSuiteList()) {
-            for (TestCase testCase : testSuite.getTestCaseList()) {
-                int testStepCount = testCase.getTestStepCount();
-                for (int c = 0; c < testStepCount; c++) {
-                    WsdlTestStep testStep = (WsdlTestStep) testCase.getTestStepAt(c);
-                    if (testStep instanceof WsdlTestRequestStep) {
-                        WsdlTestRequest testRequest = ((WsdlTestRequestStep) testStep).getTestRequest();
-                        if (testRequest != null && testRequest.getOperation() != null
-                                && testRequest.getOperation().getInterface() == iface) {
-                            String newRequest = testRequest.getOperation().createRequest(buildOptional);
+            updated.addAll(recreateRequests(iface, buildOptional, createBackups, keepExisting, keepHeaders));
 
-                            if (keepHeaders) {
-                                newRequest = SoapUtils.transferSoapHeaders(testRequest.getRequestContent(), newRequest,
-                                        iface.getSoapVersion());
-                            }
-
-                            if (keepExisting) {
-                                newRequest = XmlUtils.transferValues(testRequest.getRequestContent(), newRequest);
-                            }
-
-                            // changed?
-                            if (!newRequest.equals(testRequest.getRequestContent())) {
-                                if (createBackups) {
-                                    ((WsdlTestCase) testCase).importTestStep(testStep,
-                                            "Backup of [" + testStep.getName() + "]", -1, true).setDisabled(true);
-                                }
-
-                                ((WsdlRequest) testRequest).setRequestContent(newRequest);
-                                count++;
-
-                                result.add((WsdlTestRequestStep) testStep);
-                            }
-                        }
-                    }
-                }
+            if (dialog.getBooleanValue(Form.UPDATE_TESTREQUESTS)) {
+                updated.addAll(recreateTestRequests(iface, buildOptional, createBackups, keepExisting, keepHeaders));
             }
-        }
 
-        return result;
+            UISupport.showInfoMessage("Update of interface successfull, [" + updated.size()
+                    + "] Requests/TestRequests have" + " been updated.", "Update Definition");
+
+            if (dialog.getBooleanValue(Form.OPEN_LIST)) {
+                UISupport
+                        .showDesktopPanel(new ModelItemListDesktopPanel("Updated Requests/TestRequests",
+                                "The following Request/TestRequests where updated", updated.toArray(new ModelItem[updated
+                                .size()])));
+            }
+        } else {
+            UISupport.showInfoMessage("Update of interface successful", "Update Definition");
+        }
     }
 
     @AForm(description = "Specify Update Definition options", name = "Update Definition", helpUrl = HelpUrls.UPDATE_INTERFACE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     protected interface Form {
         @AField(name = "Definition URL", description = "The URL or file for the updated definition", type = AFieldType.FILE)
-        public final static String DEFINITION_URL = "Definition URL";
+        String DEFINITION_URL = "Definition URL";
 
         @AField(name = "Create New Requests", description = "Create default requests for new methods", type = AFieldType.BOOLEAN)
-        public final static String CREATE_REQUESTS = "Create New Requests";
+        String CREATE_REQUESTS = "Create New Requests";
 
         @AField(name = "Recreate Requests", description = "Recreate existing request with the new schema", type = AFieldType.BOOLEAN)
-        public final static String RECREATE_REQUESTS = "Recreate Requests";
+        String RECREATE_REQUESTS = "Recreate Requests";
 
         @AField(name = "Recreate Optional", description = "Recreate optional content when updating requests", type = AFieldType.BOOLEAN)
-        public final static String RECREATE_OPTIONAL = "Recreate Optional";
+        String RECREATE_OPTIONAL = "Recreate Optional";
 
         @AField(name = "Keep Existing", description = "Keeps existing values when recreating requests", type = AFieldType.BOOLEAN)
-        public final static String KEEP_EXISTING = "Keep Existing";
+        String KEEP_EXISTING = "Keep Existing";
 
         @AField(name = "Keep SOAP Headers", description = "Keeps any SOAP Headers when recreating requests", type = AFieldType.BOOLEAN)
-        public final static String KEEP_HEADERS = "Keep SOAP Headers";
+        String KEEP_HEADERS = "Keep SOAP Headers";
 
         @AField(name = "Create Backups", description = "Create backup copies of changed requests", type = AFieldType.BOOLEAN)
-        public final static String CREATE_BACKUPS = "Create Backups";
+        String CREATE_BACKUPS = "Create Backups";
 
         @AField(name = "Update TestRequests", description = "Updates all TestRequests for operations in this Interface also", type = AFieldType.BOOLEAN)
-        public final static String UPDATE_TESTREQUESTS = "Update TestRequests";
+        String UPDATE_TESTREQUESTS = "Update TestRequests";
 
         @AField(name = "Open Request List", description = "Opens a list of all requests that have been updated", type = AFieldType.BOOLEAN)
-        public final static String OPEN_LIST = "Open Request List";
+        String OPEN_LIST = "Open Request List";
     }
 }

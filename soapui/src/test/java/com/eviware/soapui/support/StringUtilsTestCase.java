@@ -19,14 +19,12 @@ package com.eviware.soapui.support;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class StringUtilsTestCase {
 
     @Test
-    public void testUnquote() throws Exception {
+    public void testUnquote() {
         assertEquals("test", StringUtils.unquote("\"test\""));
         assertNull(StringUtils.unquote(null));
         assertEquals("", StringUtils.unquote(""));
@@ -36,7 +34,7 @@ public class StringUtilsTestCase {
     }
 
     @Test
-    public void testQuote() throws Exception {
+    public void testQuote() {
         assertNull(StringUtils.quote(null));
         assertEquals("\"\"", StringUtils.quote(""));
         assertEquals("\"test\"", StringUtils.quote("test"));
@@ -46,7 +44,7 @@ public class StringUtilsTestCase {
     }
 
     @Test
-    public void testCreateXmlName() throws Exception {
+    public void testCreateXmlName() {
         assertEquals("helloThere", StringUtils.createXmlName("hello there"));
         assertEquals("helloThere", StringUtils.createXmlName("hello ?? there"));
         assertEquals("hello_there", StringUtils.createXmlName("hello_there"));
@@ -55,7 +53,7 @@ public class StringUtilsTestCase {
     }
 
     @Test
-    public void createsXmlNameForStringStartingWithDigit() throws Exception {
+    public void createsXmlNameForStringStartingWithDigit() {
         assertThat(StringUtils.createXmlName("15"), is("_15"));
         assertThat(StringUtils.createXmlName("1pt"), is("_1pt"));
     }

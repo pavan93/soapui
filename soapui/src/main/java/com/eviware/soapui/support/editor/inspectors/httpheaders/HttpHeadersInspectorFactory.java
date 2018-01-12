@@ -144,7 +144,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
         public StringToStringsMap getHeaders() {
             if (getModelItem().getMessageExchange() instanceof AMFTestStepResult) {
                 AMFTestStepResult messageExchange = (AMFTestStepResult) getModelItem().getMessageExchange();
-                return ((AMFResponse) messageExchange.getResponse()).getResponseHeaders();
+                return messageExchange.getResponse().getResponseHeaders();
             }
             return new StringToStringsMap();
         }

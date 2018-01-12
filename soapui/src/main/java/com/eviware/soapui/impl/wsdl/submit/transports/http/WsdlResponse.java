@@ -27,7 +27,7 @@ import java.util.Vector;
  */
 
 public interface WsdlResponse extends HttpResponse {
-    public Vector<?> getWssResult();
+    Vector<?> getWssResult();
 
-    public WsdlRequest getRequest();
+    WsdlRequest getRequest();
 }

@@ -25,7 +25,7 @@ import org.apache.ws.security.message.WSSecUsernameToken;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.event.ActionEvent;
@@ -57,7 +57,7 @@ public class AddWSSUsernameTokenAction extends AbstractAction {
         String req = request.getRequestContent();
 
         try {
-            String passwordType = (String) UISupport.prompt("Add WSS Username Token", "Specify Password Type",
+            String passwordType = UISupport.prompt("Add WSS Username Token", "Specify Password Type",
                     new String[]{WsdlRequest.PW_TYPE_TEXT, WsdlRequest.PW_TYPE_DIGEST});
 
             if (passwordType == null) {

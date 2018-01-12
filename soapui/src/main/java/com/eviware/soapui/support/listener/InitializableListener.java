@@ -17,5 +17,5 @@
 package com.eviware.soapui.support.listener;
 
 public interface InitializableListener {
-    public void init(SoapUIListenerConfig listenerConfig);
+    void init(SoapUIListenerConfig listenerConfig);
 }

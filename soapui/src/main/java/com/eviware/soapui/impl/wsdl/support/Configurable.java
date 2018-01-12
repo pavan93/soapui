@@ -23,5 +23,5 @@ package com.eviware.soapui.impl.wsdl.support;
  */
 
 public interface Configurable {
-    public boolean configure();
+    boolean configure();
 }

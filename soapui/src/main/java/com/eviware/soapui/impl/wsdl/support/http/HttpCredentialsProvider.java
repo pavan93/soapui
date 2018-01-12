@@ -94,9 +94,7 @@ public class HttpCredentialsProvider implements CredentialsProvider {
 
     private boolean isProxyAuthScope(AuthScope authScope) {
         if (proxyHost.equalsIgnoreCase(authScope.getHost())) {
-            if (StringUtils.hasContent(proxyPort) && (Integer.parseInt(proxyPort) == authScope.getPort())) {
-                return true;
-            }
+            return StringUtils.hasContent(proxyPort) && (Integer.parseInt(proxyPort) == authScope.getPort());
         }
         return false;
     }

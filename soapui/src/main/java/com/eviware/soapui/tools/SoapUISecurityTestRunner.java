@@ -29,12 +29,7 @@ import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.project.ProjectFactoryRegistry;
 import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.support.ModelSupport;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.security.SecurityTestRunContext;
@@ -91,7 +86,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
      * @throws Exception
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.exit(new SoapUISecurityTestRunner().runFromCommandLine(args));
     }
 
@@ -220,7 +215,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
         }
     }
 
-    protected void initProject(WsdlProject project) throws Exception {
+    protected void initProject(WsdlProject project) {
         initProjectProperties(project);
     }
 
@@ -237,8 +232,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
         }
     }
 
-    public void exportJUnitReports(JUnitSecurityReportCollector collector, String folder, WsdlProject project)
-            throws Exception {
+    public void exportJUnitReports(JUnitSecurityReportCollector collector, String folder, WsdlProject project) {
         collector.saveReports(folder == null ? "" : folder);
     }
 

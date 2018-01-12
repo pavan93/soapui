@@ -56,9 +56,7 @@ public class SoapUtils {
             XmlObject xml = XmlUtils.createXmlObject(responseContent);
             XmlObject[] paths = xml.selectPath("declare namespace env='" + soapVersion.getEnvelopeNamespace() + "';"
                     + "//env:Fault");
-            if (paths.length > 0) {
-                return true;
-            }
+            return paths.length > 0;
         }
 
         return false;

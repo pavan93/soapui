@@ -33,7 +33,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.JComboBox;
+import javax.swing.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -62,14 +62,14 @@ public class RestTestRequestDesktopPanelTest {
 
     @Test
     public void displaysEndpoint() {
-        assertThat(restTestDesktopPanel.getEndpointsModel().getSelectedItem(), is((Object) ENDPOINT));
+        assertThat(restTestDesktopPanel.getEndpointsModel().getSelectedItem(), is(ENDPOINT));
     }
 
     @Test
     public void reactsToEndpointChanges() {
         String anotherEndpoint = "http://google.com/search";
         restService().changeEndpoint(ENDPOINT, anotherEndpoint);
-        assertThat(restTestDesktopPanel.getEndpointsModel().getSelectedItem(), is((Object) anotherEndpoint));
+        assertThat(restTestDesktopPanel.getEndpointsModel().getSelectedItem(), is(anotherEndpoint));
     }
 
     @Test
@@ -113,7 +113,7 @@ public class RestTestRequestDesktopPanelTest {
         endpointsCombo = findEndpointsComboBox();
     }
 
-    private RestResource createRestRequestModel(StatefulModelItemFactory modelItemFactory) throws SoapUIException {
+    private RestResource createRestRequestModel(StatefulModelItemFactory modelItemFactory) {
         restRequest = modelItemFactory.makeRestRequest();
         restRequest.setMethod(RestRequestInterface.HttpMethod.GET);
         RestResource restResource = restRequest.getResource();
@@ -128,7 +128,7 @@ public class RestTestRequestDesktopPanelTest {
         return restResource;
     }
 
-    private RestTestRequestStep createRestTestReqStep(StatefulModelItemFactory modelItemFactory, RestResource restResource) throws RestRequestStepFactory.ItemDeletedException, SoapUIException {
+    private RestTestRequestStep createRestTestReqStep(StatefulModelItemFactory modelItemFactory, RestResource restResource) throws RestRequestStepFactory.ItemDeletedException {
         TestStepConfig config = TestStepConfig.Factory.newInstance();
         RestRequestStepConfig requestStepConfig = RestRequestStepConfig.Factory.newInstance();
         RestRequestConfig restRequestConfig = RestRequestConfig.Factory.newInstance();

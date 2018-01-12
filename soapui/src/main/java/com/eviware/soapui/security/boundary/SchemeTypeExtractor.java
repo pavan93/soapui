@@ -23,7 +23,6 @@ import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.support.xml.XmlObjectTreeModel;
 import com.eviware.soapui.support.xml.XmlObjectTreeModel.XmlTreeNode;
 import com.eviware.soapui.support.xml.XmlUtils;
-import org.apache.xmlbeans.XmlException;
 
 import javax.swing.tree.TreePath;
 import javax.wsdl.Definition;
@@ -45,7 +44,7 @@ public class SchemeTypeExtractor {
 
     }
 
-    public String getTypeFor(String name) throws Exception {
+    public String getTypeFor(String name) {
         NodeInfo node = nodes.get(name);
         if (node == null) {
             return null;
@@ -57,7 +56,7 @@ public class SchemeTypeExtractor {
         return nodes;
     }
 
-    public TreeMap<String, NodeInfo> extract() throws XmlException, Exception {
+    public TreeMap<String, NodeInfo> extract() throws Exception {
         // XmlObjectTreeModel model = new XmlObjectTreeModel(
         // request.getOperation().getInterface().getDefinitionContext()
         // .getSchemaTypeSystem(), XmlObject.Factory.parse(
@@ -96,7 +95,7 @@ public class SchemeTypeExtractor {
     TreeMap<String, NodeInfo> getElements(XmlTreeNode rootXmlTreeNode) {
         TreeMap<String, NodeInfo> result = new TreeMap<String, NodeInfo>();
         for (int cnt = 0; cnt < rootXmlTreeNode.getChildCount(); cnt++) {
-            XmlTreeNode xmlTreeNodeChild = (XmlTreeNode) rootXmlTreeNode.getChild(cnt);
+            XmlTreeNode xmlTreeNodeChild = rootXmlTreeNode.getChild(cnt);
 
             if (xmlTreeNodeChild.getChildCount() > 0) {
                 result.putAll(getElements(rootXmlTreeNode.getChild(cnt)));

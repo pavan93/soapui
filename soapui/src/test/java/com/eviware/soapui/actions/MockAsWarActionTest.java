@@ -17,21 +17,18 @@
 package com.eviware.soapui.actions;
 
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.ModelItemFactory;
 import com.eviware.x.form.XForm;
 import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormField;
 import com.eviware.x.impl.swing.FileFormField;
 import org.apache.commons.io.FileUtils;
-import org.apache.xmlbeans.XmlException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -54,13 +51,13 @@ public class MockAsWarActionTest {
     private final String warFileName = warTestDir.getPath() + File.separator + "mock.war";
 
     @Before
-    public void setUp() throws SoapUIException, URISyntaxException, IOException, XmlException {
+    public void setUp() throws IOException {
         setUpTestDirectories();
         setUpProject();
         setUpFormDialog();
     }
 
-    private void setUpFormDialog() throws IOException, URISyntaxException {
+    private void setUpFormDialog() {
         mockedDialog = mock(XFormDialog.class);
         when(mockedDialog.show()).thenReturn(true);
         when(mockedDialog.getFormField(anyString())).thenReturn(any(XFormField.class));
@@ -79,7 +76,7 @@ public class MockAsWarActionTest {
         when(mockedDialog.getFormField(fieldName)).thenReturn(fileFormField);
     }
 
-    private void setUpProject() throws URISyntaxException, XmlException, IOException, SoapUIException {
+    private void setUpProject() {
         String fileNameWithPath = getFilePathFromResource("/soapui-projects/BasicMock-soapui-4.6.3-Project.xml");
         project = new WsdlProject(fileNameWithPath);
         ModelItemFactory.makeRestMockService(project);
@@ -116,7 +113,7 @@ public class MockAsWarActionTest {
     }
 
     @Test
-    public void createMockAsWar() throws SoapUIException, IOException {
+    public void createMockAsWar() throws IOException {
 
         MockAsWarAction action = new MockAsWarAction();
 

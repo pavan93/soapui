@@ -39,21 +39,11 @@ public class AMFCredentials {
         this.context = context;
     }
 
-    public SoapUIAMFConnection login() throws ClientStatusException, ServerStatusException {
-        CommandMessage commandMessage = createLoginCommandMessage();
-
-        SoapUIAMFConnection amfConnection = new SoapUIAMFConnection();
-        amfConnection.connect(endpoint);
-        amfConnection.call((SubmitContext) context, null, commandMessage);
-        logedIn = true;
-        return amfConnection;
-    }
-
     public static void logout(SubmitContext context) {
         SoapUIAMFConnection connection = (SoapUIAMFConnection) context.getProperty(AMFSubmit.AMF_CONNECTION);
         CommandMessage commandMessage = createLogoutCommandMessage();
         try {
-            connection.call((SubmitContext) context, null, commandMessage);
+            connection.call(context, null, commandMessage);
         } catch (ClientStatusException e) {
             SoapUI.logError(e);
         } catch (ServerStatusException e) {
@@ -63,11 +53,21 @@ public class AMFCredentials {
         }
     }
 
+    public SoapUIAMFConnection login() throws ClientStatusException, ServerStatusException {
+        CommandMessage commandMessage = createLoginCommandMessage();
+
+        SoapUIAMFConnection amfConnection = new SoapUIAMFConnection();
+        amfConnection.connect(endpoint);
+        amfConnection.call(context, null, commandMessage);
+        logedIn = true;
+        return amfConnection;
+    }
+
     public void logout() {
         SoapUIAMFConnection connection = (SoapUIAMFConnection) context.getProperty(AMFSubmit.AMF_CONNECTION);
         CommandMessage commandMessage = createLogoutCommandMessage();
         try {
-            connection.call((SubmitContext) context, null, commandMessage);
+            connection.call(context, null, commandMessage);
         } catch (ClientStatusException e) {
             SoapUI.logError(e);
         } catch (ServerStatusException e) {

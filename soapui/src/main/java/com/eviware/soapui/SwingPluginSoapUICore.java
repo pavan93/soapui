@@ -33,7 +33,7 @@ public class SwingPluginSoapUICore extends SwingSoapUICore {
     }
 
     @Override
-    protected String importSettingsOnStartup(String fileName) throws Exception {
+    protected String importSettingsOnStartup(String fileName) {
         return fileName;
     }
 }

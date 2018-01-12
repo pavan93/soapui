@@ -41,7 +41,7 @@ public class MessageExchangeModelItem extends EmptyModelItem {
     }
 
     public boolean hasRawData() {
-        return messageExchange == null ? false : messageExchange.hasRawData();
+        return messageExchange != null && messageExchange.hasRawData();
     }
 
     @Override

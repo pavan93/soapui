@@ -22,7 +22,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -49,7 +49,6 @@ public class SecurityTestStepResult implements SecurityResult {
     private DefaultActionList actionList;
     private boolean hasAddedRequests;
     private ResultStatus executionProgressStatus = ResultStatus.UNKNOWN;
-    ;
     private ResultStatus logIconStatus = ResultStatus.UNKNOWN;
     // indicates if log entries need to be deleted when logging only warnings
     // (status not suitable since can be canceled with warnings)

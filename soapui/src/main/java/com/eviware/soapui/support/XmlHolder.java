@@ -44,7 +44,7 @@ public class XmlHolder implements Map<String, Object> {
         xmlObject = XmlUtils.createXmlObject(node);
     }
 
-    public XmlHolder(XmlObject xmlObject) throws XmlException {
+    public XmlHolder(XmlObject xmlObject) {
         this.xmlObject = xmlObject;
     }
 
@@ -65,7 +65,7 @@ public class XmlHolder implements Map<String, Object> {
         }
     }
 
-    public String getNodeValue(String xpath) throws XmlException {
+    public String getNodeValue(String xpath) {
         xpath = initXPathNamespaces(xpath);
 
         return XmlUtils.selectFirstNodeValue(xmlObject, xpath);
@@ -87,7 +87,7 @@ public class XmlHolder implements Map<String, Object> {
         declaredNamespaces.put(prefix, uri);
     }
 
-    public String[] getNodeValues(String xpath) throws XmlException {
+    public String[] getNodeValues(String xpath) {
         xpath = initXPathNamespaces(xpath);
 
         return XmlUtils.selectNodeValues(xmlObject, xpath);
@@ -104,7 +104,7 @@ public class XmlHolder implements Map<String, Object> {
         return xpath;
     }
 
-    public void setNodeValue(String xpath, Object value) throws XmlException {
+    public void setNodeValue(String xpath, Object value) {
         xpath = initXPathNamespaces(xpath);
 
         XmlCursor cursor = xmlObject.newCursor();
@@ -123,17 +123,17 @@ public class XmlHolder implements Map<String, Object> {
         return xmlObject;
     }
 
-    public Node getDomNode(String xpath) throws XmlException {
+    public Node getDomNode(String xpath) {
         xpath = initXPathNamespaces(xpath);
         return XmlUtils.selectFirstDomNode(xmlObject, xpath);
     }
 
-    public Node[] getDomNodes(String xpath) throws XmlException {
+    public Node[] getDomNodes(String xpath) {
         xpath = initXPathNamespaces(xpath);
         return XmlUtils.selectDomNodes(xmlObject, xpath);
     }
 
-    public void removeDomNodes(String xpath) throws XmlException {
+    public void removeDomNodes(String xpath) {
         xpath = initXPathNamespaces(xpath);
         Node[] nodes = getDomNodes(xpath);
         for (Node node : nodes) {

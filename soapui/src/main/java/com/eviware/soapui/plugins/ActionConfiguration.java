@@ -18,11 +18,7 @@ package com.eviware.soapui.plugins;
 
 import com.eviware.soapui.model.ModelItem;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Provides additional Action configuration to action classes in a plugin.
@@ -38,23 +34,23 @@ public @interface ActionConfiguration {
 
     String afterAction() default "";
 
-    public String description() default "";
+    String description() default "";
 
-    public boolean defaultAction() default false;
+    boolean defaultAction() default false;
 
-    public String iconPath() default "";
+    String iconPath() default "";
 
-    public String keyStroke() default "";
+    String keyStroke() default "";
 
-    public boolean separatorBefore() default false;
+    boolean separatorBefore() default false;
 
-    public boolean separatorAfter() default false;
+    boolean separatorAfter() default false;
 
-    public boolean isToolbarAction() default false;
+    boolean isToolbarAction() default false;
 
-    public ToolbarPosition toolbarPosition() default ToolbarPosition.NONE;
+    ToolbarPosition toolbarPosition() default ToolbarPosition.NONE;
 
-    public String toolbarIcon() default "";
+    String toolbarIcon() default "";
 
     Class targetType() default ModelItem.class;
 

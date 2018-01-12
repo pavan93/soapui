@@ -41,7 +41,7 @@ public class JMSPropertyInspectorFactory implements RequestInspectorFactory, Res
     public EditorInspector<?> createRequestInspector(Editor<?> editor, ModelItem modelItem) {
         if (modelItem instanceof AbstractHttpRequest<?>) {
             JMSPropertyInspector inspector = new JMSPropertyInspector(
-                    (JMSPropertyInspectorModel) new WsdlRequestJMSPropertiesModel((AbstractHttpRequest<?>) modelItem));
+                    new WsdlRequestJMSPropertiesModel((AbstractHttpRequest<?>) modelItem));
             inspector.setEnabled(JMSUtils.checkIfJMS(modelItem));
             return inspector;
         }

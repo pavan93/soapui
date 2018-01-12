@@ -83,7 +83,7 @@ public class AddParamActionTest {
     }
 
     @Test
-    public void editsTheValueCellAfterNameCell() throws Exception {
+    public void editsTheValueCellAfterNameCell() {
         setCellEditorForNameAndValueColumns(PARAM);
 
         invokeAddParamAction();
@@ -101,7 +101,7 @@ public class AddParamActionTest {
     }
 
     @Test
-    public void removesThePropertyIfPropertyNameIsEmpty() throws Exception {
+    public void removesThePropertyIfPropertyNameIsEmpty() {
         setCellEditorForNameAndValueColumns("");
 
         invokeAddParamAction();
@@ -116,7 +116,7 @@ public class AddParamActionTest {
     }
 
     @Test
-    public void removesThePropertyIfEditingIsCancelledOnNameCell() throws Exception {
+    public void removesThePropertyIfEditingIsCancelledOnNameCell() {
         setCellEditorForNameAndValueColumns("");
 
         invokeAddParamAction();
@@ -144,7 +144,7 @@ public class AddParamActionTest {
         new com.eviware.soapui.impl.wsdl.panels.teststeps.support.AddParamAction(paramTable, params, "Add Param").actionPerformed(actionEvent);
     }
 
-    private void verifyEditingCell(int row, int column) throws InterruptedException {
+    private void verifyEditingCell(int row, int column) {
         robot.waitForIdle();
         assertThat(paramTable.getEditingRow(), is(row));
         assertThat(paramTable.getEditingColumn(), is(column));

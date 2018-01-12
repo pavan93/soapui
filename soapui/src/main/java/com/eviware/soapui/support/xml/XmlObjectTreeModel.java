@@ -19,16 +19,8 @@ package com.eviware.soapui.support.xml;
 import com.eviware.soapui.impl.wsdl.support.xsd.SchemaUtils;
 import com.eviware.soapui.support.types.StringToStringMap;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaGlobalElement;
-import org.apache.xmlbeans.SchemaParticle;
-import org.apache.xmlbeans.SchemaProperty;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SchemaTypeSystem;
-import org.apache.xmlbeans.XmlBeans;
-import org.apache.xmlbeans.XmlCursor;
+import org.apache.xmlbeans.*;
 import org.apache.xmlbeans.XmlCursor.TokenType;
-import org.apache.xmlbeans.XmlLineNumber;
-import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.impl.values.XmlAnyTypeImpl;
 import org.jdesktop.swingx.treetable.TreeTableModel;
 import org.w3c.dom.Element;
@@ -38,13 +30,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreePath;
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class XmlObjectTreeModel implements TreeTableModel {
     private XmlObject xmlObject;
@@ -197,37 +183,37 @@ public class XmlObjectTreeModel implements TreeTableModel {
     }
 
     public interface XmlTreeNode {
-        public int getChildCount();
+        int getChildCount();
 
-        public XmlTreeNode getChild(int ix);
+        XmlTreeNode getChild(int ix);
 
-        public int getIndexOfChild(XmlTreeNode childNode);
+        int getIndexOfChild(XmlTreeNode childNode);
 
-        public String getNodeName();
+        String getNodeName();
 
-        public String getNodeText();
+        String getNodeText();
 
-        public boolean isEditable(int column);
+        boolean isEditable(int column);
 
-        public boolean isLeaf();
+        boolean isLeaf();
 
-        public boolean setValue(int column, Object value);
+        boolean setValue(int column, Object value);
 
-        public XmlLineNumber getNodeLineNumber();
+        XmlLineNumber getNodeLineNumber();
 
-        public XmlLineNumber getValueLineNumber();
+        XmlLineNumber getValueLineNumber();
 
-        public XmlObject getXmlObject();
+        XmlObject getXmlObject();
 
-        public Node getDomNode();
+        Node getDomNode();
 
-        public TreePath getTreePath();
+        TreePath getTreePath();
 
-        public XmlTreeNode getParent();
+        XmlTreeNode getParent();
 
-        public SchemaType getSchemaType();
+        SchemaType getSchemaType();
 
-        public String getDocumentation();
+        String getDocumentation();
     }
 
     private abstract class AbstractXmlTreeNode implements XmlTreeNode {

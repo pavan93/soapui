@@ -23,9 +23,7 @@ import com.eviware.soapui.utils.ModelItemFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,7 +45,7 @@ public class RestParamsTableTest {
     }
 
     @Test
-    public void disallowsTemplateParameterForMethodLevel() throws Exception {
+    public void disallowsTemplateParameterForMethodLevel() {
         RestParamProperty prop = params.addProperty("prop");
         prop.setParamLocation(NewRestResourceActionBase.ParamLocation.METHOD);
         List<RestParamsPropertyHolder.ParameterStyle> availableStyles = getParameterStyles();
@@ -55,7 +53,7 @@ public class RestParamsTableTest {
     }
 
     @Test
-    public void allowsTemplateParameterForResourceLevel() throws Exception {
+    public void allowsTemplateParameterForResourceLevel() {
         RestParamProperty prop = params.addProperty("prop");
         prop.setParamLocation(NewRestResourceActionBase.ParamLocation.RESOURCE);
         List<RestParamsPropertyHolder.ParameterStyle> availableStyles = getParameterStyles();
@@ -63,7 +61,7 @@ public class RestParamsTableTest {
     }
 
     @Test
-    public void disallowsMethodLocationForTemplateParameter() throws Exception {
+    public void disallowsMethodLocationForTemplateParameter() {
         RestParamProperty prop = params.addProperty("prop");
         prop.setParamLocation(NewRestResourceActionBase.ParamLocation.RESOURCE);
         prop.setStyle(RestParamsPropertyHolder.ParameterStyle.TEMPLATE);
@@ -72,7 +70,7 @@ public class RestParamsTableTest {
     }
 
     @Test
-    public void disallowsMethodLocationForTemplateParameterOnMethodLevel() throws Exception {
+    public void disallowsMethodLocationForTemplateParameterOnMethodLevel() {
         RestParamProperty prop = params.addProperty("prop");
         prop.setParamLocation(NewRestResourceActionBase.ParamLocation.METHOD);
         prop.setStyle(RestParamsPropertyHolder.ParameterStyle.TEMPLATE);
@@ -81,7 +79,7 @@ public class RestParamsTableTest {
     }
 
     @Test
-    public void allowsMethodLocationForQueryParameter() throws Exception {
+    public void allowsMethodLocationForQueryParameter() {
         RestParamProperty prop = params.addProperty("prop");
         prop.setParamLocation(NewRestResourceActionBase.ParamLocation.RESOURCE);
         prop.setStyle(RestParamsPropertyHolder.ParameterStyle.QUERY);

@@ -19,32 +19,11 @@ package com.eviware.soapui.security.ui;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractCellEditor;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.table.TableCellEditor;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Cursor;
+import java.awt.*;
 import java.awt.Dialog.ModalExclusionType;
-import java.awt.Dimension;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
+import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class XPathCellRender extends AbstractCellEditor implements TableCellEditor, MouseListener, WindowFocusListener {
@@ -128,8 +107,6 @@ public class XPathCellRender extends AbstractCellEditor implements TableCellEdit
                 mouseX = e.getX();
                 mouseY = e.getY();
             }
-
-            ;
 
         });
 

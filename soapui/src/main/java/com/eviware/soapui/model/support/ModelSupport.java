@@ -185,7 +185,7 @@ public class ModelSupport {
     }
 
     public interface ModelItemFilter<T extends ModelItem> {
-        public boolean accept(T modelItem);
+        boolean accept(T modelItem);
     }
 
     public static boolean dependsOn(ModelItem source, ModelItem target) {

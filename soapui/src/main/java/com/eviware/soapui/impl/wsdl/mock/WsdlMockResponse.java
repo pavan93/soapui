@@ -25,12 +25,7 @@ import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.submit.filters.RemoveEmptyContentRequestFilter;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments.AttachmentUtils;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments.BodyPartAttachment;
-import com.eviware.soapui.impl.wsdl.support.CompressedStringSupport;
-import com.eviware.soapui.impl.wsdl.support.FileAttachment;
-import com.eviware.soapui.impl.wsdl.support.HelpUrls;
-import com.eviware.soapui.impl.wsdl.support.IconAnimator;
-import com.eviware.soapui.impl.wsdl.support.MockFileAttachment;
-import com.eviware.soapui.impl.wsdl.support.WsdlAttachment;
+import com.eviware.soapui.impl.wsdl.support.*;
 import com.eviware.soapui.impl.wsdl.support.soap.SoapUtils;
 import com.eviware.soapui.impl.wsdl.support.soap.SoapVersion;
 import com.eviware.soapui.impl.wsdl.support.wsa.WsaConfig;
@@ -63,7 +58,7 @@ import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlException;
 import org.w3c.dom.Document;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.wsdl.BindingOperation;
 import javax.wsdl.BindingOutput;
 import javax.wsdl.Message;
@@ -159,7 +154,7 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
             result.addAll(Arrays.asList(getMockOperation().getOperation().getDefaultRequestParts()));
 
             if (getMockResult() != null) {
-                result.addAll(AttachmentUtils.extractAttachmentParts((WsdlOperation) getMockOperation().getOperation(), getMockResult()
+                result.addAll(AttachmentUtils.extractAttachmentParts(getMockOperation().getOperation(), getMockResult()
                         .getMockRequest().getRequestContent(), true, false, isMtomEnabled()));
             }
 
@@ -173,7 +168,7 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
     public MessagePart[] getResponseParts() {
         try {
             // init
-            WsdlOperation op = (WsdlOperation) getMockOperation().getOperation();
+            WsdlOperation op = getMockOperation().getOperation();
             if (op == null || op.isUnidirectional()) {
                 return new MessagePart[0];
             }
@@ -266,7 +261,7 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
     public HttpAttachmentPart[] getDefinedAttachmentParts() {
         if (definedAttachmentParts == null) {
             try {
-                WsdlOperation operation = (WsdlOperation) getMockOperation().getOperation();
+                WsdlOperation operation = getMockOperation().getOperation();
                 if (operation == null) {
                     definedAttachmentParts = new ArrayList<HttpAttachmentPart>();
                 } else {
@@ -617,11 +612,11 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
     }
 
     public WsdlOperation getOperation() {
-        return ((WsdlMockOperation) getMockOperation()).getOperation();
+        return getMockOperation().getOperation();
     }
 
     public void setOperation(WsdlOperation operation) {
-        ((WsdlMockOperation) getMockOperation()).setOperation(operation);
+        getMockOperation().setOperation(operation);
     }
 
     protected String mockresultProperty() {

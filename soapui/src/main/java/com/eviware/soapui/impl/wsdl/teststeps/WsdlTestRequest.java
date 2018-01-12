@@ -38,7 +38,7 @@ import com.eviware.soapui.monitor.TestMonitor;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveContext;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -242,7 +242,7 @@ public class WsdlTestRequest extends WsdlRequest implements Assertable, TestRequ
         try {
             return assertionsSupport.moveAssertion(ix, offset);
         } finally {
-            ((WsdlMessageAssertion) assertion).release();
+            assertion.release();
             notifier.notifyChange();
         }
     }

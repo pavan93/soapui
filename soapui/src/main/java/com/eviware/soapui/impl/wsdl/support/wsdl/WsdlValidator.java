@@ -25,31 +25,14 @@ import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaGlobalElement;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlError;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlLineNumber;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.apache.xmlbeans.XmlValidationError;
+import org.apache.xmlbeans.*;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-import javax.wsdl.Binding;
-import javax.wsdl.BindingFault;
-import javax.wsdl.BindingOperation;
-import javax.wsdl.Part;
-import javax.wsdl.Port;
-import javax.wsdl.Service;
+import javax.wsdl.*;
 import javax.wsdl.extensions.mime.MIMEContent;
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Class for validating SOAP requests/responses against their definition and
@@ -465,12 +448,12 @@ public class WsdlValidator {
         Map<?, ?> services = wsdlContext.getDefinition().getAllServices();
         Iterator<?> i = services.keySet().iterator();
         while (i.hasNext()) {
-            Service service = (Service) wsdlContext.getDefinition().getService((QName) i.next());
+            Service service = wsdlContext.getDefinition().getService((QName) i.next());
             Map<?, ?> ports = service.getPorts();
 
             Iterator<?> iterator = ports.keySet().iterator();
             while (iterator.hasNext()) {
-                Port port = (Port) service.getPort((String) iterator.next());
+                Port port = service.getPort((String) iterator.next());
                 Binding binding = port.getBinding();
                 if (binding.getQName().equals(wsdlContext.getInterface().getBindingName())) {
                     BindingOperation bindingOperation = binding.getBindingOperation(operationName, null, null);

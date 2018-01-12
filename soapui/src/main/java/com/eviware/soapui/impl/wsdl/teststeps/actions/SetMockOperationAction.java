@@ -84,9 +84,9 @@ public class SetMockOperationAction extends AbstractSoapUIAction<WsdlMockRespons
     @AForm(description = "Set the Operation to mock (required for dispatch and validations)", name = "Set MockOperation", helpUrl = HelpUrls.SETMOCKOPERATION_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     private interface CreateForm {
         @AField(description = "Specifies the operation to be mocked", name = "Operation", type = AFieldType.ENUMERATION)
-        public final static String OPERATION = "Operation";
+        String OPERATION = "Operation";
 
         @AField(description = "Specifies the interface containing the operation to be mocked", name = "Interface", type = AFieldType.ENUMERATION)
-        public final static String INTERFACE = "Interface";
+        String INTERFACE = "Interface";
     }
 }

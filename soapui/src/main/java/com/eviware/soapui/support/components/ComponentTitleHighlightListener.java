@@ -23,5 +23,5 @@ package com.eviware.soapui.support.components;
  *         or not.
  */
 public interface ComponentTitleHighlightListener {
-    public void setHighlighted(boolean highlighted);
+    void setHighlighted(boolean highlighted);
 }

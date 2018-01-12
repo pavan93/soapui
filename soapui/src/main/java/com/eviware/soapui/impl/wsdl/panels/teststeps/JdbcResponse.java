@@ -20,8 +20,6 @@ import com.eviware.soapui.model.support.AbstractResponse;
 import com.eviware.soapui.support.xml.XmlUtils;
 
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -32,7 +30,7 @@ public class JdbcResponse extends AbstractResponse<JdbcRequest> {
     private final String rawSql;
 
     public JdbcResponse(JdbcRequest request, Statement statement, String rawSql) throws SQLException,
-            ParserConfigurationException, TransformerConfigurationException, TransformerException {
+            ParserConfigurationException {
         super(request);
         this.rawSql = rawSql;
 

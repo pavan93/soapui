@@ -31,42 +31,40 @@ import java.util.UUID;
  */
 
 public interface TestSuite extends TestModelItem, ResultContainer, TestRunnable {
-    public final static String RUNTYPE_PROPERTY = ModelItem.class.getName() + "@runtype";
-    public final static String DISABLED_PROPERTY = TestSuite.class.getName() + "@disabled";
+    String RUNTYPE_PROPERTY = ModelItem.class.getName() + "@runtype";
+    String DISABLED_PROPERTY = TestSuite.class.getName() + "@disabled";
 
-    public Project getProject();
+    Project getProject();
 
-    public int getTestCaseCount();
+    int getTestCaseCount();
 
-    public TestCase getTestCaseAt(int index);
+    TestCase getTestCaseAt(int index);
 
-    public TestCase getTestCaseByName(String testCaseName);
+    TestCase getTestCaseByName(String testCaseName);
 
-    public TestCase getTestCaseById(UUID id);
+    TestCase getTestCaseById(UUID id);
 
-    public List<TestCase> getTestCaseList();
+    List<TestCase> getTestCaseList();
 
-    public void addTestSuiteListener(TestSuiteListener listener);
+    void addTestSuiteListener(TestSuiteListener listener);
 
-    public void removeTestSuiteListener(TestSuiteListener listener);
+    void removeTestSuiteListener(TestSuiteListener listener);
 
-    public enum TestSuiteRunType {
+    TestSuiteRunType getRunType();
+
+    int getIndexOfTestCase(TestCase testCase);
+
+    boolean isDisabled();
+
+    String getLabel();
+
+    TestSuiteRunner run(StringToObjectMap context, boolean async);
+
+    void addTestSuiteRunListener(TestSuiteRunListener listener);
+
+    void removeTestSuiteRunListener(TestSuiteRunListener listener);
+
+    enum TestSuiteRunType {
         PARALLEL, SEQUENTIAL
     }
-
-    ;
-
-    public TestSuiteRunType getRunType();
-
-    public int getIndexOfTestCase(TestCase testCase);
-
-    public boolean isDisabled();
-
-    public String getLabel();
-
-    public TestSuiteRunner run(StringToObjectMap context, boolean async);
-
-    public void addTestSuiteRunListener(TestSuiteRunListener listener);
-
-    public void removeTestSuiteRunListener(TestSuiteRunListener listener);
 }

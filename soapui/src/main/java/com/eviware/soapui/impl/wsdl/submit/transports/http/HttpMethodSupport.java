@@ -32,12 +32,7 @@ import org.apache.http.impl.io.HttpTransportMetricsImpl;
 import org.apache.http.util.EntityUtils;
 
 import javax.net.ssl.SSLSession;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 
 /**
  * Helper class used by implementations of ExtendedHttpMethod.
@@ -148,8 +143,7 @@ public class HttpMethodSupport {
                 try {
                     return CompressionSupport.decompress(compressionAlg, responseBody);
                 } catch (Exception e) {
-                    IOException ioe = new IOException("Decompression of response failed");
-                    ioe.initCause(e);
+                    IOException ioe = new IOException("Decompression of response failed", e);
                     throw ioe;
                 }
             }
@@ -261,8 +255,7 @@ public class HttpMethodSupport {
                             try {
                                 responseBody = CompressionSupport.decompress(compressionAlg, responseBody);
                             } catch (Exception e) {
-                                IOException ioe = new IOException("Decompression of response failed");
-                                ioe.initCause(e);
+                                IOException ioe = new IOException("Decompression of response failed", e);
                                 throw ioe;
                             }
                         }

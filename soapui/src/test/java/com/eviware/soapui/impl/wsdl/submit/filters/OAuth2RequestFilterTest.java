@@ -44,9 +44,7 @@ import static com.eviware.soapui.utils.CommonMatchers.anEmptyArray;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class OAuth2RequestFilterTest {
 
@@ -76,21 +74,21 @@ public class OAuth2RequestFilterTest {
     }
 
     @After
-    public void restoreLogger() throws Exception {
+    public void restoreLogger() {
         OAuth2RequestFilter.setLog(realLogger);
     }
 
 	/* Tests */
 
     @Test
-    public void appliesAccessToken() throws URISyntaxException {
+    public void appliesAccessToken() {
         String expectedAccessTokenValue = "Bearer " + ACCESS_TOKEN;
         oAuth2RequestFilter.filterRestRequest(mockContext, restRequest);
         assertThat(httpRequest.getHeaders(OAuth.HeaderType.AUTHORIZATION)[0].getValue(), is(expectedAccessTokenValue));
     }
 
     @Test
-    public void doesNotApplyNullAccessTokenToHeader() throws Exception {
+    public void doesNotApplyNullAccessTokenToHeader() {
         oAuth2Profile.setAccessToken(null);
         oAuth2RequestFilter.filterRestRequest(mockContext, restRequest);
         assertThat(httpRequest.getHeaders(OAuth.HeaderType.AUTHORIZATION), is(anEmptyArray()));

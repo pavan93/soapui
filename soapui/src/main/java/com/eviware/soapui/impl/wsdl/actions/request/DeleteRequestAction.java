@@ -35,7 +35,7 @@ public class DeleteRequestAction extends AbstractSoapUIAction<WsdlRequest> {
     public void perform(WsdlRequest request, Object param) {
         if (UISupport.confirm("Delete request [" + request.getName() + "] from operation ["
                 + request.getOperation().getName() + "]", "Delete Request")) {
-            WsdlOperation operation = (WsdlOperation) request.getOperation();
+            WsdlOperation operation = request.getOperation();
             operation.removeRequest(request);
         }
     }

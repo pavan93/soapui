@@ -18,11 +18,7 @@ package com.eviware.soapui.impl.wsdl.actions.iface.tools.jbossws;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.analytics.Analytics;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.AbstractToolsAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ArgumentBuilder;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessToolRunner;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ShowConfigFileAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ToolHost;
+import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.*;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.model.project.Project;
@@ -31,13 +27,7 @@ import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.types.StringToStringMap;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormFieldListener;
-import com.eviware.x.form.XFormTextField;
+import com.eviware.x.form.*;
 import org.w3c.dom.Element;
 
 import java.io.File;
@@ -74,7 +64,7 @@ public class WSToolsWsdl2JavaAction extends AbstractToolsAction<Interface> {
 
     @Override
     public boolean applies(Interface target) {
-        Interface iface = (Interface) target;
+        Interface iface = target;
         return !iface.getProject().hasNature(Project.JBOSSWS_NATURE_ID);
     }
 

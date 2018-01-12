@@ -39,7 +39,7 @@ import com.eviware.x.form.support.AField;
 import com.eviware.x.form.support.AField.AFieldType;
 import com.eviware.x.form.support.AForm;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -221,18 +221,18 @@ public class CloneTestSuiteAction extends AbstractSoapUIAction<WsdlTestSuite> {
     @AForm(description = "Specify target Project and name of cloned TestSuite", name = "Clone TestSuite", helpUrl = HelpUrls.CLONETESTSUITE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     protected interface Form {
         @AField(name = "TestSuite Name", description = "The name of the cloned TestSuite", type = AFieldType.STRING)
-        public final static String NAME = "TestSuite Name";
+        String NAME = "TestSuite Name";
 
         @AField(name = "Target Project", description = "The target Project for the cloned TestSuite", type = AFieldType.ENUMERATION)
-        public final static String PROJECT = "Target Project";
+        String PROJECT = "Target Project";
 
         @AField(name = "Move instead", description = "Moves the selected TestSuite instead of copying", type = AFieldType.BOOLEAN)
-        public final static String MOVE = "Move instead";
+        String MOVE = "Move instead";
 
         @AField(name = "Clone description", description = "Clones the description of selected TestSuite", type = AFieldType.BOOLEAN)
-        public final static String CLONE_DESCRIPTION = "Clone description";
+        String CLONE_DESCRIPTION = "Clone description";
 
         @AField(name = "Description", description = "Description of new TestSuite", type = AFieldType.STRINGAREA)
-        public final static String DESCRIPTION = "Description";
+        String DESCRIPTION = "Description";
     }
 }

@@ -26,27 +26,27 @@ import java.util.Properties;
 
 public interface RestParamsPropertyHolder extends MutableTestPropertyHolder, Map<String, TestProperty> {
 
-    public RestParamProperty getProperty(String name);
+    RestParamProperty getProperty(String name);
 
-    public void resetValues();
+    void resetValues();
 
-    public int getPropertyIndex(String name);
+    int getPropertyIndex(String name);
 
-    public void saveTo(Properties props);
+    void saveTo(Properties props);
 
-    public RestParamProperty getPropertyAt(int index);
+    RestParamProperty getPropertyAt(int index);
 
-    public PropertyExpansion[] getPropertyExpansions();
+    PropertyExpansion[] getPropertyExpansions();
 
-    public void setPropertiesLabel(String propertiesLabel);
+    void setPropertiesLabel(String propertiesLabel);
 
-    public RestParamProperty addProperty(String name);
+    RestParamProperty addProperty(String name);
 
-    public RestParamProperty removeProperty(String propertyName);
+    RestParamProperty removeProperty(String propertyName);
 
-    public RestParamProperty get(Object key);
+    RestParamProperty get(Object key);
 
-    public void addParameter(RestParamProperty prop);
+    void addParameter(RestParamProperty prop);
 
     void setParameterLocation(RestParamProperty parameter, NewRestResourceActionBase.ParamLocation newLocation);
 
@@ -56,7 +56,7 @@ public interface RestParamsPropertyHolder extends MutableTestPropertyHolder, Map
      * @author ole
      */
 
-    public enum ParameterStyle {
+    enum ParameterStyle {
         MATRIX, HEADER, QUERY, TEMPLATE, PLAIN
     }
 

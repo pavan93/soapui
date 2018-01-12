@@ -21,10 +21,7 @@ import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MediaTypeComboBoxTest {
     MediaType model = mock(MediaType.class);
@@ -36,7 +33,7 @@ public class MediaTypeComboBoxTest {
 
         MediaTypeComboBox mediaTypeComboBox = new MediaTypeComboBox(model);
 
-        assertThat((String) mediaTypeComboBox.getSelectedItem(), is(stuffMediaType));
+        assertThat(mediaTypeComboBox.getSelectedItem(), is(stuffMediaType));
     }
 
     @Test

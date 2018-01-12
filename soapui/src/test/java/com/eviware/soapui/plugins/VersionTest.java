@@ -21,9 +21,7 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class VersionTest {
@@ -31,7 +29,7 @@ public class VersionTest {
     public static final Version BASE_VERSION = Version.fromString("1.7");
 
     @Test
-    public void correctEquals() throws Exception {
+    public void correctEquals() {
         assertThat(BASE_VERSION, is(equalTo(Version.fromString("1.7"))));
         assertThat(BASE_VERSION, is(not(equalTo(Version.fromString("1.7.1")))));
         assertThat(BASE_VERSION, is(not(equalTo(null))));
@@ -40,13 +38,13 @@ public class VersionTest {
     }
 
     @Test
-    public void correctHashCode() throws Exception {
+    public void correctHashCode() {
         assertThat(BASE_VERSION.hashCode(), is(equalTo(Version.fromString("1.7").hashCode())));
         assertThat(BASE_VERSION.hashCode(), is(not(equalTo(Version.fromString("1.7.1").hashCode()))));
     }
 
     @Test
-    public void compareTo() throws Exception {
+    public void compareTo() {
         assertThat(Version.fromString("1.1"), is(greaterThan(Version.fromString("1.0"))));
         assertThat(Version.fromString("1.1.1"), is(greaterThan(Version.fromString("1.1.0"))));
         assertThat(Version.fromString("1.1.1"), is(greaterThan(Version.fromString("1.1"))));

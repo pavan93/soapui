@@ -17,12 +17,10 @@
 package com.eviware.soapui.impl.wsdl.support.http;
 
 import org.apache.http.Header;
-import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.protocol.HttpContext;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class HeaderRequestInterceptor implements HttpRequestInterceptor {
     public static final String SOAPUI_REQUEST_HEADERS = "soapui.request.headers";
 
     @Override
-    public void process(HttpRequest request, HttpContext context) throws HttpException, IOException {
+    public void process(HttpRequest request, HttpContext context) {
         List<Header> wHeaders = Arrays.asList(request.getAllHeaders());
         context.setAttribute(SOAPUI_REQUEST_HEADERS, wHeaders);
     }

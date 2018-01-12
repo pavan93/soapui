@@ -53,7 +53,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldAddNewMockAction() throws SoapUIException {
+    public void shouldAddNewMockAction() {
         restMockService.addNewMockAction(restRequest);
 
         RestMockAction restMockAction = restMockService.getMockOperationAt(0);
@@ -62,7 +62,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldAddNewMockActionWithEmptyPath() throws SoapUIException {
+    public void shouldAddNewMockActionWithEmptyPath() {
         restRequest.setPath("/");
 
         restMockService.addNewMockAction(restRequest);
@@ -87,7 +87,7 @@ public class RestMockServiceTest {
 
 
     @Test
-    public void shouldFindMatchingOperation() throws SoapUIException {
+    public void shouldFindMatchingOperation() {
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
         RestMockAction restMockAction = restMockService.getMockOperationAt(0);
@@ -98,7 +98,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldFindPartiallyMatchingOperation() throws SoapUIException {
+    public void shouldFindPartiallyMatchingOperation() {
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
         RestMockAction restMockAction = restMockService.getMockOperationAt(0);
@@ -112,7 +112,7 @@ public class RestMockServiceTest {
 
 
     @Test
-    public void shouldFindBestPartiallyMatchingOperation() throws SoapUIException {
+    public void shouldFindBestPartiallyMatchingOperation() {
 
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
@@ -134,7 +134,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldNotFindPartiallyMatchingOperation() throws SoapUIException {
+    public void shouldNotFindPartiallyMatchingOperation() {
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
 
@@ -145,7 +145,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void partialPathMatchingShouldBeDoneOnPrefix() throws SoapUIException {
+    public void partialPathMatchingShouldBeDoneOnPrefix() {
         restMockService.addNewMockAction(restRequest);
 
         String requestPath = "/123" + PATH;
@@ -155,7 +155,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldNotFindMatchingOperationForDifferentMethod() throws SoapUIException {
+    public void shouldNotFindMatchingOperationForDifferentMethod() {
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
         RestMockAction matchingAction = (RestMockAction) restMockService.findBestMatchedOperation(PATH, GET);
@@ -164,7 +164,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldNotFindMatchingOperationForDifferentPath() throws SoapUIException {
+    public void shouldNotFindMatchingOperationForDifferentPath() {
         restRequest.setMethod(TRACE);
         restMockService.addNewMockAction(restRequest);
         RestMockAction matchingAction = (RestMockAction) restMockService.findBestMatchedOperation("/123", GET);
@@ -185,7 +185,7 @@ public class RestMockServiceTest {
     }
 
     @Test
-    public void shouldAddOperationToMockServiceAction() throws SoapUIException {
+    public void shouldAddOperationToMockServiceAction() {
         RestMethod restMethod = mock(RestMethod.class);
         when(restMethod.getRequestAt(0)).thenReturn(restRequest);
         when(restMethod.getMethod()).thenReturn(RestRequestInterface.HttpMethod.GET);

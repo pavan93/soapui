@@ -19,7 +19,7 @@ package com.eviware.soapui.ui.desktop;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.swing.ActionList;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * Behaviour for a SoapUI Desktop implementation
@@ -28,39 +28,39 @@ import javax.swing.JComponent;
  */
 
 public interface SoapUIDesktop {
-    public boolean closeDesktopPanel(DesktopPanel desktopPanel);
+    boolean closeDesktopPanel(DesktopPanel desktopPanel);
 
-    public boolean hasDesktopPanel(ModelItem modelItem);
+    boolean hasDesktopPanel(ModelItem modelItem);
 
-    public void addDesktopListener(DesktopListener listener);
+    void addDesktopListener(DesktopListener listener);
 
-    public void removeDesktopListener(DesktopListener listener);
+    void removeDesktopListener(DesktopListener listener);
 
-    public DesktopPanel showDesktopPanel(ModelItem modelItem);
+    DesktopPanel showDesktopPanel(ModelItem modelItem);
 
-    public boolean closeDesktopPanel(ModelItem modelItem);
+    boolean closeDesktopPanel(ModelItem modelItem);
 
-    public ActionList getActions();
+    ActionList getActions();
 
-    public DesktopPanel[] getDesktopPanels();
+    DesktopPanel[] getDesktopPanels();
 
-    public DesktopPanel getDesktopPanel(ModelItem modelItem);
+    DesktopPanel getDesktopPanel(ModelItem modelItem);
 
-    public DesktopPanel showDesktopPanel(DesktopPanel desktopPanel);
+    DesktopPanel showDesktopPanel(DesktopPanel desktopPanel);
 
-    public JComponent getDesktopComponent();
+    JComponent getDesktopComponent();
 
-    public void transferTo(SoapUIDesktop newDesktop);
+    void transferTo(SoapUIDesktop newDesktop);
 
-    public boolean closeAll();
+    boolean closeAll();
 
-    public void release();
+    void release();
 
-    public void init();
+    void init();
 
-    public void minimize(DesktopPanel desktopPanel);
+    void minimize(DesktopPanel desktopPanel);
 
-    public void maximize(DesktopPanel dp);
+    void maximize(DesktopPanel dp);
 
-    public void showInspector( JComponent component );
+    void showInspector(JComponent component);
 }

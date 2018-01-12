@@ -233,7 +233,7 @@ public class GSoapAction extends AbstractToolsAction<Interface> {
         String gsoapDir = SoapUI.getSettings().getString(ToolsSettings.GSOAP_LOCATION, null);
         ArgumentBuilder builder = new ArgumentBuilder(values);
         builder.startScript(gsoapDir + File.separator + "wsdl2h", "", "");
-        builder.addArgs(new String[]{"-v"});
+        builder.addArgs("-v");
 
         values.put(WSDL2H_OUTPUT, Tools.getFilename(values.get(WSDL2H_OUTPUT)));
 
@@ -267,7 +267,7 @@ public class GSoapAction extends AbstractToolsAction<Interface> {
         String gsoapDir = SoapUI.getSettings().getString(ToolsSettings.GSOAP_LOCATION, null);
         ArgumentBuilder builder = new ArgumentBuilder(values);
         builder.startScript(gsoapDir + File.separator + "soapcpp2", "", "");
-        builder.addArgs(new String[]{"-Iimport", values.get(WSDL2H_OUTPUT)});
+        builder.addArgs("-Iimport", values.get(WSDL2H_OUTPUT));
 
         builder.addBoolean(SOAP_11, "-1");
         builder.addBoolean(SOAP_12, "-2");

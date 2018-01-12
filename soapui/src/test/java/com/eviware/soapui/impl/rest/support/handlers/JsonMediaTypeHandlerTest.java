@@ -100,7 +100,7 @@ public class JsonMediaTypeHandlerTest {
         return response;
     }
 
-    private SubmitContext submitRequest(RestRequest restRequest, String originalPath) throws URISyntaxException, URIException, Request.SubmitException {
+    private SubmitContext submitRequest(RestRequest restRequest, String originalPath) throws URIException, Request.SubmitException {
         SubmitContext submitContext = new WsdlSubmitContext(restRequest);
         HttpRequestBase httpMethod = mock(HttpRequestBase.class);
         submitContext.setProperty(BaseHttpRequestTransport.HTTP_METHOD, httpMethod);

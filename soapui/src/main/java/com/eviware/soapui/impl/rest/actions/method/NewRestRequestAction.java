@@ -69,9 +69,9 @@ public class NewRestRequestAction extends AbstractSoapUIAction<RestMethod> {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWRESTSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(description = "Form.ResourceName.Description", type = AFieldType.STRING)
-        public final static String RESOURCENAME = messages.get("Form.ResourceName.Label");
+        String RESOURCENAME = messages.get("Form.ResourceName.Label");
 
         @AField(description = "Form.OpenRequest.Description", type = AFieldType.BOOLEAN)
-        public final static String OPENSREQUEST = messages.get("Form.OpenRequest.Label");
+        String OPENSREQUEST = messages.get("Form.OpenRequest.Label");
     }
 }

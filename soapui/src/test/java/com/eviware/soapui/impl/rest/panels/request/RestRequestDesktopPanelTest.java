@@ -40,19 +40,15 @@ import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.swing.JComboBox;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import static com.eviware.soapui.utils.ModelItemMatchers.hasParameter;
 import static com.eviware.soapui.utils.StubbedDialogs.hasPromptWithValue;
-import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 
@@ -95,7 +91,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void retainsParameterValueWhenChangingItsLevel() throws Exception {
+    public void retainsParameterValueWhenChangingItsLevel() {
         JTable paramsTable = getRestParameterTable();
         paramsTable.setValueAt(NewRestResourceActionBase.ParamLocation.METHOD, 0, 3);
         paramsTable.setValueAt(NewRestResourceActionBase.ParamLocation.RESOURCE, 0, 3);
@@ -105,7 +101,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void addsNewParameterToResource() throws Exception {
+    public void addsNewParameterToResource() {
         JTable restParameterTable = getRestParameterTable();
         new AddParamAction(restParameterTable, restRequest.getParams(), "").actionPerformed(new ActionEvent(restParameterTable, 1, "Add"));
         String newParamName = "newParamName";
@@ -117,15 +113,15 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void retainsParameterOrderWhenChangingItsLevel() throws Exception {
+    public void retainsParameterOrderWhenChangingItsLevel() {
         restRequest.getParams().addProperty("Param2");
         getRestParameterTable().setValueAt(NewRestResourceActionBase.ParamLocation.METHOD, 0, 3);
 
-        assertThat((String) getRestParameterTable().getValueAt(0, 0), is(PARAMETER_NAME));
+        assertThat(getRestParameterTable().getValueAt(0, 0), is(PARAMETER_NAME));
     }
 
     @Test
-    public void addsAndRemovesTemplateParameterOnResourceField() throws Exception {
+    public void addsAndRemovesTemplateParameterOnResourceField() {
         String path = restRequest.getResource().getPath();
         assertThat(requestDesktopPanel.resourcePanel.getText(), equalTo(path));
 
@@ -139,7 +135,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void extractsQueryStringParamsFromUrl() throws Exception {
+    public void extractsQueryStringParamsFromUrl() {
         RestParamsPropertyHolder params = restRequest.getParams();
         String url = restRequest.getEndpoint() + restRequest.getPath() + "?q=foo&page=2";
         RestUtils.extractParams(url, params, true);
@@ -148,7 +144,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void addsAndRemovesTemplateParameterOnParentShouldOnlyUpdateParentPath() throws Exception {
+    public void addsAndRemovesTemplateParameterOnParentShouldOnlyUpdateParentPath() {
         RestResource restResource = restRequest.getResource();
         RestResource childResource = restResource.addNewChildResource("childResource", "/subPath");
         String childPath = childResource.getPath();
@@ -174,7 +170,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void renamesTemplateParameterOnParentResource() throws Exception {
+    public void renamesTemplateParameterOnParentResource() {
         RestResource restResource = restRequest.getResource();
         RestResource childResource = restResource.addNewChildResource("childResource", "/subPath");
         String childPath = childResource.getPath();
@@ -199,7 +195,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void addsAndRemovesTemplateParameterOnChildResourcePath() throws Exception {
+    public void addsAndRemovesTemplateParameterOnChildResourcePath() {
         RestResource restResource = restRequest.getResource();
         RestResource childResource = restResource.addNewChildResource("childResource", "/subPath");
         String fullPath = childResource.getFullPath();
@@ -226,7 +222,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void renameTemplateParameterOnChildResourcePath() throws Exception {
+    public void renameTemplateParameterOnChildResourcePath() {
         RestResource restResource = restRequest.getResource();
         RestResource childResource = restResource.addNewChildResource("childResource", "/subPath");
         String fullPath = childResource.getFullPath();
@@ -252,7 +248,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void addsAndRemovesTemplateParameterOnModel() throws Exception {
+    public void addsAndRemovesTemplateParameterOnModel() {
         String path = restRequest.getResource().getPath();
         assertThat(requestDesktopPanel.resourcePanel.getText(), equalTo(path));
 
@@ -266,7 +262,7 @@ public class RestRequestDesktopPanelTest {
     }
 
     @Test
-    public void updatesExistingTemplateParameterName() throws Exception {
+    public void updatesExistingTemplateParameterName() {
 
         String newParamName = "sessionID";
         String path = restRequest.getResource().getPath();
@@ -300,7 +296,7 @@ public class RestRequestDesktopPanelTest {
 
 
     @Test
-    public void allowsRemovalOfParameterAfterParameterLevelChange() throws Exception {
+    public void allowsRemovalOfParameterAfterParameterLevelChange() {
         restRequest.getParams().addProperty("Param2");
         getRestParameterTable().setValueAt(NewRestResourceActionBase.ParamLocation.METHOD, 0, 3);
 
@@ -313,14 +309,14 @@ public class RestRequestDesktopPanelTest {
 
     @Test
     public void displaysEndpoint() {
-        assertThat(requestDesktopPanel.getEndpointsModel().getSelectedItem(), is((Object) ENDPOINT));
+        assertThat(requestDesktopPanel.getEndpointsModel().getSelectedItem(), is(ENDPOINT));
     }
 
     @Test
     public void reactsToEndpointChanges() {
         String anotherEndpoint = "http://mafia.ru/search";
         restService().changeEndpoint(ENDPOINT, anotherEndpoint);
-        assertThat(requestDesktopPanel.getEndpointsModel().getSelectedItem(), is((Object) anotherEndpoint));
+        assertThat(requestDesktopPanel.getEndpointsModel().getSelectedItem(), is(anotherEndpoint));
     }
 
     @Test
@@ -365,7 +361,7 @@ public class RestRequestDesktopPanelTest {
 
     @Ignore("Fails intermittently, but works in GUI")
     @Test
-    public void parameterAdditionUpdatesParametersField() throws InterruptedException, InvocationTargetException {
+    public void parameterAdditionUpdatesParametersField() {
         final String parameterName = "the_new_param";
         RestParamProperty newParameter = restRequest.getParams().addProperty(parameterName);
         newParameter.setStyle(RestParamsPropertyHolder.ParameterStyle.QUERY);

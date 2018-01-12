@@ -30,62 +30,62 @@ import java.util.UUID;
  */
 
 public interface TestCase extends TestModelItem, ResultContainer, TestRunnable {
-    public final static String STATUS_PROPERTY = TestCase.class.getName() + "@status";
-    public final static String DISABLED_PROPERTY = TestCase.class.getName() + "@disabled";
+    String STATUS_PROPERTY = TestCase.class.getName() + "@status";
+    String DISABLED_PROPERTY = TestCase.class.getName() + "@disabled";
 
-    public TestSuite getTestSuite();
+    TestSuite getTestSuite();
 
-    public TestStep getTestStepAt(int index);
+    TestStep getTestStepAt(int index);
 
-    public int getIndexOfTestStep(TestStep testStep);
+    int getIndexOfTestStep(TestStep testStep);
 
-    public int getTestStepCount();
+    int getTestStepCount();
 
-    public List<TestStep> getTestStepList();
+    List<TestStep> getTestStepList();
 
-    public LoadTest getLoadTestAt(int index);
+    LoadTest getLoadTestAt(int index);
 
-    public LoadTest getLoadTestByName(String loadTestName);
+    LoadTest getLoadTestByName(String loadTestName);
 
-    public int getIndexOfLoadTest(LoadTest loadTest);
+    int getIndexOfLoadTest(LoadTest loadTest);
 
-    public int getLoadTestCount();
+    int getLoadTestCount();
 
-    public List<LoadTest> getLoadTestList();
+    List<LoadTest> getLoadTestList();
 
-    public TestCaseRunner run(StringToObjectMap context, boolean async);
+    TestCaseRunner run(StringToObjectMap context, boolean async);
 
-    public void addTestRunListener(TestRunListener listener);
+    void addTestRunListener(TestRunListener listener);
 
-    public void removeTestRunListener(TestRunListener listener);
+    void removeTestRunListener(TestRunListener listener);
 
-    public int getTestStepIndexByName(String stepName);
+    int getTestStepIndexByName(String stepName);
 
-    public <T extends TestStep> T findPreviousStepOfType(TestStep referenceStep, Class<T> stepClass);
+    <T extends TestStep> T findPreviousStepOfType(TestStep referenceStep, Class<T> stepClass);
 
-    public <T extends TestStep> T findNextStepOfType(TestStep referenceStep, Class<T> stepClass);
+    <T extends TestStep> T findNextStepOfType(TestStep referenceStep, Class<T> stepClass);
 
-    public <T extends TestStep> List<T> getTestStepsOfType(Class<T> stepType);
+    <T extends TestStep> List<T> getTestStepsOfType(Class<T> stepType);
 
-    public void moveTestStep(int index, int offset);
+    void moveTestStep(int index, int offset);
 
-    public TestStep getTestStepByName(String stepName);
+    TestStep getTestStepByName(String stepName);
 
-    public TestStep getTestStepById(UUID testStepId);
+    TestStep getTestStepById(UUID testStepId);
 
-    public boolean isDisabled();
+    boolean isDisabled();
 
-    public String getLabel();
+    String getLabel();
 
-    public SecurityTest getSecurityTestAt(int index);
+    SecurityTest getSecurityTestAt(int index);
 
-    public SecurityTest getSecurityTestByName(String securityTestName);
+    SecurityTest getSecurityTestByName(String securityTestName);
 
-    public int getIndexOfSecurityTest(SecurityTest securityTest);
+    int getIndexOfSecurityTest(SecurityTest securityTest);
 
-    public int getSecurityTestCount();
+    int getSecurityTestCount();
 
-    public List<SecurityTest> getSecurityTestList();
+    List<SecurityTest> getSecurityTestList();
 
     TestStep insertTestStep(TestStepConfig config, int position);
 }

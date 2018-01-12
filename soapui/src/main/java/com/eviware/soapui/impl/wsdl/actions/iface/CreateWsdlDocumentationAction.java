@@ -118,6 +118,6 @@ public class CreateWsdlDocumentationAction extends AbstractSoapUIAction<WsdlInte
     @AForm(description = "Creates an HTML-Report for the interface WSDL", name = "Create Documentation", helpUrl = HelpUrls.CREATEWADLDOC_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(name = "Output Folder", description = "The folder where to create the report", type = AFieldType.FOLDER)
-        public final static String OUTPUT_FOLDER = "Output Folder";
+        String OUTPUT_FOLDER = "Output Folder";
     }
 }

@@ -24,14 +24,7 @@ import com.eviware.soapui.impl.wsdl.monitor.ContentTypes;
 import com.eviware.soapui.impl.wsdl.monitor.JProxyServletWsdlMonitorMessageExchange;
 import com.eviware.soapui.impl.wsdl.monitor.SoapMonitorListenerCallBack;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.ExtendedHttpMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedGenericMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedGetMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedHeadMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedOptionsMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPatchMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPostMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPutMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedTraceMethod;
+import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.*;
 import com.eviware.soapui.impl.wsdl.support.http.HttpClientSupport;
 import com.eviware.soapui.impl.wsdl.support.http.ProxyUtils;
 import com.eviware.soapui.model.settings.Settings;
@@ -47,12 +40,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.mortbay.util.IO;
 
-import javax.servlet.Servlet;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.ByteArrayInputStream;
@@ -110,12 +98,12 @@ public class ProxyServlet implements Servlet {
                 : SoapMonitorAction.defaultContentTypes();
     }
 
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) {
         this.config = config;
         this.context = config.getServletContext();
     }
 
-    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+    public void service(ServletRequest request, ServletResponse response) throws IOException {
         listenerCallBack.fireOnRequest(project, request, response);
         if (response.isCommitted()) {
             return;

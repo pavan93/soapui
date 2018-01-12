@@ -27,10 +27,10 @@ import com.eviware.soapui.security.result.SecurityScanResult;
  * @author SoapUI team
  */
 public interface SecurityTestRunner extends TestRunner {
-    public SecurityTest getSecurityTest();
+    SecurityTest getSecurityTest();
 
-    public SecurityScanResult runTestStepSecurityScan(SecurityTestRunContext runContext, TestStep testStep,
-                                                      SecurityScan securityScan);
+    SecurityScanResult runTestStepSecurityScan(SecurityTestRunContext runContext, TestStep testStep,
+                                               SecurityScan securityScan);
 
     // Removed the rest cause I don't think we need them, since
     // SecurityTestRunnerImpl extends WsdlTestCaseRunner

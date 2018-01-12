@@ -22,7 +22,7 @@ import org.jdesktop.swingx.JXTable;
 
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableModel;
-import java.awt.Component;
+import java.awt.*;
 import java.util.List;
 
 public class CategoriesListTable extends JXTable {
@@ -77,7 +77,7 @@ public class CategoriesListTable extends JXTable {
 
     @Override
     public boolean getShowVerticalLines() {
-        return UISupport.isMac() ? false : super.getShowVerticalLines();
+        return !UISupport.isMac() && super.getShowVerticalLines();
     }
 
 }

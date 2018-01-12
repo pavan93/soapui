@@ -20,14 +20,7 @@ import com.eviware.soapui.SoapUI;
 
 import javax.activation.DataSource;
 import javax.mail.internet.MimeMultipart;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 public class MultipartAttachmentFileDataSource implements DataSource {
     private final MimeMultipart multipart;
@@ -40,7 +33,7 @@ public class MultipartAttachmentFileDataSource implements DataSource {
         return multipart.getContentType();
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         try {
             File file = File.createTempFile("largeAttachment", ".tmp");
             file.deleteOnExit();
@@ -62,7 +55,7 @@ public class MultipartAttachmentFileDataSource implements DataSource {
         return multipart.toString();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

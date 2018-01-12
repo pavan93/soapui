@@ -36,14 +36,14 @@ public interface Particle {
      *
      * @return The QName describing the particles name and namespace.
      */
-    public QName getName();
+    QName getName();
 
     /**
      * Get the ParticleType of the Particle, that is, attribute or element.
      *
      * @return Returns the type of particle this is.
      */
-    public ParticleType getPType();
+    ParticleType getPType();
 
     /**
      * Get the Type of the element or attribute that is described by this
@@ -51,7 +51,7 @@ public interface Particle {
      *
      * @return Returns the Type that corresponds to the particle.
      */
-    public Type getType();
+    Type getType();
 
     /**
      * Set the Type of the element or attribute that is described by this
@@ -59,7 +59,7 @@ public interface Particle {
      *
      * @param type The Type to set.
      */
-    public void setType(Type type);
+    void setType(Type type);
 
     /**
      * Get the attribute value that corresponds to the given name.
@@ -67,7 +67,7 @@ public interface Particle {
      * @param key The name of the attribute to get the value for.
      * @return Returns the value for the attribute.
      */
-    public String getAttribute(String key);
+    String getAttribute(String key);
 
     /**
      * Set an attribute.
@@ -75,7 +75,7 @@ public interface Particle {
      * @param key   The name of the attribute to set.
      * @param value The value to set.
      */
-    public void setAttribute(String key, String value);
+    void setAttribute(String key, String value);
 
     /**
      * Validates an XML document contained in a given Context object, at the
@@ -85,16 +85,16 @@ public interface Particle {
      *                other needed contextual variables.
      * @throws XmlException On unresolvable validation error.
      */
-    public void validate(Context context) throws XmlException;
+    void validate(Context context) throws XmlException;
 
-    public ParticleConfig save();
+    ParticleConfig save();
 
     /**
      * An enum representing one of two particle types, element or attribute.
      *
      * @author Dain Nilsson
      */
-    public enum ParticleType {
+    enum ParticleType {
         ATTRIBUTE("attribute"), ELEMENT("element");
         private final String name;
 
@@ -107,14 +107,12 @@ public interface Particle {
         }
     }
 
-    ;
-
     /**
      * A static factory class for creating new instances.
      *
      * @author Dain Nilsson
      */
-    public class Factory {
+    class Factory {
 
         /**
          * Create a blank new Particle representing an xs:element.

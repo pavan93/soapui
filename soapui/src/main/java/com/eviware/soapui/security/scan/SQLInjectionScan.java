@@ -38,10 +38,8 @@ import com.eviware.x.impl.swing.JFormDialog;
 import com.eviware.x.impl.swing.JStringListFormField;
 import org.apache.xmlbeans.XmlException;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -124,7 +122,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
         }
     }
 
-    private StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws Exception {
         StringToStringMap params = new StringToStringMap();
 
         if (parameterMutations.size() == 0) {
@@ -218,7 +216,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
         return params;
     }
 
-    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws Exception {
         mutation = true;
         // for each parameter
         for (SecurityCheckedParameter parameter : getParameterHolder().getParameterList()) {
@@ -280,11 +278,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
     protected boolean hasNext(TestStep testStep, SecurityTestRunContext context) {
         boolean hasNext = false;
         if ((parameterMutations == null || parameterMutations.size() == 0) && !mutation) {
-            if (getParameterHolder().getParameterList().size() > 0) {
-                hasNext = true;
-            } else {
-                hasNext = false;
-            }
+            hasNext = getParameterHolder().getParameterList().size() > 0;
         } else {
             for (SecurityCheckedParameter param : parameterMutations.keySet()) {
                 if (parameterMutations.get(param).size() > 0) {
@@ -386,7 +380,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
     protected interface AdvancedSettings {
 
         @AField(description = "SQL Strings", name = "###Injection Strings", type = AFieldType.STRINGLIST)
-        public final static String INJECTION_STRINGS = "###Injection Strings";
+        String INJECTION_STRINGS = "###Injection Strings";
 
     }
 

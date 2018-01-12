@@ -19,7 +19,6 @@ package com.eviware.soapui.impl.rest.panels.resource;
 import com.eviware.soapui.impl.rest.RestMethod;
 import com.eviware.soapui.impl.rest.RestRequest;
 import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.actions.support.NewRestResourceActionBase;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
 import com.eviware.soapui.impl.rest.support.XmlBeansRestParamsTestPropertyHolder;
@@ -33,11 +32,7 @@ import static com.eviware.soapui.impl.rest.actions.support.NewRestResourceAction
 import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle.QUERY;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for the RestParamsTableModel class
@@ -89,35 +84,35 @@ public class RestParamsTableModelUnitTest {
     public void setsValueToPropertyWhenSetValueAtIsInvoked() {
         String value = "New value";
         restParamsTableModel.setValueAt(value, 0, VALUE_COLUMN_INDEX);
-        assertThat((String) restParamsTableModel.getValueAt(0, VALUE_COLUMN_INDEX), is(value));
+        assertThat(restParamsTableModel.getValueAt(0, VALUE_COLUMN_INDEX), is(value));
     }
 
     @Test
     public void renamesThePropertyIfSetValueIsInvokedOnFirstColumn() {
         String value = "New Name";
         restParamsTableModel.setValueAt(value, 0, NAME_COLUMN_INDEX);
-        assertThat((String) restParamsTableModel.getValueAt(0, NAME_COLUMN_INDEX), is(value));
+        assertThat(restParamsTableModel.getValueAt(0, NAME_COLUMN_INDEX), is(value));
     }
 
     @Test
     public void changesPropertyStyleWhenSetValueIsInvokedonStyleColumn() {
         restParamsTableModel.setValueAt(QUERY, 0, STYLE_COLUMN_INDEX);
-        assertThat((RestParamsPropertyHolder.ParameterStyle) restParamsTableModel.getValueAt(0, STYLE_COLUMN_INDEX),
+        assertThat(restParamsTableModel.getValueAt(0, STYLE_COLUMN_INDEX),
                 is(QUERY));
     }
 
     @Test
     public void givenModelWithParamsWhenSetLocationAndGetLocationThenShouldReturnSameValue() {
         restParamsTableModel.setValueAt(METHOD, 0, LOCATION_COLUMN_INDEX);
-        assertThat((NewRestResourceActionBase.ParamLocation) restParamsTableModel.getValueAt(0, LOCATION_COLUMN_INDEX),
+        assertThat(restParamsTableModel.getValueAt(0, LOCATION_COLUMN_INDEX),
                 is(METHOD));
     }
 
     @Test
-    public void retainsParameterOrderWhenChangingLocation() throws Exception {
+    public void retainsParameterOrderWhenChangingLocation() {
         restParamsTableModel.setValueAt(METHOD, 0, LOCATION_COLUMN_INDEX);
 
-        assertThat((String) restParamsTableModel.getValueAt(0, NAME_COLUMN_INDEX), is(PARAM_NAME_1));
+        assertThat(restParamsTableModel.getValueAt(0, NAME_COLUMN_INDEX), is(PARAM_NAME_1));
     }
 
     private void mockParams() {

@@ -23,8 +23,7 @@ import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStepResult;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStepResult;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -48,7 +47,7 @@ public class CreateRequestAction extends AbstractAction {
         String name = UISupport.prompt("Specify name of request", "Create Request", "Result from " + step.getName());
 
         if (name != null) {
-            WsdlOperation operation = (WsdlOperation) step.getTestRequest().getOperation();
+            WsdlOperation operation = step.getTestRequest().getOperation();
             WsdlRequest request = operation.addNewRequest(name);
             request.setRequestContent(result.getRequestContent());
             request.setDomain(result.getDomain());

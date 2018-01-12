@@ -13,7 +13,7 @@ import static com.smartbear.ready.recipe.TestStepNames.createUniqueName;
 
 public class PropertiesTestStepParser implements TestStepJsonParser {
     @Override
-    public void createTestStep(WsdlTestCase testCase, TestStepStruct testStepElement, StringToObjectMap context) throws ParseException {
+    public void createTestStep(WsdlTestCase testCase, TestStepStruct testStepElement, StringToObjectMap context) {
         PropertiesTestStepStruct testStepStruct = (PropertiesTestStepStruct) testStepElement;
         String testStepName = createUniqueName(testCase, testStepStruct.name, "Properties");
 

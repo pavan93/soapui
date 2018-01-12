@@ -25,12 +25,7 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.model.support.XPathReference;
 import com.eviware.soapui.model.support.XPathReferenceContainer;
 import com.eviware.soapui.model.support.XPathReferenceImpl;
-import com.eviware.soapui.model.testsuite.SamplerTestStep;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
@@ -238,9 +233,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
                 String expression = PropertyExpander.expandProperties(context, getExpression());
                 XmlObject[] selectPath = xmlObject.selectPath(expression);
                 if (selectPath.length == 1 && selectPath[0] instanceof XmlBoolean) {
-                    if (((XmlBoolean) selectPath[0]).getBooleanValue()) {
-                        return true;
-                    }
+                    return ((XmlBoolean) selectPath[0]).getBooleanValue();
                 }
             } else {
                 log.error("Unkown condition type: " + getType());
@@ -294,7 +287,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
         }
 
         public TestProperty getSourceProperty() {
-            HttpRequestTestStep previousStep = (HttpRequestTestStep) getTestCase().findPreviousStepOfType(
+            HttpRequestTestStep previousStep = getTestCase().findPreviousStepOfType(
                     WsdlGotoTestStep.this, HttpRequestTestStep.class);
             return previousStep == null ? null : previousStep.getProperty("Response");
         }

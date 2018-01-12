@@ -18,7 +18,6 @@ package com.eviware.soapui.support.uri;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
-import org.apache.http.HttpException;
 import org.apache.http.message.BasicHeader;
 
 import java.io.IOException;
@@ -32,7 +31,7 @@ public class HttpParser {
         return IOUtils.toString(inputStream, charset);
     }
 
-    public static Header[] parseHeaders(InputStream is, String charset) throws IOException, HttpException {
+    public static Header[] parseHeaders(InputStream is, String charset) throws IOException {
         ArrayList<Header> headers = new ArrayList<Header>();
         String name = null;
         StringBuffer value = null;
@@ -66,7 +65,7 @@ public class HttpParser {
             headers.add(new BasicHeader(name, value.toString()));
         }
 
-        return (Header[]) headers.toArray(new Header[headers.size()]);
+        return headers.toArray(new Header[headers.size()]);
     }
 
 }

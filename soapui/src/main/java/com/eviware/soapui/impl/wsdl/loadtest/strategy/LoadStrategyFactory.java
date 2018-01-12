@@ -26,9 +26,9 @@ import org.apache.xmlbeans.XmlObject;
  */
 
 public interface LoadStrategyFactory {
-    public String getType();
+    String getType();
 
-    public LoadStrategy build(XmlObject config, WsdlLoadTest loadTest);
+    LoadStrategy build(XmlObject config, WsdlLoadTest loadTest);
 
-    public LoadStrategy create(WsdlLoadTest loadTest);
+    LoadStrategy create(WsdlLoadTest loadTest);
 }

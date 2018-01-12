@@ -33,25 +33,10 @@ import com.eviware.soapui.support.swing.AutoscrollSupport;
 import com.eviware.soapui.support.swing.ModelItemListKeyListener;
 import com.eviware.soapui.support.swing.ModelItemListMouseListener;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Insets;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.dnd.Autoscroll;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
@@ -112,7 +97,7 @@ public class JTestStepList extends JPanel {
         appendStepMenu = new JMenu("Append Step");
 
         WsdlTestStepRegistry registry = WsdlTestStepRegistry.getInstance();
-        WsdlTestStepFactory[] factories = (WsdlTestStepFactory[]) registry.getFactories();
+        WsdlTestStepFactory[] factories = registry.getFactories();
 
         for (int c = 0; c < factories.length; c++) {
             if (factories[c].canCreate()) {

@@ -85,7 +85,7 @@ public class OAuth2TestUtils {
         OAuth2TokenExtractor oAuth2TokenExtractor = mock(OAuth2TokenExtractor.class);
         doAnswer(new Answer<Object>() {
             @Override
-            public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Object answer(InvocationOnMock invocationOnMock) {
                 profile.setAccessToken(OAuth2TestUtils.ACCESS_TOKEN);
                 return profile;
             }
@@ -93,7 +93,7 @@ public class OAuth2TestUtils {
 
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Object answer(InvocationOnMock invocationOnMock) {
                 profile.setAccessToken(OAuth2TestUtils.ACCESS_TOKEN);
                 return profile;
             }

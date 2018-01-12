@@ -29,19 +29,11 @@ import com.eviware.soapui.model.iface.MessagePart.FaultPart;
 import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaGlobalElement;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
+import org.apache.xmlbeans.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import javax.wsdl.BindingInput;
-import javax.wsdl.BindingOperation;
-import javax.wsdl.BindingOutput;
-import javax.wsdl.Message;
-import javax.wsdl.Part;
+import javax.wsdl.*;
 import javax.xml.namespace.QName;
 import java.io.StringWriter;
 import java.util.List;
@@ -60,7 +52,7 @@ public class SoapMessageBuilder implements MessageBuilder {
     private WsdlInterface iface;
     private Map<QName, String[]> multiValues = null;
 
-    public SoapMessageBuilder(WsdlInterface iface) throws Exception {
+    public SoapMessageBuilder(WsdlInterface iface) {
         this.iface = iface;
         this.wsdlContext = iface.getWsdlContext();
     }

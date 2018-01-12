@@ -25,31 +25,31 @@ import com.eviware.soapui.model.ModelItem;
  */
 
 public interface SoapUIActionMapping<T extends ModelItem> {
-    public SoapUIAction<T> getAction();
+    SoapUIAction<T> getAction();
 
-    public String getActionId();
+    String getActionId();
 
-    public String getName();
+    String getName();
 
-    public String getDescription();
+    SoapUIActionMapping<T> setName(String name);
 
-    public boolean isDefault();
+    String getDescription();
 
-    public boolean isEnabled();
+    SoapUIActionMapping<T> setDescription(String description);
 
-    public String getIconPath();
+    boolean isDefault();
 
-    public String getKeyStroke();
+    boolean isEnabled();
 
-    public Object getParam();
+    SoapUIActionMapping<T> setEnabled(boolean enabled);
 
-    public SoapUIActionMapping<T> setName(String name);
+    String getIconPath();
 
-    public SoapUIActionMapping<T> setDescription(String description);
+    String getKeyStroke();
 
-    public SoapUIActionMapping<T> setParam(Object param);
+    Object getParam();
 
-    public SoapUIActionMapping<T> setEnabled(boolean enabled);
+    SoapUIActionMapping<T> setParam(Object param);
 
     int getToolbarIndex();
 }

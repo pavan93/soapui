@@ -67,7 +67,7 @@ public class MockResponseDataSource implements DataSource {
         return mockResponse.getName();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

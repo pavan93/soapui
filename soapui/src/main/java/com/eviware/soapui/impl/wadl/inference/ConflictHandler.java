@@ -41,13 +41,13 @@ public interface ConflictHandler {
      * @return True to accept the schema modification and continue validation,
      *         false to trigger validation failure.
      */
-    public boolean callback(Event event, Type type, QName name, String path, String message);
+    boolean callback(Event event, Type type, QName name, String path, String message);
 
-    public enum Type {
+    enum Type {
         ELEMENT, ATTRIBUTE, TYPE
     }
 
-    public enum Event {
+    enum Event {
         CREATION, MODIFICATION
     }
 }

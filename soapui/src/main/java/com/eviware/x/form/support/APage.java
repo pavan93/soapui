@@ -33,5 +33,5 @@ public @interface APage {
     /**
      * The name of this page.
      */
-    public String name();
+    String name();
 }

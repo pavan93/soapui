@@ -26,7 +26,6 @@ import com.eviware.soapui.utils.TestUtils;
 import org.apache.ws.commons.util.NamespaceContextImpl;
 import org.apache.ws.security.WSConstants;
 import org.apache.ws.security.WSSConfig;
-import org.apache.ws.security.WSSecurityException;
 import org.apache.ws.security.components.crypto.CredentialException;
 import org.apache.ws.security.components.crypto.Merlin;
 import org.apache.ws.security.message.WSSecHeader;
@@ -138,7 +137,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML1AuthenticationAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML1AuthenticationAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, false, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -151,7 +150,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML2AuthenticationAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML2AuthenticationAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, false, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -164,7 +163,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML1AttributeAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML1AttributeAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, false, AutomaticSAMLEntry.ATTRIBUTE_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -186,7 +185,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML2AttributeAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML2AttributeAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, false, AutomaticSAMLEntry.ATTRIBUTE_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -208,7 +207,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML1AuthorizationAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML1AuthorizationAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, false, AutomaticSAMLEntry.AUTHORIZATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -221,7 +220,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessUnsignedSAML2AuthorizationAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessUnsignedSAML2AuthorizationAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, false, AutomaticSAMLEntry.AUTHORIZATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -234,7 +233,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML1AuthenticationAssertionUsingHolderOfKey() throws WSSecurityException,
+    public void testProcessSignedSAML1AuthenticationAssertionUsingHolderOfKey() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, true, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.HOLDER_OF_KEY_CONFIRMATION_METHOD);
@@ -251,7 +250,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML2AuthenticationAssertionUsingHolderOfKey() throws WSSecurityException,
+    public void testProcessSignedSAML2AuthenticationAssertionUsingHolderOfKey() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, true, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.HOLDER_OF_KEY_CONFIRMATION_METHOD);
@@ -265,7 +264,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML1AttributeAssertionUsingHolderOfKey() throws WSSecurityException,
+    public void testProcessSignedSAML1AttributeAssertionUsingHolderOfKey() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, true, AutomaticSAMLEntry.ATTRIBUTE_ASSERTION_TYPE,
                 AutomaticSAMLEntry.HOLDER_OF_KEY_CONFIRMATION_METHOD);
@@ -286,7 +285,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML2AttributeAssertionUsingHolderOfKey() throws WSSecurityException,
+    public void testProcessSignedSAML2AttributeAssertionUsingHolderOfKey() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, true, AutomaticSAMLEntry.ATTRIBUTE_ASSERTION_TYPE,
                 AutomaticSAMLEntry.HOLDER_OF_KEY_CONFIRMATION_METHOD);
@@ -307,7 +306,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML1AuthenticationAssertionUsingSenderVouces() throws WSSecurityException,
+    public void testProcessSignedSAML1AuthenticationAssertionUsingSenderVouces() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_1, true, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -321,7 +320,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testProcessSignedSAML2AuthenticationAssertionUsingSenderVouches() throws WSSecurityException,
+    public void testProcessSignedSAML2AuthenticationAssertionUsingSenderVouches() throws
             XPathExpressionException {
         setRequiredFields(AutomaticSAMLEntry.SAML_VERSION_2, true, AutomaticSAMLEntry.AUTHENTICATION_ASSERTION_TYPE,
                 AutomaticSAMLEntry.SENDER_VOUCHES_CONFIRMATION_METHOD);
@@ -336,7 +335,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testUserInputFieldsForSAML1() throws WSSecurityException, XPathExpressionException {
+    public void testUserInputFieldsForSAML1() throws XPathExpressionException {
         automaticSamlEntry.setSamlVersion(AutomaticSAMLEntry.SAML_VERSION_1);
         automaticSamlEntry.setSigned(true);
         automaticSamlEntry.process(secHeader, doc, contextMock);
@@ -348,7 +347,7 @@ public class AutomaticSAMLEntryTest {
     }
 
     @Test
-    public void testUserInputFieldsForSAML2() throws WSSecurityException, XPathExpressionException {
+    public void testUserInputFieldsForSAML2() throws XPathExpressionException {
         automaticSamlEntry.setSamlVersion(AutomaticSAMLEntry.SAML_VERSION_2);
         automaticSamlEntry.setSigned(true);
         automaticSamlEntry.process(secHeader, doc, contextMock);
@@ -377,7 +376,7 @@ public class AutomaticSAMLEntryTest {
         ClassLoader loader = Loader.getClassLoader(AutomaticSAMLEntryTest.class);
         InputStream input = Merlin.loadInputStream(loader, KEYSTORE_PATH);
         keyStore.load(input, KEYSTORE_PASSWORD.toCharArray());
-        ((Merlin) crypto).setKeyStore(keyStore);
+        crypto.setKeyStore(keyStore);
     }
 
     private void setRequiredFields(String version, boolean signed, String assertionType, String confirmationMethod) {

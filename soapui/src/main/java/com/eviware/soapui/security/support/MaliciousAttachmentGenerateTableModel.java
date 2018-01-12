@@ -25,11 +25,7 @@ public class MaliciousAttachmentGenerateTableModel extends MaliciousAttachmentTa
     }
 
     public boolean isCellEditable(int row, int col) {
-        if (col > 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return col > 0;
     }
 
     public int getColumnCount() {

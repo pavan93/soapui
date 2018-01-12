@@ -29,14 +29,10 @@ import com.eviware.soapui.security.result.SecurityScanResult;
 import com.eviware.soapui.security.result.SecurityTestStepResult;
 import com.eviware.soapui.security.scan.AbstractSecurityScanWithProperties;
 
-import javax.swing.JLabel;
-import javax.swing.JProgressBar;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * Class that keeps a JProgressBars state in sync with a SecurityTest
@@ -255,7 +251,7 @@ public class ProgressBarSecurityTestStepAdapter {
                         }
                     }
 
-                progressBar.setValue(((SecurityTestRunContext) runContext).getCurrentScanIndex() + 1);
+                progressBar.setValue(runContext.getCurrentScanIndex() + 1);
                 ((DefaultTreeModel) tree.getModel()).nodeChanged(node);
             }
         }

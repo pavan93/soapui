@@ -28,13 +28,13 @@ import com.eviware.soapui.model.iface.SubmitContext;
  */
 
 public interface RequestFilter extends SoapUIListener {
-    public void filterRequest(SubmitContext context, Request request);
+    void filterRequest(SubmitContext context, Request request);
 
-    public void afterRequest(SubmitContext context, Request request);
+    void afterRequest(SubmitContext context, Request request);
 
     /**
      * @deprecated
      */
 
-    public void afterRequest(SubmitContext context, Response response);
+    void afterRequest(SubmitContext context, Response response);
 }

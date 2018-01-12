@@ -23,26 +23,26 @@ import static org.junit.Assert.assertEquals;
 public class XPathDataTest {
 
     @Test
-    public void test1() throws Exception {
+    public void test1() {
         XPathData data = new XPathData("//in/name", false);
         assertEquals("//in/name", data.getFullPath());
     }
 
     @Test
-    public void testText() throws Exception {
+    public void testText() {
         XPathData data = new XPathData("//in/name/text()", false);
         assertEquals("//in/name/text()", data.getFullPath());
     }
 
     @Test
-    public void testCount() throws Exception {
+    public void testCount() {
         XPathData data = new XPathData("count(//in/name)", false);
         assertEquals("count(//in/name)", data.getFullPath());
         assertEquals("count", data.getFunction());
     }
 
     @Test
-    public void testCountWithNamespace() throws Exception {
+    public void testCountWithNamespace() {
         String namespace = "declare namespace tes='http://www.example.org/TestService/';\n";
         XPathData data = new XPathData(namespace + "count(//in/name)", false);
         assertEquals(namespace + "count(//in/name)", data.getFullPath());
@@ -50,7 +50,7 @@ public class XPathDataTest {
     }
 
     @Test
-    public void testStripXPath() throws Exception {
+    public void testStripXPath() {
         assertEquals("//abc", checkStripXPath("//abc"));
         assertEquals("//abc", checkStripXPath("//abc[1]"));
         assertEquals("//abc", checkStripXPath("//abc[a > 3]"));

@@ -20,13 +20,11 @@ import junit.framework.ComparisonFailure;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ToolsTestCase {
     @Test
-    public void shouldTokenizeArgs() throws Exception {
+    public void shouldTokenizeArgs() {
         assertNull(Tools.tokenizeArgs(""));
 
         String[] args = Tools.tokenizeArgs("test ett");

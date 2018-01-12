@@ -37,7 +37,7 @@ public class WsdlMockStepdefs {
     }
 
     @When("^in rest (.*) context$")
-    public void in_rest_tree_node_context(String context) throws Throwable {
+    public void in_rest_tree_node_context(String context) {
     }
 
     @When("^in soap (.*) context$")
@@ -49,7 +49,7 @@ public class WsdlMockStepdefs {
     }
 
     @Then("^“(.*)” option is available$")
-    public void _add_to_mock_service_option_is_available(String menuItemLabel) throws Throwable {
+    public void _add_to_mock_service_option_is_available(String menuItemLabel) {
         assertTrue("Didn't find the " + menuItemLabel + " menu item", doesLabelExist(rightClickMenu, menuItemLabel));
     }
 }

@@ -44,18 +44,18 @@
 
 package org.apache.commons.httpclient;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.net.URLCodec;
+import org.apache.commons.httpclient.util.EncodingUtil;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
-import java.util.Locale;
 import java.util.BitSet;
 import java.util.Hashtable;
-
-import org.apache.commons.codec.DecoderException;
-import org.apache.commons.codec.net.URLCodec;
-import org.apache.commons.httpclient.util.EncodingUtil;
+import java.util.Locale;
 
 /**
  * The interface for the URI(Uniform Resource Identifiers) version of RFC 2396.
@@ -1745,7 +1745,7 @@ public class URI implements Cloneable, Comparable, Serializable {
      */
 
     protected static char[] encode(String original, BitSet allowed,
-                                   String charset) throws URIException {
+                                   String charset) {
         if (original == null) {
             throw new IllegalArgumentException("Original string may not be null");
         }
@@ -3000,8 +3000,7 @@ public class URI implements Cloneable, Comparable, Serializable {
      * @return the resolved path
      * @throws URIException no more higher path level to be resolved
      */
-    protected char[] resolvePath(char[] basePath, char[] relPath)
-            throws URIException {
+    protected char[] resolvePath(char[] basePath, char[] relPath) {
 
         // REMINDME: paths are never null
         String base = (basePath == null) ? "" : new String(basePath);
@@ -3416,7 +3415,7 @@ public class URI implements Cloneable, Comparable, Serializable {
      * @param fragment the fragment string.
      * @throws URIException If an error occurs.
      */
-    public void setFragment(String fragment) throws URIException {
+    public void setFragment(String fragment) {
         if (fragment == null || fragment.length() == 0) {
             _fragment = (fragment == null) ? null : fragment.toCharArray();
             hash = 0;
@@ -3501,7 +3500,7 @@ public class URI implements Cloneable, Comparable, Serializable {
      * @return the normalized path
      * @throws URIException no more higher path level to be normalized
      */
-    protected char[] normalize(char[] path) throws URIException {
+    protected char[] normalize(char[] path) {
 
         if (path == null) {
             return null;
@@ -3583,7 +3582,7 @@ public class URI implements Cloneable, Comparable, Serializable {
      * @throws URIException no more higher path level to be normalized
      * @see #isAbsPath()
      */
-    public void normalize() throws URIException {
+    public void normalize() {
         if (isAbsPath()) {
             _path = normalize(_path);
             setURI();
@@ -3656,10 +3655,7 @@ public class URI implements Cloneable, Comparable, Serializable {
             return false;
         }
         // has_fragment?  should be careful of the only fragment case.
-        if (!equals(_fragment, another._fragment)) {
-            return false;
-        }
-        return true;
+        return equals(_fragment, another._fragment);
     }
 
     // ---------------------------------------------------------- Serialization

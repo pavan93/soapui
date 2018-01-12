@@ -23,27 +23,27 @@ import com.eviware.soapui.support.types.StringToObjectMap;
 import java.util.Collection;
 
 public interface ModelItemReport {
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 
-    public void addSubReport(SubReport subReport);
+    void addSubReport(SubReport subReport);
 
-    public void removeSubReport(SubReport subReport);
+    void removeSubReport(SubReport subReport);
 
-    public SubReport[] getSubReports();
+    SubReport[] getSubReports();
 
-    public SubReport getSubReportByName(String name);
+    SubReport getSubReportByName(String name);
 
-    public ReportTypeConfig.Enum getLevel();
+    ReportTypeConfig.Enum getLevel();
 
-    public void prepare();
+    void prepare();
 
-    public void release();
+    void release();
 
-    public boolean hasSubReport(String id);
+    boolean hasSubReport(String id);
 
-    public <T2> Collection<T2> getSubReportsByType(Class<T2> clazz);
+    <T2> Collection<T2> getSubReportsByType(Class<T2> clazz);
 
-    public void onGenerate(StringToObjectMap params);
+    void onGenerate(StringToObjectMap params);
 
-    public TestPropertyHolder getModelItemReportParameters();
+    TestPropertyHolder getModelItemReportParameters();
 }

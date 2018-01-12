@@ -21,12 +21,7 @@ import com.eviware.soapui.support.StringUtils;
 import hermes.Domain;
 import hermes.Hermes;
 
-import javax.jms.Connection;
-import javax.jms.ConnectionFactory;
-import javax.jms.JMSException;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.Topic;
+import javax.jms.*;
 import javax.naming.NamingException;
 
 /**
@@ -60,7 +55,7 @@ public class JMSConnectionHolder {
             this.hermes = hermes;
             this.clientID = clientID;
 
-            connectionFactory = (ConnectionFactory) hermes.getConnectionFactory();
+            connectionFactory = hermes.getConnectionFactory();
             connection = createConnection(connectionFactory, isTopicDomain ? Domain.TOPIC : Domain.QUEUE, clientID,
                     username, password);
             connection.start();
@@ -79,8 +74,8 @@ public class JMSConnectionHolder {
 
     private Connection createConnection(ConnectionFactory connectionFactory, Domain domain, String clientId,
                                         String username, String password) throws JMSException {
-        Connection connection = StringUtils.hasContent(username) ? ((ConnectionFactory) connectionFactory)
-                .createConnection(username, password) : ((ConnectionFactory) connectionFactory).createConnection();
+        Connection connection = StringUtils.hasContent(username) ? connectionFactory
+                .createConnection(username, password) : connectionFactory.createConnection();
 
         if (!StringUtils.isNullOrEmpty(clientId) && domain.equals(Domain.TOPIC)) {
             connection.setClientID(clientId);

@@ -37,8 +37,7 @@ import com.eviware.x.impl.swing.JLabelFormField;
 import com.eviware.x.impl.swing.JTextFieldFormField;
 import com.jgoodies.forms.layout.FormLayout;
 
-import javax.swing.Action;
-import javax.swing.JLabel;
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -168,16 +167,16 @@ public class AuthorizationSelectionDialog<T extends AbstractHttpRequest> {
 
     @AForm(name = "AuthorizationTypeForm.Title", description = "AuthorizationTypeForm.Description", helpUrl = HelpUrls.ADD_AUTHORIZATION)
     public interface AuthorizationTypeForm {
-        public static final MessageSupport messages = MessageSupport.getMessages(AuthorizationTypeForm.class);
+        MessageSupport messages = MessageSupport.getMessages(AuthorizationTypeForm.class);
 
         @AField(description = "AuthorizationTypeForm.AuthorizationType.Description", type = AField.AFieldType.COMBOBOX)
-        public final static String AUTHORIZATION_TYPE = messages.get("AuthorizationTypeForm.AuthorizationType.Label");
+        String AUTHORIZATION_TYPE = messages.get("AuthorizationTypeForm.AuthorizationType.Label");
 
         @AField(description = "AuthorizationTypeForm.OAuth2ProfileName.Description", type = AField.AFieldType.STRING)
-        public final static String OAUTH_PROFILE_NAME_FIELD = messages.get("AuthorizationTypeForm.OAuth2ProfileName.Label");
+        String OAUTH_PROFILE_NAME_FIELD = messages.get("AuthorizationTypeForm.OAuth2ProfileName.Label");
 
         @AField(description = "AuthorizationTypeForm.OAuth2ProfileNameHintText.Description", type = AField.AFieldType.LABEL)
-        public final static String OAUTH2_PROFILE_NAME_HINT_TEXT_LABEL = messages.get("AuthorizationTypeForm.OAuth2ProfileNameHintText.Label");
+        String OAUTH2_PROFILE_NAME_HINT_TEXT_LABEL = messages.get("AuthorizationTypeForm.OAuth2ProfileNameHintText.Label");
 
     }
 

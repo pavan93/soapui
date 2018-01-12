@@ -32,7 +32,7 @@ import static org.junit.Assert.assertEquals;
 public class SettingUtilsTest {
 
     @Test
-    public void testQnameValues2String() throws Exception {
+    public void testQnameValues2String() {
         LinkedHashMap<QName, String[]> valueMap = new LinkedHashMap<QName, String[]>();
         valueMap.put(new QName("x"), new String[]{"1", "2", "3"});
         valueMap.put(new QName("ns2", "y"), new String[]{"a", "b", "c"});

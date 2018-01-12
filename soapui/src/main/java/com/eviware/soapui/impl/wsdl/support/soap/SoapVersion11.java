@@ -21,15 +21,9 @@ import com.eviware.soapui.SoapUIExtensionClassLoader;
 import com.eviware.soapui.SoapUIExtensionClassLoader.SoapUIClassLoaderState;
 import com.eviware.soapui.impl.wsdl.support.Constants;
 import com.eviware.soapui.support.xml.XmlUtils;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SchemaTypeLoader;
-import org.apache.xmlbeans.XmlBeans;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
+import org.apache.xmlbeans.*;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
 
 /**
  * SoapVersion for SOAP 1.1
@@ -96,11 +90,11 @@ public class SoapVersion11 extends AbstractSoapVersion {
         return Constants.SOAP_ENCODING_NS;
     }
 
-    public XmlObject getSoapEncodingSchema() throws XmlException, IOException {
+    public XmlObject getSoapEncodingSchema() {
         return soapEncodingXml;
     }
 
-    public XmlObject getSoapEnvelopeSchema() throws XmlException, IOException {
+    public XmlObject getSoapEnvelopeSchema() {
         return soapSchemaXml;
     }
 

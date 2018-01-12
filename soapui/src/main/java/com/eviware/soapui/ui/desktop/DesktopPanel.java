@@ -19,8 +19,7 @@ package com.eviware.soapui.ui.desktop;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * Behaviour for a SoapUI desktop panel
@@ -29,14 +28,14 @@ import javax.swing.JComponent;
  */
 
 public interface DesktopPanel extends PropertyChangeNotifier {
-    public final static String TITLE_PROPERTY = DesktopPanel.class.getName() + "@title";
-    public final static String ICON_PROPERTY = DesktopPanel.class.getName() + "@icon";
+    String TITLE_PROPERTY = DesktopPanel.class.getName() + "@title";
+    String ICON_PROPERTY = DesktopPanel.class.getName() + "@icon";
 
     /**
      * Gets the title for this desktop panel
      */
 
-    public String getTitle();
+    String getTitle();
 
     /**
      * Gets the description for this desktop panel.. may be used as tooltip,
@@ -45,26 +44,26 @@ public interface DesktopPanel extends PropertyChangeNotifier {
      * @return
      */
 
-    public String getDescription();
+    String getDescription();
 
     /**
      * Gets the model item associated with this desktop panel
      */
 
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 
     /**
      * Called when a desktop panel is about to be closed, may be overriden
      * (depending on situation) by returning false if canCancel is set to true.
      */
 
-    public boolean onClose(boolean canCancel);
+    boolean onClose(boolean canCancel);
 
     /**
      * Gets the component used to display this desktop panel
      */
 
-    public JComponent getComponent();
+    JComponent getComponent();
 
     /**
      * Checks if this desktop panel depends on the existence of the specified
@@ -73,11 +72,11 @@ public interface DesktopPanel extends PropertyChangeNotifier {
      * @param modelItem
      */
 
-    public boolean dependsOn(ModelItem modelItem);
+    boolean dependsOn(ModelItem modelItem);
 
     /**
      * Returns the icon for this panel
      */
 
-    public Icon getIcon();
+    Icon getIcon();
 }

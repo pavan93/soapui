@@ -37,7 +37,6 @@ import org.apache.http.protocol.BasicHttpContext;
 import org.mortbay.util.IO;
 
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
@@ -74,12 +73,12 @@ public class TunnelServlet extends ProxyServlet {
     }
 
     @Override
-    public void init(ServletConfig config) throws ServletException {
+    public void init(ServletConfig config) {
         this.config = config;
         this.context = config.getServletContext();
     }
 
-    public void service(ServletRequest request, ServletResponse response) throws ServletException, IOException {
+    public void service(ServletRequest request, ServletResponse response) throws IOException {
         listenerCallBack.fireOnRequest(project, request, response);
         if (response.isCommitted()) {
             return;

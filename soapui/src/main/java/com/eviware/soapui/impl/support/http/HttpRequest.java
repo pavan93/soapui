@@ -330,7 +330,7 @@ public class HttpRequest extends AbstractHttpRequest<HttpRequestConfig> implemen
     }
 
     public void notifyPropertyChanged(String responseContentProperty, String oldContent, String responseContent) {
-        notifyPropertyChanged(responseContentProperty, (Object) oldContent, (Object) responseContent);
+        notifyPropertyChanged(responseContentProperty, oldContent, responseContent);
     }
 
     @Override

@@ -45,21 +45,21 @@ public class DefaultPropertyHolderTableModelTest {
     }
 
     @Test
-    public void doesNotSetDefaultValueIfModelItemIsRestRequest() throws Exception {
+    public void doesNotSetDefaultValueIfModelItemIsRestRequest() {
         RestParamProperty property = requestParams.getPropertyAt(0);
         assertThat(property.getValue(), is(PARAM_VALUE));
         assertThat(property.getDefaultValue(), is(EMPTY_STRING));
     }
 
     @Test
-    public void setsDefaultValueIfModelItemIsRestMethod() throws Exception {
+    public void setsDefaultValueIfModelItemIsRestMethod() {
         RestParamProperty property = methodParams.getPropertyAt(0);
         assertThat(property.getValue(), is(PARAM_VALUE));
         assertThat(property.getDefaultValue(), is(PARAM_VALUE));
     }
 
     @Test
-    public void handlesParameterMoveCorrectlyForMethodParameters() throws Exception {
+    public void handlesParameterMoveCorrectlyForMethodParameters() {
         String lastParameterName = "lastOne";
         methodParams.addProperty(lastParameterName);
         tableHolderModel.moveProperty(lastParameterName, 1, 0);
@@ -68,7 +68,7 @@ public class DefaultPropertyHolderTableModelTest {
     }
 
     @Test
-    public void detectsParameterNameChange() throws Exception {
+    public void detectsParameterNameChange() {
         String newParameterName = "lastOne";
         methodParams.renameProperty(FIRST_PARAM_NAME, newParameterName);
 
@@ -76,7 +76,7 @@ public class DefaultPropertyHolderTableModelTest {
     }
 
     @Test
-    public void handlesParameterMoveCorrectlyForRequestParameters() throws Exception {
+    public void handlesParameterMoveCorrectlyForRequestParameters() {
         String lastParameterName = "lastOne";
         requestParams.addProperty(lastParameterName);
         requestTableHolderModel.moveProperty(lastParameterName, 1, 0);

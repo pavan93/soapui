@@ -33,7 +33,6 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import java.io.IOException;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -79,7 +78,7 @@ public class ManualSAMLEntryTest {
     }
 
     @Test
-    public void testProcess() throws XPathExpressionException, IOException {
+    public void testProcess() throws XPathExpressionException {
         manualSAMLentry.setSamlAssertion(TestUtils.SAMPLE_SAML_1_ASSERTION);
         manualSAMLentry.process(secHeader, doc, contextMock);
 

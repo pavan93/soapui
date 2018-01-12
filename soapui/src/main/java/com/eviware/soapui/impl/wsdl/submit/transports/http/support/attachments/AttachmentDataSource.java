@@ -52,7 +52,7 @@ public class AttachmentDataSource implements DataSource {
         return attachment.getName();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

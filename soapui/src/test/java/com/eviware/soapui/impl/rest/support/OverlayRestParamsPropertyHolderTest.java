@@ -50,7 +50,7 @@ public class OverlayRestParamsPropertyHolderTest {
     }
 
     @Test
-    public void testRemoveProperty() throws Exception {
+    public void testRemoveProperty() {
         assertNotNull(propertyHolder.removeProperty("paramOverLay"));
         assertNull(propertyHolder.removeProperty("paramOverLay"));
         assertNotNull(propertyHolder.removeProperty("paramParent"));

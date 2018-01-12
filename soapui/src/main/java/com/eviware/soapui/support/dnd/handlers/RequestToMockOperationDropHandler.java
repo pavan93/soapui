@@ -51,7 +51,7 @@ public class RequestToMockOperationDropHandler extends
 
         SoapUIAction<WsdlRequest> action = SoapUI.getActionRegistry().getAction(
                 AddRequestToMockServiceAction.SOAPUI_ACTION_ID);
-        ((AddRequestToMockServiceAction) action).perform(request, mockOperation);
+        action.perform(request, mockOperation);
         return true;
     }
 

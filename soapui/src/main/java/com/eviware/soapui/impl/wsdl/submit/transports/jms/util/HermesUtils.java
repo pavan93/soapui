@@ -37,18 +37,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 public class HermesUtils {
     private static boolean hermesJarsLoaded = false;
     private static Map<String, Context> contextMap = new HashMap<String, Context>();
     public static String HERMES_CONFIG_XML = "hermes-config.xml";
 
-    public static Context hermesContext(WsdlProject project) throws NamingException, MalformedURLException,
+    public static Context hermesContext(WsdlProject project) throws NamingException,
             IOException {
         String expandedHermesConfigPath = PropertyExpander.expandProperties(project, project.getHermesConfig());
         String key = project.getName() + expandedHermesConfigPath;
@@ -56,7 +52,7 @@ public class HermesUtils {
     }
 
     public static Context hermesContext(WsdlProject project, String hermesConfigPath) throws NamingException,
-            MalformedURLException, IOException {
+            IOException {
         String expandedHermesConfigPath = PropertyExpander.expandProperties(project, hermesConfigPath);
         String key = project.getName() + expandedHermesConfigPath;
         return getHermes(key, expandedHermesConfigPath);
@@ -64,7 +60,7 @@ public class HermesUtils {
 
     // private static URLClassLoader hermesClassLoader;
 
-    private static Context getHermes(String key, String hermesConfigPath) throws IOException, MalformedURLException,
+    private static Context getHermes(String key, String hermesConfigPath) throws IOException,
             NamingException {
         SoapUIClassLoaderState state = SoapUIExtensionClassLoader.ensure();
         if (!hermesJarsLoaded) {
@@ -92,7 +88,7 @@ public class HermesUtils {
         }
     }
 
-    private static void addHermesJarsToClasspath() throws IOException, MalformedURLException {
+    private static void addHermesJarsToClasspath() throws IOException {
         String hermesHome = SoapUI.getSettings().getString(ToolsSettings.HERMES_JMS, defaultHermesJMSPath());
 
         if (hermesHome == null || "".equals(hermesHome)) {

@@ -25,5 +25,5 @@ import com.eviware.soapui.model.workspace.Workspace;
  */
 
 public interface DesktopFactory {
-    public SoapUIDesktop createDesktop(Workspace workspace);
+    SoapUIDesktop createDesktop(Workspace workspace);
 }

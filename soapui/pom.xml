@@ -577,6 +577,11 @@
             <artifactId>org.eclipse.persistence.core</artifactId>
             <version>2.5.0-M13</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.maven.doxia</groupId>
+            <artifactId>doxia</artifactId>
+            <version>1.1</version>
+        </dependency>
     </dependencies>
 
 </project>

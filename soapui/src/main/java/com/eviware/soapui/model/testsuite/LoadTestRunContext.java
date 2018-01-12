@@ -21,5 +21,5 @@ package com.eviware.soapui.model.testsuite;
  */
 
 public interface LoadTestRunContext extends TestRunContext {
-    public LoadTestRunner getLoadTestRunner();
+    LoadTestRunner getLoadTestRunner();
 }

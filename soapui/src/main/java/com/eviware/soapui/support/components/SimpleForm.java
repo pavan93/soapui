@@ -26,29 +26,10 @@ import com.jgoodies.forms.layout.RowSpec;
 import org.apache.commons.lang.StringUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.JTextComponent;
-import java.awt.Color;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -156,7 +137,7 @@ public class SimpleForm {
     public String getComponentValue(String label) {
         JComponent component = getComponent(label);
         if (component == null) {
-            return (String) (hiddenValues == null ? null : hiddenValues.get(label));
+            return hiddenValues == null ? null : hiddenValues.get(label);
         }
 
         if (component instanceof JTextComponent) {
@@ -168,12 +149,12 @@ public class SimpleForm {
             int selectedIndex = comboBox.getSelectedIndex();
             if (selectedIndex != -1) {
                 if (comboBoxMaps.containsKey(component)) {
-                    Object[] keys = (Object[]) comboBoxMaps.get(comboBox);
+                    Object[] keys = comboBoxMaps.get(comboBox);
                     Object value = keys[selectedIndex];
-                    return (String) value == null ? null : value.toString();
+                    return value == null ? null : value.toString();
                 } else {
                     Object value = comboBox.getSelectedItem();
-                    return (String) value == null ? null : value.toString();
+                    return value == null ? null : value.toString();
                 }
             }
         }

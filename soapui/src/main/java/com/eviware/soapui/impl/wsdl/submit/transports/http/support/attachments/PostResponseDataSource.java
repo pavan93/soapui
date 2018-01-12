@@ -24,7 +24,6 @@ import com.eviware.soapui.settings.HttpSettings;
 
 import javax.activation.DataSource;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -64,7 +63,7 @@ public class PostResponseDataSource implements DataSource {
         return postMethod.getResponseContentType();
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         return new ByteArrayInputStream(data);
     }
 
@@ -73,7 +72,7 @@ public class PostResponseDataSource implements DataSource {
                 + postMethod.getRequestLine().getUri().toString();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 

@@ -24,9 +24,9 @@ import java.io.IOException;
 
 interface MockAsWarCoreInterface {
 
-    public void dispatchRequest(HttpServletRequest request, HttpServletResponse response) throws DispatchException,
+    void dispatchRequest(HttpServletRequest request, HttpServletResponse response) throws DispatchException,
             IOException;
 
-    public void stop();
+    void stop();
 
 }

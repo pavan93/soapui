@@ -188,8 +188,7 @@ public class CachedWsdlLoader extends WsdlLoader {
         return result;
     }
 
-    private void setFilenameForUrl(String fileUrl, String type, Map<String, String> urlToFileMap, String urlPrefix)
-            throws MalformedURLException {
+    private void setFilenameForUrl(String fileUrl, String type, Map<String, String> urlToFileMap, String urlPrefix) {
 
         String path = fileUrl;
 

@@ -114,7 +114,7 @@ public class ProAssertionPlaceHolderFactory implements TestAssertionFactory {
 
         @Override
         public AssertionStatus getStatus() {
-            return assertionStatus.UNKNOWN;
+            return AssertionStatus.UNKNOWN;
         }
 
         @Override

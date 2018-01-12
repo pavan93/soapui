@@ -72,7 +72,7 @@ public class WsdlTestRequestStepResult extends WsdlTestStepResult implements Res
     }
 
     public SoapVersion getSoapVersion() {
-        return ((WsdlOperation) getOperation()).getInterface().getSoapVersion();
+        return getOperation().getInterface().getSoapVersion();
     }
 
     public ModelItem getModelItem() {

@@ -17,11 +17,11 @@
 package com.eviware.soapui.support.components;
 
 public interface Undoable {
-    public void undo();
+    void undo();
 
-    public void redo();
+    void redo();
 
-    public boolean canUndo();
+    boolean canUndo();
 
-    public boolean canRedo();
+    boolean canRedo();
 }

@@ -25,19 +25,19 @@ import com.eviware.soapui.model.TestModelItem;
  */
 
 public interface TestStep extends TestModelItem, ResultContainer {
-    public final static String DISABLED_PROPERTY = TestStep.class.getName() + "@disabled";
+    String DISABLED_PROPERTY = TestStep.class.getName() + "@disabled";
 
-    public TestCase getTestCase();
+    TestCase getTestCase();
 
-    public void prepare(TestCaseRunner testRunner, TestCaseRunContext testRunContext) throws Exception;
+    void prepare(TestCaseRunner testRunner, TestCaseRunContext testRunContext) throws Exception;
 
-    public void finish(TestCaseRunner testRunner, TestCaseRunContext testRunContext);
+    void finish(TestCaseRunner testRunner, TestCaseRunContext testRunContext);
 
-    public boolean cancel();
+    boolean cancel();
 
-    public TestStepResult run(TestCaseRunner testRunner, TestCaseRunContext testRunContext);
+    TestStepResult run(TestCaseRunner testRunner, TestCaseRunContext testRunContext);
 
-    public boolean isDisabled();
+    boolean isDisabled();
 
-    public String getLabel();
+    String getLabel();
 }

@@ -25,47 +25,47 @@ import com.eviware.soapui.model.ModelItem;
  */
 
 public interface Request extends ModelItem {
-    public final String REQUEST_PROPERTY = "request";
-    public final String ENDPOINT_PROPERTY = "endpoint";
-    public final String ENCODING_PROPERTY = "encoding";
-    public final String MEDIA_TYPE = "mediaType";
+    String REQUEST_PROPERTY = "request";
+    String ENDPOINT_PROPERTY = "endpoint";
+    String ENCODING_PROPERTY = "encoding";
+    String MEDIA_TYPE = "mediaType";
 
-    public String getRequestContent();
+    String getRequestContent();
 
-    public void setEndpoint(String string);
+    String getEndpoint();
 
-    public String getEndpoint();
+    void setEndpoint(String string);
 
-    public String getEncoding();
+    String getEncoding();
 
-    public String getTimeout();
+    void setEncoding(String string);
 
-    public void setEncoding(String string);
+    String getTimeout();
 
-    public Operation getOperation();
+    Operation getOperation();
 
-    public void addSubmitListener(SubmitListener listener);
+    void addSubmitListener(SubmitListener listener);
 
-    public void removeSubmitListener(SubmitListener listener);
+    void removeSubmitListener(SubmitListener listener);
 
-    public Submit submit(SubmitContext submitContext, boolean async) throws SubmitException;
+    Submit submit(SubmitContext submitContext, boolean async) throws SubmitException;
 
-    public Attachment[] getAttachments();
+    Attachment[] getAttachments();
 
-    public MessagePart[] getRequestParts();
+    MessagePart[] getRequestParts();
 
-    public MessagePart[] getResponseParts();
+    MessagePart[] getResponseParts();
 
-    public String getUsername();
+    String getUsername();
 
-    public String getPassword();
+    String getPassword();
 
-    public String getAuthType();
+    String getAuthType();
 
-    public boolean dependsOn(ModelItem modelItem);
+    boolean dependsOn(ModelItem modelItem);
 
     @SuppressWarnings("serial")
-    public static class SubmitException extends Exception {
+    class SubmitException extends Exception {
         public SubmitException(String msg) {
             super(msg);
         }

@@ -32,7 +32,7 @@ public interface URIParser {
      *
      * @return scheme of a the URI
      */
-    public String getScheme();
+    String getScheme();
 
     /**
      * This method returns the decoded authority component of the URI.
@@ -47,13 +47,13 @@ public interface URIParser {
      *
      * @return decoded path of the URI or empty space if there is no path in the URI
      */
-    public String getResourcePath();
+    String getResourcePath();
 
     /**
      * This method returns the decoded query of the URI.
      *
      * @return decoded query of the URI or empty space if there is no query in the URI
      */
-    public String getQuery();
+    String getQuery();
 
 }

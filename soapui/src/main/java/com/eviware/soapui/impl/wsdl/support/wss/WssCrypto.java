@@ -23,17 +23,17 @@ import org.apache.ws.security.components.crypto.Crypto;
 public interface WssCrypto {
     String STATUS_OK = "OK";
 
-    public Crypto getCrypto() throws WSSecurityException;
+    Crypto getCrypto() throws WSSecurityException;
 
-    public String getLabel();
+    String getLabel();
 
-    public WssContainer getWssContainer();
+    WssContainer getWssContainer();
 
-    public String getSource();
+    String getSource();
 
-    public String getPassword();
+    String getPassword();
 
-    public String getStatus();
+    String getStatus();
 
-    public CryptoType getType();
+    CryptoType getType();
 }

@@ -23,5 +23,5 @@ package com.eviware.soapui.model.iface;
  */
 
 public interface MessageBuilder {
-    public Interface getInterface();
+    Interface getInterface();
 }

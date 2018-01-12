@@ -34,7 +34,6 @@ import com.eviware.x.form.XFormDialogBuilder;
 import com.eviware.x.form.XFormFactory;
 
 import java.io.File;
-import java.io.IOException;
 
 import static com.eviware.soapui.analytics.SoapUIActions.USE_APACHE_CXF_TOOL;
 
@@ -131,7 +130,7 @@ public class CXFAction extends AbstractToolsAction<Interface> {
         Analytics.trackAction(USE_APACHE_CXF_TOOL);
     }
 
-    private ArgumentBuilder buildArgs(StringToStringMap values, Interface modelItem) throws IOException {
+    private ArgumentBuilder buildArgs(StringToStringMap values, Interface modelItem) {
         values.put(OUTPUT, Tools.ensureDir(values.get(OUTPUT), ""));
 
         ArgumentBuilder builder = new ArgumentBuilder(values);

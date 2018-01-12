@@ -58,12 +58,12 @@ public class NewRestResourceActionBaseTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         UISupport.setDialogs(originalDialogs);
     }
 
     @Test
-    public void createsResourceAsChildResourceOfPossibleParent() throws Exception {
+    public void createsResourceAsChildResourceOfPossibleParent() {
         stubbedDialogs.mockConfirmWithReturnValue(true);
         String childResourcePath = "anthony_jr";
 
@@ -75,7 +75,7 @@ public class NewRestResourceActionBaseTest {
     }
 
     @Test
-    public void handlesBasePathWhenFindingPossibleParent() throws Exception {
+    public void handlesBasePathWhenFindingPossibleParent() {
         String basePath = "/bada_bing/";
         service.setBasePath(basePath);
         stubbedDialogs.mockConfirmWithReturnValue(true);
@@ -89,7 +89,7 @@ public class NewRestResourceActionBaseTest {
     }
 
     @Test
-    public void createsResourceAsRootLevelResourceWhenUserRejects() throws Exception {
+    public void createsResourceAsRootLevelResourceWhenUserRejects() {
         stubbedDialogs.mockConfirmWithReturnValue(false);
         String newResourcePath = "anthony_jr";
 
@@ -99,7 +99,7 @@ public class NewRestResourceActionBaseTest {
     }
 
     @Test
-    public void showsCorrectConfirmationDialog() throws Exception {
+    public void showsCorrectConfirmationDialog() {
         stubbedDialogs.mockConfirmWithReturnValue(true);
         String childResourcePath = "anthony_jr";
 

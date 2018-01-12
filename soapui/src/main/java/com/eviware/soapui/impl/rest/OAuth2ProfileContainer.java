@@ -24,17 +24,17 @@ import java.util.List;
 
 public interface OAuth2ProfileContainer extends PropertyExpansionContainer {
 
-    public WsdlProject getProject();
+    WsdlProject getProject();
 
-    public List<OAuth2Profile> getOAuth2ProfileList();
+    List<OAuth2Profile> getOAuth2ProfileList();
 
-    public void release();
+    void release();
 
-    public OAuth2ProfileContainerConfig getConfig();
+    OAuth2ProfileContainerConfig getConfig();
 
-    public OAuth2Profile addNewOAuth2Profile(String profileName);
+    OAuth2Profile addNewOAuth2Profile(String profileName);
 
-    public void removeProfile(String profileName);
+    void removeProfile(String profileName);
 
     ArrayList<String> getOAuth2ProfileNameList();
 

@@ -18,33 +18,9 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.MenuSelectionManager;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Composite;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 
 /**
@@ -251,7 +227,6 @@ class PreviewPopup extends JPopupMenu implements MouseListener, MouseMotionListe
         int dy = componentIcon.getIconHeight() + DELTA;
 
         if (corner.equals(JScrollPane.UPPER_LEFT_CORNER)) {
-            ;
         } else if (corner.equals(JScrollPane.UPPER_RIGHT_CORNER)) {
             dx = -dx;
         } else if (corner.equals(JScrollPane.LOWER_RIGHT_CORNER)) {

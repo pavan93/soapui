@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.support.http;
 
 import com.btr.proxy.selector.whitelist.ProxyBypassListSelector;
-import com.btr.proxy.util.UriFilter;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
@@ -33,11 +32,7 @@ import org.apache.http.impl.client.BasicCredentialsProvider;
 import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 
-import java.net.Authenticator;
-import java.net.InetAddress;
-import java.net.PasswordAuthentication;
-import java.net.ProxySelector;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -202,7 +197,7 @@ public class ProxyUtils {
 
     public static ProxySelector filterHttpHttpsProxy(ProxySelector proxySelector) {
         return new ProxyBypassListSelector(
-                Arrays.<UriFilter>asList(new SchemeProxyFilter("http", "https")),
+                Arrays.asList(new SchemeProxyFilter("http", "https")),
                 proxySelector);
     }
 

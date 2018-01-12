@@ -40,7 +40,7 @@ public final class ProductBodyguard extends Provider {
     }
 
     private static X509Certificate setupProviderCert()
-            throws IOException, CertificateException {
+            throws CertificateException {
         CertificateFactory cf = CertificateFactory.getInstance("X.509");
         return (X509Certificate) cf.generateCertificate(ProductBodyguard.class.getResourceAsStream("/com/eviware/soapui/plugins/PublicKey.key"));
     }
@@ -83,8 +83,7 @@ public final class ProductBodyguard extends Provider {
                     throw new SecurityException("The plugin is not accessible.");
                 }
             } catch (Exception ex) {
-                SecurityException se = new SecurityException();
-                se.initCause(ex);
+                SecurityException se = new SecurityException(ex);
                 throw se;
             }
 

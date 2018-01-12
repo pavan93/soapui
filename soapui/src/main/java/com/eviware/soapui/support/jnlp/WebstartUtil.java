@@ -17,12 +17,10 @@
 package com.eviware.soapui.support.jnlp;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.JarURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
@@ -39,13 +37,13 @@ public class WebstartUtil {
         return dir;
     }
 
-    private static void extract(JarFile jar, String dir) throws IOException, FileNotFoundException {
+    private static void extract(JarFile jar, String dir) throws IOException {
         makeDirectories(jar, dir);
         extractFiles(jar, dir);
     }
 
     @SuppressWarnings("unchecked")
-    private static void extractFiles(JarFile jar, String eviwareDir) throws IOException, FileNotFoundException {
+    private static void extractFiles(JarFile jar, String eviwareDir) throws IOException {
         Enumeration entries = jar.entries();
         while (entries.hasMoreElements()) {
             JarEntry file = (JarEntry) entries.nextElement();
@@ -80,7 +78,7 @@ public class WebstartUtil {
         }
     }
 
-    private static JarFile getJar(String jarUrl) throws MalformedURLException, IOException {
+    private static JarFile getJar(String jarUrl) throws IOException {
         // String reportsJarUrl = System.getProperty("reports.jar.url");
         URL url = new URL("jar:" + jarUrl + "!/");
         JarURLConnection jarConnection = (JarURLConnection) url.openConnection();
@@ -97,11 +95,7 @@ public class WebstartUtil {
 
     protected static boolean isWebStart() {
         String webstart = System.getProperty("com.eviware.soapui.webstart", "false");
-        if ("true".equalsIgnoreCase(webstart)) {
-            return true;
-        } else {
-            return false;
-        }
+        return "true".equalsIgnoreCase(webstart);
 
     }
 

@@ -20,7 +20,7 @@ import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.impl.rest.RestResource;
 
 public interface RestMessageExchange extends HttpMessageExchange {
-    public RestResource getResource();
+    RestResource getResource();
 
-    public RestRequestInterface getRestRequest();
+    RestRequestInterface getRestRequest();
 }

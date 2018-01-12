@@ -24,14 +24,14 @@ import javax.annotation.Nonnull;
 public interface EditorDocument extends PropertyChangeNotifier {
     String DOCUMENT_PROPERTY = EditorDocument.class.getName() + "@content";
 
-    abstract void release();
+    void release();
 
     @Nonnull
     DocumentContent getDocumentContent(Format format);
 
     void setDocumentContent(DocumentContent documentContent);
 
-    public static enum Format {
+    enum Format {
         RAW, XML
     }
 }

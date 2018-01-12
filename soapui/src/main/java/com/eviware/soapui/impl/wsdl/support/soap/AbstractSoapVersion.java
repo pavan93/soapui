@@ -17,13 +17,7 @@
 package com.eviware.soapui.impl.wsdl.support.soap;
 
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SchemaTypeLoader;
-import org.apache.xmlbeans.XmlError;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.apache.xmlbeans.XmlValidationError;
+import org.apache.xmlbeans.*;
 
 import javax.xml.namespace.QName;
 import java.util.ArrayList;
@@ -77,9 +71,7 @@ public abstract class AbstractSoapVersion implements SoapVersion {
         if (offendingQName != null) {
             if (offendingQName.equals(new QName(getEnvelopeNamespace(), "encodingStyle"))) {
                 return true;
-            } else if (offendingQName.equals(new QName(getEnvelopeNamespace(), "mustUnderstand"))) {
-                return true;
-            }
+            } else return offendingQName.equals(new QName(getEnvelopeNamespace(), "mustUnderstand"));
         }
 
         return false;

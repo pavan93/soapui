@@ -25,7 +25,7 @@ import static org.junit.Assert.assertEquals;
 public class XmlObjectConfigurationTest {
 
     @Test
-    public void testConfiguration() throws Exception {
+    public void testConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add("testFloat", (float) 0.123);
         builder.add("testInt", 123);

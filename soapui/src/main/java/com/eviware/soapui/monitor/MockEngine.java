@@ -20,11 +20,11 @@ import com.eviware.soapui.model.mock.MockRunner;
 import com.eviware.soapui.model.mock.MockService;
 
 public interface MockEngine {
-    public boolean hasRunningMock(MockService mockService);
+    boolean hasRunningMock(MockService mockService);
 
-    public void startMockService(MockRunner runner) throws Exception;
+    void startMockService(MockRunner runner) throws Exception;
 
-    public void stopMockService(MockRunner runner);
+    void stopMockService(MockRunner runner);
 
-    public MockRunner[] getMockRunners();
+    MockRunner[] getMockRunners();
 }

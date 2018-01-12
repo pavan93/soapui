@@ -29,12 +29,7 @@ import org.reflections.util.ConfigurationBuilder;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Responsible for loading plugins into SoapUI.
@@ -145,7 +140,7 @@ public class PluginLoader extends LoaderBase {
     }
 
 
-    private List<Class<? extends SoapUIListener>> loadPluginListeners(Plugin plugin, boolean autoDetect, Reflections jarFileScanner) throws IllegalAccessException, InstantiationException {
+    private List<Class<? extends SoapUIListener>> loadPluginListeners(Plugin plugin, boolean autoDetect, Reflections jarFileScanner) {
         List<Class<? extends SoapUIListener>> listeners = new ArrayList<Class<? extends SoapUIListener>>(plugin.getListeners());
         if (!listeners.isEmpty())
             registerListeners(listeners);

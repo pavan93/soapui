@@ -187,7 +187,7 @@ public class SecurityScanRequestResult implements SecurityResult {
         changedParamsInfo.append("[");
         Iterator<String> keys = changedParams.keySet().iterator();
         while (keys.hasNext()) {
-            String param = (String) keys.next();
+            String param = keys.next();
             String value = changedParams.get(param);
             if (value.length() > SecurityScanResult.MAX_SECURITY_CHANGED_PARAMETERS_LENGTH) {
                 value = value.substring(0, SecurityScanResult.MAX_SECURITY_CHANGED_PARAMETERS_LENGTH);

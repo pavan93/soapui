@@ -19,55 +19,55 @@ package com.eviware.x.form;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.Action;
+import javax.swing.*;
 
 public interface XFormDialog {
-    public final static int OK_OPTION = 1;
-    public final static int CANCEL_OPTION = 2;
+    int OK_OPTION = 1;
+    int CANCEL_OPTION = 2;
 
-    public void setValues(StringToStringMap values);
+    StringToStringMap getValues();
 
-    public StringToStringMap getValues();
+    void setValues(StringToStringMap values);
 
-    public void setVisible(boolean visible);
+    void setVisible(boolean visible);
 
-    public int getReturnValue();
+    int getReturnValue();
 
-    public void setValue(String field, String value);
+    void setValue(String field, String value);
 
-    public String getValue(String field);
+    String getValue(String field);
 
-    public boolean show();
+    boolean show();
 
-    public StringToStringMap show(StringToStringMap values);
+    StringToStringMap show(StringToStringMap values);
 
-    public boolean validate();
+    boolean validate();
 
-    public void setOptions(String field, Object[] options);
+    void setOptions(String field, Object[] options);
 
-    public XFormField getFormField(String name);
+    XFormField getFormField(String name);
 
-    public void setFormFieldProperty(String name, Object value);
+    void setFormFieldProperty(String name, Object value);
 
-    public int getValueIndex(String name);
+    int getValueIndex(String name);
 
-    public int getIntValue(String name, int defaultValue);
+    int getIntValue(String name, int defaultValue);
 
-    public boolean getBooleanValue(String name);
+    boolean getBooleanValue(String name);
 
-    public void setBooleanValue(String name, boolean b);
+    void setBooleanValue(String name, boolean b);
 
-    public void setIntValue(String name, int value);
+    void setIntValue(String name, int value);
 
-    public void setWidth(int i);
+    void setWidth(int i);
 
-    public void release();
+    void release();
 
-    public void addAction(Action action);
+    void addAction(Action action);
 
-    public XForm[] getForms();
+    XForm[] getForms();
 
-    public void setSize(int i, int j);
+    void setSize(int i, int j);
 
     ActionList getActionsList();
 }

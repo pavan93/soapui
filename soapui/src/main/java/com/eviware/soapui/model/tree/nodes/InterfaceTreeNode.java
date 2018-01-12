@@ -64,7 +64,7 @@ public class InterfaceTreeNode extends AbstractModelItemTreeNode<Interface> {
     }
 
     public Interface getInterface() {
-        return (Interface) getModelItem();
+        return getModelItem();
     }
 
     public int getChildCount() {

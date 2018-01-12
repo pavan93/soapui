@@ -37,7 +37,7 @@ public class WsdlInterfaceTest {
     }
 
     @Test
-    public void testAddEndpoints() throws Exception {
+    public void testAddEndpoints() {
         iface.addEndpoint("testEndpoint");
         assertEquals(1, iface.getEndpoints().length);
         assertEquals("testEndpoint", iface.getEndpoints()[0]);
@@ -53,7 +53,7 @@ public class WsdlInterfaceTest {
     }
 
     @Test
-    public void testRemoveEndpoints() throws Exception {
+    public void testRemoveEndpoints() {
         iface.addEndpoint("testEndpoint");
         iface.addEndpoint("testEndpoint2");
 

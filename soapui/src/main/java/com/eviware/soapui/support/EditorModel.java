@@ -29,7 +29,7 @@ public interface EditorModel {
      * @return the settings to use
      */
 
-    public Settings getSettings();
+    Settings getSettings();
 
     /**
      * Returns the text to display in the editor
@@ -37,7 +37,7 @@ public interface EditorModel {
      * @return the text to display in the editor
      */
 
-    public String getEditorText();
+    String getEditorText();
 
     /**
      * Save the text in the editor, usually called when the contents of the
@@ -46,7 +46,7 @@ public interface EditorModel {
      * @param text the editor text to save
      */
 
-    public void setEditorText(String text);
+    void setEditorText(String text);
 
     /**
      * Adds a listener for text changes
@@ -54,7 +54,7 @@ public interface EditorModel {
      * @param editorModelListener
      */
 
-    public void addEditorModelListener(EditorModelListener editorModelListener);
+    void addEditorModelListener(EditorModelListener editorModelListener);
 
     /**
      * Removes a listener for text changes
@@ -62,13 +62,13 @@ public interface EditorModel {
      * @param editorModelListener
      */
 
-    public void removeEditorModelListener(EditorModelListener editorModelListener);
+    void removeEditorModelListener(EditorModelListener editorModelListener);
 
     /**
      * Interface for listeners to editor text changes
      */
 
-    public interface EditorModelListener {
+    interface EditorModelListener {
         /**
          * Notification that should be sent by EditorModel to all registered
          * listeners if the text changes by some external method (ie not via
@@ -78,6 +78,6 @@ public interface EditorModel {
          * @param newText the new text value
          */
 
-        public void editorTextChanged(String oldText, String newText);
+        void editorTextChanged(String oldText, String newText);
     }
 }

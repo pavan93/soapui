@@ -20,30 +20,30 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.testsuite.Assertable.AssertionStatus;
 
 public interface TestAssertion extends ModelItem {
-    public final static String DISABLED_PROPERTY = TestAssertion.class.getName() + "@disabled";
-    public final static String STATUS_PROPERTY = TestAssertion.class.getName() + "@status";
-    public final static String ERRORS_PROPERTY = TestAssertion.class.getName() + "@errors";
-    public final static String CONFIGURATION_PROPERTY = TestAssertion.class.getName() + "@configuration";
+    String DISABLED_PROPERTY = TestAssertion.class.getName() + "@disabled";
+    String STATUS_PROPERTY = TestAssertion.class.getName() + "@status";
+    String ERRORS_PROPERTY = TestAssertion.class.getName() + "@errors";
+    String CONFIGURATION_PROPERTY = TestAssertion.class.getName() + "@configuration";
 
-    public AssertionStatus getStatus();
+    AssertionStatus getStatus();
 
-    public AssertionError[] getErrors();
+    AssertionError[] getErrors();
 
-    public boolean isAllowMultiple();
+    boolean isAllowMultiple();
 
-    public boolean isConfigurable();
+    boolean isConfigurable();
 
-    public boolean isClonable();
+    boolean isClonable();
 
-    public boolean configure();
+    boolean configure();
 
-    public Assertable getAssertable();
+    Assertable getAssertable();
 
-    public String getLabel();
+    String getLabel();
 
-    public boolean isDisabled();
+    boolean isDisabled();
 
-    public void prepare(TestCaseRunner testRunner, TestCaseRunContext testRunContext) throws Exception;
+    void prepare(TestCaseRunner testRunner, TestCaseRunContext testRunContext) throws Exception;
 
-    public int getIndexOfAssertion(TestAssertion assertion);
+    int getIndexOfAssertion(TestAssertion assertion);
 }

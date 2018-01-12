@@ -29,16 +29,10 @@ import com.eviware.soapui.settings.ToolsSupport;
 import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormTextField;
+import com.eviware.x.form.*;
 
 import java.io.File;
 import java.io.FilenameFilter;
-import java.io.IOException;
 
 import static com.eviware.soapui.analytics.SoapUIActions.USE_XFIRE_1_STUBS_TOOL;
 
@@ -175,8 +169,7 @@ public class XFireAction extends AbstractToolsAction<Interface> {
         return classpath.toString();
     }
 
-    private ArgumentBuilder buildArgs(StringToStringMap values, String classpath, Interface modelItem)
-            throws IOException {
+    private ArgumentBuilder buildArgs(StringToStringMap values, String classpath, Interface modelItem) {
         values.put(OUTPUT, Tools.ensureDir(values.get(OUTPUT), ""));
 
         ArgumentBuilder builder = new ArgumentBuilder(values);

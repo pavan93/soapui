@@ -18,12 +18,7 @@ package com.eviware.soapui.impl.wsdl.teststeps;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.support.http.HttpRequestTestStep;
-import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
-import com.eviware.soapui.impl.wsdl.WsdlInterface;
-import com.eviware.soapui.impl.wsdl.WsdlOperation;
-import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.impl.wsdl.WsdlRequest;
-import com.eviware.soapui.impl.wsdl.WsdlSubmit;
+import com.eviware.soapui.impl.wsdl.*;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.BaseHttpRequestTransport;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.WsdlResponse;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments.WsdlSinglePartHttpResponse;
@@ -42,20 +37,9 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionsResult;
-import com.eviware.soapui.model.support.DefaultTestStepProperty;
-import com.eviware.soapui.model.support.InterfaceListenerAdapter;
-import com.eviware.soapui.model.support.ModelSupport;
-import com.eviware.soapui.model.support.ProjectListenerAdapter;
-import com.eviware.soapui.model.support.TestStepBeanProperty;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.support.*;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.OperationTestStep;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.security.Securable;
 import com.eviware.soapui.support.resolver.ChangeOperationResolver;
@@ -68,15 +52,11 @@ import org.apache.log4j.Logger;
 import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlString;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.xml.namespace.QName;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * WsdlTestStep that executes a WsdlTestRequest
@@ -338,7 +318,7 @@ public class WsdlTestRequestStep extends WsdlTestStepWithProperties implements O
             }
         } else {
             if (event.getSource() == testRequest && event.getPropertyName().equals(WsdlTestRequest.NAME_PROPERTY)) {
-                if (!super.getName().equals((String) event.getNewValue())) {
+                if (!super.getName().equals(event.getNewValue())) {
                     super.setName((String) event.getNewValue());
                 }
             }
@@ -523,11 +503,8 @@ public class WsdlTestRequestStep extends WsdlTestStepWithProperties implements O
     public boolean dependsOn(AbstractWsdlModelItem<?> modelItem) {
         if (modelItem instanceof Interface && testRequest.getOperation().getInterface() == modelItem) {
             return true;
-        } else if (modelItem instanceof Operation && testRequest.getOperation() == modelItem) {
-            return true;
-        }
+        } else return modelItem instanceof Operation && testRequest.getOperation() == modelItem;
 
-        return false;
     }
 
     @Override

@@ -143,7 +143,7 @@ class MockedWsdlMockResponse extends WsdlMockResponse {
         }
     }
 
-    public boolean prepareMessagePart(MimeMultipart mp, StringToStringMap contentIds, MessageXmlPart requestPart) throws Exception {
+    public boolean prepareMessagePart(MimeMultipart mp, StringToStringMap contentIds, MessageXmlPart requestPart) {
         return true;
     }
 }

@@ -26,11 +26,7 @@ import flex.messaging.io.amf.ActionMessage;
 import flex.messaging.io.amf.MessageHeader;
 import org.apache.http.Header;
 
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import java.io.ByteArrayOutputStream;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AMFResponse extends AbstractResponse<AMFRequest> {
@@ -52,8 +48,7 @@ public class AMFResponse extends AbstractResponse<AMFRequest> {
     private ActionMessage actionMessage;
     private byte[] rawResponseBody;
 
-    public AMFResponse(AMFRequest request, SubmitContext submitContext, Object responseContent) throws SQLException,
-            ParserConfigurationException, TransformerConfigurationException, TransformerException {
+    public AMFResponse(AMFRequest request, SubmitContext submitContext, Object responseContent) {
         super(request);
 
         this.request = request;

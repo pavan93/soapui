@@ -28,19 +28,19 @@ import com.eviware.soapui.security.SecurityTestRunner;
  */
 
 public interface TestMonitorListener {
-    public void loadTestStarted(LoadTestRunner runner);
+    void loadTestStarted(LoadTestRunner runner);
 
-    public void loadTestFinished(LoadTestRunner runner);
+    void loadTestFinished(LoadTestRunner runner);
 
-    public void securityTestStarted(SecurityTestRunner runner);
+    void securityTestStarted(SecurityTestRunner runner);
 
-    public void securityTestFinished(SecurityTestRunner runner);
+    void securityTestFinished(SecurityTestRunner runner);
 
-    public void testCaseStarted(TestCaseRunner runner);
+    void testCaseStarted(TestCaseRunner runner);
 
-    public void testCaseFinished(TestCaseRunner runner);
+    void testCaseFinished(TestCaseRunner runner);
 
-    public void mockServiceStarted(MockRunner runner);
+    void mockServiceStarted(MockRunner runner);
 
-    public void mockServiceStopped(MockRunner runner);
+    void mockServiceStopped(MockRunner runner);
 }

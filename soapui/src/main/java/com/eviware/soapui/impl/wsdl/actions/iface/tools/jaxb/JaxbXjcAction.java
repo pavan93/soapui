@@ -66,7 +66,7 @@ public class JaxbXjcAction extends AbstractToolsAction<Interface> {
 
     @Override
     public boolean applies(Interface target) {
-        Interface iface = (Interface) target;
+        Interface iface = target;
         return !iface.getProject().hasNature(Project.JBOSSWS_NATURE_ID);
     }
 

@@ -21,7 +21,7 @@ package com.eviware.soapui.support.factory;
  */
 public interface SoapUIFactoryRegistryListener {
 
-    public void factoryAdded( Class<?> factoryType, Object factory );
+    void factoryAdded(Class<?> factoryType, Object factory);
 
-    public void factoryRemoved( Class<?> factoryType, Object factory );
+    void factoryRemoved(Class<?> factoryType, Object factory);
 }

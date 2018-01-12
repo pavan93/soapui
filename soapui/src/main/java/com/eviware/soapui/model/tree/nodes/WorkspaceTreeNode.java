@@ -65,7 +65,7 @@ public class WorkspaceTreeNode extends AbstractModelItemTreeNode<Workspace> {
     }
 
     public Workspace getWorkspace() {
-        return (Workspace) getModelItem();
+        return getModelItem();
     }
 
     private class InternalWorkspaceListener extends WorkspaceListenerAdapter {

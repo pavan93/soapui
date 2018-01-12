@@ -119,25 +119,25 @@ public class SoapUIExtensionClassLoader extends URLClassLoader {
      */
     public static void addUrlToClassLoader(URL u, ClassLoader classLoader) throws IOException {
         try {
-            Method method = classLoader.getClass().getDeclaredMethod("addURL", new Class[]{java.net.URL.class});
+            Method method = classLoader.getClass().getDeclaredMethod("addURL", URL.class);
             method.setAccessible(true);
-            method.invoke(classLoader, new Object[]{u});
+            method.invoke(classLoader, u);
 
             SoapUI.log.info("Added [" + u.toString() + "] to classpath");
         } catch (NoSuchMethodException e) {
             try {
                 Method method = classLoader.getClass().getSuperclass()
-                        .getDeclaredMethod("addURL", new Class[]{java.net.URL.class});
+                        .getDeclaredMethod("addURL", URL.class);
                 method.setAccessible(true);
-                method.invoke(classLoader, new Object[]{u});
+                method.invoke(classLoader, u);
 
                 SoapUI.log.info("Added [" + u.toString() + "] to classpath");
             } catch (NoSuchMethodException ex) {
                 try {
                     Method method = classLoader.getClass().getSuperclass().getSuperclass()
-                            .getDeclaredMethod("addURL", new Class[]{java.net.URL.class});
+                            .getDeclaredMethod("addURL", URL.class);
                     method.setAccessible(true);
-                    method.invoke(classLoader, new Object[]{u});
+                    method.invoke(classLoader, u);
 
                     SoapUI.log.info("Added [" + u.toString() + "] to classpath");
                 } catch (Throwable t) {

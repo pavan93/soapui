@@ -25,19 +25,19 @@ import javax.xml.namespace.QName;
 import java.util.Collection;
 
 public interface InterfaceDefinition<T extends Interface> {
-    public String getTargetNamespace();
+    String getTargetNamespace();
 
-    public SchemaTypeLoader getSchemaTypeLoader();
+    SchemaTypeLoader getSchemaTypeLoader();
 
-    public SchemaTypeSystem getSchemaTypeSystem();
+    SchemaTypeSystem getSchemaTypeSystem();
 
-    public boolean hasSchemaTypes();
+    boolean hasSchemaTypes();
 
-    public Collection<String> getDefinedNamespaces() throws Exception;
+    Collection<String> getDefinedNamespaces() throws Exception;
 
-    public SchemaType findType(QName name);
+    SchemaType findType(QName name);
 
-    public DefinitionCache getDefinitionCache();
+    DefinitionCache getDefinitionCache();
 
-    public T getInterface();
+    T getInterface();
 }

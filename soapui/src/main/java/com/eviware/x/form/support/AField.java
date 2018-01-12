@@ -30,22 +30,22 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface AField {
-    public enum AFieldType {
+    String name() default "";
+
+    String description();
+
+    AFieldType type() default AFieldType.STRING;
+
+    String group() default "";
+
+    String[] values() default "";
+
+    String defaultValue() default "";
+
+    enum AFieldType {
         BOOLEAN, STRING, FILE, FOLDER, FILE_OR_FOLDER, INT, ENUMERATION, PASSWORD, FILELIST, RADIOGROUP, STRINGAREA,
         MULTILIST, STRINGLIST, TABLE, ACTION, COMPONENT, SEPARATOR, INFORMATION, LABEL, RADIOGROUP_TOP_BUTTON, COMBOBOX
     }
-
-    public String name() default "";
-
-    public String description();
-
-    public AFieldType type() default AFieldType.STRING;
-
-    public String group() default "";
-
-    public String[] values() default "";
-
-    public String defaultValue() default "";
 
     boolean enabled() default true;
 }

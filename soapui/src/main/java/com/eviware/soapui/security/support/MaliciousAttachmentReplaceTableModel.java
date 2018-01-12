@@ -27,11 +27,7 @@ public class MaliciousAttachmentReplaceTableModel extends MaliciousAttachmentTab
     }
 
     public boolean isCellEditable(int row, int col) {
-        if (col > 1) {
-            return true;
-        } else {
-            return false;
-        }
+        return col > 1;
     }
 
     public int getColumnCount() {

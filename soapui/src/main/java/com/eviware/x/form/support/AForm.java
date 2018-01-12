@@ -30,11 +30,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface AForm {
-    public String name();
+    String name();
 
-    public String description();
+    String description();
 
-    public String helpUrl() default "";
+    String helpUrl() default "";
 
-    public String icon() default "";
+    String icon() default "";
 }

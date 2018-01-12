@@ -17,7 +17,6 @@
 package com.eviware.soapui.support.types;
 
 import com.eviware.soapui.support.StringUtils;
-import org.apache.xmlbeans.XmlException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -71,7 +70,7 @@ public class StringList extends ArrayList<String> {
         return toArray(new String[size()]);
     }
 
-    public static StringList fromXml(String value) throws XmlException {
+    public static StringList fromXml(String value) {
         return StringUtils.isNullOrEmpty(value) || value.equals("<xml-fragment/>") ? new StringList()
                 : new StringList(StringListConfig.Factory.parse(value).getEntryList());
     }

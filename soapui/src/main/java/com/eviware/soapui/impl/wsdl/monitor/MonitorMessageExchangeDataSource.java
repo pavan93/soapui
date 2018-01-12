@@ -21,7 +21,6 @@ import com.eviware.soapui.support.Tools;
 
 import javax.activation.DataSource;
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -50,7 +49,7 @@ public class MonitorMessageExchangeDataSource implements DataSource {
         return contentType;
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         return new ByteArrayInputStream(data);
     }
 
@@ -58,7 +57,7 @@ public class MonitorMessageExchangeDataSource implements DataSource {
         return name;
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

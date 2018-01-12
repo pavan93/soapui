@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.support.actions;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * Behaviour for any component that supports Find-and-Replace
@@ -25,21 +25,21 @@ import javax.swing.JComponent;
  */
 
 public interface FindAndReplaceable {
-    public boolean isEditable();
+    boolean isEditable();
 
-    public int getCaretPosition();
+    int getCaretPosition();
 
-    public String getText();
+    String getText();
 
-    public void select(int start, int end);
+    void select(int start, int end);
 
-    public int getSelectionStart();
+    int getSelectionStart();
 
-    public int getSelectionEnd();
+    int getSelectionEnd();
 
-    public void setSelectedText(String txt);
+    String getSelectedText();
 
-    public String getSelectedText();
+    void setSelectedText(String txt);
 
-    public JComponent getEditComponent();
+    JComponent getEditComponent();
 }

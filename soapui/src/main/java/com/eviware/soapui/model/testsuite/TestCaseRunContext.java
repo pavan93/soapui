@@ -21,13 +21,13 @@ package com.eviware.soapui.model.testsuite;
  */
 
 public interface TestCaseRunContext extends TestRunContext {
-    public TestStep getCurrentStep();
+    TestStep getCurrentStep();
 
-    public int getCurrentStepIndex();
+    int getCurrentStepIndex();
 
-    public TestCaseRunner getTestRunner();
+    TestCaseRunner getTestRunner();
 
-    public TestCase getTestCase();
+    TestCase getTestCase();
 
-    public Object getProperty(String testStep, String propertyName);
+    Object getProperty(String testStep, String propertyName);
 }

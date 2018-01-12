@@ -23,12 +23,7 @@ import flex.messaging.io.ClassAliasRegistry;
 import flex.messaging.io.MessageDeserializer;
 import flex.messaging.io.MessageIOConstants;
 import flex.messaging.io.SerializationContext;
-import flex.messaging.io.amf.ActionContext;
-import flex.messaging.io.amf.ActionMessage;
-import flex.messaging.io.amf.AmfMessageDeserializer;
-import flex.messaging.io.amf.AmfMessageSerializer;
-import flex.messaging.io.amf.MessageBody;
-import flex.messaging.io.amf.MessageHeader;
+import flex.messaging.io.amf.*;
 import flex.messaging.io.amf.client.AMFHeaderProcessor;
 import flex.messaging.io.amf.client.exceptions.ClientStatusException;
 import flex.messaging.io.amf.client.exceptions.ServerStatusException;
@@ -37,16 +32,8 @@ import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
 /**
  * AMFConnection derivate using HttpClient instead of UrlConnection
@@ -328,7 +315,7 @@ public class SoapUIAMFConnection {
      *
      * @throws IOException If an exception is encountered during URL connection setup.
      */
-    protected void internalConnect() throws IOException {
+    protected void internalConnect() {
         serializationContext.instantiateTypes = false;
         postMethod = new ExtendedPostMethod(url);
         setHttpRequestHeaders();
@@ -339,16 +326,14 @@ public class SoapUIAMFConnection {
     /**
      * Processes the HTTP response headers and body.
      */
-    protected Object processHttpResponse(InputStream inputStream) throws ClassNotFoundException, IOException,
-            ClientStatusException, ServerStatusException {
+    protected Object processHttpResponse(InputStream inputStream) throws ClassNotFoundException, IOException {
         return processHttpResponseBody(inputStream);
     }
 
     /**
      * Processes the HTTP response body.
      */
-    protected Object processHttpResponseBody(InputStream inputStream) throws ClassNotFoundException, IOException,
-            ClientStatusException, ServerStatusException {
+    protected Object processHttpResponseBody(InputStream inputStream) throws ClassNotFoundException, IOException {
         DataInputStream din = new DataInputStream(inputStream);
         ActionMessage message = new ActionMessage();
         actionContext.setRequestMessage(message);
@@ -364,7 +349,7 @@ public class SoapUIAMFConnection {
      * Processes the AMF packet.
      */
     @SuppressWarnings("unchecked")
-    protected Object processAmfPacket(ActionMessage packet) throws ClientStatusException, ServerStatusException {
+    protected Object processAmfPacket(ActionMessage packet) {
         processAmfHeaders(packet.getHeaders());
         return processAmfBody(packet.getBodies());
     }
@@ -373,7 +358,7 @@ public class SoapUIAMFConnection {
      * Processes the AMF headers by dispatching them to an AMF header processor,
      * if one exists.
      */
-    protected void processAmfHeaders(ArrayList<MessageHeader> headers) throws ClientStatusException {
+    protected void processAmfHeaders(ArrayList<MessageHeader> headers) {
         // No need to process headers if there's no AMF header processor.
         if (amfHeaderProcessor == null) {
             return;
@@ -389,7 +374,7 @@ public class SoapUIAMFConnection {
      * AMF messages is supported at some point but for now we are guaranteed to
      * have a single message.
      */
-    protected Object processAmfBody(ArrayList<MessageBody> messages) throws ServerStatusException {
+    protected Object processAmfBody(ArrayList<MessageBody> messages) {
         for (MessageBody message : messages) {
             String targetURI = message.getTargetURI();
 

@@ -33,42 +33,42 @@ public class HttpUtilsTest {
     private static final String uppercaseURLHTTPS = "HTTPS://LOCALHOST:9001/TEST/A001";
 
     @Test
-    public void nullURLShouldBeReturnNull() throws Exception{
+    public void nullURLShouldBeReturnNull() {
         assertEquals(null, HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(null));
     }
 
     @Test
-    public void emptyURLShouldBeReturnEmpty() throws Exception{
+    public void emptyURLShouldBeReturnEmpty() {
         assertEquals("", HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(""));
     }
 
     @Test
-    public void mixedCaseURLsShouldNotGetForcedToLowerCase() throws Exception {
+    public void mixedCaseURLsShouldNotGetForcedToLowerCase() {
         assertEquals(mixedCaseURL1, HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(mixedCaseURL1));
     }
 
     @Test
-    public void trailingSpaceURLsShouldStillGetTrimmed() throws Exception {
+    public void trailingSpaceURLsShouldStillGetTrimmed() {
         assertEquals("http://localhost:9001/Test/A001", HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(trailingSpaceURL1));
     }
 
     @Test
-    public void missingProtocolURLsShouldGetHTTPProtocolAdded() throws Exception {
+    public void missingProtocolURLsShouldGetHTTPProtocolAdded() {
         assertEquals("http://localhost:9001/Test/A001", HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(mixedCaseURLWithoutProtocol));
     }
 
     @Test
-    public void entirelyUppercaseHTTPURLShouldRemainUnchanged() throws Exception {
+    public void entirelyUppercaseHTTPURLShouldRemainUnchanged() {
         assertEquals("HTTP://LOCALHOST:9001/TEST/A001", HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(uppercaseURLHTTP));
     }
 
     @Test
-    public void entirelyUppercaseHTTPSURLShouldRemainUnchanged() throws Exception {
+    public void entirelyUppercaseHTTPSURLShouldRemainUnchanged() {
         assertEquals("HTTPS://LOCALHOST:9001/TEST/A001", HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(uppercaseURLHTTPS));
     }
 
     @Test
-    public void propertyExpansionsShouldNotGoToLowerCaseEither() throws Exception {
+    public void propertyExpansionsShouldNotGoToLowerCaseEither() {
         assertEquals(propertyExpansionExample, HttpUtils.completeUrlWithHttpIfProtocolIsNotHttpOrHttpsOrPropertyExpansion(propertyExpansionExample));
     }
 }

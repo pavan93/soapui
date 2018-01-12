@@ -30,29 +30,29 @@ import java.beans.PropertyChangeListener;
  */
 
 public interface AttachmentContainer {
-    public int getAttachmentCount();
+    String ATTACHMENTS_PROPERTY = WsdlRequest.class.getName() + "@attachments";
 
-    public Attachment getAttachmentAt(int index);
+    int getAttachmentCount();
 
-    public Attachment[] getAttachmentsForPart(String partName);
+    Attachment getAttachmentAt(int index);
 
-    public Attachment[] getAttachments();
+    Attachment[] getAttachmentsForPart(String partName);
 
-    public AttachmentPart[] getDefinedAttachmentParts();
+    Attachment[] getAttachments();
 
-    public AttachmentPart getAttachmentPart(String partName);
+    AttachmentPart[] getDefinedAttachmentParts();
 
-    public static final String ATTACHMENTS_PROPERTY = WsdlRequest.class.getName() + "@attachments";
+    AttachmentPart getAttachmentPart(String partName);
 
-    public void addAttachmentsChangeListener(PropertyChangeListener listener);
+    void addAttachmentsChangeListener(PropertyChangeListener listener);
 
-    public void removeAttachmentsChangeListener(PropertyChangeListener listener);
+    void removeAttachmentsChangeListener(PropertyChangeListener listener);
 
-    public boolean isMultipartEnabled();
+    boolean isMultipartEnabled();
 
     /**
      * Returns ModelItem associated with this container
      */
 
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 }

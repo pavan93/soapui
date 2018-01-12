@@ -25,6 +25,6 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
  */
 
 public interface SubmitContext extends PropertyExpansionContext {
-    public static final String HTTP_STATE_PROPERTY = "#HTTP_STATE";
-    public static final String PROPERTY_SEPARATOR = "#";
+    String HTTP_STATE_PROPERTY = "#HTTP_STATE";
+    String PROPERTY_SEPARATOR = "#";
 }

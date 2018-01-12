@@ -33,7 +33,7 @@ import com.eviware.soapui.support.xml.XmlObjectConfigurationReader;
 import junit.framework.Assert;
 import junit.framework.ComparisonFailure;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.util.regex.Pattern;
 
 public class JsonPathContentAssertion extends JsonPathAssertionBase implements RequestAssertion, ResponseAssertion {
@@ -80,9 +80,7 @@ public class JsonPathContentAssertion extends JsonPathAssertionBase implements R
             if (expected.endsWith(String.valueOf(wildcard))) {
                 sb.append(".*");
             }
-            if (!Pattern.compile(sb.toString(), Pattern.DOTALL).matcher(real).matches()) {
-                return false;
-            }
+            return Pattern.compile(sb.toString(), Pattern.DOTALL).matcher(real).matches();
         }
         return true;
     }

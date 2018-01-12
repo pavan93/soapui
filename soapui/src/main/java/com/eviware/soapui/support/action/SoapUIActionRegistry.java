@@ -195,8 +195,8 @@ public class SoapUIActionRegistry {
         SoapUIActionGroup actionGroup;
         Class<SoapUIActionGroup> actionGroupClass = (Class<SoapUIActionGroup>) Class.forName(group.getClass1());
 
-        Constructor<SoapUIActionGroup> constructor = actionGroupClass.getConstructor(new Class[]{String.class,
-                String.class});
+        Constructor<SoapUIActionGroup> constructor = actionGroupClass.getConstructor(String.class,
+                String.class);
         if (constructor != null) {
             actionGroup = constructor.newInstance(group.getId(), group.getName());
         } else {

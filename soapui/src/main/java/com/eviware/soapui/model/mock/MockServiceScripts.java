@@ -19,27 +19,27 @@ package com.eviware.soapui.model.mock;
 import com.eviware.soapui.impl.wsdl.mock.WsdlMockRunContext;
 
 public interface MockServiceScripts {
-    public Object runStartScript(WsdlMockRunContext mockContext, MockRunner wsdlMockRunner) throws Exception;
+    Object runStartScript(WsdlMockRunContext mockContext, MockRunner wsdlMockRunner) throws Exception;
 
-    public String getStartScript();
+    String getStartScript();
 
-    public void setStartScript(String script);
+    void setStartScript(String script);
 
-    public String getStopScript();
+    String getStopScript();
 
-    public void setStopScript(String script);
+    void setStopScript(String script);
 
-    public Object runStopScript(WsdlMockRunContext mockContext, MockRunner mockRunner) throws Exception;
+    Object runStopScript(WsdlMockRunContext mockContext, MockRunner mockRunner) throws Exception;
 
-    public String getOnRequestScript();
+    String getOnRequestScript();
 
-    public void setOnRequestScript(String text);
+    void setOnRequestScript(String text);
 
-    public Object runOnRequestScript(WsdlMockRunContext context, MockRequest request) throws Exception;
+    Object runOnRequestScript(WsdlMockRunContext context, MockRequest request) throws Exception;
 
-    public String getAfterRequestScript();
+    String getAfterRequestScript();
 
-    public void setAfterRequestScript(String text);
+    void setAfterRequestScript(String text);
 
-    public Object runAfterRequestScript(WsdlMockRunContext context, MockResult request) throws Exception;
+    Object runAfterRequestScript(WsdlMockRunContext context, MockResult request) throws Exception;
 }

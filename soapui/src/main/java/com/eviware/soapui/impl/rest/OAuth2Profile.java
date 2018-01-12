@@ -500,7 +500,7 @@ public class OAuth2Profile implements PropertyExpansionContainer {
 
     public List<String> getAutomationJavaScripts() {
         StringListConfig configurationEntry = configuration.getJavaScripts();
-        return configurationEntry == null ? Collections.<String>emptyList() : new ArrayList<String>(
+        return configurationEntry == null ? Collections.emptyList() : new ArrayList<String>(
                 configurationEntry.getEntryList());
     }
 

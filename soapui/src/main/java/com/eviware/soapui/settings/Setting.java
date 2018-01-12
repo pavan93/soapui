@@ -24,19 +24,19 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
 public @interface Setting {
-    public enum SettingType {
+    String name();
+
+    String description();
+
+    SettingType type() default SettingType.STRING;
+
+    String[] values() default "";
+
+    String defaultValue() default "";
+
+    Class<? extends SettingHandler> customHandler() default SettingHandler.class;
+
+    enum SettingType {
         BOOLEAN, STRING, FILE, FOLDER, INT, ENUMERATION, PASSWORD, CUSTOM, FILELIST, STRINGLIST
     }
-
-    public String name();
-
-    public String description();
-
-    public SettingType type() default SettingType.STRING;
-
-    public String[] values() default "";
-
-    public String defaultValue() default "";
-
-    public Class<? extends SettingHandler> customHandler() default SettingHandler.class;
 }

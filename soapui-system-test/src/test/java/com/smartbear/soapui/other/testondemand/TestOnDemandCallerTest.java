@@ -55,7 +55,7 @@ public class TestOnDemandCallerTest {
     public final static Logger log = Logger.getLogger(TestOnDemandCallerTest.class);
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         WsdlProject project = new WsdlProject(TestOnDemandCallerTest.class.getResource(
                 "/soapui-projects/sample-soapui-project.xml").getPath());
         WsdlTestSuite testSuite = project.getTestSuiteByName("Test Suite");

@@ -17,13 +17,12 @@
 package com.eviware.soapui.impl.wsdl.panels.teststeps;
 
 import com.eviware.soapui.impl.EmptyPanelBuilder;
-import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.teststeps.HttpTestRequestInterface;
 import com.eviware.soapui.impl.wsdl.teststeps.HttpTestRequestStep;
 import com.eviware.soapui.support.components.JPropertiesTable;
 import com.eviware.soapui.support.types.StringList;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * PanelBuilder for HttpTestRequest
@@ -77,8 +76,8 @@ public class HttpTestRequestPanelBuilder extends EmptyPanelBuilder<HttpTestReque
         table.addProperty("Authentication Type", "authType", new String[]{AuthType.GLOBAL_HTTP_SETTINGS.toString(),
                 AuthType.PREEMPTIVE.toString(), AuthType.SPNEGO_KERBEROS.toString(), AuthType.NTLM.toString()});
 
-        StringList keystores = new StringList(((WsdlProject) request.getTestStep().getTestCase().getTestSuite()
-                .getProject()).getWssContainer().getCryptoNames());
+        StringList keystores = new StringList(request.getTestStep().getTestCase().getTestSuite()
+                .getProject().getWssContainer().getCryptoNames());
         keystores.add("");
         table.addProperty("SSL Keystore", "sslKeystore", keystores.toStringArray());
 

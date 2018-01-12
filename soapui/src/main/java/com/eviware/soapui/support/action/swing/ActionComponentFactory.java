@@ -19,8 +19,8 @@ package com.eviware.soapui.support.action.swing;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.SoapUIAction;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface ActionComponentFactory {
-    public abstract JComponent buildActionComponent(SoapUIAction<?> action, ModelItem modelItem);
+    JComponent buildActionComponent(SoapUIAction<?> action, ModelItem modelItem);
 }

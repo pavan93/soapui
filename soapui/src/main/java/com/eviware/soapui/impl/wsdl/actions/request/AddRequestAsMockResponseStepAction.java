@@ -119,21 +119,21 @@ public class AddRequestAsMockResponseStepAction extends AbstractAddToTestCaseAct
     @AForm(name = "Add MockResponse to TestCase", description = "Options for adding this requests response to a TestCase", helpUrl = HelpUrls.ADDREQUESTASMOCKRESPONSESTEP_HELP_URL, icon = UISupport.OPTIONS_ICON_PATH)
     private interface Form {
         @AField(name = "Name", description = "Unique name of MockResponse Step")
-        public final static String STEP_NAME = "Name";
+        String STEP_NAME = "Name";
 
         @AField(name = "Path", description = "Path to listen on")
-        public final static String PATH = "Path";
+        String PATH = "Path";
 
         @AField(name = "Port", description = "Port to listen on", type = AFieldType.INT)
-        public final static String PORT = "Port";
+        String PORT = "Port";
 
         @AField(name = "Add Schema Assertion", description = "Adds SchemaCompliance Assertion for request", type = AFieldType.BOOLEAN)
-        public final static String ADD_SCHEMA_ASSERTION = "Add Schema Assertion";
+        String ADD_SCHEMA_ASSERTION = "Add Schema Assertion";
 
         @AField(name = "Close Request Window", description = "Closes the request editor if visible", type = AFieldType.BOOLEAN)
-        public final static String CLOSE_REQUEST = "Close Request Window";
+        String CLOSE_REQUEST = "Close Request Window";
 
         @AField(name = "Shows TestCase Editor", description = "Shows the target steps TestCase editor", type = AFieldType.BOOLEAN)
-        public final static String SHOW_TESTCASE = "Shows TestCase Editor";
+        String SHOW_TESTCASE = "Shows TestCase Editor";
     }
 }

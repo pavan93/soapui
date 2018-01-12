@@ -30,45 +30,45 @@ import java.util.Map;
  */
 
 public interface Assertable {
-    public TestAssertion addAssertion(String selection);
+    TestAssertion addAssertion(String selection);
 
-    public void addAssertionsListener(AssertionsListener listener);
+    void addAssertionsListener(AssertionsListener listener);
 
-    public int getAssertionCount();
+    int getAssertionCount();
 
-    public TestAssertion getAssertionAt(int c);
+    TestAssertion getAssertionAt(int c);
 
-    public void removeAssertionsListener(AssertionsListener listener);
+    void removeAssertionsListener(AssertionsListener listener);
 
-    public void removeAssertion(TestAssertion assertion);
+    void removeAssertion(TestAssertion assertion);
 
-    public AssertionStatus getAssertionStatus();
+    AssertionStatus getAssertionStatus();
 
-    public enum AssertionStatus {
+    String getAssertableContentAsXml();
+
+    String getAssertableContent();
+
+    String getDefaultAssertableContent();
+
+    AssertableType getAssertableType();
+
+    List<TestAssertion> getAssertionList();
+
+    TestAssertion getAssertionByName(String name);
+
+    ModelItem getModelItem();
+
+    TestStep getTestStep();
+
+    Interface getInterface();
+
+    TestAssertion cloneAssertion(TestAssertion source, String name);
+
+    Map<String, TestAssertion> getAssertions();
+
+    TestAssertion moveAssertion(int ix, int offset);
+
+    enum AssertionStatus {
         UNKNOWN, VALID, FAILED
     }
-
-    public String getAssertableContentAsXml();
-
-    public String getAssertableContent();
-
-    public String getDefaultAssertableContent();
-
-    public AssertableType getAssertableType();
-
-    public List<TestAssertion> getAssertionList();
-
-    public TestAssertion getAssertionByName(String name);
-
-    public ModelItem getModelItem();
-
-    public TestStep getTestStep();
-
-    public Interface getInterface();
-
-    public TestAssertion cloneAssertion(TestAssertion source, String name);
-
-    public Map<String, TestAssertion> getAssertions();
-
-    public TestAssertion moveAssertion(int ix, int offset);
 }

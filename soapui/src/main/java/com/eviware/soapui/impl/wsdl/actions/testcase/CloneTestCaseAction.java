@@ -213,27 +213,27 @@ public class CloneTestCaseAction extends AbstractSoapUIAction<WsdlTestCase> {
     @AForm(description = "Specify target Project/TestSuite and name of cloned TestCase", name = "Clone TestCase", helpUrl = HelpUrls.CLONETESTCASE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     protected interface Form {
         @AField(name = "TestCase Name", description = "The name of the cloned TestCase", type = AFieldType.STRING)
-        public final static String NAME = "TestCase Name";
+        String NAME = "TestCase Name";
 
         @AField(name = "Target Project", description = "The target Project for the cloned TestCase", type = AFieldType.ENUMERATION)
-        public final static String PROJECT = "Target Project";
+        String PROJECT = "Target Project";
 
         @AField(name = "Target TestSuite", description = "The target TestSuite for the cloned TestCase", type = AFieldType.ENUMERATION)
-        public final static String TESTSUITE = "Target TestSuite";
+        String TESTSUITE = "Target TestSuite";
 
         @AField(name = "Clone LoadTests", description = "Clone contained LoadTests", type = AFieldType.BOOLEAN)
-        public final static String CLONE_LOADTESTS = "Clone LoadTests";
+        String CLONE_LOADTESTS = "Clone LoadTests";
 
         @AField(name = "Clone SecurityTests", description = "Clone contained SecurityTests", type = AFieldType.BOOLEAN)
-        public final static String CLONE_SECURITYTESTS = "Clone SecurityTests";
+        String CLONE_SECURITYTESTS = "Clone SecurityTests";
 
         @AField(name = "Move instead", description = "Moves the selected TestCase instead of copying", type = AFieldType.BOOLEAN)
-        public final static String MOVE = "Move instead";
+        String MOVE = "Move instead";
 
         @AField(name = "Clone description", description = "Clones the description of selected TestCase", type = AFieldType.BOOLEAN)
-        public final static String CLONE_DESCRIPTION = "Clone description";
+        String CLONE_DESCRIPTION = "Clone description";
 
         @AField(name = "Description", description = "Description of new TestCase", type = AFieldType.STRINGAREA)
-        public final static String DESCRIPTION = "Description";
+        String DESCRIPTION = "Description";
     }
 }

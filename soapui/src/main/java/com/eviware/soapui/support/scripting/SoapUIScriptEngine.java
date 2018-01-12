@@ -23,15 +23,15 @@ package com.eviware.soapui.support.scripting;
  */
 
 public interface SoapUIScriptEngine {
-    public void setScript(String scriptText);
+    void setScript(String scriptText);
 
-    public void setVariable(String name, Object value);
+    void setVariable(String name, Object value);
 
-    public void clearVariables();
+    void clearVariables();
 
-    public Object run() throws Exception;
+    Object run() throws Exception;
 
-    public void release();
+    void release();
 
-    public void compile() throws Exception;
+    void compile() throws Exception;
 }

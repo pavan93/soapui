@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 public class JoinRelativeUrlTest {
 
     @Test
-    public void testJoin() throws Exception {
+    public void testJoin() {
         assertEquals("http://test:8080/my/root/test.xsd",
                 Tools.joinRelativeUrl("http://test:8080/my/root/test.wsdl", "test.xsd"));
         assertEquals("http://test:8080/my/root/bu/test.xsd",

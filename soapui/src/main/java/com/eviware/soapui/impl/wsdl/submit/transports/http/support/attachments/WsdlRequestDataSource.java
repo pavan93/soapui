@@ -61,7 +61,7 @@ public class WsdlRequestDataSource implements DataSource {
         return wsdlRequest.getName();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

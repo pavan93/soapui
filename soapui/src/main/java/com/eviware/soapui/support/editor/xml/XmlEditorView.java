@@ -25,5 +25,5 @@ import com.eviware.soapui.support.editor.EditorView;
  */
 
 public interface XmlEditorView<T extends XmlDocument> extends EditorView<T> {
-    public boolean saveDocument(boolean validate);
+    boolean saveDocument(boolean validate);
 }

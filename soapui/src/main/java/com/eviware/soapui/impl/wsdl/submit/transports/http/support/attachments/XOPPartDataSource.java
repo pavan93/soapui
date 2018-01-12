@@ -27,12 +27,7 @@ import org.apache.xmlbeans.XmlBase64Binary;
 import org.apache.xmlbeans.XmlHexBinary;
 
 import javax.activation.DataSource;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * DataSource for XOP/MTOM attachments
@@ -86,7 +81,7 @@ public final class XOPPartDataSource implements DataSource {
         return String.valueOf(schemaType.getName());
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

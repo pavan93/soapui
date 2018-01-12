@@ -20,7 +20,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.Context;
 import com.eviware.soapui.impl.wadl.inference.schema.Schema;
 import com.eviware.soapui.impl.wadl.inference.schema.SchemaSystem;
 import com.eviware.soapui.impl.wadl.inference.schema.Type;
-import org.apache.xmlbeans.XmlException;
 
 /**
  * This Type is simply a reference to another, actual Type. It is used when
@@ -51,7 +50,7 @@ public class TypeReferenceType implements Type {
         return name;
     }
 
-    public Type validate(Context context) throws XmlException {
+    public Type validate(Context context) {
         return schemaSystem.getSchemaForNamespace(namespace).getType(name);
     }
 

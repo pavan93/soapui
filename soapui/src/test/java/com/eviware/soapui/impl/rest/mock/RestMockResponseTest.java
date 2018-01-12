@@ -37,28 +37,28 @@ public class RestMockResponseTest {
     }
 
     @Test
-    public void getsCorrectEncodingValue() throws Exception {
+    public void getsCorrectEncodingValue() {
         String contentType = "application/atom+xml; charset=UTF-8";
         String[] parameters = contentType.split(";");
         assertThat(restMockResponse.getEncodingValue(parameters), is("UTF-8"));
     }
 
     @Test
-    public void getsEncodingValueFromMultipleParameters() throws Exception {
+    public void getsEncodingValueFromMultipleParameters() {
         String contentType = "application/atom+xml; charset=UTF-8; type=feed";
         String[] parameters = contentType.split(";");
         assertThat(restMockResponse.getEncodingValue(parameters), is("UTF-8"));
     }
 
     @Test
-    public void getsEncodingValueWhenEncodingValueIsLastParam() throws Exception {
+    public void getsEncodingValueWhenEncodingValueIsLastParam() {
         String contentType = "application/atom+xml; type=feed; charset=UTF-8; ";
         String[] parameters = contentType.split(";");
         assertThat(restMockResponse.getEncodingValue(parameters), is("UTF-8"));
     }
 
     @Test
-    public void doesNoGetAnyEncodingValueWhenContentTypeDoesNotHaveEncoding() throws Exception {
+    public void doesNoGetAnyEncodingValueWhenContentTypeDoesNotHaveEncoding() {
         String contentType = "application/atom+xml; type=feed; boo=false";
         String[] parameters = contentType.split(";");
         assertNull(restMockResponse.getEncodingValue(parameters));

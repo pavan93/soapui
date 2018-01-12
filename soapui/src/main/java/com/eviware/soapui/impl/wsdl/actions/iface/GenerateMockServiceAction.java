@@ -145,21 +145,21 @@ public class GenerateMockServiceAction extends AbstractSoapUIAction<WsdlInterfac
     @AForm(name = "Generate MockService", description = "Set options for generated MockOperations for this Interface", helpUrl = HelpUrls.GENERATE_MOCKSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     private interface Form {
         @AField(name = "MockService", description = "The MockService to create or use", type = AFieldType.ENUMERATION)
-        public final static String MOCKSERVICE = "MockService";
+        String MOCKSERVICE = "MockService";
 
         @AField(name = "Operations", description = "The Operations for which to Generate MockOperations", type = AFieldType.MULTILIST)
-        public final static String OPERATIONS = "Operations";
+        String OPERATIONS = "Operations";
 
         @AField(name = "Path", description = "The URL path to mount on", type = AFieldType.STRING)
-        public final static String PATH = "Path";
+        String PATH = "Path";
 
         @AField(name = "Port", description = "The endpoint port to listen on", type = AFieldType.STRING)
-        public final static String PORT = "Port";
+        String PORT = "Port";
 
         @AField(name = "Add Endpoint", description = "Adds the MockServices endpoint to the mocked Interface", type = AFieldType.BOOLEAN)
-        public final static String ADD_ENDPOINT = "Add Endpoint";
+        String ADD_ENDPOINT = "Add Endpoint";
 
         @AField(name = "Start MockService", description = "Starts the MockService immediately", type = AFieldType.BOOLEAN)
-        public final static String START_MOCKSERVICE = "Start MockService";
+        String START_MOCKSERVICE = "Start MockService";
     }
 }

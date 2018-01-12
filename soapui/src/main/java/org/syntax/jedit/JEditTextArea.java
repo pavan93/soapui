@@ -16,50 +16,12 @@
 
 package org.syntax.jedit;
 
-import java.awt.AWTEvent;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Insets;
-import java.awt.LayoutManager;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
-import java.lang.ref.WeakReference;
+import com.eviware.soapui.SoapUI;
+import org.syntax.jedit.tokenmarker.Token;
+import org.syntax.jedit.tokenmarker.TokenMarker;
 
-import javax.swing.JComponent;
-import javax.swing.JPopupMenu;
-import javax.swing.JViewport;
-import javax.swing.Scrollable;
-import javax.swing.SwingUtilities;
-import javax.swing.Timer;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.event.EventListenerList;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.Segment;
@@ -68,11 +30,12 @@ import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoableEdit;
-
-import org.syntax.jedit.tokenmarker.Token;
-import org.syntax.jedit.tokenmarker.TokenMarker;
-
-import com.eviware.soapui.SoapUI;
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.*;
+import java.lang.ref.WeakReference;
 
 /**
  * jEdit's text area component. It is more suited for editing program source
@@ -1965,7 +1928,7 @@ public class JEditTextArea extends JComponent implements Scrollable {
             }
         }
 
-        private void doDoubleClick(MouseEvent evt, int line, int offset, int dot) throws BadLocationException {
+        private void doDoubleClick(MouseEvent evt, int line, int offset, int dot) {
             // Ignore empty lines
             if (getTabExpandedLineLength(line) == 0) {
                 return;

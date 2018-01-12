@@ -26,21 +26,21 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public interface HttpHeadersInspectorModel {
-    public StringToStringsMap getHeaders();
+    StringToStringsMap getHeaders();
 
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+    void setHeaders(StringToStringsMap headers);
 
-    public void setHeaders(StringToStringsMap headers);
+    void addPropertyChangeListener(PropertyChangeListener listener);
 
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+    void removePropertyChangeListener(PropertyChangeListener listener);
 
-    public boolean isReadOnly();
+    boolean isReadOnly();
 
-    public void release();
+    void release();
 
-    public void setInspector(AbstractXmlInspector inspector);
+    void setInspector(AbstractXmlInspector inspector);
 
-    public static abstract class AbstractHeadersModel<T extends ModelItem> implements HttpHeadersInspectorModel,
+    abstract class AbstractHeadersModel<T extends ModelItem> implements HttpHeadersInspectorModel,
             PropertyChangeListener {
         private boolean readOnly;
         private PropertyChangeSupport propertyChangeSupport;

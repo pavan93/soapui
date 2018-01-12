@@ -31,11 +31,8 @@ import com.eviware.soapui.support.types.StringList;
 import com.eviware.soapui.support.types.TupleList;
 import org.apache.xmlbeans.SchemaType;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 
@@ -157,7 +154,7 @@ public class RestRequestContentView extends HttpRequestContentView {
                 }
             };
 
-            for (RestRepresentation representation : ((RestRequestInterface) restRequest).getRepresentations(
+            for (RestRepresentation representation : restRequest.getRepresentations(
                     RestRepresentation.Type.REQUEST, restRequest.getMediaType())) {
                 SchemaType schemaType = representation.getSchemaType();
                 if (schemaType != null) {

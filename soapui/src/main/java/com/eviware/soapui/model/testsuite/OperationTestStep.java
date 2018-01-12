@@ -25,5 +25,5 @@ import com.eviware.soapui.model.iface.Operation;
  */
 
 public interface OperationTestStep extends TestStep, ResultContainer {
-    public Operation getOperation();
+    Operation getOperation();
 }

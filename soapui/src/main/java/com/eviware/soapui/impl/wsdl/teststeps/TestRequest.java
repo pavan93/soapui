@@ -22,12 +22,12 @@ import com.eviware.soapui.model.testsuite.Assertable;
 import com.eviware.soapui.model.testsuite.TestStep;
 
 public interface TestRequest extends Request, Assertable {
-    public TestStep getTestStep();
+    TestStep getTestStep();
 
-    public boolean isDiscardResponse();
+    boolean isDiscardResponse();
 
-    public WsdlMessageAssertion importAssertion(WsdlMessageAssertion source, boolean overwrite, boolean createCopy,
-                                                String newName);
+    WsdlMessageAssertion importAssertion(WsdlMessageAssertion source, boolean overwrite, boolean createCopy,
+                                         String newName);
 
-    public Response getResponse();
+    Response getResponse();
 }

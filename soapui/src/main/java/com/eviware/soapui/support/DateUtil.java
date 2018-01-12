@@ -35,7 +35,6 @@ public class DateUtil {
                 return new SimpleDateFormat(format);
             }
 
-            ;
         };
     }
 

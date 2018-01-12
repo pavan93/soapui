@@ -41,7 +41,7 @@ new File(args[0]).eachFileRecurse(FILES){file->
        file.eachLine{ line->
       
                if ( line =~ '^package *' ){
-                   packagePasssed = true;
+                   packagePasssed = true
                } 
       
                if(packagePasssed){

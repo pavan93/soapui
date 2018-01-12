@@ -28,33 +28,33 @@ import java.io.IOException;
  */
 
 public interface MockResult {
-    public MockRequest getMockRequest();
+    MockRequest getMockRequest();
 
-    public StringToStringsMap getResponseHeaders();
+    StringToStringsMap getResponseHeaders();
 
-    public String getResponseContent();
+    String getResponseContent();
 
-    public MockResponse getMockResponse();
+    void setResponseContent(String responseContent);
 
-    public MockOperation getMockOperation();
+    MockResponse getMockResponse();
 
-    public ActionList getActions();
+    MockOperation getMockOperation();
 
-    public long getTimeTaken();
+    ActionList getActions();
 
-    public long getTimestamp();
+    long getTimeTaken();
 
-    public void finish();
+    long getTimestamp();
 
-    public byte[] getRawResponseData();
+    void finish();
 
-    public void addHeader(String name, String value);
+    byte[] getRawResponseData();
 
-    public boolean isCommitted();
+    void addHeader(String name, String value);
 
-    public void setResponseContent(String responseContent);
+    boolean isCommitted();
 
-    public void setContentType(String contentTypeHttpHeader);
+    void setContentType(String contentTypeHttpHeader);
 
-    public void writeRawResponseData(byte[] data) throws IOException;
+    void writeRawResponseData(byte[] data) throws IOException;
 }

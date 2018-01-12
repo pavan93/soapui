@@ -23,30 +23,30 @@ package com.eviware.soapui.model.settings;
  */
 
 public interface Settings {
-    public String getString(String id, String defaultValue);
+    String getString(String id, String defaultValue);
 
-    public void setString(String id, String value);
+    void setString(String id, String value);
 
     /**
      * Defaults to false.
      */
-    public boolean getBoolean(String id);
+    boolean getBoolean(String id);
 
-    public boolean getBoolean(String id, boolean defaultValue);
+    boolean getBoolean(String id, boolean defaultValue);
 
-    public void setBoolean(String id, boolean value);
+    void setBoolean(String id, boolean value);
 
-    public void addSettingsListener(SettingsListener listener);
+    void addSettingsListener(SettingsListener listener);
 
-    public void removeSettingsListener(SettingsListener listener);
+    void removeSettingsListener(SettingsListener listener);
 
-    public void clearSetting(String id);
+    void clearSetting(String id);
 
-    public long getLong(String id, long defaultValue);
+    long getLong(String id, long defaultValue);
 
-    public boolean isSet(String id);
+    boolean isSet(String id);
 
-    public void setLong(String id, long value);
+    void setLong(String id, long value);
 
-    public void reloadSettings();
+    void reloadSettings();
 }

@@ -400,7 +400,7 @@ public class RestURIParserImplTestCase {
     private void assertURIParsedCorrectly(String expectedEndpoint,
                                           String expectedPath,
                                           String expectedResourceName,
-                                          String expectedQuery, RestURIParserImpl restURIParser) throws MalformedURLException {
+                                          String expectedQuery, RestURIParserImpl restURIParser) {
         assertEquals(expectedEndpoint, restURIParser.getEndpoint());
         assertEquals(expectedPath, restURIParser.getResourcePath());
         assertEquals(expectedResourceName, restURIParser.getResourceName());

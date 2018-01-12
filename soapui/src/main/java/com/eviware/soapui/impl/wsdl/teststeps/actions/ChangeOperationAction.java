@@ -121,21 +121,21 @@ public class ChangeOperationAction extends AbstractSoapUIAction<WsdlTestRequestS
     @AForm(description = "Specify Interface/Operation for TestRequest", name = "Change Operation", helpUrl = HelpUrls.CHANGEOPERATION_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     protected interface Form {
         @AField(name = "Name", description = "The Name of the TestRequests", type = AFieldType.STRING)
-        public final static String NAME = "Name";
+        String NAME = "Name";
 
         @AField(name = "Interface", description = "The TestRequests' Interface", type = AFieldType.ENUMERATION)
-        public final static String INTERFACE = "Interface";
+        String INTERFACE = "Interface";
 
         @AField(name = "Operation", description = "The TestRequests' Operation", type = AFieldType.ENUMERATION)
-        public final static String OPERATION = "Operation";
+        String OPERATION = "Operation";
 
         @AField(name = "Recreate Request", description = "Recreates the request content from the new Operations Definition", type = AFieldType.BOOLEAN)
-        public final static String RECREATE_REQUEST = "Recreate Request";
+        String RECREATE_REQUEST = "Recreate Request";
 
         @AField(name = "Create Optional", description = "Creates optional content when recreating the request", type = AFieldType.BOOLEAN)
-        public final static String CREATE_OPTIONAL = "Create Optional";
+        String CREATE_OPTIONAL = "Create Optional";
 
         @AField(name = "Keep Existing", description = "Tries to keep existing values when recreating the request", type = AFieldType.BOOLEAN)
-        public final static String KEEP_EXISTING = "Keep Existing";
+        String KEEP_EXISTING = "Keep Existing";
     }
 }

@@ -20,11 +20,11 @@ import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.testsuite.TestProperty;
 
 public interface MutableTestPropertyHolder extends TestPropertyHolder {
-    public TestProperty addProperty(String name);
+    TestProperty addProperty(String name);
 
-    public TestProperty removeProperty(String propertyName);
+    TestProperty removeProperty(String propertyName);
 
-    public boolean renameProperty(String name, String newName);
+    boolean renameProperty(String name, String newName);
 
-    public void moveProperty(String propertyName, int targetIndex);
+    void moveProperty(String propertyName, int targetIndex);
 }

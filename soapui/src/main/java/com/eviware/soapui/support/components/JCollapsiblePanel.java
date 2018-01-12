@@ -18,16 +18,8 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class JCollapsiblePanel extends JPanel {
@@ -100,7 +92,7 @@ public class JCollapsiblePanel extends JPanel {
     private void refresh() {
         contentPanel.revalidate();
         if (contentPanel.getParent() instanceof JComponent) {
-            ((JComponent) contentPanel.getParent()).revalidate();
+            contentPanel.getParent().revalidate();
         }
     }
 

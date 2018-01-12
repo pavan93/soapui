@@ -25,14 +25,7 @@ import com.eviware.soapui.monitor.JettyMockEngine;
 import com.eviware.soapui.monitor.MockEngine;
 import com.eviware.soapui.plugins.PluginManager;
 import com.eviware.soapui.security.registry.SecurityScanRegistry;
-import com.eviware.soapui.settings.HttpSettings;
-import com.eviware.soapui.settings.ProxySettings;
-import com.eviware.soapui.settings.SecuritySettings;
-import com.eviware.soapui.settings.UISettings;
-import com.eviware.soapui.settings.VersionUpdateSettings;
-import com.eviware.soapui.settings.WSISettings;
-import com.eviware.soapui.settings.WsaSettings;
-import com.eviware.soapui.settings.WsdlSettings;
+import com.eviware.soapui.settings.*;
 import com.eviware.soapui.support.SecurityScanUtil;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
@@ -45,14 +38,8 @@ import org.apache.commons.ssl.OpenSSL;
 import org.apache.log4j.Logger;
 import org.apache.log4j.xml.DOMConfigurator;
 
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import javax.swing.*;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -397,7 +384,7 @@ public class DefaultSoapUICore implements SoapUICore {
      *
      * @see com.eviware.soapui.SoapUICore#importSettings(java.io.File)
      */
-    public Settings importSettings(File file) throws Exception {
+    public Settings importSettings(File file) {
         if (file != null) {
             log.info("Importing preferences from [" + file.getAbsolutePath() + "]");
             return initSettings(file.getAbsolutePath());

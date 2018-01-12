@@ -22,7 +22,6 @@ import javax.activation.DataSource;
 import javax.mail.internet.MimeMultipart;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
@@ -43,7 +42,7 @@ public class MultipartAttachmentDataSource implements DataSource {
         return multipart.getContentType();
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             multipart.writeTo(out);
@@ -58,7 +57,7 @@ public class MultipartAttachmentDataSource implements DataSource {
         return multipart.toString();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

@@ -61,7 +61,7 @@ public class WsdlMockResponseTest {
     }
 
     @Test
-    public void testGetResponseContentWithNoCompression() throws Exception {
+    public void testGetResponseContentWithNoCompression() {
         when(compressedStringConfig.getCompression()).thenReturn("none");
         when(compressedStringConfig.getStringValue()).thenReturn("Awesomeness");
 

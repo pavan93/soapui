@@ -28,11 +28,8 @@ import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.security.SensitiveInformationTableModel;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.security.SensitiveInformationPropertyHolder;
 import com.eviware.soapui.support.SecurityScanUtil;
 import com.eviware.soapui.support.StringUtils;
@@ -49,19 +46,11 @@ import com.eviware.x.form.support.AForm;
 import org.apache.xmlbeans.XmlObject;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion implements ResponseAssertion {
     private static final String PREFIX = "~";
@@ -295,13 +284,13 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
     protected interface SensitiveInformationConfigDialog {
 
         @AField(description = "Sensitive informations to check. Use ~ as prefix for values that are regular expressions.", name = "Sensitive Information Tokens", type = AFieldType.COMPONENT)
-        public final static String TOKENS = "Sensitive Information Tokens";
+        String TOKENS = "Sensitive Information Tokens";
 
         @AField(description = "Include project specific sensitive information configuration", name = "Project Specific", type = AFieldType.BOOLEAN)
-        public final static String INCLUDE_PROJECT_SPECIFIC = "Project Specific";
+        String INCLUDE_PROJECT_SPECIFIC = "Project Specific";
 
         @AField(description = "Include global sensitive information configuration", name = "Global Configuration", type = AFieldType.BOOLEAN)
-        public final static String INCLUDE_GLOBAL = "Global Configuration";
+        String INCLUDE_GLOBAL = "Global Configuration";
 
     }
 

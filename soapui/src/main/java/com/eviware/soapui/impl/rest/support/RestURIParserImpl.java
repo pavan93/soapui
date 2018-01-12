@@ -52,7 +52,7 @@ public class RestURIParserImpl implements RestURIParser {
         }
     }
 
-    private void parseURI(String uriString) throws MalformedURLException {
+    private void parseURI(String uriString) {
         try {
             if (isAPossibleEndPointWithoutScheme(uriString)) {
                 uriString = DEFAULT_SCHEME + SCHEME_SEPARATOR + uriString;
@@ -73,13 +73,13 @@ public class RestURIParserImpl implements RestURIParser {
         }
     }
 
-    private boolean validateScheme() throws MalformedURLException {
+    private boolean validateScheme() {
         String scheme = getScheme();
         return scheme.isEmpty() || scheme.matches("(HTTP|http).*");
 
     }
 
-    private boolean validateAuthority() throws MalformedURLException {
+    private boolean validateAuthority() {
         String endpoint = getEndpoint();
         return endpoint.isEmpty() || !endpoint.matches(".*[\\\\]+.*");
 
@@ -171,7 +171,7 @@ public class RestURIParserImpl implements RestURIParser {
 
     }
 
-    private void parseWithURL(String uriString) throws MalformedURLException {
+    private void parseWithURL(String uriString) {
         URL url;
         try {
             url = new URL(uriString);

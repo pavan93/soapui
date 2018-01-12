@@ -48,7 +48,7 @@ public class JMSHeaderAndPropertyInspectorFactory implements RequestInspectorFac
     public EditorInspector<?> createRequestInspector(Editor<?> editor, ModelItem modelItem) {
         if (modelItem instanceof MessageExchangeModelItem) {
             JMSHeaderAndPropertyInspector inspector = new JMSHeaderAndPropertyInspector(
-                    (JMSHeaderAndPropertyInspectorModel) new MessageExchangeRequestJMSHeaderAndPropertiesModel(
+                    new MessageExchangeRequestJMSHeaderAndPropertiesModel(
                             (MessageExchangeModelItem) modelItem));
             inspector.setEnabled(JMSUtils.checkIfJMS(modelItem));
             return inspector;
@@ -60,14 +60,14 @@ public class JMSHeaderAndPropertyInspectorFactory implements RequestInspectorFac
 
         if (modelItem instanceof AbstractHttpRequest<?>) {
             JMSHeaderAndPropertyInspector inspector = new JMSHeaderAndPropertyInspector(
-                    (JMSHeaderAndPropertyInspectorModel) new ResponseJMSHeaderAndPropertiesModel(
+                    new ResponseJMSHeaderAndPropertiesModel(
                             (AbstractHttpRequest<?>) modelItem));
             inspector.setEnabled(JMSUtils.checkIfJMS(modelItem));
             return inspector;
         } else if (modelItem instanceof MessageExchangeModelItem) {
 
             JMSHeaderAndPropertyInspector inspector = new JMSHeaderAndPropertyInspector(
-                    (JMSHeaderAndPropertyInspectorModel) new MessageExchangeResponseJMSHeaderAndPropertiesModel(
+                    new MessageExchangeResponseJMSHeaderAndPropertiesModel(
                             (MessageExchangeModelItem) modelItem));
             inspector.setEnabled(JMSUtils.checkIfJMS(modelItem));
             return inspector;

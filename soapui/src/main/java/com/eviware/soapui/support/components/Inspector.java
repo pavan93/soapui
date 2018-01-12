@@ -16,35 +16,34 @@
 
 package com.eviware.soapui.support.components;
 
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 
 public interface Inspector {
-    public final static String TITLE_PROPERTY = Inspector.class.getName() + "@title";
-    public final static String ICON_PROPERTY = Inspector.class.getName() + "@icon";
-    public final static String DESCRIPTION_PROPERTY = Inspector.class.getName() + "@description";
-    public final static String ENABLED_PROPERTY = Inspector.class.getName() + "@enabled";
+    String TITLE_PROPERTY = Inspector.class.getName() + "@title";
+    String ICON_PROPERTY = Inspector.class.getName() + "@icon";
+    String DESCRIPTION_PROPERTY = Inspector.class.getName() + "@description";
+    String ENABLED_PROPERTY = Inspector.class.getName() + "@enabled";
 
-    public abstract String getTitle();
+    String getTitle();
 
-    public abstract ImageIcon getIcon();
+    ImageIcon getIcon();
 
-    public abstract JComponent getComponent();
+    JComponent getComponent();
 
-    public abstract String getDescription();
+    String getDescription();
 
-    public abstract boolean isEnabled();
+    boolean isEnabled();
 
-    public abstract void addPropertyChangeListener(PropertyChangeListener listener);
+    void addPropertyChangeListener(PropertyChangeListener listener);
 
-    public abstract void removePropertyChangeListener(PropertyChangeListener listener);
+    void removePropertyChangeListener(PropertyChangeListener listener);
 
-    public abstract String getInspectorId();
+    String getInspectorId();
 
-    public abstract void release();
+    void release();
 
-    public abstract void activate();
+    void activate();
 
-    public abstract void deactivate();
+    void deactivate();
 }

@@ -31,7 +31,7 @@ public class RecipeJsonSchemaValidatorTest {
     private final File file;
 
     @Parameters(name = "{1}")
-    public static Collection<Object[]> data() throws IOException, ProcessingException {
+    public static Collection<Object[]> data() {
         File recipeDir = getTestRecipesDirectory();
         File[] listFiles = recipeDir.listFiles();
         assertThat("Recipe directory not found", listFiles, is(notNullValue()));

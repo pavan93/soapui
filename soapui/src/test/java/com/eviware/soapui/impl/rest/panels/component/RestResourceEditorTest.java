@@ -67,7 +67,7 @@ public class RestResourceEditorTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         UISupport.setDialogs(oldDialogs);
     }
 

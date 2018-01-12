@@ -162,6 +162,6 @@ public class NewWadlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEW_WADL_PROJECT_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(description = "Form.InitialWadl.Description", type = AField.AFieldType.FILE)
-        public final static String INITIALWADL = messages.get("Form.InitialWadl.Label");
+        String INITIALWADL = messages.get("Form.InitialWadl.Label");
     }
 }

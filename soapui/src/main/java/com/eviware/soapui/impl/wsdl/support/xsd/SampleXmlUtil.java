@@ -19,31 +19,7 @@ package com.eviware.soapui.impl.wsdl.support.xsd;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.StringUtils;
-import org.apache.xmlbeans.GDate;
-import org.apache.xmlbeans.GDateBuilder;
-import org.apache.xmlbeans.GDuration;
-import org.apache.xmlbeans.GDurationBuilder;
-import org.apache.xmlbeans.SchemaGlobalElement;
-import org.apache.xmlbeans.SchemaLocalElement;
-import org.apache.xmlbeans.SchemaParticle;
-import org.apache.xmlbeans.SchemaProperty;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SimpleValue;
-import org.apache.xmlbeans.XmlAnySimpleType;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlDate;
-import org.apache.xmlbeans.XmlDateTime;
-import org.apache.xmlbeans.XmlDecimal;
-import org.apache.xmlbeans.XmlDuration;
-import org.apache.xmlbeans.XmlGDay;
-import org.apache.xmlbeans.XmlGMonth;
-import org.apache.xmlbeans.XmlGMonthDay;
-import org.apache.xmlbeans.XmlGYear;
-import org.apache.xmlbeans.XmlGYearMonth;
-import org.apache.xmlbeans.XmlInteger;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.apache.xmlbeans.XmlTime;
+import org.apache.xmlbeans.*;
 import org.apache.xmlbeans.impl.util.Base64;
 import org.apache.xmlbeans.impl.util.HexBin;
 import org.apache.xmlbeans.soap.SOAPArrayType;
@@ -52,14 +28,7 @@ import org.apache.xmlbeans.soap.SchemaWSDLArrayType;
 import javax.xml.namespace.QName;
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * XmlBeans class for generating XML from XML Schemas
@@ -1230,8 +1199,8 @@ public class SampleXmlUtil {
     public static final QName ENC_ARRAYTYPE = new QName("http://schemas.xmlsoap.org/soap/encoding/", "arrayType");
     private static final QName ENC_OFFSET = new QName("http://schemas.xmlsoap.org/soap/encoding/", "offset");
 
-    public static final Set<QName> SKIPPED_SOAP_ATTRS = new HashSet<QName>(Arrays.asList(new QName[]{HREF, ID,
-            ENC_OFFSET}));
+    public static final Set<QName> SKIPPED_SOAP_ATTRS = new HashSet<QName>(Arrays.asList(HREF, ID,
+            ENC_OFFSET));
 
     private void processAttributes(SchemaType stype, XmlCursor xmlc) {
         if (_soapEnc) {

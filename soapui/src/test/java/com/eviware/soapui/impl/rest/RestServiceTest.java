@@ -41,7 +41,7 @@ public class RestServiceTest {
     }
 
     @Test
-    public void deletingResourceDeletesAllChildResources() throws Exception {
+    public void deletingResourceDeletesAllChildResources() {
         // restResource -> childResourceA
         RestResource childResourceA = restResource.addNewChildResource("ChildA", "/childPath");
 
@@ -62,7 +62,7 @@ public class RestServiceTest {
     }
 
     @Test
-    public void deletingResourceDoesNotDeleteSiblings() throws Exception {
+    public void deletingResourceDoesNotDeleteSiblings() {
         Map<String, RestResource> expectedResourceList = restService.getResources();
 
         RestResource siblingResourceA = restService.addNewResource("SiblingA", "/siblingPath");

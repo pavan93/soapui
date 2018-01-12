@@ -20,8 +20,6 @@ import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.rest.RestServiceFactory;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.support.SoapUIException;
-import org.apache.xmlbeans.XmlException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +37,7 @@ public class OAuthConfigTest {
     private String projectFileName = "OAuthTestProject.xml";
 
     @Before
-    public void setUp() throws XmlException, IOException, SoapUIException {
+    public void setUp() throws IOException {
         WsdlProject project = createNewProjectWithRESTInterface();
 
         oAuth2Profile = project.getOAuth2ProfileContainer().addNewOAuth2Profile(PROFILE_NAME);
@@ -62,7 +60,7 @@ public class OAuthConfigTest {
     }
 
     @Test
-    public void theProfileListIsEmptyByDefault() throws XmlException, IOException, SoapUIException {
+    public void theProfileListIsEmptyByDefault() {
         WsdlProject project = createNewProjectWithRESTInterface();
 
         assertThat(project.getOAuth2ProfileContainer().getOAuth2ProfileList(), is(empty()));
@@ -75,7 +73,7 @@ public class OAuthConfigTest {
 
 
     @Test
-    public void basicOAuthConfigIsProjectSpecific() throws Exception {
+    public void basicOAuthConfigIsProjectSpecific() {
         WsdlProject retrievedProject = new WsdlProject(projectFileName);
 
         assertThat(retrievedProject.getOAuth2ProfileContainer().getOAuth2ProfileList().size(), is(1));
@@ -86,7 +84,7 @@ public class OAuthConfigTest {
     }
 
     @Test
-    public void basicOAuthConfigIsSaved() throws Exception {
+    public void basicOAuthConfigIsSaved() {
         WsdlProject retrievedProject = new WsdlProject(projectFileName);
 
         assertThat(retrievedProject.getOAuth2ProfileContainer().getOAuth2ProfileList().size(), is(1));
@@ -107,7 +105,7 @@ public class OAuthConfigTest {
         assertThat(savedOAuth2Profile.getResourceOwnerPassword(), is(oAuth2Profile.getResourceOwnerPassword()));
     }
 
-    private WsdlProject createNewProjectWithRESTInterface() throws XmlException, IOException, SoapUIException {
+    private WsdlProject createNewProjectWithRESTInterface() {
         WsdlProject project = new WsdlProject();
 
         RestService restService = (RestService) project.addNewInterface("Test", RestServiceFactory.REST_TYPE);

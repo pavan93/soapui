@@ -38,13 +38,7 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.TreePathUtils;
 import org.jdesktop.swingx.JXTree;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -54,19 +48,8 @@ import javax.swing.tree.AbstractLayoutCache;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.InputEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * A panel showing a scrollable list of TestSteps in a SecurityTest.
@@ -292,6 +275,56 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         }
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) securityTestTree.getLastSelectedPathComponent();
+        if (node == null) {
+            return;
+        }
+
+        if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
+            return;
+        }
+        /* if nothing is selected */
+        if (e.getClickCount() == 1) {
+            if (securityTestTree.isExpanded(TreePathUtils.getPath(node)) && node instanceof TestStepNode
+                    && cellRender.isOn((TestStepNode) node, e.getX(), e.getY())) {
+                securityTestTree.collapseRow(securityTestTree.getRowForLocation(e.getX(), e.getY()));
+            } else {
+                securityTestTree.expandRow(securityTestTree.getRowForLocation(e.getX(), e.getY()));
+            }
+            e.consume();
+            return;
+        }
+
+        if (node instanceof SecurityScanNode) {
+            if (securityTest.isRunning()) {
+                return;
+            }
+            SecurityScan securityScan = ((SecurityScanNode) securityTestTree.getLastSelectedPathComponent())
+                    .getSecurityScan();
+
+            if (securityScan.isConfigurable()) {
+                SecurityScanConfig backupScanConfig = (SecurityScanConfig) securityScan.getConfig().copy();
+
+                SecurityConfigurationDialog dialog = SoapUI.getSoapUICore().getSecurityScanRegistry().getUIBuilder()
+                        .buildSecurityScanConfigurationDialog(securityScan);
+
+                if (!dialog.configure()) {
+                    securityScan.copyConfig(backupScanConfig);
+                }
+
+                dialog.release();
+            }
+        } else {
+            if (securityTestTree.isExpanded(TreePathUtils.getPath(node))) {
+                UISupport.selectAndShow(((TestStepNode) node).getTestStep());
+                e.consume();
+            }
+        }
+
+    }
+
     public class OpenTestStepEditorAction extends AbstractAction {
 
         public OpenTestStepEditorAction() {
@@ -304,7 +337,31 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         @Override
         public void actionPerformed(ActionEvent e) {
             TestStepNode node = (TestStepNode) securityTestTree.getLastSelectedPathComponent();
-            UISupport.selectAndShow(((TestStepNode) node).getTestStep());
+            UISupport.selectAndShow(node.getTestStep());
+        }
+
+    }
+
+    public class EnableDisableSecurityScan extends AbstractAction {
+
+        EnableDisableSecurityScan() {
+            super("Enable Scan");
+            putValue(Action.SHORT_DESCRIPTION, "Enables/Disables Security Scan");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
+            SecurityScan securityScan = node.getSecurityScan();
+            securityScan.setDisabled(!securityScan.isDisabled());
+        }
+
+        public void setText(boolean disabled) {
+            if (disabled) {
+                this.putValue(Action.NAME, "Enable Security Scan");
+            } else {
+                this.putValue(Action.NAME, "Disable Security Scan");
+            }
         }
 
     }
@@ -357,40 +414,16 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
             securityTestTree.setSelectionPath(new TreePath(node.getPath()));
 
             SecurityConfigurationDialog dialog = SoapUI.getSoapUICore().getSecurityScanRegistry().getUIBuilder()
-                    .buildSecurityScanConfigurationDialog((SecurityScan) securityScan);
+                    .buildSecurityScanConfigurationDialog(securityScan);
 
             if (!dialog.configure()) {
                 SecurityScanNode securityScanNode = (SecurityScanNode) node.getLastChild();
 
-                securityTest.removeSecurityScan(testStep, (SecurityScan) securityScan);
+                securityTest.removeSecurityScan(testStep, securityScan);
                 cellRender.remove(securityScanNode);
             }
 
             dialog.release();
-        }
-
-    }
-
-    public class EnableDisableSecurityScan extends AbstractAction {
-
-        EnableDisableSecurityScan() {
-            super("Enable Scan");
-            putValue(Action.SHORT_DESCRIPTION, "Enables/Disables Security Scan");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
-            SecurityScan securityScan = node.getSecurityScan();
-            securityScan.setDisabled(!securityScan.isDisabled());
-        }
-
-        public void setText(boolean disabled) {
-            if (disabled) {
-                this.putValue(Action.NAME, "Enable Security Scan");
-            } else {
-                this.putValue(Action.NAME, "Disable Security Scan");
-            }
         }
 
     }
@@ -411,51 +444,13 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
                 SecurityScanConfig backupScanConfig = (SecurityScanConfig) securityScan.getConfig().copy();
 
                 SecurityConfigurationDialog dialog = SoapUI.getSoapUICore().getSecurityScanRegistry().getUIBuilder()
-                        .buildSecurityScanConfigurationDialog((SecurityScan) securityScan);
+                        .buildSecurityScanConfigurationDialog(securityScan);
 
                 if (!dialog.configure()) {
                     securityScan.copyConfig(backupScanConfig);
                 }
 
                 dialog.release();
-            }
-        }
-    }
-
-    public class RemoveSecurityScanAction extends AbstractAction {
-        public RemoveSecurityScanAction() {
-            super("Remove SecurityScan");
-            putValue(Action.SHORT_DESCRIPTION, "Removes the selected security scan");
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_security_scan.gif"));
-            setEnabled(false);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if (securityTest.isRunning()) {
-                UISupport.showErrorMessage("Can not delete SecurityScan while the SecurityTest is running");
-                return;
-            }
-
-            if (securityTestTree.getSelectionCount() == 1) {
-                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
-                SecurityScan securityScan = node.getSecurityScan();
-
-                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
-                if (UISupport.confirm("Remove security scan [" + securityScan.getName() + "]", "Remove SecurityScan")) {
-                    securityTest.removeSecurityScan(testStep, (SecurityScan) securityScan);
-                }
-            } else {
-                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
-
-                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
-                if (UISupport.confirm("Remove all selected security scans", "Remove SecurityScan")) {
-                    for (TreePath path : securityTestTree.getSelectionPaths()) {
-                        if (path.getLastPathComponent() instanceof SecurityScanNode) {
-                            SecurityScan securityScan = ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan();
-                            securityTest.removeSecurityScan(testStep, (SecurityScan) securityScan);
-                        }
-                    }
-                }
             }
         }
     }
@@ -596,54 +591,42 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         cloneParametersAction.setEnabled(false);
     }
 
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) securityTestTree.getLastSelectedPathComponent();
-        if (node == null) {
-            return;
+    public class RemoveSecurityScanAction extends AbstractAction {
+        public RemoveSecurityScanAction() {
+            super("Remove SecurityScan");
+            putValue(Action.SHORT_DESCRIPTION, "Removes the selected security scan");
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_security_scan.gif"));
+            setEnabled(false);
         }
 
-        if ((e.getModifiers() & InputEvent.BUTTON3_MASK) == InputEvent.BUTTON3_MASK) {
-            return;
-        }
-        /* if nothing is selected */
-        if (e.getClickCount() == 1) {
-            if (securityTestTree.isExpanded(TreePathUtils.getPath(node)) && node instanceof TestStepNode
-                    && cellRender.isOn((TestStepNode) node, e.getX(), e.getY())) {
-                securityTestTree.collapseRow(securityTestTree.getRowForLocation(e.getX(), e.getY()));
-            } else {
-                securityTestTree.expandRow(securityTestTree.getRowForLocation(e.getX(), e.getY()));
-            }
-            e.consume();
-            return;
-        }
-
-        if (node instanceof SecurityScanNode) {
+        public void actionPerformed(ActionEvent e) {
             if (securityTest.isRunning()) {
+                UISupport.showErrorMessage("Can not delete SecurityScan while the SecurityTest is running");
                 return;
             }
-            SecurityScan securityScan = ((SecurityScanNode) securityTestTree.getLastSelectedPathComponent())
-                    .getSecurityScan();
 
-            if (securityScan.isConfigurable()) {
-                SecurityScanConfig backupScanConfig = (SecurityScanConfig) securityScan.getConfig().copy();
+            if (securityTestTree.getSelectionCount() == 1) {
+                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
+                SecurityScan securityScan = node.getSecurityScan();
 
-                SecurityConfigurationDialog dialog = SoapUI.getSoapUICore().getSecurityScanRegistry().getUIBuilder()
-                        .buildSecurityScanConfigurationDialog((SecurityScan) securityScan);
-
-                if (!dialog.configure()) {
-                    securityScan.copyConfig(backupScanConfig);
+                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
+                if (UISupport.confirm("Remove security scan [" + securityScan.getName() + "]", "Remove SecurityScan")) {
+                    securityTest.removeSecurityScan(testStep, securityScan);
                 }
+            } else {
+                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
 
-                dialog.release();
-            }
-        } else {
-            if (securityTestTree.isExpanded(TreePathUtils.getPath(node))) {
-                UISupport.selectAndShow(((TestStepNode) node).getTestStep());
-                e.consume();
+                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
+                if (UISupport.confirm("Remove all selected security scans", "Remove SecurityScan")) {
+                    for (TreePath path : securityTestTree.getSelectionPaths()) {
+                        if (path.getLastPathComponent() instanceof SecurityScanNode) {
+                            SecurityScan securityScan = ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan();
+                            securityTest.removeSecurityScan(testStep, securityScan);
+                        }
+                    }
+                }
             }
         }
-
     }
 
     @Override
@@ -773,7 +756,6 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
                 tree.repaint();
             }
 
-            ;
         };
 
         protected void paintRow(Graphics g, Rectangle clipBounds, Insets insets, Rectangle bounds, TreePath path,
@@ -782,14 +764,10 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
                     path, row, isExpanded, hasBeenExpanded, isLeaf);
         }
 
-        ;
-
         @Override
         protected void paintHorizontalPartOfLeg(Graphics g, Rectangle clipBounds, Insets insets, Rectangle bounds,
                                                 TreePath path, int row, boolean isExpanded, boolean hasBeenExpanded, boolean isLeaf) {
         }
-
-        ;
 
         @Override
         protected void paintVerticalPartOfLeg(Graphics g, Rectangle clipBounds, Insets insets, TreePath path) {

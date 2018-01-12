@@ -30,15 +30,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import static com.eviware.soapui.utils.MockedServlet.mockHttpServletRequest;
-import static com.eviware.soapui.utils.MockedServlet.mockHttpServletResponse;
-import static com.eviware.soapui.utils.MockedServlet.stubbedServletContext;
+import static com.eviware.soapui.utils.MockedServlet.*;
 import static com.eviware.soapui.utils.ResourceUtils.getFilePathFromResource;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.atLeastOnce;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class MockAsWarServletTest {
 
@@ -63,7 +59,7 @@ public class MockAsWarServletTest {
     }
 
     @Test
-    public void shouldStartAllMockServices() throws ServletException, IOException {
+    public void shouldStartAllMockServices() throws IOException {
 
         int totalMockService = stubMockAsWarServlet.project.getRestMockServiceCount() + stubMockAsWarServlet.project.getMockServiceCount();
         stubMockAsWarServlet.service(reqeust, response);

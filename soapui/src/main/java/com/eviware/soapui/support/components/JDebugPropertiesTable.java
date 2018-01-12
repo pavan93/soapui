@@ -25,16 +25,9 @@ import com.eviware.soapui.support.swing.JTableFactory;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableCellEditor;
-import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableModel;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import javax.swing.*;
+import javax.swing.table.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.lang.reflect.InvocationTargetException;
@@ -228,7 +221,7 @@ public class JDebugPropertiesTable<T> {
 
         @Override
         public boolean getShowVerticalLines() {
-            return UISupport.isMac() ? false : super.getShowVerticalLines();
+            return !UISupport.isMac() && super.getShowVerticalLines();
         }
     }
 

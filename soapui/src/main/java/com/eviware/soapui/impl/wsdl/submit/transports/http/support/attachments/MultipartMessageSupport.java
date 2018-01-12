@@ -158,7 +158,7 @@ public class MultipartMessageSupport {
                     charset = StringUtils.unquote(charset);
 
                     responseContent = charset == null ? new String(data) : new String(data, contentOffset,
-                            (int) (data.length - contentOffset), charset);
+                            data.length - contentOffset, charset);
                 }
 
                 if (responseContent == null) {

@@ -38,17 +38,12 @@ import java.util.Collection;
 import java.util.List;
 
 import static com.eviware.soapui.utils.CommonMatchers.aCollectionWithSize;
-import static org.hamcrest.CoreMatchers.hasItem;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.not;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.containsString;
 import static org.mockito.Matchers.isA;
 import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.eq;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class PluginManagerTest extends StubbedDialogsTestBase {
 
@@ -82,7 +77,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         if (originalUserHome != null) {
             System.setProperty("user.home", originalUserHome);
         }
@@ -96,7 +91,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     @Test
     public void installsAndReturnsPlugin() throws Exception {
         assertThat(pluginManager.installPlugin(pluginFile), is(plugin));
-        verify(pluginLoader).loadPlugin(pluginFile, java.util.Collections.<JarClassLoader>emptySet());
+        verify(pluginLoader).loadPlugin(pluginFile, java.util.Collections.emptySet());
         verify(fileOperations).copyFile(eq(pluginFile), any(File.class));
     }
 
@@ -127,11 +122,11 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     @Test
     public void loadsNothingFromPluginWhenUserDeclinesOverwrite() throws Exception {
         pluginManager.installPlugin(pluginFile);
-        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(upgradedAndUninstallablePlugin.getInfo());
+        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.emptySet())).thenReturn(upgradedAndUninstallablePlugin.getInfo());
         stubbedDialogs.mockConfirmWithReturnValue(false);
 
         pluginManager.installPlugin(secondPluginFile);
-        verify(pluginLoader, never()).loadPlugin(secondPluginFile, java.util.Collections.<JarClassLoader>emptySet());
+        verify(pluginLoader, never()).loadPlugin(secondPluginFile, java.util.Collections.emptySet());
     }
 
     @Test
@@ -187,7 +182,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     public void findsDependentPlugins() throws Exception {
         pluginManager.installPlugin(pluginFile);
         DependentPlugin dependentPlugin = new DependentPlugin();
-        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(
+        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.emptySet())).thenReturn(
                 PluginLoader.readPluginInfoFrom(DependentPlugin.class));
 
         when(pluginLoader.loadPlugin(eq(secondPluginFile), isA(Collection.class))).thenReturn(
@@ -200,7 +195,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void loadsClassesFromDependenciesWhenLoadingPlugins() throws Exception {
+    public void loadsClassesFromDependenciesWhenLoadingPlugins() {
          /* These three JARs contain the plugins RootPlugin, SingleDependencyPlugin and MultipleDependencyPlugin,
             but moved to another package to ensure that they can only be loaded from the JAR files themselves, i.e. not
             using the standard classpath. The file root-plugin.jar also contains the class RootPluginHelper, which
@@ -235,12 +230,12 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
         plugin = new OldPlugin();
         upgradedAndUninstallablePlugin = new UpgradedPlugin();
         pluginFile = new File(pluginsDirectory, "plugin-file.jar");
-        when(pluginLoader.loadPlugin(pluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(recordWith(plugin));
-        when(pluginLoader.loadPluginInfoFrom(pluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(plugin.getInfo());
+        when(pluginLoader.loadPlugin(pluginFile, java.util.Collections.emptySet())).thenReturn(recordWith(plugin));
+        when(pluginLoader.loadPluginInfoFrom(pluginFile, java.util.Collections.emptySet())).thenReturn(plugin.getInfo());
         secondPluginFile = new File(pluginsDirectory, "plugin-file-0.2.jar");
-        when(pluginLoader.loadPlugin(secondPluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(
+        when(pluginLoader.loadPlugin(secondPluginFile, java.util.Collections.emptySet())).thenReturn(
                 recordWith(upgradedAndUninstallablePlugin));
-        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.<JarClassLoader>emptySet())).thenReturn(upgradedAndUninstallablePlugin.getInfo());
+        when(pluginLoader.loadPluginInfoFrom(secondPluginFile, java.util.Collections.emptySet())).thenReturn(upgradedAndUninstallablePlugin.getInfo());
     }
 
     private InstalledPluginRecord recordWith(Plugin rootPlugin) {
@@ -271,7 +266,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     private class UpgradedPlugin extends PluginAdapter implements UninstallablePlugin {
 
         @Override
-        public boolean uninstall() throws Exception {
+        public boolean uninstall() {
             return true;
         }
     }
@@ -281,7 +276,7 @@ public class PluginManagerTest extends StubbedDialogsTestBase {
     private class DependentPlugin extends PluginAdapter implements UninstallablePlugin {
 
         @Override
-        public boolean uninstall() throws Exception {
+        public boolean uninstall() {
             return true;
         }
     }

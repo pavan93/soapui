@@ -29,15 +29,15 @@ import java.io.IOException;
  */
 
 public interface WsdlAttachment extends Attachment {
-    public void updateConfig(AttachmentConfig config);
+    void updateConfig(AttachmentConfig config);
 
-    public XmlObject getConfig();
+    XmlObject getConfig();
 
-    public void setContentID(String contentID);
+    void setContentID(String contentID);
 
-    public void reload(File file, boolean cache) throws IOException;
+    void reload(File file, boolean cache) throws IOException;
 
-    public void setName(String value);
+    void setName(String value);
 
-    public void setUrl(String string);
+    void setUrl(String string);
 }

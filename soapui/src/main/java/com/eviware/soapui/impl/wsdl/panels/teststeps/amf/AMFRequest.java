@@ -24,13 +24,7 @@ import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStepWithProperties;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.TestAssertionRegistry.AssertableType;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.iface.Attachment;
-import com.eviware.soapui.model.iface.Interface;
-import com.eviware.soapui.model.iface.MessagePart;
-import com.eviware.soapui.model.iface.Operation;
-import com.eviware.soapui.model.iface.Submit;
-import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.iface.SubmitListener;
+import com.eviware.soapui.model.iface.*;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.support.AbstractModelItem;
@@ -47,13 +41,8 @@ import com.eviware.soapui.support.types.StringToObjectMap;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.types.StringToStringsMap;
 
-import javax.swing.ImageIcon;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import javax.swing.*;
+import java.util.*;
 
 public class AMFRequest extends AbstractModelItem implements Assertable, TestRequest, AnimatableItem {
     public static final String AMF_SCRIPT_HEADERS = "AMF_SCRIPT_HEADERS";
@@ -96,7 +85,7 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         }
     }
 
-    public AMFSubmit submit(SubmitContext submitContext, boolean async) throws SubmitException {
+    public AMFSubmit submit(SubmitContext submitContext, boolean async) {
 
         return new AMFSubmit(this, submitContext, async);
     }

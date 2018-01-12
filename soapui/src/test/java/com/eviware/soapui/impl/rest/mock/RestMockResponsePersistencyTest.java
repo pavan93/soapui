@@ -21,7 +21,6 @@ import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.ModelItemFactory;
 import org.apache.commons.httpclient.HttpStatus;
-import org.apache.xmlbeans.XmlException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,7 +38,7 @@ public class RestMockResponsePersistencyTest {
     private String restMockServiceName = "REST Mock Service";
 
     @Before
-    public void setUp() throws XmlException, IOException, SoapUIException {
+    public void setUp() throws IOException, SoapUIException {
         RestMockAction restMockAction = ModelItemFactory.makeRestMockAction();
         WsdlProject project = restMockAction.getMockService().getProject();
         restMockAction.getMockService().setName(restMockServiceName);
@@ -58,7 +57,7 @@ public class RestMockResponsePersistencyTest {
     }
 
     @Test
-    public void testResponseHttpStatusIsPersisted() throws Exception {
+    public void testResponseHttpStatusIsPersisted() {
         WsdlProject retrievedProject = new WsdlProject(projectFileName);
         RestMockService restMockService = retrievedProject.getRestMockServiceByName(restMockServiceName);
         RestMockResponse mockResponse = restMockService.getMockOperationAt(0).getMockResponseAt(0);

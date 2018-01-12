@@ -33,21 +33,11 @@ import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.project.ProjectFactoryRegistry;
 import com.eviware.soapui.model.support.ModelSupport;
 import com.eviware.soapui.model.support.ProjectRunListenerAdapter;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.Assertable.AssertionStatus;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.ProjectRunContext;
-import com.eviware.soapui.model.testsuite.ProjectRunner;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
-import com.eviware.soapui.model.testsuite.TestSuite;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
 import com.eviware.soapui.report.JUnitReportCollector;
 import com.eviware.soapui.report.JUnitSecurityReportCollector;
 import com.eviware.soapui.report.TestCaseRunLogReport;
@@ -60,11 +50,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.eviware.soapui.analytics.SoapUIActions.LAUNCH_FUNCTIONAL_TEST_RUNNER;
 import static com.eviware.soapui.analytics.SoapUIActions.LAUNCH_FUNCTIONAL_TEST_RUNNER_FROM_UI;
@@ -118,7 +104,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
      * @throws Exception
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.exit(new SoapUITestCaseRunner().runFromCommandLine(args));
     }
 
@@ -471,7 +457,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         }
     }
 
-    protected void initProject(WsdlProject project) throws Exception {
+    protected void initProject(WsdlProject project) {
         initProjectProperties(project);
     }
 
@@ -523,8 +509,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         return exportAll;
     }
 
-    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project)
-            throws Exception {
+    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
         collector.saveReports(folder == null ? "" : folder);
     }
 

@@ -25,7 +25,7 @@ import com.eviware.x.form.support.AForm;
 import com.eviware.x.impl.swing.JFormDialog;
 import com.eviware.x.impl.swing.JTextFieldFormField;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class MalformedXmlAdvancedSettingsPanel {
 
@@ -149,37 +149,37 @@ public class MalformedXmlAdvancedSettingsPanel {
     protected interface AdvancedSettings {
 
         @AField(description = "", name = "Insert new element", type = AFieldType.BOOLEAN)
-        public final static String INSERT_NEW_ELEMENT = "Insert new element";
+        String INSERT_NEW_ELEMENT = "Insert new element";
 
         @AField(description = "", name = "New element value", type = AFieldType.STRING)
-        public final static String NEW_ELEMENT_VALUE = "New element value";
+        String NEW_ELEMENT_VALUE = "New element value";
 
         @AField(description = "", name = "Change tag name", type = AFieldType.BOOLEAN)
-        public final static String CHANGE_TAG_NAME = "Change tag name";
+        String CHANGE_TAG_NAME = "Change tag name";
 
         @AField(description = "", name = "Leave tag open", type = AFieldType.BOOLEAN)
-        public final static String LEAVE_TAG_OPEN = "Leave tag open";
+        String LEAVE_TAG_OPEN = "Leave tag open";
 
         @AField(description = "", name = "Insert invalid char in xml", type = AFieldType.BOOLEAN)
-        public final static String INSERT_INVALID_CHARACTER = "Insert invalid char in xml";
+        String INSERT_INVALID_CHARACTER = "Insert invalid char in xml";
 
         @AField(description = "", name = "Mutate attributes", type = AFieldType.BOOLEAN)
-        public final static String MUTATE_ATTRIBUTES = "Mutate attributes";
+        String MUTATE_ATTRIBUTES = "Mutate attributes";
 
         @AField(description = "", name = "Insert invalid chars in attribute", type = AFieldType.BOOLEAN)
-        public final static String INSERT_INVALID_CHARS = "Insert invalid chars in attribute";
+        String INSERT_INVALID_CHARS = "Insert invalid chars in attribute";
 
         @AField(description = "", name = "Leave attribute open", type = AFieldType.BOOLEAN)
-        public final static String LEAVE_ATTRIBUTE_OPEN = "Leave attribute open";
+        String LEAVE_ATTRIBUTE_OPEN = "Leave attribute open";
 
         @AField(description = "", name = "Add new attribute", type = AFieldType.BOOLEAN)
-        public final static String ADD_NEW_ATTRIBUTE = "Add new attribute";
+        String ADD_NEW_ATTRIBUTE = "Add new attribute";
 
         @AField(description = "", name = "New attribute name", type = AFieldType.STRING)
-        public final static String NEW_ATTRIBUTE_NAME = "New attribute name";
+        String NEW_ATTRIBUTE_NAME = "New attribute name";
 
         @AField(description = "", name = "New attribute value", type = AFieldType.STRING)
-        public final static String NEW_ATTRIBUTE_VALUE = "New attribute value";
+        String NEW_ATTRIBUTE_VALUE = "New attribute value";
 
     }
 

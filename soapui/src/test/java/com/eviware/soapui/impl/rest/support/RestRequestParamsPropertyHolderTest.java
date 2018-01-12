@@ -53,7 +53,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void addsParameterAtEndOfList() throws Exception {
+    public void addsParameterAtEndOfList() {
         String newParameterName = "newOne";
         parametersHolder.addProperty(newParameterName);
 
@@ -61,7 +61,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void canSetAndGetValueOfNewParameter() throws Exception {
+    public void canSetAndGetValueOfNewParameter() {
         String newParameterName = "newOne";
         RestParamProperty restParamProperty = parametersHolder.addProperty(newParameterName);
         String parameterValue = "theValue";
@@ -71,7 +71,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void movesParameterCorrectly() throws Exception {
+    public void movesParameterCorrectly() {
         String newParameterName = "newOne";
         parametersHolder.addProperty(newParameterName);
         parametersHolder.moveProperty(newParameterName, 0);
@@ -82,7 +82,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void movesParameterCorrectlyAfterLocationChange() throws Exception {
+    public void movesParameterCorrectlyAfterLocationChange() {
         String newParameterName = "newOne";
         RestParamProperty restParamProperty = parametersHolder.addProperty(newParameterName);
         parametersHolder.setParameterLocation(restParamProperty, NewRestResourceActionBase.ParamLocation.METHOD);
@@ -94,7 +94,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void removesParameterCorrectly() throws Exception {
+    public void removesParameterCorrectly() {
         parametersHolder.removeProperty("first");
 
         assertThat(parametersHolder.getPropertyCount(), is(0));
@@ -102,7 +102,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void detectsParameterAdditionOnMethodLevel() throws Exception {
+    public void detectsParameterAdditionOnMethodLevel() {
         String newParameterName = "newOne";
         methodParams.addProperty(newParameterName);
 
@@ -110,7 +110,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void detectsParameterRemovalOnMethodLevel() throws Exception {
+    public void detectsParameterRemovalOnMethodLevel() {
         methodParams.removeProperty("first");
 
         assertThat(parametersHolder.getPropertyCount(), is(0));
@@ -133,7 +133,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void retainsOrderWhenRenamingParameter() throws Exception {
+    public void retainsOrderWhenRenamingParameter() {
         String originalName = "secondParameter";
         parametersHolder.addProperty(originalName);
         parametersHolder.addProperty("lastParameter");
@@ -144,7 +144,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void retainsOrderWhenChangingLocation() throws Exception {
+    public void retainsOrderWhenChangingLocation() {
         String originalName = "secondParameter";
         parametersHolder.addProperty(originalName);
         parametersHolder.setParameterLocation(parametersHolder.getProperty(FIRST_PARAMETER_NAME),
@@ -154,7 +154,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void retainsLocationWhenRenamingParameter() throws Exception {
+    public void retainsLocationWhenRenamingParameter() {
         String originalName = "secondParameter";
         parametersHolder.addProperty(originalName);
         String newName = "secondParameter_with_new_name";
@@ -164,7 +164,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void retainsValueWhenRenamingParameter() throws Exception {
+    public void retainsValueWhenRenamingParameter() {
         String originalName = "secondParameter";
         RestParamProperty parameter = parametersHolder.addProperty(originalName);
         String value = "ulysses";
@@ -176,7 +176,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void detectsParameterNameChange() throws Exception {
+    public void detectsParameterNameChange() {
         String newParameterName = "newOne";
         methodParams.renameProperty(FIRST_PARAMETER_NAME, newParameterName);
 
@@ -186,7 +186,7 @@ public class RestRequestParamsPropertyHolderTest {
     }
 
     @Test
-    public void handlesParameterLevelChange() throws Exception {
+    public void handlesParameterLevelChange() {
         String newParameterName = "newOne";
         RestParamProperty restParamProperty = parametersHolder.addProperty(newParameterName);
         parametersHolder.setParameterLocation(restParamProperty, NewRestResourceActionBase.ParamLocation.METHOD);

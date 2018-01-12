@@ -19,7 +19,7 @@ package com.eviware.soapui.model.tree;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.swing.ActionList;
 
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import javax.swing.tree.TreeNode;
 
 /**
@@ -29,25 +29,25 @@ import javax.swing.tree.TreeNode;
  */
 
 public interface SoapUITreeNode extends TreeNode {
-    public int getChildCount();
+    int getChildCount();
 
-    public int getIndexOfChild(Object child);
+    int getIndexOfChild(Object child);
 
-    public boolean valueChanged(Object newValue);
+    boolean valueChanged(Object newValue);
 
-    public SoapUITreeNode getChildNode(int index);
+    SoapUITreeNode getChildNode(int index);
 
-    public boolean isLeaf();
+    boolean isLeaf();
 
-    public JPopupMenu getPopup();
+    JPopupMenu getPopup();
 
-    public SoapUITreeNode getParentTreeNode();
+    SoapUITreeNode getParentTreeNode();
 
-    public void release();
+    void release();
 
-    public ActionList getActions();
+    ActionList getActions();
 
-    public void reorder(boolean notify);
+    void reorder(boolean notify);
 
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 }

@@ -19,16 +19,16 @@ package com.eviware.soapui.model.project;
 import com.eviware.soapui.impl.wsdl.submit.RequestFilter;
 import com.eviware.soapui.model.iface.Interface;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface EndpointStrategy extends RequestFilter {
-    public void init(Project project);
+    void init(Project project);
 
-    public JComponent getConfigurationPanel(Interface iface);
+    JComponent getConfigurationPanel(Interface iface);
 
-    public void onSave();
+    void onSave();
 
-    public void release();
+    void release();
 
-    public void importEndpoints(Interface iface);
+    void importEndpoints(Interface iface);
 }

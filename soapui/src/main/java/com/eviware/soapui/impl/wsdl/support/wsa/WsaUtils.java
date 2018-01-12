@@ -31,12 +31,7 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
-import org.w3c.dom.DOMException;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.w3c.dom.Text;
+import org.w3c.dom.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -192,44 +187,8 @@ public class WsaUtils {
         return header;
     }
 
-    /**
-     * Processing ws-a property
-     *
-     * @param header           - header element to add wsa to
-     * @param override         - indicates if existing parameters should be overriden with new
-     *                         values
-     * @param elementLocalName - property string to add, for instance: any:Action, or
-     *                         any:ReplyTo
-     * @param wsaPropValue     - wsa property value, inserted in input box, or default
-     *                         generated
-     * @param address          - indicates if property is an endpoint reference, i.e. if it has
-     *                         <address> tag inside itself
-     * @param refParamsContent - the content of ReferenceParameters for specific endpoint
-     *                         reference, null if property is an absolute IRI
-     */
-    private Element processWsaProperty(Element header, boolean override, String elementLocalName, String wsaPropValue,
-                                       boolean address, String refParamsContent) {
-        boolean existsWsa = getWsaProperty(header, elementLocalName) != null ? true : false;
-        if (override) {
-            if (existsWsa) {
-                header = removeWsaProperty(override, header, elementLocalName);
-            }
-            if (address) {
-                header.appendChild(builder.createWsaAddressChildElement(elementLocalName, envelopeElement, wsaPropValue,
-                        refParamsContent));
-            } else {
-                header.appendChild(builder.createWsaChildElement(elementLocalName, envelopeElement, wsaPropValue));
-            }
-
-        } else if (!existsWsa) {
-            if (address) {
-                header.appendChild(builder.createWsaAddressChildElement(elementLocalName, envelopeElement, wsaPropValue,
-                        refParamsContent));
-            } else {
-                header.appendChild(builder.createWsaChildElement(elementLocalName, envelopeElement, wsaPropValue));
-            }
-        }
-        return header;
+    public static boolean isAnonymousAddress(String address, String wsaVersionNamespace) {
+        return address.equals(wsaVersionNamespace + "/anonymous");
     }
 
     private Element processWsaProperty(Element header, boolean override, String elementLocalName, String wsaPropValue,
@@ -237,20 +196,8 @@ public class WsaUtils {
         return processWsaProperty(header, override, elementLocalName, wsaPropValue, address, null);
     }
 
-    private Element processWsaRelatesToProperty(Element header, boolean override, String elementLocalName,
-                                                String relationshipType, String relatesTo) {
-        boolean existsWsa = getWsaProperty(header, elementLocalName) != null ? true : false;
-        if (override) {
-            if (existsWsa) {
-                header = removeWsaProperty(override, header, elementLocalName);
-            }
-            header.appendChild(builder.createRelatesToElement(wsaPrefix + ":RelatesTo", envelopeElement,
-                    relationshipType, relatesTo));
-        } else if (!existsWsa) {
-            header.appendChild(builder.createRelatesToElement(wsaPrefix + ":RelatesTo", envelopeElement,
-                    relationshipType, relatesTo));
-        }
-        return header;
+    public static boolean isNoneAddress(String address, String wsaVersionNamespace) {
+        return address.equals(wsaVersionNamespace + "/none");
     }
 
     public String removeWSAddressing(WsaContainer wsaContainer) {
@@ -628,12 +575,60 @@ public class WsaUtils {
         }
     }
 
-    public static boolean isAnonymousAddress(String address, String wsaVersionNamespace) {
-        return (address.equals(wsaVersionNamespace + "/anonymous")) ? true : false;
+    /**
+     * Processing ws-a property
+     *
+     * @param header           - header element to add wsa to
+     * @param override         - indicates if existing parameters should be overriden with new
+     *                         values
+     * @param elementLocalName - property string to add, for instance: any:Action, or
+     *                         any:ReplyTo
+     * @param wsaPropValue     - wsa property value, inserted in input box, or default
+     *                         generated
+     * @param address          - indicates if property is an endpoint reference, i.e. if it has
+     *                         <address> tag inside itself
+     * @param refParamsContent - the content of ReferenceParameters for specific endpoint
+     *                         reference, null if property is an absolute IRI
+     */
+    private Element processWsaProperty(Element header, boolean override, String elementLocalName, String wsaPropValue,
+                                       boolean address, String refParamsContent) {
+        boolean existsWsa = getWsaProperty(header, elementLocalName) != null;
+        if (override) {
+            if (existsWsa) {
+                header = removeWsaProperty(override, header, elementLocalName);
+            }
+            if (address) {
+                header.appendChild(builder.createWsaAddressChildElement(elementLocalName, envelopeElement, wsaPropValue,
+                        refParamsContent));
+            } else {
+                header.appendChild(builder.createWsaChildElement(elementLocalName, envelopeElement, wsaPropValue));
+            }
+
+        } else if (!existsWsa) {
+            if (address) {
+                header.appendChild(builder.createWsaAddressChildElement(elementLocalName, envelopeElement, wsaPropValue,
+                        refParamsContent));
+            } else {
+                header.appendChild(builder.createWsaChildElement(elementLocalName, envelopeElement, wsaPropValue));
+            }
+        }
+        return header;
     }
 
-    public static boolean isNoneAddress(String address, String wsaVersionNamespace) {
-        return (address.equals(wsaVersionNamespace + "/none")) ? true : false;
+    private Element processWsaRelatesToProperty(Element header, boolean override, String elementLocalName,
+                                                String relationshipType, String relatesTo) {
+        boolean existsWsa = getWsaProperty(header, elementLocalName) != null;
+        if (override) {
+            if (existsWsa) {
+                header = removeWsaProperty(override, header, elementLocalName);
+            }
+            header.appendChild(builder.createRelatesToElement(wsaPrefix + ":RelatesTo", envelopeElement,
+                    relationshipType, relatesTo));
+        } else if (!existsWsa) {
+            header.appendChild(builder.createRelatesToElement(wsaPrefix + ":RelatesTo", envelopeElement,
+                    relationshipType, relatesTo));
+        }
+        return header;
     }
 
     public static String getNamespace(String Version) {

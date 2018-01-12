@@ -32,18 +32,12 @@ import com.eviware.soapui.model.testsuite.TestSuite;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormFieldListener;
+import com.eviware.x.form.*;
 import com.eviware.x.impl.swing.JTextAreaFormField;
 import org.apache.log4j.Logger;
 
-import javax.swing.Action;
+import javax.swing.*;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -215,10 +209,7 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
      * @return boolean
      */
     protected boolean isProVersion(WsdlProject modelItem) {
-        if (modelItem.getClass().getName().contains("WsdlProjectPro")) {
-            return true;
-        }
-        return false;
+        return modelItem.getClass().getName().contains("WsdlProjectPro");
     }
 
     protected Action createRunOption(WsdlProject modelItem) {
@@ -317,7 +308,7 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
         toolHost.run(new ProcessToolRunner(builder, "SoapUI TestRunner", modelItem, args));
     }
 
-    protected ArgumentBuilder buildArgs(WsdlProject modelItem) throws IOException {
+    protected ArgumentBuilder buildArgs(WsdlProject modelItem) {
         XFormDialog dialog = getDialog();
         if (dialog == null) {
             ArgumentBuilder builder = new ArgumentBuilder(new StringToStringMap());
@@ -377,7 +368,7 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
         }
 
         builder.addBoolean(ENABLEUI, "-i");
-        builder.addArgs(new String[]{modelItem.getPath()});
+        builder.addArgs(modelItem.getPath());
 
         addToolArgs(values, builder);
 

@@ -46,7 +46,7 @@ public class OpenRequestForMockOperationAction extends AbstractSoapUIAction<Wsdl
 
         String[] names = ModelSupport.getNames(operation.getRequestList(), new String[]{"-> Create New"});
 
-        String name = (String) UISupport.prompt("Select Request for Operation [" + operation.getName() + "] "
+        String name = UISupport.prompt("Select Request for Operation [" + operation.getName() + "] "
                 + "to open or create", "Open Request", names);
         if (name != null) {
             WsdlRequest request = operation.getRequestByName(name);

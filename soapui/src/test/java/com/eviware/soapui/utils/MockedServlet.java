@@ -19,7 +19,6 @@ package com.eviware.soapui.utils;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.Servlet;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -125,7 +124,7 @@ class StubbedServletContext implements ServletContext {
     }
 
     @Override
-    public Servlet getServlet(String s) throws ServletException {
+    public Servlet getServlet(String s) {
         return null;
     }
 

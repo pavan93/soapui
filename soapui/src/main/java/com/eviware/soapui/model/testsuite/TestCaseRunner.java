@@ -31,7 +31,7 @@ public interface TestCaseRunner extends TestRunner {
      * @return the TestCase being run
      */
 
-    public TestCase getTestCase();
+    TestCase getTestCase();
 
     /**
      * Gets the accumulated results so far; each TestStep returns a
@@ -40,31 +40,31 @@ public interface TestCaseRunner extends TestRunner {
      * @return the accumulated results so far
      */
 
-    public List<TestStepResult> getResults();
+    List<TestStepResult> getResults();
 
     /**
      * Transfers execution of this TestRunner to the TestStep with the specified
      * index in the TestCase
      */
 
-    public void gotoStep(int index);
+    void gotoStep(int index);
 
     /**
      * Transfers execution of this TestRunner to the TestStep with the specified
      * name in the TestCase
      */
 
-    public void gotoStepByName(String stepName);
+    void gotoStepByName(String stepName);
 
     /**
      * Runs the specified TestStep and returns the result
      */
 
-    public TestStepResult runTestStepByName(String name);
+    TestStepResult runTestStepByName(String name);
 
     /**
      * Returns the context used by this runner
      */
 
-    public TestCaseRunContext getRunContext();
+    TestCaseRunContext getRunContext();
 }

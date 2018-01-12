@@ -95,18 +95,18 @@ public class AddOperationAsMockResponseStepAction extends AbstractAddToTestCaseA
             + "TestCase using a default response message generated from the schema.", helpUrl = HelpUrls.ADDMOCKOPERATIONASMOCKRESPONSESTEP_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     private interface Form {
         @AField(name = "Name", description = "Unique name of MockResponse Step")
-        public final static String STEP_NAME = "Name";
+        String STEP_NAME = "Name";
 
         @AField(name = "Path", description = "Path to listen on")
-        public final static String PATH = "Path";
+        String PATH = "Path";
 
         @AField(name = "Port", description = "Port to listen on", type = AFieldType.INT)
-        public final static String PORT = "Port";
+        String PORT = "Port";
 
         @AField(name = "Add Schema Assertion", description = "Adds SchemaCompliance Assertion for request", type = AFieldType.BOOLEAN)
-        public final static String ADD_SCHEMA_ASSERTION = "Add Schema Assertion";
+        String ADD_SCHEMA_ASSERTION = "Add Schema Assertion";
 
         @AField(name = "Shows TestCase Editor", description = "Shows the target steps TestCase editor", type = AFieldType.BOOLEAN)
-        public final static String SHOW_TESTCASE = "Shows TestCase Editor";
+        String SHOW_TESTCASE = "Shows TestCase Editor";
     }
 }

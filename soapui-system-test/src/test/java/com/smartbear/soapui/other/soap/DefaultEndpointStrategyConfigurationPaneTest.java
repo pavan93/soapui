@@ -69,7 +69,7 @@ public class DefaultEndpointStrategyConfigurationPaneTest {
     }
 
     @Test
-    public void updatesTableWithNewEndpoint() throws Exception {
+    public void updatesTableWithNewEndpoint() {
         JTableFixture tableFixture = new JTableFixture(robot, configurationPanel.table);
 
         String endpoint = "http://sljll.com";

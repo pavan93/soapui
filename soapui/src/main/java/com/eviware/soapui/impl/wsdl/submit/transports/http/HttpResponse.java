@@ -22,17 +22,17 @@ import com.eviware.soapui.model.iface.Response;
 import java.net.URL;
 
 public interface HttpResponse extends Response {
-    public abstract AbstractHttpRequestInterface<?> getRequest();
+    AbstractHttpRequestInterface<?> getRequest();
 
-    public abstract void setResponseContent(String responseContent);
+    void setResponseContent(String responseContent);
 
-    public abstract SSLInfo getSSLInfo();
+    SSLInfo getSSLInfo();
 
-    public abstract URL getURL();
+    URL getURL();
 
-    public String getMethod();
+    String getMethod();
 
-    public String getHttpVersion();
+    String getHttpVersion();
 
-    public abstract int getStatusCode();
+    int getStatusCode();
 }

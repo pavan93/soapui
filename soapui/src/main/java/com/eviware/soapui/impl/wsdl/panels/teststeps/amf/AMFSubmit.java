@@ -25,8 +25,6 @@ import com.eviware.soapui.model.iface.SubmitListener;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringsMap;
-import flex.messaging.io.amf.client.exceptions.ClientStatusException;
-import flex.messaging.io.amf.client.exceptions.ServerStatusException;
 
 import java.util.List;
 import java.util.concurrent.Future;
@@ -149,7 +147,7 @@ public class AMFSubmit implements Submit, Runnable {
 
     }
 
-    private Object executeAmfCall(AMFRequest amfRequest) throws ClientStatusException, ServerStatusException {
+    private Object executeAmfCall(AMFRequest amfRequest) {
         SoapUIAMFConnection amfConnection = null;
         try {
             amfConnection = getConnection(amfRequest);

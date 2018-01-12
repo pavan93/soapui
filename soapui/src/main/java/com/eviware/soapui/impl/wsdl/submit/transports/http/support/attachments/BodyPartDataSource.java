@@ -65,7 +65,7 @@ public class BodyPartDataSource implements DataSource {
         }
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 

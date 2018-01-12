@@ -19,26 +19,23 @@ package com.eviware.soapui.impl.wsdl;
 import com.eviware.soapui.impl.WorkspaceImpl;
 import com.eviware.soapui.model.project.ProjectFactory;
 import com.eviware.soapui.model.workspace.Workspace;
-import com.eviware.soapui.support.SoapUIException;
-import org.apache.xmlbeans.XmlException;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class WsdlProjectFactory implements ProjectFactory<WsdlProject> {
 
     public static final String WSDL_TYPE = "wsdl";
 
-    public WsdlProject createNew() throws XmlException, IOException, SoapUIException {
+    public WsdlProject createNew() {
         return new WsdlProject();
     }
 
-    public WsdlProject createNew(String path) throws XmlException, IOException, SoapUIException {
+    public WsdlProject createNew(String path) {
         return new WsdlProject(path);
     }
 
     public WsdlProject createNew(String projectFile, String projectPassword) {
-        return new WsdlProject(projectFile, (WorkspaceImpl) null, true, null, projectPassword);
+        return new WsdlProject(projectFile, null, true, null, projectPassword);
     }
 
     public WsdlProject createNew(Workspace workspace) {

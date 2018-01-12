@@ -175,19 +175,19 @@ public class NewWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWPROJECT_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(description = "Form.ProjectName.Description", type = AFieldType.STRING)
-        public final static String PROJECTNAME = messages.get("Form.ProjectName.Label");
+        String PROJECTNAME = messages.get("Form.ProjectName.Label");
 
         @AField(description = "Form.InitialWsdl.Description", type = AFieldType.FILE)
-        public final static String INITIALWSDL = messages.get("Form.InitialWsdl.Label");
+        String INITIALWSDL = messages.get("Form.InitialWsdl.Label");
 
         @AField(description = "Form.CreateRequests.Description", type = AFieldType.BOOLEAN, enabled = false)
-        public final static String CREATEREQUEST = messages.get("Form.CreateRequests.Label");
+        String CREATEREQUEST = messages.get("Form.CreateRequests.Label");
 
         @AField(description = "Form.GenerateTestSuite.Description", type = AFieldType.BOOLEAN, enabled = false)
-        public final static String GENERATETESTSUITE = messages.get("Form.GenerateTestSuite.Label");
+        String GENERATETESTSUITE = messages.get("Form.GenerateTestSuite.Label");
 
         @AField(description = "Form.RelativePaths.Description", type = AFieldType.BOOLEAN, enabled = true)
-        public final static String RELATIVEPATHS = messages.get("Form.RelativePaths.Label");
+        String RELATIVEPATHS = messages.get("Form.RelativePaths.Label");
 
     }
 }

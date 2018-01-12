@@ -62,10 +62,10 @@ public class AddEmptyRestMockResourceAction extends AbstractSoapUIAction<RestMoc
             helpUrl = HelpUrls.MOCKOPERATION_HELP_URL)
     public interface Form {
         @AField(description = "Select HTTP method", type = AField.AFieldType.COMBOBOX)
-        public final static String HTTP_METHOD = "Method";
+        String HTTP_METHOD = "Method";
 
         @AField(description = "Enter resource path", type = AField.AFieldType.STRING)
-        public final static String RESOURCE_PATH = "Resource path";
+        String RESOURCE_PATH = "Resource path";
     }
 
 }

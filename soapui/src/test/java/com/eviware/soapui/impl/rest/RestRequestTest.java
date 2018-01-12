@@ -27,9 +27,7 @@ import org.junit.Test;
 import java.io.File;
 
 import static com.eviware.soapui.utils.ModelItemMatchers.hasARestParameterNamed;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
 
@@ -78,7 +76,7 @@ public class RestRequestTest {
     }
 
     @Test
-    public void updatesConfigWhenParameterOrderIsModified() throws Exception {
+    public void updatesConfigWhenParameterOrderIsModified() {
         addRequestParameter("someName", "someValue");
         String lastParameterName = "otherName";
         addRequestParameter(lastParameterName, "someOtherValue");

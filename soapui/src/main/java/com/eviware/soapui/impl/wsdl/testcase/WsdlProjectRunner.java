@@ -23,13 +23,8 @@ import com.eviware.soapui.impl.wsdl.support.AbstractTestRunner;
 import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.propertyexpansion.DefaultPropertyExpansionContext;
 import com.eviware.soapui.model.support.TestSuiteRunListenerAdapter;
-import com.eviware.soapui.model.testsuite.ProjectRunListener;
-import com.eviware.soapui.model.testsuite.ProjectRunner;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestSuite.TestSuiteRunType;
-import com.eviware.soapui.model.testsuite.TestSuiteRunContext;
-import com.eviware.soapui.model.testsuite.TestSuiteRunListener;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
 import com.eviware.soapui.support.types.StringToObjectMap;
 
 import java.util.Arrays;
@@ -114,7 +109,7 @@ public class WsdlProjectRunner extends AbstractTestRunner<WsdlProject, WsdlProje
     private void runSequential(WsdlProject project, WsdlProjectRunContext runContext) {
         currentTestSuiteIndex = 0;
         for (; isRunning() && currentTestSuiteIndex < project.getTestSuiteCount(); currentTestSuiteIndex++) {
-            currentTestSuite = (WsdlTestSuite) project.getTestSuiteAt(currentTestSuiteIndex);
+            currentTestSuite = project.getTestSuiteAt(currentTestSuiteIndex);
             if (!currentTestSuite.isDisabled()) {
                 notifyBeforeRunTestSuite(currentTestSuite);
                 WsdlTestSuiteRunner testSuiteRunner = runTestSuite(currentTestSuite, false);

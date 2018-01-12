@@ -44,8 +44,7 @@ public class Soap11HttpBindingImporter extends AbstractSoapBindingImporter {
     public boolean canImport(Binding binding) {
         List<?> list = binding.getExtensibilityElements();
         SOAPBinding soapBinding = WsdlUtils.getExtensiblityElement(list, SOAPBinding.class);
-        return soapBinding == null ? false
-                : (soapBinding.getTransportURI().startsWith(Constants.SOAP_HTTP_TRANSPORT) || soapBinding
+        return soapBinding != null && (soapBinding.getTransportURI().startsWith(Constants.SOAP_HTTP_TRANSPORT) || soapBinding
                 .getTransportURI().startsWith(Constants.SOAP_MICROSOFT_TCP));
     }
 

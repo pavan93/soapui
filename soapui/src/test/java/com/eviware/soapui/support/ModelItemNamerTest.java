@@ -18,13 +18,11 @@ package com.eviware.soapui.support;
 
 import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.workspace.Workspace;
-import org.apache.xmlbeans.XmlException;
 import org.hamcrest.core.Is;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,41 +38,40 @@ public class ModelItemNamerTest {
     private Workspace workspace;
 
     @Before
-    public void setUp() throws IOException, XmlException {
+    public void setUp() {
         workspace = mock(Workspace.class);
     }
 
     @Test
-    public void createsFirstRestProjectWithNameRESTProject1() throws Exception {
+    public void createsFirstRestProjectWithNameRESTProject1() {
         mockWorkspaceProjects();
         String expectedFirstProjectName = DEFAULT_PROJECT_NAME + " 1";
         assertThat(ModelItemNamer.createName(DEFAULT_PROJECT_NAME, workspace.getProjectList()), Is.is(expectedFirstProjectName));
     }
 
     @Test
-    public void createsProjectWithNameRESTProject2IfProjectWithNameRESTProject1AlreadyExists() throws Exception {
+    public void createsProjectWithNameRESTProject2IfProjectWithNameRESTProject1AlreadyExists() {
         mockWorkspaceProjects(DEFAULT_PROJECT_NAME + " 1");
         String expectedFirstProjectName = DEFAULT_PROJECT_NAME + " 2";
         assertThat(ModelItemNamer.createName(DEFAULT_PROJECT_NAME, workspace.getProjectList()), Is.is(expectedFirstProjectName));
     }
 
     @Test
-    public void createsProjectWithNameRESTProject3IfProjectsWithNameRESTProject1AndRESTProject2AlreadyExist()
-            throws Exception {
+    public void createsProjectWithNameRESTProject3IfProjectsWithNameRESTProject1AndRESTProject2AlreadyExist() {
         mockWorkspaceProjects(DEFAULT_PROJECT_NAME + " 1", DEFAULT_PROJECT_NAME + " 2");
         String expectedFirstProjectName = DEFAULT_PROJECT_NAME + " 3";
         assertThat(ModelItemNamer.createName(DEFAULT_PROJECT_NAME, workspace.getProjectList()), Is.is(expectedFirstProjectName));
     }
 
     @Test
-    public void createsProjectWithNameRESTProject4IfProjectsExistWithNameRESTProject1AndRESTProject3() throws Exception {
+    public void createsProjectWithNameRESTProject4IfProjectsExistWithNameRESTProject1AndRESTProject3() {
         mockWorkspaceProjects(DEFAULT_PROJECT_NAME + "1", DEFAULT_PROJECT_NAME + "3");  //REST Project1, REST Project3
         String expectedFirstProjectName = DEFAULT_PROJECT_NAME + " 4";
         assertThat(ModelItemNamer.createName(DEFAULT_PROJECT_NAME, workspace.getProjectList()), Is.is(expectedFirstProjectName));
     }
 
     @Test
-    public void doesNotThrowAnExceptionIfProjectExistsWithNameRESTProject3x() throws Exception {
+    public void doesNotThrowAnExceptionIfProjectExistsWithNameRESTProject3x() {
         mockWorkspaceProjects(DEFAULT_PROJECT_NAME + " 3x");
         String expectedFirstProjectName = DEFAULT_PROJECT_NAME + " 1";
         assertThat(ModelItemNamer.createName(DEFAULT_PROJECT_NAME, workspace.getProjectList()), Is.is(expectedFirstProjectName));

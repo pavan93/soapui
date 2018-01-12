@@ -88,7 +88,7 @@ public class WsdlRequestMimeMessageRequestEntity extends AbstractHttpEntity {
     }
 
     @Override
-    public void writeTo(OutputStream arg0) throws IOException {
+    public void writeTo(OutputStream arg0) {
         try {
             arg0.write("\r\n".getBytes());
             ((MimeMultipart) message.getContent()).writeTo(arg0);
@@ -122,7 +122,7 @@ public class WsdlRequestMimeMessageRequestEntity extends AbstractHttpEntity {
         }
 
         @Override
-        public void write(int b) throws IOException {
+        public void write(int b) {
             size += intLength;
         }
 

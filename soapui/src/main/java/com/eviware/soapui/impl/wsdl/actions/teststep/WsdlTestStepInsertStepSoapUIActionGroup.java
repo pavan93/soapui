@@ -38,7 +38,7 @@ public class WsdlTestStepInsertStepSoapUIActionGroup extends DefaultSoapUIAction
         SoapUIActionMappingList<WsdlTestStep> actions = new SoapUIActionMappingList<WsdlTestStep>();
 
         WsdlTestStepRegistry registry = WsdlTestStepRegistry.getInstance();
-        WsdlTestStepFactory[] factories = (WsdlTestStepFactory[]) registry.getFactories();
+        WsdlTestStepFactory[] factories = registry.getFactories();
 
         for (int c = 0; c < factories.length; c++) {
             WsdlTestStepFactory factory = factories[c];

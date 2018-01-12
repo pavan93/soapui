@@ -17,20 +17,12 @@
 package com.eviware.soapui.support.editor;
 
 import com.eviware.soapui.support.UISupport;
-import com.eviware.soapui.support.components.Inspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.VTextIcon;
-import com.eviware.soapui.support.components.VerticalMetalTabbedPaneUI;
-import com.eviware.soapui.support.components.VerticalWindowsTabbedPaneUI;
+import com.eviware.soapui.support.components.*;
 
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -143,7 +135,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
     }
 
     public boolean hasFocus() {
-        return currentView == null ? false : currentView.getComponent().hasFocus();
+        return currentView != null && currentView.getComponent().hasFocus();
     }
 
     public final void setDocument(T document) {
@@ -197,7 +189,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
         inspectorPanel.addInspector(inspector);
         inspector.init(this);
         inspectorPanel
-                .setInspectorVisible(inspector, currentView == null ? true : inspector.isEnabledFor(currentView));
+                .setInspectorVisible(inspector, currentView == null || inspector.isEnabledFor(currentView));
     }
 
     private final class InputTabsChangeListener implements ChangeListener {
@@ -259,7 +251,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
                         ((EditorInspector<T>) inspector).isEnabledFor(currentView));
             }
 
-            if (currentInspector != null && ((EditorInspector<T>) currentInspector).isEnabledFor(currentView)) {
+            if (currentInspector != null && currentInspector.isEnabledFor(currentView)) {
                 if (lastDividerLocation == 0) {
                     inspectorPanel.setResetDividerLocation();
                 } else {

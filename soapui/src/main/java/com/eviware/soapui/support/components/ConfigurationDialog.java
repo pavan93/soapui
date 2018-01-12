@@ -27,27 +27,27 @@ import java.util.Map;
  */
 
 public interface ConfigurationDialog {
-    public boolean show(Map<String, String> values);
+    boolean show(Map<String, String> values);
 
-    public void hide();
+    void hide();
 
-    public void addTextField(String name, String tooltip);
+    void addTextField(String name, String tooltip);
 
-    public void addTextField(String name, String tooltip, FieldType type);
+    void addTextField(String name, String tooltip, FieldType type);
 
-    public void addCheckBox(String caption, String label, boolean selected);
+    void addCheckBox(String caption, String label, boolean selected);
 
-    public void addComboBox(String label, Object[] objects, String tooltip);
+    void addComboBox(String label, Object[] objects, String tooltip);
 
-    public void setValues(String id, String[] values);
+    void setValues(String id, String[] values);
 
-    public void addComboBox(String label, String tooltip);
+    void addComboBox(String label, String tooltip);
 
-    public ActionList getActions();
+    ActionList getActions();
 
-    public void getValues(Map<String, String> values);
+    void getValues(Map<String, String> values);
 
-    public enum FieldType {
+    enum FieldType {
         TEXT, DIRECTORY, FILE, URL, JAVA_PACKAGE, JAVA_CLASS
     }
 }

@@ -17,19 +17,13 @@
 package com.eviware.soapui.impl.rest.actions.mock;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
-import com.eviware.soapui.impl.rest.RestServiceFactory;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.rest.mock.RestMockAction;
 import com.eviware.soapui.impl.rest.mock.RestMockService;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.HttpResponse;
 import com.eviware.soapui.model.support.ProjectListenerAdapter;
 import com.eviware.soapui.settings.HttpSettings;
-import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringsMap;
 import com.eviware.soapui.utils.ModelItemFactory;
@@ -45,11 +39,7 @@ import static com.eviware.soapui.impl.rest.RestRequestInterface.HttpMethod.GET;
 import static java.lang.Boolean.FALSE;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.mockito.internal.matchers.NotNull.NOT_NULL;
 import static org.mockito.internal.matchers.Null.NULL;
 
@@ -135,7 +125,7 @@ public class AddRestRequestToMockServiceActionTest {
     }
 
     @Test
-    public void shouldAddASecondResponseToAnOperationForTheSamePath() throws SoapUIException {
+    public void shouldAddASecondResponseToAnOperationForTheSamePath() {
         action.perform(restRequest, notUsed);
         action.perform(restRequest, notUsed);
 
@@ -145,7 +135,7 @@ public class AddRestRequestToMockServiceActionTest {
     }
 
     @Test
-    public void shouldCreateNewOperationForDifferentPath() throws SoapUIException {
+    public void shouldCreateNewOperationForDifferentPath() {
         action.perform(restRequest, notUsed);
         restRequest.setPath("someotherpath");
         action.perform(restRequest, notUsed);
@@ -211,7 +201,7 @@ public class AddRestRequestToMockServiceActionTest {
     }
 
     @Test
-    public void shouldExpandPathParameters() throws SoapUIException {
+    public void shouldExpandPathParameters() {
         RestService restService = (RestService) project.addNewInterface("a rest resource", RestServiceFactory.REST_TYPE);
 
         RestResource restResource = restService.addNewResource("resource", "http://some.path.example.com");
@@ -226,7 +216,7 @@ public class AddRestRequestToMockServiceActionTest {
     }
 
     @Test
-    public void shouldExpandMultiplePathParameters() throws SoapUIException {
+    public void shouldExpandMultiplePathParameters() {
         RestService restService = (RestService) project.addNewInterface("a rest resource", RestServiceFactory.REST_TYPE);
 
         RestResource restResource = restService.addNewResource("resource", "http://some.path.example.com");
@@ -243,7 +233,7 @@ public class AddRestRequestToMockServiceActionTest {
     }
 
     @Test
-    public void shouldAddEndPointToRestService() throws SoapUIException {
+    public void shouldAddEndPointToRestService() {
 
         int endPointCount = restRequest.getOperation().getService().getEndpoints().length;
         int expectedEndPointCount = endPointCount + 1;

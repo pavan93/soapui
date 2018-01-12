@@ -62,7 +62,7 @@ public class SoapUIToolRunner extends AbstractSoapUIRunner implements ToolHost, 
      * @throws Exception
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.exit(new SoapUIToolRunner().runFromCommandLine(args));
     }
 
@@ -148,7 +148,7 @@ public class SoapUIToolRunner extends AbstractSoapUIRunner implements ToolHost, 
         }
     }
 
-    public void run(ToolRunner runner) throws Exception {
+    public void run(ToolRunner runner) {
         status = RunnerStatus.RUNNING;
         runner.setContext(this);
 

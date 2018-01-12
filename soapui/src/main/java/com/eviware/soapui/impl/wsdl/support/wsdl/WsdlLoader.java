@@ -121,7 +121,7 @@ public abstract class WsdlLoader extends AbstractDefinitionLoader implements Wsd
         }
     }
 
-    private InvalidDefinitionException makeInvalidDefinitionException(String url, Exception e) throws InvalidDefinitionException {
+    private InvalidDefinitionException makeInvalidDefinitionException(String url, Exception e) {
         e.printStackTrace();
         log.error("Failed to load url [" + url + "]");
         return new InvalidDefinitionException("Error loading [" + url + "]: " + e);

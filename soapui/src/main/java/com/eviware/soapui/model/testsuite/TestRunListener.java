@@ -26,9 +26,9 @@ import com.eviware.soapui.model.iface.SoapUIListener;
  */
 
 public interface TestRunListener extends SoapUIListener {
-    public void beforeRun(TestCaseRunner testRunner, TestCaseRunContext runContext);
+    void beforeRun(TestCaseRunner testRunner, TestCaseRunContext runContext);
 
-    public void afterRun(TestCaseRunner testRunner, TestCaseRunContext runContext);
+    void afterRun(TestCaseRunner testRunner, TestCaseRunContext runContext);
 
     /**
      * @deprecated use
@@ -36,9 +36,9 @@ public interface TestRunListener extends SoapUIListener {
      *             instead
      */
     @Deprecated
-    public void beforeStep(TestCaseRunner testRunner, TestCaseRunContext runContext);
+    void beforeStep(TestCaseRunner testRunner, TestCaseRunContext runContext);
 
-    public void beforeStep(TestCaseRunner testRunner, TestCaseRunContext runContext, TestStep testStep);
+    void beforeStep(TestCaseRunner testRunner, TestCaseRunContext runContext, TestStep testStep);
 
-    public void afterStep(TestCaseRunner testRunner, TestCaseRunContext runContext, TestStepResult result);
+    void afterStep(TestCaseRunner testRunner, TestCaseRunContext runContext, TestStepResult result);
 }

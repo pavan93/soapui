@@ -70,12 +70,8 @@ public abstract class KeySensitiveModelItemDesktopPanel<T extends ModelItem> ext
     protected void renameModelItem() {
     }
 
-    ;
-
     protected void cloneModelItem() {
     }
-
-    ;
 
 
 }

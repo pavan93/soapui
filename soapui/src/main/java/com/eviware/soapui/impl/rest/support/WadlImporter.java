@@ -16,11 +16,7 @@
 
 package com.eviware.soapui.impl.rest.support;
 
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRepresentation;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle;
 import com.eviware.soapui.impl.support.definition.support.InvalidDefinitionException;
 import com.eviware.soapui.impl.wsdl.support.Constants;
@@ -511,39 +507,6 @@ public class WadlImporter {
         return null;
     }
 
-    private ApplicationDocument loadReferencedWadl(String id) throws URISyntaxException, XmlException, IOException {
-        int ix = id.indexOf('#');
-        if (ix != -1) {
-            id = id.substring(0, ix);
-        }
-        ApplicationDocument applicationDocument = refCache.get(id);
-
-        if (applicationDocument == null) {
-            URI uri = new URI(id);
-            applicationDocument = ApplicationDocument.Factory.parse(uri.toURL());
-            refCache.put(id, applicationDocument);
-        }
-
-        return applicationDocument;
-    }
-
-    public static Map<String, XmlObject> getDefinitionParts(String wadlUrl) {
-        Map<String, XmlObject> result = new HashMap<String, XmlObject>();
-
-        try {
-            return SchemaUtils.getSchemas(wadlUrl, new UrlSchemaLoader(wadlUrl));
-
-            // URL url = new URL(wadlUrl);
-            // ApplicationDocument applicationDocument =
-            // ApplicationDocument.Factory.parse(url);
-            // result.put(url.getPath(), applicationDocument);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
     public static String extractParams(URL param, RestParamsPropertyHolder params) {
         String path = param.getPath();
         String[] items = path.split("/");
@@ -586,7 +549,7 @@ public class WadlImporter {
             }
         }
 
-        String query = ((URL) param).getQuery();
+        String query = param.getQuery();
         if (StringUtils.hasContent(query)) {
             items = query.split("&");
             for (String item : items) {
@@ -607,5 +570,38 @@ public class WadlImporter {
         }
 
         return resultPath.toString();
+    }
+
+    public static Map<String, XmlObject> getDefinitionParts(String wadlUrl) {
+        Map<String, XmlObject> result = new HashMap<String, XmlObject>();
+
+        try {
+            return SchemaUtils.getSchemas(wadlUrl, new UrlSchemaLoader(wadlUrl));
+
+            // URL url = new URL(wadlUrl);
+            // ApplicationDocument applicationDocument =
+            // ApplicationDocument.Factory.parse(url);
+            // result.put(url.getPath(), applicationDocument);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+
+    private ApplicationDocument loadReferencedWadl(String id) throws URISyntaxException, IOException {
+        int ix = id.indexOf('#');
+        if (ix != -1) {
+            id = id.substring(0, ix);
+        }
+        ApplicationDocument applicationDocument = refCache.get(id);
+
+        if (applicationDocument == null) {
+            URI uri = new URI(id);
+            applicationDocument = ApplicationDocument.Factory.parse(uri.toURL());
+            refCache.put(id, applicationDocument);
+        }
+
+        return applicationDocument;
     }
 }

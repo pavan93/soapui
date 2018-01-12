@@ -32,7 +32,7 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param context
      */
 
-    public void beforeLoadTest(LoadTestRunner loadTestRunner, LoadTestRunContext context);
+    void beforeLoadTest(LoadTestRunner loadTestRunner, LoadTestRunContext context);
 
     /**
      * Called after all initial loadtest threads have been started
@@ -41,7 +41,7 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param context
      */
 
-    public void loadTestStarted(LoadTestRunner loadTestRunner, LoadTestRunContext context);
+    void loadTestStarted(LoadTestRunner loadTestRunner, LoadTestRunContext context);
 
     /**
      * Called before the execution of a testcase
@@ -52,8 +52,8 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param runContext
      */
 
-    public void beforeTestCase(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
-                               TestCaseRunContext runContext);
+    void beforeTestCase(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
+                        TestCaseRunContext runContext);
 
     /**
      * Called before the execution of a teststep
@@ -65,8 +65,8 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param testStep
      */
 
-    public void beforeTestStep(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
-                               TestCaseRunContext runContext, TestStep testStep);
+    void beforeTestStep(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
+                        TestCaseRunContext runContext, TestStep testStep);
 
     /**
      * Called after the execution of a teststep
@@ -78,8 +78,8 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param testStepResult
      */
 
-    public void afterTestStep(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
-                              TestCaseRunContext runContext, TestStepResult testStepResult);
+    void afterTestStep(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
+                       TestCaseRunContext runContext, TestStepResult testStepResult);
 
     /**
      * Called after the execution of a testcase
@@ -90,8 +90,8 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param runContext
      */
 
-    public void afterTestCase(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
-                              TestCaseRunContext runContext);
+    void afterTestCase(LoadTestRunner loadTestRunner, LoadTestRunContext context, TestCaseRunner testRunner,
+                       TestCaseRunContext runContext);
 
     /**
      * Called when a loadtest has been stopped for some reason
@@ -100,7 +100,7 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param context
      */
 
-    public void loadTestStopped(LoadTestRunner loadTestRunner, LoadTestRunContext context);
+    void loadTestStopped(LoadTestRunner loadTestRunner, LoadTestRunContext context);
 
     /**
      * Called after the execution of a loadtest when all threads have terminated
@@ -108,5 +108,5 @@ public interface LoadTestRunListener extends SoapUIListener {
      * @param loadTestRunner
      * @param context
      */
-    public void afterLoadTest(LoadTestRunner loadTestRunner, LoadTestRunContext context);
+    void afterLoadTest(LoadTestRunner loadTestRunner, LoadTestRunContext context);
 }

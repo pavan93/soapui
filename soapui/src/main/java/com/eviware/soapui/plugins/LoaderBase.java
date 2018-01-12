@@ -39,15 +39,9 @@ import org.reflections.vfs.Vfs;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.Action;
+import javax.swing.*;
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class LoaderBase {
 
@@ -161,7 +155,7 @@ public class LoaderBase {
         return listeners;
     }
 
-    protected List<Class<? extends SoapUIListener>> loadListeners(Reflections jarFileScanner) throws IllegalAccessException, InstantiationException {
+    protected List<Class<? extends SoapUIListener>> loadListeners(Reflections jarFileScanner) {
         List<Class<? extends SoapUIListener>> listeners = new ArrayList<Class<? extends SoapUIListener>>();
 
         Set<Class<?>> listenerClasses = jarFileScanner.getTypesAnnotatedWith(ListenerConfiguration.class);

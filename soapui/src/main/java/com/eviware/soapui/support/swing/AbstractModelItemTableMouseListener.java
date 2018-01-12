@@ -20,7 +20,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 
-import javax.swing.JTable;
+import javax.swing.*;
 
 /**
  * ListMouseListener for ModelItems
@@ -39,7 +39,7 @@ public abstract class AbstractModelItemTableMouseListener extends AbstractTableM
 
     @Override
     protected ActionList getActionsForRow(JTable table, int row) {
-        ModelItem item = (ModelItem) getModelItemAt(row);
+        ModelItem item = getModelItemAt(row);
         try {
             return item == null ? null : ActionListBuilder.buildActions(item);
         } catch (Exception e) {

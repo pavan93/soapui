@@ -24,26 +24,11 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import java.awt.event.ActionEvent;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.lang.reflect.Method;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Properties;
-import java.util.UUID;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class Tools {
@@ -234,7 +219,7 @@ public class Tools {
         try {
             if (osName.startsWith("Mac OS")) {
                 Class<?> fileMgr = Class.forName("com.apple.eio.FileManager");
-                Method openURL = fileMgr.getDeclaredMethod("openURL", new Class[]{String.class});
+                Method openURL = fileMgr.getDeclaredMethod("openURL", String.class);
                 openURL.invoke(null, url);
             } else if (osName.startsWith("Windows")) {
                 if (url.startsWith("file:")) {
@@ -608,9 +593,7 @@ public class Tools {
             if (expected.endsWith(String.valueOf(wildcard))) {
                 sb.append(".*");
             }
-            if (!Pattern.compile(sb.toString(), Pattern.DOTALL).matcher(real).matches()) {
-                return false;
-            }
+            return Pattern.compile(sb.toString(), Pattern.DOTALL).matcher(real).matches();
         }
         return true;
     }

@@ -44,7 +44,7 @@ public class WsdlProjectBackwardCompatibilityTest {
     }
 
     @Test
-    public void verifyBackwardCompatibilityForBasic462ProjectWithMockService() throws XmlException, IOException, SoapUIException, URISyntaxException {
+    public void verifyBackwardCompatibilityForBasic462ProjectWithMockService() {
 
         assertThat(project.getMockServiceCount(), is(2));
         MockService mockService = project.getMockServiceByName("MockService 1");

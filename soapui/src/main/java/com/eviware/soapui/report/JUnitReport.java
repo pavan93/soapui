@@ -19,7 +19,6 @@ package com.eviware.soapui.report;
 import org.apache.xmlbeans.XmlOptions;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
@@ -161,7 +160,7 @@ public class JUnitReport {
     }
 
     @SuppressWarnings("unchecked")
-    public void save(File file) throws IOException {
+    public void save(File file) {
         finishReport();
 
         @SuppressWarnings("rawtypes")

@@ -49,7 +49,7 @@ public class OpenRequestForMockResponseAction extends AbstractSoapUIAction<WsdlM
         if (operation.getInterface().getProject().isEnvironmentMode()) {
             UISupport.showInfoMessage("Do you wish to activate the Default Environment?");
         } else {
-            String name = (String) UISupport.prompt("Select Request for Operation [" + operation.getName() + "] "
+            String name = UISupport.prompt("Select Request for Operation [" + operation.getName() + "] "
                     + "to open or create", "Open Request", names);
             if (name != null) {
                 WsdlRequest request = operation.getRequestByName(name);

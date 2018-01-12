@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 public class ResolverUtilsTest {
 
     @Test
-    public void testExtractXPathPropertyValue() throws Exception {
+    public void testExtractXPathPropertyValue() {
         assertEquals("audi", ResolverUtils.extractXPathPropertyValue("<test><bil>audi</bil></test>", "//bil"));
         assertEquals("<test><bil>audi</bil><bil>bmw</bil></test>",
                 ResolverUtils.extractXPathPropertyValue("<test><bil>audi</bil><bil>bmw</bil></test>", "//test"));

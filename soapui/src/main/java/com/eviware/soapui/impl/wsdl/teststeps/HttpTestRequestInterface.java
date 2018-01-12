@@ -21,16 +21,16 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.iface.SubmitContext;
 
 public interface HttpTestRequestInterface<T extends AbstractRequestConfig> extends TestRequest, HttpRequestInterface<T> {
-    public static final String RESPONSE_PROPERTY = HttpTestRequestInterface.class.getName() + "@response";
-    public static final String STATUS_PROPERTY = HttpTestRequestInterface.class.getName() + "@status";
+    String RESPONSE_PROPERTY = HttpTestRequestInterface.class.getName() + "@response";
+    String STATUS_PROPERTY = HttpTestRequestInterface.class.getName() + "@status";
 
-    public void assertResponse(SubmitContext context);
+    void assertResponse(SubmitContext context);
 
-    public String getResponseContentAsString();
+    String getResponseContentAsString();
 
-    public void updateConfig(T request);
+    void updateConfig(T request);
 
-    public WsdlTestStep getTestStep();
+    WsdlTestStep getTestStep();
 
-    public WsdlTestCase getTestCase();
+    WsdlTestCase getTestCase();
 }

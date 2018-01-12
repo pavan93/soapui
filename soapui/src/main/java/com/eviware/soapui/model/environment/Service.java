@@ -18,18 +18,18 @@ package com.eviware.soapui.model.environment;
 
 public interface Service {
 
-    public void setEnvironment(Environment environment);
+    Environment getEnvironment();
 
-    public Environment getEnvironment();
+    void setEnvironment(Environment environment);
 
-    public void setEndpoint(Endpoint endpoint);
+    Endpoint getEndpoint();
 
-    public Endpoint getEndpoint();
+    void setEndpoint(Endpoint endpoint);
 
-    public void release();
+    void release();
 
-    public String getName();
+    String getName();
 
-    public ServiceConfig.Type.Enum getType();
+    ServiceConfig.Type.Enum getType();
 
 }

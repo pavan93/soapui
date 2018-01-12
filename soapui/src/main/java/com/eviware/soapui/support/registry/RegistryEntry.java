@@ -17,5 +17,5 @@
 package com.eviware.soapui.support.registry;
 
 public interface RegistryEntry<T1 extends RegistryEntryConfig, T2 extends Object> {
-    public void init(T1 config, T2 container);
+    void init(T1 config, T2 container);
 }

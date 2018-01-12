@@ -31,7 +31,7 @@ import static org.junit.matchers.JUnitMatchers.hasItem;
 public class StubbedDialogsTest extends StubbedDialogsTestBase {
 
     @Test
-    public void catchesErrorMessage() throws Exception {
+    public void catchesErrorMessage() {
         String errorMessage = "The shit's hit the fan!";
 
         UISupport.showErrorMessage(errorMessage);
@@ -39,7 +39,7 @@ public class StubbedDialogsTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void catchesInfoMessages() throws Exception {
+    public void catchesInfoMessages() {
         String infoMessage = "Some info";
 
         UISupport.showInfoMessage(infoMessage);

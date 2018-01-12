@@ -22,12 +22,8 @@ import com.eviware.soapui.impl.rest.RestServiceFactory;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.registry.RestRequestStepFactory;
-import com.eviware.soapui.support.SoapUIException;
-import org.apache.xmlbeans.XmlException;
 import org.junit.Test;
 import org.mockito.Mockito;
-
-import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.sameInstance;
 import static org.hamcrest.core.Is.is;
@@ -44,7 +40,7 @@ public class RestTestRequestStepTest {
     public static final String PATH = "/";
 
     @Test
-    public void resourceIsFoundEvenThoughMultipleInterfacesWithDuplicateNameExists() throws RestRequestStepFactory.ItemDeletedException, XmlException, IOException, SoapUIException {
+    public void resourceIsFoundEvenThoughMultipleInterfacesWithDuplicateNameExists() throws RestRequestStepFactory.ItemDeletedException {
         WsdlTestCase testCase = Mockito.mock(WsdlTestCase.class);
         WsdlProject project = new WsdlProject();
         RestService restService1 = (RestService) project

@@ -21,9 +21,7 @@ import com.eviware.soapui.impl.rest.RestRequestInterface;
 import com.eviware.soapui.utils.ModelItemFactory;
 import org.junit.Test;
 
-import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle.MATRIX;
-import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle.QUERY;
-import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle.TEMPLATE;
+import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.ParameterStyle.*;
 import static com.eviware.soapui.impl.rest.support.RestUtils.TemplateExtractionOption.EXTRACT_TEMPLATE_PARAMETERS;
 import static com.eviware.soapui.impl.rest.support.RestUtils.TemplateExtractionOption.IGNORE_TEMPLATE_PARAMETERS;
 import static com.eviware.soapui.utils.ModelItemFactory.makeRestRequest;
@@ -34,7 +32,7 @@ import static org.junit.Assert.assertThat;
 public class RestUtilsTest {
 
     @Test
-    public void extractsTemplateParams() throws Exception {
+    public void extractsTemplateParams() {
         String path = "/{id}/test/{test}/test";
 
         String[] params = RestUtils.extractTemplateParams(path);

@@ -29,12 +29,7 @@ import java.io.IOException;
 import static com.eviware.soapui.impl.rest.RestRequestInterface.HttpMethod;
 import static com.eviware.soapui.utils.MockedServlet.mockHttpServletRequest;
 import static com.eviware.soapui.utils.MockedServlet.mockHttpServletResponse;
-import static org.mockito.Mockito.any;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 public class RestMockDispatcherTest {
@@ -83,7 +78,7 @@ public class RestMockDispatcherTest {
     }
 
     @Test
-    public void shouldReturnNoResponseFoundWhenThereIsNoMatchingAction() throws Exception {
+    public void shouldReturnNoResponseFoundWhenThereIsNoMatchingAction() {
         when(restMockService.findBestMatchedOperation(anyString(), any(HttpMethod.class))).thenReturn(null);
         when(restMockService.getPath()).thenReturn("/");
         when(request.getPathInfo()).thenReturn("/");

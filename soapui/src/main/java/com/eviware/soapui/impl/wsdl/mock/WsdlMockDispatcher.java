@@ -44,12 +44,7 @@ import javax.wsdl.Definition;
 import javax.wsdl.Import;
 import javax.wsdl.factory.WSDLFactory;
 import javax.wsdl.xml.WSDLWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.StringReader;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -243,8 +238,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         }
     }
 
-    public MockResult dispatchHeadRequest(HttpServletRequest request, HttpServletResponse response)
-            throws DispatchException {
+    public MockResult dispatchHeadRequest(HttpServletRequest request, HttpServletResponse response) {
         response.setStatus(HttpServletResponse.SC_OK);
         return null;
     }
@@ -358,7 +352,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         out.print("</ul></p></body></html>");
     }
 
-    public void returnFile(HttpServletResponse response, File file) throws FileNotFoundException, IOException {
+    public void returnFile(HttpServletResponse response, File file) throws IOException {
         FileInputStream in = new FileInputStream(file);
         response.setStatus(HttpServletResponse.SC_OK);
         long length = file.length();

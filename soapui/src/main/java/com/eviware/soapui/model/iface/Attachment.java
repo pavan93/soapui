@@ -25,39 +25,39 @@ import java.io.InputStream;
  */
 
 public interface Attachment {
-    public String getName();
+    String getName();
 
-    public String getContentType();
+    String getContentType();
 
-    public void setContentType(String contentType);
+    void setContentType(String contentType);
 
-    public long getSize();
+    long getSize();
 
-    public String getPart();
+    String getPart();
 
-    public void setPart(String part);
+    void setPart(String part);
 
-    public InputStream getInputStream() throws Exception;
+    InputStream getInputStream() throws Exception;
 
-    public String getUrl();
+    String getUrl();
 
-    public boolean isCached();
+    boolean isCached();
 
-    public AttachmentType getAttachmentType();
+    AttachmentType getAttachmentType();
 
-    public enum AttachmentType {
+    String getContentID();
+
+    AttachmentEncoding getEncoding();
+
+    String getContentEncoding();
+
+    String getId();
+
+    enum AttachmentType {
         MIME, XOP, CONTENT, SWAREF, UNKNOWN
     }
 
-    public String getContentID();
-
-    public enum AttachmentEncoding {
+    enum AttachmentEncoding {
         BASE64, HEX, NONE
     }
-
-    public AttachmentEncoding getEncoding();
-
-    public String getContentEncoding();
-
-    public String getId();
 }

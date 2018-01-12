@@ -4,12 +4,7 @@ import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.TestAssertionRegistry;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.GroovyScriptAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.ResponseSLAAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.SimpleContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.SimpleNotContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XPathContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XQueryContainsAssertion;
+import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.*;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.json.JsonPathContentAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.json.JsonPathCountAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.json.JsonPathExistenceAssertion;
@@ -57,7 +52,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesValidHttpStatusesAssertion() throws Exception {
+    public void parsesValidHttpStatusesAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(0);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof ValidHttpStatusCodesAssertion);
         ValidHttpStatusCodesAssertion statusCodesAssertion = (ValidHttpStatusCodesAssertion) assertion;
@@ -66,7 +61,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesInvalidHttpStatusesAssertion() throws Exception {
+    public void parsesInvalidHttpStatusesAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(1);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof InvalidHttpStatusCodesAssertion);
         InvalidHttpStatusCodesAssertion statusCodesAssertion = (InvalidHttpStatusCodesAssertion) assertion;
@@ -75,7 +70,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesSimpleContainsAssertion() throws Exception {
+    public void parsesSimpleContainsAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(2);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof SimpleContainsAssertion);
         SimpleContainsAssertion containsAssertion = (SimpleContainsAssertion) assertion;
@@ -86,7 +81,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesXPathContainsAssertion() throws Exception {
+    public void parsesXPathContainsAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(3);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof XPathContainsAssertion);
         XPathContainsAssertion containsAssertion = (XPathContainsAssertion) assertion;
@@ -99,7 +94,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesXQueryContainsAssertion() throws Exception {
+    public void parsesXQueryContainsAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(4);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof XQueryContainsAssertion);
         XQueryContainsAssertion containsAssertion = (XQueryContainsAssertion) assertion;
@@ -110,7 +105,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesJsonPathContentAssertion() throws Exception {
+    public void parsesJsonPathContentAssertion() {
 
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(5);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof JsonPathContentAssertion);
@@ -122,7 +117,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesJsonPathCountAssertion() throws Exception {
+    public void parsesJsonPathCountAssertion() {
 
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(6);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof JsonPathCountAssertion);
@@ -134,7 +129,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesJsonPathExistenceAssertion() throws Exception {
+    public void parsesJsonPathExistenceAssertion() {
 
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(7);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof JsonPathExistenceAssertion);
@@ -145,7 +140,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesScriptAssertion() throws Exception {
+    public void parsesScriptAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(8);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof GroovyScriptAssertion);
         GroovyScriptAssertion groovyScriptAssertion = (GroovyScriptAssertion) assertion;
@@ -155,7 +150,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesResponseSlaAssertion() throws Exception {
+    public void parsesResponseSlaAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(9);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof ResponseSLAAssertion);
         ResponseSLAAssertion responseSLAAssertion = (ResponseSLAAssertion) assertion;
@@ -165,7 +160,7 @@ public class AssertionsParsingTest extends RecipeParserTestBase {
     }
 
     @Test
-    public void parsesNotContainsAssertion() throws Exception {
+    public void parsesNotContainsAssertion() {
         WsdlMessageAssertion assertion = restRequestStep.getAssertionAt(10);
         assertTrue("Wrong assertion class: " + assertion.getClass(), assertion instanceof SimpleNotContainsAssertion);
         SimpleNotContainsAssertion notContainsAssertion = (SimpleNotContainsAssertion) assertion;

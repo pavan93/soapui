@@ -58,7 +58,7 @@ public class GetOAuthAccessTokenActionTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         UISupport.setDialogs(originalDialogs);
     }
 
@@ -74,7 +74,7 @@ public class GetOAuthAccessTokenActionTest {
         final String accessToken = "4/98789adfc8234278243987";
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Object answer(InvocationOnMock invocationOnMock) {
                 profile.setAccessToken(accessToken);
                 return null;
             }

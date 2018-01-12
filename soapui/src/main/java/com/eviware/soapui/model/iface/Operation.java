@@ -27,27 +27,27 @@ import java.util.List;
  */
 
 public interface Operation extends ModelItem {
-    public final static String ACTION_PROPERTY = Operation.class.getName() + "@action";
+    String ACTION_PROPERTY = Operation.class.getName() + "@action";
 
-    public boolean isUnidirectional();
+    boolean isUnidirectional();
 
-    public boolean isBidirectional();
+    boolean isBidirectional();
 
-    public Request getRequestAt(int index);
+    Request getRequestAt(int index);
 
-    public Request getRequestByName(String requestName);
+    Request getRequestByName(String requestName);
 
-    public List<Request> getRequestList();
+    List<Request> getRequestList();
 
-    public int getRequestCount();
+    int getRequestCount();
 
-    public Interface getInterface();
+    Interface getInterface();
 
-    public MessagePart[] getDefaultRequestParts();
+    MessagePart[] getDefaultRequestParts();
 
-    public MessagePart[] getDefaultResponseParts();
+    MessagePart[] getDefaultResponseParts();
 
-    public String createRequest(boolean b);
+    String createRequest(boolean b);
 
-    public String createResponse(boolean b);
+    String createResponse(boolean b);
 }

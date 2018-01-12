@@ -36,15 +36,7 @@ import com.eviware.soapui.support.scripting.SoapUIScriptEngineRegistry;
 import com.eviware.soapui.support.types.StringToObjectMap;
 import org.apache.xmlbeans.XmlObject;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class is used to connect a TestCase with a set of security scans
@@ -667,7 +659,7 @@ public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<Securi
             List<SecurityScan> t = getSecurityScansMap().get(testStepId);
             for (int i = 0; i < t.size(); i++) {
                 SecurityScan scan = t.get(i);
-                result.add((ModelItem) scan);
+                result.add(scan);
             }
         }
         return result;

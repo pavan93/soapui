@@ -21,7 +21,6 @@ import com.eviware.soapui.impl.support.HttpUtils;
 import com.eviware.soapui.impl.wsdl.panels.assertions.AssertionListEntry;
 import com.eviware.soapui.impl.wsdl.panels.teststeps.support.AbstractGroovyEditorModel;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
-import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.teststeps.HttpTestRequestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
@@ -33,12 +32,8 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.security.SecurityTestRunContext;
 import com.eviware.soapui.security.SecurityTestRunner;
 import com.eviware.soapui.security.SecurityTestRunnerImpl;
@@ -59,10 +54,8 @@ import com.eviware.x.form.support.AField.AFieldType;
 import com.eviware.x.form.support.AForm;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JScrollPane;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -214,7 +207,7 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
 
         WsdlTestStepFactory factory = WsdlTestStepRegistry.getInstance().getFactory(
                 (HttpRequestStepFactory.HTTPREQUEST_TYPE));
-        return (HttpTestRequestStep) factory.buildTestStep((WsdlTestCase) testStep2.getTestCase(), testStepConfig,
+        return (HttpTestRequestStep) factory.buildTestStep(testStep2.getTestCase(), testStepConfig,
                 false);
 
     }
@@ -364,15 +357,15 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
     @AForm(description = "", name = "Cross Site Scripting on Separate HTML", helpUrl = HelpUrls.SECURITY_XSS_ASSERTION_HELP)
     protected interface CrossSiteScripSeparateHTMLConfigDialog {
         @AField(description = "Check Imediate Response", name = "###Check Response", type = AFieldType.BOOLEAN)
-        public final static String CHECK_RESPONSE = "###Check Response";
+        String CHECK_RESPONSE = "###Check Response";
 
         @AField(description = "Check Response from URLs specified in Custom Script", name = "###Check Separate HTML", type = AFieldType.BOOLEAN)
-        public final static String CHECK_SEPARATE_HTML = "###Check Separate HTML";
+        String CHECK_SEPARATE_HTML = "###Check Separate HTML";
 
         @AField(description = "", name = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ", type = AFieldType.LABEL)
-        public final static String LABEL = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ";
+        String LABEL = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ";
 
         @AField(description = "Groovy script", name = "###Groovy url list", type = AFieldType.COMPONENT)
-        public final static String GROOVY = "###Groovy url list";
+        String GROOVY = "###Groovy url list";
     }
 }

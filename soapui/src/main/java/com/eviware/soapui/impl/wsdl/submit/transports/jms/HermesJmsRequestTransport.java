@@ -44,27 +44,9 @@ import hermes.Hermes;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.commons.lang.NotImplementedException;
 
-import javax.jms.BytesMessage;
-import javax.jms.Connection;
-import javax.jms.Destination;
-import javax.jms.JMSException;
-import javax.jms.MapMessage;
-import javax.jms.Message;
-import javax.jms.MessageConsumer;
-import javax.jms.MessageProducer;
-import javax.jms.Queue;
-import javax.jms.Session;
-import javax.jms.TextMessage;
-import javax.jms.Topic;
-import javax.jms.TopicSubscriber;
+import javax.jms.*;
 import javax.naming.NamingException;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -381,10 +363,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
     }
 
     private boolean hasAttachment(Request request) {
-        if (request.getAttachments().length > 0) {
-            return true;
-        }
-        return false;
+        return request.getAttachments().length > 0;
     }
 
     private Message createTextMessage(SubmitContext submitContext, String requestContent, Session session)
@@ -395,13 +374,10 @@ public class HermesJmsRequestTransport implements RequestTransport {
     }
 
     private boolean isTextAttachment(Request request) {
-        if (request.getAttachments().length > 0
+        return request.getAttachments().length > 0
                 && (request.getAttachments()[0].getContentType().contains("/text")
                 || request.getAttachments()[0].getContentType().contains("/xml") || request.getAttachments()[0]
-                .getContentType().contains("text/plain"))) {
-            return true;
-        }
-        return false;
+                .getContentType().contains("text/plain"));
     }
 
     private Message createBytesMessage(Request request, Session session) {

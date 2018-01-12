@@ -39,7 +39,7 @@ public class RandomFile {
         }
     }
 
-    public File next() throws IOException {
+    public File next() {
 
         BufferedWriter out = null;
         try {

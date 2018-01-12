@@ -31,16 +31,13 @@ import static com.eviware.soapui.utils.MockedServlet.mockHttpServletResponse;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class RestMockResponseWriterTest {
 
     private RestMockResponse mockResponse;
     private MockResult result;
-    private String originalResponseContent = "<content>awful lot of content</content>";;
+    private String originalResponseContent = "<content>awful lot of content</content>";
     private HttpServletRequest servletRequest;
     private HttpServletResponse servletResponse;
 

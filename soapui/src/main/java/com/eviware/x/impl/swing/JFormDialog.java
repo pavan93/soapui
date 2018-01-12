@@ -28,15 +28,9 @@ import com.eviware.x.form.XForm;
 import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormField;
 
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.Dialog.ModalityType;
-import java.awt.Dimension;
 import java.util.concurrent.CountDownLatch;
 
 public class JFormDialog extends SwingXFormDialog {
@@ -54,7 +48,7 @@ public class JFormDialog extends SwingXFormDialog {
         buttons = UISupport.initDialogActions(actions, dialog);
         buttons.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         JPanel panel = new JPanel(new BorderLayout());
-        this.form = (SwingXFormImpl) form;
+        this.form = form;
         panel.add((this.form.getPanel()), BorderLayout.CENTER);
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 

@@ -38,10 +38,8 @@ import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -88,7 +86,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
         return requestMutationsStack.empty() ? null : requestMutationsStack.pop();
     }
 
-    private void extractMutations(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private void extractMutations(TestStep testStep, SecurityTestRunContext context) {
         strategy = getExecutionStrategy().getStrategy();
 
         XmlObjectTreeModel model = null;// getXmlObjectTreeModel( testStep );
@@ -165,8 +163,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
     }
 
     public String extractRestrictions(XmlObjectTreeModel model2, SecurityTestRunContext context,
-                                      XmlTreeNode nodeToUpdate, XmlObjectTreeModel model, SecurityCheckedParameter scp, StringToStringMap stsmap)
-            throws XmlException, Exception {
+                                      XmlTreeNode nodeToUpdate, XmlObjectTreeModel model, SecurityCheckedParameter scp, StringToStringMap stsmap) {
         getNextChild(model2.getRootNode(), context, nodeToUpdate, model, scp, stsmap);
 
         return nodeToUpdate.getXmlObject().toString();

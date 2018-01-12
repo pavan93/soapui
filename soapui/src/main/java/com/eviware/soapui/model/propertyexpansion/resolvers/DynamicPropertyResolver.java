@@ -81,13 +81,13 @@ public class DynamicPropertyResolver implements PropertyResolver, SoapUIFactoryR
             removeProvider((ValueProviderFactory)factory);
     }
 
-    public static interface ValueProvider {
+    public interface ValueProvider {
         String getValue(PropertyExpansionContext context);
     }
 
-    public static interface ValueProviderFactory extends SoapUIFactory {
-        public ValueProvider createValueProvider();
+    public interface ValueProviderFactory extends SoapUIFactory {
+        ValueProvider createValueProvider();
 
-        public String getValueId();
+        String getValueId();
     }
 }

@@ -52,31 +52,16 @@ import com.eviware.x.form.support.AForm;
 import com.eviware.x.impl.swing.FileFormField;
 import org.apache.commons.io.FilenameUtils;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import javax.swing.TransferHandler;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.*;
 import java.awt.event.ActionEvent;
 import java.io.BufferedReader;
 import java.io.File;
@@ -511,15 +496,15 @@ public class PropertyHolderTable extends JPanel {
     }
 
     @AForm(name = "Load Properties", description = "Set load options below")
-    private static interface LoadOptionsForm {
+    private interface LoadOptionsForm {
         @AField(name = "File", description = "The Properties file to load", type = AFieldType.FILE)
-        public static final String FILE = "File";
+        String FILE = "File";
 
         @AField(name = "Create Missing", description = "Creates Missing Properties", type = AFieldType.BOOLEAN)
-        public static final String CREATEMISSING = "Create Missing";
+        String CREATEMISSING = "Create Missing";
 
         @AField(name = "Delete Remaining", description = "Deletes properties not in file", type = AFieldType.BOOLEAN)
-        public static final String DELETEREMAINING = "Delete Remaining";
+        String DELETEREMAINING = "Delete Remaining";
     }
 
     public TestPropertyHolder getHolder() {

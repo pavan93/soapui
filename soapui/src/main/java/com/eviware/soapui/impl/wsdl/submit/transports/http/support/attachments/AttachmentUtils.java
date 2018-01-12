@@ -39,11 +39,7 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.XmlBase64Binary;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlHexBinary;
-import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.*;
 
 import javax.activation.DataHandler;
 import javax.mail.MessagingException;
@@ -59,12 +55,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Attachment-related utility classes
@@ -85,7 +76,7 @@ public class AttachmentUtils {
     public static final long MAX_SIZE_IN_MEMORY_ATTACHMENT = 500 * 1024;
 
     public static boolean prepareMessagePart(WsdlAttachmentContainer container, MimeMultipart mp,
-                                             MessageXmlPart messagePart, StringToStringMap contentIds) throws Exception, MessagingException {
+                                             MessageXmlPart messagePart, StringToStringMap contentIds) throws Exception {
         boolean isXop = false;
 
         XmlObjectTreeModel treeModel = null;

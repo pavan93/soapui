@@ -21,17 +21,14 @@ import com.eviware.soapui.support.components.WebViewBasedBrowserComponent;
 import com.eviware.soapui.support.components.WebViewBasedBrowserComponentFactory;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.lang.reflect.InvocationTargetException;
+import javax.swing.*;
+import java.awt.*;
 
 public class URLDesktopPanel extends DefaultDesktopPanel {
     private WebViewBasedBrowserComponent browser;
     private boolean closed;
 
-    public URLDesktopPanel(String title, String description, String url) throws InterruptedException,
-            InvocationTargetException {
+    public URLDesktopPanel(String title, String description, String url) {
         super(title, description, new JPanel(new BorderLayout()));
 
         JPanel panel = (JPanel) getComponent();

@@ -20,7 +20,6 @@ import com.eviware.soapui.impl.support.AbstractHttpRequestInterface;
 import com.eviware.soapui.impl.wsdl.support.RequestFileAttachment;
 import com.eviware.soapui.model.iface.Attachment;
 
-import java.io.IOException;
 import java.io.InputStream;
 
 public class InfiniteAttachment extends RequestFileAttachment {
@@ -31,7 +30,7 @@ public class InfiniteAttachment extends RequestFileAttachment {
         this.maxSize = maxSize;
     }
 
-    public InputStream getInputStream() throws IOException {
+    public InputStream getInputStream() {
         return new InfiniteInputStream(maxSize);
     }
 

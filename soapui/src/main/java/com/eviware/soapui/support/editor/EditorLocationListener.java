@@ -23,5 +23,5 @@ package com.eviware.soapui.support.editor;
  */
 
 public interface EditorLocationListener<T extends EditorDocument> {
-    public void locationChanged(EditorLocation<T> location);
+    void locationChanged(EditorLocation<T> location);
 }

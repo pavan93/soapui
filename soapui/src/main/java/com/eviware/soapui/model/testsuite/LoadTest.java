@@ -25,11 +25,11 @@ import com.eviware.soapui.model.ModelItem;
  */
 
 public interface LoadTest extends ModelItem {
-    public TestCase getTestCase();
+    TestCase getTestCase();
 
-    public LoadTestRunner run();
+    LoadTestRunner run();
 
-    public void addLoadTestRunListener(LoadTestRunListener listener);
+    void addLoadTestRunListener(LoadTestRunListener listener);
 
-    public void removeLoadTestRunListener(LoadTestRunListener listener);
+    void removeLoadTestRunListener(LoadTestRunListener listener);
 }

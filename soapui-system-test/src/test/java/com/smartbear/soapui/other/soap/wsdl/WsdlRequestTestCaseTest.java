@@ -42,7 +42,7 @@ public class WsdlRequestTestCaseTest extends JettyTestCaseBase {
                 true)[0];
 
         // get "Help" operation
-        WsdlOperation operation = (WsdlOperation) iface.getOperationByName("GetPage");
+        WsdlOperation operation = iface.getOperationByName("GetPage");
 
         // create a new empty request for that operation
         WsdlRequest request = operation.addNewRequest("My request");
@@ -51,7 +51,7 @@ public class WsdlRequestTestCaseTest extends JettyTestCaseBase {
         request.setRequestContent(operation.createRequest(true));
 
         // submit the request
-        WsdlSubmit submit = (WsdlSubmit) request.submit(new WsdlSubmitContext(request), false);
+        WsdlSubmit submit = request.submit(new WsdlSubmitContext(request), false);
 
         // wait for the response
         Response response = submit.getResponse();

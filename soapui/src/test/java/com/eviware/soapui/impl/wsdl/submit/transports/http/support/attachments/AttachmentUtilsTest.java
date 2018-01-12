@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
  */
 public class AttachmentUtilsTest {
     @Test
-    public void actionIsNotWithinTypeElement() throws Exception {
+    public void actionIsNotWithinTypeElement() {
         String contentType = AttachmentUtils.buildRootPartContentType("SendFile", SoapVersion.Soap12);
 
         String expectedContentType = "application/xop+xml; charset=UTF-8; type=\"application/soap+xml\"; action=\"SendFile\"";

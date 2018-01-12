@@ -17,12 +17,8 @@
 package com.eviware.soapui.impl.wsdl.teststeps;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRepresentation;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.rest.RestRepresentation.Type;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.rest.support.RestRequestConverter;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
@@ -45,20 +41,9 @@ import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionsResult;
-import com.eviware.soapui.model.support.DefaultTestStepProperty;
-import com.eviware.soapui.model.support.InterfaceListenerAdapter;
-import com.eviware.soapui.model.support.ModelSupport;
-import com.eviware.soapui.model.support.ProjectListenerAdapter;
-import com.eviware.soapui.model.support.TestPropertyListenerAdapter;
-import com.eviware.soapui.model.support.TestStepBeanProperty;
+import com.eviware.soapui.model.support.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepProperty;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.security.Securable;
 import com.eviware.soapui.support.UISupport;
@@ -73,15 +58,10 @@ import org.apache.log4j.Logger;
 import org.apache.xmlbeans.SchemaType;
 import org.w3c.dom.Document;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.xml.namespace.QName;
 import java.beans.PropertyChangeEvent;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static com.eviware.soapui.support.JsonUtil.seemsToBeJsonContentType;
 
@@ -517,11 +497,8 @@ public class RestTestRequestStep extends WsdlTestStepWithProperties implements R
         if (modelItem instanceof Interface && getTestRequest().getOperation() != null
                 && getTestRequest().getOperation().getInterface() == modelItem) {
             return true;
-        } else if (modelItem instanceof Operation && getTestRequest().getOperation() == modelItem) {
-            return true;
-        }
+        } else return modelItem instanceof Operation && getTestRequest().getOperation() == modelItem;
 
-        return false;
     }
 
     public void setRestMethod(RestMethod method) {

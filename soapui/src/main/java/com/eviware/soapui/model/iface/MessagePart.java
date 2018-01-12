@@ -29,19 +29,17 @@ import javax.xml.namespace.QName;
  */
 
 public interface MessagePart {
-    public String getName();
+    String getName();
 
-    public String getDescription();
+    String getDescription();
 
-    public PartType getPartType();
+    PartType getPartType();
 
-    public enum PartType {
+    enum PartType {
         HEADER, CONTENT, ATTACHMENT, FAULT, PARAMETER
     }
 
-    ;
-
-    public abstract static class ContentPart implements MessagePart {
+    abstract class ContentPart implements MessagePart {
         public abstract SchemaType getSchemaType();
 
         public abstract QName getPartElementName();
@@ -53,7 +51,7 @@ public interface MessagePart {
         }
     }
 
-    public abstract static class AttachmentPart implements MessagePart {
+    abstract class AttachmentPart implements MessagePart {
         public abstract String[] getContentTypes();
 
         public abstract boolean isAnonymous();
@@ -63,19 +61,19 @@ public interface MessagePart {
         }
     }
 
-    public abstract static class HeaderPart extends ContentPart {
+    abstract class HeaderPart extends ContentPart {
         public PartType getPartType() {
             return PartType.HEADER;
         }
     }
 
-    public abstract static class ParameterPart extends ContentPart {
+    abstract class ParameterPart extends ContentPart {
         public PartType getPartType() {
             return PartType.PARAMETER;
         }
     }
 
-    public abstract static class FaultPart extends ContentPart {
+    abstract class FaultPart extends ContentPart {
         public PartType getPartType() {
             return PartType.FAULT;
         }

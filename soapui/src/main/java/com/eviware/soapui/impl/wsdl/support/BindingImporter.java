@@ -29,7 +29,7 @@ import javax.wsdl.Binding;
  */
 
 public interface BindingImporter {
-    public boolean canImport(Binding binding);
+    boolean canImport(Binding binding);
 
-    public WsdlInterface importBinding(WsdlProject project, WsdlContext wsdlContext, Binding binding) throws Exception;
+    WsdlInterface importBinding(WsdlProject project, WsdlContext wsdlContext, Binding binding) throws Exception;
 }

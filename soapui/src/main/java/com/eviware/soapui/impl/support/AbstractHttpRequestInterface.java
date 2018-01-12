@@ -32,111 +32,111 @@ import com.eviware.soapui.support.resolver.ResolveContext;
 import com.eviware.soapui.support.types.StringToStringsMap;
 import org.apache.log4j.Logger;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.List;
 
 public interface AbstractHttpRequestInterface<T extends AbstractRequestConfig> extends Request,
         PropertyExpansionContainer, MutableAttachmentContainer {
 
-    public final static Logger log = Logger.getLogger(AbstractHttpRequest.class);
-    public static final String RESPONSE_PROPERTY = WsdlRequest.class.getName() + "@response";
-    public static final String REMOVE_EMPTY_CONTENT = WsdlRequest.class.getName() + "@remove_empty_content";
-    public static final String STRIP_WHITESPACES = WsdlRequest.class.getName() + "@strip-whitespaces";
-    public static final String REQUEST_HEADERS_PROPERTY = WsdlRequest.class.getName() + "@request-headers";
-    public static final String BIND_ADDRESS = WsdlRequest.class.getName() + "@bind_address";
-    public static final String DISABLE_MULTIPART_ATTACHMENTS = WsdlRequest.class.getName()
+    Logger log = Logger.getLogger(AbstractHttpRequest.class);
+    String RESPONSE_PROPERTY = WsdlRequest.class.getName() + "@response";
+    String REMOVE_EMPTY_CONTENT = WsdlRequest.class.getName() + "@remove_empty_content";
+    String STRIP_WHITESPACES = WsdlRequest.class.getName() + "@strip-whitespaces";
+    String REQUEST_HEADERS_PROPERTY = WsdlRequest.class.getName() + "@request-headers";
+    String BIND_ADDRESS = WsdlRequest.class.getName() + "@bind_address";
+    String DISABLE_MULTIPART_ATTACHMENTS = WsdlRequest.class.getName()
             + "@disable-multipart-attachments";
-    public static final String DUMP_FILE = AbstractHttpRequest.class.getName() + "@dump-file";
-    public static final String MAX_SIZE = AbstractHttpRequest.class.getName() + "@max-size";
-    public static final String FOLLOW_REDIRECTS = AbstractHttpRequest.class.getName() + "@follow-redirects";
+    String DUMP_FILE = AbstractHttpRequest.class.getName() + "@dump-file";
+    String MAX_SIZE = AbstractHttpRequest.class.getName() + "@max-size";
+    String FOLLOW_REDIRECTS = AbstractHttpRequest.class.getName() + "@follow-redirects";
 
-    public abstract RestRequestInterface.HttpMethod getMethod();
+    RestRequestInterface.HttpMethod getMethod();
 
-    public abstract void setMultipartEnabled(boolean multipartEnabled);
+    void setMultipartEnabled(boolean multipartEnabled);
 
-    public abstract boolean isEntitizeProperties();
+    boolean isEntitizeProperties();
 
-    public abstract void setEntitizeProperties(boolean entitizeProperties);
+    void setEntitizeProperties(boolean entitizeProperties);
 
-    public abstract void release();
+    void release();
 
-    public abstract SubmitListener[] getSubmitListeners();
+    SubmitListener[] getSubmitListeners();
 
-    public abstract void copyAttachmentsTo(WsdlRequest newRequest);
+    void copyAttachmentsTo(WsdlRequest newRequest);
 
-    public abstract Attachment importAttachment(Attachment attachment);
+    Attachment importAttachment(Attachment attachment);
 
-    public abstract boolean isReadOnly();
+    boolean isReadOnly();
 
-    public abstract void setRequestContent(String request);
+    void setRequestContent(String request);
 
-    public abstract boolean isPrettyPrint();
+    boolean isPrettyPrint();
 
-    public abstract void setPrettyPrint(boolean prettyPrint);
+    void setPrettyPrint(boolean prettyPrint);
 
-    public abstract StringToStringsMap getRequestHeaders();
+    StringToStringsMap getRequestHeaders();
 
-    public abstract RequestIconAnimator<?> getIconAnimator();
+    void setRequestHeaders(StringToStringsMap map);
 
-    public abstract void setRequestHeaders(StringToStringsMap map);
+    RequestIconAnimator<?> getIconAnimator();
 
-    public abstract ImageIcon getIcon();
+    void setIconAnimator(RequestIconAnimator<?> iconAnimator);
 
-    public abstract String getUsername();
+    ImageIcon getIcon();
 
-    public abstract String getPassword();
+    String getUsername();
 
-    public abstract String getDomain();
+    void setUsername(String username);
 
-    public abstract String getAuthType();
+    String getPassword();
 
-    public abstract void setUsername(String username);
+    void setPassword(String password);
 
-    public abstract void setPassword(String password);
+    String getDomain();
 
-    public abstract void setDomain(String domain);
+    void setDomain(String domain);
 
-    public abstract String getSslKeystore();
+    String getAuthType();
 
-    public abstract void setSslKeystore(String sslKeystore);
+    String getSslKeystore();
 
-    public abstract String getBindAddress();
+    void setSslKeystore(String sslKeystore);
 
-    public abstract void setBindAddress(String bindAddress);
+    String getBindAddress();
 
-    public abstract long getMaxSize();
+    void setBindAddress(String bindAddress);
 
-    public abstract void setMaxSize(long maxSize);
+    long getMaxSize();
 
-    public abstract String getDumpFile();
+    void setMaxSize(long maxSize);
 
-    public abstract void setDumpFile(String df);
+    String getDumpFile();
 
-    public abstract boolean isRemoveEmptyContent();
+    void setDumpFile(String df);
 
-    public abstract void setRemoveEmptyContent(boolean removeEmptyContent);
+    boolean isRemoveEmptyContent();
 
-    public abstract boolean isStripWhitespaces();
+    void setRemoveEmptyContent(boolean removeEmptyContent);
 
-    public abstract void setStripWhitespaces(boolean stripWhitespaces);
+    boolean isStripWhitespaces();
 
-    public abstract boolean isFollowRedirects();
+    void setStripWhitespaces(boolean stripWhitespaces);
 
-    public abstract void setFollowRedirects(boolean followRedirects);
+    boolean isFollowRedirects();
 
-    public abstract void beforeSave();
+    void setFollowRedirects(boolean followRedirects);
 
-    public abstract void setIconAnimator(RequestIconAnimator<?> iconAnimator);
+    void beforeSave();
 
-    public abstract HttpResponse getResponse();
+    HttpResponse getResponse();
 
-    public abstract void setResponse(HttpResponse response, SubmitContext context);
+    void setResponse(HttpResponse response, SubmitContext context);
 
-    public abstract void resolve(ResolveContext<?> context);
+    void resolve(ResolveContext<?> context);
 
-    public abstract void addExternalDependencies(List<ExternalDependency> dependencies);
+    void addExternalDependencies(List<ExternalDependency> dependencies);
 
-    public abstract boolean hasEndpoint();
+    boolean hasEndpoint();
 
-    public IAfterRequestInjection getAfterRequestInjection();
+    IAfterRequestInjection getAfterRequestInjection();
 }

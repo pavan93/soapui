@@ -21,5 +21,5 @@ import com.eviware.soapui.settings.Setting.SettingType;
 public interface SecuritySettings {
 
     @Setting(name = "Password", description = "password for shadowing proxy password in settings file", type = SettingType.PASSWORD)
-    public final static String SHADOW_PASSWORD = SecuritySettings.class.getSimpleName() + "@" + "shadowProxyPassword";
+    String SHADOW_PASSWORD = SecuritySettings.class.getSimpleName() + "@" + "shadowProxyPassword";
 }

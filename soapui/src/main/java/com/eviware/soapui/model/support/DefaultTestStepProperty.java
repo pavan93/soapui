@@ -117,9 +117,9 @@ public class DefaultTestStepProperty implements TestStepProperty, RenameableTest
      */
 
     public interface PropertyHandler {
-        public String getValue(DefaultTestStepProperty property);
+        String getValue(DefaultTestStepProperty property);
 
-        public void setValue(DefaultTestStepProperty property, String value);
+        void setValue(DefaultTestStepProperty property, String value);
     }
 
     /**

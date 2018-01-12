@@ -158,7 +158,7 @@ public class ProjectTreeNode extends AbstractModelItemTreeNode<Project> {
     }
 
     public Project getProject() {
-        return (Project) getModelItem();
+        return getModelItem();
     }
 
     private class InternalProjectListener extends ProjectListenerAdapter {

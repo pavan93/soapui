@@ -33,7 +33,6 @@ import org.apache.http.protocol.HttpContext;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -109,7 +108,7 @@ public class HttpClientRequestTransportTest {
         }
 
         @Override
-        protected HttpResponse submitRequest(ExtendedHttpMethod httpMethod, HttpContext httpContext) throws IOException {
+        protected HttpResponse submitRequest(ExtendedHttpMethod httpMethod, HttpContext httpContext) {
             methodExecuted = httpMethod;
             contextUsed = httpContext;
             return makeSuccessfulResponse();

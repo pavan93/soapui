@@ -27,11 +27,8 @@ import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.xml.XmlObjectConfigurationBuilder;
@@ -87,7 +84,7 @@ public class JMSTimeoutAssertion extends WsdlMessageAssertion implements Respons
     @Override
     protected String internalAssertResponse(MessageExchange messageExchange, SubmitContext context)
             throws AssertionException {
-        PropertyExpansionContext propertyExpansionContext = (PropertyExpansionContext) context;
+        PropertyExpansionContext propertyExpansionContext = context;
         boolean isRun = propertyExpansionContext.hasProperty(HermesJmsRequestTransport.IS_JMS_MESSAGE_RECEIVED);
         Boolean temp = (Boolean) context.getProperty(HermesJmsRequestTransport.IS_JMS_MESSAGE_RECEIVED);
         Boolean messageReceived = temp != null ? temp : false;

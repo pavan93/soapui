@@ -23,7 +23,7 @@ import static org.junit.Assert.assertNotNull;
 public class WadlTest {
 
     @Test
-    public void testWadl() throws Exception {
+    public void testWadl() {
         ApplicationDocument applicationDocument = ApplicationDocument.Factory.newInstance();
         Application application = applicationDocument.addNewApplication();
         assertNotNull(application);

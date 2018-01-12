@@ -18,20 +18,9 @@ package com.eviware.soapui.support.propertyexpansion.scrollmenu;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.Timer;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.Vector;
 
 /**
@@ -170,8 +159,8 @@ public class ScrollablePopup extends JPopupMenu implements ScrollableMenuContain
             return;
         } else {
             indexVisible--;
-            ((JComponent) subMenus.get(indexVisible + visibleItems)).setVisible(false);
-            ((JComponent) subMenus.get(indexVisible)).setVisible(true);
+            subMenus.get(indexVisible + visibleItems).setVisible(false);
+            subMenus.get(indexVisible).setVisible(true);
             downButton.setVisible(true);
             if (indexVisible == 0) {
                 upButton.setVisible(false);
@@ -195,8 +184,8 @@ public class ScrollablePopup extends JPopupMenu implements ScrollableMenuContain
             return;
         } else {
             try {
-                ((JComponent) subMenus.get(indexVisible)).setVisible(false);
-                ((JComponent) subMenus.get(indexVisible + visibleItems)).setVisible(true);
+                subMenus.get(indexVisible).setVisible(false);
+                subMenus.get(indexVisible + visibleItems).setVisible(true);
                 upButton.setVisible(true);
                 indexVisible++;
                 if ((indexVisible + visibleItems) == subMenus.size()) {

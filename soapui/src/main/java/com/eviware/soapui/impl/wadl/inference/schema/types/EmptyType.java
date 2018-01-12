@@ -24,7 +24,6 @@ import com.eviware.soapui.impl.wadl.inference.schema.content.EmptyContent;
 import com.eviware.soapui.impl.wadl.inference.support.TypeInferrer;
 import org.apache.xmlbeans.XmlAnySimpleType;
 import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlException;
 
 /**
  * EmptyRtpe corresponds to an instance of a type with no attributes, nor any
@@ -66,7 +65,7 @@ public class EmptyType implements Type {
         this.schema = schema;
     }
 
-    public Type validate(Context context) throws XmlException {
+    public Type validate(Context context) {
         XmlCursor cursor = context.getCursor();
         if (!cursor.isAttr() && (cursor.toFirstAttribute() || cursor.toFirstChild())) {
             // Element has attributes or children, must be complexType

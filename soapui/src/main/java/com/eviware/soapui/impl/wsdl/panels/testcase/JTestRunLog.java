@@ -33,19 +33,8 @@ import com.eviware.x.form.support.AField;
 import com.eviware.x.form.support.AField.AFieldType;
 import com.eviware.x.form.support.AForm;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -328,15 +317,15 @@ public class JTestRunLog extends JPanel implements TestRunLog {
     }
 
     @AForm(name = "Log Options", description = "Set options for the run log below")
-    private static interface OptionsForm {
+    private interface OptionsForm {
         @AField(name = "Max Rows", description = "Sets the maximum number of rows to keep in the log", type = AFieldType.INT)
-        public static final String MAXROWS = "Max Rows";
+        String MAXROWS = "Max Rows";
 
         @AField(name = "Errors Only", description = "Logs only TestStep errors in the log", type = AFieldType.BOOLEAN)
-        public static final String ERRORSONLY = "Errors Only";
+        String ERRORSONLY = "Errors Only";
 
         @AField(name = "Follow", description = "Follow log content", type = AFieldType.BOOLEAN)
-        public static final String FOLLOW = "Follow";
+        String FOLLOW = "Follow";
     }
 
     private class ClearLogAction extends AbstractAction {

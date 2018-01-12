@@ -26,39 +26,13 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.log4j.Logger;
-import org.apache.xmlbeans.SchemaAnnotation;
-import org.apache.xmlbeans.SchemaField;
-import org.apache.xmlbeans.SchemaLocalElement;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SchemaTypeSystem;
-import org.apache.xmlbeans.SimpleValue;
-import org.apache.xmlbeans.XmlAnySimpleType;
-import org.apache.xmlbeans.XmlBase64Binary;
-import org.apache.xmlbeans.XmlBeans;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlException;
-import org.apache.xmlbeans.XmlHexBinary;
-import org.apache.xmlbeans.XmlObject;
-import org.apache.xmlbeans.XmlOptions;
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
+import org.apache.xmlbeans.*;
+import org.w3c.dom.*;
 
 import javax.xml.namespace.QName;
 import java.io.File;
-import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * XML-Schema related tools
@@ -120,7 +94,7 @@ public class SchemaUtils {
         }
     }
 
-    private static void loadSchemaDirectory(String schemaDirectory) throws IOException, MalformedURLException {
+    private static void loadSchemaDirectory(String schemaDirectory) {
         File dir = new File(schemaDirectory);
         if (dir.exists() && dir.isDirectory()) {
             String[] xsdFiles = dir.list();
@@ -544,7 +518,7 @@ public class SchemaUtils {
      * SchemaDocuments so that referenced types are not downloaded (again)
      */
 
-    public static void removeImports(XmlObject xmlObject) throws XmlException {
+    public static void removeImports(XmlObject xmlObject) {
         XmlObject[] imports = xmlObject.selectPath("declare namespace s='" + Constants.XSD_NS + "' .//s:import");
 
         for (int c = 0; c < imports.length; c++) {
@@ -566,7 +540,7 @@ public class SchemaUtils {
         if (schemaType == null) {
             return false;
         }
-        return schemaType.equals(baseType) ? true : isInstanceOf(schemaType.getBaseType(), baseType);
+        return schemaType.equals(baseType) || isInstanceOf(schemaType.getBaseType(), baseType);
     }
 
     public static boolean isBinaryType(SchemaType schemaType) {

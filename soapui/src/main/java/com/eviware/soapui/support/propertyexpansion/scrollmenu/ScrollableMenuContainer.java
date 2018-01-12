@@ -16,19 +16,18 @@
 
 package com.eviware.soapui.support.propertyexpansion.scrollmenu;
 
-import javax.swing.Action;
-import javax.swing.JMenuItem;
+import javax.swing.*;
 
 public interface ScrollableMenuContainer {
-    public JMenuItem add(JMenuItem menuItem);
+    JMenuItem add(JMenuItem menuItem);
 
-    public JMenuItem addHeader(JMenuItem header);
+    JMenuItem addHeader(JMenuItem header);
 
-    public JMenuItem addHeader(Action action);
+    JMenuItem addHeader(Action action);
 
-    public JMenuItem addFooter(JMenuItem menuItem);
+    JMenuItem addFooter(JMenuItem menuItem);
 
-    public JMenuItem addFooter(Action action);
+    JMenuItem addFooter(Action action);
 
-    public void removeAll();
+    void removeAll();
 }

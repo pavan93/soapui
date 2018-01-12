@@ -24,7 +24,6 @@ import com.eviware.soapui.impl.wsdl.support.xsd.SchemaUtils;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.DocumentFragment;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
@@ -60,11 +59,7 @@ public abstract class AbstractDefinitionCache<T extends AbstractInterface<?>> im
             return false;
         }
 
-        if (definitionCache.sizeOfPartArray() == 0) {
-            return false;
-        }
-
-        return true;
+        return definitionCache.sizeOfPartArray() != 0;
     }
 
     public void importCache(DefinitionCache cache) throws Exception {
@@ -97,7 +92,7 @@ public abstract class AbstractDefinitionCache<T extends AbstractInterface<?>> im
             Node domNode = xmlObject.getDomNode();
 
             if (domNode.getNodeType() == Node.DOCUMENT_FRAGMENT_NODE) {
-                Node node = ((DocumentFragment) domNode).getFirstChild();
+                Node node = domNode.getFirstChild();
                 if (node.getNodeType() == Node.TEXT_NODE) {
                     domNode = XmlUtils.parseXml(node.getNodeValue());
                     // xmlObject = XmlObject.Factory.parse( domNode );
@@ -115,7 +110,7 @@ public abstract class AbstractDefinitionCache<T extends AbstractInterface<?>> im
         initParts();
     }
 
-    public List<InterfaceDefinitionPart> getDefinitionParts() throws Exception {
+    public List<InterfaceDefinitionPart> getDefinitionParts() {
         if (parts == null) {
             initParts();
         }

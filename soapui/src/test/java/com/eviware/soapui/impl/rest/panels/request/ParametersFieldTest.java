@@ -51,12 +51,12 @@ public class ParametersFieldTest {
     }
 
     @Test
-    public void displaysQueryParameter() throws Exception {
+    public void displaysQueryParameter() {
         assertThat(parametersField.getText(), endsWith("?" + QUERY_PARAM_NAME + "=" + QUERY_PARAM_VALUE));
     }
 
     @Test
-    public void displaysMatrixParameter() throws Exception {
+    public void displaysMatrixParameter() {
         assertThat(parametersField.getText(), startsWith(";" + MATRIX_PARAM_NAME + "=" + MATRIX_PARAM_VALUE));
     }
 

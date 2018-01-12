@@ -25,7 +25,6 @@ import com.eviware.soapui.impl.rest.mock.RestMockService;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.model.mock.MockOperation;
 import com.eviware.soapui.settings.HttpSettings;
-import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.ModelItemFactory;
 import com.eviware.x.form.XFormDialog;
 import org.junit.After;
@@ -78,7 +77,7 @@ public class GenerateRestMockServiceActionTest {
     }
 
     @Test
-    public void shouldGenerateRestMockService() throws SoapUIException {
+    public void shouldGenerateRestMockService() {
         action.perform(restService, null);
 
         RestMockService restMockService = getResultingRestMockService();
@@ -87,7 +86,7 @@ public class GenerateRestMockServiceActionTest {
     }
 
     @Test
-    public void shouldGenerateNonStartedRestMockServiceIfSettingIsOff() throws SoapUIException {
+    public void shouldGenerateNonStartedRestMockServiceIfSettingIsOff() {
         SoapUI.getSettings().setBoolean(HttpSettings.START_MOCK_SERVICE, FALSE);
 
         action.perform(restService, null);

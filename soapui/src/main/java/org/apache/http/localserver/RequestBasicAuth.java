@@ -41,8 +41,6 @@
 
 package org.apache.http.localserver;
 
-import java.io.IOException;
-
 import org.apache.http.HttpException;
 import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
@@ -56,7 +54,7 @@ public class RequestBasicAuth implements HttpRequestInterceptor {
         this.authTokenExtractor = new BasicAuthTokenExtractor();
     }
 
-    public void process(final HttpRequest request, final HttpContext context) throws HttpException, IOException {
+    public void process(final HttpRequest request, final HttpContext context) throws HttpException {
         context.setAttribute("creds", this.authTokenExtractor.extract(request));
     }
 

@@ -16,7 +16,6 @@
 
 package com.eviware.soapui.impl.wsdl.actions.request;
 
-import com.eviware.soapui.impl.wsdl.WsdlOperation;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
@@ -41,7 +40,7 @@ public class CloneRequestAction extends AbstractSoapUIAction<WsdlRequest> {
             return;
         }
 
-        WsdlRequest newRequest = ((WsdlOperation) request.getOperation()).addNewRequest(name);
+        WsdlRequest newRequest = request.getOperation().addNewRequest(name);
         request.copyTo(newRequest, true, true);
 
         UISupport.selectAndShow(newRequest);

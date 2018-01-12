@@ -91,11 +91,8 @@ public class PolicyUtils {
 
     public static boolean isAddressing(Policy policy) {
 
-        if (policy.getAddressingList().size() > 0) {
-            return true;
-        }
+        return policy.getAddressingList().size() > 0;
 
-        return false;
     }
 
     public static List<Policy> getAddressingPolicies(WsdlContext wsdlContext) {

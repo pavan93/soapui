@@ -33,7 +33,7 @@ import com.eviware.soapui.model.testsuite.TestAssertion;
 import com.eviware.soapui.monitor.TestMonitor;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -219,7 +219,7 @@ public class HttpTestRequest extends HttpRequest implements HttpTestRequestInter
         try {
             return assertionsSupport.moveAssertion(ix, offset);
         } finally {
-            ((WsdlMessageAssertion) assertion).release();
+            assertion.release();
             notifier.notifyChange();
         }
     }

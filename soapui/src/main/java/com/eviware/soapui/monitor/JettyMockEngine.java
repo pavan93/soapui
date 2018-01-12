@@ -35,36 +35,19 @@ import org.mortbay.component.AbstractLifeCycle;
 import org.mortbay.io.Connection;
 import org.mortbay.io.EndPoint;
 import org.mortbay.io.nio.SelectChannelEndPoint;
-import org.mortbay.jetty.Connector;
-import org.mortbay.jetty.HttpConnection;
-import org.mortbay.jetty.Request;
-import org.mortbay.jetty.RequestLog;
-import org.mortbay.jetty.Response;
-import org.mortbay.jetty.Server;
+import org.mortbay.jetty.*;
 import org.mortbay.jetty.handler.AbstractHandler;
 import org.mortbay.jetty.handler.RequestLogHandler;
 import org.mortbay.jetty.nio.SelectChannelConnector;
 import org.mortbay.jetty.security.SslSocketConnector;
 
-import javax.servlet.ServletException;
 import javax.servlet.ServletInputStream;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
-import java.io.StringReader;
+import java.io.*;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -171,7 +154,7 @@ public class JettyMockEngine implements MockEngine {
         }
     }
 
-    private void initServer() throws Exception {
+    private void initServer() {
         server = new Server();
         server.setThreadPool(new SoapUIJettyThreadPool());
         server.setHandler(new ServerHandler());
@@ -403,7 +386,7 @@ public class JettyMockEngine implements MockEngine {
             return false;
         }
 
-        public void reset() throws IOException {
+        public void reset() {
             buffer1 = null;
         }
     }
@@ -563,7 +546,7 @@ public class JettyMockEngine implements MockEngine {
 
     private class ServerHandler extends AbstractHandler {
         public void handle(String target, HttpServletRequest request, HttpServletResponse response, int dispatch)
-                throws IOException, ServletException {
+                throws IOException {
             // find mockService
             Map<String, List<MockRunner>> map = runners.get(request.getLocalPort());
 

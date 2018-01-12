@@ -101,16 +101,16 @@ public class NewRestMethodAction extends AbstractSoapUIAction<RestResource> {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWRESTSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(description = "Form.ResourceName.Description", type = AFieldType.STRING)
-        public final static String RESOURCENAME = messages.get("Form.ResourceName.Label");
+        String RESOURCENAME = messages.get("Form.ResourceName.Label");
 
         @AField(description = "Form.Method.Description", type = AFieldType.ENUMERATION, values = {"GET", "POST", "PUT",
                 "DELETE", "HEAD", "PATCH"})
-        public final static String METHOD = messages.get("Form.Method.Label");
+        String METHOD = messages.get("Form.Method.Label");
 
         @AField(description = "Form.ParamsTable.Description", type = AFieldType.COMPONENT)
-        public final static String PARAMSTABLE = messages.get("Form.ParamsTable.Label");
+        String PARAMSTABLE = messages.get("Form.ParamsTable.Label");
 
         @AField(description = "Form.CreateRequest.Description", type = AFieldType.BOOLEAN)
-        public final static String CREATEREQUEST = messages.get("Form.CreateRequest.Label");
+        String CREATEREQUEST = messages.get("Form.CreateRequest.Label");
     }
 }

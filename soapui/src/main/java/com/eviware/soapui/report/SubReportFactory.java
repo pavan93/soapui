@@ -17,13 +17,13 @@
 package com.eviware.soapui.report;
 
 public interface SubReportFactory {
-    public SubReport[] buildSubReports(ModelItemReport modelItem);
+    SubReport[] buildSubReports(ModelItemReport modelItem);
 
-    public String getName();
+    String getName();
 
-    public String getDescription();
+    String getDescription();
 
-    public String getId();
+    String getId();
 
-    public ReportTypeConfig.Enum[] getLevels();
+    ReportTypeConfig.Enum[] getLevels();
 }

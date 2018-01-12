@@ -17,37 +17,16 @@
 package com.eviware.soapui.impl.rest.support.handlers;
 
 import com.eviware.soapui.SoapUI;
-import net.sf.json.JSON;
-import net.sf.json.JSONArray;
-import net.sf.json.JSONException;
-import net.sf.json.JSONFunction;
-import net.sf.json.JSONNull;
-import net.sf.json.JSONObject;
+import net.sf.json.*;
 import net.sf.json.util.JSONUtils;
 import net.sf.json.xml.JSONTypes;
-import nu.xom.Attribute;
-import nu.xom.Builder;
-import nu.xom.Document;
-import nu.xom.Element;
-import nu.xom.Elements;
-import nu.xom.Node;
-import nu.xom.Serializer;
-import nu.xom.Text;
+import nu.xom.*;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -681,11 +660,7 @@ public class JsonXmlSerializer {
                 return true;
             }
             if (elementCount == 1) {
-                if (skipWhitespace || element.getChild(0) instanceof Text) {
-                    return true;
-                } else {
-                    return false;
-                }
+                return skipWhitespace || element.getChild(0) instanceof Text;
             }
         }
 
@@ -812,13 +787,11 @@ public class JsonXmlSerializer {
             if (attrCount == 1 && paramsAttr != null) {
                 return true;
             }
-            if (attrCount == 2
+            return attrCount == 2
                     && paramsAttr != null
                     && typeAttr != null
                     && (typeAttr.getValue().compareToIgnoreCase(JSONTypes.STRING) == 0 || typeAttr.getValue()
-                    .compareToIgnoreCase(JSONTypes.FUNCTION) == 0)) {
-                return true;
-            }
+                    .compareToIgnoreCase(JSONTypes.FUNCTION) == 0);
         }
         return false;
     }
@@ -839,10 +812,7 @@ public class JsonXmlSerializer {
                 return true;
             }
         }
-        if (skipWhitespace && element.getChildCount() == 1 && element.getChild(0) instanceof Text) {
-            return true;
-        }
-        return false;
+        return skipWhitespace && element.getChildCount() == 1 && element.getChild(0) instanceof Text;
     }
 
     private boolean isObject(Element element, boolean isTopLevel) {

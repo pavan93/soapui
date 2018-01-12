@@ -30,16 +30,10 @@ import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormFieldListener;
+import com.eviware.x.form.*;
 import org.apache.log4j.Logger;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -268,7 +262,7 @@ public class SecurityTestRunnerAction extends TestRunnerAction {
         buildArgsForm(builder, false, "TestRunner");
     }
 
-    protected ArgumentBuilder buildArgs(WsdlProject modelItem) throws IOException {
+    protected ArgumentBuilder buildArgs(WsdlProject modelItem) {
         XFormDialog dialog = getDialog();
         if (dialog == null) {
             ArgumentBuilder builder = new ArgumentBuilder(new StringToStringMap());
@@ -331,7 +325,7 @@ public class SecurityTestRunnerAction extends TestRunnerAction {
         }
 
         builder.addBoolean(ENABLEUI, "-i");
-        builder.addArgs(new String[]{modelItem.getPath()});
+        builder.addArgs(modelItem.getPath());
 
         addToolArgs(values, builder);
 

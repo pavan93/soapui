@@ -31,14 +31,8 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlString;
 
-import javax.swing.JComponent;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -146,7 +140,7 @@ public class XmlBombSecurityScan extends AbstractSecurityScanWithProperties {
         }
     }
 
-    private StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private StringToStringMap update(TestStep testStep, SecurityTestRunContext context) {
         StringToStringMap params = new StringToStringMap();
 
         if (parameterMutations.size() == 0) {
@@ -169,7 +163,7 @@ public class XmlBombSecurityScan extends AbstractSecurityScanWithProperties {
         return params;
     }
 
-    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) {
         mutation = true;
 
         // for each parameter
@@ -250,11 +244,7 @@ public class XmlBombSecurityScan extends AbstractSecurityScanWithProperties {
     protected boolean hasNext(TestStep testStep, SecurityTestRunContext context) {
         boolean hasNext = false;
         if ((parameterMutations == null || parameterMutations.size() == 0) && !mutation) {
-            if (getParameterHolder().getParameterList().size() > 0) {
-                hasNext = true;
-            } else {
-                hasNext = false;
-            }
+            hasNext = getParameterHolder().getParameterList().size() > 0;
         } else {
             for (SecurityCheckedParameter param : parameterMutations.keySet()) {
                 if (parameterMutations.get(param).size() > 0) {

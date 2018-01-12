@@ -25,7 +25,7 @@ import com.eviware.x.form.support.AField;
 import com.eviware.x.form.support.AForm;
 import com.eviware.x.form.support.XFormRadioGroup;
 
-import javax.swing.JButton;
+import javax.swing.*;
 
 import static com.eviware.soapui.impl.rest.OAuth2Profile.AccessTokenPosition;
 
@@ -93,12 +93,12 @@ public class OAuth2AdvancedOptionsDialog {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.OAUTH_ADVANCED_OPTIONS)
     public interface Form {
         @AField(description = "Form.AccessTokenPosition.Description", type = AField.AFieldType.RADIOGROUP)
-        public final static String ACCESS_TOKEN_POSITION = messages.get("Form.AccessTokenPosition.Label");
+        String ACCESS_TOKEN_POSITION = messages.get("Form.AccessTokenPosition.Label");
 
         @AField(description = "Form.AutomaticRefreshAccessToken.Description", type = AField.AFieldType.RADIOGROUP)
-        public final static String AUTOMATIC_ACCESS_TOKEN_REFRESH = messages.get("Form.AutomaticRefreshAccessToken.Label");
+        String AUTOMATIC_ACCESS_TOKEN_REFRESH = messages.get("Form.AutomaticRefreshAccessToken.Label");
 
         @AField(description = "Form.AccessTokenExpirationTime.Description", type = AField.AFieldType.COMPONENT)
-        public final static String ACCESS_TOKEN_EXPIRATION_TIME = messages.get("Form.AccessTokenExpirationTime.Label");
+        String ACCESS_TOKEN_EXPIRATION_TIME = messages.get("Form.AccessTokenExpirationTime.Label");
     }
 }

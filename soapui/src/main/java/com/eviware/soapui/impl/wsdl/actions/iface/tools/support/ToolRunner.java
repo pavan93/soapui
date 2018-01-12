@@ -25,19 +25,19 @@ import com.eviware.soapui.model.ModelItem;
  */
 
 public interface ToolRunner extends Runnable {
-    public void setContext(RunnerContext context);
+    void setContext(RunnerContext context);
 
-    public boolean isRunning();
+    boolean isRunning();
 
-    public boolean canCancel();
+    boolean canCancel();
 
-    public boolean showLog();
+    boolean showLog();
 
-    public void cancel();
+    void cancel();
 
-    public String getName();
+    String getName();
 
-    public ModelItem getModelItem();
+    ModelItem getModelItem();
 
-    public String getDescription();
+    String getDescription();
 }

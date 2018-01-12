@@ -39,7 +39,7 @@ public class JsScriptEngine implements SoapUIScriptEngine {
         this.parentClassLoader = parentClassLoader;
     }
 
-    public Object run() throws Exception {
+    public Object run() {
         if (StringUtils.isNullOrEmpty(scriptText)) {
             return null;
         }
@@ -74,7 +74,7 @@ public class JsScriptEngine implements SoapUIScriptEngine {
         this.scriptText = scriptText;
     }
 
-    public void compile() throws Exception {
+    public void compile() {
     }
 
     public void setVariable(String name, Object value) {

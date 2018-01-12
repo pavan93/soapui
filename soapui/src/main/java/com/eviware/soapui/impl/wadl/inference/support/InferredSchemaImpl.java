@@ -25,7 +25,6 @@ import org.apache.xmlbeans.XmlBeans;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -38,7 +37,7 @@ public class InferredSchemaImpl implements InferredSchema {
         ss = new SchemaSystem();
     }
 
-    public InferredSchemaImpl(InputStream is) throws XmlException, IOException {
+    public InferredSchemaImpl(InputStream is) {
         ss = new SchemaSystem(SchemaSetConfig.Factory.parse(is));
     }
 
@@ -77,7 +76,7 @@ public class InferredSchemaImpl implements InferredSchema {
         ss.validate(xml, new AllowAll());
     }
 
-    public void save(OutputStream os) throws IOException {
+    public void save(OutputStream os) {
         SchemaSetConfig xml = SchemaSetConfig.Factory.newInstance();
         ss.save(xml);
         xml.save(os);

@@ -31,7 +31,7 @@ public interface XmlObjectPersistable {
      * @return the persisted XmlObject
      */
 
-    public XmlObject save();
+    XmlObject save();
 
     /**
      * Restores this object from the specified XmlObject
@@ -39,5 +39,5 @@ public interface XmlObjectPersistable {
      * @param xmlObject the xmlObject to restore from
      */
 
-    public void restore(XmlObject xmlObject);
+    void restore(XmlObject xmlObject);
 }

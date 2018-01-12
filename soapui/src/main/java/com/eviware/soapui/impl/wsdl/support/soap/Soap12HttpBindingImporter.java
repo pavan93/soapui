@@ -44,9 +44,9 @@ public class Soap12HttpBindingImporter extends AbstractSoapBindingImporter {
     public boolean canImport(Binding binding) {
         List<?> list = binding.getExtensibilityElements();
         SOAP12Binding soapBinding = WsdlUtils.getExtensiblityElement(list, SOAP12Binding.class);
-        return soapBinding == null ? false : soapBinding.getTransportURI().startsWith(Constants.SOAP_HTTP_TRANSPORT)
+        return soapBinding != null && (soapBinding.getTransportURI().startsWith(Constants.SOAP_HTTP_TRANSPORT)
                 || soapBinding.getTransportURI().startsWith(Constants.SOAP12_HTTP_BINDING_NS)
-                || soapBinding.getTransportURI().startsWith(Constants.SOAP_MICROSOFT_TCP);
+                || soapBinding.getTransportURI().startsWith(Constants.SOAP_MICROSOFT_TCP));
     }
 
     @SuppressWarnings("unchecked")
@@ -68,7 +68,7 @@ public class Soap12HttpBindingImporter extends AbstractSoapBindingImporter {
         Collections.sort(list, new BindingOperationComparator());
 
         for (Iterator<BindingOperation> iter = list.iterator(); iter.hasNext(); ) {
-            BindingOperation operation = (BindingOperation) iter.next();
+            BindingOperation operation = iter.next();
 
             // sanity check
             if (operation.getOperation() == null || operation.getOperation().isUndefined()) {

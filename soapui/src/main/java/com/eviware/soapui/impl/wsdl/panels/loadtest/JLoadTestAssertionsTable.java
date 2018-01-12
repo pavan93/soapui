@@ -30,25 +30,13 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.JTableFactory;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -275,7 +263,7 @@ public class JLoadTestAssertionsTable extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             String[] types = LoadTestAssertionRegistry.getAvailableAssertions();
-            String type = (String) UISupport.prompt("Select assertion type to add", "Add Assertion", types);
+            String type = UISupport.prompt("Select assertion type to add", "Add Assertion", types);
             if (type != null) {
                 loadTest.addAssertion(type, LoadTestAssertion.ANY_TEST_STEP, true);
                 Analytics.trackAction(SoapUIActions.ADD_LOAD_TEST_ASSERTION);

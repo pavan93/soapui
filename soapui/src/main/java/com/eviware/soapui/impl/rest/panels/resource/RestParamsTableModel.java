@@ -35,7 +35,7 @@ public class RestParamsTableModel extends DirectAccessPropertyHolderTableModel<R
     public static final int STYLE_COLUMN_INDEX = 2;
     public static final int LOCATION_COLUMN_INDEX = 3;
 
-    public static enum Mode {
+    public enum Mode {
         MINIMAL(new String[]{NAME, VALUE}, new Class[]{String.class, String.class}),
         MEDIUM(new String[]{NAME, VALUE, STYLE}, new Class[]{String.class, String.class, ParameterStyle.class}),
         FULL(COLUMN_NAMES, COLUMN_TYPES);
@@ -44,7 +44,7 @@ public class RestParamsTableModel extends DirectAccessPropertyHolderTableModel<R
 
         private final Class[] columnTypes;
 
-        private Mode(String[] columnNames, Class[] columnTypes) {
+        Mode(String[] columnNames, Class[] columnTypes) {
             this.columnNames = columnNames;
             this.columnTypes = columnTypes;
         }

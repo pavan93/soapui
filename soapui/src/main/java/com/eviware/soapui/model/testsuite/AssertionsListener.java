@@ -23,9 +23,9 @@ package com.eviware.soapui.model.testsuite;
  */
 
 public interface AssertionsListener {
-    public void assertionAdded(TestAssertion assertion);
+    void assertionAdded(TestAssertion assertion);
 
-    public void assertionRemoved(TestAssertion assertion);
+    void assertionRemoved(TestAssertion assertion);
 
-    public void assertionMoved(TestAssertion assertion, int ix, int offset);
+    void assertionMoved(TestAssertion assertion, int ix, int offset);
 }

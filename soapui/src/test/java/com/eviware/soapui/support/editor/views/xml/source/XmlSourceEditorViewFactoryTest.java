@@ -43,28 +43,28 @@ public class XmlSourceEditorViewFactoryTest {
     }
 
     @Test
-    public void testCreateRequestEditorViewForWsdlMockResponse() throws Exception {
+    public void testCreateRequestEditorViewForWsdlMockResponse() {
         mockResponse = mock(WsdlMockResponse.class);
         EditorView<?> requestEditorView = xmlSourceEditorViewFactory.createRequestEditorView(editor, mockResponse);
         assertEditorView(requestEditorView);
     }
 
     @Test
-    public void testCreateRequestEditorViewForRestMockResponse() throws Exception {
+    public void testCreateRequestEditorViewForRestMockResponse() {
         mockResponse = mock(RestMockResponse.class);
         EditorView<?> requestEditorView = xmlSourceEditorViewFactory.createRequestEditorView(editor, mockResponse);
         assertEditorView(requestEditorView);
     }
 
     @Test
-    public void testCreateResponseEditorViewForWsdlMockResponse() throws Exception {
+    public void testCreateResponseEditorViewForWsdlMockResponse() {
         mockResponse = mock(WsdlMockResponse.class);
         EditorView<?> requestEditorView = xmlSourceEditorViewFactory.createResponseEditorView(editor, mockResponse);
         assertEditorView(requestEditorView);
     }
 
     @Test
-    public void testCreateResponseEditorViewForRestMockResponse() throws Exception {
+    public void testCreateResponseEditorViewForRestMockResponse() {
         mockResponse = mock(RestMockResponse.class);
         EditorView<?> responseEditorView = xmlSourceEditorViewFactory.createResponseEditorView(editor, mockResponse);
         assertEditorView(responseEditorView, "Editor");

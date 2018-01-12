@@ -26,21 +26,11 @@ import com.eviware.soapui.security.support.ProgressBarSecurityScanAdapter;
 import com.eviware.soapui.security.support.ProgressBarSecurityTestStepAdapter;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
@@ -279,10 +269,7 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
 
         public boolean isOnExpandButton(int x, int y) {
             y = y - 30 * (tree.getRowForLocation(x, y));
-            if ((5 <= x) && (20 >= x) && (5 <= y) && (20 >= y)) {
-                return true;
-            }
-            return false;
+            return (5 <= x) && (20 >= x) && (5 <= y) && (20 >= y);
         }
 
         public void release() {
@@ -310,7 +297,7 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
             super(new BorderLayout());
 
             this.node = node;
-            this.securityCheck = (SecurityScan) node.getSecurityScan();
+            this.securityCheck = node.getSecurityScan();
             this.securityCheck.addPropertyChangeListener(this);
             label = new JLabel(securityCheck.getName(), SwingConstants.LEFT);
             String iconPath = UISupport.getIconPath(securityCheck.getIcon());
@@ -348,7 +335,7 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
             setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.black));
 
             progressBarAdapter = new ProgressBarSecurityScanAdapter(tree, this.node, progressBar, securityCheck,
-                    (SecurityTest) ((SecurityScan) securityCheck).getParent(), cntLabel);
+                    (SecurityTest) securityCheck.getParent(), cntLabel);
 
         }
 

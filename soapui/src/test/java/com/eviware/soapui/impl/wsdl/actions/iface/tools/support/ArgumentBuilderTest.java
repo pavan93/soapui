@@ -24,7 +24,7 @@ import static org.junit.Assert.assertEquals;
 public class ArgumentBuilderTest {
 
     @Test
-    public void testUnix() throws Exception {
+    public void testUnix() {
         ArgumentBuilder builder = new ArgumentBuilder(new StringToStringMap());
         builder.startScript("tcpmon", null, ".sh");
 
@@ -33,10 +33,10 @@ public class ArgumentBuilderTest {
 
         assertEquals("./tcpmon.sh", builder.getArgs().get(2));
 
-        builder.addArgs(new String[]{"test"});
+        builder.addArgs("test");
         assertEquals("./tcpmon.sh test", builder.getArgs().get(2));
 
-        builder.addArgs(new String[]{"te st"});
+        builder.addArgs("te st");
         assertEquals("./tcpmon.sh test te%20st", builder.getArgs().get(2));
     }
 }

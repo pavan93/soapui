@@ -46,7 +46,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void shouldGetTemplateParams() throws Exception {
+    public void shouldGetTemplateParams() {
         assertThat(restResource.getDefaultParams(), is(anEmptyArray()));
 
         restResource.setPath("/{id}/test");
@@ -58,7 +58,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void ignoresMatrixParamsOnPath() throws Exception {
+    public void ignoresMatrixParamsOnPath() {
         String matrixParameterString = ";Param2=matrixValue2;address=16";
         restResource.setPath("/maps/api/geocode/xml" + matrixParameterString);
 
@@ -73,7 +73,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void ignoresMatrixParamsWithoutValueOnPath() throws Exception {
+    public void ignoresMatrixParamsWithoutValueOnPath() {
         String matrixParameterString = ";Param2=1;address=";
         restResource.setPath("/maps/api/geocode/xml" + matrixParameterString);
 
@@ -88,7 +88,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void listensToChangesInConfiguredParameters() throws Exception {
+    public void listensToChangesInConfiguredParameters() {
         RestResourceConfig config = RestResourceConfig.Factory.newInstance();
         RestParametersConfig restParametersConfig = config.addNewParameters();
         RestParameterConfig parameterConfig = restParametersConfig.addNewParameter();
@@ -104,7 +104,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void removesFormerTemplateParametersFromPath() throws Exception {
+    public void removesFormerTemplateParametersFromPath() {
         RestResourceConfig config = RestResourceConfig.Factory.newInstance();
         RestParametersConfig restParametersConfig = config.addNewParameters();
         RestParameterConfig parameterConfig = restParametersConfig.addNewParameter();
@@ -120,7 +120,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void considersBasePathWhenAddingTemplateParameter() throws Exception {
+    public void considersBasePathWhenAddingTemplateParameter() {
         String parameterName = "version";
         String parameterInPath = "{" + parameterName + "}";
         parentService.setBasePath("/base/" + parameterInPath);
@@ -131,7 +131,7 @@ public class RestResourceTest {
     }
 
     @Test
-    public void deletingResourceDeletesAllChildResources() throws Exception {
+    public void deletingResourceDeletesAllChildResources() {
         // restResource -> childResourceA, childResourceB
         RestResource childResourceA = restResource.addNewChildResource("ChildA", "/childPathA");
         restResource.addNewChildResource("ChildB", "/childPathB");

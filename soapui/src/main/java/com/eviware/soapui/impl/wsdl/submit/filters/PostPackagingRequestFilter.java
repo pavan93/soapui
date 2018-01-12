@@ -41,8 +41,7 @@ public class PostPackagingRequestFilter extends AbstractRequestFilter {
             long limit = settings.getLong(HttpSettings.CHUNKING_THRESHOLD, -1);
             HttpEntity requestEntity = entityEnclosingMethod.getEntity();
             if (requestEntity != null && requestEntity instanceof AbstractHttpEntity) {
-                ((AbstractHttpEntity) requestEntity).setChunked(limit >= 0 ? requestEntity.getContentLength() > limit
-                        : false);
+                ((AbstractHttpEntity) requestEntity).setChunked(limit >= 0 && requestEntity.getContentLength() > limit);
             }
         }
     }

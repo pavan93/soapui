@@ -51,7 +51,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
      * @throws Exception
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.exit(new SoapUIMockAsWarGenerator().runFromCommandLine(args));
     }
 

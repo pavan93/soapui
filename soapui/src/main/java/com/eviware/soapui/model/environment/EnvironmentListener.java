@@ -20,6 +20,6 @@ import com.eviware.soapui.model.iface.SoapUIListener;
 
 public interface EnvironmentListener extends SoapUIListener {
 
-    public void propertyValueChanged(Property property);
+    void propertyValueChanged(Property property);
 
 }

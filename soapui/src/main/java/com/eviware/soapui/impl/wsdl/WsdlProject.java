@@ -137,11 +137,11 @@ public class WsdlProject extends AbstractTestPropertyHolderWsdlModelItem<Project
     private Set<ProjectRunListener> runListeners = new HashSet<ProjectRunListener>();
     private Environment environment;
 
-    public WsdlProject() throws XmlException, IOException, SoapUIException {
+    public WsdlProject() {
         this((WorkspaceImpl) null);
     }
 
-    public WsdlProject(String path) throws XmlException, IOException, SoapUIException {
+    public WsdlProject(String path) {
         this(path, (WorkspaceImpl) null);
     }
 
@@ -309,7 +309,7 @@ public class WsdlProject extends AbstractTestPropertyHolderWsdlModelItem<Project
         }
     }
 
-    public SoapuiProjectDocumentConfig loadProjectFromInputStream(InputStream inputStream) throws XmlException, IOException, GeneralSecurityException {
+    public SoapuiProjectDocumentConfig loadProjectFromInputStream(InputStream inputStream) throws IOException {
         projectDocument = SoapuiProjectDocumentConfig.Factory.parse(inputStream);
         inputStream.close();
 
@@ -429,7 +429,7 @@ public class WsdlProject extends AbstractTestPropertyHolderWsdlModelItem<Project
      * @throws GeneralSecurityException
      * @author robert nemet
      */
-    protected ProjectEncryptionStatus checkForEncodedData(ProjectConfig soapuiProject) throws IOException, GeneralSecurityException {
+    protected ProjectEncryptionStatus checkForEncodedData(ProjectConfig soapuiProject) throws IOException {
 
         byte[] encryptedContent = soapuiProject.getEncryptedContent();
         char[] password;
@@ -1303,11 +1303,11 @@ public class WsdlProject extends AbstractTestPropertyHolderWsdlModelItem<Project
         return result;
     }
 
-    public void reload() throws SoapUIException {
+    public void reload() {
         reload(path);
     }
 
-    public void reload(String path) throws SoapUIException {
+    public void reload(String path) {
         this.path = path;
         getWorkspace().reloadProject(this);
     }
@@ -1980,7 +1980,7 @@ public class WsdlProject extends AbstractTestPropertyHolderWsdlModelItem<Project
     }
 
     public enum ProjectEncryptionStatus {
-        NOT_ENCRYPTED, ENCRYPTED_BAD_OR_NO_PASSWORD, ENCRYPTED_GOOD_PASSWORD;
+        NOT_ENCRYPTED, ENCRYPTED_BAD_OR_NO_PASSWORD, ENCRYPTED_GOOD_PASSWORD
     }
 
 }

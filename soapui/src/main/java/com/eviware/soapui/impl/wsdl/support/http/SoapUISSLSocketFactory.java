@@ -25,23 +25,13 @@ import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.params.HttpParams;
 import org.apache.log4j.Logger;
 
-import javax.net.ssl.KeyManager;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocket;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
+import javax.net.ssl.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import java.net.UnknownHostException;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
+import java.security.*;
 import java.security.cert.X509Certificate;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -172,8 +162,7 @@ public class SoapUISSLSocketFactory extends SSLSocketFactory {
      */
     @Override
     public Socket connectSocket(final Socket socket, final InetSocketAddress remoteAddress,
-                                final InetSocketAddress localAddress, final HttpParams params) throws IOException, UnknownHostException,
-            ConnectTimeoutException {
+                                final InetSocketAddress localAddress, final HttpParams params) throws IOException {
         if (remoteAddress == null) {
             throw new IllegalArgumentException("Remote address may not be null");
         }
@@ -234,7 +223,7 @@ public class SoapUISSLSocketFactory extends SSLSocketFactory {
      */
     @Override
     public Socket createLayeredSocket(final Socket socket, final String host, final int port, final boolean autoClose)
-            throws IOException, UnknownHostException {
+            throws IOException {
         SSLSocket sslSocket = (SSLSocket)sslContext.getSocketFactory().createSocket(socket, host, port, autoClose);
         sslSocket = enableSocket(sslSocket);
 //		if( getHostnameVerifier() != null )

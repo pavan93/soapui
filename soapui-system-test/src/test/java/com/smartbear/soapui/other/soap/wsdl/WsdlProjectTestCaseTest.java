@@ -46,7 +46,7 @@ public class WsdlProjectTestCaseTest extends JettyTestCaseBase {
         assertNotNull(new WsdlProject(str));
     }
 
-    public void testInit() throws Exception {
+    public void testInit() {
         assertTrue(new WsdlProject().isCacheDefinitions());
     }
 }

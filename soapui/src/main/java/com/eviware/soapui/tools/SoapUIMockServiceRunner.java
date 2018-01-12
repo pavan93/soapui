@@ -62,7 +62,7 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
      * @throws Exception
      */
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         System.exit(new SoapUIMockServiceRunner().runFromCommandLine(args));
     }
 
@@ -170,11 +170,11 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
         return block;
     }
 
-    protected void initProject() throws Exception {
+    protected void initProject() {
         initProjectProperties(project);
     }
 
-    protected void exportReports() throws Exception {
+    protected void exportReports() {
     }
 
     /**

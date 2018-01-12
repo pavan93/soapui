@@ -35,24 +35,24 @@ public class JsonPathFacadeTest {
             "}";
 
     @Test
-    public void simpleStringReadWorks() throws Exception {
+    public void simpleStringReadWorks() {
         String jsonPathExpression = "$.children[1].childProperty";
         assertThat(new JsonPathFacade(SIMPLE_JSON).readStringValue(jsonPathExpression), is("propValue"));
     }
 
     @Test
-    public void simpleObjectReadWorks() throws Exception {
+    public void simpleObjectReadWorks() {
         List arrayElements = new JsonPathFacade(SIMPLE_JSON).readObjectValue("$.children");
         assertThat(arrayElements, is(aCollectionWithSize(2)));
     }
 
     @Test
-    public void simpleWriteWorks() throws Exception {
+    public void simpleWriteWorks() {
         verifyJsonWrite(SIMPLE_JSON, "$.children[1].childProperty");
     }
 
     @Test
-    public void writeIntoArrayQueryWorks() throws Exception {
+    public void writeIntoArrayQueryWorks() {
         String json = "{" +
                 "customers: [" +
                 "{ id: 1, name: 'Lisa' }," +
@@ -64,7 +64,7 @@ public class JsonPathFacadeTest {
     }
 
     @Test
-    public void multipleWritesWork() throws Exception {
+    public void multipleWritesWork() {
         String json = "{" +
                 "customers: [" +
                 "{ id: 1, name: 'Lisa' }," +
@@ -84,10 +84,10 @@ public class JsonPathFacadeTest {
         if (read instanceof List) {
             List valueList = (List) read;
             for (Object value : valueList) {
-                assertThat(value, is((Object) "newValue"));
+                assertThat(value, is("newValue"));
             }
         } else {
-            assertThat(read, is((Object) "newValue"));
+            assertThat(read, is("newValue"));
         }
     }
 }

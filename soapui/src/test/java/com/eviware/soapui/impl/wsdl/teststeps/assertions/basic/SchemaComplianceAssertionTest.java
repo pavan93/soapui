@@ -47,12 +47,12 @@ public class SchemaComplianceAssertionTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         UISupport.setDialogs(originalDialogs);
     }
 
     @Test
-    public void configureAbortedWithErrorMessageWhenNoValidDefinitionSelected() throws Exception {
+    public void configureAbortedWithErrorMessageWhenNoValidDefinitionSelected() {
         stubbedDialogs.mockPromptWithReturnValue("<invalid URL>");
 
         assertThat(assertion.configure(), is(false));
@@ -60,7 +60,7 @@ public class SchemaComplianceAssertionTest {
     }
 
     @Test
-    public void noErrorMessageShownWhenConfigureIsCancelled() throws Exception {
+    public void noErrorMessageShownWhenConfigureIsCancelled() {
         stubbedDialogs.mockPromptWithReturnValue(null);
 
         assertThat(assertion.configure(), is(false));
@@ -68,7 +68,7 @@ public class SchemaComplianceAssertionTest {
     }
 
     @Test
-    public void canBeConfiguredWithAValidWSDL() throws Exception {
+    public void canBeConfiguredWithAValidWSDL() {
         String validWsdlURL = SchemaComplianceAssertionTest.class.getResource("/attachment-test.wsdl").toString();
         stubbedDialogs.mockPromptWithReturnValue(validWsdlURL);
 
@@ -77,7 +77,7 @@ public class SchemaComplianceAssertionTest {
     }
 
     @Test
-    public void canBeConfiguredWithAValidWADL() throws Exception {
+    public void canBeConfiguredWithAValidWADL() {
         String validWadlURL = SchemaComplianceAssertionTest.class.getResource("/wadl/YahooSearch.wadl").toString();
         stubbedDialogs.mockPromptWithReturnValue(validWadlURL);
 

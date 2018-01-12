@@ -25,10 +25,7 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.AbstractButton;
-import javax.swing.JComboBox;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 import static com.eviware.soapui.utils.SwingMatchers.enabled;
 import static org.hamcrest.CoreMatchers.is;
@@ -54,7 +51,7 @@ public class ExpirationTimeChooserTest {
     }
 
     @Test
-    public void serverExpirationRadioButtonIsSelectedWhenManualIsNotSelectedInProfile() throws Exception {
+    public void serverExpirationRadioButtonIsSelectedWhenManualIsNotSelectedInProfile() {
         JRadioButton serverRadioButton = walker.findComponent(ExpirationTimeChooser.SERVER_EXPIRATION_RADIO_NAME, JRadioButton.class);
         assertThat(serverRadioButton, is(selected()));
     }
@@ -70,14 +67,14 @@ public class ExpirationTimeChooserTest {
     }
 
     @Test
-    public void timeFieldsDisabledOnStart() throws Exception {
+    public void timeFieldsDisabledOnStart() {
         assertThat(walker.findComponent(ExpirationTimeChooser.TIME_FIELD_NAME, JTextField.class), is(not(enabled())));
         assertThat(walker.findComponent(ExpirationTimeChooser.TIME_UNIT_COMBO_NAME, JComboBox.class), is(not(enabled())));
 
     }
 
     @Test
-    public void timeFieldsEnabledWhenManualIsSelected() throws Exception {
+    public void timeFieldsEnabledWhenManualIsSelected() {
         walker.findComponent(ExpirationTimeChooser.MANUAL_EXPIRATION_RADIO_NAME, JRadioButton.class).doClick();
         assertThat(walker.findComponent(ExpirationTimeChooser.TIME_FIELD_NAME, JTextField.class), is(enabled()));
         assertThat(walker.findComponent(ExpirationTimeChooser.TIME_UNIT_COMBO_NAME, JComboBox.class), is(enabled()));
@@ -94,7 +91,7 @@ public class ExpirationTimeChooserTest {
     }
 
     @Test
-    public void timeFieldIsEmptyWhenNoManualTimeSpecifiedInProfile() throws Exception {
+    public void timeFieldIsEmptyWhenNoManualTimeSpecifiedInProfile() {
         JTextField timeField = walker.findComponent(ExpirationTimeChooser.TIME_FIELD_NAME, JTextField.class);
         assertThat(timeField.getText(), is(""));
     }

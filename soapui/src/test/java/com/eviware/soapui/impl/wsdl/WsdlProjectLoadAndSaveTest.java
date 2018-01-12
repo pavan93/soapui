@@ -19,11 +19,9 @@ package com.eviware.soapui.impl.wsdl;
 import com.eviware.soapui.impl.WorkspaceImpl;
 import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.project.SaveStatus;
-import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.utils.StubbedDialogsTestBase;
 import com.google.common.io.Files;
 import org.apache.commons.io.FileUtils;
-import org.apache.xmlbeans.XmlException;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,9 +34,7 @@ import java.util.UUID;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Matchers.anyObject;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Matchers.isA;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -77,7 +73,7 @@ public class WsdlProjectLoadAndSaveTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void newlyCreatedProjectCanBeSaved() throws XmlException, IOException, SoapUIException {
+    public void newlyCreatedProjectCanBeSaved() throws IOException {
         WsdlProject project = createTemporaryProject();
         SaveStatus status = project.saveIn(createTemporaryProjectFile());
         assertThat(status, is(SaveStatus.SUCCESS));
@@ -92,7 +88,7 @@ public class WsdlProjectLoadAndSaveTest extends StubbedDialogsTestBase {
     }
 
     @Test
-    public void newlyCreatedProjectIsNotSavedIfUserOptsNotToSave() throws XmlException, IOException, SoapUIException {
+    public void newlyCreatedProjectIsNotSavedIfUserOptsNotToSave() throws IOException {
         Project project = createTemporaryProject();
         cancelWhenTheSaveAsFileDialogIsShown();
         SaveStatus status = project.save();
@@ -153,7 +149,7 @@ public class WsdlProjectLoadAndSaveTest extends StubbedDialogsTestBase {
         return new File(TEMPORARY_FOLDER + File.separator + UUID.randomUUID() + "-soapui-project.xml");
     }
 
-    private WsdlProject createTemporaryProject() throws XmlException, IOException, SoapUIException {
+    private WsdlProject createTemporaryProject() {
         WsdlProject project = new WsdlProject();
         project.setName(PROJECT_NAME);
         return project;

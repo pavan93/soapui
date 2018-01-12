@@ -27,53 +27,53 @@ import static org.junit.Assert.assertThat;
 public class ParameterFinderTest {
 
     @Test
-    public void findsSingleQueryParameter() throws Exception {
+    public void findsSingleQueryParameter() {
         ParameterFinder finder = new ParameterFinder("?name=Johan");
         assertThat(finder.findParameterAt(2), is("name"));
     }
 
     @Test
-    public void locatesSecondQueryParameter() throws Exception {
+    public void locatesSecondQueryParameter() {
         ParameterFinder finder = new ParameterFinder("?name=Johan&reallyLongOne=value");
         assertThat(finder.findParameterAt(15), is("reallyLongOne"));
     }
 
     @Test
-    public void findsSingleMatrixParameter() throws Exception {
+    public void findsSingleMatrixParameter() {
         ParameterFinder finder = new ParameterFinder(";name=Johan?query1=value1");
         assertThat(finder.findParameterAt(2), is("name"));
 
     }
 
     @Test
-    public void locatesSecondMatrixParameter() throws Exception {
+    public void locatesSecondMatrixParameter() {
         ParameterFinder finder = new ParameterFinder(";name=Johan;reallyLongOne=value?query1=value1");
         assertThat(finder.findParameterAt(15), is("reallyLongOne"));
     }
 
     @Test
-    public void findsParameterWhenEqualsSignClicked() throws Exception {
+    public void findsParameterWhenEqualsSignClicked() {
         String parametersString = "?name=Johan&reallyLongOne=value";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.lastIndexOf('=')), is("reallyLongOne"));
     }
 
     @Test
-    public void findsNextParameterWhenAmpersandClicked() throws Exception {
+    public void findsNextParameterWhenAmpersandClicked() {
         String parametersString = "?name=Johan&reallyLongOne=value";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.indexOf('&')), is("reallyLongOne"));
     }
 
     @Test
-    public void findsNextParameterWhenSemicolonClicked() throws Exception {
+    public void findsNextParameterWhenSemicolonClicked() {
         String parametersString = ";name=Johan;reallyLongOne=value?query1=value1";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.indexOf(";really")), is("reallyLongOne"));
     }
 
     @Test
-    public void findsParameterWhenValueClicked() throws Exception {
+    public void findsParameterWhenValueClicked() {
         String parametersString = "?name=Johan&reallyLongOne=value";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.indexOf("Johan")), is("name"));
@@ -81,28 +81,28 @@ public class ParameterFinderTest {
     }
 
     @Test
-    public void handlesClickOnTrailingAmpersand() throws Exception {
+    public void handlesClickOnTrailingAmpersand() {
         String parametersString = "?name=Johan&reallyLongOne=value&";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.lastIndexOf("&")), is(""));
     }
 
     @Test
-    public void handlesClickAtVeryEnd() throws Exception {
+    public void handlesClickAtVeryEnd() {
         String parametersString = ";new=${#Project#site};jsessionid=abc?item=http://www.svd.se/?service=mobile&amp;articleId=8492260&amp;new=true&rssId=123&cid=25968641";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.length()), is("cid"));
     }
 
     @Test
-    public void returnsFirstParameterWhenLeadingCharIsClicked() throws Exception {
+    public void returnsFirstParameterWhenLeadingCharIsClicked() {
         String parametersString = "?name=Johan&reallyLongOne=value&";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(0), is("name"));
     }
 
     @Test
-    public void handlesClickOnLeadingEqualsSign() throws Exception {
+    public void handlesClickOnLeadingEqualsSign() {
         String parametersString = "?=name=Johan&reallyLongOne=value&";
         ParameterFinder finder = new ParameterFinder(parametersString);
         assertThat(finder.findParameterAt(parametersString.indexOf("=")), is(""));

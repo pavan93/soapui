@@ -121,7 +121,7 @@ public class WsaValidator {
                         cumulativeErrorMsg
                                 .append("WS-A InvalidAddressingHeader FaultTo , Anonymous addresses are prohibited. ");
                     } else if (AnonymousTypeConfig.REQUIRED.toString().equals(
-                            ((WsdlMessageExchange) messageExchange).getOperation().getAnonymous())
+                            messageExchange.getOperation().getAnonymous())
                             && !(WsaUtils.isAnonymousAddress(faultToAddressValue, wsaVersionNameSpace) || WsaUtils
                             .isNoneAddress(faultToAddressValue, wsaVersionNameSpace))) {
                         cumulativeErrorMsg
@@ -216,12 +216,12 @@ public class WsaValidator {
                 } else {
                     // check for anonymous
                     if (AnonymousTypeConfig.PROHIBITED.toString().equals(
-                            ((WsdlMessageExchange) messageExchange).getOperation().getAnonymous())
+                            messageExchange.getOperation().getAnonymous())
                             && WsaUtils.isAnonymousAddress(replyToAddressValue, wsaNsStr)) {
                         cumulativeErrorMsg
                                 .append("WS-A InvalidAddressingHeader ReplyTo , Anonymous addresses are prohibited. ");
                     } else if (AnonymousTypeConfig.REQUIRED.toString().equals(
-                            ((WsdlMessageExchange) messageExchange).getOperation().getAnonymous())
+                            messageExchange.getOperation().getAnonymous())
                             && !(WsaUtils.isAnonymousAddress(replyToAddressValue, wsaNsStr) || WsaUtils.isNoneAddress(
                             replyToAddressValue, wsaNsStr))) {
                         cumulativeErrorMsg
@@ -275,12 +275,12 @@ public class WsaValidator {
                 if (!StringUtils.isNullOrEmpty(replyToAddressValue)) {
                     // check for anonymous
                     if (AnonymousTypeConfig.PROHIBITED.toString().equals(
-                            ((WsdlMessageExchange) messageExchange).getOperation().getAnonymous())
+                            messageExchange.getOperation().getAnonymous())
                             && WsaUtils.isAnonymousAddress(replyToAddressValue, wsaVersionNameSpace)) {
                         cumulativeErrorMsg
                                 .append("WS-A InvalidAddressingHeader ReplyTo , Anonymous addresses are prohibited. ");
                     } else if (AnonymousTypeConfig.REQUIRED.toString().equals(
-                            ((WsdlMessageExchange) messageExchange).getOperation().getAnonymous())
+                            messageExchange.getOperation().getAnonymous())
                             && !(WsaUtils.isAnonymousAddress(replyToAddressValue, wsaVersionNameSpace) || WsaUtils
                             .isNoneAddress(replyToAddressValue, wsaVersionNameSpace))) {
                         cumulativeErrorMsg

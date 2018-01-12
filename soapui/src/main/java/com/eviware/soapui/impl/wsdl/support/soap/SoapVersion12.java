@@ -25,11 +25,9 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.SchemaTypeLoader;
 import org.apache.xmlbeans.XmlBeans;
-import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 
 import javax.xml.namespace.QName;
-import java.io.IOException;
 
 /**
  * SoapVersion for SOAP 1.2
@@ -74,11 +72,11 @@ public class SoapVersion12 extends AbstractSoapVersion {
         return "http://www.w3.org/2003/05/soap-encoding";
     }
 
-    public XmlObject getSoapEncodingSchema() throws XmlException, IOException {
+    public XmlObject getSoapEncodingSchema() {
         return soapEncodingXml;
     }
 
-    public XmlObject getSoapEnvelopeSchema() throws XmlException, IOException {
+    public XmlObject getSoapEnvelopeSchema() {
         return soapSchemaXml;
     }
 

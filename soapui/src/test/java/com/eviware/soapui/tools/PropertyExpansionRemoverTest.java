@@ -28,28 +28,28 @@ import static org.junit.Assert.assertThat;
 public class PropertyExpansionRemoverTest {
 
     @Test
-    public void removesPropertyExpansion() throws Exception {
+    public void removesPropertyExpansion() {
         String stringWithPropertyExpansion = "<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"${#Project#MyValue }\"/>";
         assertThat(PropertyExpansionRemover.removeExpansions(stringWithPropertyExpansion),
                 is("<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"\"/>"));
     }
 
     @Test
-    public void removesDynamicPropertyExpansion() throws Exception {
+    public void removesDynamicPropertyExpansion() {
         String stringWithDynamicPropertyExpansion = "<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"${= new java.util.Date() }\"/>";
         assertThat(PropertyExpansionRemover.removeExpansions(stringWithDynamicPropertyExpansion),
                 is("<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"\"/>"));
     }
 
     @Test
-    public void removesNestedPropertyExpansion() throws Exception {
+    public void removesNestedPropertyExpansion() {
         String stringWithDynamicPropertyExpansion = "<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"${#testxml#${testxpath}}\"/>";
         assertThat(PropertyExpansionRemover.removeExpansions(stringWithDynamicPropertyExpansion),
                 is("<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"\"/>"));
     }
 
     @Test
-    public void removesMultiplePropertyExpansions() throws Exception {
+    public void removesMultiplePropertyExpansions() {
         String stringWithMultiplePropertyExpansions =
                 "<!-- ${= 5- + 2}--><xsd:attribute name=\"name\" type=\"xsd:string\" default=\"${#testxml#${testxpath}}\"/>";
         assertThat(PropertyExpansionRemover.removeExpansions(stringWithMultiplePropertyExpansions),
@@ -57,14 +57,14 @@ public class PropertyExpansionRemoverTest {
     }
 
     @Test
-    public void doesNotRemoveSpecialCharactersWhenNotPropertyExpansion() throws Exception {
+    public void doesNotRemoveSpecialCharactersWhenNotPropertyExpansion() {
         String stringWithSpecialCharacters = "<xsd:attribute name=\"name\" type=\"xsd:string\" default=\"$ { #testxml#$ {testxpath} } ${\"/>";
         assertThat(PropertyExpansionRemover.removeExpansions(stringWithSpecialCharacters),
                 is(stringWithSpecialCharacters));
     }
 
     @Test
-    public void handlesNullValues() throws Exception {
+    public void handlesNullValues() {
         assertThat(PropertyExpansionRemover.removeExpansions(null), is(nullValue()));
 
     }

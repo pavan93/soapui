@@ -32,7 +32,7 @@ public class HermesJMSClasspathHacker {
         addURL(f.toURI().toURL());
     }// end method
 
-    private static void addURL(URL u) throws IOException {
+    private static void addURL(URL u) {
         ClassLoader classLoader = JAXBHermesLoader.class.getClassLoader();
         // ClasspathHacker.addUrlToClassLoader( u, classLoader );
     }// end method

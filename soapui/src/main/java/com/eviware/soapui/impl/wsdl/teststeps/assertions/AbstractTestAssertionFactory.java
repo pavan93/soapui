@@ -80,12 +80,9 @@ public abstract class AbstractTestAssertionFactory implements TestAssertionFacto
         if (assertable.getAssertableType() == AssertableType.REQUEST
                 && classes.contains(com.eviware.soapui.model.testsuite.RequestAssertion.class)) {
             return true;
-        } else if (assertable.getAssertableType() == AssertableType.RESPONSE
-                && classes.contains(com.eviware.soapui.model.testsuite.ResponseAssertion.class)) {
-            return true;
-        }
+        } else return assertable.getAssertableType() == AssertableType.RESPONSE
+                && classes.contains(com.eviware.soapui.model.testsuite.ResponseAssertion.class);
 
-        return false;
     }
 
     /*
@@ -98,8 +95,7 @@ public abstract class AbstractTestAssertionFactory implements TestAssertionFacto
 
     public TestAssertion buildAssertion(TestAssertionConfig config, Assertable assertable) {
         try {
-            Constructor<? extends TestAssertion> ctor = assertionClass.getConstructor(new Class[]{
-                    TestAssertionConfig.class, Assertable.class});
+            Constructor<? extends TestAssertion> ctor = assertionClass.getConstructor(TestAssertionConfig.class, Assertable.class);
 
             return ctor.newInstance(config, assertable);
         } catch (Exception e) {

@@ -25,7 +25,7 @@ import com.eviware.x.form.support.AField.AFieldType;
 import com.eviware.x.form.support.AForm;
 import com.eviware.x.impl.swing.JFormDialog;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class MaliciousAttachmentAdvancedSettingsPanel {
     private JFormDialog dialog;
@@ -74,7 +74,7 @@ public class MaliciousAttachmentAdvancedSettingsPanel {
     @AForm(description = "Malicious Attachment Configuration", name = "Malicious Attachment Configuration")
     protected interface AdvancedSettings {
         @AField(description = "Request timeout(ms)", name = "Request timeout(ms)", type = AFieldType.INT)
-        final static String REQUEST_TIMEOUT = "Request timeout(ms)";
+        String REQUEST_TIMEOUT = "Request timeout(ms)";
     }
 
     public void release() {

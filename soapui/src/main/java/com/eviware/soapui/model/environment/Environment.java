@@ -20,26 +20,26 @@ import com.eviware.soapui.model.project.Project;
 
 public interface Environment {
 
-    public void setProject(Project project);
+    Project getProject();
 
-    public Project getProject();
+    void setProject(Project project);
 
-    public void release();
+    void release();
 
-    public Service addNewService(String name, ServiceConfig.Type.Enum serviceType);
+    Service addNewService(String name, ServiceConfig.Type.Enum serviceType);
 
-    public void removeService(Service service);
+    void removeService(Service service);
 
-    public String getName();
+    String getName();
 
-    public Property addNewProperty(String name, String value);
+    void setName(String name);
 
-    public void removeProperty(Property property);
+    Property addNewProperty(String name, String value);
 
-    public void changePropertyName(String name, String value);
+    void removeProperty(Property property);
 
-    public void moveProperty(String name, int idx);
+    void changePropertyName(String name, String value);
 
-    public void setName(String name);
+    void moveProperty(String name, int idx);
 
 }

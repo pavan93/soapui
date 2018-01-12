@@ -17,34 +17,16 @@
 package com.eviware.soapui.report;
 
 import com.eviware.soapui.model.TestModelItem;
-import com.eviware.soapui.model.testsuite.ProjectRunContext;
-import com.eviware.soapui.model.testsuite.ProjectRunListener;
-import com.eviware.soapui.model.testsuite.ProjectRunner;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestRunListener;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
-import com.eviware.soapui.model.testsuite.TestSuite;
-import com.eviware.soapui.model.testsuite.TestSuiteRunContext;
-import com.eviware.soapui.model.testsuite.TestSuiteRunListener;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.xml.XmlUtils;
 
 import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Collects TestRun results and creates JUnitReports
@@ -72,7 +54,7 @@ public class JUnitReportCollector implements TestRunListener, TestSuiteRunListen
         failures = new HashMap<TestCase, String>();
     }
 
-    public List<String> saveReports(String path) throws Exception {
+    public List<String> saveReports(String path) {
 
         File file = new File(path);
         if (!file.exists() || !file.isDirectory()) {
@@ -97,7 +79,7 @@ public class JUnitReportCollector implements TestRunListener, TestSuiteRunListen
         return reports;
     }
 
-    public void saveReport(JUnitReport report, String filename) throws Exception {
+    public void saveReport(JUnitReport report, String filename) {
         report.save(new File(filename));
     }
 

@@ -49,7 +49,7 @@ public class OAuth2ParametersTest {
     }
 
     @Test
-    public void performsPropertyExpansion() throws Exception {
+    public void performsPropertyExpansion() {
         WsdlProject project = profile.getContainer().getProject();
         project.addProperty(AUTHORIZATION_URI_PROPERTY_NAME).setValue(profile.getAuthorizationURI());
         project.addProperty(REDIRECT_URI_PROPERTY_NAME).setValue(profile.getRedirectURI());
@@ -79,7 +79,7 @@ public class OAuth2ParametersTest {
     }
 
     @Test
-    public void performsPropertyExpansionInJavaScripts() throws Exception {
+    public void performsPropertyExpansionInJavaScripts() {
         final String userNamePropertyName = "OAuth_User";
         final String userName = "our.google.user";
         WsdlProject project = profile.getContainer().getProject();

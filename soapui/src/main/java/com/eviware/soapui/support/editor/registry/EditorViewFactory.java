@@ -23,5 +23,5 @@ package com.eviware.soapui.support.editor.registry;
  */
 
 public interface EditorViewFactory {
-    public String getViewId();
+    String getViewId();
 }

@@ -20,15 +20,15 @@ import com.eviware.soapui.impl.support.definition.InterfaceDefinition;
 import com.eviware.soapui.model.iface.Interface;
 
 public interface DefinitionContext<T extends Interface> {
-    public boolean hasSchemaTypes();
+    boolean hasSchemaTypes();
 
-    public boolean isCached();
+    boolean isCached();
 
-    public T getInterface();
+    T getInterface();
 
-    public InterfaceDefinition<T> getInterfaceDefinition() throws Exception;
+    InterfaceDefinition<T> getInterfaceDefinition() throws Exception;
 
-    public String export(String path) throws Exception;
+    String export(String path) throws Exception;
 
-    public boolean loadIfNecessary() throws Exception;
+    boolean loadIfNecessary() throws Exception;
 }

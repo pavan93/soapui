@@ -43,8 +43,7 @@ import com.eviware.x.form.support.XFormMultiSelectList;
 import com.eviware.x.impl.swing.JFormDialog;
 import com.eviware.x.impl.swing.SwingXFormDialog;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -383,25 +382,25 @@ public class CloneParametersAction extends AbstractAction {
     @AForm(description = "Specify target TestSuite/TestCase/Security Test(s)/Security Scan(s) and select Parameters to clone", name = "Clone Parameters", icon = UISupport.TOOL_ICON_PATH, helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
     private interface CloneParameterDialog {
         @AField(name = "Parameters", description = "The Parameters to clone", type = AFieldType.MULTILIST)
-        public final static String PARAMETERS = "Parameters";
+        String PARAMETERS = "Parameters";
 
         @AField(name = "Target TestSuite", description = "The target TestSuite for the cloned Parameter(s)", type = AFieldType.ENUMERATION)
-        public final static String TARGET_TESTSUITE = "Target TestSuite";
+        String TARGET_TESTSUITE = "Target TestSuite";
 
         @AField(name = "Target TestCase", description = "The target TestCase for the cloned Parameter(s)", type = AFieldType.ENUMERATION)
-        public final static String TARGET_TESTCASE = "Target TestCase";
+        String TARGET_TESTCASE = "Target TestCase";
 
         @AField(name = "Target SecurityTest", description = "The target SecurityTest for the cloned Parameter(s)", type = AFieldType.ENUMERATION)
-        public final static String TARGET_SECURITYTEST = "Target SecurityTest";
+        String TARGET_SECURITYTEST = "Target SecurityTest";
 
         @AField(name = "Target TestStep", description = "The target TestStep for the cloned Parameter(s)", type = AFieldType.ENUMERATION)
-        public final static String TARGET_TESTSTEP = "Target TestStep";
+        String TARGET_TESTSTEP = "Target TestStep";
 
         @AField(name = "Target SecurityScans", description = "The SecurityScans to clone to", type = AFieldType.MULTILIST)
-        public final static String TARGET_SECURITYSCAN = "Target SecurityScans";
+        String TARGET_SECURITYSCAN = "Target SecurityScans";
 
         @AField(name = "Overwrite", description = "Overwrite existing parameters", type = AFieldType.BOOLEAN)
-        public final static String OVERWRITE = "Overwrite";
+        String OVERWRITE = "Overwrite";
     }
 
 }

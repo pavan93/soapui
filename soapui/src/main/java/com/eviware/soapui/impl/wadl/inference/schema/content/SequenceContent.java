@@ -17,20 +17,12 @@
 package com.eviware.soapui.impl.wadl.inference.schema.content;
 
 import com.eviware.soapui.impl.wadl.inference.ConflictHandler;
-import com.eviware.soapui.impl.wadl.inference.schema.Content;
-import com.eviware.soapui.impl.wadl.inference.schema.Context;
-import com.eviware.soapui.impl.wadl.inference.schema.Particle;
-import com.eviware.soapui.impl.wadl.inference.schema.Schema;
-import com.eviware.soapui.impl.wadl.inference.schema.Settings;
+import com.eviware.soapui.impl.wadl.inference.schema.*;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * SequenceContent represents an xs:sequence, xs:choice, or xs:all. It infers
@@ -155,7 +147,6 @@ public class SequenceContent implements Content {
         for (QName item : particles.keySet()) {
             int i;
             for (i = order.size(); !canAppend(order.subList(0, i), item); i--) {
-                ;
             }
             order.add(i, item);
         }

@@ -33,7 +33,6 @@ import com.eviware.x.form.support.AForm;
 
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.URIResolver;
 import javax.xml.transform.stream.StreamResult;
@@ -124,7 +123,7 @@ public class CreateWadlDocumentationAction extends AbstractSoapUIAction<RestServ
     @AForm(description = "Creates an HTML-Report for the current WADL", name = "Create Report", helpUrl = HelpUrls.CREATEWADLDOC_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(name = "Output Folder", description = "The folder where to create the report", type = AFieldType.FOLDER)
-        public final static String OUTPUT_FOLDER = "Output Folder";
+        String OUTPUT_FOLDER = "Output Folder";
     }
 
     public static class FileUriResolver implements URIResolver {
@@ -134,7 +133,7 @@ public class CreateWadlDocumentationAction extends AbstractSoapUIAction<RestServ
             this.basePath = basePath;
         }
 
-        public Source resolve(String href, String base) throws TransformerException {
+        public Source resolve(String href, String base) {
             try {
                 if (PathUtils.isHttpPath(href)) {
                     return new StreamSource(new URL(href).openStream());

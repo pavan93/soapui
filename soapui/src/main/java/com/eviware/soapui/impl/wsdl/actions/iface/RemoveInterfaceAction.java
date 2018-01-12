@@ -62,7 +62,7 @@ public class RemoveInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
                 }
             }
 
-            WsdlProject project = (WsdlProject) iface.getProject();
+            WsdlProject project = iface.getProject();
             project.removeInterface(iface);
         }
     }

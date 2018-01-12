@@ -74,7 +74,7 @@ public class SoapUIGroovyScriptEngine implements SoapUIScriptEngine {
         }
     }
 
-    public synchronized Object run() throws Exception {
+    public synchronized Object run() {
         saver.lockSave();
         SoapUIClassLoaderState state = SoapUIExtensionClassLoader.ensure();
         try {
@@ -129,7 +129,7 @@ public class SoapUIGroovyScriptEngine implements SoapUIScriptEngine {
         saver.unlockSave();
     }
 
-    public synchronized void compile() throws Exception {
+    public synchronized void compile() {
         if (script == null) {
             SoapUIClassLoaderState state = SoapUIExtensionClassLoader.ensure();
             try {

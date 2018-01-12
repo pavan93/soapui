@@ -19,7 +19,6 @@ package com.eviware.soapui.impl.wsdl.teststeps.assertions;
 import com.eviware.soapui.impl.wsdl.WsdlSubmitContext;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XPathContainsAssertion;
 import com.eviware.soapui.model.testsuite.AssertionException;
-import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -30,10 +29,7 @@ import java.io.InputStreamReader;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class XPathContainsAssertionTest {
     private String testResponse;
@@ -48,13 +44,13 @@ public class XPathContainsAssertionTest {
     }
 
     @Test
-    public void idIsSetOnCreation() throws Exception {
+    public void idIsSetOnCreation() {
         assertThat(assertion.getConfig().isSetId(), is(true));
         assertThat(assertion.getId(), is(notNullValue()));
     }
 
     @Test
-    public void testCreate() throws Exception {
+    public void testCreate() {
         TestAssertionConfig config = createConfig("testPath", "testContent");
 
         XPathContainsAssertion assertion = new XPathContainsAssertion(config, null);
@@ -183,7 +179,7 @@ public class XPathContainsAssertionTest {
     }
 
     @Test
-    public void testAnyElementTextFail() throws Exception {
+    public void testAnyElementTextFail() {
         assertion.setPath("declare namespace env='http://schemas.xmlsoap.org/soap/envelope/';"
                 + "declare namespace urn='urn:schema:v1:companyservice:applications:bis.bonnier.se';"
                 + "declare namespace urn1='urn:v1:companysearch:common:bis.bonnier.se';"
@@ -227,7 +223,7 @@ public class XPathContainsAssertionTest {
         return result.toString();
     }
 
-    private TestAssertionConfig createConfig(String path, String content) throws XmlException {
+    private TestAssertionConfig createConfig(String path, String content) {
         return TestAssertionConfig.Factory.parse("<con:configuration xmlns:con=\"http://eviware.com/soapui/config\">"
                 + "<path>" + path + "</path><content>" + content + "</content></con:configuration>");
     }

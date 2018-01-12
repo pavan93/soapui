@@ -50,6 +50,17 @@ public class ResolveContext<T extends AbstractWsdlModelItem<?>> {
         return pathToResolve;
     }
 
+    public interface Resolver {
+        boolean resolve();
+
+        boolean isResolved();
+
+        String getResolvedPath();
+
+        Object getDescription();
+
+    }
+
     public class PathToResolve {
         private final AbstractWsdlModelItem<?> owner;
         private final String description;
@@ -149,13 +160,8 @@ public class ResolveContext<T extends AbstractWsdlModelItem<?>> {
                 return false;
             }
             if (path == null) {
-                if (other.path != null) {
-                    return false;
-                }
-            } else if (!path.equals(other.path)) {
-                return false;
-            }
-            return true;
+                return other.path == null;
+            } else return path.equals(other.path);
         }
 
         @SuppressWarnings("rawtypes")
@@ -175,17 +181,6 @@ public class ResolveContext<T extends AbstractWsdlModelItem<?>> {
             }
             return false;
         }
-
-    }
-
-    public interface Resolver {
-        public boolean resolve();
-
-        public boolean isResolved();
-
-        public String getResolvedPath();
-
-        public Object getDescription();
 
     }
 

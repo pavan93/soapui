@@ -21,7 +21,6 @@ import com.eviware.soapui.support.SoapUIException;
 import org.apache.oltu.oauth2.client.OAuthClient;
 import org.apache.oltu.oauth2.client.request.OAuthClientRequest;
 import org.apache.oltu.oauth2.client.response.OAuthAccessTokenResponse;
-import org.apache.oltu.oauth2.common.exception.OAuthProblemException;
 import org.apache.oltu.oauth2.common.exception.OAuthSystemException;
 import org.apache.oltu.oauth2.common.token.BasicOAuthToken;
 import org.apache.oltu.oauth2.common.utils.OAuthUtils;
@@ -38,10 +37,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.eviware.soapui.impl.rest.actions.oauth.OAuth2TestUtils.ACCESS_TOKEN;
-import static com.eviware.soapui.impl.rest.actions.oauth.OAuth2TestUtils.AUTHORIZATION_CODE;
-import static com.eviware.soapui.impl.rest.actions.oauth.OAuth2TestUtils.OAUTH_2_OOB_URN;
-import static com.eviware.soapui.impl.rest.actions.oauth.OAuth2TestUtils.REFRESH_TOKEN;
+import static com.eviware.soapui.impl.rest.actions.oauth.OAuth2TestUtils.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.matchers.JUnitMatchers.hasItem;
@@ -242,8 +238,7 @@ public class OAuth2TokenExtractorTest {
         }
 
         @Override
-        public <T extends OAuthAccessTokenResponse> T accessToken(OAuthClientRequest request, Class<T> responseClass)
-                throws OAuthSystemException, OAuthProblemException {
+        public <T extends OAuthAccessTokenResponse> T accessToken(OAuthClientRequest request, Class<T> responseClass) {
             oAuthClientRequest = request;
             OAuthAccessTokenResponse response = mock(responseClass);
             when(response.getOAuthToken()).thenReturn(new BasicOAuthToken(ACCESS_TOKEN, 3600L, REFRESH_TOKEN, "user"));

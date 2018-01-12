@@ -37,7 +37,7 @@ public class OAuth1AdvancedOptionsDialog {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.OAUTH_ADVANCED_OPTIONS)
     public interface Form {
         @AField(description = "Form.AccessTokenPosition.Description", type = AField.AFieldType.RADIOGROUP)
-        public final static String ACCESS_TOKEN_POSITION = messages.get("Form.SendAuthParameters.Label");
+        String ACCESS_TOKEN_POSITION = messages.get("Form.SendAuthParameters.Label");
 
     }
 }

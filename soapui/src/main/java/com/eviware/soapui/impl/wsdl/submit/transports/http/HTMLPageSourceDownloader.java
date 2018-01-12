@@ -32,7 +32,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -56,7 +55,7 @@ public class HTMLPageSourceDownloader {
     List<Attachment> attachmentList = new ArrayList<Attachment>();
 
     protected List<Attachment> downloadCssAndImages(String endpoint, HttpRequest request)
-            throws MalformedURLException, IOException {
+            throws IOException {
         HtmlPage htmlPage = client.getPage(endpoint);
         String xPathExpression = "//*[name() = 'img' or name() = 'link' and @type = 'text/css']";
         List<?> resultList = htmlPage.getByXPath(xPathExpression);
@@ -92,7 +91,7 @@ public class HTMLPageSourceDownloader {
     private RequestFileAttachment createMissingAttachment(HttpRequest request, URL url,
                                                           FailingHttpStatusCodeException fhsce) throws IOException {
         File temp = new File(fhsce.getStatusCode() + "_" + fhsce.getStatusMessage() + "_" + url.toString());
-        RequestFileAttachment missingFile = new RequestFileAttachment(temp, false, (AbstractHttpRequest<?>) request);
+        RequestFileAttachment missingFile = new RequestFileAttachment(temp, false, request);
         missingResourcesList.add(fhsce.getStatusCode() + " " + fhsce.getStatusMessage() + " " + url.toString());
         return missingFile;
     }

@@ -19,15 +19,15 @@ package com.eviware.soapui.model.support;
 import com.eviware.soapui.model.iface.Operation;
 
 public interface XPathReference {
-    public String getXPath();
+    String getXPath();
 
-    public void setXPath(String xpath);
+    void setXPath(String xpath);
 
-    public String getLabel();
+    String getLabel();
 
-    public Operation getOperation();
+    Operation getOperation();
 
-    public boolean isRequest();
+    boolean isRequest();
 
     /**
      * Gets the property this xpath selects from
@@ -39,5 +39,5 @@ public interface XPathReference {
      * apply updates
      */
 
-    public void update();
+    void update();
 }

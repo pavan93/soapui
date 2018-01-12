@@ -29,39 +29,39 @@ import java.util.List;
  */
 
 public interface Interface extends ModelItem {
-    public final static String ENDPOINT_PROPERTY = Interface.class.getName() + "@endpoint";
+    String ENDPOINT_PROPERTY = Interface.class.getName() + "@endpoint";
 
-    public final static String DEFINITION_PROPERTY = Interface.class.getName() + "@definition";
+    String DEFINITION_PROPERTY = Interface.class.getName() + "@definition";
 
-    public final static String UPDATING_PROPERTY = Interface.class.getName() + "@updating";
+    String UPDATING_PROPERTY = Interface.class.getName() + "@updating";
 
-    public String[] getEndpoints();
+    String[] getEndpoints();
 
-    public Operation getOperationAt(int index);
+    Operation getOperationAt(int index);
 
-    public int getOperationCount();
+    int getOperationCount();
 
-    public Operation getOperationByName(String name);
+    Operation getOperationByName(String name);
 
-    public Project getProject();
+    Project getProject();
 
-    public void addInterfaceListener(InterfaceListener listener);
+    void addInterfaceListener(InterfaceListener listener);
 
-    public void removeInterfaceListener(InterfaceListener listener);
+    void removeInterfaceListener(InterfaceListener listener);
 
-    public String getTechnicalId();
+    String getTechnicalId();
 
-    public List<Operation> getOperationList();
+    List<Operation> getOperationList();
 
-    public String getInterfaceType();
+    String getInterfaceType();
 
-    public void addEndpoint(String endpoint);
+    void addEndpoint(String endpoint);
 
-    public void removeEndpoint(String ep);
+    void removeEndpoint(String ep);
 
-    public void changeEndpoint(String endpoint, String string);
+    void changeEndpoint(String endpoint, String string);
 
-    public DefinitionContext<?> getDefinitionContext();
+    DefinitionContext<?> getDefinitionContext();
 
-    public Operation[] getAllOperations();
+    Operation[] getAllOperations();
 }

@@ -26,7 +26,7 @@ import static org.junit.Assert.assertEquals;
 public class MoveXmlTest {
 
     @Test
-    public void movesXmlCorrectly() throws Exception {
+    public void movesXmlCorrectly() {
         TestCaseConfig testCase = TestCaseConfig.Factory.newInstance();
         TestStepConfig step1 = testCase.addNewTestStep();
         TestStepConfig step2 = testCase.addNewTestStep();

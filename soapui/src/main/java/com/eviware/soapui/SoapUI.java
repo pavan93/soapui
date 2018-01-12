@@ -16,13 +16,7 @@
 
 package com.eviware.soapui;
 
-import com.eviware.soapui.actions.SaveAllProjectsAction;
-import com.eviware.soapui.actions.ShowSystemPropertiesAction;
-import com.eviware.soapui.actions.SoapUIPreferencesAction;
-import com.eviware.soapui.actions.StartHermesJMSButtonAction;
-import com.eviware.soapui.actions.SumbitUserInfoAction;
-import com.eviware.soapui.actions.SwitchDesktopPanelAction;
-import com.eviware.soapui.actions.VersionUpdateAction;
+import com.eviware.soapui.actions.*;
 import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.AnalyticsHelper;
 import com.eviware.soapui.analytics.SoapUIActions;
@@ -84,11 +78,7 @@ import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 import com.eviware.soapui.support.action.swing.SwingActionDelegate;
-import com.eviware.soapui.support.components.JComponentInspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.JPropertiesTable;
-import com.eviware.soapui.support.components.JXToolBar;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.dnd.DropType;
 import com.eviware.soapui.support.dnd.NavigatorDragAndDropable;
 import com.eviware.soapui.support.dnd.SoapUIDragAndDropHandler;
@@ -128,69 +118,24 @@ import org.apache.commons.cli.PosixParser;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.JToggleButton;
-import javax.swing.JTree;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Image;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
-import java.awt.event.ActionEvent;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 import java.util.List;
-import java.util.Properties;
 import java.util.Timer;
-import java.util.TimerTask;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.prefs.BackingStoreException;
 
-import static com.eviware.soapui.analytics.SoapUIActions.CREATE_EMPTY_PROJECT_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.CREATE_REST_PROJECT_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.CREATE_SOAP_PROJECT_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.IMPORT_PREFERENCES;
-import static com.eviware.soapui.analytics.SoapUIActions.IMPORT_PROJECT_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.OPEN_PREFERENCES_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.SAVE_ALL_PROJECTS_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.SAVE_PREFERENCES;
-import static com.eviware.soapui.analytics.SoapUIActions.TURN_OFF_PROXY_FROM_TOOLBAR;
-import static com.eviware.soapui.analytics.SoapUIActions.TURN_ON_PROXY_FROM_TOOLBAR;
+import static com.eviware.soapui.analytics.SoapUIActions.*;
 import static com.eviware.soapui.impl.support.HttpUtils.urlEncodeWithUtf8;
 
 /**
@@ -844,7 +789,7 @@ public class SoapUI {
         UIManager.put("ScrollPane.background", Color.WHITE);
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         WebstartUtilCore.init();
         setBackgroundsToWhite();
         mainArgs = args;

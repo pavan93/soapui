@@ -226,22 +226,22 @@ public class CloneTestStepAction extends AbstractSoapUIAction<WsdlTestStep> {
     @AForm(description = "Specify target Project/TestSuite/TestCase and name of cloned TestStep", name = "Clone TestStep", helpUrl = HelpUrls.CLONETESTSTEP_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     protected interface Form {
         @AField(name = "TestStep Name", description = "The name of the cloned TestStep", type = AFieldType.STRING)
-        public final static String NAME = "TestStep Name";
+        String NAME = "TestStep Name";
 
         @AField(name = "Target Project", description = "The target Project for the cloned TestStep", type = AFieldType.ENUMERATION)
-        public final static String PROJECT = "Target Project";
+        String PROJECT = "Target Project";
 
         @AField(name = "Target TestSuite", description = "The target TestSuite for the cloned TestStep", type = AFieldType.ENUMERATION)
-        public final static String TESTSUITE = "Target TestSuite";
+        String TESTSUITE = "Target TestSuite";
 
         @AField(name = "Target TestCase", description = "The target TestCase for the cloned TestStep", type = AFieldType.ENUMERATION)
-        public final static String TESTCASE = "Target TestCase";
+        String TESTCASE = "Target TestCase";
 
         @AField(name = "Move Instead", description = "Moves the selected TestStep instead of copying", type = AFieldType.BOOLEAN)
-        public final static String MOVE = "Move Instead";
+        String MOVE = "Move Instead";
 
         @AField(name = "Open Editor", description = "Opens the editor for the cloned TestStep", type = AFieldType.BOOLEAN)
-        public final static String OPEN = "Open Editor";
+        String OPEN = "Open Editor";
 
     }
 }

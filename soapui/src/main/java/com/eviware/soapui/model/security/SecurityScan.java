@@ -25,13 +25,13 @@ import com.eviware.soapui.security.SecurityTestRunner;
 import com.eviware.soapui.security.result.SecurityScanResult;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public interface SecurityScan extends ModelItem, Assertable {
 
-    public static final String SECURITY_SCAN_REQUEST_RESULT = "SecurityScanRequestResult";
-    public static final String SECURITY_CHECK_RESPONSE_RESULT = "SecurityScanResponseResult";
-    public static final String STATUS_PROPERTY = SecurityScan.class.getName() + "@status";
+    String SECURITY_SCAN_REQUEST_RESULT = "SecurityScanRequestResult";
+    String SECURITY_CHECK_RESPONSE_RESULT = "SecurityScanResponseResult";
+    String STATUS_PROPERTY = SecurityScan.class.getName() + "@status";
 
     void updateSecurityConfig(SecurityScanConfig config);
 
@@ -107,7 +107,7 @@ public interface SecurityScan extends ModelItem, Assertable {
      */
     JComponent getAdvancedSettingsPanel();
 
-    public SecurityScanResult getSecurityScanResult();
+    SecurityScanResult getSecurityScanResult();
 
     XmlObject getConfig();
 

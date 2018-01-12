@@ -20,25 +20,25 @@ import com.eviware.soapui.model.testsuite.TestProperty;
 
 public interface PropertyExpansion {
     // scope specifiers
-    public static final String SYSTEM_REFERENCE = "#System#";
-    public static final String ENV_REFERENCE = "#Env#";
-    public static final String GLOBAL_REFERENCE = "#Global#";
-    public static final String PROJECT_REFERENCE = "#Project#";
-    public static final String TESTSUITE_REFERENCE = "#TestSuite#";
-    public static final String TESTCASE_REFERENCE = "#TestCase#";
-    public static final String MOCKSERVICE_REFERENCE = "#MockService#";
-    public static final String MOCKRESPONSE_REFERENCE = "#MockResponse#";
-    public static final String SECURITYTEST_REFERENCE = "#SecurityTest#";
+    String SYSTEM_REFERENCE = "#System#";
+    String ENV_REFERENCE = "#Env#";
+    String GLOBAL_REFERENCE = "#Global#";
+    String PROJECT_REFERENCE = "#Project#";
+    String TESTSUITE_REFERENCE = "#TestSuite#";
+    String TESTCASE_REFERENCE = "#TestCase#";
+    String MOCKSERVICE_REFERENCE = "#MockService#";
+    String MOCKRESPONSE_REFERENCE = "#MockResponse#";
+    String SECURITYTEST_REFERENCE = "#SecurityTest#";
 
-    public static final char PROPERTY_SEPARATOR = '#';
-    public static final char XPATH_SEPARATOR = '#';
-    public static final char SCOPE_PREFIX = '#';
+    char PROPERTY_SEPARATOR = '#';
+    char XPATH_SEPARATOR = '#';
+    char SCOPE_PREFIX = '#';
 
-    public TestProperty getProperty();
+    TestProperty getProperty();
 
-    public String toString();
+    String toString();
 
-    public String getXPath();
+    String getXPath();
 
-    public String getContainerInfo();
+    String getContainerInfo();
 }

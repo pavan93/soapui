@@ -38,21 +38,21 @@ public interface Content {
      *         quite possibly this Content instance itself.
      * @throws XmlException
      */
-    public Content validate(Context context) throws XmlException;
+    Content validate(Context context) throws XmlException;
 
-    public String toString(String attrs);
+    String toString(String attrs);
 
     /**
      * Save the Content to an XmlObject.
      */
-    public ContentConfig save();
+    ContentConfig save();
 
     /**
      * A static factory class for creating new instances.
      *
      * @author Dain Nilsson
      */
-    public class Factory {
+    class Factory {
 
         /**
          * Creates a new, empty, Content.

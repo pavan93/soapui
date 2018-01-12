@@ -34,7 +34,6 @@ import com.eviware.x.form.XFormDialogBuilder;
 import com.eviware.x.form.XFormFactory;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.List;
 
 import static com.eviware.soapui.analytics.SoapUIActions.USE_JAX_WS_ARTIFACTS_TOOL;
@@ -120,8 +119,7 @@ public class WSImportAction extends AbstractToolsAction<Interface> {
         Analytics.trackAction(USE_JAX_WS_ARTIFACTS_TOOL);
     }
 
-    private ArgumentBuilder buildArgs(StringToStringMap values, boolean isWindows, Interface modelItem)
-            throws IOException {
+    private ArgumentBuilder buildArgs(StringToStringMap values, boolean isWindows, Interface modelItem) {
         values.put(OUTPUT, Tools.ensureDir(values.get(OUTPUT), ""));
         values.put(SOURCE_OUTPUT, Tools.ensureDir(values.get(SOURCE_OUTPUT), values.get(OUTPUT)));
 

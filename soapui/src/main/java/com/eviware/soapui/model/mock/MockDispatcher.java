@@ -23,16 +23,16 @@ import javax.servlet.http.HttpServletResponse;
 
 public interface MockDispatcher {
 
-    public MockResult dispatchRequest(HttpServletRequest request, HttpServletResponse response)
+    MockResult dispatchRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException;
 
-    public int getMockResultCount();
+    int getMockResultCount();
 
-    public MockResult getMockResultAt(int index);
+    MockResult getMockResultAt(int index);
 
-    public void setLogEnabled(boolean logEnabled);
+    void setLogEnabled(boolean logEnabled);
 
-    public void clearResults();
+    void clearResults();
 
-    public void setMaxResults(long maxNumberOfResults);
+    void setMaxResults(long maxNumberOfResults);
 }

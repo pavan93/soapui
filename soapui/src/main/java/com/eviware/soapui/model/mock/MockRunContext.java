@@ -26,13 +26,13 @@ import com.eviware.soapui.support.types.StringToStringMap;
  */
 
 public interface MockRunContext extends PropertyExpansionContext {
-    public MockService getMockService();
+    MockService getMockService();
 
-    public MockResponse getMockResponse();
+    MockResponse getMockResponse();
 
-    public MockRunner getMockRunner();
+    void setMockResponse(MockResponse mockResponse);
 
-    public void setMockResponse(MockResponse mockResponse);
+    MockRunner getMockRunner();
 
-    public StringToStringMap toStringToStringMap();
+    StringToStringMap toStringToStringMap();
 }

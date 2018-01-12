@@ -23,5 +23,5 @@ package com.eviware.soapui;
  */
 
 public interface SoapUIPlugin {
-    public void init(SoapUI soapUI);
+    void init(SoapUI soapUI);
 }

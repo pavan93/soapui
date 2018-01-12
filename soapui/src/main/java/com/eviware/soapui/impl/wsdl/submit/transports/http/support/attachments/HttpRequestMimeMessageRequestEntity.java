@@ -73,7 +73,7 @@ public class HttpRequestMimeMessageRequestEntity extends AbstractHttpEntity {
         return true;
     }
 
-    public void writeTo(OutputStream arg0) throws IOException {
+    public void writeTo(OutputStream arg0) {
         try {
             arg0.write("\r\n".getBytes());
             ((MimeMultipart) message.getContent()).writeTo(arg0);

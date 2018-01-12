@@ -20,22 +20,12 @@ package com.eviware.soapui.support.swing;
  * @(#)MenuScroller.java	1.4.1 2010-09-29
  */
 
-import javax.swing.Icon;
-import javax.swing.JComponent;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.MenuSelectionManager;
-import javax.swing.Timer;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -447,7 +437,7 @@ public class MenuScroller {
      * @see MenuScroller#dispose()
      */
     @Override
-    public void finalize() throws Throwable {
+    public void finalize() {
         dispose();
     }
 
@@ -568,7 +558,7 @@ public class MenuScroller {
         }
     }
 
-    private static enum MenuIcon implements Icon {
+    private enum MenuIcon implements Icon {
 
         UP(9, 1, 9), DOWN(1, 9, 1);
         final int[] xPoints = {1, 5, 9};

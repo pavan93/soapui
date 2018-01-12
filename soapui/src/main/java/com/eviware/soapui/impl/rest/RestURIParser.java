@@ -33,7 +33,7 @@ public interface RestURIParser extends URIParser {
      *
      * @return decoded endpoint of the URI or empty space if there is no endpoint in the URI
      */
-    public String getEndpoint();
+    String getEndpoint();
 
     /**
      * This method returns the resource name.
@@ -41,6 +41,6 @@ public interface RestURIParser extends URIParser {
      *
      * @return decoded resourceName of the URI or empty space if there is no path in the URI
      */
-    public String getResourceName();
+    String getResourceName();
 
 }

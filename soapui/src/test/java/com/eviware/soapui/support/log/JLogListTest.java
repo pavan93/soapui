@@ -19,7 +19,7 @@ package com.eviware.soapui.support.log;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.ListModel;
+import javax.swing.*;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -39,7 +39,7 @@ public class JLogListTest {
     }
 
     @Test
-    public void limitsTheNumberOfRows() throws Exception {
+    public void limitsTheNumberOfRows() {
         final int maxRows = 10;
         logList.setMaxRows(10);
         for (int i = 0; i < maxRows + 1; i++) {
@@ -48,23 +48,23 @@ public class JLogListTest {
         waitForUpdaterThread();
 
         assertThat(model.getSize(), is(maxRows));
-        assertThat((String) model.getElementAt(0), is("Line 1"));
+        assertThat(model.getElementAt(0), is("Line 1"));
     }
 
     @Test
-    public void addsLogLinesInCorrectOrder() throws Exception {
+    public void addsLogLinesInCorrectOrder() {
         for (int i = 0; i < 20 + 1; i++) {
             logList.addLine("Line " + i);
         }
         waitForUpdaterThread();
 
         for (int i = 0; i < 20 + 1; i++) {
-            assertThat((String) model.getElementAt(i), is("Line " + i));
+            assertThat(model.getElementAt(i), is("Line " + i));
         }
     }
 
     @Test
-    public void clearsLogListCorrectly() throws Exception {
+    public void clearsLogListCorrectly() {
         for (int i = 0; i < 20 + 1; i++) {
             logList.addLine("Line " + i);
         }

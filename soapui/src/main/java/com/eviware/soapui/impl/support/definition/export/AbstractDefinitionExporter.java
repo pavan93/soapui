@@ -119,8 +119,7 @@ public abstract class AbstractDefinitionExporter<T extends Interface> implements
     protected void postProcessing(XmlObject obj, InterfaceDefinitionPart part) {
     }
 
-    private void setFilenameForPart(InterfaceDefinitionPart part, Map<String, String> urlToFileMap, String urlPrefix)
-            throws MalformedURLException {
+    private void setFilenameForPart(InterfaceDefinitionPart part, Map<String, String> urlToFileMap, String urlPrefix) {
 
         String path = part.getUrl();
 

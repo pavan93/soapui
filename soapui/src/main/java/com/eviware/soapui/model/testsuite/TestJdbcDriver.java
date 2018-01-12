@@ -19,19 +19,19 @@ package com.eviware.soapui.model.testsuite;
 import javax.xml.namespace.QName;
 
 public interface TestJdbcDriver {
-    public String getName();
+    String getName();
 
-    public String getDescription();
+    String getDescription();
 
-    public String getConnectionTemplateString();
+    String getConnectionTemplateString();
 
-    public String getDefaultValue();
+    void setConnectionTemplateString(String connectionTemplateString);
 
-    public void setConnectionTemplateString(String connectionTemplateString);
+    String getDefaultValue();
 
-    public boolean isReadOnly();
+    boolean isReadOnly();
 
-    public QName getType();
+    QName getType();
 
     // public enum Type { STRING };
 

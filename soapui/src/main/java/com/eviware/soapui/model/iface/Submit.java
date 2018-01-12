@@ -23,21 +23,20 @@ package com.eviware.soapui.model.iface;
  */
 
 public interface Submit {
-    public Request getRequest();
+    Request getRequest();
 
-    public Response getResponse();
+    Response getResponse();
 
-    public Status waitUntilFinished();
+    Status waitUntilFinished();
 
-    public void cancel();
+    void cancel();
 
-    public Status getStatus();
+    Status getStatus();
 
-    public Exception getError();
+    Exception getError();
 
-    public enum Status {
+    enum Status {
         INITIALIZED, RUNNING, CANCELED, FINISHED, ERROR
     }
 
-    ;
 }

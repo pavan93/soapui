@@ -48,7 +48,7 @@ public class RestResourceEditorPopupWindowTest {
     }
 
     @Test
-    public void displaysCorrectNumberOfFields() throws Exception {
+    public void displaysCorrectNumberOfFields() {
         assertThat(new RestResourceEditorPopupWindow(parentResource, parentResource).restSubResourceTextFields,
                 is(aCollectionWithSize(1)));
         assertThat(new RestResourceEditorPopupWindow(childResource, childResource).restSubResourceTextFields,
@@ -58,7 +58,7 @@ public class RestResourceEditorPopupWindowTest {
     }
 
     @Test
-    public void displaysPathsOfResourcesInFields() throws Exception {
+    public void displaysPathsOfResourcesInFields() {
         RestResourceEditorPopupWindow popupWindow = new RestResourceEditorPopupWindow(grandchildResource, grandchildResource);
         List<RestResourceEditorPopupWindow.RestSubResourceTextField> resourceTextFields = popupWindow.restSubResourceTextFields;
         assertThat(resourceTextFields.get(0).getTextField().getText(), is(parentResource.getPath()));
@@ -67,7 +67,7 @@ public class RestResourceEditorPopupWindowTest {
     }
 
     @Test
-    public void basePathNotAddedToResourceFields() throws Exception {
+    public void basePathNotAddedToResourceFields() {
         final String basePath = "/base";
         parentResource.getInterface().setBasePath(basePath);
         RestResourceEditorPopupWindow popupWindow = new RestResourceEditorPopupWindow(grandchildResource, grandchildResource);
@@ -79,7 +79,7 @@ public class RestResourceEditorPopupWindowTest {
     }
 
     @Test
-    public void displaysFieldForBasePath() throws Exception {
+    public void displaysFieldForBasePath() {
         final String basePath = "/base";
         parentResource.getInterface().setBasePath(basePath);
         RestResourceEditorPopupWindow popupWindow = new RestResourceEditorPopupWindow(parentResource, parentResource);

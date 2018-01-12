@@ -17,11 +17,7 @@
 package com.eviware.soapui.impl.wsdl.panels.mockoperation.actions;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.AbstractToolsAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ArgumentBuilder;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessToolRunner;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.RunnerContext;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ToolHost;
+import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.*;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.wsi.WSIAnalyzeAction;
 import com.eviware.soapui.impl.wsdl.actions.iface.tools.wsi.WSIReportPanel;
 import com.eviware.soapui.model.mock.MockRequest;
@@ -35,7 +31,7 @@ import com.eviware.soapui.support.types.StringToStringsMap;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 import org.apache.log4j.Logger;
 
-import java.awt.Dimension;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -199,7 +195,7 @@ public class WSIValidateResponseAction extends AbstractToolsAction<MockResponse>
         log.setMessageEntryArray(new MessageEntry[]{requestMessage, responseMessage});
     }
 
-    private void addMonitorConfig(Log log) throws Exception {
+    private void addMonitorConfig(Log log) {
         Monitor monitor = log.addNewMonitor();
 
         monitor.setVersion("1.5");

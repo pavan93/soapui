@@ -16,11 +16,7 @@
 
 package com.eviware.soapui.model.tree.nodes;
 
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestSuite;
-import com.eviware.soapui.model.testsuite.TestSuiteListener;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.tree.AbstractModelItemTreeNode;
 import com.eviware.soapui.model.tree.SoapUITreeModel;
 import com.eviware.soapui.model.tree.SoapUITreeNode;
@@ -37,7 +33,6 @@ import java.util.List;
 
 public class TestSuiteTreeNode extends AbstractModelItemTreeNode<TestSuite> {
     private InternalTestSuiteListener internalTestSuiteListener = new InternalTestSuiteListener();
-    ;
     private ReorderPropertyChangeListener propertyChangeListener = new ReorderPropertyChangeListener();
     private List<TestCaseTreeNode> testCaseNodes = new ArrayList<TestCaseTreeNode>();
     private PropertiesTreeNode<?> propertiesTreeNode;
@@ -96,7 +91,7 @@ public class TestSuiteTreeNode extends AbstractModelItemTreeNode<TestSuite> {
     }
 
     public TestSuite getTestSuite() {
-        return (TestSuite) getModelItem();
+        return getModelItem();
     }
 
     private class InternalTestSuiteListener implements TestSuiteListener {

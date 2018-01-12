@@ -45,7 +45,7 @@ public class JMSUtils {
 
     private static boolean checkIfJMS(MessageExchangeModelItem messageExchange) {
         try {
-            MessageExchange me = ((MessageExchangeModelItem) messageExchange).getMessageExchange();
+            MessageExchange me = messageExchange.getMessageExchange();
             if (me != null) {
                 StringToStringMap strmap = me.getProperties();
                 if (strmap != null && strmap.containsKey("Endpoint")) {

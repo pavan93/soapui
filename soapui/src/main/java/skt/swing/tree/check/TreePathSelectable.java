@@ -36,5 +36,5 @@ import javax.swing.tree.TreePath;
  * @email santhosh@in.fiorano.com
  */
 public interface TreePathSelectable {
-    public boolean isSelectable(TreePath path);
+    boolean isSelectable(TreePath path);
 }

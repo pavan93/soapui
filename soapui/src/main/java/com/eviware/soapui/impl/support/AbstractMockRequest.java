@@ -166,8 +166,7 @@ public abstract class AbstractMockRequest implements MockRequest {
             try {
                 data = CompressionSupport.decompress(compressionAlg, data);
             } catch (Exception e) {
-                IOException ioe = new IOException("Decompression of response failed");
-                ioe.initCause(e);
+                IOException ioe = new IOException("Decompression of response failed", e);
                 throw ioe;
             }
         }
@@ -186,7 +185,7 @@ public abstract class AbstractMockRequest implements MockRequest {
             encoding = StringUtils.unquote(encoding);
 
             messageContent = encoding == null ? new String(data) : new String(data, contentOffset,
-                    (int) (data.length - contentOffset), encoding);
+                    data.length - contentOffset, encoding);
         }
 
         if (encoding == null) {

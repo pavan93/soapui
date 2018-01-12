@@ -18,13 +18,13 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.impl.rest.actions.oauth.BrowserListener;
 
-import java.awt.Component;
+import java.awt.*;
 
 /**
  * @author joel.jonsson
  */
 public interface WebViewBasedBrowserComponent {
-    public enum PopupStrategy {
+    enum PopupStrategy {
         INTERNAL_BROWSER_NEW_WINDOW, INTERNAL_BROWSER_REUSE_WINDOW, EXTERNAL_BROWSER, DISABLED
     }
 

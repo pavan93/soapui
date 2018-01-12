@@ -25,8 +25,8 @@ import com.eviware.soapui.model.security.SecurityScan;
  */
 
 public interface SecurityTestListener {
-    public void securityScanAdded(SecurityScan securityScan);
+    void securityScanAdded(SecurityScan securityScan);
 
-    public void securityScanRemoved(SecurityScan securityScan);
+    void securityScanRemoved(SecurityScan securityScan);
 
 }

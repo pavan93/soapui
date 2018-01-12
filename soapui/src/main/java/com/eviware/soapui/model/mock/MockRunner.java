@@ -29,21 +29,21 @@ public interface MockRunner extends MockDispatcher, Releasable {
     /**
      * Start this runner. If already started - do nothing.
      */
-    public void start() throws Exception;
+    void start() throws Exception;
 
     /**
      * Stop this runner. If not running - do nothing.
      */
-    public void stop();
+    void stop();
 
     /**
      * @return true if this runner is running - false otherwise.
      */
-    public boolean isRunning();
+    boolean isRunning();
 
     /**
      * @return The MockRunContext for this runner. This includes references to the mock service and responses for
      *         this runner.
      */
-    public MockRunContext getMockContext();
+    MockRunContext getMockContext();
 }

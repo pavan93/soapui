@@ -69,7 +69,7 @@ public class RefreshOAuthAccessTokenActionTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         UISupport.setDialogs(originalDialogs);
     }
 
@@ -79,7 +79,7 @@ public class RefreshOAuthAccessTokenActionTest {
         final String accessToken = "4/98789adfc8234278243987";
         doAnswer(new Answer() {
             @Override
-            public Object answer(InvocationOnMock invocationOnMock) throws Throwable {
+            public Object answer(InvocationOnMock invocationOnMock) {
                 profile.setAccessToken(accessToken);
                 return null;
             }
@@ -108,7 +108,7 @@ public class RefreshOAuthAccessTokenActionTest {
 
     @Ignore("Ignored until requirement is clarified - see comment in RefreshOAuthAccessTokenAction.isEnabled()")
     @Test
-    public void disabledIfAndOnlyIfRefreshTokenIsEmpty() throws Exception {
+    public void disabledIfAndOnlyIfRefreshTokenIsEmpty() {
         profile.setRefreshToken("");
         action = new RefreshOAuthAccessTokenAction(profile);
         assertThat(action.isEnabled(), is(false));

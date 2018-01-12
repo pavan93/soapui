@@ -36,9 +36,7 @@ import java.util.UUID;
 
 import static com.eviware.soapui.utils.CommonMatchers.aCollectionWithSize;
 import static com.eviware.soapui.utils.CommonMatchers.anEmptyCollection;
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.CoreMatchers.nullValue;
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class PluginLoaderTest {
@@ -58,7 +56,7 @@ public class PluginLoaderTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         if (originalSoapUIHome != null) {
             System.setProperty("soapui.home", originalSoapUIHome);
         }
@@ -67,7 +65,7 @@ public class PluginLoaderTest {
     @Test
     public void installsPluginFromFile() throws IOException {
         File pluginFile = new File(PluginLoaderTest.class.getResource("plugin-example-1.0.jar").getPath());
-        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.<JarClassLoader>emptySet()).plugin;
+        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.emptySet()).plugin;
 
         assertThat(loadedPlugin.getInfo().getId().getName(), is("Example plugin"));
         assertThat(defaultSoapUICore.getActionRegistry().getAction("ExampleAction"), is(notNullValue()));
@@ -80,7 +78,7 @@ public class PluginLoaderTest {
     @Test
     public void installsBarePluginFromFile() throws IOException {
         File pluginFile = new File(PluginLoaderTest.class.getResource("bare-plugin.jar").getPath());
-        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.<JarClassLoader>emptySet()).plugin;
+        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.emptySet()).plugin;
 
         assertThat(loadedPlugin.getInfo().getId().getName(), is("NonAdapterPlugin"));
     }
@@ -88,7 +86,7 @@ public class PluginLoaderTest {
     @Test
     public void loadsPluginInfoFromFile() throws IOException {
         File pluginFile = new File(PluginLoaderTest.class.getResource("plugin-example-1.0.jar").getPath());
-        PluginInfo pluginInfo = pluginLoader.loadPluginInfoFrom(pluginFile, java.util.Collections.<JarClassLoader>emptySet());
+        PluginInfo pluginInfo = pluginLoader.loadPluginInfoFrom(pluginFile, java.util.Collections.emptySet());
 
         assertThat(pluginInfo.getId().getName(), is("Example plugin"));
         assertThat(pluginInfo.getId().getGroupId(), is("com.smartbear.soapui"));
@@ -98,7 +96,7 @@ public class PluginLoaderTest {
     @Test
     public void removesPluginComponentsOnUnload() throws Exception {
         File pluginFile = new File(PluginLoaderTest.class.getResource("plugin-example-1.0.jar").getPath());
-        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.<JarClassLoader>emptySet()).plugin;
+        Plugin loadedPlugin = pluginLoader.loadPlugin(pluginFile, java.util.Collections.emptySet()).plugin;
 
         pluginLoader.unloadPlugin(loadedPlugin);
         assertThat(defaultSoapUICore.getActionRegistry().getAction("ExampleAction"), is(nullValue()));
@@ -109,19 +107,19 @@ public class PluginLoaderTest {
     }
 
     @Test(expected = InvalidPluginException.class)
-    public void rejectsPluginThatRequiresHigherReadyApiVersion() throws Exception {
+    public void rejectsPluginThatRequiresHigherReadyApiVersion() {
         pluginLoader.loadPlugin(ScienceFictionPlugin.class, null);
 
     }
 
     @Test
-    public void acceptsPluginThatDoesNotRequireAHigherReadyApiVersion() throws Exception {
+    public void acceptsPluginThatDoesNotRequireAHigherReadyApiVersion() {
         pluginLoader.loadPlugin(VanillaPlugin.class, null);
 
     }
 
     @Test
-    public void setsPluginInPluginAwareComponents() throws Exception {
+    public void setsPluginInPluginAwareComponents() {
         Plugin plugin = pluginLoader.loadPlugin(AwarenessPlugin.class, null);
         AwareAction action = (AwareAction)plugin.getActions().get(0);
         AwareFactory factory = (AwareFactory)plugin.getFactories().iterator().next();

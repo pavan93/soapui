@@ -25,21 +25,21 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public interface JMSPropertyInspectorModel {
-    public StringToStringMap getJMSProperties();
+    StringToStringMap getJMSProperties();
 
-    public void addPropertyChangeListener(PropertyChangeListener listener);
+    void setJMSProperties(StringToStringMap jmsProperties);
 
-    public void setJMSProperties(StringToStringMap jmsProperties);
+    void addPropertyChangeListener(PropertyChangeListener listener);
 
-    public void removePropertyChangeListener(PropertyChangeListener listener);
+    void removePropertyChangeListener(PropertyChangeListener listener);
 
-    public boolean isReadOnly();
+    boolean isReadOnly();
 
-    public void release();
+    void release();
 
-    public void setInspector(JMSPropertyInspector inspector);
+    void setInspector(JMSPropertyInspector inspector);
 
-    public static abstract class AbstractJMSPropertyModel<T extends ModelItem> implements JMSPropertyInspectorModel,
+    abstract class AbstractJMSPropertyModel<T extends ModelItem> implements JMSPropertyInspectorModel,
             PropertyChangeListener {
         private boolean readOnly;
         private PropertyChangeSupport propertyChangeSupport;

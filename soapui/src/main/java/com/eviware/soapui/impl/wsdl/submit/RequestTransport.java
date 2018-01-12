@@ -27,16 +27,16 @@ import com.eviware.soapui.model.iface.SubmitContext;
  */
 
 public interface RequestTransport {
-    public final static String WSDL_REQUEST = "wsdlRequest";
-    public static final String REQUEST_TRANSPORT = "requestTransport";
+    String WSDL_REQUEST = "wsdlRequest";
+    String REQUEST_TRANSPORT = "requestTransport";
 
-    public void addRequestFilter(RequestFilter filter);
+    void addRequestFilter(RequestFilter filter);
 
-    public void removeRequestFilter(RequestFilter filter);
+    void removeRequestFilter(RequestFilter filter);
 
-    public void abortRequest(SubmitContext submitContext);
+    void abortRequest(SubmitContext submitContext);
 
-    public Response sendRequest(SubmitContext submitContext, Request request) throws Exception;
+    Response sendRequest(SubmitContext submitContext, Request request) throws Exception;
 
-    public void insertRequestFilter(RequestFilter filter, RequestFilter refFilter );
+    void insertRequestFilter(RequestFilter filter, RequestFilter refFilter);
 }

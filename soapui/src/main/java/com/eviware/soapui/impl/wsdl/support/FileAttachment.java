@@ -26,14 +26,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.log4j.Logger;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.List;
 import java.util.UUID;
 import java.util.zip.ZipEntry;
@@ -126,7 +119,7 @@ public abstract class FileAttachment<T extends AbstractWsdlModelItem<?>> impleme
         return modelItem;
     }
 
-    public void cacheFileLocally(File file) throws FileNotFoundException, IOException {
+    public void cacheFileLocally(File file) throws IOException {
         // write attachment-data to tempfile
         ByteArrayOutputStream data = new ByteArrayOutputStream();
         ZipOutputStream out = new ZipOutputStream(data);

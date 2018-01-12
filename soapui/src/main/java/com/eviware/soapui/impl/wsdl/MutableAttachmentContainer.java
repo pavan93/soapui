@@ -29,7 +29,7 @@ import java.io.IOException;
  */
 
 public interface MutableAttachmentContainer extends AttachmentContainer {
-    public Attachment attachFile(File file, boolean cache) throws IOException;
+    Attachment attachFile(File file, boolean cache) throws IOException;
 
-    public void removeAttachment(Attachment attachment);
+    void removeAttachment(Attachment attachment);
 }

@@ -33,7 +33,7 @@ import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import javax.swing.AbstractButton;
+import javax.swing.*;
 
 import static com.eviware.soapui.utils.SwingMatchers.enabled;
 import static org.hamcrest.core.Is.is;
@@ -41,9 +41,7 @@ import static org.hamcrest.core.IsNot.not;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Matchers.isA;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 /**
  * Unit tests for WsdlRequestDesktopPanel, indirectly testing AbstractHttpRequestDesktopPanel as well.
@@ -74,18 +72,18 @@ public class WsdlRequestDesktopPanelTest {
     }
 
     @Test
-    public void returnsCorrectHelpUrl() throws Exception {
+    public void returnsCorrectHelpUrl() {
         assertThat(desktopPanel.getHelpUrl(), is(HelpUrls.REQUESTEDITOR_HELP_URL));
     }
 
     @Ignore
     @Test
-    public void endpointComboBoxIsEditable() throws Exception {
+    public void endpointComboBoxIsEditable() {
         assertThat(containerWalker.findComboBoxWithValue(request).isEditable(), is(false));
     }
 
     @Test
-    public void returnsRequest() throws Exception {
+    public void returnsRequest() {
         assertThat(desktopPanel.getRequest(), is(request));
     }
 
@@ -102,14 +100,14 @@ public class WsdlRequestDesktopPanelTest {
 
     @Ignore
     @Test
-    public void disablesSubmitButtonWhenEndpointIsEmpty() throws Exception {
+    public void disablesSubmitButtonWhenEndpointIsEmpty() {
         //containerWalker.findComboBoxWithValue( ENDPOINT_URL ).getModel().se
 
         assertThat(desktopPanel.getSubmitButton(), is(not(enabled())));
     }
 
     @Test
-    public void disablesInteractionsDuringSubmit() throws Exception {
+    public void disablesInteractionsDuringSubmit() {
         Submit submit = makeSubmitMockWithRequest();
         desktopPanel.beforeSubmit(submit, mock(SubmitContext.class));
 
@@ -119,7 +117,7 @@ public class WsdlRequestDesktopPanelTest {
     }
 
     @Test
-    public void reenablesInteractionsAfterSubmit() throws Exception {
+    public void reenablesInteractionsAfterSubmit() {
         Submit submit = makeSubmitMockWithRequest();
         SubmitContext submitContext = mock(SubmitContext.class);
         desktopPanel.beforeSubmit(submit, submitContext);

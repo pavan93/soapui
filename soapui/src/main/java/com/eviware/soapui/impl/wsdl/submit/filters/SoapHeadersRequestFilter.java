@@ -33,7 +33,7 @@ public class SoapHeadersRequestFilter extends AbstractRequestFilter {
     public void filterWsdlRequest(SubmitContext context, WsdlRequest wsdlRequest) {
         HttpRequest postMethod = (HttpRequest) context.getProperty(BaseHttpRequestTransport.HTTP_METHOD);
 
-        WsdlInterface wsdlInterface = (WsdlInterface) wsdlRequest.getOperation().getInterface();
+        WsdlInterface wsdlInterface = wsdlRequest.getOperation().getInterface();
 
         // init content-type and encoding
         String encoding = System.getProperty("soapui.request.encoding", wsdlRequest.getEncoding());

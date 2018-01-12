@@ -27,12 +27,12 @@ public interface MediaType {
      *
      * @return a valid media type.
      */
-    public String getMediaType();
+    String getMediaType();
 
     /**
      * This method should set the media type so it can later be accessed by getMediaType.
      *
      * @param mediaType a valid media type.
      */
-    public void setMediaType(String mediaType);
+    void setMediaType(String mediaType);
 }

@@ -23,8 +23,7 @@ import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.xml.XmlUtils;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -55,7 +54,7 @@ public class RecreateRequestAction extends AbstractAction {
             createOptional = create.booleanValue();
         }
 
-        WsdlOperation wsdlOperation = (WsdlOperation) request.getOperation();
+        WsdlOperation wsdlOperation = request.getOperation();
         String req = wsdlOperation.createRequest(createOptional);
         if (req == null) {
             UISupport.showErrorMessage("Request creation failed");

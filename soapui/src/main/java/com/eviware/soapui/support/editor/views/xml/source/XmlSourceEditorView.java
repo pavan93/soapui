@@ -36,12 +36,7 @@ import com.eviware.soapui.support.propertyexpansion.PropertyExpansionPopupListen
 import com.eviware.soapui.support.swing.JTextComponentPopupMenu;
 import com.eviware.soapui.support.swing.SoapUISplitPaneUI;
 import com.eviware.soapui.support.xml.XmlUtils;
-import com.eviware.soapui.support.xml.actions.EnableLineNumbersAction;
-import com.eviware.soapui.support.xml.actions.FormatXmlAction;
-import com.eviware.soapui.support.xml.actions.GoToLineAction;
-import com.eviware.soapui.support.xml.actions.InsertBase64FileTextAreaAction;
-import com.eviware.soapui.support.xml.actions.LoadXmlTextAreaAction;
-import com.eviware.soapui.support.xml.actions.SaveXmlTextAreaAction;
+import com.eviware.soapui.support.xml.actions.*;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.xmlbeans.XmlError;
 import org.apache.xmlbeans.XmlException;
@@ -53,36 +48,11 @@ import org.fife.ui.rtextarea.RTextScrollPane;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.CaretListener;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridLayout;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.Window;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -793,7 +763,7 @@ public class XmlSourceEditorView<T extends ModelItem> extends AbstractXmlEditorV
     }
 
     public boolean saveDocument(boolean validate) {
-        return validate ? validate() : true;
+        return !validate || validate();
     }
 
     public void locationChanged(EditorLocation<XmlDocument> location) {

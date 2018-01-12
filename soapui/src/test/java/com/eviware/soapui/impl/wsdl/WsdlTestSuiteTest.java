@@ -45,7 +45,7 @@ public class WsdlTestSuiteTest {
     }
 
     @Test
-    public void addsTestCasesForNames() throws Exception {
+    public void addsTestCasesForNames() {
         String testCaseName = "Frakking big test case";
         suite.addNewTestCase(testCaseName);
         assertThat(suite, hasATestCaseNamed(testCaseName));
@@ -53,7 +53,7 @@ public class WsdlTestSuiteTest {
     }
 
     @Test
-    public void doesNotAddTestCaseWithNullName() throws Exception {
+    public void doesNotAddTestCaseWithNullName() {
         try {
             suite.addNewTestCase(null);
         } catch (Exception e) {

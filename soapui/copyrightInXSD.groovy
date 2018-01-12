@@ -41,7 +41,7 @@ new File(args[0]).eachFileRecurse(FILES){file->
       
        file.eachLine{ line->
              if ( line =~'schema *' ){
-						schemaPasssed = true;
+						schemaPasssed = true
 						
 				  }
 				  

@@ -22,13 +22,11 @@ import org.junit.Test;
 import java.io.File;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 public class ToolsTest {
     @Test
-    public void tokenizesArgs() throws Exception {
+    public void tokenizesArgs() {
         assertNull(Tools.tokenizeArgs(""));
 
         String[] args = Tools.tokenizeArgs("test ett");
@@ -44,7 +42,7 @@ public class ToolsTest {
     }
 
     @Test
-    public void joinsUrlsCorrectly() throws Exception {
+    public void joinsUrlsCorrectly() {
         assertEquals("http://test:8080/my/root/test.xsd",
                 Tools.joinRelativeUrl("http://test:8080/my/root/test.wsdl", "test.xsd"));
         assertEquals("http://test:8080/my/root/bu/test.xsd",

@@ -50,7 +50,7 @@ public class XmlUtilsTest {
     }
 
     @Test
-    public void testTransferValues() throws Exception {
+    public void testTransferValues() {
         String doc1 = "<h1><p>p1</p><h2 test=\"bil\">lkj</h2></h1>";
         String doc2 = "<h1><p>string</p><h2>string</h2><p>p2</p></h1>";
 
@@ -59,7 +59,7 @@ public class XmlUtilsTest {
     }
 
     @Test
-    public void testTransferValuesWithList() throws Exception {
+    public void testTransferValuesWithList() {
         String doc1 = "<h1><p>p1</p><p>p2</p><h2 test=\"bil\">lkj</h2></h1>";
         String doc2 = "<h1><p>string</p><h2>string</h2><p>p2</p></h1>";
 
@@ -68,7 +68,7 @@ public class XmlUtilsTest {
     }
 
     @Test
-    public void testTransferValuesNS() throws Exception {
+    public void testTransferValuesNS() {
         String doc1 = "<ns:h1 xmlns:ns=\"test\"><ns:p>p1</ns:p><ns:h2 test=\"bil\">lkj</ns:h2></ns:h1>";
         String doc2 = "<ns:h1 xmlns:ns=\"test\"><ns:p>string</ns:p><ns:h2>string</ns:h2><ns:p>p2</ns:p></ns:h1>";
 
@@ -127,7 +127,7 @@ public class XmlUtilsTest {
     }
 
     @Test
-    public void stripsWhitespaces() throws Exception {
+    public void stripsWhitespaces() {
         assertEquals("<content/>", XmlUtils.stripWhitespaces("<content>   </content>"));
         assertEquals("<content><test>bil</test></content>",
                 XmlUtils.stripWhitespaces("<content>  <test>  bil   </test>   </content>"));

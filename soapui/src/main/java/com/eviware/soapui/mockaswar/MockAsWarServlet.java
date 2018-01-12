@@ -176,7 +176,7 @@ public class MockAsWarServlet extends HttpServlet {
         return (MockAsWarCoreInterface) SoapUI.getSoapUICore();
     }
 
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+    protected void service(HttpServletRequest request, HttpServletResponse response) throws
             IOException {
         try {
             getMockServletCore().dispatchRequest(request, response);
@@ -337,7 +337,7 @@ public class MockAsWarServlet extends HttpServlet {
             return false;
         }
 
-        public void startMockService(MockRunner runner) throws Exception {
+        public void startMockService(MockRunner runner) {
             mockRunners.add(runner);
         }
 

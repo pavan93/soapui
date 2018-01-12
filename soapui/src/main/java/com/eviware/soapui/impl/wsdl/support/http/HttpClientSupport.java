@@ -27,13 +27,7 @@ import com.eviware.soapui.model.settings.SettingsListener;
 import com.eviware.soapui.settings.HttpSettings;
 import com.eviware.soapui.settings.SSLSettings;
 import org.apache.commons.ssl.KeyMaterial;
-import org.apache.http.Header;
-import org.apache.http.HttpClientConnection;
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.ClientProtocolException;
+import org.apache.http.*;
 import org.apache.http.client.CookieStore;
 import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.conn.ClientConnectionManager;
@@ -53,12 +47,7 @@ import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.IOException;
 import java.net.ProxySelector;
-import java.security.KeyManagementException;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
-import java.security.NoSuchAlgorithmException;
-import java.security.UnrecoverableKeyException;
-import java.security.cert.CertificateException;
+import java.security.*;
 
 /**
  * HttpClient related tools
@@ -184,6 +173,23 @@ public class HttpClientSupport {
         }
     }
 
+    public static HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext)
+            throws IOException {
+        return helper.execute(method, httpContext);
+    }
+
+    public static SoapUIHttpClient getHttpClient() {
+        return helper.getHttpClient();
+    }
+
+    public static void setProxySelector(ProxySelector proxySelector) {
+        getHttpClient().setRoutePlanner(new OverridableProxySelectorRoutePlanner(helper.getRegistry(), proxySelector));
+    }
+
+    public static HttpResponse execute(ExtendedHttpMethod method) throws IOException {
+        return helper.execute(method);
+    }
+
     private static class Helper {
         private final SoapUIHttpClient httpClient;
         private final static Logger log = Logger.getLogger(HttpClientSupport.Helper.class);
@@ -224,7 +230,7 @@ public class HttpClientSupport {
             return registry;
         }
 
-        public HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext) throws ClientProtocolException,
+        public HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext) throws
                 IOException {
             method.afterWriteRequest();
             if (method.getMetrics() != null) {
@@ -236,7 +242,7 @@ public class HttpClientSupport {
             return httpResponse;
         }
 
-        public HttpResponse execute(ExtendedHttpMethod method) throws ClientProtocolException, IOException {
+        public HttpResponse execute(ExtendedHttpMethod method) throws IOException {
             method.afterWriteRequest();
             if (method.getMetrics() != null) {
                 method.getMetrics().getConnectTimer().start();
@@ -278,7 +284,7 @@ public class HttpClientSupport {
         }
 
         public SoapUISSLSocketFactory initSocketFactory() throws KeyStoreException, NoSuchAlgorithmException,
-                CertificateException, IOException, UnrecoverableKeyException, KeyManagementException {
+                UnrecoverableKeyException, KeyManagementException {
             KeyStore keyStore = null;
             Settings settings = SoapUI.getSettings();
 
@@ -308,23 +314,6 @@ public class HttpClientSupport {
 
             return new SoapUISSLSocketFactory(keyStore, pass);
         }
-    }
-
-    public static SoapUIHttpClient getHttpClient() {
-        return helper.getHttpClient();
-    }
-
-    public static void setProxySelector(ProxySelector proxySelector) {
-        getHttpClient().setRoutePlanner(new OverridableProxySelectorRoutePlanner(helper.getRegistry(), proxySelector));
-    }
-
-    public static HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext)
-            throws ClientProtocolException, IOException {
-        return helper.execute(method, httpContext);
-    }
-
-    public static HttpResponse execute(ExtendedHttpMethod method) throws ClientProtocolException, IOException {
-        return helper.execute(method);
     }
 
     public static void applyHttpSettings(HttpRequest httpMethod, Settings settings) {

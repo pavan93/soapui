@@ -20,15 +20,10 @@ import com.eviware.soapui.SoapUI;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import com.jgoodies.forms.layout.Sizes;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 /**
  * A simple status bar for editors
@@ -146,6 +141,5 @@ public class JEditorStatusBar extends JPanel implements CaretListener {
 
         int getLineOfOffset(int offset) throws Exception;
 
-        ;
     }
 }

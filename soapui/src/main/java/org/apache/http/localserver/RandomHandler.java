@@ -41,20 +41,16 @@
 
 package org.apache.http.localserver;
 
+import org.apache.http.*;
+import org.apache.http.entity.AbstractHttpEntity;
+import org.apache.http.protocol.HttpContext;
+import org.apache.http.protocol.HttpRequestHandler;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.Locale;
-
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.MethodNotSupportedException;
-import org.apache.http.entity.AbstractHttpEntity;
-import org.apache.http.protocol.HttpContext;
-import org.apache.http.protocol.HttpRequestHandler;
 
 /**
  * A handler that generates random data.
@@ -80,7 +76,7 @@ public class RandomHandler implements HttpRequestHandler {
      * @throws IOException   in case of an IO problem
      */
     public void handle(final HttpRequest request, final HttpResponse response, final HttpContext context)
-            throws HttpException, IOException {
+            throws HttpException {
 
         String method = request.getRequestLine().getMethod().toUpperCase(Locale.ENGLISH);
         if (!"GET".equals(method) && !"HEAD".equals(method)) {

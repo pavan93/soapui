@@ -31,26 +31,16 @@ import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.security.SecurityScan;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.SamplerTestStep;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.security.ExecutionStrategyHolder;
-import com.eviware.soapui.security.Securable;
-import com.eviware.soapui.security.SecurityTest;
-import com.eviware.soapui.security.SecurityTestRunContext;
-import com.eviware.soapui.security.SecurityTestRunner;
-import com.eviware.soapui.security.SecurityTestRunnerImpl;
+import com.eviware.soapui.security.*;
 import com.eviware.soapui.security.result.SecurityResult.ResultStatus;
 import com.eviware.soapui.security.result.SecurityScanRequestResult;
 import com.eviware.soapui.security.result.SecurityScanResult;
 import com.eviware.soapui.security.support.FailedSecurityMessageExchange;
 import com.eviware.soapui.security.support.SecurityTestRunListener;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
@@ -305,11 +295,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
     }
 
     public static boolean isSecurable(TestStep testStep) {
-        if (testStep != null && testStep instanceof Securable) {
-            return true;
-        } else {
-            return false;
-        }
+        return testStep != null && testStep instanceof Securable;
     }
 
     /*
@@ -438,7 +424,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         try {
             return assertionsSupport.moveAssertion(ix, offset);
         } finally {
-            ((WsdlMessageAssertion) assertion).release();
+            assertion.release();
             notifier.notifyChange();
         }
     }

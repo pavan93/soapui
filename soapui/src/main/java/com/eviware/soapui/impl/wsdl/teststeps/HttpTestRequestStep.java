@@ -42,14 +42,7 @@ import com.eviware.soapui.model.support.DefaultTestStepProperty;
 import com.eviware.soapui.model.support.TestPropertyListenerAdapter;
 import com.eviware.soapui.model.support.TestStepBeanProperty;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepProperty;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.security.Securable;
 import com.eviware.soapui.support.resolver.ResolveContext;
@@ -57,7 +50,7 @@ import com.eviware.soapui.support.types.StringToStringsMap;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.SchemaType;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import javax.xml.namespace.QName;
 import java.beans.PropertyChangeEvent;
 import java.util.Collections;
@@ -238,7 +231,7 @@ public class HttpTestRequestStep extends WsdlTestStepWithProperties implements H
             }
         } else {
             if (event.getSource() == testRequest && event.getPropertyName().equals(WsdlTestRequest.NAME_PROPERTY)) {
-                if (!super.getName().equals((String) event.getNewValue())) {
+                if (!super.getName().equals(event.getNewValue())) {
                     super.setName((String) event.getNewValue());
                 }
             }

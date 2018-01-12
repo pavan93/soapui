@@ -22,7 +22,7 @@ import com.eviware.x.dialogs.XProgressDialog;
 import com.eviware.x.dialogs.XProgressMonitor;
 
 public class NullProgressDialog implements XProgressDialog {
-    public void run(Worker worker) throws Exception {
+    public void run(Worker worker) {
         SwingWorkerDelegator swingWorker = new SwingWorkerDelegator(new NullProgressMonitor(), this, worker);
         swingWorker.start();
         swingWorker.get();

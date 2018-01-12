@@ -26,21 +26,8 @@ import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.lang.reflect.InvocationTargetException;
 
@@ -194,7 +181,7 @@ public class XQueryXPathTesterAction extends AbstractAction {
                 statusLabel.setText("Expression returned " + objects.length + " hits");
             } catch (Throwable e1) {
                 if (e1 instanceof RuntimeException) {
-                    e1 = ((RuntimeException) e1).getCause();
+                    e1 = e1.getCause();
                     if (e1 instanceof InvocationTargetException) {
                         e1 = ((InvocationTargetException) e1).getTargetException();
                     }

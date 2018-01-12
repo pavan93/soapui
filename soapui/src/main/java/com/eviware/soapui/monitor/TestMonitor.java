@@ -21,19 +21,8 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.mock.MockRunner;
 import com.eviware.soapui.model.mock.MockService;
 import com.eviware.soapui.model.project.Project;
-import com.eviware.soapui.model.support.LoadTestRunListenerAdapter;
-import com.eviware.soapui.model.support.MockRunListenerAdapter;
-import com.eviware.soapui.model.support.ProjectListenerAdapter;
-import com.eviware.soapui.model.support.TestRunListenerAdapter;
-import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.support.WorkspaceListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.support.*;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.workspace.Workspace;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.security.SecurityTestRunContext;
@@ -41,11 +30,7 @@ import com.eviware.soapui.security.SecurityTestRunner;
 import com.eviware.soapui.security.SecurityTestRunnerImpl;
 import com.eviware.soapui.security.support.SecurityTestRunListenerAdapter;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Global class for monitoring ongoing test runs (both functional and loadtests)
@@ -300,7 +285,7 @@ public class TestMonitor {
 
     private class InternalSecurityTestRunListener extends SecurityTestRunListenerAdapter {
         public void afterRun(TestCaseRunner testRunner, SecurityTestRunContext context) {
-            runningSecurityTests.remove((SecurityTestRunnerImpl) testRunner);
+            runningSecurityTests.remove(testRunner);
             notifySecurityTestFinished((SecurityTestRunnerImpl) testRunner);
         }
 

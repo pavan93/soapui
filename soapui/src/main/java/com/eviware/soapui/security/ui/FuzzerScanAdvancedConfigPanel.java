@@ -114,13 +114,13 @@ public class FuzzerScanAdvancedConfigPanel {
     protected interface AdvancedSettings {
 
         @AField(description = "Minimal length of Fuzzed value", name = "Minimal length", type = AFieldType.INT)
-        public final static String MINIMAL = "Minimal length";
+        String MINIMAL = "Minimal length";
 
         @AField(description = "Maximal length of Fuzzed value", name = "Maximal length", type = AFieldType.INT)
-        public final static String MAXIMAL = "Maximal length";
+        String MAXIMAL = "Maximal length";
 
         @AField(description = "Number of Fuzzed Requests to do", name = "Number of Requests", type = AFieldType.INT)
-        public final static String NUMBER_OF_REQUEST = "Number of Requests";
+        String NUMBER_OF_REQUEST = "Number of Requests";
 
     }
 

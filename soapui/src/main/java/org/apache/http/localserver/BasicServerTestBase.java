@@ -41,10 +41,10 @@
 
 package org.apache.http.localserver;
 
-import java.net.InetSocketAddress;
-
 import org.apache.http.HttpHost;
 import org.junit.After;
+
+import java.net.InetSocketAddress;
 
 /**
  * Base class for tests using {@link LocalTestServer}. The server will not be
@@ -57,7 +57,7 @@ public abstract class BasicServerTestBase {
     protected LocalTestServer localServer;
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
         if (localServer != null) {
             localServer.stop();
         }

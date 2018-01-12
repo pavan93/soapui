@@ -27,16 +27,16 @@ public interface LoadTestRunner extends TestRunner {
      * Gets the number of threads currently running
      */
 
-    public int getRunningThreadCount();
+    int getRunningThreadCount();
 
-    public LoadTest getLoadTest();
+    LoadTest getLoadTest();
 
     /**
      * Returns the progress of the loadtest as a value between 0 and 1. Progress
      * is measured depending on the LoadTest limit configuration
      */
 
-    public float getProgress();
+    float getProgress();
 
     /**
      * Confusing but unfortunately necessary; isStopped will return false until
@@ -46,5 +46,5 @@ public interface LoadTestRunner extends TestRunner {
      * @return
      */
 
-    public boolean hasStopped();
+    boolean hasStopped();
 }

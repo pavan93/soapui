@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.actions.loadtest;
 
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
-import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 
@@ -39,7 +38,7 @@ public class DeleteLoadTestAction extends AbstractSoapUIAction<WsdlLoadTest> {
         }
 
         if (UISupport.confirm("Remove LoadTest [" + loadTest.getName() + "] from test-casee", "Remove LoadTest")) {
-            ((WsdlTestCase) loadTest.getTestCase()).removeLoadTest(loadTest);
+            loadTest.getTestCase().removeLoadTest(loadTest);
         }
     }
 }

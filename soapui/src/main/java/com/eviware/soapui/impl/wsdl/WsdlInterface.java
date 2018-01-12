@@ -45,19 +45,11 @@ import com.eviware.soapui.support.resolver.ResolveContext;
 import com.eviware.soapui.support.types.StringList;
 import org.apache.log4j.Logger;
 
-import javax.wsdl.Binding;
-import javax.wsdl.BindingOperation;
-import javax.wsdl.Definition;
-import javax.wsdl.Port;
-import javax.wsdl.Service;
+import javax.wsdl.*;
 import javax.xml.namespace.QName;
 import java.io.File;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * WSDL implementation of Interface, maps to a WSDL Binding
@@ -315,7 +307,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         return tuple;
     }
 
-    public void updateDefinition(BindingTuple tuple) throws Exception {
+    public void updateDefinition(BindingTuple tuple) {
         setBindingName(tuple.binding.getQName());
 
         if (getConfig().isSetDefinitionCache()) {
@@ -579,11 +571,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         }
 
         DefinitionCacheConfig cacheConfig = getConfig().getDefinitionCache();
-        if (cacheConfig == null || cacheConfig.getRootPart() == null || cacheConfig.sizeOfPartArray() == 0) {
-            return false;
-        }
-
-        return true;
+        return cacheConfig != null && cacheConfig.getRootPart() != null && cacheConfig.sizeOfPartArray() != 0;
     }
 
     public String getStyle() {

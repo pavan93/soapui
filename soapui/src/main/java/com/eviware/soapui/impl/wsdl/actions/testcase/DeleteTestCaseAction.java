@@ -17,7 +17,6 @@
 package com.eviware.soapui.impl.wsdl.actions.testcase;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.wsdl.WsdlTestSuite;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
@@ -40,7 +39,7 @@ public class DeleteTestCaseAction extends AbstractSoapUIAction<WsdlTestCase> {
         }
 
         if (UISupport.confirm("Remove TestCase [" + testCase.getName() + "] from TestSuite", "Remove TestCase")) {
-            ((WsdlTestSuite) testCase.getTestSuite()).removeTestCase(testCase);
+            testCase.getTestSuite().removeTestCase(testCase);
         }
     }
 

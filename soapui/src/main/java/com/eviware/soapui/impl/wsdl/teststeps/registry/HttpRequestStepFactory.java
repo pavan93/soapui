@@ -37,7 +37,7 @@ import com.eviware.x.form.support.AField;
 import com.eviware.x.form.support.AForm;
 import com.eviware.x.form.validators.RequiredValidator;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -149,19 +149,19 @@ public class HttpRequestStepFactory extends WsdlTestStepFactory {
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.HTTP_REQUEST_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(description = "Form.TestStepName.Description", type = AField.AFieldType.STRING)
-        public final static String STEPNAME = messages.get("Form.TestStepName.Label");
+        String STEPNAME = messages.get("Form.TestStepName.Label");
 
         @AField(description = "Form.Endpoint.Description", type = AField.AFieldType.STRING)
-        public final static String ENDPOINT = messages.get("Form.Endpoint.Label");
+        String ENDPOINT = messages.get("Form.Endpoint.Label");
 
         @AField(description = "Form.ExtractParams.Description", type = AField.AFieldType.ACTION)
-        public final static String EXTRACTPARAMS = messages.get("Form.ExtractParams.Label");
+        String EXTRACTPARAMS = messages.get("Form.ExtractParams.Label");
 
         @AField(description = "Form.ParamsTable.Description", type = AField.AFieldType.COMPONENT)
-        public final static String PARAMSTABLE = messages.get("Form.ParamsTable.Label");
+        String PARAMSTABLE = messages.get("Form.ParamsTable.Label");
 
         @AField(description = "Form.HttpMethod.Description", type = AField.AFieldType.ENUMERATION)
-        public final static String HTTPMETHOD = messages.get("Form.HttpMethod.Label");
+        String HTTPMETHOD = messages.get("Form.HttpMethod.Label");
     }
 
     private class ExtractParamsAction extends AbstractAction {

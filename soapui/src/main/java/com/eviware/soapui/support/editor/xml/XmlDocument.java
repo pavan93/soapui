@@ -26,5 +26,5 @@ import org.apache.xmlbeans.SchemaTypeSystem;
  */
 
 public interface XmlDocument extends EditorDocument {
-    public SchemaTypeSystem getTypeSystem();
+    SchemaTypeSystem getTypeSystem();
 }

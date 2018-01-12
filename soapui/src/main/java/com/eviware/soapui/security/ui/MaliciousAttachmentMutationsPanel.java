@@ -19,11 +19,7 @@ package com.eviware.soapui.security.ui;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.iface.Attachment;
-import com.eviware.soapui.security.support.MaliciousAttachmentFilesListForm;
-import com.eviware.soapui.security.support.MaliciousAttachmentGenerateTableModel;
-import com.eviware.soapui.security.support.MaliciousAttachmentListToTableHolder;
-import com.eviware.soapui.security.support.MaliciousAttachmentReplaceTableModel;
-import com.eviware.soapui.security.support.MaliciousAttachmentTableModel;
+import com.eviware.soapui.security.support.*;
 import com.eviware.soapui.security.tools.AttachmentElement;
 import com.eviware.soapui.settings.ProjectSettings;
 import com.eviware.soapui.support.HelpActionMarker;
@@ -46,24 +42,11 @@ import com.eviware.x.impl.swing.JTextFieldFormField;
 import org.jdesktop.swingx.JXTable;
 
 import javax.activation.MimetypesFileTypeMap;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.KeyStroke;
-import javax.swing.ListModel;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -239,28 +222,28 @@ public class MaliciousAttachmentMutationsPanel {
     @AForm(description = "Malicious Attachment Mutations", name = "Malicious Attachment Mutations")
     public interface MutationSettings {
         @AField(description = "###Mutations panel", name = "###Mutations panel", type = AFieldType.COMPONENT)
-        final static String MUTATIONS_PANEL = "###Mutations panel";
+        String MUTATIONS_PANEL = "###Mutations panel";
     }
 
     @AForm(description = "Malicious Attachment Mutation Tables", name = "Malicious Attachment Mutation Tables")
     public interface MutationTables {
         @AField(description = "<html><b>Specify below how selected attachment should be mutated</b></html>", name = "###Label", type = AFieldType.LABEL)
-        final static String LABEL = "###Label";
+        String LABEL = "###Label";
 
         @AField(description = "Generate file", name = "Generate", type = AFieldType.COMPONENT)
-        final static String GENERATE_FILE = "Generate";
+        String GENERATE_FILE = "Generate";
         @AField(description = "Replace file", name = "Replace", type = AFieldType.COMPONENT)
-        final static String REPLACE_FILE = "Replace";
+        String REPLACE_FILE = "Replace";
         @AField(description = "Do not send the attachment with the request", name = "Remove", type = AFieldType.BOOLEAN)
-        final static String REMOVE_FILE = "Remove";
+        String REMOVE_FILE = "Remove";
     }
 
     @AForm(description = "Generate File Mutation", name = "Generate File Mutation")
     public interface GenerateFile {
         @AField(description = "Size (bytes)", name = "Size (bytes)", type = AFieldType.INT)
-        final static String SIZE = "Size (bytes)";
+        String SIZE = "Size (bytes)";
         @AField(description = "Content type", name = "Content type", type = AFieldType.STRING)
-        final static String CONTENT_TYPE = "Content type";
+        String CONTENT_TYPE = "Content type";
     }
 
     public class AddFileAction extends AbstractAction {

@@ -18,15 +18,7 @@ package com.eviware.soapui.plugins;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class PluginDependencyResolver {
     private final Map<PluginInfo,File> infoToFileMap;
@@ -34,11 +26,11 @@ public class PluginDependencyResolver {
     public PluginDependencyResolver(PluginLoader pluginLoader, Iterable<File> pluginFiles) throws IOException {
         infoToFileMap = new HashMap<PluginInfo,File>();
         for (File pluginFile : pluginFiles) {
-            infoToFileMap.put(pluginLoader.loadPluginInfoFrom(pluginFile, Collections.<JarClassLoader>emptySet()), pluginFile);
+            infoToFileMap.put(pluginLoader.loadPluginInfoFrom(pluginFile, Collections.emptySet()), pluginFile);
         }
     }
 
-    public List<File> determineLoadOrder() throws IOException {
+    public List<File> determineLoadOrder() {
         List<PluginInfo> infoList = new ArrayList<PluginInfo>(infoToFileMap.keySet());
         Collections.sort(infoList, new PluginDependencyComparator());
         List<File> resultList = new ArrayList<File>();

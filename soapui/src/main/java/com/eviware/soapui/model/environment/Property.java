@@ -18,14 +18,14 @@ package com.eviware.soapui.model.environment;
 
 public interface Property {
 
-    public void setEnvironment(Environment environment);
+    Environment getEnvironment();
 
-    public Environment getEnvironment();
+    void setEnvironment(Environment environment);
 
-    public String getName();
+    String getName();
 
-    public String getValue();
+    String getValue();
 
-    public void release();
+    void release();
 
 }

@@ -57,10 +57,9 @@ public class LoadTestAssertionRegistry {
     public static AbstractLoadTestAssertion buildAssertion(LoadTestAssertionConfig config, WsdlLoadTest loadTest) {
         try {
             Class<? extends AbstractLoadTestAssertion> clazz = getInstance().availableAssertions.get(config.getType());
-            Constructor<? extends AbstractLoadTestAssertion> ctor = clazz.getConstructor(new Class[]{
-                    LoadTestAssertionConfig.class, WsdlLoadTest.class});
+            Constructor<? extends AbstractLoadTestAssertion> ctor = clazz.getConstructor(LoadTestAssertionConfig.class, WsdlLoadTest.class);
 
-            return (AbstractLoadTestAssertion) ctor.newInstance(config, loadTest);
+            return ctor.newInstance(config, loadTest);
         } catch (SecurityException e) {
             SoapUI.logError(e);
         } catch (NoSuchMethodException e) {

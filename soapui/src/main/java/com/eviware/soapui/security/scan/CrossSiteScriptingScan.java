@@ -42,10 +42,8 @@ import com.eviware.x.form.support.AForm;
 import com.eviware.x.impl.swing.JFormDialog;
 import com.eviware.x.impl.swing.JStringListFormField;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
@@ -202,11 +200,7 @@ public class CrossSiteScriptingScan extends AbstractSecurityScanWithProperties {
     @SuppressWarnings("unchecked")
     private boolean checkIfEmptyStack(SecurityTestRunContext context) {
         Stack<PropertyMutation> stack = (Stack<PropertyMutation>) context.get(PropertyMutation.REQUEST_MUTATIONS_STACK);
-        if (stack.empty()) {
-            return false;
-        } else {
-            return true;
-        }
+        return !stack.empty();
     }
 
     private void extractMutations(TestStep testStep, SecurityTestRunContext context) {
@@ -373,7 +367,7 @@ public class CrossSiteScriptingScan extends AbstractSecurityScanWithProperties {
     protected interface AdvancedSettings {
 
         @AField(description = "Cross Site Scripting Vectors", name = "###Cross Site Scripting", type = AFieldType.STRINGLIST)
-        public final static String PARAMETER_EXPOSURE_STRINGS = "###Cross Site Scripting";
+        String PARAMETER_EXPOSURE_STRINGS = "###Cross Site Scripting";
 
     }
 }

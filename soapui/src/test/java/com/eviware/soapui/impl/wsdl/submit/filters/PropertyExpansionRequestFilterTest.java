@@ -57,7 +57,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnWsdlTestRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnWsdlTestRequestContent() {
         AbstractHttpRequest request = mockRequest(WsdlTestRequest.class);
 
         requestFilter.filterAbstractHttpRequest(submitContext, request);
@@ -67,7 +67,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnRestTestRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnRestTestRequestContent() {
         AbstractHttpRequest request = mockRequest(RestTestRequest.class);
         requestFilter.filterAbstractHttpRequest(submitContext, request);
 
@@ -76,7 +76,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnHttpTestRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnHttpTestRequestContent() {
         AbstractHttpRequest request = mockRequest(HttpTestRequest.class);
         requestFilter.filterAbstractHttpRequest(submitContext, request);
 
@@ -85,7 +85,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnWsdlRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnWsdlRequestContent() {
         AbstractHttpRequest request = mockRequest(WsdlRequest.class);
         requestFilter.filterAbstractHttpRequest(submitContext, request);
 
@@ -94,7 +94,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnRestRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnRestRequestContent() {
         AbstractHttpRequest request = mockRequest(RestRequest.class);
         requestFilter.filterAbstractHttpRequest(submitContext, request);
 
@@ -103,7 +103,7 @@ public class PropertyExpansionRequestFilterTest {
     }
 
     @Test
-    public void performsPropertyExpansionOnHttpRequestContent() throws SoapUIException {
+    public void performsPropertyExpansionOnHttpRequestContent() {
         AbstractHttpRequest request = mockRequest(HttpRequest.class);
         requestFilter.filterAbstractHttpRequest(submitContext, request);
 

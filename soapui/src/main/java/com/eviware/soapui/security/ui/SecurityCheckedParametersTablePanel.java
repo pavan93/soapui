@@ -42,18 +42,12 @@ import com.eviware.x.impl.swing.JTextFieldFormField;
 import com.eviware.x.impl.swing.SwingXFormDialog;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListSelectionModel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -374,13 +368,13 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
     @AForm(description = "Add New Security Test Step Parameter", name = "Configure Security Test Step Parameters", helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
     interface AddParameterDialog {
         @AField(description = "Parameter Name", name = "Parameter Name", type = AFieldType.ENUMERATION)
-        static String NAME = "Parameter Name";
+        String NAME = "Parameter Name";
 
         @AField(description = "Parameter Label", name = "Parameter Label", type = AFieldType.STRING)
-        static String LABEL = "Parameter Label";
+        String LABEL = "Parameter Label";
 
         @AField(description = "Parameter XPath", name = "XPath", type = AFieldType.COMPONENT)
-        static String PATH = "XPath";
+        String PATH = "XPath";
     }
 
     /*

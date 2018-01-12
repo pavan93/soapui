@@ -20,11 +20,7 @@ import com.eviware.soapui.support.actions.MarkerAction;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -133,8 +129,6 @@ public class ActionSupport {
             }
         }
     }
-
-    ;
 
     public static JPopupMenu insertActions(ActionList actions, JPopupMenu popup, int index) {
         for (int i = 0; i < actions.getActionCount(); i++) {

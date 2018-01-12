@@ -33,8 +33,6 @@ import org.w3c.dom.Element;
 
 import javax.security.auth.callback.Callback;
 import javax.security.auth.callback.CallbackHandler;
-import javax.security.auth.callback.UnsupportedCallbackException;
-import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Vector;
@@ -110,7 +108,7 @@ public class IncomingWss {
             }
 
             List<WSSecurityEngineResult> incomingResult = wssecurityEngine.processSecurityHeader(soapDocument,
-                    (String) null, new WSSCallbackHandler(dec), sig, dec);
+                    null, new WSSCallbackHandler(dec), sig, dec);
 
             Vector<Object> wssResult = new Vector<Object>();
             wssResult.setSize(incomingResult.size());
@@ -130,7 +128,7 @@ public class IncomingWss {
             this.dec = dec;
         }
 
-        public void handle(Callback[] callbacks) throws IOException, UnsupportedCallbackException {
+        public void handle(Callback[] callbacks) {
             for (Callback callback : callbacks) {
                 if (callback instanceof WSPasswordCallback) {
                     WSPasswordCallback cb = (WSPasswordCallback) callback;

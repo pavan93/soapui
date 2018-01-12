@@ -64,7 +64,7 @@ public class JdbcUtils {
     }
 
     public static boolean hasMasskedPass(String connStr) {
-        return !StringUtils.isNullOrEmpty(connStr) ? connStr.contains(PASS_TEMPLATE) : false;
+        return !StringUtils.isNullOrEmpty(connStr) && connStr.contains(PASS_TEMPLATE);
     }
 
     public static boolean missingConnSettings(String driver, String connectionString) {

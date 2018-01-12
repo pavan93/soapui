@@ -22,8 +22,7 @@ import com.eviware.soapui.impl.wsdl.submit.transports.jms.util.HermesUtils;
 import com.eviware.soapui.settings.ToolsSettings;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.Map;
@@ -73,9 +72,6 @@ public class StartHermesJMSButtonAction extends AbstractAction {
 
     private boolean isHermesHomeValid(String hermesHome) {
         File file = new File(hermesHome + File.separator + "bin" + File.separator + "hermes.bat");
-        if (file.exists()) {
-            return true;
-        }
-        return false;
+        return file.exists();
     }
 }

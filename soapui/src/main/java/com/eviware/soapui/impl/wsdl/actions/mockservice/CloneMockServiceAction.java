@@ -189,18 +189,18 @@ public class CloneMockServiceAction extends AbstractSoapUIAction<WsdlMockService
     @AForm(description = "Specify target Project and name of cloned MockService", name = "Clone MockService", helpUrl = HelpUrls.CLONEMOCKSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     public interface Form {
         @AField(name = "MockService Name", description = "The name of the cloned MockService", type = AFieldType.STRING)
-        public final static String NAME = "MockService Name";
+        String NAME = "MockService Name";
 
         @AField(name = "Target Project", description = "The target Project for the cloned MockService", type = AFieldType.ENUMERATION)
-        public final static String PROJECT = "Target Project";
+        String PROJECT = "Target Project";
 
         @AField(name = "Move instead", description = "Moves the selected MockService instead of copying", type = AFieldType.BOOLEAN)
-        public final static String MOVE = "Move instead";
+        String MOVE = "Move instead";
 
         @AField(name = "Clone description", description = "Clones the description of selected TestCase", type = AFieldType.BOOLEAN)
-        public final static String CLONE_DESCRIPTION = "Clone description";
+        String CLONE_DESCRIPTION = "Clone description";
 
         @AField(name = "Description", description = "Descroption of new TestCase", type = AFieldType.STRINGAREA)
-        public final static String DESCRIPTION = "Description";
+        String DESCRIPTION = "Description";
     }
 }

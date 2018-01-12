@@ -26,17 +26,17 @@ import com.eviware.soapui.model.project.Project;
  */
 
 public interface WorkspaceListener extends SoapUIListener {
-    public void projectAdded(Project project);
+    void projectAdded(Project project);
 
-    public void projectRemoved(Project project);
+    void projectRemoved(Project project);
 
-    public void projectChanged(Project project);
+    void projectChanged(Project project);
 
-    public void projectOpened(Project project);
+    void projectOpened(Project project);
 
-    public void projectClosed(Project project);
+    void projectClosed(Project project);
 
-    public void workspaceSwitching(Workspace workspace);
+    void workspaceSwitching(Workspace workspace);
 
-    public void workspaceSwitched(Workspace workspace);
+    void workspaceSwitched(Workspace workspace);
 }

@@ -26,5 +26,5 @@ import com.eviware.soapui.model.ModelItem;
  */
 
 public interface SoapUIMultiAction extends SoapUIAction<ModelItem> {
-    public void perform(ModelItem[] targets, Object param);
+    void perform(ModelItem[] targets, Object param);
 }

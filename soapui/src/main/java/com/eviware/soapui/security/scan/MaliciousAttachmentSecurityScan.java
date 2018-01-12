@@ -31,7 +31,7 @@ import com.eviware.soapui.security.ui.MaliciousAttachmentAdvancedSettingsPanel;
 import com.eviware.soapui.security.ui.MaliciousAttachmentMutationsPanel;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -278,7 +278,7 @@ public class MaliciousAttachmentSecurityScan extends AbstractSecurityScan implem
     @Override
     protected boolean hasNext(TestStep testStep, SecurityTestRunContext context) {
         AbstractHttpRequest<?> request = (AbstractHttpRequest<?>) getRequest(testStep);
-        boolean hasNext = request.getAttachmentCount() == 0 ? false : elementIndex < config.getElementList().size();
+        boolean hasNext = request.getAttachmentCount() != 0 && elementIndex < config.getElementList().size();
 
         if (!hasNext) {
             elementIndex = -1;

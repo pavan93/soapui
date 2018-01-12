@@ -34,14 +34,21 @@ public interface Type {
      *
      * @return The name of the type.
      */
-    public String getName();
+    String getName();
 
     /**
      * Getter for the schema in which the element/attribute with this type lives.
      *
      * @return The Schema for the type.
      */
-    public Schema getSchema();
+    Schema getSchema();
+
+    /**
+     * Setter for the schema in which this type lives.
+     *
+     * @param schema
+     */
+    void setSchema(Schema schema);
 
     /**
      * Validate an element/attribute with this type.
@@ -51,30 +58,23 @@ public interface Type {
      *         possibly this Type instance itself.
      * @throws XmlException
      */
-    public Type validate(Context context) throws XmlException;
+    Type validate(Context context) throws XmlException;
 
-    public String toString();
-
-    /**
-     * Setter for the schema in which this type lives.
-     *
-     * @param schema
-     */
-    public void setSchema(Schema schema);
+    String toString();
 
     /**
      * Serialize instance to XmlObject.
      *
      * @return Returns an XmlObject storing the variables of this instance.
      */
-    public TypeConfig save();
+    TypeConfig save();
 
     /**
      * A static factory class for creating new instances.
      *
      * @author Dain Nilsson
      */
-    public class Factory {
+    class Factory {
 
         /**
          * Creates a new empty Type object.

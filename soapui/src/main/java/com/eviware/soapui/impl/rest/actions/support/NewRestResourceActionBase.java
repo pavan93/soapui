@@ -168,7 +168,7 @@ public abstract class NewRestResourceActionBase<T extends ModelItem> extends Abs
     public interface Form {
 
         @AField(description = "Form.ServiceUrl.Description", type = AFieldType.STRING)
-        public final static String RESOURCEPATH = messages.get("Form.ResourcePath.Label");
+        String RESOURCEPATH = messages.get("Form.ResourcePath.Label");
 
     }
 }

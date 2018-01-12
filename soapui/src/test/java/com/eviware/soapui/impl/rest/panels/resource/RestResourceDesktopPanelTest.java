@@ -26,7 +26,7 @@ import com.eviware.soapui.utils.ModelItemFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.swing.JTable;
+import javax.swing.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -54,7 +54,7 @@ public class RestResourceDesktopPanelTest {
     }
 
     @Test
-    public void displaysFullPathForChildResource() throws Exception {
+    public void displaysFullPathForChildResource() {
         assertThat(resourceDesktopPanel.pathTextField.getText(), is(childResource.getFullPath()));
     }
 
@@ -64,8 +64,7 @@ public class RestResourceDesktopPanelTest {
      * @return
      * @throws SoapUIException
      */
-    private RestRequestDesktopPanel openRestRequestDesktopPanelToAttachTheEventListenersForParameterlevelChange()
-            throws SoapUIException {
+    private RestRequestDesktopPanel openRestRequestDesktopPanelToAttachTheEventListenersForParameterlevelChange() {
         RestRequest restRequest = ModelItemFactory.makeRestRequest(childResource);
         restRequest.setMethod(RestRequestInterface.HttpMethod.GET);
         return new RestRequestDesktopPanel(restRequest);

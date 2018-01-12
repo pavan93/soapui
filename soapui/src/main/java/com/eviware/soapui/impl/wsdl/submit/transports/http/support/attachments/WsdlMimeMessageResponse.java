@@ -33,12 +33,7 @@ import org.apache.commons.codec.binary.Hex;
 import org.apache.http.Header;
 import org.apache.http.HeaderElement;
 import org.apache.http.NameValuePair;
-import org.apache.xmlbeans.SchemaGlobalElement;
-import org.apache.xmlbeans.SchemaType;
-import org.apache.xmlbeans.SchemaTypeSystem;
-import org.apache.xmlbeans.XmlCursor;
-import org.apache.xmlbeans.XmlHexBinary;
-import org.apache.xmlbeans.XmlObject;
+import org.apache.xmlbeans.*;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -56,7 +51,7 @@ public class WsdlMimeMessageResponse extends MimeMessageResponse implements Wsdl
                                    PropertyExpansionContext context) {
         super(httpRequest, httpMethod, requestContent, context);
 
-        WsdlRequest wsdlRequest = (WsdlRequest) httpRequest;
+        WsdlRequest wsdlRequest = httpRequest;
         processIncomingWss(wsdlRequest, context);
 
         String multipartType = null;

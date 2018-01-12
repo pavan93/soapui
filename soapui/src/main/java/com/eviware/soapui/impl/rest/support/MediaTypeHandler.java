@@ -20,9 +20,9 @@ import com.eviware.soapui.impl.wsdl.submit.transports.http.HttpResponse;
 import com.eviware.soapui.model.iface.TypedContent;
 
 public interface MediaTypeHandler {
-    public boolean canHandle(String contentType);
+    boolean canHandle(String contentType);
 
-    public String createXmlRepresentation(HttpResponse response);
+    String createXmlRepresentation(HttpResponse response);
 
-    public String createXmlRepresentation(TypedContent typedContent);
+    String createXmlRepresentation(TypedContent typedContent);
 }

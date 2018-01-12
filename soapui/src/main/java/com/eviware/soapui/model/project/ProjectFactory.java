@@ -25,18 +25,18 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public interface ProjectFactory<T extends Project> {
-    public T createNew() throws XmlException, IOException, SoapUIException;
+    T createNew() throws XmlException, IOException, SoapUIException;
 
-    public T createNew(String path) throws XmlException, IOException, SoapUIException;
+    T createNew(String path) throws XmlException, IOException, SoapUIException;
 
-    public T createNew(String projectFile, String projectPassword);
+    T createNew(String projectFile, String projectPassword);
 
-    public T createNew(Workspace workspace);
+    T createNew(Workspace workspace);
 
-    public T createNew(String path, Workspace workspace);
+    T createNew(String path, Workspace workspace);
 
-    public T createNew(String path, Workspace workspace, boolean open, String tempName,
-                       String projectPassword);
+    T createNew(String path, Workspace workspace, boolean open, String tempName,
+                String projectPassword);
 
-    public T createNew(InputStream inputStream, WorkspaceImpl workspace);
+    T createNew(InputStream inputStream, WorkspaceImpl workspace);
 }

@@ -79,7 +79,6 @@ public class CreateTestRequestForMockResponseAction extends AbstractAddToTestCas
         if (dialog.getReturnValue() != XFormDialog.OK_OPTION) {
             return null;
         }
-        ;
 
         String name = dialogValues.get(STEP_NAME);
 

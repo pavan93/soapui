@@ -59,7 +59,7 @@ public class PropertyTransferTest {
     }
 
     @Test
-    public void translatesOldXQueryBooleanToXQueryPathLanguage() throws Exception {
+    public void translatesOldXQueryBooleanToXQueryPathLanguage() {
         transfer.setUseXQuery(true);
 
         assertThat(transfer.getSourcePathLanguage(), is(PathLanguage.XQUERY));

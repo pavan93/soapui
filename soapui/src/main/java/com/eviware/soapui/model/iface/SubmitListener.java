@@ -30,7 +30,7 @@ public interface SubmitListener extends SoapUIListener {
      * @return boolean telling if the submit should proceed.
      */
 
-    public boolean beforeSubmit(Submit submit, SubmitContext context);
+    boolean beforeSubmit(Submit submit, SubmitContext context);
 
     /**
      * Called after submittal of a request
@@ -38,5 +38,5 @@ public interface SubmitListener extends SoapUIListener {
      * @param submit the submit.
      */
 
-    public void afterSubmit(Submit submit, SubmitContext context);
+    void afterSubmit(Submit submit, SubmitContext context);
 }

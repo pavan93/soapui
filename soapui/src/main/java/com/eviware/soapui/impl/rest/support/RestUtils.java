@@ -42,7 +42,7 @@ import static com.eviware.soapui.impl.support.HttpUtils.urlEncodeWithUtf8;
 
 public class RestUtils {
 
-    public static enum TemplateExtractionOption {
+    public enum TemplateExtractionOption {
         EXTRACT_TEMPLATE_PARAMETERS, IGNORE_TEMPLATE_PARAMETERS
     }
 

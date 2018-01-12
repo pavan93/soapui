@@ -17,37 +17,37 @@
 package com.eviware.x.form;
 
 public interface XFormField {
-    public final static String CURRENT_DIRECTORY = XFormField.class.getName() + "@currentDirectory";
+    String CURRENT_DIRECTORY = XFormField.class.getName() + "@currentDirectory";
 
-    public void setValue(String value);
+    String getValue();
 
-    public String getValue();
+    void setValue(String value);
 
-    public void setEnabled(boolean enabled);
+    boolean isEnabled();
 
-    public boolean isEnabled();
+    void setEnabled(boolean enabled);
 
-    public void setRequired(boolean required, String message);
+    void setRequired(boolean required, String message);
 
-    public boolean isRequired();
+    boolean isRequired();
 
-    public void setToolTip(String tooltip);
+    void setToolTip(String tooltip);
 
-    public void addFormFieldListener(XFormFieldListener listener);
+    void addFormFieldListener(XFormFieldListener listener);
 
-    public void removeFieldListener(XFormFieldListener listener);
+    void removeFieldListener(XFormFieldListener listener);
 
-    public void addFormFieldValidator(XFormFieldValidator validator);
+    void addFormFieldValidator(XFormFieldValidator validator);
 
-    public void removeFormFieldValidator(XFormFieldValidator validator);
+    void removeFormFieldValidator(XFormFieldValidator validator);
 
-    public void addComponentEnabler(XFormField tf, String value);
+    void addComponentEnabler(XFormField tf, String value);
 
-    public void setProperty(String name, Object value);
+    void setProperty(String name, Object value);
 
-    public Object getProperty(String name);
+    Object getProperty(String name);
 
-    public ValidationMessage[] validate();
+    ValidationMessage[] validate();
 
     boolean isVisible();
 }

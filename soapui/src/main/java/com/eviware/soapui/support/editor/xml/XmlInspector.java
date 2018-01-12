@@ -28,11 +28,11 @@ import com.eviware.soapui.support.editor.EditorView;
  */
 
 public interface XmlInspector extends EditorLocationListener<XmlDocument>, EditorInspector<XmlDocument> {
-    public void init(Editor<XmlDocument> editor);
+    void init(Editor<XmlDocument> editor);
 
-    public Editor<XmlDocument> getEditor();
+    Editor<XmlDocument> getEditor();
 
-    public boolean isContentHandler();
+    boolean isContentHandler();
 
-    public boolean isEnabledFor(EditorView<XmlDocument> view);
+    boolean isEnabledFor(EditorView<XmlDocument> view);
 }

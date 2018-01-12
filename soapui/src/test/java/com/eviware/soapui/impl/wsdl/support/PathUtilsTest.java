@@ -24,7 +24,7 @@ public class PathUtilsTest {
 
 
     @Test
-    public void relativizesPaths() throws Exception {
+    public void relativizesPaths() {
         assertEquals("c:\\test\\file.txt", PathUtils.relativize("c:\\test\\file.txt", "d:\\"));
         assertEquals("c:/test/file.txt", PathUtils.relativize("c:/test/file.txt", "d:\\"));
         assertEquals("c:\\test\\file.txt", PathUtils.relativize("c:\\test\\file.txt", "d:/"));

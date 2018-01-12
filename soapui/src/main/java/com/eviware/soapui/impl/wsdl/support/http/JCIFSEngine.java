@@ -27,7 +27,7 @@ import java.io.IOException;
 
 public class JCIFSEngine implements NTLMEngine {
 
-    public String generateType1Msg(String domain, String workstation) throws NTLMEngineException {
+    public String generateType1Msg(String domain, String workstation) {
         Type1Message t1m = new Type1Message(Type1Message.getDefaultFlags(), domain, workstation);
         return Base64.encode(t1m.toByteArray());
     }

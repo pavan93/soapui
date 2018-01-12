@@ -18,7 +18,7 @@ package com.eviware.soapui.support.editor;
 
 import com.eviware.soapui.support.PropertyChangeNotifier;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * Views available for the XmlDocument of a XmlEditor
@@ -27,35 +27,35 @@ import javax.swing.JComponent;
  */
 
 public interface EditorView<T extends EditorDocument> extends PropertyChangeNotifier, EditorLocationListener<T> {
-    public final static String TITLE_PROPERTY = EditorView.class.getName() + "@title";
+    String TITLE_PROPERTY = EditorView.class.getName() + "@title";
 
-    public Editor<T> getEditor();
+    Editor<T> getEditor();
 
-    public String getTitle();
+    String getTitle();
 
-    public JComponent getComponent();
+    JComponent getComponent();
 
-    public boolean deactivate();
+    boolean deactivate();
 
-    public boolean activate(EditorLocation<T> location);
+    boolean activate(EditorLocation<T> location);
 
-    public EditorLocation<T> getEditorLocation();
+    EditorLocation<T> getEditorLocation();
 
-    public void setLocation(EditorLocation<T> location);
+    void setLocation(EditorLocation<T> location);
 
-    public void setDocument(T document);
+    T getDocument();
 
-    public T getDocument();
+    void setDocument(T document);
 
-    public void addLocationListener(EditorLocationListener<T> listener);
+    void addLocationListener(EditorLocationListener<T> listener);
 
-    public void removeLocationListener(EditorLocationListener<T> listener);
+    void removeLocationListener(EditorLocationListener<T> listener);
 
-    public void release();
+    void release();
 
-    public void setEditable(boolean enabled);
+    void setEditable(boolean enabled);
 
-    public String getViewId();
+    String getViewId();
 
-    public void requestFocus();
+    void requestFocus();
 }

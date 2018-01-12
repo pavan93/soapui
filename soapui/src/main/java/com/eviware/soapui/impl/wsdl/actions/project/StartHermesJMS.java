@@ -28,7 +28,7 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 import com.eviware.soapui.support.components.DirectoryFormComponent;
 import com.eviware.soapui.support.components.SimpleForm;
 
-import java.awt.Component;
+import java.awt.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
@@ -68,10 +68,7 @@ public class StartHermesJMS extends AbstractSoapUIAction<WsdlProject> {
 
     private boolean isHermesHomeValid(String hermesHome) {
         File file = new File(hermesHome + File.separator + "bin" + File.separator + "hermes.bat");
-        if (file.exists()) {
-            return true;
-        }
-        return false;
+        return file.exists();
     }
 
     private void startHermesJMS(String hermesConfigPath, String hermesHome) {

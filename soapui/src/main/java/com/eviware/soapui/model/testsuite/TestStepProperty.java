@@ -25,5 +25,5 @@ package com.eviware.soapui.model.testsuite;
  */
 
 public interface TestStepProperty extends TestProperty {
-    public TestStep getTestStep();
+    TestStep getTestStep();
 }

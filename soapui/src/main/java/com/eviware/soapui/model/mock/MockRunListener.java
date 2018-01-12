@@ -28,11 +28,11 @@ import javax.servlet.http.HttpServletResponse;
  */
 
 public interface MockRunListener extends SoapUIListener {
-    public void onMockRunnerStart(MockRunner mockRunner);
+    void onMockRunnerStart(MockRunner mockRunner);
 
-    public void onMockResult(MockResult result);
+    void onMockResult(MockResult result);
 
-    public void onMockRunnerStop(MockRunner mockRunner);
+    void onMockRunnerStop(MockRunner mockRunner);
 
     /**
      * Called before dispatching a request. If a MockResult is returned, further
@@ -45,5 +45,5 @@ public interface MockRunListener extends SoapUIListener {
      *         usual
      */
 
-    public MockResult onMockRequest(MockRunner runner, HttpServletRequest request, HttpServletResponse response);
+    MockResult onMockRequest(MockRunner runner, HttpServletRequest request, HttpServletResponse response);
 }

@@ -17,11 +17,11 @@
 package com.eviware.soapui.impl.wsdl.mock;
 
 public interface MockRunnerManager {
-    public WsdlMockService getMockService(int port, String path);
+    WsdlMockService getMockService(int port, String path);
 
-    public boolean isStarted();
+    boolean isStarted();
 
-    public void start() throws MockRunnerManagerException;
+    void start() throws MockRunnerManagerException;
 
-    public void stop();
+    void stop();
 }

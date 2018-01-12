@@ -36,10 +36,8 @@ import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.impl.schema.SchemaTypeImpl;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -146,7 +144,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
      * Set new value for request
      */
     private StringToStringMap updateRequestContent(TestStep testStep, SecurityTestRunContext context)
-            throws XmlException, Exception {
+            throws Exception {
 
         StringToStringMap params = new StringToStringMap();
 
@@ -253,7 +251,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
      * @throws XmlException
      * @throws XmlException
      */
-    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException, Exception {
+    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws Exception {
 
         mutation = true;
         // for each parameter
@@ -315,11 +313,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
     protected boolean hasNext(TestStep testStep, SecurityTestRunContext context) {
         boolean hasNext = false;
         if ((parameterMutations == null || parameterMutations.size() == 0) && !mutation) {
-            if (getParameterHolder().getParameterList().size() > 0) {
-                hasNext = true;
-            } else {
-                hasNext = false;
-            }
+            hasNext = getParameterHolder().getParameterList().size() > 0;
         } else {
             for (SecurityCheckedParameter param : parameterMutations.keySet()) {
                 if (parameterMutations.get(param).size() > 0) {

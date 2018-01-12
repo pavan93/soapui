@@ -27,22 +27,22 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;
 public interface HttpRequestInterface<T extends AbstractRequestConfig> extends AbstractHttpRequestInterface<T>,
         Request, MutableTestPropertyHolder, PropertyExpansionContainer, MutableAttachmentContainer, MediaType {
 
-    public void setMethod(RestRequestInterface.HttpMethod method);
+    void setMethod(RestRequestInterface.HttpMethod method);
 
-    public boolean hasRequestBody();
+    boolean hasRequestBody();
 
-    public RestParamsPropertyHolder getParams();
+    RestParamsPropertyHolder getParams();
 
-    public boolean isPostQueryString();
+    boolean isPostQueryString();
 
-    public void setPostQueryString(boolean b);
+    void setPostQueryString(boolean b);
 
-    public String getResponseContentAsXml();
+    String getResponseContentAsXml();
 
-    public void updateConfig(T request);
+    void updateConfig(T request);
 
-    public String getPath();
+    String getPath();
 
-    public String getMultiValueDelimiter();
+    String getMultiValueDelimiter();
 
 }

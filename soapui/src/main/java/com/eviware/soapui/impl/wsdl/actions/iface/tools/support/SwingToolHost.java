@@ -26,7 +26,7 @@ import com.eviware.soapui.support.UISupport;
  */
 
 public class SwingToolHost implements ToolHost {
-    public void run(ToolRunner runner) throws Exception {
+    public void run(ToolRunner runner) {
         ProcessDialog processDialog = null;
 
         try {

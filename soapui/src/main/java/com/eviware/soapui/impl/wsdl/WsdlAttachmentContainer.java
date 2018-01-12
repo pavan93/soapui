@@ -22,11 +22,11 @@ public interface WsdlAttachmentContainer extends AttachmentContainer {
     /**
      * If Message Transmission Optimization Mechanism is enabled or not
      */
-    public boolean isMtomEnabled();
+    boolean isMtomEnabled();
 
-    public boolean isInlineFilesEnabled();
+    boolean isInlineFilesEnabled();
 
-    public boolean isEncodeAttachments();
+    boolean isEncodeAttachments();
 
     AttachmentEncoding getAttachmentEncoding(String partName);
 }

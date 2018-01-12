@@ -25,11 +25,11 @@ import org.apache.xmlbeans.XmlObject;
  */
 
 public interface AssertedXPath {
-    public TestAssertion getAssertion();
+    TestAssertion getAssertion();
 
-    public String getPath();
+    String getPath();
 
-    public String getLabel();
+    String getLabel();
 
-    public XmlObject getAssertedContent();
+    XmlObject getAssertedContent();
 }

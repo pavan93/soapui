@@ -100,13 +100,10 @@ public class SoapUIVersionInfo implements Comparator<SoapUIVersionInfo> {
             return false;
         }
 
-        if (getMajorVersion() == ver.getMajorVersion() &&
+        return getMajorVersion() == ver.getMajorVersion() &&
                 getMiddleVersion() == ver.getMiddleVersion() &&
-                getMinorVersion() == ver.getMinorVersion()) {
-            return true;
-        }
+                getMinorVersion() == ver.getMinorVersion();
 
-        return false;
     }
 
     @Override

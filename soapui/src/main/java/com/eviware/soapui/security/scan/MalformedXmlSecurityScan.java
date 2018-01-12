@@ -34,8 +34,7 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlOptions;
 
-import javax.swing.JComponent;
-import java.io.IOException;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -101,7 +100,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         }
     }
 
-    protected StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws XmlException,
+    protected StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws
             Exception {
         StringToStringMap params = new StringToStringMap();
 
@@ -242,8 +241,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         return params;
     }
 
-    protected void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException,
-            IOException {
+    protected void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException {
         mutation = true;
         // for each parameter
         for (SecurityCheckedParameter parameter : getParameterHolder().getParameterList()) {
@@ -283,7 +281,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         }
     }
 
-    protected Collection<? extends String> mutateNode(XmlTreeNode node, String xml) throws IOException {
+    protected Collection<? extends String> mutateNode(XmlTreeNode node, String xml) {
 
         ArrayList<String> result = new ArrayList<String>();
         String nodeXml = getXmlForNode(node);
@@ -437,11 +435,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
     protected boolean hasNext(TestStep testStep, SecurityTestRunContext context) {
         boolean hasNext = false;
         if ((parameterMutations == null || parameterMutations.size() == 0) && !mutation) {
-            if (getParameterHolder().getParameterList().size() > 0) {
-                hasNext = true;
-            } else {
-                hasNext = false;
-            }
+            hasNext = getParameterHolder().getParameterList().size() > 0;
         } else {
             for (SecurityCheckedParameter param : parameterMutations.keySet()) {
                 if (parameterMutations.get(param).size() > 0) {

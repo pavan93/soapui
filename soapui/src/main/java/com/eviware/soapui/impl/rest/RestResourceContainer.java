@@ -17,9 +17,9 @@
 package com.eviware.soapui.impl.rest;
 
 public interface RestResourceContainer {
-    public String getName();
+    String getName();
 
-    public void deleteResource(RestResource resource);
+    void deleteResource(RestResource resource);
 
-    public RestResource cloneResource(RestResource resource, String name);
+    RestResource cloneResource(RestResource resource, String name);
 }

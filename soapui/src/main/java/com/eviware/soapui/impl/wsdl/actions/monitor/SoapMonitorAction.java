@@ -175,62 +175,62 @@ public class SoapMonitorAction extends AbstractSoapUIAction<WsdlProject> {
     @AForm(description = "Specify HTTP Monitor settings", name = "General Options", helpUrl = HelpUrls.SOAPMONITOR_GENERAL_OPTIONS, icon = UISupport.TOOL_ICON_PATH)
     private interface WizardForm {
         @APage(name = "General")
-        public final static LaunchForm general = null;
+        LaunchForm general = null;
 
         @APage(name = "Security")
-        public final static SecurityTabForm security = null;
+        SecurityTabForm security = null;
     }
 
     @AForm(description = "Specify HTTP Monitor settings", name = "Launch HTTP Monitor", helpUrl = HelpUrls.SOAPMONITOR_GENERAL_OPTIONS)
     public interface LaunchForm {
         @AField(description = "SSL tunnel or HTTP proxy", name = "Choose one:", type = AFieldType.RADIOGROUP)
-        public final static String SSLORHTTP = "Choose one:";
+        String SSLORHTTP = "Choose one:";
 
         @AField(description = "The local port to listen on", name = "Port", type = AFieldType.INT)
-        public final static String PORT = "Port";
+        String PORT = "Port";
 
         @AField(description = "The Incoming WSS configuration to use for processing requests", name = "Incoming Request WSS", type = AFieldType.ENUMERATION)
-        public final static String REQUEST_WSS = "Incoming Request WSS";
+        String REQUEST_WSS = "Incoming Request WSS";
 
         @AField(description = "The Outgoing WSS configuration to use for processing responses", name = "Incoming Response WSS", type = AFieldType.ENUMERATION)
-        public final static String RESPONSE_WSS = "Incoming Response WSS";
+        String RESPONSE_WSS = "Incoming Response WSS";
 
         @AField(description = "Set as Global Proxy", name = "Set as Proxy", type = AFieldType.BOOLEAN)
-        public final static String SETASPROXY = "Set as Proxy";
+        String SETASPROXY = "Set as Proxy";
 
         @AField(description = "Set endpoint", name = "Set endpoint for HTTP Tunnel:", type = AFieldType.STRING)
-        public final static String SETSSLMON = "Set endpoint for HTTP Tunnel:";
+        String SETSSLMON = "Set endpoint for HTTP Tunnel:";
 
         @AField(description = "Keep request state", name = "Reuse request state", type = AFieldType.BOOLEAN)
-        public final static String SSLTUNNEL_REUSESTATE = "Reuse request state";
+        String SSLTUNNEL_REUSESTATE = "Reuse request state";
 
         @AField(description = "Content types to monitor, if blank default types will be set!", name = "Content types to monitor", type = AFieldType.STRINGAREA)
-        public final static String SET_CONTENT_TYPES = "Content types to monitor";
+        String SET_CONTENT_TYPES = "Content types to monitor";
 
     }
 
     @AForm(description = "Specify HTTP tunnel security settings", name = "HTTP tunnel security", helpUrl = HelpUrls.SOAPMONITOR_GENERAL_OPTIONS)
     public interface SecurityTabForm {
         @AField(description = "Set SSL Tunnel KeyStore", name = "HTTP tunnel - KeyStore", type = AFieldType.FILE)
-        public final static String SSLTUNNEL_KEYSTORE = "HTTP tunnel - KeyStore";
+        String SSLTUNNEL_KEYSTORE = "HTTP tunnel - KeyStore";
 
         @AField(description = "Set SSL Tunnel Password", name = "HTTP tunnel - Password", type = AFieldType.PASSWORD)
-        public final static String SSLTUNNEL_PASSWORD = "HTTP tunnel - Password";
+        String SSLTUNNEL_PASSWORD = "HTTP tunnel - Password";
 
         @AField(description = "Set SSL Tunnel KeyPassword", name = "HTTP tunnel - KeyPassword", type = AFieldType.PASSWORD)
-        public final static String SSLTUNNEL_KEYPASSWORD = "HTTP tunnel - KeyPassword";
+        String SSLTUNNEL_KEYPASSWORD = "HTTP tunnel - KeyPassword";
 
         @AField(description = "Set SSL Tunnel TrustStore", name = "HTTP tunnel - TrustStore", type = AFieldType.FILE)
-        public final static String SSLTUNNEL_TRUSTSTORE = "HTTP tunnel - TrustStore";
+        String SSLTUNNEL_TRUSTSTORE = "HTTP tunnel - TrustStore";
 
         @AField(description = "Set SSL Tunnel TrustStore Password", name = "HTTP tunnel - TrustStore Password", type = AFieldType.PASSWORD)
-        public final static String SSLTUNNEL_TRUSTSTORE_PASSWORD = "HTTP tunnel - TrustStore Password";
+        String SSLTUNNEL_TRUSTSTORE_PASSWORD = "HTTP tunnel - TrustStore Password";
 
         @AField(description = "Set SSL Client Key Store", name = "HTTP tunnel - Set SSL Client Key Store path", type = AFieldType.FILE)
-        public final static String SSLTUNNEL_KEYSTOREPATH = "HTTP tunnel - Set SSL Client Key Store path";
+        String SSLTUNNEL_KEYSTOREPATH = "HTTP tunnel - Set SSL Client Key Store path";
 
         @AField(description = "Set SSL Client Key Store Password", name = "HTTP tunnel - Set SSL Client Key Store Password", type = AFieldType.PASSWORD)
-        public final static String SSLTUNNEL_KEYSTOREPASSWORD = "HTTP tunnel - Set SSL Client Key Store Password";
+        String SSLTUNNEL_KEYSTOREPASSWORD = "HTTP tunnel - Set SSL Client Key Store Password";
     }
 
     protected class FullMonitorDialogHandler implements DialogHandler {

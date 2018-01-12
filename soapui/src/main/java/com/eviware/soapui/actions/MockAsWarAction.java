@@ -123,30 +123,30 @@ public class MockAsWarAction extends AbstractSoapUIAction<WsdlProject> {
     @AForm(description = "Configure what to include in generated WAR", name = "Deploy Project as WAR", helpUrl = HelpUrls.MOCKASWAR_HELP_URL)
     protected interface MockAsWarDialog {
         @AField(description = "Specify if global settings should be included", name = "Include Global Settings", type = AFieldType.BOOLEAN)
-        public final static String GLOBAL_SETTINGS = "Include Global Settings";
+        String GLOBAL_SETTINGS = "Include Global Settings";
 
         @AField(description = "Specify Settings File", name = "Settings", type = AFieldType.FILE)
-        public final static String SETTINGS_FILE = "Settings";
+        String SETTINGS_FILE = "Settings";
 
         @AField(description = "Specify if action extensions should be included", name = "Include Actions", type = AFieldType.BOOLEAN)
-        public final static String ACTIONS = "Include Actions";
+        String ACTIONS = "Include Actions";
 
         @AField(description = "Specify if listener extensions should be included", name = "Include Listeners", type = AFieldType.BOOLEAN)
-        public final static String LISTENERS = "Include Listeners";
+        String LISTENERS = "Include Listeners";
 
         @AField(description = "Include jar files from ext folder", name = "Include External Jar Files", type = AFieldType.BOOLEAN)
-        public final static String EXT_LIBS = "Include External Jar Files";
+        String EXT_LIBS = "Include External Jar Files";
 
         @AField(description = "Check to enable WebUI", name = "WebUI", type = AFieldType.BOOLEAN)
-        public final static String ENABLE_WEBUI = "WebUI";
+        String ENABLE_WEBUI = "WebUI";
 
         @AField(description = "Local endpoint that will be used for WSDL endpoints/includes/imports", name = "MockService Endpoint", type = AFieldType.STRING)
-        public final static String MOCKSERVICE_ENDPOINT = "MockService Endpoint";
+        String MOCKSERVICE_ENDPOINT = "MockService Endpoint";
 
         @AField(description = "Specify name of target War File", name = "War File", type = AFieldType.FILE)
-        public final static String WAR_FILE = "War File";
+        String WAR_FILE = "War File";
 
         @AField(description = "Specify a directory where War file structure will be created", name = "War Directory", type = AFieldType.FOLDER)
-        public final static String WAR_DIRECTORY = "War Directory";
+        String WAR_DIRECTORY = "War Directory";
     }
 }

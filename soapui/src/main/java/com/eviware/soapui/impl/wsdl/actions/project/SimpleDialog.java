@@ -24,14 +24,8 @@ import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 import com.eviware.soapui.support.components.JButtonBar;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JDialog;
-import javax.swing.KeyStroke;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 
@@ -86,8 +80,6 @@ public abstract class SimpleDialog extends JDialog {
      */
     protected void modifyButtons() {
     }
-
-    ;
 
     public SimpleDialog(String title, String description, String helpUrl) {
         this(title, description, helpUrl, true);

@@ -52,7 +52,7 @@ public class RestRequestDataSource implements DataSource {
         return restRequest.getName();
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    public OutputStream getOutputStream() {
         return null;
     }
 }

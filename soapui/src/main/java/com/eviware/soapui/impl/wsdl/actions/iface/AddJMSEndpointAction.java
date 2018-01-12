@@ -24,12 +24,7 @@ import com.eviware.soapui.impl.wsdl.submit.transports.jms.util.HermesUtils;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
-import com.eviware.x.form.XFormFieldListener;
+import com.eviware.x.form.*;
 import hermes.Domain;
 import hermes.Hermes;
 import hermes.HermesContext;
@@ -39,7 +34,6 @@ import hermes.config.DestinationConfig;
 import javax.naming.Context;
 import javax.naming.NamingException;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -153,7 +147,7 @@ public class AddJMSEndpointAction extends AbstractSoapUIAction<AbstractInterface
     }
 
     private Context getHermesContext(AbstractInterface<?> iface, String hermesConfigPath)
-            throws MalformedURLException, NamingException, IOException {
+            throws NamingException, IOException {
         WsdlProject project = iface.getProject();
         HermesUtils.flushHermesCache();
         Context ctx = HermesUtils.hermesContext(project, hermesConfigPath);

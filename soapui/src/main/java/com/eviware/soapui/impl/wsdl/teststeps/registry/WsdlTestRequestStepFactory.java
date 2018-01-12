@@ -94,7 +94,7 @@ public class WsdlTestRequestStepFactory extends WsdlTestStepFactory {
             testRequestConfig.setWsrmConfig((WsrmConfigConfig) request.getConfig().getWsrmConfig().copy());
         }
 
-        if ((CredentialsConfig) request.getConfig().getCredentials() != null) {
+        if (request.getConfig().getCredentials() != null) {
             testRequestConfig.setCredentials((CredentialsConfig) request.getConfig().getCredentials().copy());
         }
 

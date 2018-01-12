@@ -21,13 +21,13 @@ import com.eviware.soapui.model.testsuite.TestProperty;
 import javax.swing.table.TableModel;
 
 public interface PropertyHolderTableModel extends TableModel {
-    public abstract void fireTableDataChanged();
+    void fireTableDataChanged();
 
-    public abstract TestProperty getPropertyAtRow(int rowIndex);
+    TestProperty getPropertyAtRow(int rowIndex);
 
-    public abstract void fireTableRowsDeleted(int row, int row2);
+    void fireTableRowsDeleted(int row, int row2);
 
-    public abstract void fireTableRowsInserted(int row, int row2);
+    void fireTableRowsInserted(int row, int row2);
 
-    public void moveProperty(String propName, int oldRow, int newRow);
+    void moveProperty(String propName, int oldRow, int newRow);
 }

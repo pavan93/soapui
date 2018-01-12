@@ -30,35 +30,35 @@ import java.util.List;
  */
 
 public interface MockOperation extends ModelItem, Releasable {
-    public MockService getMockService();
+    MockService getMockService();
 
-    public int getMockResponseCount();
+    int getMockResponseCount();
 
-    public MockResponse getMockResponseAt(int index);
+    MockResponse getMockResponseAt(int index);
 
-    public MockResponse getMockResponseByName(String name);
+    MockResponse getMockResponseByName(String name);
 
-    public MockResponse addNewMockResponse(String name);
+    MockResponse addNewMockResponse(String name);
 
-    public Operation getOperation();
+    Operation getOperation();
 
-    public MockResult getLastMockResult();
+    MockResult getLastMockResult();
 
-    public List<MockResponse> getMockResponses();
+    List<MockResponse> getMockResponses();
 
-    public void removeMockResponse(MockResponse mockResponse);
+    void removeMockResponse(MockResponse mockResponse);
 
     /**
      * This is a container used by dispatcher to save script, xpath expressions etc
      *
      * @return script or xpath
      */
-    public String getScript();
+    String getScript();
 
     /**
      * @param script this is a String that might be needed by the dispatch style used in this mock operation.
      */
-    public void setScript(String script);
+    void setScript(String script);
 
     String getScriptHelpUrl();
 }
