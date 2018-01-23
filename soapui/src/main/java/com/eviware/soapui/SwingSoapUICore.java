@@ -41,16 +41,18 @@ import com.eviware.x.impl.swing.SwingFormFactory;
 import java.io.File;
 import java.io.FileInputStream;
 
+import static com.eviware.soapui.SwingSoapUICore.SoapuiSettingsDocumentConfig.settingFactory;
+
 public class SwingSoapUICore extends DefaultSoapUICore {
-    public SwingSoapUICore() {
+    private SwingSoapUICore() {
         super();
     }
 
-    public SwingSoapUICore(String root, String settingsFile) {
+    SwingSoapUICore(String root, String settingsFile) {
         super(root, settingsFile);
     }
 
-    public SwingSoapUICore(boolean settingPassword, String soapUISettingsPassword) {
+    SwingSoapUICore(boolean settingPassword, String soapUISettingsPassword) {
         super(settingPassword, soapUISettingsPassword);
     }
 
@@ -89,7 +91,11 @@ public class SwingSoapUICore extends DefaultSoapUICore {
 
         if (!new File(fileName).exists()) {
             try {
-                fileName = importSettingsOnStartup(fileName);
+                fileName = importSettingsOnStartup(fileName, settingFactory, new Runnable() {
+                    public void run() {
+                        settingFactory.parsegsfile;
+                    }
+                });
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,23 +110,21 @@ public class SwingSoapUICore extends DefaultSoapUICore {
         return result;
     }
 
-    protected String importSettingsOnStartup(String fileName) {
+    String importSettingsOnStartup(String fileName, Object settingFactory, Runnable runnable) {
         if (UISupport.getDialogs().confirm("Missing SoapUI Settings, import from existing installation?",
                 "Import Preferences")) {
             while (true) {
                 File settingsFile = UISupport.getFileDialogs().open(null, "Import Preferences", ".xml",
                         "SoapUI settings XML", fileName);
-                if (settingsFile != null) {
-                    try {
-                        SoapuiSettingsDocumentConfig.Factory.parse(settingsFile);
-                        log.info("imported soapui-settings from [" + settingsFile.getAbsolutePath() + "]");
-                        return settingsFile.getAbsolutePath();
-                    } catch (Exception e) {
-                        if (!UISupport.getDialogs().confirm(
-                                "Error loading settings from [" + settingsFile.getAbsolutePath() + "]\r\nspecify another?",
-                                "Error Importing")) {
-                            break;
-                        }
+                if (settingsFile != null) try {
+                    runnable.run();
+                    log.info("imported soapui-settings from [" + settingsFile.getAbsolutePath() + "]");
+                    return settingsFile.getAbsolutePath();
+                } catch (Exception e) {
+                    if (!UISupport.getDialogs().confirm(
+                            "Error loading settings from [" + settingsFile.getAbsolutePath() + "]\r\nspecify another?",
+                            "Error Importing")) {
+                        break;
                     }
                 }
             }
@@ -129,7 +133,7 @@ public class SwingSoapUICore extends DefaultSoapUICore {
         return fileName;
     }
 
-    protected void addExternalActions(String folder, ClassLoader classLoader) {
+    private void addExternalActions(String folder, ClassLoader classLoader) {
         File[] actionFiles = new File(folder).listFiles();
         if (actionFiles != null) {
             for (File actionFile : actionFiles) {
@@ -151,5 +155,9 @@ public class SwingSoapUICore extends DefaultSoapUICore {
                 }
             }
         }
+    }
+
+    private class SoapuiSettingsDocumentConfig {
+        static Object settingFactory;
     }
 }
