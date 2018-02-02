@@ -16,18 +16,8 @@
 
 package com.eviware.soapui.impl.actions;
 
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
-import com.eviware.soapui.impl.rest.RestServiceFactory;
-import com.eviware.soapui.impl.rest.RestURIParser;
-import com.eviware.soapui.impl.rest.support.RestParamProperty;
-import com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder;
-import com.eviware.soapui.impl.rest.support.RestURIParserImpl;
-import com.eviware.soapui.impl.rest.support.RestUtils;
-import com.eviware.soapui.impl.rest.support.XmlBeansRestParamsTestPropertyHolder;
+import com.eviware.soapui.impl.rest.*;
+import com.eviware.soapui.impl.rest.support.*;
 import com.eviware.soapui.impl.support.AbstractInterface;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.support.ModelItemNamer;
@@ -45,22 +35,11 @@ public class RestServiceBuilder {
         CREATE_NEW_MODEL, REUSE_MODEL
     }
 
-    public static class RequestInfo {
-        private final String uri;
-        private final RestRequestInterface.HttpMethod requestMethod;
-
-        public RequestInfo(String uri, RestRequestInterface.HttpMethod requestMethod) {
-            this.uri = uri;
-            this.requestMethod = requestMethod;
-        }
-
-        public String getUri() {
-            return uri;
-        }
-
-        public RestRequestInterface.HttpMethod getRequestMethod() {
-            return requestMethod;
-        }
+    private RestParamsPropertyHolder extractParams(String URI) {
+        RestParamsPropertyHolder params = new XmlBeansRestParamsTestPropertyHolder(null,
+                RestParametersConfig.Factory.newInstance());
+        extractAndFillParameters(URI, params);
+        return params;
     }
 
     public void createRestService(WsdlProject project, String URI) throws MalformedURLException {
@@ -84,14 +63,7 @@ public class RestServiceBuilder {
         return restRequest;
     }
 
-    protected RestParamsPropertyHolder extractParams(String URI) {
-        RestParamsPropertyHolder params = new XmlBeansRestParamsTestPropertyHolder(null,
-                RestParametersConfig.Factory.newInstance());
-        extractAndFillParameters(URI, params);
-        return params;
-    }
-
-    protected RestResource createResource(ModelCreationStrategy creationStrategy, WsdlProject project, String URI) throws MalformedURLException {
+    private RestResource createResource(ModelCreationStrategy creationStrategy, WsdlProject project, String URI) throws MalformedURLException {
         RestURIParser restURIParser = new RestURIParserImpl(URI);
         String resourcePath = restURIParser.getResourcePath();
         String host = restURIParser.getEndpoint();
@@ -116,13 +88,13 @@ public class RestServiceBuilder {
         return restService.addNewResource(restURIParser.getResourceName(), resourcePath);
     }
 
-    protected void extractAndFillParameters(String URI, RestParamsPropertyHolder params) {
+    private void extractAndFillParameters(String URI, RestParamsPropertyHolder params) {
         // This does lot of magic including extracting and filling up parameters on the params
         RestUtils.extractParams(URI, params, false, RestUtils.TemplateExtractionOption.EXTRACT_TEMPLATE_PARAMETERS);
     }
 
     //TODO: In advanced version we have to apply filtering like which type of parameter goes to which location
-    protected void copyParameters(RestParamsPropertyHolder srcParams, RestParamsPropertyHolder destinationParams) {
+    private void copyParameters(RestParamsPropertyHolder srcParams, RestParamsPropertyHolder destinationParams) {
         for (int i = 0; i < srcParams.size(); i++) {
             RestParamProperty prop = srcParams.getPropertyAt(i);
 
@@ -132,7 +104,7 @@ public class RestServiceBuilder {
     }
 
     //TODO: In advanced version we have to apply filtering like which type of parameter goes to which location
-    protected void copyParametersWithDefaultsOnResource(RestParamsPropertyHolder srcParams, RestParamsPropertyHolder resourceParams, RestParamsPropertyHolder requestParams) {
+    private void copyParametersWithDefaultsOnResource(RestParamsPropertyHolder srcParams, RestParamsPropertyHolder resourceParams, RestParamsPropertyHolder requestParams) {
         for (int i = 0; i < srcParams.size(); i++) {
             RestParamProperty prop = srcParams.getPropertyAt(i);
             String value = prop.getValue();
@@ -144,8 +116,7 @@ public class RestServiceBuilder {
         }
     }
 
-
-    protected RestMethod addNewMethod(ModelCreationStrategy creationStrategy, RestResource restResource, RestRequestInterface.HttpMethod requestMethod) {
+    private RestMethod addNewMethod(ModelCreationStrategy creationStrategy, RestResource restResource, RestRequestInterface.HttpMethod requestMethod) {
         if (creationStrategy == ModelCreationStrategy.REUSE_MODEL) {
             for (RestMethod restMethod : restResource.getRestMethodList()) {
                 if (restMethod.getMethod() == requestMethod) {
@@ -159,8 +130,26 @@ public class RestServiceBuilder {
         return restMethod;
     }
 
-    protected RestRequest addNewRequest(RestMethod restMethod) {
+    private RestRequest addNewRequest(RestMethod restMethod) {
         return restMethod.addNewRequest("Request " + (restMethod.getRequestCount() + 1));
+    }
+
+    public static class RequestInfo {
+        private final String uri;
+        private final RestRequestInterface.HttpMethod requestMethod;
+
+        public RequestInfo(String uri, RestRequestInterface.HttpMethod requestMethod) {
+            this.uri = uri;
+            this.requestMethod = requestMethod;
+        }
+
+        String getUri() {
+            return uri;
+        }
+
+        RestRequestInterface.HttpMethod getRequestMethod() {
+            return requestMethod;
+        }
     }
 
 }

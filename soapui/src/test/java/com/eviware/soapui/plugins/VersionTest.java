@@ -26,7 +26,7 @@ import static org.junit.Assert.assertThat;
 
 public class VersionTest {
 
-    public static final Version BASE_VERSION = Version.fromString("1.7");
+    private static final Version BASE_VERSION = Version.fromString("1.7");
 
     @Test
     public void correctEquals() {

@@ -29,8 +29,8 @@ import javax.swing.*;
 
 import static com.eviware.soapui.impl.rest.OAuth2Profile.AccessTokenPosition;
 
-public class OAuth2AdvancedOptionsDialog {
-    public static final MessageSupport messages = MessageSupport.getMessages(OAuth2AdvancedOptionsDialog.class);
+class OAuth2AdvancedOptionsDialog {
+    private static final MessageSupport messages = MessageSupport.getMessages(OAuth2AdvancedOptionsDialog.class);
     private ExpirationTimeChooser expirationTimeComponent;
     private JButton refreshAccessTokenButton;
 
@@ -91,7 +91,7 @@ public class OAuth2AdvancedOptionsDialog {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.OAUTH_ADVANCED_OPTIONS)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.AccessTokenPosition.Description", type = AField.AFieldType.RADIOGROUP)
         String ACCESS_TOKEN_POSITION = messages.get("Form.AccessTokenPosition.Label");
 

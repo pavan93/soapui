@@ -358,13 +358,87 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
         }
     }
 
+    private List<DefaultMutableTreeNode> mapTreeItems(XmlObject xmlObject, DefaultMutableTreeNode treeRoot,
+                                                      boolean createEmpty, int tabIndex, String groupName, String query, String nameQuery, boolean sort,
+                                                      NodeSelector selector) {
+        List<DefaultMutableTreeNode> resultNodes = new ArrayList<DefaultMutableTreeNode>();
+
+        try {
+            XmlObject[] items = xmlObject.selectPath(query);
+            List<DefaultMutableTreeNode> treeNodes = new ArrayList<DefaultMutableTreeNode>();
+
+            DefaultMutableTreeNode root = treeRoot;
+            if (groupName != null) {
+                String groupKey = new TreePath(root.getPath()).toString() + "/" + groupName;
+                root = groupNodes.get(groupKey);
+                if (root == null && (items.length > 0 || createEmpty)) {
+                    root = new DefaultMutableTreeNode(groupName);
+                    treeRoot.add(root);
+                    groupNodes.put(groupKey, root);
+                } else if (root != null) {
+                    Enumeration<?> children = root.children();
+                    while (children.hasMoreElements()) {
+                        treeNodes.add((DefaultMutableTreeNode) children.nextElement());
+                    }
+                }
+            }
+
+            if (items.length == 0) {
+                return resultNodes;
+            }
+
+            for (XmlObject item : items) {
+                XmlObject[] selectPath = item.selectPath(nameQuery);
+                if (selectPath.length > 0) {
+                    DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(new InspectItem(item, selectPath[0],
+                            tabIndex, selector));
+                    treeNodes.add(treeNode);
+                    resultNodes.add(treeNode);
+                }
+            }
+
+            if (sort) {
+                Collections.sort(treeNodes, new Comparator<DefaultMutableTreeNode>() {
+
+                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
+                        return o1.toString().compareTo(o2.toString());
+                    }
+                });
+            }
+
+            root.removeAllChildren();
+
+            for (DefaultMutableTreeNode treeNode : treeNodes) {
+                root.add(treeNode);
+
+                String path = "/" + getTreeNodeName(treeNode);
+                TreePath treePath = new TreePath(treeNode.getPath());
+                while (treeNode.getParent() != null) {
+                    treeNode = (DefaultMutableTreeNode) treeNode.getParent();
+                    path = "/" + getTreeNodeName(treeNode) + path;
+                }
+
+                pathMap.put(path, treePath);
+            }
+        } catch (Throwable e) {
+            SoapUI.log("Failed to map items for query [" + query + "]:[" + nameQuery + "]");
+            SoapUI.logError(e);
+        }
+
+        return resultNodes;
+    }
+
+    public boolean dependsOn(ModelItem modelItem) {
+        return modelItem == getModelItem() || modelItem == getModelItem().getProject();
+    }
+
     private class Loader implements Worker {
         private static final String DEFINITION_PARTS_SECTION = "Definition Parts";
         private ProgressDialog progressDialog;
         private final WsdlInterface iface;
         private JProgressBar progressBar;
 
-        public Loader(WsdlInterface iface) {
+        Loader(WsdlInterface iface) {
             this.iface = iface;
         }
 
@@ -569,80 +643,6 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
         }
     }
 
-    public boolean dependsOn(ModelItem modelItem) {
-        return modelItem == getModelItem() || modelItem == getModelItem().getProject();
-    }
-
-    public List<DefaultMutableTreeNode> mapTreeItems(XmlObject xmlObject, DefaultMutableTreeNode treeRoot,
-                                                     boolean createEmpty, int tabIndex, String groupName, String query, String nameQuery, boolean sort,
-                                                     NodeSelector selector) {
-        List<DefaultMutableTreeNode> resultNodes = new ArrayList<DefaultMutableTreeNode>();
-
-        try {
-            XmlObject[] items = xmlObject.selectPath(query);
-            List<DefaultMutableTreeNode> treeNodes = new ArrayList<DefaultMutableTreeNode>();
-
-            DefaultMutableTreeNode root = treeRoot;
-            if (groupName != null) {
-                String groupKey = new TreePath(root.getPath()).toString() + "/" + groupName;
-                root = groupNodes.get(groupKey);
-                if (root == null && (items.length > 0 || createEmpty)) {
-                    root = new DefaultMutableTreeNode(groupName);
-                    treeRoot.add(root);
-                    groupNodes.put(groupKey, root);
-                } else if (root != null) {
-                    Enumeration<?> children = root.children();
-                    while (children.hasMoreElements()) {
-                        treeNodes.add((DefaultMutableTreeNode) children.nextElement());
-                    }
-                }
-            }
-
-            if (items.length == 0) {
-                return resultNodes;
-            }
-
-            for (XmlObject item : items) {
-                XmlObject[] selectPath = item.selectPath(nameQuery);
-                if (selectPath.length > 0) {
-                    DefaultMutableTreeNode treeNode = new DefaultMutableTreeNode(new InspectItem(item, selectPath[0],
-                            tabIndex, selector));
-                    treeNodes.add(treeNode);
-                    resultNodes.add(treeNode);
-                }
-            }
-
-            if (sort) {
-                Collections.sort(treeNodes, new Comparator<DefaultMutableTreeNode>() {
-
-                    public int compare(DefaultMutableTreeNode o1, DefaultMutableTreeNode o2) {
-                        return o1.toString().compareTo(o2.toString());
-                    }
-                });
-            }
-
-            root.removeAllChildren();
-
-            for (DefaultMutableTreeNode treeNode : treeNodes) {
-                root.add(treeNode);
-
-                String path = "/" + getTreeNodeName(treeNode);
-                TreePath treePath = new TreePath(treeNode.getPath());
-                while (treeNode.getParent() != null) {
-                    treeNode = (DefaultMutableTreeNode) treeNode.getParent();
-                    path = "/" + getTreeNodeName(treeNode) + path;
-                }
-
-                pathMap.put(path, treePath);
-            }
-        } catch (Throwable e) {
-            SoapUI.log("Failed to map items for query [" + query + "]:[" + nameQuery + "]");
-            SoapUI.logError(e);
-        }
-
-        return resultNodes;
-    }
-
     private String getTreeNodeName(DefaultMutableTreeNode treeNode) {
         Object userObject = treeNode.getUserObject();
         if (userObject instanceof InspectItem) {
@@ -659,7 +659,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
         private XmlLineNumber lineNumber;
         private final NodeSelector selector;
 
-        public InspectItem(XmlObject item, XmlObject nameObj, int tabIndex, NodeSelector selector) {
+        InspectItem(XmlObject item, XmlObject nameObj, int tabIndex, NodeSelector selector) {
             this.item = item;
             this.selector = selector;
             this.name = XmlUtils.getNodeValue(nameObj.getDomNode());
@@ -681,20 +681,20 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
             cursor.dispose();
         }
 
-        public String getDescription() {
+        String getDescription() {
             return getName() + "@" + targetNamespaces.get(tabIndex);
         }
 
-        public String getName() {
+        String getName() {
             int ix = name.indexOf(' ');
             return ix == -1 ? name : name.substring(0, ix);
         }
 
-        public int getTabIndex() {
+        int getTabIndex() {
             return tabIndex;
         }
 
-        public int getLineNumber() {
+        int getLineNumber() {
             return lineNumber == null ? -1 : lineNumber.getLine() - 1;
         }
 
@@ -707,7 +707,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
             return selector;
         }
 
-        public Element getElement() {
+        Element getElement() {
             return (Element) item.getDomNode();
         }
     }
@@ -797,7 +797,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     private class BackwardAction extends AbstractAction {
-        public BackwardAction() {
+        BackwardAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/arrow_left.png"));
             putValue(Action.SHORT_DESCRIPTION, "Navigate to previous selection");
         }
@@ -813,7 +813,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     private class ForwardAction extends AbstractAction {
-        public ForwardAction() {
+        ForwardAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/arrow_right.png"));
             putValue(Action.SHORT_DESCRIPTION, "Navigate to next selection");
         }
@@ -830,7 +830,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     private class RunWSIAction extends AbstractAction {
-        public RunWSIAction() {
+        RunWSIAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Creates a WS-I report for this interface");
         }
@@ -856,7 +856,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     private class WSIOptionsAction extends AbstractAction {
-        public WSIOptionsAction() {
+        WSIOptionsAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/preferences.png"));
             putValue(Action.SHORT_DESCRIPTION, "Sets WS-I report creation options");
         }
@@ -867,7 +867,7 @@ public class WsdlInterfaceDesktopPanel extends ModelItemDesktopPanel<WsdlInterfa
     }
 
     private class SaveWsiReportAction extends AbstractAction {
-        public SaveWsiReportAction() {
+        SaveWsiReportAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/export.png"));
             putValue(Action.SHORT_DESCRIPTION, "Saved the current WS-I report to a file");
 

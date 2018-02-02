@@ -18,11 +18,8 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.Tools;
 
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Graphics;
-import java.awt.Insets;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -54,7 +51,7 @@ public class JHyperlinkLabel extends JLabel {
                 getHeight() - 1 - insets.bottom);
     }
 
-    public class HyperlinkLabelMouseAdapter extends MouseAdapter {
+    class HyperlinkLabelMouseAdapter extends MouseAdapter {
         @Override
         public void mouseClicked(MouseEvent e) {
             Tools.openURL(getText());

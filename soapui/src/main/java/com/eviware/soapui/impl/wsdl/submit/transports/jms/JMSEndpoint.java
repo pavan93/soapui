@@ -25,18 +25,18 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import java.util.Arrays;
 
 public class JMSEndpoint {
-    public static final String JMS_OLD_ENDPOINT_SEPARATOR = "/";
+    private static final String JMS_OLD_ENDPOINT_SEPARATOR = "/";
     public static final String JMS_ENDPOINT_SEPARATOR = "::";
     public static final String QUEUE_ENDPOINT_PREFIX = "queue_";
     public static final String TOPIC_ENDPOINT_PREFIX = "topic_";
     public static final String JMS_EMPTY_DESTIONATION = "-";
     public static final String JMS_ENDPOINT_PREFIX = "jms://";
-    Request request;
-    SubmitContext submitContext;
-    String[] parameters;
-    String sessionName;
-    String send;
-    String receive;
+    private Request request;
+    private SubmitContext submitContext;
+    private String[] parameters;
+    private String sessionName;
+    private String send;
+    private String receive;
 
     public JMSEndpoint(Request request, SubmitContext submitContext) {
         this.request = request;

@@ -34,7 +34,7 @@ public abstract class AbstractRequestFilter implements RequestFilter {
         }
     }
 
-    public void filterAbstractHttpRequest(SubmitContext context, AbstractHttpRequest<?> request) {
+    void filterAbstractHttpRequest(SubmitContext context, AbstractHttpRequest<?> request) {
         if (request instanceof WsdlRequest) {
             filterWsdlRequest(context, (WsdlRequest) request);
         } else if (request instanceof RestRequestInterface) {
@@ -44,13 +44,13 @@ public abstract class AbstractRequestFilter implements RequestFilter {
         }
     }
 
-    public void filterWsdlRequest(SubmitContext context, WsdlRequest request) {
+    void filterWsdlRequest(SubmitContext context, WsdlRequest request) {
     }
 
-    public void filterRestRequest(SubmitContext context, RestRequestInterface request) {
+    void filterRestRequest(SubmitContext context, RestRequestInterface request) {
     }
 
-    public void filterHttpRequest(SubmitContext context, HttpRequestInterface<?> request) {
+    void filterHttpRequest(SubmitContext context, HttpRequestInterface<?> request) {
     }
 
     public void afterRequest(SubmitContext context, Request request) {
@@ -65,7 +65,7 @@ public abstract class AbstractRequestFilter implements RequestFilter {
         }
     }
 
-    public void afterAbstractHttpResponse(SubmitContext context, AbstractHttpRequestInterface<?> request) {
+    void afterAbstractHttpResponse(SubmitContext context, AbstractHttpRequestInterface<?> request) {
         if (request instanceof WsdlRequest) {
             afterWsdlRequest(context, (WsdlRequest) request);
         } else if (request instanceof RestRequestInterface) {
@@ -75,13 +75,13 @@ public abstract class AbstractRequestFilter implements RequestFilter {
         }
     }
 
-    public void afterWsdlRequest(SubmitContext context, WsdlRequest request) {
+    private void afterWsdlRequest(SubmitContext context, WsdlRequest request) {
     }
 
-    public void afterRestRequest(SubmitContext context, RestRequestInterface request) {
+    private void afterRestRequest(SubmitContext context, RestRequestInterface request) {
     }
 
-    public void afterHttpRequest(SubmitContext context, HttpRequestInterface<?> request) {
+    private void afterHttpRequest(SubmitContext context, HttpRequestInterface<?> request) {
     }
 
     public void afterRequest(SubmitContext context, Response response) {

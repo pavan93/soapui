@@ -49,9 +49,9 @@ public class AddWsdlAction extends AbstractSoapUIAction<WsdlProject> {
     public static final String SOAPUI_ACTION_ID = "NewWsdlProjectAction";
     private XFormDialog dialog;
 
-    public static final MessageSupport messages = MessageSupport.getMessages(AddWsdlAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(AddWsdlAction.class);
 
-    public AddWsdlAction() {
+    private AddWsdlAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 
@@ -124,7 +124,7 @@ public class AddWsdlAction extends AbstractSoapUIAction<WsdlProject> {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWPROJECT_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.InitialWsdl.Description", type = AFieldType.FILE)
         String INITIALWSDL = messages.get("Form.InitialWsdl.Label");
 

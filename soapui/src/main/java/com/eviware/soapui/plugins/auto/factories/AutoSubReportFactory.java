@@ -24,7 +24,7 @@ import com.eviware.soapui.report.SubReport;
 /**
  * Created by ole on 15/06/14.
  */
-public class AutoSubReportFactory extends AbstractSubReportFactory implements SoapUIFactory {
+class AutoSubReportFactory extends AbstractSubReportFactory implements SoapUIFactory {
     public AutoSubReportFactory(PluginSubReport annotation, Class<SubReport> subReportClass) {
         super(annotation.name(), annotation.description(), annotation.id(), ReportTypeConfig.Enum.forString(annotation.level()));
     }

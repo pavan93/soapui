@@ -48,7 +48,7 @@ public class TestStepBeanProperty extends DefaultTestStepProperty {
         private final Object target;
         private final String targetName;
 
-        public BeanPropertyHandler(Object targetObject, String targetName) {
+        BeanPropertyHandler(Object targetObject, String targetName) {
             this.target = targetObject;
             this.targetName = targetName;
         }

@@ -25,11 +25,8 @@ import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFa
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 
 /**
  * Asserts JMS connection
@@ -38,11 +35,11 @@ import com.eviware.soapui.model.testsuite.ResponseAssertion;
  */
 
 public class JMSStatusAssertion extends WsdlMessageAssertion implements ResponseAssertion, RequestAssertion {
-    public static final String ID = "JMS Status";
-    public static final String LABEL = "JMS Status";
-    public static final String DESCRIPTION = "Validates that the JMS request of the target TestStep executed successfully. Applicable to Request TestSteps with a JMS endpoint.";
+    private static final String ID = "JMS Status";
+    private static final String LABEL = "JMS Status";
+    private static final String DESCRIPTION = "Validates that the JMS request of the target TestStep executed successfully. Applicable to Request TestSteps with a JMS endpoint.";
 
-    public JMSStatusAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JMSStatusAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

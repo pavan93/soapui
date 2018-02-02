@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 public class DateBoundary extends AbstractBoundary {
 
     private static final int OFFSET = 10;
-    public static final String DATE_FORMAT = "yyyy-MM-dd'T00:00:00'";
+    private static final String DATE_FORMAT = "yyyy-MM-dd'T00:00:00'";
 
     private static final ThreadLocal<SimpleDateFormat> simpleDateFormat = new ThreadLocal<SimpleDateFormat>() {
         @Override

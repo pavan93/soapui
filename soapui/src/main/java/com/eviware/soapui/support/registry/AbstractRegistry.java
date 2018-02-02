@@ -19,16 +19,12 @@ package com.eviware.soapui.support.registry;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.support.StringUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractRegistry<T1 extends RegistryEntry<T2, T3>, T2 extends RegistryEntryConfig, T3 extends Object> {
     private Map<String, Class<? extends T1>> registry = new HashMap<String, Class<? extends T1>>();
 
-    public void mapType(String type, Class<? extends T1> clazz) {
+    protected void mapType(String type, Class<? extends T1> clazz) {
         registry.put(type, clazz);
     }
 

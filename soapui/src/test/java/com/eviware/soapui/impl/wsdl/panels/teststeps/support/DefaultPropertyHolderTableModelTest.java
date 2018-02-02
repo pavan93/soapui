@@ -27,9 +27,9 @@ import static org.junit.Assert.assertThat;
 
 public class DefaultPropertyHolderTableModelTest {
 
-    public static final String FIRST_PARAM_NAME = "Param1";
-    public static final String PARAM_VALUE = "ParamValue";
-    public static final String EMPTY_STRING = "";
+    private static final String FIRST_PARAM_NAME = "Param1";
+    private static final String PARAM_VALUE = "ParamValue";
+    private static final String EMPTY_STRING = "";
     private RestParamsPropertyHolder methodParams;
     private DirectAccessPropertyHolderTableModel tableHolderModel;
     private RestParamsPropertyHolder requestParams;

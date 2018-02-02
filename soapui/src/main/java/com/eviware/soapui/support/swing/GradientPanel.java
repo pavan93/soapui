@@ -16,14 +16,8 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.LayoutManager;
-import java.awt.Paint;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -32,10 +26,10 @@ import java.awt.Paint;
 public class GradientPanel extends JPanel {
     // ------------------------------ FIELDS ------------------------------
 
-    public final static int HORIZONTAL = 0;
+    private final static int HORIZONTAL = 0;
     public final static int VERTICAL = 1;
-    public final static int DIAGONAL_LEFT = 2;
-    public final static int DIAGONAL_RIGHT = 3;
+    private final static int DIAGONAL_LEFT = 2;
+    private final static int DIAGONAL_RIGHT = 3;
 
     private int direction = HORIZONTAL;
     private boolean cyclic;
@@ -43,11 +37,11 @@ public class GradientPanel extends JPanel {
 
     // --------------------------- CONSTRUCTORS ---------------------------
 
-    public GradientPanel() {
+    protected GradientPanel() {
         this(HORIZONTAL);
     }
 
-    public GradientPanel(int direction) {
+    private GradientPanel(int direction) {
         super(new BorderLayout());
         setOpaque(false);
         this.direction = direction;

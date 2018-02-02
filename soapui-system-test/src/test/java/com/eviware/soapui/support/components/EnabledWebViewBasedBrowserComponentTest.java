@@ -9,8 +9,8 @@ import java.net.URISyntaxException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 @Category(IntegrationTest.class)
 public class EnabledWebViewBasedBrowserComponentTest {
@@ -38,7 +38,7 @@ public class EnabledWebViewBasedBrowserComponentTest {
         assertThat(latch.await(TIMEOUT, TimeUnit.SECONDS), is(true));
     }
 
-    public class JavaScriptCallback {
+    class JavaScriptCallback {
         public void call() {
             latch.countDown();
         }

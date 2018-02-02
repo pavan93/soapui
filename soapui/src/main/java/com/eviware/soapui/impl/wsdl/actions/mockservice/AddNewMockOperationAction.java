@@ -71,14 +71,14 @@ public class AddNewMockOperationAction extends AbstractSoapUIAction<WsdlMockServ
         }
     }
 
-    public class OperationWrapper {
+    class OperationWrapper {
         private final WsdlOperation operation;
 
-        public OperationWrapper(WsdlOperation operation) {
+        OperationWrapper(WsdlOperation operation) {
             this.operation = operation;
         }
 
-        public WsdlOperation getOperation() {
+        WsdlOperation getOperation() {
             return operation;
         }
 

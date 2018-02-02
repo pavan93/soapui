@@ -32,15 +32,8 @@ import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.xml.XmlUtils;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
@@ -50,7 +43,7 @@ public class MockResponseScriptInspector extends AbstractXmlInspector {
     private RunScriptAction runScriptAction = new RunScriptAction();
     private JPanel panel;
 
-    protected MockResponseScriptInspector(MockResponse mockResponse) {
+    MockResponseScriptInspector(MockResponse mockResponse) {
         super("Script", "Script for this MockResponse", true, ScriptInspectorFactory.INSPECTOR_ID);
         this.mockResponse = mockResponse;
     }
@@ -68,7 +61,7 @@ public class MockResponseScriptInspector extends AbstractXmlInspector {
         responseScriptEditor.requestFocusInWindow();
     }
 
-    protected void buildResponseScriptEditor() {
+    private void buildResponseScriptEditor() {
         responseScriptEditor = new GroovyEditor(new MockResponseGroovyEditorModel());
 
         panel = new JPanel(new BorderLayout());
@@ -102,7 +95,7 @@ public class MockResponseScriptInspector extends AbstractXmlInspector {
     }
 
     private class RunScriptAction extends AbstractAction {
-        public RunScriptAction() {
+        RunScriptAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs this script using mock httpRequest/httpResponse objects");
         }

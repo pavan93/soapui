@@ -63,7 +63,7 @@ public class CreateTestRequestForMockResponseAction extends AbstractAddToTestCas
         }
     }
 
-    public WsdlTestRequestStep addRequest(WsdlTestCase testCase, WsdlMockResponse mockResponse, int position) {
+    private WsdlTestRequestStep addRequest(WsdlTestCase testCase, WsdlMockResponse mockResponse, int position) {
         if (dialog == null) {
             buildDialog();
         }

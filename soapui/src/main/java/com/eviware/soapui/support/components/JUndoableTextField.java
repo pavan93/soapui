@@ -19,15 +19,13 @@ package com.eviware.soapui.support.components;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.swing.JTextComponentPopupMenu;
 
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
@@ -40,7 +38,7 @@ import java.awt.event.KeyEvent;
  */
 
 public class JUndoableTextField extends JTextField implements Undoable, UndoableEditListener, FocusListener {
-    public static final int UNDO_LIMIT = 100;
+    private static final int UNDO_LIMIT = 100;
 
     private UndoManager undoManager;
     private boolean discardEditsOnSet = false;

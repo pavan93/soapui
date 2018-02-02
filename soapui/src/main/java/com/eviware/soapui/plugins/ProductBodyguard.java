@@ -32,7 +32,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-public final class ProductBodyguard extends Provider {
+final class ProductBodyguard extends Provider {
     private X509Certificate providerCert = null;
 
     public ProductBodyguard() {
@@ -72,7 +72,7 @@ public final class ProductBodyguard extends Provider {
             }
         }
 
-        public void verify(X509Certificate targetCert)
+        void verify(X509Certificate targetCert)
                 throws IOException {
             if (targetCert == null) {
                 throw new SecurityException("The certificate is not specified.");

@@ -27,10 +27,7 @@ import com.eviware.soapui.support.xml.XmlObjectConfigurationReader;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.Document;
 
 /**
@@ -44,7 +41,7 @@ public class BurstLoadStrategy extends AbstractLoadStrategy {
     private static final String BURST_DELAY_ELEMENT = "burstDelay";
     private static final int DEFAULT_BURST_DURATION = 10000;
     private static final int DEFAULT_BURST_DELAY = 60000;
-    public static final String STRATEGY_TYPE = "Burst";
+    private static final String STRATEGY_TYPE = "Burst";
     private JPanel configPanel;
 
     private int burstDelay = DEFAULT_BURST_DELAY;
@@ -62,7 +59,7 @@ public class BurstLoadStrategy extends AbstractLoadStrategy {
         burstDuration = DEFAULT_BURST_DURATION;
     }
 
-    public BurstLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
+    private BurstLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
         super(STRATEGY_TYPE, loadTest);
 
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(config);

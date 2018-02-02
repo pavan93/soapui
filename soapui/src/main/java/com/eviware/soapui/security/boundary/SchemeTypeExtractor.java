@@ -28,7 +28,7 @@ import javax.swing.tree.TreePath;
 import javax.wsdl.Definition;
 import java.util.TreeMap;
 
-public class SchemeTypeExtractor {
+class SchemeTypeExtractor {
 
     private WsdlRequest request;
     private TreeMap<String, NodeInfo> nodes;
@@ -92,7 +92,7 @@ public class SchemeTypeExtractor {
      * Recursive look for leafs which types are primitive type. Those elements
      * actualy carry values.
      */
-    TreeMap<String, NodeInfo> getElements(XmlTreeNode rootXmlTreeNode) {
+    private TreeMap<String, NodeInfo> getElements(XmlTreeNode rootXmlTreeNode) {
         TreeMap<String, NodeInfo> result = new TreeMap<String, NodeInfo>();
         for (int cnt = 0; cnt < rootXmlTreeNode.getChildCount(); cnt++) {
             XmlTreeNode xmlTreeNodeChild = rootXmlTreeNode.getChild(cnt);
@@ -117,7 +117,7 @@ public class SchemeTypeExtractor {
         return result.toString();
     }
 
-    public class NodeInfo {
+    class NodeInfo {
 
         private String name;
         private String text;
@@ -161,7 +161,7 @@ public class SchemeTypeExtractor {
 
         }
 
-        public NodeInfo(XmlTreeNode child) {
+        NodeInfo(XmlTreeNode child) {
             this.name = child.getNodeName();
             this.text = child.getNodeText();
             this.treePath = child.getTreePath();
@@ -170,7 +170,7 @@ public class SchemeTypeExtractor {
             this.xpath = XmlUtils.createXPath(child.getDomNode(), true, false, false, null);
         }
 
-        public String getType() {
+        String getType() {
             return type;
         }
 

@@ -48,7 +48,7 @@ import static org.mockito.Mockito.*;
  */
 public class WsdlRequestDesktopPanelTest {
 
-    public static final String ENDPOINT_URL = "http://google.com/webservices";
+    private static final String ENDPOINT_URL = "http://google.com/webservices";
     private WsdlRequestDesktopPanel desktopPanel;
     private WsdlRequest request;
     private ContainerWalker containerWalker;

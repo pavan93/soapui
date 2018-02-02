@@ -54,8 +54,8 @@ import java.util.List;
 
 public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion implements ResponseAssertion {
     private static final String PREFIX = "~";
-    public static final String ID = "Sensitive Information Exposure";
-    public static final String LABEL = "Sensitive Information Exposure";
+    private static final String ID = "Sensitive Information Exposure";
+    private static final String LABEL = "Sensitive Information Exposure";
 
     private List<String> assertionSpecificExposureList;
 
@@ -63,14 +63,14 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
     private static final String ASSERTION_SPECIFIC_EXPOSURE_LIST = "AssertionSpecificExposureList";
     private static final String INCLUDE_GLOBAL = "IncludeGlobal";
     private static final String INCLUDE_PROJECT_SPECIFIC = "IncludeProjectSpecific";
-    public static final String DESCRIPTION = "Checks that the last received message does not expose an sensitive information about the target system. Applicable to REST, SOAP and HTTP TestSteps.";
+    private static final String DESCRIPTION = "Checks that the last received message does not expose an sensitive information about the target system. Applicable to REST, SOAP and HTTP TestSteps.";
     private boolean includeGlobal;
     private boolean includeProjectSpecific;
     private JPanel sensitiveInfoTableForm;
     private SensitiveInformationTableModel sensitiveInformationTableModel;
     private JXTable tokenTable;
 
-    public SensitiveInfoExposureAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private SensitiveInfoExposureAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, true, false, true);
 
         init();
@@ -228,7 +228,7 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
         return null;
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add(ASSERTION_SPECIFIC_EXPOSURE_LIST,
                 assertionSpecificExposureList.toArray(new String[assertionSpecificExposureList.size()]));
@@ -272,38 +272,14 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
         return temp;
     }
 
-    protected void buildDialog() {
+    private void buildDialog() {
         dialog = ADialogBuilder.buildDialog(SensitiveInformationConfigDialog.class);
         dialog.setBooleanValue(SensitiveInformationConfigDialog.INCLUDE_GLOBAL, includeGlobal);
         dialog.setBooleanValue(SensitiveInformationConfigDialog.INCLUDE_PROJECT_SPECIFIC, includeProjectSpecific);
         dialog.getFormField(SensitiveInformationConfigDialog.TOKENS).setProperty("component", getForm());
     }
 
-    // TODO : update help URL
-    @AForm(description = "Configure Sensitive Information Exposure Assertion", name = "Sensitive Information Exposure Assertion", helpUrl = HelpUrls.SECURITY_SENSITIVE_INFORMATION_EXPOSURE_ASSERTION_HELP)
-    protected interface SensitiveInformationConfigDialog {
-
-        @AField(description = "Sensitive informations to check. Use ~ as prefix for values that are regular expressions.", name = "Sensitive Information Tokens", type = AFieldType.COMPONENT)
-        String TOKENS = "Sensitive Information Tokens";
-
-        @AField(description = "Include project specific sensitive information configuration", name = "Project Specific", type = AFieldType.BOOLEAN)
-        String INCLUDE_PROJECT_SPECIFIC = "Project Specific";
-
-        @AField(description = "Include global sensitive information configuration", name = "Global Configuration", type = AFieldType.BOOLEAN)
-        String INCLUDE_GLOBAL = "Global Configuration";
-
-    }
-
-    @Override
-    public void release() {
-        if (dialog != null) {
-            dialog.release();
-        }
-
-        super.release();
-    }
-
-    public JPanel getForm() {
+    private JPanel getForm() {
         if (sensitiveInfoTableForm == null) {
             sensitiveInfoTableForm = new JPanel(new BorderLayout());
 
@@ -321,9 +297,33 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
         return sensitiveInfoTableForm;
     }
 
+    @Override
+    public void release() {
+        if (dialog != null) {
+            dialog.release();
+        }
+
+        super.release();
+    }
+
+    // TODO : update help URL
+    @AForm(description = "Configure Sensitive Information Exposure Assertion", name = "Sensitive Information Exposure Assertion", helpUrl = HelpUrls.SECURITY_SENSITIVE_INFORMATION_EXPOSURE_ASSERTION_HELP)
+    interface SensitiveInformationConfigDialog {
+
+        @AField(description = "Sensitive informations to check. Use ~ as prefix for values that are regular expressions.", name = "Sensitive Information Tokens", type = AFieldType.COMPONENT)
+        String TOKENS = "Sensitive Information Tokens";
+
+        @AField(description = "Include project specific sensitive information configuration", name = "Project Specific", type = AFieldType.BOOLEAN)
+        String INCLUDE_PROJECT_SPECIFIC = "Project Specific";
+
+        @AField(description = "Include global sensitive information configuration", name = "Global Configuration", type = AFieldType.BOOLEAN)
+        String INCLUDE_GLOBAL = "Global Configuration";
+
+    }
+
     class AddTokenAction extends AbstractAction {
 
-        public AddTokenAction() {
+        AddTokenAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Adds a token to assertion");
         }
@@ -357,7 +357,7 @@ public class SensitiveInfoExposureAssertion extends WsdlMessageAssertion impleme
 
     class RemoveTokenAction extends AbstractAction {
 
-        public RemoveTokenAction() {
+        RemoveTokenAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Removes token from assertion");
         }

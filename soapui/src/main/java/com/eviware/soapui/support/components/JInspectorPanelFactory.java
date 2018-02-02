@@ -18,10 +18,10 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.SoapUI;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class JInspectorPanelFactory {
-    public static Class<? extends JInspectorPanel> inspectorPanelClass = JInspectorPanelImpl.class;
+    private static Class<? extends JInspectorPanel> inspectorPanelClass = JInspectorPanelImpl.class;
 
     public static JInspectorPanel build(JComponent contentComponent) {
         try {

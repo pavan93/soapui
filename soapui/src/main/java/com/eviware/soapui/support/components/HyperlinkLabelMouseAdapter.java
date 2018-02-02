@@ -18,13 +18,12 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.Tools;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public final class HyperlinkLabelMouseAdapter extends MouseAdapter {
+final class HyperlinkLabelMouseAdapter extends MouseAdapter {
     private final JComponent label;
 
     public HyperlinkLabelMouseAdapter(JTextComponent label) {

@@ -19,11 +19,7 @@ package com.eviware.soapui.actions;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.settings.Setting;
-import com.eviware.soapui.support.components.DirectoryFormComponent;
-import com.eviware.soapui.support.components.FileFormComponent;
-import com.eviware.soapui.support.components.FileListFormComponent;
-import com.eviware.soapui.support.components.SimpleForm;
-import com.eviware.soapui.support.components.StringListFormComponent;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.types.StringToStringMap;
 
 import java.lang.reflect.Field;
@@ -59,7 +55,7 @@ public class AnnotatedSettingsPrefs implements Prefs {
         return simpleForm;
     }
 
-    public List<Setting> getSettings() {
+    private List<Setting> getSettings() {
         ArrayList<Setting> settings = new ArrayList<Setting>();
         for (Field field : settingsClass.getFields()) {
             Setting annotation = field.getAnnotation(Setting.class);

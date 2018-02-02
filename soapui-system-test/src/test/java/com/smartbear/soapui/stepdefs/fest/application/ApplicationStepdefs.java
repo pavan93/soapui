@@ -27,7 +27,7 @@ import org.fest.swing.fixture.FrameFixture;
 import static com.smartbear.soapui.utils.fest.ApplicationUtils.closeApplicationWithoutSaving;
 import static com.smartbear.soapui.utils.fest.ApplicationUtils.getMainWindow;
 
-public class ApplicationStepdefs {
+class ApplicationStepdefs {
     private Robot robot;
 
     public ApplicationStepdefs(ScenarioRobot runner) {

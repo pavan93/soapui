@@ -26,7 +26,7 @@ import java.util.Map;
  * @author Ole.Matzura
  */
 
-public class PropertiesMap extends StringToObjectMap {
+class PropertiesMap extends StringToObjectMap {
     public PropertiesMap() {
         super();
     }

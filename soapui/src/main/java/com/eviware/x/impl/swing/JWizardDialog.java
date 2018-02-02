@@ -29,18 +29,8 @@ import com.eviware.x.form.XForm;
 import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormField;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Frame;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -134,7 +124,7 @@ public class JWizardDialog extends SwingXFormDialog {
         actions.update();
     }
 
-    public void addPageController(WizardPage controller) {
+    private void addPageController(WizardPage controller) {
         controllers.put(controller.getName(), controller);
     }
 
@@ -295,7 +285,7 @@ public class JWizardDialog extends SwingXFormDialog {
     }
 
     private class BackAction extends AbstractAction implements UpdateableAction {
-        public BackAction() {
+        BackAction() {
             super("< Back");
         }
 
@@ -315,7 +305,7 @@ public class JWizardDialog extends SwingXFormDialog {
     }
 
     private class NextAction extends AbstractAction implements UpdateableAction {
-        public NextAction() {
+        NextAction() {
             super("Next >");
         }
 
@@ -333,7 +323,7 @@ public class JWizardDialog extends SwingXFormDialog {
     }
 
     private final class CancelAction extends AbstractAction implements UpdateableAction {
-        public CancelAction() {
+        CancelAction() {
             super("Cancel");
         }
 
@@ -347,7 +337,7 @@ public class JWizardDialog extends SwingXFormDialog {
     }
 
     private final class FinishAction extends AbstractAction implements UpdateableAction {
-        public FinishAction() {
+        FinishAction() {
             super("Finish");
         }
 

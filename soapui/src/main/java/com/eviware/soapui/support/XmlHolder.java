@@ -34,7 +34,7 @@ public class XmlHolder implements Map<String, Object> {
     private PropertyExpansionContext context;
     private String propertyRef;
 
-    public XmlHolder(String xml) throws XmlException {
+    private XmlHolder(String xml) throws XmlException {
         // xmlObject = XmlObject.Factory.parse( xml );
         xmlObject = XmlUtils.createXmlObject(xml);
     }
@@ -59,19 +59,19 @@ public class XmlHolder implements Map<String, Object> {
         updateProperty(false);
     }
 
-    public void updateProperty(boolean prettyPrint) {
+    private void updateProperty(boolean prettyPrint) {
         if (context != null && propertyRef != null) {
             context.setProperty(propertyRef, prettyPrint ? getPrettyXml() : getXml());
         }
     }
 
-    public String getNodeValue(String xpath) {
+    private String getNodeValue(String xpath) {
         xpath = initXPathNamespaces(xpath);
 
         return XmlUtils.selectFirstNodeValue(xmlObject, xpath);
     }
 
-    public StringToStringMap getNamespaces() {
+    private StringToStringMap getNamespaces() {
         if (declaredNamespaces == null) {
             declaredNamespaces = new StringToStringMap();
         }
@@ -87,7 +87,7 @@ public class XmlHolder implements Map<String, Object> {
         declaredNamespaces.put(prefix, uri);
     }
 
-    public String[] getNodeValues(String xpath) {
+    private String[] getNodeValues(String xpath) {
         xpath = initXPathNamespaces(xpath);
 
         return XmlUtils.selectNodeValues(xmlObject, xpath);
@@ -104,7 +104,7 @@ public class XmlHolder implements Map<String, Object> {
         return xpath;
     }
 
-    public void setNodeValue(String xpath, Object value) {
+    private void setNodeValue(String xpath, Object value) {
         xpath = initXPathNamespaces(xpath);
 
         XmlCursor cursor = xmlObject.newCursor();
@@ -119,16 +119,16 @@ public class XmlHolder implements Map<String, Object> {
         }
     }
 
-    public XmlObject getXmlObject() {
+    private XmlObject getXmlObject() {
         return xmlObject;
     }
 
-    public Node getDomNode(String xpath) {
+    private Node getDomNode(String xpath) {
         xpath = initXPathNamespaces(xpath);
         return XmlUtils.selectFirstDomNode(xmlObject, xpath);
     }
 
-    public Node[] getDomNodes(String xpath) {
+    private Node[] getDomNodes(String xpath) {
         xpath = initXPathNamespaces(xpath);
         return XmlUtils.selectDomNodes(xmlObject, xpath);
     }
@@ -141,11 +141,11 @@ public class XmlHolder implements Map<String, Object> {
         }
     }
 
-    public String getXml() {
+    private String getXml() {
         return xmlObject.xmlText();
     }
 
-    public String getPrettyXml() {
+    private String getPrettyXml() {
         return XmlUtils.prettyPrintXml(xmlObject);
     }
 

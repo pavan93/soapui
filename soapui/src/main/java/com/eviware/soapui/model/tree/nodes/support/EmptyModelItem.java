@@ -21,7 +21,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.support.AbstractModelItem;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.Collections;
 import java.util.List;
 
@@ -35,7 +35,7 @@ public class EmptyModelItem extends AbstractModelItem {
     private String name;
     private ImageIcon icon;
 
-    public EmptyModelItem(String name, ImageIcon icon) {
+    protected EmptyModelItem(String name, ImageIcon icon) {
         this.name = name;
         this.icon = icon;
     }
@@ -63,7 +63,7 @@ public class EmptyModelItem extends AbstractModelItem {
         return SoapUI.getSettings();
     }
 
-    public void release() {
+    void release() {
     }
 
     public String getId() {

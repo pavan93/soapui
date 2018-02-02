@@ -48,7 +48,7 @@ import java.util.Map;
  */
 
 public class WSIValidateResponseAction extends AbstractToolsAction<MockResponse> {
-    public final static Logger log = Logger.getLogger(WSIValidateResponseAction.class);
+    private final static Logger log = Logger.getLogger(WSIValidateResponseAction.class);
     private String configFile;
     private File logFile;
     private String wsiDir;
@@ -249,7 +249,7 @@ public class WSIValidateResponseAction extends AbstractToolsAction<MockResponse>
         private final File reportFile;
         private final MockResponse modelItem;
 
-        public WSIProcessToolRunner(ProcessBuilder builder, File reportFile, MockResponse modelItem) {
+        WSIProcessToolRunner(ProcessBuilder builder, File reportFile, MockResponse modelItem) {
             super(builder, "WSI Message Validation", modelItem);
             this.reportFile = reportFile;
             this.modelItem = modelItem;

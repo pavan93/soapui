@@ -218,7 +218,7 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         }
     }
 
-    public void initIcons() {
+    private void initIcons() {
         if (validRequestIcon == null) {
             validRequestIcon = UISupport.createImageIcon("/valid_amf_request_step.png");
         }
@@ -242,37 +242,21 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         return new RequestIconAnimator<AMFRequest>(this, "/amf_request.gif", "/exec_amf_request.png", 3);
     }
 
-    public static class RequestIconAnimator<T extends AMFRequest> extends IconAnimator<T> implements
-            SubmitListener {
-        public RequestIconAnimator(T modelItem, String baseIcon, String baseAnimateIcon, int iconCount) {
-            super(modelItem, baseIcon, baseAnimateIcon, iconCount);
-        }
-
-        public boolean beforeSubmit(Submit submit, SubmitContext context) {
-            if (isEnabled() && submit.getRequest() == getTarget()) {
-                start();
-            }
-            return true;
-        }
-
-        public void afterSubmit(Submit submit, SubmitContext context) {
-            if (submit.getRequest() == getTarget()) {
-                stop();
-            }
-        }
-    }
-
-    public RequestIconAnimator<?> getIconAnimator() {
+    private RequestIconAnimator<?> getIconAnimator() {
         return iconAnimator;
     }
 
-    public void setIconAnimator(RequestIconAnimator<?> iconAnimator) {
+    private void setIconAnimator(RequestIconAnimator<?> iconAnimator) {
         if (this.iconAnimator != null) {
             removeSubmitListener(this.iconAnimator);
         }
 
         this.iconAnimator = iconAnimator;
         addSubmitListener(this.iconAnimator);
+    }
+
+    private String[] getPropertyNames() {
+        return propertyNames;
     }
 
     public ImageIcon getIcon() {
@@ -311,8 +295,8 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         this.propertyNames = propertyNames;
     }
 
-    public String[] getPropertyNames() {
-        return propertyNames;
+    private String getScript() {
+        return script;
     }
 
     public void setScriptEngine(SoapUIScriptEngine scriptEngine) {
@@ -339,16 +323,17 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         this.script = script;
     }
 
-    public String getScript() {
-        return script;
+    private HashMap<String, TestProperty> getPropertyMap() {
+        return propertyMap;
     }
 
     public void setAmfCall(String amfCall) {
         this.amfCall = amfCall;
     }
 
-    public HashMap<String, TestProperty> getPropertyMap() {
-        return propertyMap;
+    private List<Object> addArgument(Object obj) {
+        arguments.add(obj);
+        return arguments;
     }
 
     public void setPropertyMap(HashMap<String, TestProperty> map) {
@@ -367,9 +352,8 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         return arguments;
     }
 
-    public List<Object> addArgument(Object obj) {
-        arguments.add(obj);
-        return arguments;
+    private void setAmfHeaders(StringToObjectMap amfHeaders) {
+        this.amfHeaders = amfHeaders;
     }
 
     public Object[] argumentsToArray() {
@@ -529,8 +513,8 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         return httpHeaders;
     }
 
-    public void setAmfHeaders(StringToObjectMap amfHeaders) {
-        this.amfHeaders = amfHeaders;
+    private StringToStringMap getAmfHeadersString() {
+        return amfHeadersString;
     }
 
     public StringToObjectMap getAmfHeaders() {
@@ -541,8 +525,24 @@ public class AMFRequest extends AbstractModelItem implements Assertable, TestReq
         this.amfHeadersString = amfHeadersString;
     }
 
-    public StringToStringMap getAmfHeadersString() {
-        return amfHeadersString;
+    public static class RequestIconAnimator<T extends AMFRequest> extends IconAnimator<T> implements
+            SubmitListener {
+        RequestIconAnimator(T modelItem, String baseIcon, String baseAnimateIcon, int iconCount) {
+            super(modelItem, baseIcon, baseAnimateIcon, iconCount);
+        }
+
+        public boolean beforeSubmit(Submit submit, SubmitContext context) {
+            if (isEnabled() && submit.getRequest() == getTarget()) {
+                start();
+            }
+            return true;
+        }
+
+        public void afterSubmit(Submit submit, SubmitContext context) {
+            if (submit.getRequest() == getTarget()) {
+                stop();
+            }
+        }
     }
 
     public String getPassword() {

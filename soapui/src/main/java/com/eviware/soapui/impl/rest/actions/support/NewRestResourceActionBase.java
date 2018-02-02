@@ -46,9 +46,9 @@ import java.util.List;
 public abstract class NewRestResourceActionBase<T extends ModelItem> extends AbstractSoapUIAction<T> {
     public static final String CONFIRM_DIALOG_TITLE = "New REST Resource";
 
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestResourceActionBase.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestResourceActionBase.class);
 
-    public NewRestResourceActionBase(String title, String description) {
+    protected NewRestResourceActionBase(String title, String description) {
         super(title, description);
     }
 
@@ -73,7 +73,7 @@ public abstract class NewRestResourceActionBase<T extends ModelItem> extends Abs
 
     }
 
-    protected RestResource createRestResource(T item, String path) {
+    RestResource createRestResource(T item, String path) {
         RestResource possibleParent = null;
         String pathWithoutEndpoint = removeEndpointFrom(path);
 
@@ -165,7 +165,7 @@ public abstract class NewRestResourceActionBase<T extends ModelItem> extends Abs
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWRESTSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
 
         @AField(description = "Form.ServiceUrl.Description", type = AFieldType.STRING)
         String RESOURCEPATH = messages.get("Form.ResourcePath.Label");

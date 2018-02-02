@@ -33,13 +33,8 @@ import org.apache.log4j.Logger;
 import org.apache.xmlbeans.SchemaGlobalElement;
 import org.apache.xmlbeans.SchemaType;
 
-import javax.swing.ImageIcon;
-import javax.wsdl.BindingInput;
-import javax.wsdl.BindingOperation;
-import javax.wsdl.BindingOutput;
-import javax.wsdl.Definition;
-import javax.wsdl.Message;
-import javax.wsdl.OperationType;
+import javax.swing.*;
+import javax.wsdl.*;
 import javax.wsdl.extensions.mime.MIMEContent;
 import javax.wsdl.extensions.mime.MIMEMultipartRelated;
 import javax.wsdl.extensions.mime.MIMEPart;
@@ -59,12 +54,12 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
     public static final String STYLE_DOCUMENT = "Document";
     public static final String STYLE_RPC = "RPC";
 
-    public static final String ONE_WAY = "One-Way";
-    public static final String NOTIFICATION = "Notification";
-    public static final String REQUEST_RESPONSE = "Request-Response";
-    public static final String SOLICIT_RESPONSE = "Solicit-Response";
+    private static final String ONE_WAY = "One-Way";
+    private static final String NOTIFICATION = "Notification";
+    private static final String REQUEST_RESPONSE = "Request-Response";
+    private static final String SOLICIT_RESPONSE = "Solicit-Response";
 
-    public final static Logger log = Logger.getLogger(WsdlOperation.class);
+    private final static Logger log = Logger.getLogger(WsdlOperation.class);
     public static final String ICON_NAME = "/operation.png";
     private List<WsdlRequest> requests = new ArrayList<WsdlRequest>();
     private WsdlInterface iface;
@@ -141,7 +136,7 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
         return iface;
     }
 
-    public void setAction(String soapAction) {
+    private void setAction(String soapAction) {
         String old = getAction();
         getConfig().setAction(soapAction);
         notifyPropertyChanged(ACTION_PROPERTY, old, soapAction);
@@ -237,7 +232,7 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
         }
     }
 
-    public OperationType getOperationType() {
+    private OperationType getOperationType() {
         OperationConfig config = getConfig();
 
         // Backwards compatibility:
@@ -263,7 +258,7 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
         }
     }
 
-    public void setOperationType(OperationType type) {
+    private void setOperationType(OperationType type) {
         OperationConfig config = getConfig();
         if (type == null) {
             if (config.isSetType()) {
@@ -286,11 +281,11 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
         return getConfig().getBindingOperationName();
     }
 
-    public void setBindingOperationName(String name) {
+    private void setBindingOperationName(String name) {
         getConfig().setBindingOperationName(name);
     }
 
-    public void setInputName(String name) {
+    private void setInputName(String name) {
         getConfig().setInputName(name);
     }
 
@@ -299,7 +294,7 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
         return inputName == null || inputName.trim().length() == 0 ? null : inputName;
     }
 
-    public void setOutputName(String name) {
+    private void setOutputName(String name) {
         if (name == null) {
             if (getConfig().isSetOutputName()) {
                 getConfig().unsetOutputName();
@@ -778,7 +773,7 @@ public class WsdlOperation extends AbstractWsdlModelItem<OperationConfig> implem
     private class WsdlFaultPart extends FaultPart {
         private final String name;
 
-        public WsdlFaultPart(String name) {
+        WsdlFaultPart(String name) {
             this.name = name;
         }
 

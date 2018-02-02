@@ -34,7 +34,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 public class EndpointRequestFilterTest {
-    EndpointRequestFilter endpointRequestFilter;
+    private EndpointRequestFilter endpointRequestFilter;
 
     @Before
     public void setUp() {

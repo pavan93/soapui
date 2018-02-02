@@ -25,7 +25,7 @@ public class SettingPathPropertySupport extends AbstractPathPropertySupport {
         this(modelItem, settingName, null);
     }
 
-    public SettingPathPropertySupport(AbstractWsdlModelItem<?> modelItem, String settingName, String defaultValue) {
+    private SettingPathPropertySupport(AbstractWsdlModelItem<?> modelItem, String settingName, String defaultValue) {
         super(modelItem, settingName);
         this.defaultValue = defaultValue;
     }

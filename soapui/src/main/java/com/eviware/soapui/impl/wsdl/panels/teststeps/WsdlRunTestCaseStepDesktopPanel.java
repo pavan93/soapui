@@ -125,7 +125,7 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
         return testRunLog;
     }
 
-    protected PropertyHolderTable createPropertiesTable() {
+    private PropertyHolderTable createPropertiesTable() {
         propertiesTable = new PropertyHolderTable(getModelItem());
 
         titledBorder = BorderFactory.createTitledBorder(createTitleForBorder());
@@ -186,7 +186,7 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
     }
 
     private class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs the selected TestCases");
         }
@@ -227,7 +227,7 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
     }
 
     private class OpenTestCaseAction extends AbstractAction {
-        public OpenTestCaseAction() {
+        OpenTestCaseAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/testcase.png"));
             putValue(Action.SHORT_DESCRIPTION, "Opens the target TestCases editor");
         }
@@ -243,7 +243,7 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
     }
 
     private class OptionsAction extends AbstractAction {
-        public OptionsAction() {
+        OptionsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/preferences.png"));
             putValue(Action.SHORT_DESCRIPTION, "Sets Options");
         }
@@ -412,7 +412,7 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
     }
 
     public class InternalTestRunListener extends TestRunLogTestRunListener {
-        public InternalTestRunListener() {
+        InternalTestRunListener() {
             super(testRunLog, true);
         }
 
@@ -427,8 +427,8 @@ public class WsdlRunTestCaseStepDesktopPanel extends ModelItemDesktopPanel<WsdlR
         }
     }
 
-    public class CancelRunTestCaseAction extends AbstractAction {
-        public CancelRunTestCaseAction() {
+    class CancelRunTestCaseAction extends AbstractAction {
+        CancelRunTestCaseAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/stop.png"));
             putValue(Action.SHORT_DESCRIPTION, "Stops running this testcase");
         }

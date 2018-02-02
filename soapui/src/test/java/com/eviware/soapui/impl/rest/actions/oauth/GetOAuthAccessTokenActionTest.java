@@ -42,7 +42,7 @@ import static org.mockito.Mockito.mock;
  */
 public class GetOAuthAccessTokenActionTest {
 
-    public static final ActionEvent DUMMY_ACTION_EVENT = new ActionEvent(new Object(), 0, "click");
+    private static final ActionEvent DUMMY_ACTION_EVENT = new ActionEvent(new Object(), 0, "click");
     private XDialogs originalDialogs;
     private StubbedDialogs stubbedDialogs;
     private OAuth2Profile profile;

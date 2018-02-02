@@ -16,10 +16,10 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
 import org.syntax.jedit.SyntaxUtilities;
+
+import javax.swing.text.Segment;
 
 /**
  * HTML token marker.
@@ -28,13 +28,13 @@ import org.syntax.jedit.SyntaxUtilities;
  * @version $Id: HTMLTokenMarker.java,v 1.34 1999/12/13 03:40:29 sp Exp $
  */
 public class HTMLTokenMarker extends TokenMarker {
-    public static final byte JAVASCRIPT = Token.INTERNAL_FIRST;
+    private static final byte JAVASCRIPT = Token.INTERNAL_FIRST;
 
     public HTMLTokenMarker() {
         this(true);
     }
 
-    public HTMLTokenMarker(boolean js) {
+    private HTMLTokenMarker(boolean js) {
         this.js = js;
         keywords = JavaScriptTokenMarker.getKeywords();
     }

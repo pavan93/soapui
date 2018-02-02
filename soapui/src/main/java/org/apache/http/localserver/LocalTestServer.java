@@ -76,7 +76,7 @@ public class LocalTestServer {
      * "localhost" to avoid surprises on hosts that map "localhost" to an IPv6
      * address or something else. The port is 0 to let the system pick one.
      */
-    public final static InetSocketAddress TEST_SERVER_ADDR = new InetSocketAddress("127.0.0.1", 0);
+    private final static InetSocketAddress TEST_SERVER_ADDR = new InetSocketAddress("127.0.0.1", 0);
 
     /**
      * The request handler registry.
@@ -124,9 +124,9 @@ public class LocalTestServer {
      * @param sslcontext optional SSL context if the server is to leverage SSL/TLS
      *                   transport security
      */
-    public LocalTestServer(final BasicHttpProcessor proc, final ConnectionReuseStrategy reuseStrat,
-                           final HttpResponseFactory responseFactory, final HttpExpectationVerifier expectationVerifier,
-                           final HttpParams params, final SSLContext sslcontext) {
+    private LocalTestServer(final BasicHttpProcessor proc, final ConnectionReuseStrategy reuseStrat,
+                            final HttpResponseFactory responseFactory, final HttpExpectationVerifier expectationVerifier,
+                            final HttpParams params, final SSLContext sslcontext) {
         super();
         this.handlerRegistry = new HttpRequestHandlerRegistry();
         this.workers = Collections.synchronizedSet(new HashSet<Worker>());
@@ -163,7 +163,7 @@ public class LocalTestServer {
      *
      * @return a protocol processor for server-side use
      */
-    protected HttpProcessor newProcessor() {
+    private HttpProcessor newProcessor() {
         return new ImmutableHttpProcessor(new HttpResponseInterceptor[]{new ResponseDate(), new ResponseServer(),
                 new ResponseContent(), new ResponseConnControl()});
     }
@@ -173,7 +173,7 @@ public class LocalTestServer {
      *
      * @return default parameters
      */
-    protected HttpParams newDefaultParams() {
+    private HttpParams newDefaultParams() {
         HttpParams params = new SyncBasicHttpParams();
         params.setIntParameter(CoreConnectionPNames.SO_TIMEOUT, 60000)
                 .setIntParameter(CoreConnectionPNames.SOCKET_BUFFER_SIZE, 8 * 1024)
@@ -183,11 +183,11 @@ public class LocalTestServer {
         return params;
     }
 
-    protected ConnectionReuseStrategy newConnectionReuseStrategy() {
+    private ConnectionReuseStrategy newConnectionReuseStrategy() {
         return new DefaultConnectionReuseStrategy();
     }
 
-    protected HttpResponseFactory newHttpResponseFactory() {
+    private HttpResponseFactory newHttpResponseFactory() {
         return new DefaultHttpResponseFactory();
     }
 
@@ -343,7 +343,7 @@ public class LocalTestServer {
             }
         }
 
-        public void shutdown() {
+        void shutdown() {
             interrupt();
             try {
                 servicedSocket.close();
@@ -363,7 +363,7 @@ public class LocalTestServer {
 
         private volatile Exception exception;
 
-        public Worker(final HttpServerConnection conn) {
+        Worker(final HttpServerConnection conn) {
             this.conn = conn;
         }
 
@@ -385,7 +385,7 @@ public class LocalTestServer {
             }
         }
 
-        public void shutdown() {
+        void shutdown() {
             interrupt();
             try {
                 this.conn.shutdown();

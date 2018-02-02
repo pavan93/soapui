@@ -40,12 +40,12 @@ public abstract class AbstractSoapUIAction<T extends ModelItem> implements SoapU
         propertySupport = new PropertyChangeSupport(this);
     }
 
-    public AbstractSoapUIAction(String name, String description) {
+    protected AbstractSoapUIAction(String name, String description) {
         this(null, name, description);
         id = getClass().getSimpleName();
     }
 
-    public AbstractSoapUIAction(String id, String name, String description) {
+    protected AbstractSoapUIAction(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -61,7 +61,7 @@ public abstract class AbstractSoapUIAction<T extends ModelItem> implements SoapU
         return description;
     }
 
-    public void setEnabled(boolean enabled) {
+    protected void setEnabled(boolean enabled) {
         if (enabled == this.enabled) {
             return;
         }

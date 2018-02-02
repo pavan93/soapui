@@ -54,21 +54,20 @@ import java.util.List;
 public class HermesJmsRequestTransport implements RequestTransport {
 
     public static final String IS_JMS_MESSAGE_RECEIVED = "JMS_MESSAGE_RECEIVE";
-    public static final String JMS_MESSAGE_SEND = "JMS_MESSAGE_SEND";
+    private static final String JMS_MESSAGE_SEND = "JMS_MESSAGE_SEND";
     public static final String JMS_RESPONSE = "JMS_RESPONSE";
     public static final String JMS_ERROR = "JMS_ERROR";
-    public static final String JMS_RECEIVE_TIMEOUT = "JMS_RECEIVE_TIMEOUT";
-
-    protected String username;
-    protected String password;
-    protected JMSEndpoint jmsEndpoint;
-    protected String durableSubscriptionName;
-    protected String clientID;
-    protected String messageSelector;
-    protected boolean sendAsBytesMessage;
-    protected boolean addSoapAction;
-    protected Hermes hermes;
-    protected static List<RequestFilter> filters = new ArrayList<RequestFilter>();
+    private static final String JMS_RECEIVE_TIMEOUT = "JMS_RECEIVE_TIMEOUT";
+    private static List<RequestFilter> filters = new ArrayList<RequestFilter>();
+    String username;
+    String password;
+    JMSEndpoint jmsEndpoint;
+    String clientID;
+    String messageSelector;
+    Hermes hermes;
+    private String durableSubscriptionName;
+    private boolean sendAsBytesMessage;
+    private boolean addSoapAction;
 
     public Response sendRequest(SubmitContext submitContext, Request request) throws Exception {
         long timeStarted = Calendar.getInstance().getTimeInMillis();
@@ -77,7 +76,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return resolveType(submitContext, request).execute(submitContext, request, timeStarted);
     }
 
-    protected void init(SubmitContext submitContext, Request request) throws NamingException {
+    void init(SubmitContext submitContext, Request request) throws NamingException {
         this.jmsEndpoint = new JMSEndpoint(request, submitContext);
         this.hermes = getHermes(jmsEndpoint.getSessionName(), request);
         this.username = submitContext.expand(request.getUsername());
@@ -92,7 +91,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
         submitContext.setProperty(HermesJmsRequestTransport.IS_JMS_MESSAGE_RECEIVED, false);
     }
 
-    protected Response execute(SubmitContext submitContext, Request request, long timeStarted) throws Exception {
+    Response execute(SubmitContext submitContext, Request request, long timeStarted) throws Exception {
         throw new NotImplementedException();
     }
 
@@ -159,12 +158,12 @@ public class HermesJmsRequestTransport implements RequestTransport {
                 "\nBad jms alias! \nFor JMS please use this endpont pattern:\nfor sending 'jms://sessionName::queue_myqueuename' \nfor receive  'jms://sessionName::-::queue_myqueuename'\nfor send-receive 'jms://sessionName::queue_myqueuename1::queue_myqueuename2'");
     }
 
-    protected Hermes getHermes(String sessionName, Request request) throws NamingException {
+    private Hermes getHermes(String sessionName, Request request) throws NamingException {
         WsdlProject project = (WsdlProject) ModelSupport.getModelItemProject(request);
         return HermesUtils.getHermes(project, sessionName);
     }
 
-    protected long getTimeout(SubmitContext submitContext, Request request) {
+    private long getTimeout(SubmitContext submitContext, Request request) {
         String timeout = PropertyExpander.expandProperties(submitContext, request.getTimeout());
         long to = 0;
         try {
@@ -175,8 +174,8 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return to;
     }
 
-    protected JMSHeader createJMSHeader(SubmitContext submitContext, Request request, Hermes hermes, Message message,
-                                        Destination replyToDestination) {
+    private JMSHeader createJMSHeader(SubmitContext submitContext, Request request, Hermes hermes, Message message,
+                                      Destination replyToDestination) {
         JMSHeader jmsHeader = new JMSHeader();
         jmsHeader.setMessageHeaders(message, request, hermes, submitContext);
         JMSHeader.setMessageProperties(message, request, hermes, submitContext);
@@ -201,7 +200,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return jmsHeader;
     }
 
-    protected void closeSessionAndConnection(Connection connection, Session session) throws JMSException {
+    void closeSessionAndConnection(Connection connection, Session session) throws JMSException {
         if (session != null) {
             session.close();
         }
@@ -210,7 +209,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
         }
     }
 
-    protected Response errorResponse(SubmitContext submitContext, Request request, long timeStarted, JMSException jmse) {
+    Response errorResponse(SubmitContext submitContext, Request request, long timeStarted, JMSException jmse) {
         JMSResponse response;
         SoapUI.logError(jmse);
         submitContext.setProperty(JMS_ERROR, jmse);
@@ -219,15 +218,15 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return response;
     }
 
-    protected Message messageSend(SubmitContext submitContext, Request request, Session session, Hermes hermes,
-                                  Queue queueSend, Destination replyToDestination) throws JMSException {
+    Message messageSend(SubmitContext submitContext, Request request, Session session, Hermes hermes,
+                        Queue queueSend, Destination replyToDestination) throws JMSException {
         MessageProducer messageProducer = session.createProducer(queueSend);
         Message messageSend = createMessage(submitContext, request, session);
         return send(submitContext, request, hermes, messageProducer, messageSend, replyToDestination);
     }
 
-    protected Message messagePublish(SubmitContext submitContext, Request request, Session topicSession, Hermes hermes,
-                                     Topic topicPublish, Destination replyToDestination) throws JMSException {
+    Message messagePublish(SubmitContext submitContext, Request request, Session topicSession, Hermes hermes,
+                           Topic topicPublish, Destination replyToDestination) throws JMSException {
         MessageProducer topicPublisher = topicSession.createProducer(topicPublish);
         Message messagePublish = createMessage(submitContext, request, topicSession);
         return send(submitContext, request, hermes, topicPublisher, messagePublish, replyToDestination);
@@ -241,8 +240,8 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return message;
     }
 
-    protected Response makeResponse(SubmitContext submitContext, Request request, long timeStarted,
-                                    Message messageSend, MessageConsumer messageConsumer) throws JMSException {
+    Response makeResponse(SubmitContext submitContext, Request request, long timeStarted,
+                          Message messageSend, MessageConsumer messageConsumer) throws JMSException {
         long timeout = getTimeout(submitContext, request);
         Message messageReceive = messageConsumer.receive(timeout);
         if (messageReceive != null) {
@@ -281,8 +280,8 @@ public class HermesJmsRequestTransport implements RequestTransport {
         return null;
     }
 
-    protected Response makeEmptyResponse(SubmitContext submitContext, Request request, long timeStarted,
-                                         Message messageSend) {
+    Response makeEmptyResponse(SubmitContext submitContext, Request request, long timeStarted,
+                               Message messageSend) {
         JMSResponse response = new JMSResponse("", messageSend, null, request, timeStarted);
         submitContext.setProperty(JMS_RESPONSE, response);
         return response;
@@ -416,8 +415,8 @@ public class HermesJmsRequestTransport implements RequestTransport {
         }
     }
 
-    protected TopicSubscriber createDurableSubscription(SubmitContext submitContext, Session topicSession,
-                                                        JMSConnectionHolder jmsConnectionHolder) throws JMSException, NamingException {
+    TopicSubscriber createDurableSubscription(SubmitContext submitContext, Session topicSession,
+                                              JMSConnectionHolder jmsConnectionHolder) throws JMSException, NamingException {
 
         Topic topicSubscribe = jmsConnectionHolder.getTopic(jmsConnectionHolder.getJmsEndpoint().getReceive());
 
@@ -429,7 +428,7 @@ public class HermesJmsRequestTransport implements RequestTransport {
     }
 
     @SuppressWarnings("serial")
-    public static class UnresolvedJMSEndpointException extends Exception {
+    private static class UnresolvedJMSEndpointException extends Exception {
         public UnresolvedJMSEndpointException(String msg) {
             super(msg);
         }

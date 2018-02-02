@@ -41,7 +41,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 /**
  * Assertion that matches a specified XQuery expression and its expected result
@@ -54,7 +54,7 @@ public class XQueryContainsAssertion extends AbstractXmlContainsAssertion {
 
     public static final String ID = "XQuery Match";
     public static final String LABEL = "XQuery Match";
-    public static final String DESCRIPTION = "Uses an XQuery expression to select content from the target property and compares the result to an expected value. Applicable to any property containing XML.";
+    private static final String DESCRIPTION = "Uses an XQuery expression to select content from the target property and compares the result to an expected value. Applicable to any property containing XML.";
 
     public XQueryContainsAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, true, true, true, true);

@@ -28,12 +28,8 @@ import com.eviware.soapui.support.xml.XmlObjectConfigurationReader;
 import org.apache.xmlbeans.XmlObject;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -95,7 +91,7 @@ public class ProjectSensitiveInformationPanel {
         return mainpanel;
     }
 
-    public void save() {
+    private void save() {
         projectSpecificExposureList = createListFromTable();
         setConfiguration(createConfiguration());
     }
@@ -109,20 +105,20 @@ public class ProjectSensitiveInformationPanel {
         return temp;
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add(PROJECT_SPECIFIC_EXPOSURE_LIST,
                 projectSpecificExposureList.toArray(new String[projectSpecificExposureList.size()]));
         return builder.finish();
     }
 
-    public void setConfiguration(XmlObject configuration) {
+    private void setConfiguration(XmlObject configuration) {
         config.set(configuration);
     }
 
     class AddTokenAction extends AbstractAction {
 
-        public AddTokenAction() {
+        AddTokenAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Adds a token to assertion");
         }
@@ -142,7 +138,7 @@ public class ProjectSensitiveInformationPanel {
 
     class RemoveTokenAction extends AbstractAction {
 
-        public RemoveTokenAction() {
+        RemoveTokenAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Removes token from assertion");
         }

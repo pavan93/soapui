@@ -38,15 +38,8 @@ import com.google.common.base.Joiner;
 import com.google.common.base.Strings;
 
 import javax.annotation.Nonnull;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -89,14 +82,16 @@ public class TestOnDemandPanel extends JPanel {
     private static List<Location> locationsCache = new ArrayList<Location>();
 
     @Nonnull
+    private
     JLabel serverIPAddressesLabel = new JLabel();
 
     @Nonnull
+    private
     TestOnDemandCaller caller;
 
     private final WsdlTestCase testCase;
 
-    protected DependencyValidator validator;
+    private DependencyValidator validator;
 
     public TestOnDemandPanel(WsdlTestCase testCase) {
         super(new BorderLayout());
@@ -112,11 +107,11 @@ public class TestOnDemandPanel extends JPanel {
         add(buildToolbar(), BorderLayout.NORTH);
     }
 
-    protected void setValidator() {
+    private void setValidator() {
         validator = new DependencyValidator();
     }
 
-    protected void setCaller() {
+    private void setCaller() {
         caller = new TestOnDemandCaller();
     }
 
@@ -217,7 +212,7 @@ public class TestOnDemandPanel extends JPanel {
     }
 
     private class SendTestCaseAction extends AbstractAction {
-        public SendTestCaseAction() {
+        SendTestCaseAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Run Test On Demand report");
         }
@@ -303,7 +298,7 @@ public class TestOnDemandPanel extends JPanel {
         private final Location selectedLocation;
         private String result = null;
 
-        public SendTestCaseWorker(WsdlTestCase testCase, Location selectedLocation) {
+        SendTestCaseWorker(WsdlTestCase testCase, Location selectedLocation) {
             this.testCase = testCase;
             this.selectedLocation = selectedLocation;
         }
@@ -318,7 +313,7 @@ public class TestOnDemandPanel extends JPanel {
             return result;
         }
 
-        public String getResult() {
+        String getResult() {
             return result;
         }
     }

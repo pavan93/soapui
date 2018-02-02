@@ -19,22 +19,10 @@ package com.eviware.soapui.support.components;
 import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JToggleButton;
-import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -52,7 +40,7 @@ public class JInspectorPanelImpl extends JPanel implements PropertyChangeListene
     private JXToolBar inspectToolbar;
     private List<Inspector> inspectors = new ArrayList<Inspector>();
     private Map<Inspector, JToggleButton> inspectorButtons = new HashMap<Inspector, JToggleButton>();
-    public Inspector currentInspector;
+    private Inspector currentInspector;
 
     private final int orientation;
 
@@ -219,10 +207,10 @@ public class JInspectorPanelImpl extends JPanel implements PropertyChangeListene
         return this;
     }
 
-    public class SelectInspectorAction extends AbstractAction implements PropertyChangeListener {
+    class SelectInspectorAction extends AbstractAction implements PropertyChangeListener {
         private final Inspector inspector;
 
-        public SelectInspectorAction(Inspector inspector) {
+        SelectInspectorAction(Inspector inspector) {
             super(inspector.getTitle());
             this.inspector = inspector;
 

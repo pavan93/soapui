@@ -34,13 +34,12 @@ import com.eviware.soapui.support.action.swing.ActionListBuilder;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 import com.eviware.soapui.support.action.swing.SwingActionDelegate;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 
 
 public class MenuBuilderHelper {
-    public static JMenu getMenu(String name) {
+    private static JMenu getMenu(String name) {
         JMenuBar menuBar = SoapUI.getMenuBar();
         for (int i = 0; i < menuBar.getMenuCount(); i++) {
             if (menuBar.getMenu(i).getText().equals(name)) {
@@ -75,7 +74,7 @@ public class MenuBuilderHelper {
         return menu;
     }
 
-    protected static ActionList buildActionsForActionGroup(String actionGroup) {
+    private static ActionList buildActionsForActionGroup(String actionGroup) {
         return ActionListBuilder.buildActions(actionGroup, null);
     }
 

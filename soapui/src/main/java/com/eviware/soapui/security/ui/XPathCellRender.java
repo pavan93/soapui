@@ -26,16 +26,16 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.event.*;
 
 @SuppressWarnings("serial")
-public class XPathCellRender extends AbstractCellEditor implements TableCellEditor, MouseListener, WindowFocusListener {
+class XPathCellRender extends AbstractCellEditor implements TableCellEditor, MouseListener, WindowFocusListener {
 
-    protected JPanel panel;
-    JTextArea textArea;
+    private JPanel panel;
+    private JTextArea textArea;
 
     private JTextField textField;
-    protected JFrame frame;
+    private JFrame frame;
     private JButton resizeBtn;
-    protected int mouseX;
-    protected int mouseY;
+    private int mouseX;
+    private int mouseY;
 
     public XPathCellRender() {
 
@@ -80,7 +80,7 @@ public class XPathCellRender extends AbstractCellEditor implements TableCellEdit
      * @param jxToolBar
      * @return
      */
-    protected JXToolBar initToolbar(JXToolBar toolbar) {
+    private JXToolBar initToolbar(JXToolBar toolbar) {
 
         resizeBtn = UISupport.createToolbarButton(UISupport.createImageIcon("/icon_resize.gif"));
         resizeBtn.setCursor(new Cursor(Cursor.SE_RESIZE_CURSOR));
@@ -120,7 +120,7 @@ public class XPathCellRender extends AbstractCellEditor implements TableCellEdit
 
     private class SaveXPathAction extends AbstractAction {
 
-        public SaveXPathAction() {
+        SaveXPathAction() {
             super("Save");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/disk_multiple.png"));
             putValue(Action.SHORT_DESCRIPTION, "Save XPath");
@@ -136,7 +136,7 @@ public class XPathCellRender extends AbstractCellEditor implements TableCellEdit
 
     private class CancelXPathAction extends AbstractAction {
 
-        public CancelXPathAction() {
+        CancelXPathAction() {
             super("Cancel");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/rest_method.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Cancel Changes");

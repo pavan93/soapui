@@ -25,28 +25,20 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import org.apache.commons.lang.mutable.MutableBoolean;
 
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.Document;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.IllegalComponentStateException;
-import java.awt.Point;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Text field for editing a rest resource. Pops up a separate dialog to edit parts of the resource separately if the
  * rest resource has parents or children.
  */
 public class RestResourceEditor extends JTextField {
-    public static final String REST_RESOURCE_EDITOR_TEXT_FIELD = "RestResourceEditorTextField";
+    private static final String REST_RESOURCE_EDITOR_TEXT_FIELD = "RestResourceEditorTextField";
     MouseListener mouseListener;
 
     private RestResource editingRestResource;
@@ -142,7 +134,7 @@ public class RestResourceEditor extends JTextField {
 
     }
 
-    public void openPopup(RestResource focusedResource) {
+    private void openPopup(RestResource focusedResource) {
         RestResourceEditorPopupWindow popupWindow = new RestResourceEditorPopupWindow(editingRestResource, focusedResource);
         moveWindowBelowTextField(popupWindow);
         popupWindow.setVisible(true);

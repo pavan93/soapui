@@ -72,7 +72,7 @@ public class MaliciousAttachmentAdvancedSettingsPanel {
     }
 
     @AForm(description = "Malicious Attachment Configuration", name = "Malicious Attachment Configuration")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
         @AField(description = "Request timeout(ms)", name = "Request timeout(ms)", type = AFieldType.INT)
         String REQUEST_TIMEOUT = "Request timeout(ms)";
     }

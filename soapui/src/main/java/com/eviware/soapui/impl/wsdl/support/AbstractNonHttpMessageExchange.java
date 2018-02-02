@@ -24,7 +24,7 @@ import com.eviware.soapui.support.types.StringToStringsMap;
 
 public abstract class AbstractNonHttpMessageExchange<T extends ModelItem> extends AbstractMessageExchange<T> {
 
-    public AbstractNonHttpMessageExchange(T modelItem) {
+    AbstractNonHttpMessageExchange(T modelItem) {
         super(modelItem);
     }
 

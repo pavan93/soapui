@@ -30,7 +30,7 @@ public class OAuth1ProfileContainer {
         return project;
     }
 
-    public List<OAuth1Profile> getOAuth1ProfileList() {
+    private List<OAuth1Profile> getOAuth1ProfileList() {
         return OAuth1ProfileList;
     }
 

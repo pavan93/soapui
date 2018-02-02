@@ -26,7 +26,7 @@ import com.eviware.soapui.model.propertyexpansion.DefaultPropertyExpansionContex
  * @author SoapUI team
  */
 
-public class SecurityTestContext extends DefaultPropertyExpansionContext
+class SecurityTestContext extends DefaultPropertyExpansionContext
 // implements SecurityTestRunContext
 {
 

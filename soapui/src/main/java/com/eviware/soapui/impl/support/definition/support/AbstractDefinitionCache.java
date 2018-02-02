@@ -34,12 +34,12 @@ import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractDefinitionCache<T extends AbstractInterface<?>> implements DefinitionCache {
-    protected DefinitionCacheConfig definitionCache;
+    private DefinitionCacheConfig definitionCache;
     private T container;
     private InterfaceDefinitionPart rootPart;
     private List<InterfaceDefinitionPart> parts;
 
-    public AbstractDefinitionCache(DefinitionCacheConfig definitionCache, T container) {
+    AbstractDefinitionCache(DefinitionCacheConfig definitionCache, T container) {
         this.definitionCache = definitionCache;
         this.container = container;
 
@@ -72,7 +72,7 @@ public abstract class AbstractDefinitionCache<T extends AbstractInterface<?>> im
         }
     }
 
-    protected DefinitionCacheConfig getConfig() {
+    DefinitionCacheConfig getConfig() {
         return definitionCache;
     }
 

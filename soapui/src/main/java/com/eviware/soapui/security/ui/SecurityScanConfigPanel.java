@@ -18,13 +18,13 @@ package com.eviware.soapui.security.ui;
 
 import com.eviware.soapui.support.components.SimpleForm;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class SecurityScanConfigPanel extends JPanel {
     protected SimpleForm form;
 
-    public SecurityScanConfigPanel(BorderLayout borderLayout) {
+    SecurityScanConfigPanel(BorderLayout borderLayout) {
         super(borderLayout);
     }
 

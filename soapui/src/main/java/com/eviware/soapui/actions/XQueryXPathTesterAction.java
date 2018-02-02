@@ -37,7 +37,7 @@ import java.lang.reflect.InvocationTargetException;
  * @author Ole.Matzura
  */
 
-public class XQueryXPathTesterAction extends AbstractAction {
+class XQueryXPathTesterAction extends AbstractAction {
     private JDialog dialog;
     private JSplitPane mainSplit;
     private RSyntaxTextArea resultArea;
@@ -147,7 +147,7 @@ public class XQueryXPathTesterAction extends AbstractAction {
     }
 
     private class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/submit_request.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Execute current query");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt ENTER"));
@@ -193,7 +193,7 @@ public class XQueryXPathTesterAction extends AbstractAction {
     }
 
     private class DeclareNSAction extends AbstractAction {
-        public DeclareNSAction() {
+        DeclareNSAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/declareNs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Declares namespaces in current input in xpath expression");
         }

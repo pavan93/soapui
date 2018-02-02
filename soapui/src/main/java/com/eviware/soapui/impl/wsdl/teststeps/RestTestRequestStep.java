@@ -248,7 +248,7 @@ public class RestTestRequestStep extends WsdlTestStepWithProperties implements R
         return restRequestStepConfig;
     }
 
-    protected RestTestRequest buildTestRequest(boolean forLoadTest) {
+    private RestTestRequest buildTestRequest(boolean forLoadTest) {
         if (getRestMethod() == null) {
             return null;
         }
@@ -271,15 +271,15 @@ public class RestTestRequestStep extends WsdlTestStepWithProperties implements R
         return getRequestStepConfig().getResourcePath();
     }
 
-    protected String createDefaultRawResponseContent() {
+    private String createDefaultRawResponseContent() {
         return getResource() == null ? null : getResource().createResponse(true);
     }
 
-    protected String createDefaultResponseXmlContent() {
+    private String createDefaultResponseXmlContent() {
         return getResource() == null ? null : getResource().createResponse(true);
     }
 
-    protected String createDefaultRequestContent() {
+    private String createDefaultRequestContent() {
         return getResource() == null ? null : getResource().createRequest(true);
     }
 
@@ -896,11 +896,11 @@ public class RestTestRequestStep extends WsdlTestStepWithProperties implements R
     private class RestTestStepProperty implements TestStepProperty {
         private String propertyName;
 
-        public RestTestStepProperty(String propertyName) {
+        RestTestStepProperty(String propertyName) {
             this.propertyName = propertyName;
         }
 
-        public void setPropertyName(String name) {
+        void setPropertyName(String name) {
             propertyName = name;
         }
 

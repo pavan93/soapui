@@ -52,7 +52,7 @@ public class ManualTestStep extends WsdlTestStepWithProperties implements Proper
 {
     @SuppressWarnings("unused")
     private final static Logger log = Logger.getLogger(WsdlTestRequestStep.class);
-    protected ManualTestStepConfig manualTestStepConfig;
+    private ManualTestStepConfig manualTestStepConfig;
     private ManualTestStepResult testStepResult;
     public final static String MANUAL_STEP = ManualTestStep.class.getName() + "@manualstep";
     public static final String STATUS_PROPERTY = WsdlTestRequest.class.getName() + "@status";
@@ -83,7 +83,7 @@ public class ManualTestStep extends WsdlTestStepWithProperties implements Proper
         addProperty(new TestStepBeanProperty("ExpectedResult", false, this, "expectedResult", this));
     }
 
-    protected ManualTestStepResult getLastResult() {
+    private ManualTestStepResult getLastResult() {
         return testStepResult;
     }
 
@@ -193,7 +193,7 @@ public class ManualTestStep extends WsdlTestStepWithProperties implements Proper
     }
 
     @AForm(description = "", name = "Run Manual TestStep", helpUrl = HelpUrls.MANUALTESTSTEP_HELP_URL)
-    protected interface Form {
+    interface Form {
         @AField(name = "Description", description = "Describes the actions to perform", type = AFieldType.INFORMATION)
         String DESCRIPTION = "Description";
 

@@ -16,12 +16,7 @@
 
 package com.eviware.soapui.impl.wsdl.mock.dispatch;
 
-import com.eviware.soapui.model.mock.MockOperation;
-import com.eviware.soapui.model.mock.MockRequest;
-import com.eviware.soapui.model.mock.MockResponse;
-import com.eviware.soapui.model.mock.MockResult;
-import com.eviware.soapui.model.mock.MockRunListener;
-import com.eviware.soapui.model.mock.MockRunner;
+import com.eviware.soapui.model.mock.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +24,7 @@ import javax.servlet.http.HttpServletResponse;
 public class SequenceMockOperationDispatcher extends AbstractMockOperationDispatcher implements MockRunListener {
     private int currentDispatchIndex;
 
-    public SequenceMockOperationDispatcher(MockOperation mockOperation) {
+    private SequenceMockOperationDispatcher(MockOperation mockOperation) {
         super(mockOperation);
 
         mockOperation.getMockService().addMockRunListener(this);

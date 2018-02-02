@@ -208,6 +208,22 @@ public class JTestStepList extends JPanel {
     // }
     // }
 
+    public void setSelectedIndex(int i) {
+        testStepList.setSelectedIndex(i);
+    }
+
+    public void setSelectedValue(TestStep testStep, boolean b) {
+        try {
+            testStepList.setSelectedValue(testStep, true);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void release() {
+        testStepListModel.release();
+    }
+
     /**
      * Renderer which sets icon and wider border for teststeps
      *
@@ -215,7 +231,7 @@ public class JTestStepList extends JPanel {
      */
 
     private final static class TestStepCellRenderer extends JLabel implements ListCellRenderer {
-        public TestStepCellRenderer() {
+        TestStepCellRenderer() {
             setOpaque(true);
             setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         }
@@ -248,10 +264,28 @@ public class JTestStepList extends JPanel {
         }
     }
 
+    private static class TestStepJList extends JList implements Autoscroll {
+        private AutoscrollSupport autoscrollSupport;
+
+        TestStepJList(TestStepListModel testStepListModel) {
+            super(testStepListModel);
+
+            autoscrollSupport = new AutoscrollSupport(this, new Insets(10, 10, 10, 10));
+        }
+
+        public void autoscroll(Point cursorLoc) {
+            autoscrollSupport.autoscroll(cursorLoc);
+        }
+
+        public Insets getAutoscrollInsets() {
+            return autoscrollSupport.getAutoscrollInsets();
+        }
+    }
+
     private class TestStepListModel extends AbstractListModel implements PropertyChangeListener {
         private TestStepListTestSuiteListener testStepListTestSuiteListener = new TestStepListTestSuiteListener();
 
-        public TestStepListModel() {
+        TestStepListModel() {
             for (int c = 0; c < getSize(); c++) {
                 testCase.getTestStepAt(c).addPropertyChangeListener(this);
             }
@@ -285,7 +319,7 @@ public class JTestStepList extends JPanel {
             }
         }
 
-        public void release() {
+        void release() {
             testCase.getTestSuite().removeTestSuiteListener(testStepListTestSuiteListener);
 
             for (int c = 0; c < getSize(); c++) {
@@ -326,10 +360,10 @@ public class JTestStepList extends JPanel {
         }
     }
 
-    public class InsertTestStepAction extends AbstractAction {
+    class InsertTestStepAction extends AbstractAction {
         private final WsdlTestStepFactory factory;
 
-        public InsertTestStepAction(WsdlTestStepFactory factory) {
+        InsertTestStepAction(WsdlTestStepFactory factory) {
             super(factory.getTestStepName());
             putValue(Action.SHORT_DESCRIPTION, factory.getTestStepDescription());
             putValue(Action.SMALL_ICON, UISupport.createImageIcon(factory.getTestStepIconPath()));
@@ -349,40 +383,6 @@ public class JTestStepList extends JPanel {
                     UISupport.selectAndShow(testStep);
                 }
             }
-        }
-    }
-
-    public void setSelectedIndex(int i) {
-        testStepList.setSelectedIndex(i);
-    }
-
-    public void setSelectedValue(TestStep testStep, boolean b) {
-        try {
-            testStepList.setSelectedValue(testStep, true);
-        } catch (RuntimeException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void release() {
-        testStepListModel.release();
-    }
-
-    private static class TestStepJList extends JList implements Autoscroll {
-        private AutoscrollSupport autoscrollSupport;
-
-        public TestStepJList(TestStepListModel testStepListModel) {
-            super(testStepListModel);
-
-            autoscrollSupport = new AutoscrollSupport(this, new Insets(10, 10, 10, 10));
-        }
-
-        public void autoscroll(Point cursorLoc) {
-            autoscrollSupport.autoscroll(cursorLoc);
-        }
-
-        public Insets getAutoscrollInsets() {
-            return autoscrollSupport.getAutoscrollInsets();
         }
     }
 }

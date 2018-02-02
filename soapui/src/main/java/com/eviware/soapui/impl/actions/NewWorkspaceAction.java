@@ -35,9 +35,9 @@ import java.io.File;
 
 public class NewWorkspaceAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "NewWorkspaceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewWorkspaceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewWorkspaceAction.class);
 
-    public NewWorkspaceAction() {
+    private NewWorkspaceAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

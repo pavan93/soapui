@@ -57,7 +57,7 @@ public class JMSPropertyInspectorFactory implements RequestInspectorFactory, Res
         AbstractHttpRequest<?> request;
         JMSPropertyInspector inspector;
 
-        public WsdlRequestJMSPropertiesModel(AbstractHttpRequest<?> wsdlRequest) {
+        WsdlRequestJMSPropertiesModel(AbstractHttpRequest<?> wsdlRequest) {
             super(false, wsdlRequest, "jmsProperty");
             this.request = wsdlRequest;
             request.addPropertyChangeListener(this);

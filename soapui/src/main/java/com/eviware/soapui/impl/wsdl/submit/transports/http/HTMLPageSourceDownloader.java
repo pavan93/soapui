@@ -39,11 +39,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class HTMLPageSourceDownloader {
-    WebClient client = new WebClient();
-    List<String> missingResourcesList = new ArrayList<String>();
     public static final String MISSING_RESOURCES_LIST = "MissingResourcesList";
-
-    public static final HashMap<String, String> acceptTypes = new HashMap<String, String>() {
+    private static final HashMap<String, String> acceptTypes = new HashMap<String, String>() {
         {
             put("html", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
             put("img", "image/png,image/*;q=0.8,*/*;q=0.5");
@@ -51,10 +48,12 @@ public class HTMLPageSourceDownloader {
             put("style", "text/css,*/*;q=0.1");
         }
     };
+    private WebClient client = new WebClient();
+    private List<String> missingResourcesList = new ArrayList<String>();
 
     List<Attachment> attachmentList = new ArrayList<Attachment>();
 
-    protected List<Attachment> downloadCssAndImages(String endpoint, HttpRequest request)
+    List<Attachment> downloadCssAndImages(String endpoint, HttpRequest request)
             throws IOException {
         HtmlPage htmlPage = client.getPage(endpoint);
         String xPathExpression = "//*[name() = 'img' or name() = 'link' and @type = 'text/css']";

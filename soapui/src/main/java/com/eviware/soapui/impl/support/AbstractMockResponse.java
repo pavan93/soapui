@@ -68,7 +68,7 @@ public abstract class AbstractMockResponse<MockResponseConfigType extends BaseMo
     private ScriptEnginePool scriptEnginePool;
 
 
-    public AbstractMockResponse(MockResponseConfigType config, MockOperation operation, String icon) {
+    protected AbstractMockResponse(MockResponseConfigType config, MockOperation operation, String icon) {
         super(config, operation, icon);
         scriptEnginePool = new ScriptEnginePool(this);
         scriptEnginePool.setScript(getScript());
@@ -145,7 +145,7 @@ public abstract class AbstractMockResponse<MockResponseConfigType extends BaseMo
         }
     }
 
-    public String getResponseCompression() {
+    private String getResponseCompression() {
         if (getConfig().isSetCompression()) {
             return getConfig().getCompression();
         } else {
@@ -396,11 +396,11 @@ public abstract class AbstractMockResponse<MockResponseConfigType extends BaseMo
         return false;
     }
 
-    public boolean prepareMessagePart(MimeMultipart mp, StringToStringMap contentIds, MessageXmlPart requestPart) throws Exception {
+    protected boolean prepareMessagePart(MimeMultipart mp, StringToStringMap contentIds, MessageXmlPart requestPart) throws Exception {
         return AttachmentUtils.prepareMessagePart(this, mp, requestPart, contentIds);
     }
 
-    public MessageXmlObject createMessageXmlObject(String responseContent, WsdlOperation wsdlOperation) {
+    protected MessageXmlObject createMessageXmlObject(String responseContent, WsdlOperation wsdlOperation) {
         return new MessageXmlObject(wsdlOperation, responseContent, false);
     }
 
@@ -433,15 +433,15 @@ public abstract class AbstractMockResponse<MockResponseConfigType extends BaseMo
 
     protected abstract String executeSpecifics(MockRequest request, String responseContent, WsdlMockRunContext context) throws IOException, WSSecurityException;
 
-    public boolean isEntitizeProperties() {
+    private boolean isEntitizeProperties() {
         return getSettings().getBoolean(CommonSettings.ENTITIZE_PROPERTIES);
     }
 
-    public abstract long getResponseDelay();
+    protected abstract long getResponseDelay();
 
-    public abstract boolean isForceMtom();
+    protected abstract boolean isForceMtom();
 
-    public abstract boolean isStripWhitespaces();
+    protected abstract boolean isStripWhitespaces();
 
     public void addTestPropertyListener(TestPropertyListener listener) {
         propertyHolder.addTestPropertyListener(listener);

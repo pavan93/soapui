@@ -44,7 +44,7 @@ public class BaseMockResult<MockRequestType extends MockRequest, MockOperationTy
     private MockOperationType mockOperation;
     private String responseContentType;
 
-    public BaseMockResult(MockRequestType request) {
+    protected BaseMockResult(MockRequestType request) {
         timestamp = System.currentTimeMillis();
         mockRequest = request;
     }
@@ -129,7 +129,7 @@ public class BaseMockResult<MockRequestType extends MockRequest, MockOperationTy
         responseContentType = contentType;
     }
 
-    public OutputStream getOutputStream() throws IOException {
+    private OutputStream getOutputStream() throws IOException {
         return mockRequest.getHttpResponse().getOutputStream();
     }
 
@@ -141,7 +141,7 @@ public class BaseMockResult<MockRequestType extends MockRequest, MockOperationTy
         return rawResponseData;
     }
 
-    public void setRawResponseData(byte[] rawResponseData) {
+    private void setRawResponseData(byte[] rawResponseData) {
         this.rawResponseData = rawResponseData;
     }
 

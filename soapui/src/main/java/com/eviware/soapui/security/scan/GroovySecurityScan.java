@@ -42,7 +42,7 @@ import java.util.Map;
 
 public class GroovySecurityScan extends AbstractSecurityScanWithProperties {
 
-    public static final String SCRIPT_PROPERTY = GroovySecurityScan.class.getName() + "@script";
+    private static final String SCRIPT_PROPERTY = GroovySecurityScan.class.getName() + "@script";
     public static final String TYPE = "GroovySecurityScan";
     public static final String NAME = "Custom Script";
     private GroovySecurityScanConfig groovyscc;

@@ -35,11 +35,11 @@ import java.util.List;
  */
 
 public abstract class AbstractAddToTestCaseAction<T extends ModelItem> extends AbstractSoapUIAction<T> {
-    public AbstractAddToTestCaseAction(String name, String description) {
+    protected AbstractAddToTestCaseAction(String name, String description) {
         super(name, description);
     }
 
-    public static WsdlTestCase getTargetTestCase(WsdlProject project) {
+    protected static WsdlTestCase getTargetTestCase(WsdlProject project) {
         List<WsdlTestCase> testCases = new ArrayList<WsdlTestCase>();
         List<WsdlTestSuite> testSuites = new ArrayList<WsdlTestSuite>();
         List<String> testCaseNames = new ArrayList<String>();
@@ -133,7 +133,7 @@ public abstract class AbstractAddToTestCaseAction<T extends ModelItem> extends A
         return testCase;
     }
 
-    protected static WsdlTestCase addNewTestSuiteAndTestCase(WsdlProject project, String questionText) {
+    private static WsdlTestCase addNewTestSuiteAndTestCase(WsdlProject project, String questionText) {
         String testSuiteName = UISupport.prompt(questionText,
                 "Create TestSuite", "TestSuite " + (project.getTestSuiteCount() + 1));
         if (testSuiteName == null) {

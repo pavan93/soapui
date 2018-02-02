@@ -63,7 +63,7 @@ public class InterfaceTreeNode extends AbstractModelItemTreeNode<Interface> {
         }
     }
 
-    public Interface getInterface() {
+    private Interface getInterface() {
         return getModelItem();
     }
 

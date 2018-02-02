@@ -24,7 +24,7 @@ import com.eviware.soapui.impl.wsdl.mock.WsdlMockResponse;
  * @author ole.matzura
  */
 
-public class WsdlMockResponseDesktopPanel extends AbstractWsdlMockResponseDesktopPanel<WsdlMockResponse> {
+class WsdlMockResponseDesktopPanel extends AbstractWsdlMockResponseDesktopPanel<WsdlMockResponse> {
     public WsdlMockResponseDesktopPanel(WsdlMockResponse mockResponse) {
         super(mockResponse);
 

@@ -22,7 +22,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class JCollapsiblePanel extends JPanel {
+class JCollapsiblePanel extends JPanel {
     private static final String HIGHLIGHT_SIGN = "* ";
 
     private ImageIcon minusIcon;
@@ -34,7 +34,7 @@ public class JCollapsiblePanel extends JPanel {
     private JLabel titleLabel;
     private String nonHighlightedTitle;
 
-    public JCollapsiblePanel(JPanel contentPanel, String title) {
+    JCollapsiblePanel(JPanel contentPanel, String title) {
         super(new BorderLayout());
         this.contentPanel = contentPanel;
         minusIcon = UISupport.createImageIcon("/button1.gif");
@@ -44,7 +44,7 @@ public class JCollapsiblePanel extends JPanel {
         add(startToolbar(title), BorderLayout.NORTH);
     }
 
-    public JCollapsiblePanel(String title) {
+    JCollapsiblePanel(String title) {
         this(new JPanel(), title);
     }
 
@@ -74,11 +74,11 @@ public class JCollapsiblePanel extends JPanel {
         return toolbar;
     }
 
-    public boolean isExpanded() {
+    private boolean isExpanded() {
         return toggleAction.getValue(Action.SMALL_ICON) == getMinusIcon();
     }
 
-    public void setExpanded(boolean expanded) {
+    private void setExpanded(boolean expanded) {
         if (!expanded) {
             toggleAction.setShow();
         } else {
@@ -96,7 +96,7 @@ public class JCollapsiblePanel extends JPanel {
         }
     }
 
-    public void setContentPanel(JPanel panel) {
+    void setContentPanel(JPanel panel) {
         remove(contentPanel);
         add(panel, BorderLayout.CENTER);
         contentPanel = panel;
@@ -104,17 +104,37 @@ public class JCollapsiblePanel extends JPanel {
         refresh();
     }
 
+    private ImageIcon getMinusIcon() {
+        return minusIcon;
+    }
+
+    void setMinusIcon(ImageIcon minusIcon) {
+        this.minusIcon = minusIcon;
+    }
+
+    public JXToolBar getToolbar() {
+        return toolbar;
+    }
+
+    private ImageIcon getPlusIcon() {
+        return plusIcon;
+    }
+
+    void setPlusIcon(ImageIcon plusIcon) {
+        this.plusIcon = plusIcon;
+    }
+
     private class ToggleAction extends AbstractAction {
-        public ToggleAction() {
+        ToggleAction() {
             setHide();
         }
 
-        public void setHide() {
+        void setHide() {
             putValue(Action.SMALL_ICON, getMinusIcon());
             putValue(Action.SHORT_DESCRIPTION, "Hides the content of this block");
         }
 
-        public void setShow() {
+        void setShow() {
             putValue(Action.SMALL_ICON, getPlusIcon());
             putValue(Action.SHORT_DESCRIPTION, "Shows the content of this block");
         }
@@ -122,26 +142,6 @@ public class JCollapsiblePanel extends JPanel {
         public void actionPerformed(ActionEvent e) {
             setExpanded(!isExpanded());
         }
-    }
-
-    public JXToolBar getToolbar() {
-        return toolbar;
-    }
-
-    public ImageIcon getMinusIcon() {
-        return minusIcon;
-    }
-
-    public void setMinusIcon(ImageIcon minusIcon) {
-        this.minusIcon = minusIcon;
-    }
-
-    public ImageIcon getPlusIcon() {
-        return plusIcon;
-    }
-
-    public void setPlusIcon(ImageIcon plusIcon) {
-        this.plusIcon = plusIcon;
     }
 
     public void setHighlightedTitle(boolean highlightedTitle) {

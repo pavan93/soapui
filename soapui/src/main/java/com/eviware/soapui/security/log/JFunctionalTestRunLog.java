@@ -27,20 +27,8 @@ import com.eviware.soapui.support.components.JHyperlinkLabel;
 import com.eviware.soapui.support.components.JXToolBar;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -60,7 +48,7 @@ public class JFunctionalTestRunLog extends JPanel {
     private FunctionalTestLogModel logListModel;
     private JList testLogList;
     private Set<String> boldTexts = new HashSet<String>();
-    protected int selectedIndex;
+    private int selectedIndex;
     private Logger log = Logger.getLogger(JSecurityTestRunLog.class);
     // TODO see how to get this from security log options to apply here
     private boolean follow = true;
@@ -94,7 +82,7 @@ public class JFunctionalTestRunLog extends JPanel {
         return testLogList;
     }
 
-    protected void addToolbarButtons(JXToolBar toolbar) {
+    private void addToolbarButtons(JXToolBar toolbar) {
         toolbar.addFixed(UISupport.createToolbarButton(new ClearLogAction()));
         toolbar.addFixed(UISupport.createToolbarButton(new ExportLogAction()));
     }
@@ -120,8 +108,17 @@ public class JFunctionalTestRunLog extends JPanel {
         }
     }
 
+    private void printLog(PrintWriter out) {
+        for (int c = 0; c < logListModel.getSize(); c++) {
+            Object value = logListModel.getElementAt(c);
+            if (value instanceof String) {
+                out.println(value.toString());
+            }
+        }
+    }
+
     private class ClearLogAction extends AbstractAction {
-        public ClearLogAction() {
+        ClearLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clear.png"));
             putValue(Action.SHORT_DESCRIPTION, "Clears the log");
         }
@@ -132,7 +129,7 @@ public class JFunctionalTestRunLog extends JPanel {
     }
 
     private class ExportLogAction extends AbstractAction {
-        public ExportLogAction() {
+        ExportLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/export.png"));
             putValue(Action.SHORT_DESCRIPTION, "Exports this log to a file");
         }
@@ -148,15 +145,6 @@ public class JFunctionalTestRunLog extends JPanel {
                 } catch (FileNotFoundException e1) {
                     UISupport.showErrorMessage(e1);
                 }
-            }
-        }
-    }
-
-    public void printLog(PrintWriter out) {
-        for (int c = 0; c < logListModel.getSize(); c++) {
-            Object value = logListModel.getElementAt(c);
-            if (value instanceof String) {
-                out.println(value.toString());
             }
         }
     }
@@ -189,7 +177,7 @@ public class JFunctionalTestRunLog extends JPanel {
                 showPopup(e);
         }
 
-        public void showPopup(MouseEvent e) {
+        void showPopup(MouseEvent e) {
             int row = testLogList.locationToIndex(e.getPoint());
             if (row == -1)
                 return;
@@ -223,7 +211,7 @@ public class JFunctionalTestRunLog extends JPanel {
         private Font normalFont;
         private JHyperlinkLabel hyperlinkLabel = new JHyperlinkLabel("");
 
-        public FunctionalLogCellRenderer() {
+        FunctionalLogCellRenderer() {
             setOpaque(true);
             setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
             setIcon(null);

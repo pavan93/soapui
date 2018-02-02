@@ -36,9 +36,9 @@ import java.util.Map;
  */
 
 public class RequestTransportRegistry {
-    public static final String HTTP = "http";
-    public static final String HTTPS = "https";
-    public static final String JMS = "jms";
+    private static final String HTTP = "http";
+    private static final String HTTPS = "https";
+    private static final String JMS = "jms";
 
     private static Map<String, RequestTransport> transports = new HashMap<String, RequestTransport>();
     private static Map<String, List<RequestFilter>> addedCustomRequestFilters = new HashMap<String, List<RequestFilter>>();
@@ -181,7 +181,7 @@ public class RequestTransportRegistry {
         addedCustomRequestFilters.get(protocol).add(requestFilter);
     }
 
-    public static void removeRequestFilterFactory(RequestFilterFactory factory) {
+    private static void removeRequestFilterFactory(RequestFilterFactory factory) {
         String protocol = factory.getProtocol();
         if (addedCustomRequestFilters.containsKey(protocol)) {
             for (RequestFilter filter : addedCustomRequestFilters.get(protocol)) {
@@ -222,11 +222,11 @@ public class RequestTransportRegistry {
         return transport;
     }
 
-    public static void addTransport(String key, RequestTransport rt) {
+    private static void addTransport(String key, RequestTransport rt) {
         transports.put(key, rt);
     }
 
-    public static void removeFactory(RequestTransportFactory factory) {
+    private static void removeFactory(RequestTransportFactory factory) {
         RequestTransport transport = factory.newRequestTransport();
         for (Map.Entry<String, RequestTransport> transportEntry : transports.entrySet()) {
             if (transportEntry.getValue().getClass().equals(transport.getClass())) {

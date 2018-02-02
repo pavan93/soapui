@@ -47,7 +47,7 @@ public class ExportDefinitionAction extends AbstractSoapUIAction<WsdlInterface> 
         }
     }
 
-    public String exportDefinition(String location, WsdlInterface iface) throws Exception {
+    private String exportDefinition(String location, WsdlInterface iface) throws Exception {
         File folderName = location == null ? UISupport.getFileDialogs().openDirectory(this, "Select output directory",
                 null) : new File(location);
 

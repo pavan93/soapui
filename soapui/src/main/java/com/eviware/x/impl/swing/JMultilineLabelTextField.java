@@ -19,9 +19,7 @@ package com.eviware.x.impl.swing;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.x.form.XFormTextField;
 
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class JMultilineLabelTextField extends AbstractSwingXFormField<JComponent> implements XFormTextField {
     private JScrollPane scrollPane;
@@ -36,7 +34,7 @@ public class JMultilineLabelTextField extends AbstractSwingXFormField<JComponent
         UISupport.setFixedSize(scrollPane, 300, 100);
     }
 
-    public JTextArea getTextArea() {
+    private JTextArea getTextArea() {
         return (JTextArea) super.getComponent();
     }
 

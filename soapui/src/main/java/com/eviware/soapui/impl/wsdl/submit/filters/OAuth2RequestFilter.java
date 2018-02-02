@@ -16,11 +16,7 @@
 
 package com.eviware.soapui.impl.wsdl.submit.filters;
 
-import com.eviware.soapui.impl.rest.OAuth1Profile;
-import com.eviware.soapui.impl.rest.OAuth1ProfileContainer;
-import com.eviware.soapui.impl.rest.OAuth2Profile;
-import com.eviware.soapui.impl.rest.OAuth2ProfileContainer;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.rest.actions.oauth.GoogleOAuth1ClientFacade;
 import com.eviware.soapui.impl.rest.actions.oauth.OAuth1ClientFacade;
 import com.eviware.soapui.impl.rest.actions.oauth.OAuth2ClientFacade;
@@ -87,11 +83,11 @@ public class OAuth2RequestFilter extends AbstractRequestFilter {
         }
     }
 
-    protected OAuth2ClientFacade getOAuth2ClientFacade() {
+    OAuth2ClientFacade getOAuth2ClientFacade() {
         return new OltuOAuth2ClientFacade();
     }
 
-    protected OAuth1ClientFacade getOAuth1ClientFacade() {
+    private OAuth1ClientFacade getOAuth1ClientFacade() {
         return new GoogleOAuth1ClientFacade();
     }
 

@@ -26,7 +26,7 @@ public class Version implements Comparable<Version> {
     private final int minorVersion;
     private final String patchVersion;
 
-    public Version(int majorVersion, int minorVersion, String patchVersion) {
+    private Version(int majorVersion, int minorVersion, String patchVersion) {
         this.majorVersion = majorVersion;
         this.minorVersion = minorVersion;
         this.patchVersion = patchVersion;

@@ -49,12 +49,12 @@ import java.util.List;
  */
 
 public class WsdlTestRequestStepFactory extends WsdlTestStepFactory {
-    public static final String REQUEST_TYPE = "request";
+    private static final String REQUEST_TYPE = "request";
     private static final String CREATE_OPTIONAL_ELEMENTS_IN_REQUEST = "Create optional elements";
     private static final String ADD_SOAP_RESPONSE_ASSERTION = "Add SOAP Response Assertion";
     private static final String ADD_SOAP_FAULT_ASSERTION = "Add Not SOAP Fault Assertion";
     private static final String ADD_SCHEMA_ASSERTION = "Add Schema Assertion";
-    public static final String STEP_NAME = "Name";
+    private static final String STEP_NAME = "Name";
     private XFormDialog dialog;
     private StringToStringMap dialogValues = new StringToStringMap();
 
@@ -177,7 +177,7 @@ public class WsdlTestRequestStepFactory extends WsdlTestStepFactory {
         return null;
     }
 
-    public TestStepConfig createNewTestStep(WsdlOperation operation, StringToStringMap values) {
+    private TestStepConfig createNewTestStep(WsdlOperation operation, StringToStringMap values) {
         String name;
         name = values.get(STEP_NAME);
 

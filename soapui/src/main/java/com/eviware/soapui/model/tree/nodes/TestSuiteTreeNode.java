@@ -90,7 +90,7 @@ public class TestSuiteTreeNode extends AbstractModelItemTreeNode<TestSuite> {
         return ix == -1 ? ix : ix + propMod;
     }
 
-    public TestSuite getTestSuite() {
+    private TestSuite getTestSuite() {
         return getModelItem();
     }
 

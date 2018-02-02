@@ -32,7 +32,7 @@ import java.util.Set;
  * @author Dain Nilsson
  */
 public class SchemaSystem {
-    Map<String, Schema> schemas;
+    private Map<String, Schema> schemas;
 
     /**
      * Constructs a new SchemaSystem object.

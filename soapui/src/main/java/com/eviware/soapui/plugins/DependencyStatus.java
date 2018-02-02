@@ -18,7 +18,7 @@ package com.eviware.soapui.plugins;
 
 import java.util.List;
 
-public class DependencyStatus {
+class DependencyStatus {
 
     private final boolean installable;
     private final List<PluginInfo> dependenciesToInstall;

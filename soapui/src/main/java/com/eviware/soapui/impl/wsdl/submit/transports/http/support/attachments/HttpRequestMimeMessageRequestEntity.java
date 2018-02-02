@@ -36,7 +36,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class HttpRequestMimeMessageRequestEntity extends AbstractHttpEntity {
+class HttpRequestMimeMessageRequestEntity extends AbstractHttpEntity {
     private final MimeMessage message;
     private final HttpRequestInterface<?> restRequest;
 

@@ -41,11 +41,11 @@ import org.w3c.dom.NodeList;
  * @see {@link}http://www.w3.org/TR/2006/WD-ws-addr-wsdl-20060216/#WSDL11MEPS
  */
 public class WsaValidator {
-    WsdlMessageExchange messageExchange;
-    Element header;
-    String wsaVersionNameSpace;
-    StringBuilder cumulativeErrorMsg;
-    WsaAssertionConfiguration wsaAssertionConfiguration;
+    private WsdlMessageExchange messageExchange;
+    private Element header;
+    private String wsaVersionNameSpace;
+    private StringBuilder cumulativeErrorMsg;
+    private WsaAssertionConfiguration wsaAssertionConfiguration;
 
     public WsaValidator(WsdlMessageExchange messageExchange, WsaAssertionConfiguration wsaAssertionConfiguration) {
         this.messageExchange = messageExchange;

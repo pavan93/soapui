@@ -35,18 +35,9 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import net.sf.json.JSON;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
@@ -82,7 +73,7 @@ public class HttpRequestContentView extends AbstractXmlEditorView<HttpRequestDoc
         return panel;
     }
 
-    protected void buildComponent() {
+    private void buildComponent() {
         JPanel p = new JPanel(new BorderLayout());
 
         p.add(buildToolbar(), BorderLayout.NORTH);
@@ -138,7 +129,7 @@ public class HttpRequestContentView extends AbstractXmlEditorView<HttpRequestDoc
         return httpRequest;
     }
 
-    protected Component buildContent() {
+    private Component buildContent() {
         JPanel contentPanel = new JPanel(new BorderLayout());
 
         // Add popup!

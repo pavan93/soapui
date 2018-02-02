@@ -19,9 +19,7 @@ package com.eviware.soapui.support.swing;
 import com.eviware.soapui.support.UISupport;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import java.awt.event.ActionEvent;
@@ -75,7 +73,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class CutAction extends AbstractAction {
-        public CutAction() {
+        CutAction() {
             super("Cut");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu X"));
         }
@@ -86,7 +84,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class CopyAction extends AbstractAction {
-        public CopyAction() {
+        CopyAction() {
             super("Copy");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu C"));
         }
@@ -97,7 +95,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class PasteAction extends AbstractAction {
-        public PasteAction() {
+        PasteAction() {
             super("Paste");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu V"));
         }
@@ -112,7 +110,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class ClearAction extends AbstractAction {
-        public ClearAction() {
+        ClearAction() {
             super("Clear");
         }
 
@@ -122,7 +120,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class SelectAllAction extends AbstractAction {
-        public SelectAllAction() {
+        SelectAllAction() {
             super("Select All");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu A"));
         }
@@ -136,7 +134,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class UndoAction extends AbstractAction {
-        public UndoAction() {
+        UndoAction() {
             super("Undo");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu Z"));
         }
@@ -147,7 +145,7 @@ public final class RSyntaxAreaPopupMenu extends JPopupMenu implements PopupMenuL
     }
 
     private final class RedoAction extends AbstractAction {
-        public RedoAction() {
+        RedoAction() {
             super("Redo");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu Y"));
         }

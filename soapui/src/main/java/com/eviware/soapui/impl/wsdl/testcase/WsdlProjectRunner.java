@@ -206,7 +206,7 @@ public class WsdlProjectRunner extends AbstractTestRunner<WsdlProject, WsdlProje
         return Arrays.asList(finishedRunners.toArray(new TestSuiteRunner[finishedRunners.size()]));
     }
 
-    protected void finishRunner(TestSuiteRunner testRunner) {
+    private void finishRunner(TestSuiteRunner testRunner) {
         notifyAfterRunTestSuite(testRunner);
 
         activeRunners.remove(testRunner);

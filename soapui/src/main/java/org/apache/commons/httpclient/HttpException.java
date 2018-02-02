@@ -55,12 +55,12 @@ import java.lang.reflect.Method;
  * @author Laura Werner
  * @version $Revision: 480424 $ $Date: 2006-11-29 06:56:49 +0100 (Wed, 29 Nov 2006) $
  */
-public class HttpException extends IOException {
+class HttpException extends IOException {
 
     /**
      * Creates a new HttpException with a <tt>null</tt> detail message.
      */
-    public HttpException() {
+    HttpException() {
         super();
         this.cause = null;
     }
@@ -70,7 +70,7 @@ public class HttpException extends IOException {
      *
      * @param message the exception detail message
      */
-    public HttpException(String message) {
+    HttpException(String message) {
         super(message);
         this.cause = null;
     }

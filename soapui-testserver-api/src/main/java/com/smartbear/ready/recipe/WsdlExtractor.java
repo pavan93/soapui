@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * A utility class to extract objects after adding WSDL to a project.
  */
-public class WsdlExtractor {
+class WsdlExtractor {
     static WsdlInterface getWsdlInterface(WsdlTestCase testCase, String wsdlUrl, String binding) throws ParseException {
         WsdlProject project = testCase.getTestSuite().getProject();
         List<AbstractInterface<?>> wsdlInterfaces = project.getInterfaces(WsdlInterfaceFactory.WSDL_TYPE);

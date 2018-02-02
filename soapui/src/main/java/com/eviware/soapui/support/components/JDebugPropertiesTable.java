@@ -72,7 +72,7 @@ public class JDebugPropertiesTable<T> {
         tableModel.setPropertyObject(propertyObject);
     }
 
-    public PropertiesTableModel<?> getTableModel() {
+    private PropertiesTableModel<?> getTableModel() {
         return tableModel;
     }
 
@@ -80,11 +80,11 @@ public class JDebugPropertiesTable<T> {
         return addProperty(caption, name, false);
     }
 
-    public PropertyDescriptor addProperty(String caption, String name, boolean editable) {
+    private PropertyDescriptor addProperty(String caption, String name, boolean editable) {
         return addProperty(caption, name, editable, null);
     }
 
-    public PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
+    private PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
         return tableModel.addProperty(caption, name, editable, formatter);
     }
 
@@ -93,31 +93,31 @@ public class JDebugPropertiesTable<T> {
         private T propertyObject;
         private boolean attached;
 
-        public PropertiesTableModel(T propertyObject) {
+        PropertiesTableModel(T propertyObject) {
             this.propertyObject = propertyObject;
         }
 
-        public void attach() {
+        void attach() {
             if (!attached && propertyObject instanceof PropertyChangeNotifier) {
                 ((PropertyChangeNotifier) propertyObject).addPropertyChangeListener(this);
                 attached = true;
             }
         }
 
-        public void setPropertyObject(T propertyObject) {
+        void setPropertyObject(T propertyObject) {
             release();
             this.propertyObject = propertyObject;
             attach();
             fireTableDataChanged();
         }
 
-        public PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
+        PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, editable, formatter);
             properties.add(propertyDescriptor);
             return propertyDescriptor;
         }
 
-        public PropertyDescriptor addProperty(String caption, String name, Object[] options) {
+        PropertyDescriptor addProperty(String caption, String name, Object[] options) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, options);
             properties.add(propertyDescriptor);
             fireTableStructureChanged();
@@ -158,7 +158,7 @@ public class JDebugPropertiesTable<T> {
             return null;
         }
 
-        public PropertyDescriptor getPropertyDescriptorAt(int row) {
+        PropertyDescriptor getPropertyDescriptorAt(int row) {
             return properties.get(row);
         }
 
@@ -166,14 +166,14 @@ public class JDebugPropertiesTable<T> {
             fireTableDataChanged();
         }
 
-        public void release() {
+        void release() {
             if (propertyObject instanceof PropertyChangeNotifier && attached) {
                 ((PropertyChangeNotifier) propertyObject).removePropertyChangeListener(this);
                 attached = false;
             }
         }
 
-        public PropertyDescriptor addPropertyShadow(String caption, String name, boolean editable) {
+        PropertyDescriptor addPropertyShadow(String caption, String name, boolean editable) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, editable);
             properties.add(propertyDescriptor);
             return propertyDescriptor;
@@ -197,7 +197,7 @@ public class JDebugPropertiesTable<T> {
     }
 
     private class PTable extends JXTable {
-        public PTable(TableModel tableModel) {
+        PTable(TableModel tableModel) {
             super(tableModel);
             if (UISupport.isMac()) {
                 JTableFactory.setGridAttributes(this);

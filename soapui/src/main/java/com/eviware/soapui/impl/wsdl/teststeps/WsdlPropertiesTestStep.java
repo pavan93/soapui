@@ -23,18 +23,14 @@ import com.eviware.soapui.impl.wsdl.support.XmlBeansPropertiesTestPropertyHolder
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestPropertyListener;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveContext;
 import com.eviware.soapui.support.types.StringList;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -165,7 +161,7 @@ public class WsdlPropertiesTestStep extends WsdlTestStep implements MutableTestP
     private int loadProperties(String source, boolean createMissing) throws IOException {
         // override methods so propertynames are returned in readorder
         java.util.Properties props = new java.util.Properties() {
-            public StringList names = new StringList();
+            StringList names = new StringList();
 
             @Override
             public synchronized Object put(Object key, Object value) {
@@ -269,7 +265,7 @@ public class WsdlPropertiesTestStep extends WsdlTestStep implements MutableTestP
         return saveProperties(target);
     }
 
-    public boolean isCreateMissingOnLoad() {
+    private boolean isCreateMissingOnLoad() {
         return propertiesStepConfig.getCreateMissingOnLoad();
     }
 
@@ -277,7 +273,7 @@ public class WsdlPropertiesTestStep extends WsdlTestStep implements MutableTestP
         propertiesStepConfig.setCreateMissingOnLoad(b);
     }
 
-    public boolean isSaveFirst() {
+    private boolean isSaveFirst() {
         return propertiesStepConfig.getSaveFirst();
     }
 
@@ -285,7 +281,7 @@ public class WsdlPropertiesTestStep extends WsdlTestStep implements MutableTestP
         propertiesStepConfig.setSaveFirst(b);
     }
 
-    public boolean isDiscardValuesOnSave() {
+    private boolean isDiscardValuesOnSave() {
         return propertiesStepConfig.getDiscardValuesOnSave();
     }
 
@@ -310,7 +306,7 @@ public class WsdlPropertiesTestStep extends WsdlTestStep implements MutableTestP
         }
     }
 
-    public void clearPropertyValues() {
+    private void clearPropertyValues() {
         for (TestProperty property : propertyHolderSupport.getProperties().values()) {
             property.setValue(null);
         }

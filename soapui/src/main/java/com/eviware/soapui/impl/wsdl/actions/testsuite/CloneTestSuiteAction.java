@@ -191,7 +191,7 @@ public class CloneTestSuiteAction extends AbstractSoapUIAction<WsdlTestSuite> {
         return newTestSuite;
     }
 
-    public static Set<Interface> getRequiredInterfaces(WsdlTestSuite testSuite, WsdlProject targetProject) {
+    private static Set<Interface> getRequiredInterfaces(WsdlTestSuite testSuite, WsdlProject targetProject) {
         Set<Interface> requiredInterfaces = new HashSet<Interface>();
 
         for (int i = 0; i < testSuite.getTestCaseCount(); i++) {
@@ -219,7 +219,7 @@ public class CloneTestSuiteAction extends AbstractSoapUIAction<WsdlTestSuite> {
     }
 
     @AForm(description = "Specify target Project and name of cloned TestSuite", name = "Clone TestSuite", helpUrl = HelpUrls.CLONETESTSUITE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    protected interface Form {
+    interface Form {
         @AField(name = "TestSuite Name", description = "The name of the cloned TestSuite", type = AFieldType.STRING)
         String NAME = "TestSuite Name";
 

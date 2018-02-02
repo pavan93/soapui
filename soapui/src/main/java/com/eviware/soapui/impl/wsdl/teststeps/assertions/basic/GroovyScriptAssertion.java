@@ -27,25 +27,13 @@ import com.eviware.soapui.impl.wsdl.panels.teststeps.support.GroovyEditor;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.support.JdbcMessageExchange;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext;
-import com.eviware.soapui.impl.wsdl.teststeps.HttpResponseMessageExchange;
-import com.eviware.soapui.impl.wsdl.teststeps.HttpTestRequestStepInterface;
-import com.eviware.soapui.impl.wsdl.teststeps.JdbcRequestTestStep;
-import com.eviware.soapui.impl.wsdl.teststeps.RestResponseMessageExchange;
-import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStepInterface;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlMessageAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlMockResponseTestStep;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlResponseMessageExchange;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStep;
+import com.eviware.soapui.impl.wsdl.teststeps.*;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFactory;
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.log.JLogList;
@@ -57,19 +45,8 @@ import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -81,16 +58,16 @@ import java.awt.event.MouseEvent;
  */
 
 public class GroovyScriptAssertion extends WsdlMessageAssertion implements RequestAssertion, ResponseAssertion {
-    public static final String ID = "GroovyScriptAssertion";
+    private static final String ID = "GroovyScriptAssertion";
     public static final String LABEL = "Script Assertion";
-    public static final String DESCRIPTION = "Runs a custom script to perform arbitrary validations. Applicable to any Property.";
+    private static final String DESCRIPTION = "Runs a custom script to perform arbitrary validations. Applicable to any Property.";
     private String scriptText;
     private SoapUIScriptEngine scriptEngine;
     private JDialog dialog;
     private GroovyScriptAssertionPanel groovyScriptAssertionPanel;
     private String oldScriptText;
 
-    public GroovyScriptAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
+    private GroovyScriptAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
         super(assertionConfig, modelItem, true, true, true, false);
 
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
@@ -146,7 +123,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         return true;
     }
 
-    protected void buildDialog() {
+    private void buildDialog() {
         dialog = new JDialog(UISupport.getMainFrame(), "Script Assertion", true);
         groovyScriptAssertionPanel = new GroovyScriptAssertionPanel();
         dialog.setContentPane(groovyScriptAssertionPanel);
@@ -161,7 +138,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         return groovyScriptAssertionPanel;
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add("scriptText", scriptText);
         return builder.finish();
@@ -218,7 +195,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         private JButton okButton;
         private ShowOnlineHelpAction showOnlineHelpAction;
 
-        public GroovyScriptAssertionPanel() {
+        GroovyScriptAssertionPanel() {
             super(new BorderLayout());
 
             buildUI();
@@ -232,7 +209,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
             return editor;
         }
 
-        public void release() {
+        void release() {
             editor.release();
             logger = null;
         }
@@ -269,11 +246,11 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
             add(buildStatusBar(), BorderLayout.SOUTH);
         }
 
-        public JButton getDefaultButton() {
+        JButton getDefaultButton() {
             return okButton;
         }
 
-        public ShowOnlineHelpAction getShowOnlineHelpAction() {
+        ShowOnlineHelpAction getShowOnlineHelpAction() {
             return showOnlineHelpAction;
         }
 
@@ -308,7 +285,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         }
 
         private final class OkAction extends AbstractAction {
-            public OkAction() {
+            OkAction() {
                 super("OK");
             }
 
@@ -319,7 +296,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         }
 
         private final class CancelAction extends AbstractAction {
-            public CancelAction() {
+            CancelAction() {
                 super("Cancel");
             }
 
@@ -330,7 +307,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         }
 
         private class ScriptStepGroovyEditorModel extends AbstractGroovyEditorModel {
-            public ScriptStepGroovyEditorModel() {
+            ScriptStepGroovyEditorModel() {
                 super(new String[]{"log", "context", "messageExchange"}, getAssertable().getModelItem(), "Assertion");
             }
 
@@ -348,7 +325,7 @@ public class GroovyScriptAssertion extends WsdlMessageAssertion implements Reque
         }
 
         private class RunAction extends AbstractAction {
-            public RunAction() {
+            RunAction() {
                 putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
                 putValue(Action.SHORT_DESCRIPTION,
                         "Runs this assertion script against the last messageExchange with a mock testContext");

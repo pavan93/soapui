@@ -18,7 +18,7 @@ package com.eviware.soapui.support.dnd.handlers;
 
 import com.eviware.soapui.model.ModelItem;
 
-public abstract class AbstractBeforeModelItemDropHandler<T1 extends ModelItem, T2 extends ModelItem> extends
+abstract class AbstractBeforeModelItemDropHandler<T1 extends ModelItem, T2 extends ModelItem> extends
         AbstractModelItemDropHandler<T1, T2> {
     protected AbstractBeforeModelItemDropHandler(Class<T1> sourceClass, Class<T2> targetClass) {
         super(sourceClass, targetClass);

@@ -139,7 +139,7 @@ public class SensitiveInformationPropertyHolder implements MutableTestPropertyHo
         private String name;
         private String value;
 
-        public SensitiveTokenProperty(String name, String value) {
+        SensitiveTokenProperty(String name, String value) {
             this.name = name;
             this.value = value;
         }

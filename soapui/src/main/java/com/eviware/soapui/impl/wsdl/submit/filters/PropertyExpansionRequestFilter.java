@@ -32,7 +32,7 @@ import org.apache.log4j.Logger;
  */
 
 public class PropertyExpansionRequestFilter extends AbstractRequestFilter {
-    public final static Logger log = Logger.getLogger(PropertyExpansionRequestFilter.class);
+    private final static Logger log = Logger.getLogger(PropertyExpansionRequestFilter.class);
 
     @Override
     public void filterAbstractHttpRequest(SubmitContext context, AbstractHttpRequest<?> request) {

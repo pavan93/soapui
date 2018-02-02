@@ -23,15 +23,10 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JFriendlyTextField;
 import com.smartbear.analytics.OSUserDescription;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -74,7 +69,7 @@ public class SumbitUserInfoAction {
             curLabel.setBackground(Color.WHITE);
         }
 
-        public CollectUserInfoDialog() {
+        CollectUserInfoDialog() {
             super(UISupport.getMainFrame(), DIALOG_CAPTION, true);
             setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
             setResizable(false);
@@ -230,7 +225,7 @@ public class SumbitUserInfoAction {
             return email;
         }
 
-        protected boolean handleOk() {
+        boolean handleOk() {
             if (!validateFormValues()) {
                 return false;
             }

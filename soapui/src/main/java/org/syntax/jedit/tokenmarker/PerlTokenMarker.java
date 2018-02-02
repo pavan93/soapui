@@ -16,10 +16,10 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
 import org.syntax.jedit.SyntaxUtilities;
+
+import javax.swing.text.Segment;
 
 /**
  * Perl token marker.
@@ -29,15 +29,15 @@ import org.syntax.jedit.SyntaxUtilities;
  */
 public class PerlTokenMarker extends TokenMarker {
     // public members
-    public static final byte S_ONE = Token.INTERNAL_FIRST;
-    public static final byte S_TWO = (byte) (Token.INTERNAL_FIRST + 1);
-    public static final byte S_END = (byte) (Token.INTERNAL_FIRST + 2);
+    private static final byte S_ONE = Token.INTERNAL_FIRST;
+    private static final byte S_TWO = (byte) (Token.INTERNAL_FIRST + 1);
+    private static final byte S_END = (byte) (Token.INTERNAL_FIRST + 2);
 
     public PerlTokenMarker() {
         this(getKeywords());
     }
 
-    public PerlTokenMarker(KeywordMap keywords) {
+    private PerlTokenMarker(KeywordMap keywords) {
         this.keywords = keywords;
     }
 

@@ -40,7 +40,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class RestMockServiceTest {
-    public static final String PATH = "/aNicePath";
+    private static final String PATH = "/aNicePath";
     private RestMockService restMockService;
     private RestRequest restRequest;
 

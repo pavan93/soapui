@@ -144,7 +144,7 @@ public class RestResourceTreeNode extends AbstractModelItemTreeNode<RestResource
 	 * node.requestRemoved(request); } } }
 	 */
 
-    public void methodAdded(final RestMethod method) {
+    private void methodAdded(final RestMethod method) {
         UISupport.invokeAndWaitIfNotInEDT(new Runnable() {
             @Override
             public void run() {
@@ -157,7 +157,7 @@ public class RestResourceTreeNode extends AbstractModelItemTreeNode<RestResource
         });
     }
 
-    public void methodRemoved(RestMethod method) {
+    private void methodRemoved(RestMethod method) {
         SoapUITreeNode methodTreeNode = getTreeModel().getTreeNode(method);
         if (methodNodes.contains(methodTreeNode)) {
             getTreeModel().notifyNodeRemoved(methodTreeNode);

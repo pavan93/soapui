@@ -187,7 +187,7 @@ public class CloneMockServiceAction extends AbstractSoapUIAction<WsdlMockService
     }
 
     @AForm(description = "Specify target Project and name of cloned MockService", name = "Clone MockService", helpUrl = HelpUrls.CLONEMOCKSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(name = "MockService Name", description = "The name of the cloned MockService", type = AFieldType.STRING)
         String NAME = "MockService Name";
 

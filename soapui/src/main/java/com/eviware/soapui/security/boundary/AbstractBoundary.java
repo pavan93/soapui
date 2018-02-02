@@ -21,18 +21,18 @@ package com.eviware.soapui.security.boundary;
  */
 public abstract class AbstractBoundary implements Boundary {
 
-    public static final String XSD_LENGTH = "xsd:length";
-    public static final String XSD_MAX_LENGTH = "xsd:maxLength";
-    public static final String XSD_MIN_LENGTH = "xsd:minLength";
-    public static final String XSD_MIN_INCLUSIVE = "xsd:minInclusive";
-    public static final String XSD_MAX_INCLUSIVE = "xsd:maxInclusive";
-    public static final String XSD_MIN_EXCLUSIVE = "xsd:minExclusive";
-    public static final String XSD_MAX_EXCLUSIVE = "xsd:maxExclusive";
-    public static final String XSD_TOTAL_DIGITS = "xsd:totalDigits";
-    public static final String XSD_FRACTION_DIGITS = "xsd:fractionDigits";
+    private static final String XSD_LENGTH = "xsd:length";
+    private static final String XSD_MAX_LENGTH = "xsd:maxLength";
+    private static final String XSD_MIN_LENGTH = "xsd:minLength";
+    private static final String XSD_MIN_INCLUSIVE = "xsd:minInclusive";
+    private static final String XSD_MAX_INCLUSIVE = "xsd:maxInclusive";
+    private static final String XSD_MIN_EXCLUSIVE = "xsd:minExclusive";
+    private static final String XSD_MAX_EXCLUSIVE = "xsd:maxExclusive";
+    private static final String XSD_TOTAL_DIGITS = "xsd:totalDigits";
+    private static final String XSD_FRACTION_DIGITS = "xsd:fractionDigits";
 
     // TODO: cover more simple types
-    public static Boundary factory(String type) {
+    private static Boundary factory(String type) {
         if (type == null) {
             return null;
         }

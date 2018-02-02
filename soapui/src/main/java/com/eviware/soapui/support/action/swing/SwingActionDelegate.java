@@ -26,8 +26,7 @@ import com.eviware.soapui.support.action.SoapUIAction;
 import com.eviware.soapui.support.action.SoapUIActionMapping;
 import com.eviware.soapui.support.action.support.StandaloneActionMapping;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -104,8 +103,8 @@ public class SwingActionDelegate<T extends ModelItem> extends AbstractAction imp
         }
     }
 
-    public SoapUIAction<T> getAction() {
-        return mapping.getAction();
+    private static <T extends ModelItem> SwingActionDelegate<T> createDelegate(SoapUIAction<T> action) {
+        return new SwingActionDelegate<T>(new StandaloneActionMapping<T>(action), null);
     }
 
     public T getTarget() {
@@ -134,8 +133,8 @@ public class SwingActionDelegate<T extends ModelItem> extends AbstractAction imp
         return new SwingActionDelegate<T>(new StandaloneActionMapping<T>(action), target);
     }
 
-    public static <T extends ModelItem> SwingActionDelegate<T> createDelegate(SoapUIAction<T> action) {
-        return new SwingActionDelegate<T>(new StandaloneActionMapping<T>(action), null);
+    private SoapUIAction<T> getAction() {
+        return mapping.getAction();
     }
 
     public static SwingActionDelegate<?> createDelegate(String soapUIActionId) {

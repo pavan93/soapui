@@ -59,12 +59,12 @@ public abstract class AbstractDefinitionContext<T extends AbstractInterface<?>, 
     private static Map<String, InterfaceDefinition<?>> definitionCache = new HashMap<String, InterfaceDefinition<?>>();
     private static Map<String, Integer> urlReferences = new HashMap<String, Integer>();
 
-    public AbstractDefinitionContext(String url, T iface) {
+    protected AbstractDefinitionContext(String url, T iface) {
         this.url = PathUtils.ensureFilePathIsUrl(url);
         this.iface = iface;
     }
 
-    public AbstractDefinitionContext(String url) {
+    protected AbstractDefinitionContext(String url) {
         this(url, null);
     }
 
@@ -173,70 +173,11 @@ public abstract class AbstractDefinitionContext<T extends AbstractInterface<?>, 
         return schemaException;
     }
 
-    private class Loader extends Worker.WorkerAdapter {
-        private Throwable error;
-        private T2 wsdlLoader;
-
-        public Loader(T2 wsdlLoader) {
-            super();
-            this.wsdlLoader = wsdlLoader;
-        }
-
-        private T2 getDefinitionLoader() {
-            if (wsdlLoader != null) {
-                return wsdlLoader;
-            } else {
-                return createDefinitionLoader(url);
-            }
-        }
-
-        public boolean hasError() {
-            return error != null;
-        }
-
-        public Object construct(XProgressMonitor monitor) {
-            try {
-                DefinitionCache cache = iface == null ? new StandaloneDefinitionCache<T>()
-                        : new InterfaceConfigDefinitionCache<T>(iface);
-
-                if (!cache.validate()) {
-                    monitor.setProgress(1, "Caching Definition from url [" + url + "]");
-
-                    currentLoader = getDefinitionLoader();
-                    currentLoader.setProgressMonitor(monitor, 2);
-
-                    cache.update(currentLoader);
-
-                    if (currentLoader.isAborted()) {
-                        throw new Exception("Loading of Definition from [" + url + "] was aborted");
-                    }
-                }
-
-                monitor.setProgress(1, "Loading Definition from " + (iface == null ? "url" : "cache"));
-
-                log.debug("Loading Definition...");
-                cacheDefinition(cache);
-                return null;
-            } catch (Throwable e) {
-                SoapUI.logError(e);
-                this.error = e;
-                return e;
-            } finally {
-                currentLoader = null;
-            }
-        }
-
-        public Throwable getError() {
-            return error;
-        }
-
-        public boolean onCancel() {
-            if (currentLoader == null) {
-                return false;
-            }
-
-            return currentLoader.abort();
-        }
+    protected void reload() throws Exception {
+        getDefinitionCache().clear();
+        definitionCache.remove(url);
+        loaded = false;
+        load();
     }
 
     private void cacheDefinition(DefinitionCache cache) throws Exception {
@@ -340,11 +281,70 @@ public abstract class AbstractDefinitionContext<T extends AbstractInterface<?>, 
         urlReferences.remove(url);
     }
 
-    public void reload() throws Exception {
-        getDefinitionCache().clear();
-        definitionCache.remove(url);
-        loaded = false;
-        load();
+    private class Loader extends Worker.WorkerAdapter {
+        private Throwable error;
+        private T2 wsdlLoader;
+
+        Loader(T2 wsdlLoader) {
+            super();
+            this.wsdlLoader = wsdlLoader;
+        }
+
+        private T2 getDefinitionLoader() {
+            if (wsdlLoader != null) {
+                return wsdlLoader;
+            } else {
+                return createDefinitionLoader(url);
+            }
+        }
+
+        boolean hasError() {
+            return error != null;
+        }
+
+        public Object construct(XProgressMonitor monitor) {
+            try {
+                DefinitionCache cache = iface == null ? new StandaloneDefinitionCache<T>()
+                        : new InterfaceConfigDefinitionCache<T>(iface);
+
+                if (!cache.validate()) {
+                    monitor.setProgress(1, "Caching Definition from url [" + url + "]");
+
+                    currentLoader = getDefinitionLoader();
+                    currentLoader.setProgressMonitor(monitor, 2);
+
+                    cache.update(currentLoader);
+
+                    if (currentLoader.isAborted()) {
+                        throw new Exception("Loading of Definition from [" + url + "] was aborted");
+                    }
+                }
+
+                monitor.setProgress(1, "Loading Definition from " + (iface == null ? "url" : "cache"));
+
+                log.debug("Loading Definition...");
+                cacheDefinition(cache);
+                return null;
+            } catch (Throwable e) {
+                SoapUI.logError(e);
+                this.error = e;
+                return e;
+            } finally {
+                currentLoader = null;
+            }
+        }
+
+        Throwable getError() {
+            return error;
+        }
+
+        public boolean onCancel() {
+            if (currentLoader == null) {
+                return false;
+            }
+
+            return currentLoader.abort();
+        }
     }
 
     public boolean isCached() {

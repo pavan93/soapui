@@ -21,7 +21,7 @@ package com.eviware.soapui.plugins;
  * cleanup is required when uninstalling a plugin (apart from removing all the factories, actions etc. that it has
  * added to SoapUI), the interface can be implemented with a no-op method.
  */
-public interface UninstallablePlugin extends Plugin {
+interface UninstallablePlugin extends Plugin {
 
     /**
      * Should return true if uninstall was successful and SoapUI does not need to be restarted.

@@ -45,7 +45,7 @@ public class AddJMSEndpointAction extends AbstractSoapUIAction<AbstractInterface
     private static final String SEND = "Send/Publish destination";
     private static final String RECEIVE = "Receive/Subscribe destination";
     private XForm mainForm;
-    List<Destination> destinationNameList;
+    private List<Destination> destinationNameList;
 
     public AddJMSEndpointAction() {
         super("Add JMS endpoint", "Wizard for creating JMS endpoint");
@@ -155,7 +155,7 @@ public class AddJMSEndpointAction extends AbstractSoapUIAction<AbstractInterface
 
     }
 
-    protected XFormDialog buildDialog(final AbstractInterface<?> iface) {
+    private XFormDialog buildDialog(final AbstractInterface<?> iface) {
         if (iface == null) {
             return null;
         }
@@ -228,7 +228,7 @@ public class AddJMSEndpointAction extends AbstractSoapUIAction<AbstractInterface
     }
 
     private class Destination {
-        public Destination(String destinationName, Domain domain) {
+        Destination(String destinationName, Domain domain) {
             this.domain = domain;
             if (destinationName.equals(JMSEndpoint.JMS_EMPTY_DESTIONATION) || destinationName.equals("")) {
                 this.destinationName = destinationName;
@@ -245,7 +245,7 @@ public class AddJMSEndpointAction extends AbstractSoapUIAction<AbstractInterface
         private String destinationName;
         private Domain domain;
 
-        public String getDestinationName() {
+        String getDestinationName() {
             return destinationName;
         }
 

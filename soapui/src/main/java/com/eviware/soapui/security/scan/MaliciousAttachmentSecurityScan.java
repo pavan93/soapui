@@ -71,7 +71,7 @@ public class MaliciousAttachmentSecurityScan extends AbstractSecurityScan implem
     /**
      * Default malicious attachment configuration
      */
-    protected void initConfig() {
+    private void initConfig() {
         getConfig().setConfig(MaliciousAttachmentSecurityScanConfig.Factory.newInstance());
         config = (MaliciousAttachmentSecurityScanConfig) getConfig().getConfig();
     }

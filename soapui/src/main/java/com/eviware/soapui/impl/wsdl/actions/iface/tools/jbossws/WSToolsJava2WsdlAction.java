@@ -19,12 +19,7 @@ package com.eviware.soapui.impl.wsdl.actions.iface.tools.jbossws;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.WsdlInterfaceFactory;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.AbstractToolsAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ArgumentBuilder;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessToolRunner;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.RunnerContext;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ShowConfigFileAction;
-import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ToolHost;
+import com.eviware.soapui.impl.wsdl.actions.iface.tools.support.*;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.settings.ToolsSettings;
@@ -177,7 +172,7 @@ public class WSToolsJava2WsdlAction extends AbstractToolsAction<WsdlProject> {
         private final String serviceName;
         private final WsdlProject project;
 
-        public ToolRunner(ProcessBuilder builder, File outDir, String serviceName, WsdlProject modelItem) {
+        ToolRunner(ProcessBuilder builder, File outDir, String serviceName, WsdlProject modelItem) {
             super(builder, "JBossWS wstools", modelItem);
             this.outDir = outDir;
             this.serviceName = serviceName;

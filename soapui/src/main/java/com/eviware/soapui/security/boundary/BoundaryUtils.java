@@ -54,7 +54,7 @@ public class BoundaryUtils {
      * @param availableValues
      * @return character
      */
-    public static String randomCharacter(String availableValues) {
+    private static String randomCharacter(String availableValues) {
         int position = (int) (Math.random() * availableValues.length());
         return availableValues.substring(position, position + 1);
     }

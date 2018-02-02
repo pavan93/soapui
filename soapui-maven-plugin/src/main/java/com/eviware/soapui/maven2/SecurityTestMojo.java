@@ -29,7 +29,7 @@ import java.util.Properties;
  * 
  * @goal security-test
  */
-public class SecurityTestMojo extends AbstractMojo
+class SecurityTestMojo extends AbstractMojo
 {
 
 	public void execute() throws MojoExecutionException, MojoFailureException

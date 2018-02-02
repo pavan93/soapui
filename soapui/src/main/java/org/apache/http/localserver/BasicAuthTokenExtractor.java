@@ -51,7 +51,7 @@ import org.apache.http.ProtocolException;
 import org.apache.http.auth.AUTH;
 import org.apache.http.util.EncodingUtils;
 
-public class BasicAuthTokenExtractor {
+class BasicAuthTokenExtractor {
 
     public String extract(final HttpRequest request) throws HttpException {
         String auth = null;

@@ -51,20 +51,20 @@ import java.util.List;
 @ActionConfiguration(targetType = WsdlInterface.class)
 public class WSIAnalyzeAction extends AbstractToolsAction<Interface> {
     public final static String SOAPUI_ACTION_ID = "WSIAnalyzeAction";
-    public final static Logger log = Logger.getLogger(WSIAnalyzeAction.class);
+    private final static Logger log = Logger.getLogger(WSIAnalyzeAction.class);
 
     public static final String WSI_ANALYZER_CONFIG = "wsi-analyzer-config";
     public static final String ANALYZER_V10_NAME = "analyzerV10";
     public static final String ANALYZER_V11_NAME = "analyzerV11";
     public static final String WSI_REPORT_NAME = "wsi-report";
-    public static final String REPORT_TEMPLATE_FILE_NAME = "report.xsl";
+    private static final String REPORT_TEMPLATE_FILE_NAME = "report.xsl";
     public static final String WSI_HOME_ENV_VAR_NAME = "WSI_HOME";
     public static final String XML_EXTENSION = ".xml";
     public static final String WIN_BATCH_FILE_EXTENSION = ".bat";
     public static final String UNIX_BATCH_FILE_EXTENSION = ".sh";
     public static final String WSI_DIR_PROP_NAME = "wsi.dir";
     public static final String PROFILES_DIR_RELATED_PATH = "./profiles/";
-    public static final String HTML_EXTENSION = ".html";
+    private static final String HTML_EXTENSION = ".html";
     public static final String ALL_RESULT_TYPE = "all";
 
     private String configFile;
@@ -206,7 +206,7 @@ public class WSIAnalyzeAction extends AbstractToolsAction<Interface> {
         private File reportFile;
         private final Interface modelItem;
 
-        public WSIProcessToolRunner(ProcessBuilder builder, File reportFile, Interface modelItem) {
+        WSIProcessToolRunner(ProcessBuilder builder, File reportFile, Interface modelItem) {
             super(builder, "WSI Analyzer", modelItem);
             this.reportFile = reportFile;
             this.modelItem = modelItem;

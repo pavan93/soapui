@@ -3,7 +3,7 @@ package com.eviware.soapui.impl.rest.actions.oauth;
 import com.eviware.soapui.impl.rest.OAuth1Profile;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 
-public class OAuth1Parameters {
+class OAuth1Parameters {
     final String temporaryTokenUri;
     final String authorizationUri;
     final String redirectUri;

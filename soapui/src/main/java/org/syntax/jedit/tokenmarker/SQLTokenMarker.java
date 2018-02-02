@@ -16,9 +16,9 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
+
+import javax.swing.text.Segment;
 
 /**
  * SQL token marker.
@@ -34,10 +34,8 @@ public class SQLTokenMarker extends TokenMarker {
         this(k, false);
     }
 
-    public SQLTokenMarker(KeywordMap k, boolean tsql) {
-        keywords = k;
-        isTSQL = tsql;
-    }
+    // protected members
+    private boolean isTSQL = false;
 
     public byte markTokensImpl(byte token, Segment line, int lineIndex) {
         offset = lastOffset = lastKeyword = line.offset;
@@ -174,8 +172,10 @@ public class SQLTokenMarker extends TokenMarker {
         return token;
     }
 
-    // protected members
-    protected boolean isTSQL = false;
+    SQLTokenMarker(KeywordMap k, boolean tsql) {
+        keywords = k;
+        isTSQL = tsql;
+    }
 
     // private members
     private KeywordMap keywords;

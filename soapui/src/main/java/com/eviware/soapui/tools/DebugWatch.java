@@ -19,9 +19,9 @@ package com.eviware.soapui.tools;
 /**
  * @author joel.jonsson
  */
-public class DebugWatch {
+class DebugWatch {
     private final String name;
-    long start;
+    private long start;
 
     public DebugWatch(String name) {
         System.out.println(String.format("START %s", name));

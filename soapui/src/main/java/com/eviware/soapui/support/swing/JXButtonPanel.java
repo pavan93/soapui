@@ -16,19 +16,8 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.AbstractButton;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.DefaultButtonModel;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.KeyStroke;
-import javax.swing.LayoutFocusTraversalPolicy;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.FocusTraversalPolicy;
-import java.awt.KeyboardFocusManager;
-import java.awt.LayoutManager;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -130,7 +119,7 @@ public class JXButtonPanel extends JPanel {
     /**
      * {@inheritDoc}
      */
-    public JXButtonPanel() {
+    protected JXButtonPanel() {
         super();
         init();
     }
@@ -178,7 +167,7 @@ public class JXButtonPanel extends JPanel {
      * Returns whether arrow keys should support cyclic focus traversal ordering
      * for for this JXButtonPanel.
      */
-    public boolean isCyclic() {
+    private boolean isCyclic() {
         return isCyclic;
     }
 
@@ -197,7 +186,7 @@ public class JXButtonPanel extends JPanel {
      * <p/>
      * Note: this property affects buttons which are added to a ButtonGroup
      */
-    public boolean isGroupSelectionFollowFocus() {
+    private boolean isGroupSelectionFollowFocus() {
         return isGroupSelectionFollowFocus;
     }
 
@@ -208,7 +197,7 @@ public class JXButtonPanel extends JPanel {
      * <p/>
      * Note: this property affects buttons which are added to a ButtonGroup
      */
-    public void setGroupSelectionFollowFocus(boolean groupSelectionFollowFocus) {
+    private void setGroupSelectionFollowFocus(boolean groupSelectionFollowFocus) {
         isGroupSelectionFollowFocus = groupSelectionFollowFocus;
     }
 
@@ -271,11 +260,11 @@ public class JXButtonPanel extends JPanel {
     private class JXButtonPanelFocusTraversalPolicy extends LayoutFocusTraversalPolicy {
         private boolean isAlternativeFocusMode;
 
-        public boolean isAlternativeFocusMode() {
+        boolean isAlternativeFocusMode() {
             return isAlternativeFocusMode;
         }
 
-        public void setAlternativeFocusMode(boolean alternativeFocusMode) {
+        void setAlternativeFocusMode(boolean alternativeFocusMode) {
             isAlternativeFocusMode = alternativeFocusMode;
         }
 

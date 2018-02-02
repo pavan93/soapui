@@ -25,12 +25,12 @@ import org.syntax.jedit.KeywordMap;
  * @author Juha Lindfors
  * @version $Id: IDLTokenMarker.java,v 1.2 1999/12/18 06:10:56 sp Exp $
  */
-public class IDLTokenMarker extends CTokenMarker {
+class IDLTokenMarker extends CTokenMarker {
     public IDLTokenMarker() {
         super(true, getKeywords());
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (idlKeywords == null) {
             idlKeywords = new KeywordMap(false);
 

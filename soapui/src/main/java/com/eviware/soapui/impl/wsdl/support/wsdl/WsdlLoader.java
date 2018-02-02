@@ -47,9 +47,9 @@ public abstract class WsdlLoader extends AbstractDefinitionLoader implements Wsd
     private String last;
     private String username;
     private String password;
-    protected static final Logger log = Logger.getLogger(WsdlLoader.class);
+    static final Logger log = Logger.getLogger(WsdlLoader.class);
 
-    public WsdlLoader(String url) {
+    WsdlLoader(String url) {
         this.url = url;
 
         if (!PathUtils.isFilePath(url) && !PathUtils.isRelativePath(url)) {
@@ -93,7 +93,7 @@ public abstract class WsdlLoader extends AbstractDefinitionLoader implements Wsd
         }
     }
 
-    public abstract InputStream load(String url) throws Exception;
+    protected abstract InputStream load(String url) throws Exception;
 
     public XmlObject loadXmlObject(String url, XmlOptions options) throws Exception {
         try {
@@ -167,7 +167,7 @@ public abstract class WsdlLoader extends AbstractDefinitionLoader implements Wsd
         }
     }
 
-    protected boolean isAbsoluteUrl(String tempImp) {
+    private boolean isAbsoluteUrl(String tempImp) {
         tempImp = tempImp.toUpperCase();
         return tempImp.startsWith("HTTP:") || tempImp.startsWith("HTTPS:") || tempImp.startsWith("FILE:");
     }
@@ -178,7 +178,7 @@ public abstract class WsdlLoader extends AbstractDefinitionLoader implements Wsd
         return result;
     }
 
-    public boolean hasCredentials() {
+    boolean hasCredentials() {
         return !StringUtils.isNullOrEmpty(getUsername()) && !StringUtils.isNullOrEmpty(getPassword());
         // return !StringUtils.isNullOrEmpty( username ) &&
         // !StringUtils.isNullOrEmpty( password );

@@ -41,23 +41,8 @@ import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.swing.SoapUISplitPaneUI;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToggleButton;
-import javax.swing.KeyStroke;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
@@ -87,12 +72,12 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
     private JPanel requestTabPanel;
     private JToggleButton tabsButton;
 
-    public boolean responseHasFocus;
+    private boolean responseHasFocus;
 
     private InternalPropertyChangeListener propertyChangeListener = new InternalPropertyChangeListener();
     private MockResponseType mockResponse;
 
-    public AbstractMockResponseDesktopPanel(ModelItemType modelItem) {
+    protected AbstractMockResponseDesktopPanel(ModelItemType modelItem) {
         super(modelItem);
     }
 
@@ -137,7 +122,7 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         return requestEditor;
     }
 
-    public final MockResponseMessageEditor getResponseEditor() {
+    protected final MockResponseMessageEditor getResponseEditor() {
         return responseEditor;
     }
 
@@ -145,7 +130,7 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         return mockRunner;
     }
 
-    protected JComponent buildStatusLabel() {
+    private JComponent buildStatusLabel() {
         statusBar = new JEditorStatusBarWithProgress();
         statusBar.setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
 
@@ -220,15 +205,15 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         return component;
     }
 
-    public boolean hasRequestEditor() {
+    protected boolean hasRequestEditor() {
         return true;
     }
 
-    public JComponent addTopEditorPanel() {
+    protected JComponent addTopEditorPanel() {
         return new JPanel();
     }
 
-    public boolean hasTopEditorPanel() {
+    protected boolean hasTopEditorPanel() {
         return false;
     }
 
@@ -245,11 +230,11 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         return new MockResponseMessageEditor(new MockResponseXmlDocument(mockResponse));
     }
 
-    protected ModelItemXmlEditor<?, ?> buildRequestEditor() {
+    private ModelItemXmlEditor<?, ?> buildRequestEditor() {
         return new MockRequestMessageEditor(new MockRequestXmlDocument(mockResponse));
     }
 
-    protected JComponent buildToolbar() {
+    private JComponent buildToolbar() {
         JXToolBar toolbar = UISupport.createToolbar();
         createToolbar(toolbar);
 
@@ -291,26 +276,8 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         }
     }
 
-    public class MockRequestMessageEditor extends RequestMessageXmlEditor<MockResponse, XmlDocument> {
-        public MockRequestMessageEditor(XmlDocument document) {
-            super(document, mockResponse);
-        }
-
-        protected XmlSourceEditorView<?> buildSourceEditor() {
-            XmlSourceEditorView<?> editor = getSourceEditor();
-            RSyntaxTextArea inputArea = editor.getInputArea();
-
-            inputArea.addFocusListener(new InputAreaFocusListener());
-
-            if (UISupport.isMac()) {
-                inputArea.getInputMap().put(KeyStroke.getKeyStroke("control meta TAB"), moveFocusAction);
-            } else {
-                inputArea.getInputMap().put(KeyStroke.getKeyStroke("control alt TAB"), moveFocusAction);
-            }
-            inputArea.getInputMap().put(KeyStroke.getKeyStroke("ctrl F4"), closePanelAction);
-
-            return editor;
-        }
+    protected void setContent(JComponent content) {
+        add(content, BorderLayout.CENTER);
     }
 
     public class MockResponseMessageEditor extends ResponseMessageXmlEditor<MockResponse, XmlDocument> {
@@ -347,7 +314,55 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
 
     }
 
-    protected final class InputAreaFocusListener implements FocusListener {
+    protected void removeContent(JComponent content) {
+        remove(content);
+    }
+
+    public boolean dependsOn(ModelItem modelItem) {
+        return modelItem == getModelItem() || modelItem == mockResponse.getMockOperation()
+                || modelItem == mockResponse.getMockOperation().getMockService()
+                || modelItem == mockResponse.getMockOperation().getMockService().getProject();
+    }
+
+    class MockRequestMessageEditor extends RequestMessageXmlEditor<MockResponse, XmlDocument> {
+        MockRequestMessageEditor(XmlDocument document) {
+            super(document, mockResponse);
+        }
+
+        protected XmlSourceEditorView<?> buildSourceEditor() {
+            XmlSourceEditorView<?> editor = getSourceEditor();
+            RSyntaxTextArea inputArea = editor.getInputArea();
+
+            inputArea.addFocusListener(new InputAreaFocusListener());
+
+            if (UISupport.isMac()) {
+                inputArea.getInputMap().put(KeyStroke.getKeyStroke("control meta TAB"), moveFocusAction);
+            } else {
+                inputArea.getInputMap().put(KeyStroke.getKeyStroke("control alt TAB"), moveFocusAction);
+            }
+            inputArea.getInputMap().put(KeyStroke.getKeyStroke("ctrl F4"), closePanelAction);
+
+            return editor;
+        }
+    }
+
+    private class ClosePanelAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
+            SoapUI.getDesktop().closeDesktopPanel(getModelItem());
+        }
+    }
+
+    private class MoveFocusAction extends AbstractAction {
+        public void actionPerformed(ActionEvent e) {
+            if (!hasRequestEditor() || requestEditor.hasFocus()) {
+                responseEditor.requestFocus();
+            } else {
+                requestEditor.requestFocus();
+            }
+        }
+    }
+
+    final class InputAreaFocusListener implements FocusListener {
         public void focusGained(FocusEvent e) {
             responseHasFocus = false;
 
@@ -380,7 +395,7 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         }
     }
 
-    protected final class ResultAreaFocusListener implements FocusListener {
+    final class ResultAreaFocusListener implements FocusListener {
         public void focusGained(FocusEvent e) {
             responseHasFocus = true;
 
@@ -415,30 +430,8 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
         }
     }
 
-    private class ClosePanelAction extends AbstractAction {
-        public void actionPerformed(ActionEvent e) {
-            SoapUI.getDesktop().closeDesktopPanel(getModelItem());
-        }
-    }
-
-    private class MoveFocusAction extends AbstractAction {
-        public void actionPerformed(ActionEvent e) {
-            if (!hasRequestEditor() || requestEditor.hasFocus()) {
-                responseEditor.requestFocus();
-            } else {
-                requestEditor.requestFocus();
-            }
-        }
-    }
-
-    public boolean dependsOn(ModelItem modelItem) {
-        return modelItem == getModelItem() || modelItem == mockResponse.getMockOperation()
-                || modelItem == mockResponse.getMockOperation().getMockService()
-                || modelItem == mockResponse.getMockOperation().getMockService().getProject();
-    }
-
     private final class ChangeToTabsAction extends AbstractAction {
-        public ChangeToTabsAction() {
+        ChangeToTabsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/toggle_tabs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Toggles to tab-based layout");
         }
@@ -469,14 +462,6 @@ public abstract class AbstractMockResponseDesktopPanel<ModelItemType extends Mod
 
             revalidate();
         }
-    }
-
-    public void setContent(JComponent content) {
-        add(content, BorderLayout.CENTER);
-    }
-
-    public void removeContent(JComponent content) {
-        remove(content);
     }
 
     public boolean onClose(boolean canCancel) {

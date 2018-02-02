@@ -51,35 +51,13 @@ import com.eviware.soapui.ui.support.ModelItemDesktopPanel;
 import org.apache.log4j.Logger;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToggleButton;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
-import java.awt.BorderLayout;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -92,9 +70,9 @@ import java.beans.PropertyChangeListener;
 public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 extends AbstractHttpRequestInterface<?>>
         extends ModelItemDesktopPanel<T> implements SubmitListener {
     private final static Logger log = Logger.getLogger(AbstractHttpRequestDesktopPanel.class);
-    public static final String END_POINT_COMBO_BOX = "EndPointComboBox";
+    private static final String END_POINT_COMBO_BOX = "EndPointComboBox";
 
-    protected EndpointsComboBoxModel endpointsModel;
+    private EndpointsComboBoxModel endpointsModel;
 
     private JButton submitButton;
     private JButton cancelButton;
@@ -136,7 +114,7 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         }
     }
 
-    public void setEndpointsModel(T2 request) {
+    private void setEndpointsModel(T2 request) {
         this.endpointsModel = new EndpointsComboBoxModel(request);
     }
 
@@ -144,19 +122,19 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         return endpointsModel;
     }
 
-    public void setEndpointComponent(JComponent endpointComponent) {
+    private void setEndpointComponent(JComponent endpointComponent) {
         this.endpointComponent = endpointComponent;
     }
 
-    public JButton getCancelButton() {
+    protected JButton getCancelButton() {
         return cancelButton;
     }
 
-    public JButton getSplitButton() {
+    protected JButton getSplitButton() {
         return splitButton;
     }
 
-    public JToggleButton getTabsButton() {
+    protected JToggleButton getTabsButton() {
         return tabsButton;
     }
 
@@ -199,15 +177,15 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         return requestEditor;
     }
 
-    public final ModelItemXmlEditor<?, ?> getResponseEditor() {
+    protected final ModelItemXmlEditor<?, ?> getResponseEditor() {
         return responseEditor;
     }
 
-    public Submit getSubmit() {
+    protected Submit getSubmit() {
         return submit;
     }
 
-    protected JComponent buildStatusLabel() {
+    private JComponent buildStatusLabel() {
         statusBar = new JEditorStatusBarWithProgress();
         statusBar.setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
 
@@ -356,7 +334,7 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         statusBar.setIndeterminate(!enabled);
     }
 
-    protected void buildLockIcon() {
+    private void buildLockIcon() {
         lockIcon = new JLabel(UISupport.createImageIcon("/lock.png"));
         lockIcon.setVisible(isAuthActivated(getRequest().getAuthType()));
         lockIcon.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -379,7 +357,7 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
 
     }
 
-    protected boolean isAuthActivated(String authType) {
+    private boolean isAuthActivated(String authType) {
         return authType != null && !(authType.equals(CredentialsConfig.AuthType.NO_AUTHORIZATION.toString()));
     }
 
@@ -483,115 +461,29 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         }
     }
 
-    protected final class InputAreaFocusListener implements FocusListener {
-        private final XmlSourceEditorView<?> sourceEditor;
-
-        public InputAreaFocusListener(XmlSourceEditorView<?> editor) {
-            this.sourceEditor = editor;
-        }
-
-        public void focusGained(FocusEvent e) {
-            responseHasFocus = false;
-
-            statusBar.setTarget(new JEditorStatusBarTargetProxy(sourceEditor.getInputArea()));
-            if (!splitButton.isEnabled()) {
-                requestTabs.setSelectedIndex(0);
-                return;
-            }
-
-            if (getModelItem().getSettings().getBoolean(UISettings.NO_RESIZE_REQUEST_EDITOR)) {
-                return;
-            }
-
-            // dont resize if split has been dragged
-            if (requestSplitPane.getUI() instanceof SoapUISplitPaneUI
-                    && ((SoapUISplitPaneUI) requestSplitPane.getUI()).hasBeenDragged()) {
-                return;
-            }
-
-            int pos = requestSplitPane.getDividerLocation();
-            if (pos >= 600) {
-                return;
-            }
-            if (requestSplitPane.getMaximumDividerLocation() > 700) {
-                requestSplitPane.setDividerLocation(600);
-            } else {
-                requestSplitPane.setDividerLocation(0.8);
-            }
-        }
-
-        public void focusLost(FocusEvent e) {
-        }
+    protected void setContent(JComponent content) {
+        add(content, BorderLayout.CENTER);
     }
 
-    protected final class ResultAreaFocusListener implements FocusListener {
-        private final XmlSourceEditorView<?> sourceEditor;
-
-        public ResultAreaFocusListener(XmlSourceEditorView<?> editor) {
-            this.sourceEditor = editor;
-        }
-
-        public void focusGained(FocusEvent e) {
-            responseHasFocus = true;
-
-            statusBar.setTarget(new JEditorStatusBarTargetProxy(sourceEditor.getInputArea()));
-            if (!splitButton.isEnabled()) {
-                requestTabs.setSelectedIndex(1);
-                return;
-            }
-
-            if (request.getSettings().getBoolean(UISettings.NO_RESIZE_REQUEST_EDITOR)) {
-                return;
-            }
-
-            // dont resize if split has been dragged or result is empty
-            if (requestSplitPane.getUI() instanceof SoapUISplitPaneUI
-                    && ((SoapUISplitPaneUI) requestSplitPane.getUI()).hasBeenDragged() || request.getResponse() == null) {
-                return;
-            }
-
-            int pos = requestSplitPane.getDividerLocation();
-            int maximumDividerLocation = requestSplitPane.getMaximumDividerLocation();
-            if (pos + 600 < maximumDividerLocation) {
-                return;
-            }
-
-            if (maximumDividerLocation > 700) {
-                requestSplitPane.setDividerLocation(maximumDividerLocation - 600);
-            } else {
-                requestSplitPane.setDividerLocation(0.2);
-            }
-        }
-
-        public void focusLost(FocusEvent e) {
-        }
+    protected void removeContent(JComponent content) {
+        remove(content);
     }
 
-    public class SubmitAction extends AbstractAction {
-        public SubmitAction() {
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/submit_request.gif"));
-            putValue(Action.SHORT_DESCRIPTION, "Submit request to specified endpoint URL (Alt-Enter)");
-            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt ENTER"));
+    private void onCancel() {
+        if (submit == null) {
+            return;
         }
 
-        public void actionPerformed(ActionEvent e) {
-            onSubmit();
-        }
+        cancelButton.setEnabled(false);
+        submit.cancel();
+        setEnabled(true);
+        submit = null;
     }
 
     protected abstract Submit doSubmit() throws SubmitException;
 
-    private class CancelAction extends AbstractAction {
-        public CancelAction() {
-            super();
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
-            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            onCancel();
-        }
+    protected boolean isHasClosed() {
+        return hasClosed;
     }
 
     private class ClosePanelAction extends AbstractAction {
@@ -749,8 +641,153 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
         return request.dependsOn(modelItem);
     }
 
+    final class InputAreaFocusListener implements FocusListener {
+        private final XmlSourceEditorView<?> sourceEditor;
+
+        InputAreaFocusListener(XmlSourceEditorView<?> editor) {
+            this.sourceEditor = editor;
+        }
+
+        public void focusGained(FocusEvent e) {
+            responseHasFocus = false;
+
+            statusBar.setTarget(new JEditorStatusBarTargetProxy(sourceEditor.getInputArea()));
+            if (!splitButton.isEnabled()) {
+                requestTabs.setSelectedIndex(0);
+                return;
+            }
+
+            if (getModelItem().getSettings().getBoolean(UISettings.NO_RESIZE_REQUEST_EDITOR)) {
+                return;
+            }
+
+            // dont resize if split has been dragged
+            if (requestSplitPane.getUI() instanceof SoapUISplitPaneUI
+                    && ((SoapUISplitPaneUI) requestSplitPane.getUI()).hasBeenDragged()) {
+                return;
+            }
+
+            int pos = requestSplitPane.getDividerLocation();
+            if (pos >= 600) {
+                return;
+            }
+            if (requestSplitPane.getMaximumDividerLocation() > 700) {
+                requestSplitPane.setDividerLocation(600);
+            } else {
+                requestSplitPane.setDividerLocation(0.8);
+            }
+        }
+
+        public void focusLost(FocusEvent e) {
+        }
+    }
+
+    private void showTabbedView(boolean respFocus) {
+        removeContent(requestSplitPane);
+        setContent(requestTabPanel);
+        requestTabs.addTab("Request", requestEditor);
+
+        if (responseEditor != null) {
+            requestTabs.addTab("Response", responseEditor);
+        }
+
+        if (respFocus) {
+            requestTabs.setSelectedIndex(1);
+            requestEditor.requestFocus();
+        }
+    }
+
+    public void focusResponseInTabbedView(boolean respFocus) {
+        showTabbedView(respFocus);
+        getResponseEditor().selectView(2);
+    }
+
+    final class ResultAreaFocusListener implements FocusListener {
+        private final XmlSourceEditorView<?> sourceEditor;
+
+        ResultAreaFocusListener(XmlSourceEditorView<?> editor) {
+            this.sourceEditor = editor;
+        }
+
+        public void focusGained(FocusEvent e) {
+            responseHasFocus = true;
+
+            statusBar.setTarget(new JEditorStatusBarTargetProxy(sourceEditor.getInputArea()));
+            if (!splitButton.isEnabled()) {
+                requestTabs.setSelectedIndex(1);
+                return;
+            }
+
+            if (request.getSettings().getBoolean(UISettings.NO_RESIZE_REQUEST_EDITOR)) {
+                return;
+            }
+
+            // dont resize if split has been dragged or result is empty
+            if (requestSplitPane.getUI() instanceof SoapUISplitPaneUI
+                    && ((SoapUISplitPaneUI) requestSplitPane.getUI()).hasBeenDragged() || request.getResponse() == null) {
+                return;
+            }
+
+            int pos = requestSplitPane.getDividerLocation();
+            int maximumDividerLocation = requestSplitPane.getMaximumDividerLocation();
+            if (pos + 600 < maximumDividerLocation) {
+                return;
+            }
+
+            if (maximumDividerLocation > 700) {
+                requestSplitPane.setDividerLocation(maximumDividerLocation - 600);
+            } else {
+                requestSplitPane.setDividerLocation(0.2);
+            }
+        }
+
+        public void focusLost(FocusEvent e) {
+        }
+    }
+
+    public class SubmitAction extends AbstractAction {
+        SubmitAction() {
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/submit_request.gif"));
+            putValue(Action.SHORT_DESCRIPTION, "Submit request to specified endpoint URL (Alt-Enter)");
+            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt ENTER"));
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            onSubmit();
+        }
+    }
+
+    protected void onSubmit() {
+        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
+            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
+                submit.cancel();
+            } else {
+                return;
+            }
+        }
+
+        try {
+            submit = doSubmit();
+        } catch (SubmitException e1) {
+            SoapUI.logError(e1);
+        }
+    }
+
+    private class CancelAction extends AbstractAction {
+        CancelAction() {
+            super();
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
+            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            onCancel();
+        }
+    }
+
     private final class ChangeToTabsAction extends AbstractAction {
-        public ChangeToTabsAction() {
+        ChangeToTabsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/toggle_tabs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Toggles to tab-based layout");
         }
@@ -780,65 +817,6 @@ public abstract class AbstractHttpRequestDesktopPanel<T extends ModelItem, T2 ex
 
             revalidate();
         }
-    }
-
-    private void showTabbedView(boolean respFocus) {
-        removeContent(requestSplitPane);
-        setContent(requestTabPanel);
-        requestTabs.addTab("Request", requestEditor);
-
-        if (responseEditor != null) {
-            requestTabs.addTab("Response", responseEditor);
-        }
-
-        if (respFocus) {
-            requestTabs.setSelectedIndex(1);
-            requestEditor.requestFocus();
-        }
-    }
-
-    public void focusResponseInTabbedView(boolean respFocus) {
-        showTabbedView(respFocus);
-        getResponseEditor().selectView(2);
-    }
-
-    public void setContent(JComponent content) {
-        add(content, BorderLayout.CENTER);
-    }
-
-    public void removeContent(JComponent content) {
-        remove(content);
-    }
-
-    protected void onSubmit() {
-        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
-            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
-                submit.cancel();
-            } else {
-                return;
-            }
-        }
-
-        try {
-            submit = doSubmit();
-        } catch (SubmitException e1) {
-            SoapUI.logError(e1);
-        }
-    }
-
-    protected void onCancel() {
-        if (submit == null) {
-            return;
-        }
-
-        cancelButton.setEnabled(false);
-        submit.cancel();
-        setEnabled(true);
-        submit = null;
-    }
-
-    public boolean isHasClosed() {
-        return hasClosed;
     }
 
     protected void enableEndpointCombo(final JComboBox endpointCombo, WsdlProject project) {

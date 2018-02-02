@@ -36,7 +36,7 @@ import java.util.*;
  */
 public class PluginLoader extends LoaderBase {
 
-    public static Logger log = Logger.getLogger(PluginLoader.class);
+    private static Logger log = Logger.getLogger(PluginLoader.class);
 
     public PluginLoader(SoapUIFactoryRegistry factoryRegistry,
                         SoapUIActionRegistry actionRegistry, ListenerRegistry listenerRegistry) {
@@ -195,7 +195,7 @@ public class PluginLoader extends LoaderBase {
         }
     }
 
-    static PluginInfo readPluginInfoFromAnnotation(PluginConfiguration annotation) {
+    private static PluginInfo readPluginInfoFromAnnotation(PluginConfiguration annotation) {
         PluginId id = new PluginId(annotation.groupId(), annotation.name());
         Version version = Version.fromString(annotation.version());
         String infoUrl = annotation.infoUrl();
@@ -222,8 +222,8 @@ public class PluginLoader extends LoaderBase {
         private final List<SoapUIAction> actions;
         private final List<Class<? extends SoapUIListener>> listeners;
 
-        public LoadedPlugin(Plugin plugin, Collection<SoapUIFactory> factories, List<SoapUIAction> actions,
-                            List<Class<? extends SoapUIListener>> listeners) {
+        LoadedPlugin(Plugin plugin, Collection<SoapUIFactory> factories, List<SoapUIAction> actions,
+                     List<Class<? extends SoapUIListener>> listeners) {
             this.plugin = plugin;
             this.factories = factories;
             this.actions = actions;

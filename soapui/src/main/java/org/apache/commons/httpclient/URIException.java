@@ -101,7 +101,7 @@ public class URIException extends HttpException {
     /**
      * No specified reason code.
      */
-    public static final int UNKNOWN = 0;
+    private static final int UNKNOWN = 0;
 
 
     /**
@@ -132,13 +132,13 @@ public class URIException extends HttpException {
     /**
      * The reason code.
      */
-    protected int reasonCode;
+    private int reasonCode;
 
 
     /**
      * The reason message.
      */
-    protected String reason;
+    private String reason;
 
     // ---------------------------------------------------------------- methods
 

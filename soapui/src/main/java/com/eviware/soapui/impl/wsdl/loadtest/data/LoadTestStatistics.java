@@ -22,25 +22,16 @@ import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.support.LoadTestRunListenerAdapter;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.types.StringList;
 import org.apache.log4j.Logger;
 
 import javax.swing.table.AbstractTableModel;
-import java.awt.Color;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.EmptyStackException;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -52,7 +43,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 
 public final class LoadTestStatistics extends AbstractTableModel implements Runnable {
-    public final static String NO_STATS_TESTCASE_CANCEL_REASON = "NO_STATS_TESTCASE_CANCEL_REASON";
+    private final static String NO_STATS_TESTCASE_CANCEL_REASON = "NO_STATS_TESTCASE_CANCEL_REASON";
     private final static Logger log = Logger.getLogger(LoadTestStatistics.class);
 
     private final WsdlLoadTest loadTest;
@@ -224,8 +215,8 @@ public final class LoadTestStatistics extends AbstractTableModel implements Runn
         }
     }
 
-    public void pushSamples(long[] samples, long[] sizes, long[] sampleCounts, long startTime, long timeTaken,
-                            boolean complete) {
+    private void pushSamples(long[] samples, long[] sizes, long[] sampleCounts, long startTime, long timeTaken,
+                             boolean complete) {
         if (!running || samples.length == 0 || sizes.length == 0) {
             return;
         }
@@ -669,8 +660,8 @@ public final class LoadTestStatistics extends AbstractTableModel implements Runn
         private final long timeTaken;
         private final boolean complete;
 
-        public SamplesHolder(long[] samples, long[] sizes, long[] sampleCounts, long startTime, long timeTaken,
-                             boolean complete) {
+        SamplesHolder(long[] samples, long[] sizes, long[] sampleCounts, long startTime, long timeTaken,
+                      boolean complete) {
             this.samples = samples;
             this.sizes = sizes;
             this.startTime = startTime;

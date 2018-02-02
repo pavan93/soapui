@@ -102,7 +102,7 @@ public final class RestProjectUtils {
         return locateMethodEditor(rootWindow);
     }
 
-    public static JPanelFixture locateMethodEditor(FrameFixture rootWindow) {
+    private static JPanelFixture locateMethodEditor(FrameFixture rootWindow) {
         return rootWindow.panel(RestMethodDesktopPanel.REST_METHOD_EDITOR);
     }
 
@@ -113,7 +113,7 @@ public final class RestProjectUtils {
         return locateResourceEditor(rootWindow);
     }
 
-    public static JPanelFixture locateResourceEditor(FrameFixture rootWindow) {
+    private static JPanelFixture locateResourceEditor(FrameFixture rootWindow) {
         return rootWindow.panel(RestResourceDesktopPanel.REST_RESOURCE_EDITOR);
     }
 
@@ -234,7 +234,7 @@ public final class RestProjectUtils {
         enterURIandClickOk(robot, URI);
     }
 
-    public static void enterURIandClickOk(Robot robot, String uri) {
+    private static void enterURIandClickOk(Robot robot, String uri) {
         DialogFixture newProjectDialog = FestMatchers.dialogWithTitle(NEW_REST_PROJECT_DIALOG_NAME)
                 .withTimeout(NEW_PROJECT_TIMEOUT)
                 .using(robot);
@@ -294,7 +294,7 @@ public final class RestProjectUtils {
 
     }
 
-    public static void createNewRESTMethod(Robot robot, String methodName) {
+    private static void createNewRESTMethod(Robot robot, String methodName) {
         DialogFixture newMethodDialog = FestMatchers.dialogWithTitle("New REST Method").using(robot);
         newMethodDialog.textBox().setText(methodName);
         newMethodDialog.button(FestMatchers.buttonWithText("OK")).click();

@@ -85,8 +85,8 @@ public class ActionListBuilder {
      */
 
     @SuppressWarnings({"unchecked"})
-    protected static <T extends ModelItem> void addActions(T modelItem, ActionList actions,
-                                                           SoapUIActionGroup<T> actionGroup) {
+    private static <T extends ModelItem> void addActions(T modelItem, ActionList actions,
+                                                         SoapUIActionGroup<T> actionGroup) {
         boolean prevWasSeparator = false;
         for (SoapUIActionMapping<? extends ModelItem> mapping : actionGroup.getActionMappings(modelItem)) {
             if (mapping == null) {
@@ -141,7 +141,7 @@ public class ActionListBuilder {
      */
 
     @SuppressWarnings({"unchecked"})
-    protected static void addMultiActions(ModelItem[] modelItems, ActionList actions, SoapUIActionGroup actionGroup) {
+    private static void addMultiActions(ModelItem[] modelItems, ActionList actions, SoapUIActionGroup actionGroup) {
         boolean prevWasSeparator = false;
         SoapUIActionMappingList actionMappings = actionGroup.getActionMappings(null);
         for (int c = 0; c < actionMappings.size(); c++) {

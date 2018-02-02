@@ -28,12 +28,8 @@ import com.eviware.soapui.support.components.WebViewBasedBrowserComponentFactory
 import com.eviware.soapui.support.editor.EditorLocation;
 import com.eviware.soapui.support.editor.views.AbstractXmlEditorView;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -109,7 +105,7 @@ public class HttpHtmlResponseView extends AbstractXmlEditorView<HttpResponseDocu
         messageExchangeModelItem = null;
     }
 
-    protected void setEditorContent(HttpResponse httpResponse) {
+    private void setEditorContent(HttpResponse httpResponse) {
         if (httpResponse == null || SoapUI.isBrowserDisabled()) {
             return;
         }

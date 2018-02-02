@@ -136,7 +136,7 @@ public class AMFSubmit implements Submit, Runnable {
         }
     }
 
-    protected void createResponse(Object responseContent) {
+    private void createResponse(Object responseContent) {
         try {
             response = new AMFResponse(request, context, responseContent);
             response.setTimestamp(timestamp);

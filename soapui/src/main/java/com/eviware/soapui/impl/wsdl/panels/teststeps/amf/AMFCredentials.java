@@ -23,9 +23,9 @@ import flex.messaging.io.amf.client.exceptions.ServerStatusException;
 import flex.messaging.messages.CommandMessage;
 import flex.messaging.util.Base64.Encoder;
 
-public class AMFCredentials {
+class AMFCredentials {
 
-    public static final String DESTINATION = "auth";
+    private static final String DESTINATION = "auth";
     private String endpoint;
     private String username;
     private String password;

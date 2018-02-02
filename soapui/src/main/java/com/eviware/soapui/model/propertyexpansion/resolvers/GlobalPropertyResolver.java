@@ -29,12 +29,7 @@ import org.apache.xmlbeans.XmlBeans;
 import org.apache.xmlbeans.XmlString;
 
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class GlobalPropertyResolver implements PropertyResolver {
     public class EnvironmentPropertyHolder implements TestPropertyHolder {
@@ -110,7 +105,7 @@ public class GlobalPropertyResolver implements PropertyResolver {
         private class SystemEnviromentTestProperty implements TestProperty {
             private final Object key;
 
-            public SystemEnviromentTestProperty(Object key) {
+            SystemEnviromentTestProperty(Object key) {
                 this.key = key;
             }
 
@@ -232,7 +227,7 @@ public class GlobalPropertyResolver implements PropertyResolver {
         private class SystemTestProperty implements TestProperty {
             private final Object key;
 
-            public SystemTestProperty(Object key) {
+            SystemTestProperty(Object key) {
                 this.key = key;
             }
 

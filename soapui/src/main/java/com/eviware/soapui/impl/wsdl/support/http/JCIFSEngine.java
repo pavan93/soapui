@@ -25,7 +25,7 @@ import org.apache.http.impl.auth.NTLMEngineException;
 
 import java.io.IOException;
 
-public class JCIFSEngine implements NTLMEngine {
+class JCIFSEngine implements NTLMEngine {
 
     public String generateType1Msg(String domain, String workstation) {
         Type1Message t1m = new Type1Message(Type1Message.getDefaultFlags(), domain, workstation);

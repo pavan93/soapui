@@ -23,16 +23,8 @@ import com.eviware.x.dialogs.XProgressDialog;
 import com.eviware.x.dialogs.XProgressMonitor;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.HeadlessException;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -129,7 +121,7 @@ public class ProgressDialog extends JDialog implements XProgressDialog, XProgres
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             super("Cancel");
         }
 

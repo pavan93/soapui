@@ -21,22 +21,12 @@ import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.components.JUndoableTextField;
-import com.eviware.x.form.XForm;
-import com.eviware.x.form.XFormDialog;
-import com.eviware.x.form.XFormDialogBuilder;
-import com.eviware.x.form.XFormFactory;
-import com.eviware.x.form.XFormField;
+import com.eviware.x.form.*;
 import com.eviware.x.impl.swing.JTextFieldFormField;
 
-import javax.swing.AbstractAction;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Constructs dialogs for inputting REST URIs and manages state in an open dialog.
@@ -64,7 +54,7 @@ public class RestUriDialogHandler {
         return buildDialog(messages, helpUrl, null);
     }
 
-    public XFormDialog buildDialog(MessageSupport messages, String helpUrl, AbstractAction actionToBeAdded) {
+    private XFormDialog buildDialog(MessageSupport messages, String helpUrl, AbstractAction actionToBeAdded) {
         XFormDialogBuilder newDialogBuilder = XFormFactory.createDialogBuilder(messages.get("Title"));
         XForm form = newDialogBuilder.createForm("");
         uriLabelKey = messages.get("Form.URI.Label");

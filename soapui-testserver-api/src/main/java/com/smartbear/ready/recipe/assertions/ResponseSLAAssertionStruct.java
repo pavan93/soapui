@@ -11,9 +11,9 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures the JSON configuration of a Response SLA assertion.
  */
 @ApiModel(value = "ResponseSLAAssertion", description = "Response SLA assertion definition")
-public class ResponseSLAAssertionStruct extends AssertionStruct<ResponseSLAAssertion> {
+class ResponseSLAAssertionStruct extends AssertionStruct<ResponseSLAAssertion> {
 
-    public final String maxResponseTime;
+    private final String maxResponseTime;
 
     @JsonCreator
     public ResponseSLAAssertionStruct(@JsonProperty("name") String name, @JsonProperty("maxResponseTime") String maxResponseTime) {

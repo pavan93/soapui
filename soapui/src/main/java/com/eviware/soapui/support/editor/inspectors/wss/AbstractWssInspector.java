@@ -22,20 +22,15 @@ import com.eviware.soapui.support.editor.inspectors.AbstractXmlInspector;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.editor.xml.XmlLocation;
 
-import javax.swing.AbstractListModel;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.util.Vector;
 
 public abstract class AbstractWssInspector extends AbstractXmlInspector {
     private JPanel mainPanel;
     private JList resultList;
 
-    protected AbstractWssInspector() {
+    AbstractWssInspector() {
         super("WSS", "Displays WS-Security information for this response", true, WssInspectorFactory.INSPECTOR_ID);
     }
 
@@ -65,9 +60,9 @@ public abstract class AbstractWssInspector extends AbstractXmlInspector {
         return new JScrollPane(resultList);
     }
 
-    public abstract Vector<?> getWssResults();
+    protected abstract Vector<?> getWssResults();
 
-    public void update() {
+    void update() {
         resultList.setModel(new ResultVectorListModel(getWssResults()));
         int size = resultList.getModel().getSize();
         setTitle("WSS (" + size + ")");
@@ -77,7 +72,7 @@ public abstract class AbstractWssInspector extends AbstractXmlInspector {
     private static class ResultVectorListModel extends AbstractListModel {
         private final Vector<?> result;
 
-        public ResultVectorListModel(Vector<?> result) {
+        ResultVectorListModel(Vector<?> result) {
             this.result = result;
         }
 

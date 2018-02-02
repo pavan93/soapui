@@ -30,9 +30,9 @@ public abstract class AbstractSecurityScanFactory implements SecurityScanFactory
     private final String type;
     private final String name;
     private final String description;
-    protected final String pathToIcon;
+    private final String pathToIcon;
 
-    public AbstractSecurityScanFactory(String typeName, String name, String description, String pathToIcon) {
+    AbstractSecurityScanFactory(String typeName, String name, String description, String pathToIcon) {
         this.type = typeName;
         this.name = name;
         this.description = description;

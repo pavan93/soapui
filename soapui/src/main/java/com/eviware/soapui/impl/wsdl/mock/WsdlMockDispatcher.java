@@ -161,7 +161,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         }
     }
 
-    public WsdlMockResult dispatchPostRequest(WsdlMockRequest mockRequest) throws Exception {
+    private WsdlMockResult dispatchPostRequest(WsdlMockRequest mockRequest) throws Exception {
         WsdlMockResult result = null;
 
         try {
@@ -243,7 +243,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         return null;
     }
 
-    protected void dispatchWsdlRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void dispatchWsdlRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         if (request.getQueryString().equalsIgnoreCase("WSDL")) {
             printWsdl(response);
             return;
@@ -276,7 +276,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         mockContext.clear();
     }
 
-    public void printWsdl(HttpServletResponse response) throws IOException {
+    private void printWsdl(HttpServletResponse response) throws IOException {
         WsdlInterface[] mockedInterfaces = mockService.getMockedInterfaces();
         if (mockedInterfaces.length == 1) {
             StringToStringMap parts = wsdlCache.get(mockedInterfaces[0].getName());
@@ -307,7 +307,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         }
     }
 
-    public void printOkXmlResult(HttpServletResponse response, String content) throws IOException {
+    private void printOkXmlResult(HttpServletResponse response, String content) throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("text/xml");
         response.setCharacterEncoding("UTF-8");
@@ -315,7 +315,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
     }
 
 
-    public void printPartList(WsdlInterface iface, StringToStringMap parts, HttpServletResponse response)
+    private void printPartList(WsdlInterface iface, StringToStringMap parts, HttpServletResponse response)
             throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("text/html");
@@ -336,7 +336,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         out.print("</ul></p></body></html>");
     }
 
-    public void printInterfaceList(HttpServletResponse response) throws IOException {
+    private void printInterfaceList(HttpServletResponse response) throws IOException {
         response.setStatus(HttpServletResponse.SC_OK);
         response.setContentType("text/html");
 
@@ -352,7 +352,7 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         out.print("</ul></p></body></html>");
     }
 
-    public void returnFile(HttpServletResponse response, File file) throws IOException {
+    private void returnFile(HttpServletResponse response, File file) throws IOException {
         FileInputStream in = new FileInputStream(file);
         response.setStatus(HttpServletResponse.SC_OK);
         long length = file.length();
@@ -362,12 +362,12 @@ public class WsdlMockDispatcher extends AbstractMockDispatcher {
         in.close();
     }
 
-    public String getInterfacePrefix(Interface iface) {
+    private String getInterfacePrefix(Interface iface) {
         String wsdlPrefix = getOverviewUrl() + "&interface=" + iface.getName();
         return wsdlPrefix;
     }
 
-    public String getOverviewUrl() {
+    private String getOverviewUrl() {
         return mockService.getPath() + "?WSDL";
     }
 

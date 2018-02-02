@@ -36,12 +36,12 @@ import java.util.Collections;
 
 public class DefaultPropertyHolderTableModel<T extends TestPropertyHolder> extends AbstractTableModel implements PropertyHolderTableModel,
         EnvironmentListener, PropertyChangeListener {
-    protected InternalTestPropertyListener testPropertyListener;
-    protected StringList paramNameIndex = new StringList();
+    private InternalTestPropertyListener testPropertyListener;
+    private StringList paramNameIndex = new StringList();
     protected T params;
     protected boolean isLastChangeParameterLevelChange = false;
 
-    protected DefaultPropertyHolderTableModel() {
+    DefaultPropertyHolderTableModel() {
     }
 
     public DefaultPropertyHolderTableModel(T holder) {
@@ -52,7 +52,7 @@ public class DefaultPropertyHolderTableModel<T extends TestPropertyHolder> exten
         holder.addTestPropertyListener(testPropertyListener);
     }
 
-    protected void buildParamNameIndex() {
+    private void buildParamNameIndex() {
         paramNameIndex = new StringList(getPropertyNames());
     }
 

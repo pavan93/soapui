@@ -42,16 +42,12 @@ import com.eviware.soapui.support.types.StringList;
 import org.apache.commons.httpclient.URI;
 import org.apache.http.client.methods.HttpRequestBase;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class DefaultEndpointStrategy implements EndpointStrategy, PropertyExpansionContainer {
     private WsdlProject project;
@@ -189,8 +185,8 @@ public class DefaultEndpointStrategy implements EndpointStrategy, PropertyExpans
         applyDefaultsToWsdlRequest(context, (AbstractHttpRequestInterface<?>) wsdlRequest, def);
     }
 
-    protected void applyDefaultsToWsdlRequest(SubmitContext context, AbstractHttpRequestInterface<?> wsdlRequest,
-                                              EndpointDefaults def) {
+    private void applyDefaultsToWsdlRequest(SubmitContext context, AbstractHttpRequestInterface<?> wsdlRequest,
+                                            EndpointDefaults def) {
         String requestUsername = PropertyExpander.expandProperties(context, wsdlRequest.getUsername());
         String requestPassword = PropertyExpander.expandProperties(context, wsdlRequest.getPassword());
         String requestDomain = PropertyExpander.expandProperties(context, wsdlRequest.getDomain());
@@ -378,7 +374,7 @@ public class DefaultEndpointStrategy implements EndpointStrategy, PropertyExpans
             return endpointConfig;
         }
 
-        public EndpointDefaults(EndpointConfig endpointConfig) {
+        EndpointDefaults(EndpointConfig endpointConfig) {
             this.endpointConfig = endpointConfig;
 
             if (!endpointConfig.isSetMode()) {
@@ -458,7 +454,7 @@ public class DefaultEndpointStrategy implements EndpointStrategy, PropertyExpans
             endpointConfig.setMode(mode);
         }
 
-        protected EndpointConfig getConfig() {
+        EndpointConfig getConfig() {
             return endpointConfig;
         }
 

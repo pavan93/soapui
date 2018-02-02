@@ -35,11 +35,7 @@ import com.eviware.soapui.support.resolver.ResolveDialog;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * A MockService for simulation WsdlInterfaces and their operations
@@ -51,13 +47,13 @@ public class WsdlMockService extends AbstractMockService<WsdlMockOperation, Mock
     private static final String REQUIRE_SOAP_VERSION = WsdlMockService.class.getName() + "@require-soap-version";
     private static final String REQUIRE_SOAP_ACTION = WsdlMockService.class.getName() + "@require-soap-action";
 
-    public static final String INCOMING_WSS = WsdlMockService.class.getName() + "@incoming-wss";
-    public static final String OUTGOING_WSS = WsdlMockService.class.getName() + "@outgoing-wss";
+    private static final String INCOMING_WSS = WsdlMockService.class.getName() + "@incoming-wss";
+    private static final String OUTGOING_WSS = WsdlMockService.class.getName() + "@outgoing-wss";
 
     private WsdlMockOperation faultMockOperation;
     private String mockServiceEndpoint;
     public static final String ICON_NAME = "/soap_virt.png";
-    public static final String STRING_ID = "MOCK";
+    private static final String STRING_ID = "MOCK";
 
     public String getStringID() {
         return STRING_ID;
@@ -213,7 +209,7 @@ public class WsdlMockService extends AbstractMockService<WsdlMockOperation, Mock
         return getSettings().getBoolean(REQUIRE_SOAP_ACTION);
     }
 
-    public void setRequireSoapAction(boolean requireSoapAction) {
+    private void setRequireSoapAction(boolean requireSoapAction) {
         getSettings().setBoolean(REQUIRE_SOAP_ACTION, requireSoapAction);
     }
 

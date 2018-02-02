@@ -18,50 +18,13 @@ package com.eviware.soapui.support.dnd;
 
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.support.dnd.handlers.InterfaceToProjectDropHandler;
-import com.eviware.soapui.support.dnd.handlers.MockResponseToTestCaseDropHandler;
-import com.eviware.soapui.support.dnd.handlers.MockResponseToTestStepDropHandler;
-import com.eviware.soapui.support.dnd.handlers.MockResponseToTestStepsDropHandler;
-import com.eviware.soapui.support.dnd.handlers.MockServiceToProjectDropHandler;
-import com.eviware.soapui.support.dnd.handlers.OperationToMockServiceDropHandler;
-import com.eviware.soapui.support.dnd.handlers.RequestToMockOperationDropHandler;
-import com.eviware.soapui.support.dnd.handlers.RequestToTestCaseDropHandler;
-import com.eviware.soapui.support.dnd.handlers.RequestToTestStepDropHandler;
-import com.eviware.soapui.support.dnd.handlers.RequestToTestStepsDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestCaseToProjectDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestCaseToTestCaseDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestCaseToTestSuiteDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestStepToTestCaseDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestStepToTestStepDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestStepToTestStepsDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestSuiteToProjectDropHandler;
-import com.eviware.soapui.support.dnd.handlers.TestSuiteToTestSuiteDropHandler;
+import com.eviware.soapui.support.dnd.handlers.*;
 
-import javax.swing.Timer;
-import javax.swing.ToolTipManager;
-import java.awt.AlphaComposite;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.GradientPaint;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.SystemColor;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -72,7 +35,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoapUIDragAndDropHandler implements DragGestureListener, DragSourceListener {
-    public static final int ON_RANGE = 3;
+    private static final int ON_RANGE = 3;
     private final SoapUIDragAndDropable<ModelItem> dragAndDropable;
     private BufferedImage _imgGhost; // The 'drag image'
     private Point _ptOffset = new Point(); // Where, in the drag image, the mouse
@@ -114,7 +77,7 @@ public class SoapUIDragAndDropHandler implements DragGestureListener, DragSource
     }
 
     @SuppressWarnings("unchecked")
-    public static void addDropHandler(ModelItemDropHandler dropHandler) {
+    private static void addDropHandler(ModelItemDropHandler dropHandler) {
         handlers.add(dropHandler);
     }
 
@@ -199,7 +162,7 @@ public class SoapUIDragAndDropHandler implements DragGestureListener, DragSource
         private String dropInfo;
 
         // Constructor...
-        public SoapUIDropTargetListener() {
+        SoapUIDropTargetListener() {
             _colorCueLine = new Color(SystemColor.controlShadow.getRed(), SystemColor.controlShadow.getGreen(),
                     SystemColor.controlShadow.getBlue(), 128);
 
@@ -406,7 +369,7 @@ public class SoapUIDragAndDropHandler implements DragGestureListener, DragSource
         }
 
         // Helpers...
-        public boolean isDragAcceptable(DropTargetDragEvent e, int dt) {
+        boolean isDragAcceptable(DropTargetDragEvent e, int dt) {
             // Only accept COPY or MOVE gestures (ie LINK is not supported)
             if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0) {
                 return false;
@@ -451,7 +414,7 @@ public class SoapUIDragAndDropHandler implements DragGestureListener, DragSource
             return false;
         }
 
-        public boolean isDropAcceptable(DropTargetDropEvent e, int dt) {
+        boolean isDropAcceptable(DropTargetDropEvent e, int dt) {
             // Only accept COPY or MOVE gestures (ie LINK is not supported)
             if ((e.getDropAction() & DnDConstants.ACTION_COPY_OR_MOVE) == 0) {
                 return false;

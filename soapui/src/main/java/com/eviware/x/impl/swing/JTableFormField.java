@@ -19,12 +19,9 @@ package com.eviware.x.impl.swing;
 import com.eviware.x.form.XFormTextField;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.table.TableModel;
-import java.awt.Color;
-import java.awt.Dimension;
+import java.awt.*;
 
 public class JTableFormField extends AbstractSwingXFormField<JComponent> implements XFormTextField {
     private JScrollPane scrollPane;
@@ -52,7 +49,7 @@ public class JTableFormField extends AbstractSwingXFormField<JComponent> impleme
         }
     }
 
-    public JXTable getTable() {
+    private JXTable getTable() {
         return (JXTable) super.getComponent();
     }
 

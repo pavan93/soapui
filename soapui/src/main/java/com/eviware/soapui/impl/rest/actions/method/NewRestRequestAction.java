@@ -39,10 +39,10 @@ import com.eviware.x.form.support.AForm;
 
 public class NewRestRequestAction extends AbstractSoapUIAction<RestMethod> {
     public static final String SOAPUI_ACTION_ID = "NewRestRequestAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestRequestAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestRequestAction.class);
     private XFormDialog dialog;
 
-    public NewRestRequestAction() {
+    private NewRestRequestAction() {
         super(messages.get("title"), messages.get("description"));
     }
 
@@ -67,7 +67,7 @@ public class NewRestRequestAction extends AbstractSoapUIAction<RestMethod> {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWRESTSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.ResourceName.Description", type = AFieldType.STRING)
         String RESOURCENAME = messages.get("Form.ResourceName.Label");
 

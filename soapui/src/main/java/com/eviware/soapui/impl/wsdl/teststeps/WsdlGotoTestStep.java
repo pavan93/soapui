@@ -176,7 +176,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
         private TestStep currentStep;
         private PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
 
-        public GotoCondition(GotoConditionConfig conditionConfig) {
+        GotoCondition(GotoConditionConfig conditionConfig) {
             this.conditionConfig = conditionConfig;
             initListeners();
         }
@@ -209,7 +209,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
             }
         }
 
-        public void release() {
+        void release() {
             if (currentStep != null) {
                 currentStep.removePropertyChangeListener(this);
             }
@@ -242,7 +242,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
             return false;
         }
 
-        protected void setConfig(GotoConditionConfig conditionConfig) {
+        void setConfig(GotoConditionConfig conditionConfig) {
             this.conditionConfig = conditionConfig;
         }
 
@@ -286,7 +286,7 @@ public class WsdlGotoTestStep extends WsdlTestStepWithProperties implements XPat
             propertyChangeSupport.firePropertyChange(TARGET_STEP_PROPERTY, evt.getOldValue(), evt.getNewValue());
         }
 
-        public TestProperty getSourceProperty() {
+        TestProperty getSourceProperty() {
             HttpRequestTestStep previousStep = getTestCase().findPreviousStepOfType(
                     WsdlGotoTestStep.this, HttpRequestTestStep.class);
             return previousStep == null ? null : previousStep.getProperty("Response");

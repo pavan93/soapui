@@ -32,7 +32,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 
 public class RestMockResponse extends AbstractMockResponse<RESTMockResponseConfig> implements MediaType {
-    public final static String MOCKRESULT_PROPERTY = RestMockResponse.class.getName() + "@mockresult";
+    private final static String MOCKRESULT_PROPERTY = RestMockResponse.class.getName() + "@mockresult";
     public static final String ICON_NAME = "/restMockResponse.gif";
 
     public RestMockResponse(RestMockAction action, RESTMockResponseConfig config) {
@@ -192,7 +192,7 @@ public class RestMockResponse extends AbstractMockResponse<RESTMockResponseConfi
         }
     }
 
-    protected String getEncodingValue(String[] parameters) {
+    String getEncodingValue(String[] parameters) {
         String encoding = null;
 
         for (int i = 0; i < parameters.length; i++) {

@@ -23,18 +23,16 @@ import com.eviware.soapui.support.SecurityScanUtil;
 import com.eviware.soapui.support.components.SimpleForm;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.JLabel;
-import javax.swing.JTable;
-import javax.swing.TransferHandler;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 
 public class SecurityScansPrefs implements Prefs {
 
-    public static final String GLOBAL_SENSITIVE_INFORMATION_TOKENS = "Global Sensitive Information Tokens";
+    private static final String GLOBAL_SENSITIVE_INFORMATION_TOKENS = "Global Sensitive Information Tokens";
     private SimpleForm securityScansForm;
     private final String title;
 

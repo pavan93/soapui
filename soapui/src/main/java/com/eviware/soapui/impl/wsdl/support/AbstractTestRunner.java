@@ -54,7 +54,7 @@ public abstract class AbstractTestRunner<T extends TestRunnable, T2 extends Test
     private Thread thread;
     private long timeTaken;
 
-    public AbstractTestRunner(T modelItem, StringToObjectMap properties) {
+    protected AbstractTestRunner(T modelItem, StringToObjectMap properties) {
         this.testRunnable = modelItem;
         status = Status.INITIALIZED;
         id = ++idCounter;
@@ -62,7 +62,7 @@ public abstract class AbstractTestRunner<T extends TestRunnable, T2 extends Test
         runContext = createContext(properties);
     }
 
-    public abstract T2 createContext(StringToObjectMap properties);
+    protected abstract T2 createContext(StringToObjectMap properties);
 
     public T2 getRunContext() {
         return runContext;
@@ -150,7 +150,7 @@ public abstract class AbstractTestRunner<T extends TestRunnable, T2 extends Test
         }
     }
 
-    protected void setStartTime() {
+    void setStartTime() {
         startTime = System.currentTimeMillis();
     }
 
@@ -170,7 +170,7 @@ public abstract class AbstractTestRunner<T extends TestRunnable, T2 extends Test
         this.status = status;
     }
 
-    protected void setError(Throwable error) {
+    void setError(Throwable error) {
         this.error = error;
     }
 
@@ -204,7 +204,7 @@ public abstract class AbstractTestRunner<T extends TestRunnable, T2 extends Test
         return getStatus();
     }
 
-    protected void setTimeTaken() {
+    private void setTimeTaken() {
         timeTaken = System.currentTimeMillis() - startTime;
     }
 

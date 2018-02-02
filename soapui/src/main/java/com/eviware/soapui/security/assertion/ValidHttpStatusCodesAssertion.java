@@ -51,15 +51,15 @@ import java.util.List;
  */
 
 public class ValidHttpStatusCodesAssertion extends WsdlMessageAssertion implements ResponseAssertion {
-    public static final String ID = "Valid HTTP Status Codes";
+    private static final String ID = "Valid HTTP Status Codes";
     public static final String LABEL = "Valid HTTP Status Codes";
 
     private String codes;
     private XFormDialog dialog;
     private static final String CODES = "codes";
-    public static final String DESCRIPTION = "Checks that the target TestStep received an HTTP result with a status code in the list of defined codes. Applicable to any TestStep that receives HTTP messages.";
+    private static final String DESCRIPTION = "Checks that the target TestStep received an HTTP result with a status code in the list of defined codes. Applicable to any TestStep that receives HTTP messages.";
 
-    public ValidHttpStatusCodesAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private ValidHttpStatusCodesAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, true, false, false);
 
         init();
@@ -149,7 +149,7 @@ public class ValidHttpStatusCodesAssertion extends WsdlMessageAssertion implemen
         return null;
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add(CODES, codes);
         return builder.finish();

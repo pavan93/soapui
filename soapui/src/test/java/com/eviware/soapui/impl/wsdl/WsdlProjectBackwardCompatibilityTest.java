@@ -34,7 +34,7 @@ import static org.junit.Assert.assertTrue;
 
 public class WsdlProjectBackwardCompatibilityTest {
 
-    WsdlProject project;
+    private WsdlProject project;
 
     @Before
     public void setUp() throws URISyntaxException, XmlException, IOException, SoapUIException {

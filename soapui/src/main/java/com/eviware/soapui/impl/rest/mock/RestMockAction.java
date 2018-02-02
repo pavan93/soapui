@@ -59,7 +59,7 @@ public class RestMockAction extends AbstractMockOperation<RESTMockActionConfig, 
         resource = request.getResource();
     }
 
-    public static String getIconName(RESTMockActionConfig methodConfig) {
+    private static String getIconName(RESTMockActionConfig methodConfig) {
         if (methodConfig.isSetMethod()) {
             return getIconName(methodConfig.getMethod());
         }

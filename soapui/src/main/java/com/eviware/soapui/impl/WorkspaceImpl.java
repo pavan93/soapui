@@ -56,7 +56,7 @@ import static com.eviware.soapui.impl.wsdl.WsdlProject.ProjectEncryptionStatus.N
 
 public class WorkspaceImpl extends AbstractModelItem implements Workspace {
     private final static Logger log = Logger.getLogger(WorkspaceImpl.class);
-    public static final MessageSupport messages = MessageSupport.getMessages(WorkspaceImpl.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(WorkspaceImpl.class);
 
     private List<Project> projectList = new ArrayList<Project>();
     private SoapuiWorkspaceDocumentConfig workspaceConfig;
@@ -120,7 +120,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         fireWorkspaceSwitched();
     }
 
-    public void loadWorkspace(File file) {
+    private void loadWorkspace(File file) {
         if (file.exists()) {
             log.info(messages.get("FailedToLoadWorkspaceFrom", file.getAbsolutePath()));
             workspaceConfig = SoapuiWorkspaceDocumentConfig.Factory.parse(file);
@@ -160,7 +160,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         }
     }
 
-    public void setPath(String path) {
+    private void setPath(String path) {
         this.path = path;
     }
 
@@ -342,7 +342,7 @@ public class WorkspaceImpl extends AbstractModelItem implements Workspace {
         return project;
     }
 
-    public void resolveProject(WsdlProject project) {
+    private void resolveProject(WsdlProject project) {
         if (resolver == null) {
             resolver = new ResolveDialog("Resolve Project", "Resolve imported project", null);
             resolver.setShowOkMessage(false);

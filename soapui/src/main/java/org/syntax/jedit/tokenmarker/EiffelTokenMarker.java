@@ -16,9 +16,9 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
+
+import javax.swing.text.Segment;
 
 /**
  * Eiffel token Marker.
@@ -154,7 +154,7 @@ public class EiffelTokenMarker extends TokenMarker {
         return token;
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (eiffelKeywords == null) {
             eiffelKeywords = new KeywordMap(true);
             eiffelKeywords.add("alias", Token.KEYWORD1);

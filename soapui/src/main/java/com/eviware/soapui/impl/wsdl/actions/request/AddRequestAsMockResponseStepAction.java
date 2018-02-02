@@ -53,7 +53,7 @@ public class AddRequestAsMockResponseStepAction extends AbstractAddToTestCaseAct
         }
     }
 
-    protected boolean addMockResponse(WsdlTestCase testCase, WsdlRequest request) {
+    private boolean addMockResponse(WsdlTestCase testCase, WsdlRequest request) {
         String title = getName();
         boolean create = false;
 

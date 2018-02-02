@@ -68,8 +68,8 @@ import static com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessTo
  */
 
 public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
-    public static final String SOAPUI_EXPORT_SEPARATOR = "soapui.export.separator";
-    public static final String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " TestCase Runner";
+    private static final String SOAPUI_EXPORT_SEPARATOR = "soapui.export.separator";
+    private static final String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " TestCase Runner";
 
     private String testSuite;
     private String testCase;
@@ -205,7 +205,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         return true;
     }
 
-    public void setMaxErrors(int maxErrors) {
+    private void setMaxErrors(int maxErrors) {
         this.maxErrors = maxErrors;
     }
 
@@ -275,14 +275,14 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         }
     }
 
-    public void setJUnitReportWithProperties(boolean shouldIncludePropertiesInTheReport) {
+    private void setJUnitReportWithProperties(boolean shouldIncludePropertiesInTheReport) {
         this.junitReportWithProperties = shouldIncludePropertiesInTheReport;
         if (this.junitReport && junitReportWithProperties) {
             reportCollector.setIncludeTestPropertiesInReport(junitReportWithProperties);
         }
     }
 
-    protected JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
+    private JUnitSecurityReportCollector createJUnitSecurityReportCollector() {
         return new JUnitSecurityReportCollector();
     }
 
@@ -304,7 +304,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         this.printReport = printReport;
     }
 
-    public void setPrintAlertSiteReport(boolean printAlertSiteReport) {
+    private void setPrintAlertSiteReport(boolean printAlertSiteReport) {
         this.printAlertSiteReport = printAlertSiteReport;
     }
 
@@ -433,14 +433,14 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         }
     }
 
-    protected void removeListeners(TestCase tc) {
+    private void removeListeners(TestCase tc) {
         tc.removeTestRunListener(this);
         if (junitReport) {
             tc.removeTestRunListener(reportCollector);
         }
     }
 
-    protected void runProject(WsdlProject project) {
+    void runProject(WsdlProject project) {
         // add listener for counting..
         InternalProjectRunListener projectRunListener = new InternalProjectRunListener();
         project.addProjectRunListener(projectRunListener);
@@ -457,17 +457,17 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         }
     }
 
-    protected void initProject(WsdlProject project) {
+    void initProject(WsdlProject project) {
         initProjectProperties(project);
     }
 
-    protected void exportReports(WsdlProject project) throws Exception {
+    void exportReports(WsdlProject project) {
         if (junitReport) {
             exportJUnitReports(reportCollector, getAbsoluteOutputFolder(project), project);
         }
     }
 
-    protected void addListeners(TestCase tc) {
+    void addListeners(TestCase tc) {
         tc.addTestRunListener(this);
         if (junitReport) {
             tc.addTestRunListener(reportCollector);
@@ -478,7 +478,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
 
     }
 
-    protected void throwFailureException() throws Exception {
+    private void throwFailureException() throws Exception {
         StringBuffer buf = new StringBuffer();
 
         for (int c = 0; c < assertions.size(); c++) {
@@ -505,15 +505,15 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         throw new Exception(buf.toString());
     }
 
-    public boolean isExportAll() {
+    boolean isExportAll() {
         return exportAll;
     }
 
-    public void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
+    private void exportJUnitReports(JUnitReportCollector collector, String folder, WsdlProject project) {
         collector.saveReports(folder == null ? "" : folder);
     }
 
-    public void printReport(long timeTaken) {
+    void printReport(long timeTaken) {
         System.out.println();
         System.out.println("SoapUI " + SoapUI.SOAPUI_VERSION + " TestCaseRunner Summary");
         System.out.println("-----------------------------");
@@ -532,7 +532,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
      * @param suite the TestSuite to run
      */
 
-    protected void runSuite(WsdlTestSuite suite) {
+    void runSuite(WsdlTestSuite suite) {
         try {
             log.info(("Running TestSuite [" + suite.getName() + "], runType = " + suite.getRunType()));
             WsdlTestSuiteRunner runner = suite.run(new StringToObjectMap(), false);
@@ -552,7 +552,7 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
      * @param context
      */
 
-    protected void runTestCase(WsdlTestCase testCase) {
+    void runTestCase(WsdlTestCase testCase) {
         try {
             log.info("Running TestCase [" + testCase.getName() + "]");
             WsdlTestCaseRunner runner = testCase.run(new StringToObjectMap(), false);
@@ -723,19 +723,19 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         }
     }
 
-    public String getTestSuite() {
+    String getTestSuite() {
         return testSuite;
     }
 
-    public String getTestCase() {
+    String getTestCase() {
         return testCase;
     }
 
-    public boolean isJUnitReport() {
+    boolean isJUnitReport() {
         return junitReport;
     }
 
-    public boolean isIgnoreErrors() {
+    boolean isIgnoreErrors() {
         return ignoreErrors;
     }
 
@@ -743,11 +743,11 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         this.ignoreErrors = ignoreErrors;
     }
 
-    public boolean isPrintReport() {
+    boolean isPrintReport() {
         return printReport;
     }
 
-    public boolean isSaveAfterRun() {
+    boolean isSaveAfterRun() {
         return saveAfterRun;
     }
 
@@ -755,19 +755,19 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         return failedTests;
     }
 
-    public List<TestAssertion> getAssertions() {
+    List<TestAssertion> getAssertions() {
         return assertions;
     }
 
-    public boolean isJunitReport() {
+    boolean isJunitReport() {
         return junitReport;
     }
 
-    public int getExportCount() {
+    int getExportCount() {
         return exportCount;
     }
 
-    public void setExportCount(int exportCount) {
+    void setExportCount(int exportCount) {
         this.exportCount = exportCount;
     }
 
@@ -775,11 +775,11 @@ public class SoapUITestCaseRunner extends AbstractSoapUITestRunner {
         return assertionResults;
     }
 
-    public int getTestStepCount() {
+    int getTestStepCount() {
         return testStepCount;
     }
 
-    public void setTestStepCount(int testStepCount) {
+    void setTestStepCount(int testStepCount) {
         this.testStepCount = testStepCount;
     }
 }

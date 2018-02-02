@@ -18,7 +18,7 @@ package com.eviware.soapui.impl.rest.panels.request;
 
 import com.eviware.soapui.impl.rest.RestRequestInterface;
 
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -37,7 +37,7 @@ import java.beans.PropertyChangeListener;
  * express or implied. See the Licence for the specific language governing permissions and limitations
  * under the Licence.
 */
-public class RestRequestMethodModel extends DefaultComboBoxModel implements PropertyChangeListener {
+class RestRequestMethodModel extends DefaultComboBoxModel implements PropertyChangeListener {
     private RestRequestInterface request;
 
     public RestRequestMethodModel(RestRequestInterface request) {

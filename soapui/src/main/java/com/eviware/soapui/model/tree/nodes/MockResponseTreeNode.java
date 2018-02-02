@@ -26,7 +26,7 @@ import com.eviware.soapui.model.tree.SoapUITreeModel;
  * @author Ole.Matzura
  */
 
-public class MockResponseTreeNode extends AbstractModelItemTreeNode<MockResponse> {
+class MockResponseTreeNode extends AbstractModelItemTreeNode<MockResponse> {
     public MockResponseTreeNode(MockResponse mockResponse, SoapUITreeModel treeModel) {
         super(mockResponse, mockResponse.getMockOperation(), treeModel);
     }

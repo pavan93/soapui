@@ -40,21 +40,11 @@ import org.apache.xmlbeans.XmlObject;
 import org.apache.xmlbeans.XmlOptions;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.xml.namespace.QName;
-import java.awt.BorderLayout;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -76,7 +66,7 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
     private Handler handler;
     private Thread thread;
 
-    protected InferredSchemaInspector(RestRequest request) {
+    InferredSchemaInspector(RestRequest request) {
         super("Schema", "Inferred Schema", true, InferredSchemaInspectorFactory.INSPECTOR_ID);
         service = request.getResource().getService();
         this.request = request;
@@ -158,6 +148,10 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
         }
     }
 
+    private RestRequest getRequest() {
+        return request;
+    }
+
     @SuppressWarnings("serial")
     private class SchemaTabs extends JTabbedPane implements ActionListener, PropertyChangeListener,
             ListSelectionListener {
@@ -168,10 +162,10 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
         private Handler handler;
         private RSyntaxTextArea xsd;
         private JList schemaList;
-        public static final String AUTO_INFER_SCHEMAS = "AutoInferSchemas";
-        public static final String NO_NAMESPACE = "<no namespace>";
+        static final String AUTO_INFER_SCHEMAS = "AutoInferSchemas";
+        static final String NO_NAMESPACE = "<no namespace>";
 
-        public SchemaTabs() {
+        SchemaTabs() {
             super();
             conflicts = new JPanel();
             conflicts.setLayout(new BorderLayout());
@@ -219,7 +213,7 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
             addTab("Schemas", new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, listPanel, new JScrollPane(xsd)));
         }
 
-        public synchronized boolean awaitButton(Handler handler) {
+        synchronized boolean awaitButton(Handler handler) {
             if (auto.isSelected()) {
                 return false;
             }
@@ -241,7 +235,7 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
             update();
         }
 
-        public void update() {
+        void update() {
             String[] namespaces = InferredSchemaManager.getInferredSchema(service).getNamespaces();
             for (int i = 0; i < namespaces.length; i++) {
                 if (namespaces[i].equals("")) {
@@ -260,7 +254,7 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
             }
         }
 
-        public void logln(String line) {
+        void logln(String line) {
             log.addLine(line);
         }
 
@@ -307,7 +301,7 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
         private boolean yesToAll = false;
         private boolean kill = false;
 
-        public Handler(SchemaTabs panel, XmlObject xml) {
+        Handler(SchemaTabs panel, XmlObject xml) {
             this.panel = panel;
             this.xml = xml;
             paths = new ArrayList<String>();
@@ -336,11 +330,11 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
             }
         }
 
-        public synchronized void go() {
+        synchronized void go() {
             notifyAll();
         }
 
-        public synchronized void kill() {
+        synchronized void kill() {
             kill = true;
             notifyAll();
         }
@@ -378,9 +372,5 @@ public class InferredSchemaInspector extends AbstractXmlInspector implements Sub
             return true;
         }
 
-    }
-
-    public RestRequest getRequest() {
-        return request;
     }
 }

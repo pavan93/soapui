@@ -36,14 +36,8 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 import org.apache.xmlbeans.impl.values.XmlValueDisconnectedException;
 
-import javax.swing.Box;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -52,12 +46,12 @@ import static com.eviware.soapui.impl.rest.support.RestParamsPropertyHolder.Para
 
 public abstract class AbstractRestRequestDesktopPanel<T extends ModelItem, T2 extends RestRequestInterface> extends
         AbstractHttpXmlRequestDesktopPanel<T, T2> {
-    protected static final int STANDARD_TOOLBAR_HEIGHT = 45;
+    static final int STANDARD_TOOLBAR_HEIGHT = 45;
 
     private InternalTestPropertyListener testPropertyListener = new InternalTestPropertyListener();
     private RestParamPropertyChangeListener restParamPropertyChangeListener = new RestParamPropertyChangeListener();
 
-    public AbstractRestRequestDesktopPanel(T modelItem, T2 requestItem) {
+    protected AbstractRestRequestDesktopPanel(T modelItem, T2 requestItem) {
         super(modelItem, requestItem);
 
         addPropertyChangeListenerToResource(requestItem);
@@ -144,7 +138,7 @@ public abstract class AbstractRestRequestDesktopPanel<T extends ModelItem, T2 ex
         }
     }
 
-    protected int findMaximumPreferredHeight(Container parent) {
+    private int findMaximumPreferredHeight(Container parent) {
         int maximum = 0;
         for (Component component : parent.getComponents()) {
             int componentPreferredHeight = component == null || component.getPreferredSize() == null ? 0 : component.getPreferredSize().height;

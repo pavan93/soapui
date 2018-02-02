@@ -37,7 +37,7 @@ public class XmlLocation implements EditorLocation<XmlDocument> {
         this(line, column, null, null, null);
     }
 
-    public XmlLocation(int line, int column, XmlObject xmlObject, SchemaType schemaType, String documentation) {
+    private XmlLocation(int line, int column, XmlObject xmlObject, SchemaType schemaType, String documentation) {
         this.line = line;
         this.column = column;
         this.xmlObject = xmlObject;

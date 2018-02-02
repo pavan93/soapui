@@ -23,7 +23,7 @@ import org.apache.http.HttpRequest;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-public interface MonitorListener extends SoapUIListener {
+interface MonitorListener extends SoapUIListener {
     void onRequest(WsdlProject project, ServletRequest request, ServletResponse response);
 
     void onMessageExchange(WsdlMonitorMessageExchange messageExchange);

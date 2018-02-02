@@ -22,16 +22,13 @@ import com.eviware.soapui.support.actions.FindAndReplaceable;
 import com.eviware.soapui.support.components.JEditorStatusBar.JEditorStatusBarTarget;
 import com.eviware.soapui.support.swing.JTextComponentPopupMenu;
 
-import javax.swing.JComponent;
-import javax.swing.JTextArea;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import javax.swing.event.UndoableEditEvent;
 import javax.swing.event.UndoableEditListener;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 import javax.swing.undo.UndoManager;
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
@@ -45,7 +42,7 @@ import java.awt.event.KeyEvent;
 
 public class JUndoableTextArea extends JTextArea implements Undoable, UndoableEditListener, FocusListener,
         FindAndReplaceable, JEditorStatusBarTarget {
-    public static final int UNDO_LIMIT = 1500;
+    private static final int UNDO_LIMIT = 1500;
 
     private UndoManager undoManager;
     private boolean discardEditsOnSet = false;
@@ -102,7 +99,7 @@ public class JUndoableTextArea extends JTextArea implements Undoable, UndoableEd
         init();
     }
 
-    protected void findAndReplace() {
+    private void findAndReplace() {
         if (findAndReplaceAction == null) {
             findAndReplaceAction = new FindAndReplaceDialog(this);
         }

@@ -27,14 +27,14 @@ import java.util.Map;
 
 public class MaliciousAttachmentListToTableHolder {
 
-    MaliciousAttachmentFilesListForm filesList;
-    MaliciousAttachmentTableModel generateTableModel;
-    MaliciousAttachmentTableModel replaceTableModel;
-    JFormDialog tablesDialog;
+    private MaliciousAttachmentFilesListForm filesList;
+    private MaliciousAttachmentTableModel generateTableModel;
+    private MaliciousAttachmentTableModel replaceTableModel;
+    private JFormDialog tablesDialog;
 
-    Map<String, List<MaliciousAttachmentConfig>> generateMap = new HashMap<String, List<MaliciousAttachmentConfig>>();
-    Map<String, List<MaliciousAttachmentConfig>> replaceMap = new HashMap<String, List<MaliciousAttachmentConfig>>();
-    Map<String, Boolean> removeMap = new HashMap<String, Boolean>();
+    private Map<String, List<MaliciousAttachmentConfig>> generateMap = new HashMap<String, List<MaliciousAttachmentConfig>>();
+    private Map<String, List<MaliciousAttachmentConfig>> replaceMap = new HashMap<String, List<MaliciousAttachmentConfig>>();
+    private Map<String, Boolean> removeMap = new HashMap<String, Boolean>();
 
     public JFormDialog getTablesDialog() {
         return tablesDialog;

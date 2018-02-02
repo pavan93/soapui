@@ -26,21 +26,18 @@ import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFa
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 import com.eviware.soapui.support.StringUtils;
 
 public class JdbcTimeoutAssertion extends WsdlMessageAssertion implements ResponseAssertion, RequestAssertion {
-    public static final String ID = "JDBC Timeout";
+    private static final String ID = "JDBC Timeout";
     public static final String LABEL = "JDBC Timeout";
     public static final String DESCRIPTION = "Validates that the JDBC statement of the target TestStep did not take longer than the specified duration. Applicable to JDBC TestSteps only.";
     private static long DEFAULT_QUERY_TIEMOUT = 100;
 
 
-    public JdbcTimeoutAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JdbcTimeoutAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

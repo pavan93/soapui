@@ -87,7 +87,7 @@ public class InterfaceCacheDefinitionLoader extends AbstractWsdlDefinitionLoader
         return null;
     }
 
-    public static XmlObject getPartContent(InterfaceDefinitionPart part) throws XmlException {
+    private static XmlObject getPartContent(InterfaceDefinitionPart part) throws XmlException {
         // return XmlObject.Factory.parse( part.getContent(), new
         // XmlOptions().setLoadLineNumbers() );
         return XmlUtils.createXmlObject(part.getContent(), new XmlOptions().setLoadLineNumbers());

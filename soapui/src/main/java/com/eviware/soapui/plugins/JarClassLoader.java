@@ -30,10 +30,10 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class JarClassLoader extends URLClassLoader implements PluginClassLoader {
+class JarClassLoader extends URLClassLoader implements PluginClassLoader {
 
     private static final Logger log = Logger.getLogger(JarClassLoader.class);
-    public static final String LIB_PREFIX = "lib/";
+    private static final String LIB_PREFIX = "lib/";
     private final ClassLoader parent;
     private Collection<JarClassLoader> dependencyClassLoaders;
     private GroovyClassLoader scriptClassLoader;

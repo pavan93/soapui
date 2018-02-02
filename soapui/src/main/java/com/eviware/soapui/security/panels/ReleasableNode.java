@@ -16,6 +16,6 @@
 
 package com.eviware.soapui.security.panels;
 
-public interface ReleasableNode {
+interface ReleasableNode {
     void release();
 }

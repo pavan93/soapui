@@ -22,7 +22,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
-public class HermesJMSClasspathHacker {
+class HermesJMSClasspathHacker {
     private static void addFile(String s) throws IOException {
         File f = new File(s);
         addFile(f);

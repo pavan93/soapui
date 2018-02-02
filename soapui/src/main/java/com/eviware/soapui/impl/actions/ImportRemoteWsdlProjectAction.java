@@ -35,9 +35,9 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 
 public class ImportRemoteWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "ImportRemoteWsdlProjectAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(ImportRemoteWsdlProjectAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(ImportRemoteWsdlProjectAction.class);
 
-    public ImportRemoteWsdlProjectAction() {
+    private ImportRemoteWsdlProjectAction() {
         super(messages.get("title"), messages.get("description"));
     }
 

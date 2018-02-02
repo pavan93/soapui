@@ -59,7 +59,7 @@ public abstract class AbstractMockRequest implements MockRequest {
     private boolean responseMessage;
     private XmlObject requestXmlObject;
 
-    public AbstractMockRequest(HttpServletRequest request, HttpServletResponse response, WsdlMockRunContext context) throws Exception {
+    protected AbstractMockRequest(HttpServletRequest request, HttpServletResponse response, WsdlMockRunContext context) throws Exception {
         this.request = request;
         this.response = response;
         this.context = context;
@@ -95,7 +95,7 @@ public abstract class AbstractMockRequest implements MockRequest {
 
     }
 
-    protected void initPostRequest(HttpServletRequest request, WsdlMockRunContext context) throws Exception {
+    private void initPostRequest(HttpServletRequest request, WsdlMockRunContext context) throws Exception {
         String contentType = request.getContentType();
 
         if (isMultiPart(contentType)) {
@@ -253,27 +253,27 @@ public abstract class AbstractMockRequest implements MockRequest {
                 : actualRequestContent.getBytes() : mockRequestDataSource.getData();
     }
 
-    public HttpServletRequest getRequest() {
+    protected HttpServletRequest getRequest() {
         return request;
     }
 
-    public void setActualRequestContent(String actualRequestContent) {
+    protected void setActualRequestContent(String actualRequestContent) {
         this.actualRequestContent = actualRequestContent;
     }
 
-    public void setMultipartMessageSupport(MultipartMessageSupport multipartMessageSupport) {
-        this.multipartMessageSupport = multipartMessageSupport;
+    private MultipartMessageSupport getMultipartMessageSupport() {
+        return multipartMessageSupport;
     }
 
-    public MultipartMessageSupport getMultipartMessageSupport() {
-        return multipartMessageSupport;
+    private void setMultipartMessageSupport(MultipartMessageSupport multipartMessageSupport) {
+        this.multipartMessageSupport = multipartMessageSupport;
     }
 
     public void setRequestContent(String requestContent) {
         this.requestContent = requestContent;
     }
 
-    public void setMockRequestDataSource(MockRequestDataSource mockRequestDataSource) {
+    private void setMockRequestDataSource(MockRequestDataSource mockRequestDataSource) {
         this.mockRequestDataSource = mockRequestDataSource;
     }
 
@@ -285,7 +285,7 @@ public abstract class AbstractMockRequest implements MockRequest {
         return responseMessage;
     }
 
-    public void setRequestXmlObject(XmlObject requestXmlObject) {
+    protected void setRequestXmlObject(XmlObject requestXmlObject) {
         this.requestXmlObject = requestXmlObject;
     }
 

@@ -20,21 +20,8 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.xml.ProxyFindAndReplacable;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -218,7 +205,7 @@ public class FindAndReplaceDialog extends AbstractAction {
         String lastSearchedItem = "";
         int lastPositionF = -1;
 
-        public FindAction() {
+        FindAction() {
             super("Find/Find Next");
         }
 
@@ -279,7 +266,7 @@ public class FindAndReplaceDialog extends AbstractAction {
         String lastSearchedItem = "";
         int lastPositionF = -1;
 
-        public ReplaceAction() {
+        ReplaceAction() {
             super("Replace/Replace Next");
         }
 
@@ -357,7 +344,7 @@ public class FindAndReplaceDialog extends AbstractAction {
     }
 
     private class ReplaceAllAction extends AbstractAction {
-        public ReplaceAllAction() {
+        ReplaceAllAction() {
             super("Replace All");
         }
 
@@ -430,7 +417,7 @@ public class FindAndReplaceDialog extends AbstractAction {
     }
 
     private class CloseAction extends AbstractAction {
-        public CloseAction() {
+        CloseAction() {
             super("Close");
         }
 

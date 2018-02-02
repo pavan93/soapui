@@ -22,9 +22,9 @@ import java.net.URI;
 
 public class HttpPatch extends HttpEntityEnclosingRequestBase {
 
-    public final static String METHOD_NAME = "PATCH";
+    private final static String METHOD_NAME = "PATCH";
 
-    public HttpPatch() {
+    protected HttpPatch() {
         super();
     }
 
@@ -33,7 +33,7 @@ public class HttpPatch extends HttpEntityEnclosingRequestBase {
         setURI(uri);
     }
 
-    public HttpPatch(final String uri) {
+    protected HttpPatch(final String uri) {
         super();
         setURI(URI.create(uri));
     }

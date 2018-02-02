@@ -25,21 +25,18 @@ import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFa
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 
 import java.util.List;
 
 public class HttpDownloadAllResourcesAssertion extends WsdlMessageAssertion implements ResponseAssertion,
         RequestAssertion {
-    public static final String ID = "HTTP Download all resources";
-    public static final String LABEL = "HTTP Download all resources";
-    public static final String DESCRIPTION = "Downloads all resources referred to be an HTML document (images, scripts, etc.) and validates that they are all available. Applicable to any property containing HTML.";
+    private static final String ID = "HTTP Download all resources";
+    private static final String LABEL = "HTTP Download all resources";
+    private static final String DESCRIPTION = "Downloads all resources referred to be an HTML document (images, scripts, etc.) and validates that they are all available. Applicable to any property containing HTML.";
 
-    public HttpDownloadAllResourcesAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private HttpDownloadAllResourcesAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

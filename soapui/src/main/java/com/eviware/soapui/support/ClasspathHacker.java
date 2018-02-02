@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.net.URL;
 
-public class ClasspathHacker {
+class ClasspathHacker {
     private static void addFile(String s) throws IOException {
         File f = new File(s);
         addFile(f);

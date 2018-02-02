@@ -16,9 +16,9 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
+
+import javax.swing.text.Segment;
 
 /**
  * C token marker.
@@ -27,11 +27,11 @@ import org.syntax.jedit.KeywordMap;
  * @version $Id: CTokenMarker.java,v 1.34 1999/12/13 03:40:29 sp Exp $
  */
 public class CTokenMarker extends TokenMarker {
-    public CTokenMarker() {
+    CTokenMarker() {
         this(true, getKeywords());
     }
 
-    public CTokenMarker(boolean cpp, KeywordMap keywords) {
+    CTokenMarker(boolean cpp, KeywordMap keywords) {
         this.cpp = cpp;
         this.keywords = keywords;
     }
@@ -190,7 +190,7 @@ public class CTokenMarker extends TokenMarker {
         return token;
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (cKeywords == null) {
             cKeywords = new KeywordMap(false);
             cKeywords.add("char", Token.KEYWORD3);

@@ -31,7 +31,7 @@ public class WsdlRequestWsrmPiggybackInspector extends AbstractWsrmInspector imp
 
     private final WsdlRequest request;
 
-    protected WsdlRequestWsrmPiggybackInspector(WsdlRequest request) {
+    WsdlRequestWsrmPiggybackInspector(WsdlRequest request) {
         super(request);
         request.addSubmitListener(this);
         this.request = request;

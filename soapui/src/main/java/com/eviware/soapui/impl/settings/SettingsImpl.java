@@ -38,7 +38,7 @@ public class SettingsImpl implements Settings {
         this(null);
     }
 
-    public SettingsImpl(Settings parent) {
+    private SettingsImpl(Settings parent) {
         this.parent = parent;
     }
 

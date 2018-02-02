@@ -51,7 +51,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
     private static final String REQUEST_MUTATIONS_STACK = "RequestMutationsStack";
     private RestrictionLabel restrictionLabel = new RestrictionLabel();
 
-    StrategyTypeConfig.Enum strategy = StrategyTypeConfig.ONE_BY_ONE;
+    private StrategyTypeConfig.Enum strategy = StrategyTypeConfig.ONE_BY_ONE;
 
     public BoundarySecurityScan(TestStep testStep, SecurityScanConfig config, ModelItem parent, String icon) {
         super(testStep, config, parent, icon);
@@ -162,8 +162,8 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
 
     }
 
-    public String extractRestrictions(XmlObjectTreeModel model2, SecurityTestRunContext context,
-                                      XmlTreeNode nodeToUpdate, XmlObjectTreeModel model, SecurityCheckedParameter scp, StringToStringMap stsmap) {
+    private String extractRestrictions(XmlObjectTreeModel model2, SecurityTestRunContext context,
+                                       XmlTreeNode nodeToUpdate, XmlObjectTreeModel model, SecurityCheckedParameter scp, StringToStringMap stsmap) {
         getNextChild(model2.getRootNode(), context, nodeToUpdate, model, scp, stsmap);
 
         return nodeToUpdate.getXmlObject().toString();
@@ -215,7 +215,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
         }
     }
 
-    public void updateEnumNodeValue(XmlTreeNode mynode, EnumerationValues enumerationValues) {
+    private void updateEnumNodeValue(XmlTreeNode mynode, EnumerationValues enumerationValues) {
         int size = EnumerationValues.maxLengthStringSize(enumerationValues.getValuesList());
         String value = EnumerationValues.createOutOfBoundaryValue(enumerationValues, size);
         if (value != null) {
@@ -280,7 +280,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
         return "http://www.soapui.org/Security/boundary-scan.html";
     }
 
-    public class RestrictionLabel {
+    class RestrictionLabel {
         private String text = "";
         private JLabel jlabel = new JLabel();
         private int limit = 70;
@@ -289,7 +289,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
             setJlabel(text);
         }
 
-        public void setJlabel(String text) {
+        void setJlabel(String text) {
             text = text.replace("[", "");
             text = text.replace("]", "");
             if (text.length() > limit) {
@@ -300,7 +300,7 @@ public class BoundarySecurityScan extends AbstractSecurityScanWithProperties {
             }
         }
 
-        public JLabel getJLabel() {
+        JLabel getJLabel() {
             return jlabel;
         }
     }

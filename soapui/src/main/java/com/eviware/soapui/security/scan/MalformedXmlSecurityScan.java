@@ -63,7 +63,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
     /**
      * Default malformed xml configuration
      */
-    protected void initMalformedXmlConfig() {
+    private void initMalformedXmlConfig() {
         getConfig().setConfig(MalformedXmlConfig.Factory.newInstance());
         malformedXmlConfig = (MalformedXmlConfig) getConfig().getConfig();
 
@@ -100,7 +100,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         }
     }
 
-    protected StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws
+    private StringToStringMap update(TestStep testStep, SecurityTestRunContext context) throws
             Exception {
         StringToStringMap params = new StringToStringMap();
 
@@ -241,7 +241,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         return params;
     }
 
-    protected void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException {
+    private void mutateParameters(TestStep testStep, SecurityTestRunContext context) throws XmlException {
         mutation = true;
         // for each parameter
         for (SecurityCheckedParameter parameter : getParameterHolder().getParameterList()) {
@@ -281,7 +281,7 @@ public class MalformedXmlSecurityScan extends AbstractSecurityScanWithProperties
         }
     }
 
-    protected Collection<? extends String> mutateNode(XmlTreeNode node, String xml) {
+    private Collection<? extends String> mutateNode(XmlTreeNode node, String xml) {
 
         ArrayList<String> result = new ArrayList<String>();
         String nodeXml = getXmlForNode(node);

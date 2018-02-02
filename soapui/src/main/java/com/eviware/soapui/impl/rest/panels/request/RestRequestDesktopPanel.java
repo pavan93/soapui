@@ -25,19 +25,14 @@ import com.eviware.soapui.support.action.swing.SwingActionDelegate;
 import com.eviware.soapui.support.components.JXToolBar;
 import org.apache.commons.lang.mutable.MutableBoolean;
 
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
 public class RestRequestDesktopPanel extends
         AbstractRestRequestDesktopPanel<RestRequestInterface, RestRequestInterface> {
     public static final String REST_REQUEST_EDITOR = "rest-request-editor";
-    protected TextPanelWithTopLabel resourcePanel;
-    protected ParametersField queryPanel;
+    TextPanelWithTopLabel resourcePanel;
+    ParametersField queryPanel;
     private JButton addToTestCaseButton;
     private MutableBoolean updating;
 

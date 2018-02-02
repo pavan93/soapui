@@ -31,17 +31,17 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import junit.framework.Assert;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.util.List;
 
 public class JsonPathCountAssertion extends JsonPathAssertionBase implements RequestAssertion, ResponseAssertion {
 
-    public static final String ID = "JsonPath Count";
+    private static final String ID = "JsonPath Count";
     public static final String LABEL = "JsonPath Count";
-    public static final String DESCRIPTION = "Uses an JsonPath expression to count the occurrences of an element." +
+    private static final String DESCRIPTION = "Uses an JsonPath expression to count the occurrences of an element." +
             " Applicable to any property containing JSON.";
 
-    public JsonPathCountAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JsonPathCountAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable);
     }
 

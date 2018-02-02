@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.report;
 
-public interface SubReportFactory {
+interface SubReportFactory {
     SubReport[] buildSubReports(ModelItemReport modelItem);
 
     String getName();

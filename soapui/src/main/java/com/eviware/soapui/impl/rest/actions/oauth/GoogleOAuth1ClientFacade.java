@@ -5,14 +5,7 @@ import com.eviware.soapui.impl.rest.OAuth1Profile;
 import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.TimeUtils;
-import com.google.api.client.auth.oauth.OAuthAuthorizeTemporaryTokenUrl;
-import com.google.api.client.auth.oauth.OAuthCallbackUrl;
-import com.google.api.client.auth.oauth.OAuthCredentialsResponse;
-import com.google.api.client.auth.oauth.OAuthGetAccessToken;
-import com.google.api.client.auth.oauth.OAuthGetTemporaryToken;
-import com.google.api.client.auth.oauth.OAuthHmacSigner;
-import com.google.api.client.auth.oauth.OAuthParameters;
-import com.google.api.client.auth.oauth.OAuthSigner;
+import com.google.api.client.auth.oauth.*;
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import org.apache.http.client.methods.HttpRequestBase;
@@ -134,7 +127,7 @@ public class GoogleOAuth1ClientFacade implements OAuth1ClientFacade {
     }
 
 
-    protected UserBrowserFacade getBrowserFacade() {
+    private UserBrowserFacade getBrowserFacade() {
         WebViewUserBrowserFacade result = new WebViewUserBrowserFacade();
         return result;
     }

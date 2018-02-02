@@ -19,10 +19,10 @@ package com.eviware.soapui.model.support;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class ShowModelItemAction extends AbstractAction {
+class ShowModelItemAction extends AbstractAction {
     private final ModelItem modelItem;
 
     public ShowModelItemAction(String title, ModelItem modelItem) {

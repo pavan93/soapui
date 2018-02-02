@@ -68,7 +68,7 @@ public class WsrmConfig implements PropertyChangeNotifier {
         return wsrmConfig;
     }
 
-    public void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
+    private void setPropertyChangeSupport(PropertyChangeSupport propertyChangeSupport) {
         this.propertyChangeSupport = propertyChangeSupport;
     }
 

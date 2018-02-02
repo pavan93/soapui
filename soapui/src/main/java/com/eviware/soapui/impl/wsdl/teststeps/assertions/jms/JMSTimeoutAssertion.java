@@ -47,29 +47,19 @@ import org.apache.xmlbeans.XmlObject;
  */
 
 public class JMSTimeoutAssertion extends WsdlMessageAssertion implements ResponseAssertion, RequestAssertion {
-    public static final String JMS_TIMEOUT_DURATION = "JMS timeout duration";
+    private static final String JMS_TIMEOUT_DURATION = "JMS timeout duration";
     private static final String JMS_TIMEOUT_SETTING = "timeout";
-    public static final String JMS_TIMEOUT_OK = "JMS Timeout OK";
+    private static final String JMS_TIMEOUT_OK = "JMS Timeout OK";
     private XFormDialog dialog;
-    public static final String ID = "JMS Timeout";
-    public static final String LABEL = "JMS Timeout";
-    public static final String DESCRIPTION = "Validates that the JMS statement of the target TestStep did not take longer than the specified duration. Applicable to Request TestSteps with a JMS endpoint.";
+    private static final String ID = "JMS Timeout";
+    private static final String LABEL = "JMS Timeout";
+    private static final String DESCRIPTION = "Validates that the JMS statement of the target TestStep did not take longer than the specified duration. Applicable to Request TestSteps with a JMS endpoint.";
     private long jmsTimeoutDuration;
     private static int magicUnreachableNumber = -120184;
     private static long defaultJmsAssertionTimeout = 100;
     private LastJmsResponseResult lastJmsResponseResult;
 
-    private class LastJmsResponseResult {
-        public long timeTaken;
-        public boolean isRecieved;
-
-        public LastJmsResponseResult (){
-            timeTaken = magicUnreachableNumber;
-            isRecieved = false;
-        }
-    }
-
-    public JMSTimeoutAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JMSTimeoutAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, true, false, true);
 
         lastJmsResponseResult = new LastJmsResponseResult();
@@ -79,6 +69,12 @@ public class JMSTimeoutAssertion extends WsdlMessageAssertion implements Respons
         if (jmsTimeoutDuration == magicUnreachableNumber){
             jmsTimeoutDuration = defaultJmsAssertionTimeout;
         }
+    }
+
+    private XmlObject createConfiguration() {
+        XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
+        builder.add(JMS_TIMEOUT_SETTING, jmsTimeoutDuration);
+        return builder.finish();
     }
 
     @Override
@@ -136,10 +132,14 @@ public class JMSTimeoutAssertion extends WsdlMessageAssertion implements Respons
         return false;
     }
 
-    protected XmlObject createConfiguration() {
-        XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
-        builder.add(JMS_TIMEOUT_SETTING, jmsTimeoutDuration);
-        return builder.finish();
+    private class LastJmsResponseResult {
+        long timeTaken;
+        boolean isRecieved;
+
+        LastJmsResponseResult() {
+            timeTaken = magicUnreachableNumber;
+            isRecieved = false;
+        }
     }
 
     private XFormDialog buildDialog() {

@@ -127,19 +127,19 @@ public class HttpTestRequestStep extends WsdlTestStepWithProperties implements H
         });
     }
 
-    protected HttpTestRequest buildTestRequest(boolean forLoadTest) {
+    private HttpTestRequest buildTestRequest(boolean forLoadTest) {
         return new HttpTestRequest(httpRequestConfig, this, forLoadTest);
     }
 
-    protected String createDefaultRawResponseContent() {
+    private String createDefaultRawResponseContent() {
         return "";
     }
 
-    protected String createDefaultResponseXmlContent() {
+    private String createDefaultResponseXmlContent() {
         return "";
     }
 
-    protected String createDefaultRequestContent() {
+    private String createDefaultRequestContent() {
         return "";
     }
 
@@ -448,10 +448,10 @@ public class HttpTestRequestStep extends WsdlTestStepWithProperties implements H
         }
     }
 
-    public class RequestParamHolder {
+    class RequestParamHolder {
         private final String name;
 
-        public RequestParamHolder(String name) {
+        RequestParamHolder(String name) {
             this.name = name;
         }
 
@@ -590,7 +590,7 @@ public class HttpTestRequestStep extends WsdlTestStepWithProperties implements H
     private class RestTestStepProperty implements TestStepProperty {
         private RestParamProperty property;
 
-        public RestTestStepProperty(RestParamProperty property) {
+        RestTestStepProperty(RestParamProperty property) {
             this.property = property;
         }
 

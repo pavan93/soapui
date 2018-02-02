@@ -24,9 +24,7 @@ import com.eviware.soapui.support.components.SimpleForm;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.ui.desktop.DesktopRegistry;
 
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-import javax.swing.ToolTipManager;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -37,28 +35,28 @@ import java.awt.event.ActionListener;
  */
 
 public class UIPrefs implements Prefs {
-    public static final String CLOSE_PROJECTS = "Close Projects";
-    public static final String ORDER_PROJECTS = "Order Projects";
-    public static final String ORDER_SERVICES = "Order Services";
-    public static final String ORDER_REQUESTS = "Order Requests";
-    public static final String SHOW_DESCRIPTIONS = "Show Descriptions";
-    public static final String CREATE_BACKUP = "Create Backup";
-    public static final String BACKUP_FOLDER = "Backup Folder";
-    public static final String DESKTOP_TYPE = "Desktop Type";
-    public static final String MRU_PANEL_SELECTOR = "Select most recently used desktop panel on close";
-    public static final String NATIVE_LAF = "Native LF";
-    public static final String ENABLE_GROOVY_LOG = "Do not disable Groovy Log";
-    public static final String SHOW_LOGS_AT_STARTUP = "Show Log Tabs";
-    public static final String AUTOSAVE_INTERVAL = "AutoSave Interval";
-    public static final String AUTOSAVE_ONEXIT = "Save projects on exit";
-    public static final String SHOW_STARTUP_PAGE = "Show Startup Page";
-    public static final String LINEBREAK = "Normalize line-break";
-    public static final String GC_INTERVAL = "Garbage Collection Interval (s)";
-    public static final String RAW_RESPONSE_MESSAGE_SIZE = "Size of Raw Response Message to Show";
-    public static final String RAW_REQUEST_MESSAGE_SIZE = "Size of Raw Request Message to Show";
-    public static final String WRAP_RAW_MESSAGES = "Wrap content in Raw Message Viewers";
-    public static final String DISABLE_TOOLTIPS = "Disable Tooltips";
-    public static final String DISABLE_ANALYTICS = "Disable Usage Statistics";
+    private static final String CLOSE_PROJECTS = "Close Projects";
+    private static final String ORDER_PROJECTS = "Order Projects";
+    private static final String ORDER_SERVICES = "Order Services";
+    private static final String ORDER_REQUESTS = "Order Requests";
+    private static final String SHOW_DESCRIPTIONS = "Show Descriptions";
+    private static final String CREATE_BACKUP = "Create Backup";
+    private static final String BACKUP_FOLDER = "Backup Folder";
+    private static final String DESKTOP_TYPE = "Desktop Type";
+    private static final String MRU_PANEL_SELECTOR = "Select most recently used desktop panel on close";
+    private static final String NATIVE_LAF = "Native LF";
+    private static final String ENABLE_GROOVY_LOG = "Do not disable Groovy Log";
+    private static final String SHOW_LOGS_AT_STARTUP = "Show Log Tabs";
+    private static final String AUTOSAVE_INTERVAL = "AutoSave Interval";
+    private static final String AUTOSAVE_ONEXIT = "Save projects on exit";
+    private static final String SHOW_STARTUP_PAGE = "Show Startup Page";
+    private static final String LINEBREAK = "Normalize line-break";
+    private static final String GC_INTERVAL = "Garbage Collection Interval (s)";
+    private static final String RAW_RESPONSE_MESSAGE_SIZE = "Size of Raw Response Message to Show";
+    private static final String RAW_REQUEST_MESSAGE_SIZE = "Size of Raw Request Message to Show";
+    private static final String WRAP_RAW_MESSAGES = "Wrap content in Raw Message Viewers";
+    private static final String DISABLE_TOOLTIPS = "Disable Tooltips";
+    private static final String DISABLE_ANALYTICS = "Disable Usage Statistics";
 
     private SimpleForm editorForm;
     private final String title;

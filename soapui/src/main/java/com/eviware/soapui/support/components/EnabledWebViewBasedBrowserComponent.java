@@ -33,21 +33,14 @@ import javafx.scene.web.WebView;
 import javafx.util.Callback;
 import netscape.javascript.JSObject;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.DefaultKeyboardFocusManager;
-import java.awt.HeadlessException;
-import java.awt.KeyEventDispatcher;
-import java.awt.KeyboardFocusManager;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -62,19 +55,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 class EnabledWebViewBasedBrowserComponent implements WebViewBasedBrowserComponent {
-    public static final String CHARSET_PATTERN = "(.+)(;\\s*charset=)(.+)";
-    public static final String DEFAULT_ERROR_PAGE = "<html><body><h1>The page could not be loaded</h1></body></html>";
+    private static final String CHARSET_PATTERN = "(.+)(;\\s*charset=)(.+)";
+    private static final String DEFAULT_ERROR_PAGE = "<html><body><h1>The page could not be loaded</h1></body></html>";
     private Pattern charsetFinderPattern = Pattern.compile(CHARSET_PATTERN);
 
     private JPanel panel = new JPanel(new BorderLayout());
     private String errorPage;
     private boolean showingErrorPage;
-    public String url;
+    private String url;
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
     private java.util.List<BrowserListener> listeners = new ArrayList<BrowserListener>();
 
-    public WebView webView;
+    private WebView webView;
     private WebViewNavigationBar navigationBar;
     private String lastLocation;
     private Set<BrowserWindow> browserWindows = new HashSet<BrowserWindow>();
@@ -251,7 +244,7 @@ class EnabledWebViewBasedBrowserComponent implements WebViewBasedBrowserComponen
     }
 
 
-    public void setErrorPage(String errorPage) {
+    private void setErrorPage(String errorPage) {
         this.errorPage = errorPage;
     }
 
@@ -269,7 +262,7 @@ class EnabledWebViewBasedBrowserComponent implements WebViewBasedBrowserComponen
         navigate(url, DEFAULT_ERROR_PAGE);
     }
 
-    public void navigate(final String url, String errorPage) {
+    private void navigate(final String url, String errorPage) {
         if (SoapUI.isBrowserDisabled()) {
             return;
         }
@@ -317,7 +310,7 @@ class EnabledWebViewBasedBrowserComponent implements WebViewBasedBrowserComponen
             });
         }
 
-        public void close() {
+        void close() {
             setVisible(false);
             dispose();
             browser.close(true);
@@ -333,7 +326,7 @@ class EnabledWebViewBasedBrowserComponent implements WebViewBasedBrowserComponen
 
     private class WebViewInitialization implements Runnable {
 
-        public WebViewInitialization(JFXPanel browserPanel) {
+        WebViewInitialization(JFXPanel browserPanel) {
             EnabledWebViewBasedBrowserComponent.this.browserPanel = browserPanel;
         }
 

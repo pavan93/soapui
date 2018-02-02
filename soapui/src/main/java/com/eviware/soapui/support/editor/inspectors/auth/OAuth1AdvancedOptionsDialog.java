@@ -9,7 +9,7 @@ import com.eviware.x.form.support.AField;
 import com.eviware.x.form.support.AForm;
 import com.eviware.x.form.support.XFormRadioGroup;
 
-public class OAuth1AdvancedOptionsDialog {
+class OAuth1AdvancedOptionsDialog {
     private static final MessageSupport messages = MessageSupport.getMessages(OAuth1AdvancedOptionsDialog.class);
 
     public OAuth1AdvancedOptionsDialog(OAuth1Profile profile) {
@@ -35,7 +35,7 @@ public class OAuth1AdvancedOptionsDialog {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.OAUTH_ADVANCED_OPTIONS)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.AccessTokenPosition.Description", type = AField.AFieldType.RADIOGROUP)
         String ACCESS_TOKEN_POSITION = messages.get("Form.SendAuthParameters.Label");
 

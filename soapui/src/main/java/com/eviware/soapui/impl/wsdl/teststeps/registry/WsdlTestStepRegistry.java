@@ -32,7 +32,7 @@ public class WsdlTestStepRegistry implements SoapUIFactoryRegistryListener {
     private static WsdlTestStepRegistry instance;
     private List<WsdlTestStepFactory> factories = new ArrayList<WsdlTestStepFactory>();
 
-    public WsdlTestStepRegistry() {
+    private WsdlTestStepRegistry() {
         addFactory(new WsdlTestRequestStepFactory());
         addFactory(new RestRequestStepFactory());
         addFactory(new HttpRequestStepFactory());
@@ -82,7 +82,7 @@ public class WsdlTestStepRegistry implements SoapUIFactoryRegistryListener {
         }
     }
 
-    public int removeFactory(String type) {
+    private int removeFactory(String type) {
         int index = 0;
         for (WsdlTestStepFactory factory : factories) {
             if (factory.getType().equals(type)) {

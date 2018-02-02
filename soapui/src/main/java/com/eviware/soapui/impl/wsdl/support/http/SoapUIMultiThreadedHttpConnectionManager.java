@@ -20,14 +20,7 @@ import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.metrics.SoapUIMetrics;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.http.HttpHost;
-import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.conn.ClientConnectionOperator;
-import org.apache.http.conn.ClientConnectionRequest;
-import org.apache.http.conn.ConnectTimeoutException;
-import org.apache.http.conn.ConnectionPoolTimeoutException;
-import org.apache.http.conn.HttpHostConnectException;
-import org.apache.http.conn.ManagedClientConnection;
-import org.apache.http.conn.OperatedClientConnection;
+import org.apache.http.conn.*;
 import org.apache.http.conn.routing.HttpRoute;
 import org.apache.http.conn.scheme.Scheme;
 import org.apache.http.conn.scheme.SchemeRegistry;
@@ -58,7 +51,7 @@ import java.util.concurrent.TimeUnit;
  * Manages a set of HttpConnections for various HostConfigurations. Modified to
  * keep different pools for different keystores.
  */
-public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientConnManager {
+class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientConnManager {
 
     /**
      * Log object for this class.
@@ -68,7 +61,7 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
     /**
      * Connection eviction policy
      */
-    IdleConnectionMonitorThread idleConnectionHandler = new IdleConnectionMonitorThread(this);
+    private IdleConnectionMonitorThread idleConnectionHandler = new IdleConnectionMonitorThread(this);
 
     public SoapUIMultiThreadedHttpConnectionManager(SchemeRegistry registry) {
         super(registry);
@@ -91,11 +84,11 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
         return new SoapUIClientConnectionOperator(schreg);// @ThreadSafe
     }
 
-    public static class IdleConnectionMonitorThread extends Thread {
+    static class IdleConnectionMonitorThread extends Thread {
         private final ClientConnectionManager connMgr;
         private volatile boolean shutdown;
 
-        public IdleConnectionMonitorThread(ClientConnectionManager connMgr) {
+        IdleConnectionMonitorThread(ClientConnectionManager connMgr) {
             super();
             this.connMgr = connMgr;
         }
@@ -118,7 +111,7 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
             }
         }
 
-        public void shutdown() {
+        void shutdown() {
             shutdown = true;
             synchronized (this) {
                 notifyAll();
@@ -208,9 +201,33 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
         idleConnectionHandler.shutdown();
     }
 
+    static class SoapUIBasicPooledConnAdapter extends BasicPooledConnAdapter {
+
+        SoapUIBasicPooledConnAdapter(ThreadSafeClientConnManager tsccm, AbstractPoolEntry entry) {
+            super(tsccm, entry);
+        }
+
+        @Override
+        protected ClientConnectionManager getManager() {
+            // override needed only to make method visible in this package
+            return super.getManager();
+        }
+
+        @Override
+        protected AbstractPoolEntry getPoolEntry() {
+            // override needed only to make method visible in this package
+            return super.getPoolEntry();
+        }
+
+        @Override
+        protected void detach() {
+            // override needed only to make method visible in this package
+            super.detach();
+        }
+    }
 
     private class SoapUIClientConnectionOperator extends DefaultClientConnectionOperator {
-        public SoapUIClientConnectionOperator(SchemeRegistry schemes) {
+        SoapUIClientConnectionOperator(SchemeRegistry schemes) {
             super(schemes);
         }
 
@@ -304,7 +321,7 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
 
     private class SoapUIDefaultClientConnection extends DefaultClientConnection {
 
-        public SoapUIDefaultClientConnection() {
+        SoapUIDefaultClientConnection() {
             super();
         }
 
@@ -315,31 +332,6 @@ public class SoapUIMultiThreadedHttpConnectionManager extends ThreadSafeClientCo
         protected HttpConnectionMetricsImpl createConnectionMetrics(final HttpTransportMetrics inTransportMetric,
                                                                     final HttpTransportMetrics outTransportMetric) {
             return new SoapUIMetrics(inTransportMetric, outTransportMetric);
-        }
-    }
-
-    static class SoapUIBasicPooledConnAdapter extends BasicPooledConnAdapter {
-
-        protected SoapUIBasicPooledConnAdapter(ThreadSafeClientConnManager tsccm, AbstractPoolEntry entry) {
-            super(tsccm, entry);
-        }
-
-        @Override
-        protected ClientConnectionManager getManager() {
-            // override needed only to make method visible in this package
-            return super.getManager();
-        }
-
-        @Override
-        protected AbstractPoolEntry getPoolEntry() {
-            // override needed only to make method visible in this package
-            return super.getPoolEntry();
-        }
-
-        @Override
-        protected void detach() {
-            // override needed only to make method visible in this package
-            super.detach();
         }
     }
 

@@ -55,16 +55,16 @@ public class DynamicPropertyResolver implements PropertyResolver, SoapUIFactoryR
         return null;
     }
 
-    public static void addProvider(String propertyName, ValueProvider provider) {
+    private static void addProvider(String propertyName, ValueProvider provider) {
         providers.put(propertyName, provider);
     }
 
-    public static void addProvider( ValueProviderFactory factory )
+    private static void addProvider(ValueProviderFactory factory)
     {
         addProvider(factory.getValueId(), factory.createValueProvider());
     }
 
-    public static void removeProvider( ValueProviderFactory factory )
+    private static void removeProvider(ValueProviderFactory factory)
     {
         providers.remove( factory.getValueId() );
     }

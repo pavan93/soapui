@@ -30,10 +30,8 @@ import net.sf.json.JSONException;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -91,7 +89,7 @@ public class JsonResponseView extends AbstractXmlEditorView<HttpResponseDocument
         return contentPanel;
     }
 
-    protected void setEditorContent(HttpResponse httpResponse) {
+    private void setEditorContent(HttpResponse httpResponse) {
         if (httpResponse == null || httpResponse.getContentAsString() == null) {
             contentEditor.setText("");
         } else {

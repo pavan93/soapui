@@ -34,7 +34,7 @@ import java.util.List;
 
 public class CloseOpenProjectsAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "CloseOpenProjectsAction";
-    public static final String NAME = "Close All Open Projects";
+    private static final String NAME = "Close All Open Projects";
 
     public CloseOpenProjectsAction() {
         super(NAME, "Closes all open projects in the current Workspace");

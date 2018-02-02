@@ -58,19 +58,19 @@ public class RestMockServiceOptionsAction extends AbstractSoapUIAction<RestMockS
     @AForm(name = "REST MockService Options", description = "Set options for this REST mock service", helpUrl = HelpUrls.REST_MOCKSERVICE_OPTIONS, icon = UISupport.OPTIONS_ICON_PATH)
     private class OptionsForm {
         @AField(name = "Path", description = "The path this MockService will mount on")
-        public final static String PATH = "Path";
+        final static String PATH = "Path";
 
         @AField(name = "Port", description = "The port this MockService will mount on", type = AField.AFieldType.INT)
-        public final static String PORT = "Port";
+        final static String PORT = "Port";
 
         @AField(name = "Host", description = "The local host to bind to and use in Port endpoints")
-        public final static String HOST = "Host";
+        final static String HOST = "Host";
 
         @AField(name = "Host Only", description = "Only binds to specified host", type = AField.AFieldType.BOOLEAN)
         public final static String HOSTONLY = "Host Only";
 
         @AField(name = "Docroot", description = "The document root to serve (empty = none)", type = AField.AFieldType.FOLDER)
-        public final static String DOCROOT = "Docroot";
+        final static String DOCROOT = "Docroot";
     }
 
 }

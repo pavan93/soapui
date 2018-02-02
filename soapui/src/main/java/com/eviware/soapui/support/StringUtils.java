@@ -26,7 +26,7 @@ import java.util.StringTokenizer;
 
 public class StringUtils {
     public static final String NEWLINE = System.getProperty("line.separator");
-    public static final char DEFAULT_FILENAME_WHITESPACE_CHAR = '-';
+    private static final char DEFAULT_FILENAME_WHITESPACE_CHAR = '-';
 
     public static String unquote(String str) {
         int length = str == null ? -1 : str.length();
@@ -308,7 +308,7 @@ public class StringUtils {
         return toHtml(string, 0);
     }
 
-    public static String toHtml(String string, int maxSize) {
+    private static String toHtml(String string, int maxSize) {
         if (StringUtils.isNullOrEmpty(string)) {
             return "<html><body></body></html>";
         }

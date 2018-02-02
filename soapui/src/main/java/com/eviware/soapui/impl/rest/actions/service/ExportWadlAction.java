@@ -48,7 +48,7 @@ public class ExportWadlAction extends AbstractSoapUIAction<RestService> {
         }
     }
 
-    public String exportDefinition(String location, RestService iface) throws Exception {
+    private String exportDefinition(String location, RestService iface) throws Exception {
         if (!iface.isGenerated()) {
             boolean exportChanges = UISupport.confirm("Do you want the exported WADL to contain recent changes?", "WADL export option");
             iface.setExportChanges(exportChanges);

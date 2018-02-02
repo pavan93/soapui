@@ -38,20 +38,8 @@ import com.eviware.soapui.support.swing.ModelItemListKeyListener;
 import com.eviware.soapui.support.swing.ModelItemListMouseListener;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractListModel;
-import javax.swing.BorderFactory;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListModel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
@@ -69,7 +57,7 @@ public abstract class AbstractMockOperationDesktopPanel<MockOperationType extend
     private JInspectorPanel inspectorPanel;
     private JPanel defaultResponsePanel;
 
-    public AbstractMockOperationDesktopPanel(MockOperationType mockOperation) {
+    protected AbstractMockOperationDesktopPanel(MockOperationType mockOperation) {
         super(mockOperation);
 
         buildUI();
@@ -221,7 +209,7 @@ public abstract class AbstractMockOperationDesktopPanel<MockOperationType extend
             PropertyChangeListener {
         private java.util.List<MockResponse> responses = new ArrayList<MockResponse>();
 
-        public ResponseListModel() {
+        ResponseListModel() {
             for (int c = 0; c < getModelItem().getMockResponseCount(); c++) {
                 MockResponse mockResponse = getModelItem().getMockResponseAt(c);
                 mockResponse.addPropertyChangeListener(this);
@@ -287,7 +275,7 @@ public abstract class AbstractMockOperationDesktopPanel<MockOperationType extend
             }
         }
 
-        public void release() {
+        void release() {
             for (MockResponse response : responses) {
                 response.removePropertyChangeListener(this);
             }

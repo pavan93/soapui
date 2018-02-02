@@ -109,14 +109,14 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
         return testStepsNode;
     }
 
-    public TestCase getTestCase() {
+    private TestCase getTestCase() {
         return getModelItem();
     }
 
     public class TestStepsTreeNode extends AbstractTreeNode<WsdlTestStepsModelItem> {
         private List<TestStepTreeNode> testStepNodes = new ArrayList<TestStepTreeNode>();
 
-        protected TestStepsTreeNode() {
+        TestStepsTreeNode() {
             super(new WsdlTestStepsModelItem(getTestCase()));
 
             for (int c = 0; c < getTestCase().getTestStepCount(); c++) {
@@ -147,14 +147,14 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
             return TestCaseTreeNode.this;
         }
 
-        public void testStepInserted(TestStep testStep, int index) {
+        void testStepInserted(TestStep testStep, int index) {
             TestStepTreeNode testStepTreeNode = createTestStepTreeNode(testStep);
             testStepNodes.add(index, testStepTreeNode);
             getTreeModel().notifyNodeInserted(testStepTreeNode);
             getTreeModel().notifyNodeChanged(this);
         }
 
-        public void testStepRemoved(TestStep testStep, int index) {
+        void testStepRemoved(TestStep testStep, int index) {
             SoapUITreeNode treeNode = getTreeModel().getTreeNode(testStep);
             if (testStepNodes.contains(treeNode)) {
                 getTreeModel().notifyNodeRemoved(treeNode);
@@ -164,7 +164,7 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
             }
         }
 
-        public void testStepMoved(TestStep testStep, int fromIndex, int offset) {
+        void testStepMoved(TestStep testStep, int fromIndex, int offset) {
             testStepRemoved(testStep, fromIndex);
             testStepInserted(testStep, fromIndex + offset);
         }
@@ -185,7 +185,7 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
     public class LoadTestsTreeNode extends AbstractTreeNode<WsdlLoadTestsModelItem> {
         private List<LoadTestTreeNode> loadTestNodes = new ArrayList<LoadTestTreeNode>();
 
-        protected LoadTestsTreeNode() {
+        LoadTestsTreeNode() {
             super(new WsdlLoadTestsModelItem(getTestCase()));
 
             for (int c = 0; c < getTestCase().getLoadTestCount(); c++) {
@@ -212,14 +212,14 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
             return TestCaseTreeNode.this;
         }
 
-        public void loadTestInserted(LoadTest loadTest) {
+        void loadTestInserted(LoadTest loadTest) {
             LoadTestTreeNode loadTestTreeNode = new LoadTestTreeNode(loadTest, getModelItem(), getTreeModel());
             loadTestNodes.add(loadTestTreeNode);
             getTreeModel().notifyNodeInserted(loadTestTreeNode);
             getTreeModel().notifyNodeChanged(this);
         }
 
-        public void loadTestRemoved(LoadTest loadTest) {
+        void loadTestRemoved(LoadTest loadTest) {
             SoapUITreeNode treeNode = getTreeModel().getTreeNode(loadTest);
             if (loadTestNodes.contains(treeNode)) {
                 getTreeModel().notifyNodeRemoved(treeNode);
@@ -243,7 +243,7 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
     public class SecurityTestsTreeNode extends AbstractTreeNode<SecurityTestsModelItem> {
         private List<SecurityTestTreeNode> securityTestNodes = new ArrayList<SecurityTestTreeNode>();
 
-        protected SecurityTestsTreeNode() {
+        SecurityTestsTreeNode() {
             super(new SecurityTestsModelItem(getTestCase()));
 
             for (int c = 0; c < getTestCase().getSecurityTestCount(); c++) {
@@ -270,7 +270,7 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
             return TestCaseTreeNode.this;
         }
 
-        public void securityTestInserted(SecurityTest securityTest) {
+        void securityTestInserted(SecurityTest securityTest) {
             SecurityTestTreeNode securityTestTreeNode = new SecurityTestTreeNode(securityTest, getModelItem(),
                     getTreeModel());
             securityTestNodes.add(securityTestTreeNode);
@@ -278,7 +278,7 @@ public class TestCaseTreeNode extends AbstractModelItemTreeNode<TestCase> {
             getTreeModel().notifyNodeChanged(this);
         }
 
-        public void securityTestRemoved(SecurityTest securityTest) {
+        void securityTestRemoved(SecurityTest securityTest) {
             SoapUITreeNode treeNode = getTreeModel().getTreeNode(securityTest);
             if (securityTestNodes.contains(treeNode)) {
                 getTreeModel().notifyNodeRemoved(treeNode);

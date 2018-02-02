@@ -23,28 +23,11 @@ import com.eviware.soapui.impl.rest.panels.resource.RestParamsTable;
 import com.eviware.soapui.impl.rest.panels.resource.RestParamsTableModel;
 import com.eviware.soapui.impl.rest.support.RestUtils;
 
-import javax.swing.Action;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.FlowLayout;
-import java.awt.IllegalComponentStateException;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -52,7 +35,7 @@ import java.beans.PropertyChangeListener;
  */
 class ParametersField extends JPanel {
 
-    public static final String PARAMETERS_FIELD = "ParametersField";
+    private static final String PARAMETERS_FIELD = "ParametersField";
     private final RestRequestInterface request;
     private final JLabel textLabel;
     private final JTextField textField;
@@ -103,7 +86,7 @@ class ParametersField extends JPanel {
         return textField.getText();
     }
 
-    public void setText(String text) {
+    private void setText(String text) {
         textField.setText(text);
         setToolTipText(text);
     }

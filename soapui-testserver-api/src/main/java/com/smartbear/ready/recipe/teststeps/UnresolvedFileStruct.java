@@ -5,9 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "UnresolvedFile")
-public class UnresolvedFileStruct {
+class UnresolvedFileStruct {
 
-    public String fileName;
+    private String fileName;
 
     @JsonCreator
     public UnresolvedFileStruct(@JsonProperty("fileName") String fileName) {

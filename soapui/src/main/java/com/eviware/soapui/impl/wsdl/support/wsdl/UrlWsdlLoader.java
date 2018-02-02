@@ -65,10 +65,10 @@ import java.util.Map;
 
 public class UrlWsdlLoader extends WsdlLoader {
     private HttpContext state;
-    protected HttpGet getMethod;
+    private HttpGet getMethod;
     private boolean aborted;
-    protected Map<String, byte[]> urlCache = new HashMap<String, byte[]>();
-    protected boolean finished;
+    private Map<String, byte[]> urlCache = new HashMap<String, byte[]>();
+    private boolean finished;
     private boolean useWorker;
     private ModelItem contextModelItem;
     private org.apache.http.HttpResponse httpResponse;
@@ -174,12 +174,12 @@ public class UrlWsdlLoader extends WsdlLoader {
         }
     }
 
-    protected InputStream handleFile(String url) throws Exception {
+    private InputStream handleFile(String url) throws Exception {
         setNewBaseURI(url);
         return new URL(url).openStream();
     }
 
-    protected void createGetMethod(String url) {
+    private void createGetMethod(String url) {
         URI uri = URI.create(url);
         String authority = uri.getAuthority();
         if ((uri.getUserInfo() == null) && authority != null) {
@@ -243,11 +243,11 @@ public class UrlWsdlLoader extends WsdlLoader {
 
     private static Map<AuthScope, Credentials> cache = new HashMap<AuthScope, Credentials>();
 
-    public final class WsdlCredentialsProvider implements CredentialsProvider {
+    final class WsdlCredentialsProvider implements CredentialsProvider {
         private XFormDialog basicDialog;
         private XFormDialog ntDialog;
 
-        public WsdlCredentialsProvider() {
+        WsdlCredentialsProvider() {
         }
 
         public Credentials getCredentials(final AuthScope authScope) {

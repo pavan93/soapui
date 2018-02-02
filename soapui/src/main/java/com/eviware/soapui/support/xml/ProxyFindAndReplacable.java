@@ -19,16 +19,16 @@ package com.eviware.soapui.support.xml;
 import com.eviware.soapui.support.actions.FindAndReplaceable;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class ProxyFindAndReplacable implements FindAndReplaceable {
-    protected FindAndReplaceable proxytarget;
-    protected boolean isReplaceAll = false;
-    protected StringBuilder sbtartget;
-    protected String oldValue;
-    protected String newValue;
-    protected int start;
-    protected int end;
+    private FindAndReplaceable proxytarget;
+    private boolean isReplaceAll = false;
+    private StringBuilder sbtartget;
+    private String oldValue;
+    private String newValue;
+    private int start;
+    private int end;
 
     public ProxyFindAndReplacable(FindAndReplaceable proxytarget) {
         this.proxytarget = proxytarget;
@@ -136,11 +136,11 @@ public class ProxyFindAndReplacable implements FindAndReplaceable {
         }
     }
 
-    public int getStart() {
+    private int getStart() {
         return start;
     }
 
-    public int getEnd() {
+    private int getEnd() {
         return end;
     }
 

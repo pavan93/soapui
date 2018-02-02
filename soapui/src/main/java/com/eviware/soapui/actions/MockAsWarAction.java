@@ -96,7 +96,7 @@ public class MockAsWarAction extends AbstractSoapUIAction<WsdlProject> {
     }
 
     // Only to be called from test class
-    protected void setDialog(XFormDialog dialog) {
+    void setDialog(XFormDialog dialog) {
         this.dialog = dialog;
     }
 
@@ -121,7 +121,7 @@ public class MockAsWarAction extends AbstractSoapUIAction<WsdlProject> {
     }
 
     @AForm(description = "Configure what to include in generated WAR", name = "Deploy Project as WAR", helpUrl = HelpUrls.MOCKASWAR_HELP_URL)
-    protected interface MockAsWarDialog {
+    interface MockAsWarDialog {
         @AField(description = "Specify if global settings should be included", name = "Include Global Settings", type = AFieldType.BOOLEAN)
         String GLOBAL_SETTINGS = "Include Global Settings";
 

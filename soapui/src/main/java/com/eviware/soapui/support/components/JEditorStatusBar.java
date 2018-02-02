@@ -41,7 +41,7 @@ public class JEditorStatusBar extends JPanel implements CaretListener {
         this(null);
     }
 
-    public JEditorStatusBar(JEditorStatusBarTarget target) {
+    JEditorStatusBar(JEditorStatusBarTarget target) {
         this.target = target;
 
         caretLabel = new JLabel();
@@ -118,7 +118,7 @@ public class JEditorStatusBar extends JPanel implements CaretListener {
         infoLabel.setVisible(txt != null);
     }
 
-    public void setStatusComponent(JComponent statusComponent) {
+    void setStatusComponent(JComponent statusComponent) {
         statusPanel.removeAll();
         statusPanel.add(statusComponent, BorderLayout.CENTER);
         statusPanel.revalidate();

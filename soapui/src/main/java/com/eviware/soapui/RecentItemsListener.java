@@ -439,18 +439,18 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
     private static class ShowEditorAction extends AbstractAction {
         private Reference<ModelItem> ref;
 
-        public ShowEditorAction(ModelItem modelItem) {
+        ShowEditorAction(ModelItem modelItem) {
             super(modelItem.getName());
 
             putValue(Action.SHORT_DESCRIPTION, "Reopen editor for [" + modelItem.getName() + "]");
             ref = new WeakReference<ModelItem>(modelItem);
         }
 
-        public ModelItem getModelItem() {
+        ModelItem getModelItem() {
             return ref.get();
         }
 
-        public void update() {
+        void update() {
             ModelItem modelItem = ref.get();
             if (modelItem == null) {
                 return;
@@ -460,7 +460,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
             putValue(Action.SHORT_DESCRIPTION, "Reopen editor for [" + modelItem.getName() + "]");
         }
 
-        public boolean isReleased() {
+        boolean isReleased() {
             return ref.get() == null;
         }
 
@@ -520,7 +520,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
 
     @SuppressWarnings("serial")
     private class ClearProjectsAction extends AbstractAction {
-        public ClearProjectsAction() {
+        ClearProjectsAction() {
             super(CLEAR_ITEMS);
             putValue(Action.SHORT_DESCRIPTION, "Clear all recent projects");
         }
@@ -540,7 +540,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
 
     @SuppressWarnings("serial")
     private class ClearWorkspacesAction extends AbstractAction {
-        public ClearWorkspacesAction() {
+        ClearWorkspacesAction() {
             super(CLEAR_ITEMS);
             putValue(Action.SHORT_DESCRIPTION, "Clear all recent workspaces");
         }
@@ -560,7 +560,7 @@ public class RecentItemsListener extends WorkspaceListenerAdapter implements Wor
 
     @SuppressWarnings("serial")
     private class ClearEditorsAction extends AbstractAction {
-        public ClearEditorsAction() {
+        ClearEditorsAction() {
             super(CLEAR_ITEMS);
             putValue(Action.SHORT_DESCRIPTION, "Clear all recent Editors");
         }

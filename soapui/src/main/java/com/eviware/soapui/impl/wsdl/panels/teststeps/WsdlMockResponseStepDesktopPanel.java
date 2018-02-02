@@ -201,14 +201,14 @@ public class WsdlMockResponseStepDesktopPanel extends AbstractWsdlMockResponseDe
         return panel;
     }
 
-    protected JXToolBar buildQueryMatchToolbar() {
+    private JXToolBar buildQueryMatchToolbar() {
         JXToolBar toolBar = UISupport.createSmallToolbar();
         toolBar.addFixed(new JButton(new SelectFromCurrentAction()));
         return toolBar;
     }
 
-    public class SelectFromCurrentAction extends AbstractAction {
-        public SelectFromCurrentAction() {
+    class SelectFromCurrentAction extends AbstractAction {
+        SelectFromCurrentAction() {
             super("Select from current");
             putValue(Action.SHORT_DESCRIPTION, "Selects the Query XPath expression from the last request Match field");
         }

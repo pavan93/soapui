@@ -22,18 +22,11 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.JTableFactory;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -124,19 +117,19 @@ public class SAMLAttributeValuesTable extends JPanel {
             return attributeValue.get("value");
         }
 
-        public void remove(int row) {
+        void remove(int row) {
             attributeValues.remove(row);
             fireTableRowsDeleted(row, row);
         }
 
-        public void addAttributeValues(StringToStringMap map) {
+        void addAttributeValues(StringToStringMap map) {
             attributeValues.add(map);
             fireTableRowsInserted(attributeValues.size() - 1, attributeValues.size() - 1);
         }
     }
 
     private class AddAttributeValueAction extends AbstractAction {
-        public AddAttributeValueAction() {
+        AddAttributeValueAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(SHORT_DESCRIPTION, "Adds a new attribute value");
         }
@@ -148,7 +141,7 @@ public class SAMLAttributeValuesTable extends JPanel {
     }
 
     private class RemoveAttributeValueAction extends AbstractAction {
-        public RemoveAttributeValueAction() {
+        RemoveAttributeValueAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(SHORT_DESCRIPTION, "Removes the attribute value");
             setEnabled(false);

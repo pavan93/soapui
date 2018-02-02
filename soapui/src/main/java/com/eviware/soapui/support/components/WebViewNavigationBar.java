@@ -26,16 +26,9 @@ import javafx.beans.value.ObservableValue;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebHistory;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -160,7 +153,7 @@ class WebViewNavigationBar {
     }
 
     private class BackAction extends AbstractAction {
-        public BackAction() {
+        BackAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/arrow_left.png"));
             putValue(Action.SHORT_DESCRIPTION, "Go back");
         }
@@ -184,7 +177,7 @@ class WebViewNavigationBar {
     }
 
     private class ForwardAction extends AbstractAction {
-        public ForwardAction() {
+        ForwardAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/arrow_right.png"));
             putValue(Action.SHORT_DESCRIPTION, "Go forward");
         }
@@ -208,7 +201,7 @@ class WebViewNavigationBar {
     }
 
     private class ReloadAction extends AbstractAction {
-        public ReloadAction() {
+        ReloadAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/reload_properties.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Reload page");
         }

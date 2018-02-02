@@ -30,45 +30,35 @@ import com.google.common.collect.Lists;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Nullable;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MockAsWar {
-    protected static final String SOAPUI_SETTINGS = "[SoapUISettings]";
-    protected static final String PROJECT_FILE_NAME = "[ProjectFileName]";
-    protected static final String MOCKSERVICE_ENDPOINT = "[mockServiceEndpoint]";
+    private static final String SOAPUI_SETTINGS = "[SoapUISettings]";
+    private static final String PROJECT_FILE_NAME = "[ProjectFileName]";
+    private static final String MOCKSERVICE_ENDPOINT = "[mockServiceEndpoint]";
 
     private static final String SOAPUI_HOME = "soapui.home";
     private static final String SOAPUI_BIN_FOLDER = "." + File.separator + "bin";
     private static final String SOAPUI_LIB_FOLDER = ".." + File.separator + "lib";
-
-    protected File projectFile;
-    protected File settingsFile;
-    protected File warDir;
+    private final String localEndpoint;
+    private File projectFile;
+    private File settingsFile;
     private File warFile;
-    protected File webInf;
+    private File warDir;
     private File warLibDir;
-    protected File soapUIDir;
-
-    protected Logger log = Logger.getLogger(MockAsWar.class);
+    private File webInf;
+    private File soapUIDir;
 
     private boolean includeExt;
-    protected boolean includeActions;
-    protected boolean includeListeners;
+    private Logger log = Logger.getLogger(MockAsWar.class);
+    private boolean includeActions;
     private File actionsDir;
     private File listenersDir;
-    protected final String localEndpoint;
-    protected boolean enableWebUI;
+    private boolean includeListeners;
+    private boolean enableWebUI;
 
     private WsdlProject project;
 
@@ -139,7 +129,7 @@ public class MockAsWar {
         return result;
     }
 
-    protected void createWebXml() {
+    private void createWebXml() {
         URL url = SoapUI.class.getResource("/com/eviware/soapui/resources/mockaswar/web.xml");
         try {
             BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
@@ -162,7 +152,7 @@ public class MockAsWar {
         }
     }
 
-    protected void createContent(StringBuilder content) {
+    private void createContent(StringBuilder content) {
         content.replace(content.indexOf(PROJECT_FILE_NAME),
                 content.indexOf(PROJECT_FILE_NAME) + PROJECT_FILE_NAME.length(), projectFile.getName());
 
@@ -192,7 +182,7 @@ public class MockAsWar {
         }
     }
 
-    protected boolean prepareWarFile() {
+    private boolean prepareWarFile() {
         // create file system first
         if (createWarFileSystem()) {
             String homePath = System.getProperty(SOAPUI_HOME) == null ? SOAPUI_BIN_FOLDER : System.getProperty(SOAPUI_HOME);
@@ -244,7 +234,7 @@ public class MockAsWar {
         return false;
     }
 
-    protected void copyProjectFile() {
+    private void copyProjectFile() {
         JarPackager.copyFileToDir(projectFile, soapUIDir);
     }
 
@@ -266,7 +256,7 @@ public class MockAsWar {
         }
     }
 
-    protected boolean createWarFileSystem() {
+    private boolean createWarFileSystem() {
         if (warDir.isDirectory()) {
             log.info("Creating WAR directory in [" + warDir.getAbsolutePath() + "]");
             webInf = new File(warDir, "WEB-INF");
@@ -322,7 +312,7 @@ public class MockAsWar {
      *
      * @param dir
      */
-    protected void clearDir(File dir) {
+    private void clearDir(File dir) {
         for (File file : dir.listFiles()) {
             if (file.isFile()) {
                 file.delete();
@@ -330,8 +320,8 @@ public class MockAsWar {
         }
     }
 
-    protected static class CaseInsensitiveFileFilter implements FileFilter {
-        protected static final ArrayList<String> excludes = Lists.newArrayList("servlet", "xulrunner", "Mozilla", "l2fprod", "tuxpack", "winpack", "ActiveQueryBuilder", "jxbrowser", "protection");
+    static class CaseInsensitiveFileFilter implements FileFilter {
+        static final ArrayList<String> excludes = Lists.newArrayList("servlet", "xulrunner", "Mozilla", "l2fprod", "tuxpack", "winpack", "ActiveQueryBuilder", "jxbrowser", "protection");
 
         public boolean accept(final File file) {
 

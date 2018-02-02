@@ -38,7 +38,7 @@ import java.util.NoSuchElementException;
  * @author Santhosh Kumar T
  * @email santhosh@in.fiorano.com
  */
-public class ChildrenEnumeration implements Enumeration {
+class ChildrenEnumeration implements Enumeration {
     private TreePath path;
     private TreeModel model;
     private int position = 0;

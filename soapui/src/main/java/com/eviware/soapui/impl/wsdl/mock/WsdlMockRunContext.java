@@ -26,11 +26,7 @@ import com.eviware.soapui.model.propertyexpansion.DefaultPropertyExpansionContex
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.settings.Settings;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestStep;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.types.StringToObjectMap;
 import com.eviware.soapui.support.types.StringToStringMap;
 
@@ -263,7 +259,7 @@ public class WsdlMockRunContext implements MockRunContext, Map<String, Object>, 
         return context == null ? null : context.getTestCase();
     }
 
-    public synchronized Settings getSettings() {
+    private synchronized Settings getSettings() {
         return context == null ? mockService.getSettings() : context.getTestCase().getSettings();
     }
 

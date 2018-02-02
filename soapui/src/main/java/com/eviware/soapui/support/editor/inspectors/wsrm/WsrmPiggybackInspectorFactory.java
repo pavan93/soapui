@@ -24,7 +24,7 @@ import com.eviware.soapui.support.editor.registry.RequestInspectorFactory;
 
 public class WsrmPiggybackInspectorFactory implements RequestInspectorFactory {
 
-    public static final String INSPECTOR_ID = "WS-RM_Piggyback";
+    private static final String INSPECTOR_ID = "WS-RM_Piggyback";
 
     public String getInspectorId() {
         return INSPECTOR_ID;

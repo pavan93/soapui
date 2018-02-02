@@ -31,7 +31,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class BodyPartDataSource implements DataSource {
+class BodyPartDataSource implements DataSource {
     private final BodyPart bodyPart;
 
     public BodyPartDataSource(BodyPart bodyPart) {

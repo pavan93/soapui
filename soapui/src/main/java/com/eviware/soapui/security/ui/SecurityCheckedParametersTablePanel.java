@@ -54,19 +54,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public class SecurityCheckedParametersTablePanel extends JPanel implements ListSelectionListener {
+class SecurityCheckedParametersTablePanel extends JPanel implements ListSelectionListener {
 
-    protected static final int LABEL_NAME_COLUMN_WIDTH = 120;
-    protected static final int ENABLE_COLUMN_WIDTH = 70;
-    static final String CHOOSE_TEST_PROPERTY = "Choose Test Property";
-    protected SecurityParametersTableModel model;
-    protected JXToolBar toolbar;
-    protected JXTable table;
-    protected Map<String, TestProperty> properties;
-    protected DefaultActionList actionList;
-    protected JUndoableTextArea pathPane;
-    protected XFormDialog dialog;
-    protected AbstractSecurityScanWithProperties securityScan;
+    private static final int LABEL_NAME_COLUMN_WIDTH = 120;
+    private static final int ENABLE_COLUMN_WIDTH = 70;
+    private static final String CHOOSE_TEST_PROPERTY = "Choose Test Property";
+    private SecurityParametersTableModel model;
+    private JXToolBar toolbar;
+    private JXTable table;
+    private Map<String, TestProperty> properties;
+    private DefaultActionList actionList;
+    private JUndoableTextArea pathPane;
+    private XFormDialog dialog;
+    private AbstractSecurityScanWithProperties securityScan;
 
     public SecurityCheckedParametersTablePanel(SecurityParametersTableModel model,
                                                Map<String, TestProperty> properties, AbstractSecurityScanWithProperties securityCheck) {
@@ -87,7 +87,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
         }
     }
 
-    protected void init() {
+    private void init() {
 
         setLayout(new BorderLayout());
         toolbar = UISupport.createToolbar();
@@ -119,7 +119,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
     /**
      *
      */
-    protected void defineColumnWidth() {
+    private void defineColumnWidth() {
         // enable column
         TableColumn col = table.getColumnModel().getColumn(3);
         col.setMaxWidth(ENABLE_COLUMN_WIDTH);
@@ -142,7 +142,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
      *
      * @return
      */
-    protected TableCellEditor getDefaultCellEditor() {
+    private TableCellEditor getDefaultCellEditor() {
         return new XPathCellRender();
     }
 
@@ -153,7 +153,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
     /*
      * Creates dialog
      */
-    protected XFormDialog createAddParameterDialog() {
+    private XFormDialog createAddParameterDialog() {
         actionList = new DefaultActionList();
         AddAction addAction = new AddAction();
         actionList.addAction(addAction, true);
@@ -199,7 +199,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
         return dialog;
     }
 
-    protected JPanel buildPathSelector() {
+    private JPanel buildPathSelector() {
         JPanel sourcePanel = new JPanel(new BorderLayout());
         sourcePanel.add(new JScrollPane(pathPane), BorderLayout.CENTER);
         sourcePanel.setBorder(BorderFactory.createEmptyBorder(0, 3, 3, 3));
@@ -209,12 +209,12 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
     /**
      * @param pathField
      */
-    protected void enablePathField(boolean enable) {
+    private void enablePathField(boolean enable) {
         pathPane.setEnabled(enable);
     }
 
     class AddNewParameterAction extends AbstractAction {
-        public AddNewParameterAction() {
+        AddNewParameterAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Adds a parameter to security scan");
         }
@@ -228,7 +228,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
     }
 
     class RemoveParameterAction extends AbstractAction {
-        public RemoveParameterAction() {
+        RemoveParameterAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Removes parameter from security scan");
         }
@@ -241,15 +241,15 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
 
     }
 
-    public class AddAndCopy extends AbstractAction {
+    class AddAndCopy extends AbstractAction {
 
         private XFormDialog dialog;
 
-        public AddAndCopy() {
+        AddAndCopy() {
             super("Add&Copy");
         }
 
-        public void setDialog(XFormDialog dialog) {
+        void setDialog(XFormDialog dialog) {
             this.dialog = dialog;
         }
 
@@ -272,11 +272,11 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
 
         private XFormDialog dialog;
 
-        public Close() {
+        Close() {
             super("Close");
         }
 
-        public void setDialog(XFormDialog dialog) {
+        void setDialog(XFormDialog dialog) {
             this.dialog = dialog;
         }
 
@@ -299,7 +299,7 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
 
     class CopyParameterAction extends AbstractAction {
 
-        public CopyParameterAction() {
+        CopyParameterAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/copy.png"));
             putValue(Action.SHORT_DESCRIPTION, "Copies parameter");
         }
@@ -333,11 +333,11 @@ public class SecurityCheckedParametersTablePanel extends JPanel implements ListS
 
         private XFormDialog dialog;
 
-        public AddAction() {
+        AddAction() {
             super("Add");
         }
 
-        public void setDialog(XFormDialog dialog) {
+        void setDialog(XFormDialog dialog) {
             this.dialog = dialog;
         }
 

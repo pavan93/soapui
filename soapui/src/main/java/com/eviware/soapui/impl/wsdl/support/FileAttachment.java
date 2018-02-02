@@ -45,7 +45,7 @@ public abstract class FileAttachment<T extends AbstractWsdlModelItem<?>> impleme
     private final T modelItem;
     private BeanPathPropertySupport urlProperty;
 
-    public FileAttachment(T modelItem, AttachmentConfig config) {
+    FileAttachment(T modelItem, AttachmentConfig config) {
         this.modelItem = modelItem;
         this.config = config;
 
@@ -77,7 +77,7 @@ public abstract class FileAttachment<T extends AbstractWsdlModelItem<?>> impleme
         urlProperty = new BeanPathPropertySupport(modelItem, config, "url");
     }
 
-    public FileAttachment(T modelItem, File file, boolean cache, AttachmentConfig config) throws IOException {
+    FileAttachment(T modelItem, File file, boolean cache, AttachmentConfig config) throws IOException {
         this(modelItem, config);
 
         config.setName(file.getName());
@@ -115,11 +115,11 @@ public abstract class FileAttachment<T extends AbstractWsdlModelItem<?>> impleme
         }
     }
 
-    public T getModelItem() {
+    T getModelItem() {
         return modelItem;
     }
 
-    public void cacheFileLocally(File file) throws IOException {
+    private void cacheFileLocally(File file) throws IOException {
         // write attachment-data to tempfile
         ByteArrayOutputStream data = new ByteArrayOutputStream();
         ZipOutputStream out = new ZipOutputStream(data);

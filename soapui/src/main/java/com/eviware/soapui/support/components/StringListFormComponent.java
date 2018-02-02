@@ -20,19 +20,10 @@ import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringList;
 
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -172,7 +163,7 @@ public class StringListFormComponent extends JPanel implements JFormComponent, A
         }
     }
 
-    public void setButtonState() {
+    private void setButtonState() {
         boolean b = list.getSelectedIndex() != -1;
         for (JButton button : buttons) {
             button.setEnabled(b);

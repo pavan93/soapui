@@ -21,7 +21,7 @@ import com.eviware.soapui.support.components.SimpleBindingForm;
 import com.eviware.soapui.support.types.StringList;
 
 public class WSSAuthenticationForm extends BasicAuthenticationForm<WsdlRequest> {
-    protected WSSAuthenticationForm(WsdlRequest request) {
+    WSSAuthenticationForm(WsdlRequest request) {
         super(request);
     }
 

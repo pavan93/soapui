@@ -28,7 +28,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class MultiAssertionDeleteAction extends AbstractSoapUIMultiAction<ModelItem> {
-    public static final String SOAPUI_ACTION_ID = "MultiAssertionDeleteAction";
+    private static final String SOAPUI_ACTION_ID = "MultiAssertionDeleteAction";
 
     public MultiAssertionDeleteAction() {
         super(SOAPUI_ACTION_ID, "Delete Assertions", "Delete selected Assertions");

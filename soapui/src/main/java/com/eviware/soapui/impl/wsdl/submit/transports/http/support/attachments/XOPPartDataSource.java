@@ -35,7 +35,7 @@ import java.io.*;
  * @author ole.matzura
  */
 
-public final class XOPPartDataSource implements DataSource {
+final class XOPPartDataSource implements DataSource {
     private String content;
     private final String contentType;
     private final SchemaType schemaType;

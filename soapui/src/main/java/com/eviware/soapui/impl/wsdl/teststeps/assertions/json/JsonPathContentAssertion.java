@@ -38,10 +38,17 @@ import java.util.regex.Pattern;
 
 public class JsonPathContentAssertion extends JsonPathAssertionBase implements RequestAssertion, ResponseAssertion {
 
-    public static final String ID = "JsonPath Match";
+    private static final String ID = "JsonPath Match";
     public static final String LABEL = "JsonPath Match";
-    public static final String DESCRIPTION = "Uses an JsonPath expression to existence of a node and compares the result to an expected value. Applicable to any property containing JSON.";
+    private static final String DESCRIPTION = "Uses an JsonPath expression to existence of a node and compares the result to an expected value. Applicable to any property containing JSON.";
     private boolean allowWildcards;
+
+    private JsonPathContentAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+        super(assertionConfig, assertable);
+
+        XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
+        allowWildcards = reader.readBoolean("allowWildcards", false);
+    }
 
     /**
      * Compares two string for similarity, allows wildcard.
@@ -51,13 +58,13 @@ public class JsonPathContentAssertion extends JsonPathAssertionBase implements R
      * @param wildcard
      * @throws ComparisonFailure
      */
-    public static void assertSimilar(String expected, String real, char wildcard) throws ComparisonFailure {
+    private static void assertSimilar(String expected, String real, char wildcard) throws ComparisonFailure {
         if (!isSimilar(expected, real, wildcard)) {
             throw new ComparisonFailure("Not matched", expected, real);
         }
     }
 
-    public static boolean isSimilar(String expected, String real, char wildcard) throws ComparisonFailure {
+    private static boolean isSimilar(String expected, String real, char wildcard) throws ComparisonFailure {
 
         // expected == wildcard matches all
         if (!expected.equals(String.valueOf(wildcard))) {
@@ -83,13 +90,6 @@ public class JsonPathContentAssertion extends JsonPathAssertionBase implements R
             return Pattern.compile(sb.toString(), Pattern.DOTALL).matcher(real).matches();
         }
         return true;
-    }
-
-    public JsonPathContentAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
-        super(assertionConfig, assertable);
-
-        XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
-        allowWildcards = reader.readBoolean("allowWildcards", false);
     }
 
     public boolean isAllowWildcards() {

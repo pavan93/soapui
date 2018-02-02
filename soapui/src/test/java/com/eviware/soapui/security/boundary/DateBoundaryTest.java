@@ -26,8 +26,8 @@ import static org.junit.Assert.assertTrue;
 
 public class DateBoundaryTest {
 
-    DateTimeBoundary dateBoundary;
-    String today;
+    private DateTimeBoundary dateBoundary;
+    private String today;
 
     @Before
     public void setUp() throws Exception {

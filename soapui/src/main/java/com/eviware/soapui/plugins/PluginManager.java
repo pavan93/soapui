@@ -72,7 +72,7 @@ public class PluginManager {
         return pluginLoader;
     }
 
-    public static ForkJoinPool getForkJoinPool() {
+    private static ForkJoinPool getForkJoinPool() {
         return forkJoinPool;
     }
 
@@ -193,7 +193,7 @@ public class PluginManager {
         return uninstallPlugin(plugin.getInfo(), false);
     }
 
-    public boolean uninstallPlugin(PluginInfo pluginInfo, boolean silent) throws IOException {
+    private boolean uninstallPlugin(PluginInfo pluginInfo, boolean silent) throws IOException {
         for (File installedPluginFile : installedPlugins.keySet()) {
             Plugin installedPlugin = installedPlugins.get(installedPluginFile).plugin;
             if (installedPlugin.getInfo().getId().equals(pluginInfo.getId())) {

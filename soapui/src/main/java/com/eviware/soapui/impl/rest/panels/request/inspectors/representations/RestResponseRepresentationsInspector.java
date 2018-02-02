@@ -29,7 +29,7 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.xmlbeans.XmlCursor;
 
-import javax.swing.JCheckBox;
+import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -39,10 +39,10 @@ import java.util.List;
 public class RestResponseRepresentationsInspector extends AbstractRestRepresentationsInspector implements
         SubmitListener {
     private JCheckBox enableRecordingCheckBox;
-    public static final String RECORD_RESPONSE_REPRESENTATIONS = "RecordResponseRepresentations";
+    private static final String RECORD_RESPONSE_REPRESENTATIONS = "RecordResponseRepresentations";
     private RestRequestInterface request;
 
-    protected RestResponseRepresentationsInspector(RestRequestInterface request) {
+    RestResponseRepresentationsInspector(RestRequestInterface request) {
         super(request.getRestMethod(), "Representations", "Response Representations", new RestRepresentation.Type[]{
                 RestRepresentation.Type.RESPONSE, RestRepresentation.Type.FAULT});
 
@@ -90,7 +90,7 @@ public class RestResponseRepresentationsInspector extends AbstractRestRepresenta
     }
 
     @SuppressWarnings("unchecked")
-    protected void extractRepresentation(HttpResponse response, RestRepresentation.Type type) {
+    private void extractRepresentation(HttpResponse response, RestRepresentation.Type type) {
         RestRepresentation[] representations = getMethod().getRepresentations(type, null);
         int c = 0;
         for (; c < representations.length; c++) {

@@ -87,7 +87,7 @@ public class MimeMessageResponse extends BaseHttpResponse {
         }
     }
 
-    protected MultipartMessageSupport getMmSupport() {
+    MultipartMessageSupport getMmSupport() {
         return mmSupport;
     }
 

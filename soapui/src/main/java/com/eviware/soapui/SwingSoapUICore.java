@@ -1,7 +1,7 @@
 /*
  * SoapUI, Copyright (C) 2004-2017 SmartBear Software
  *
- * Licensed under the EUPL, Version 1.1 or - as soon as they will be approved by the European Commission - subsequent 
+ * Licensed under the EUPL, Version 1.1 or - as soon as they will be approved by the European Commission - subsequent
  * versions of the EUPL (the "Licence"); 
  * You may not use this work except in compliance with the Licence. 
  * You may obtain a copy of the Licence at: 
@@ -41,9 +41,8 @@ import com.eviware.x.impl.swing.SwingFormFactory;
 import java.io.File;
 import java.io.FileInputStream;
 
-import static com.eviware.soapui.SwingSoapUICore.SoapuiSettingsDocumentConfig.settingFactory;
-
 public class SwingSoapUICore extends DefaultSoapUICore {
+    private Object settingFactory;
     private SwingSoapUICore() {
         super();
     }
@@ -158,6 +157,6 @@ public class SwingSoapUICore extends DefaultSoapUICore {
     }
 
     private class SoapuiSettingsDocumentConfig {
-        static Object settingFactory;
+        Object settingFactory;
     }
 }

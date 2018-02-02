@@ -1,6 +1,6 @@
 package com.smartbear.ready.recipe;
 
-public class ParseException extends Exception {
+class ParseException extends Exception {
     public ParseException(String message, Throwable cause) {
         super(message, cause);
     }

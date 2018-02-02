@@ -101,7 +101,7 @@ public class AMFResponse extends AbstractResponse<AMFRequest> {
         return responseContentXML;
     }
 
-    protected void initHeaders(ExtendedPostMethod postMethod) {
+    private void initHeaders(ExtendedPostMethod postMethod) {
         requestHeaders = new StringToStringsMap();
         responseHeaders = new StringToStringsMap();
 
@@ -197,7 +197,7 @@ public class AMFResponse extends AbstractResponse<AMFRequest> {
      *
      * @return stringHEAD
      */
-    public String toExternalForm(Header header) {
+    private String toExternalForm(Header header) {
         return ((null == header.getName() ? "" : header.getName()) + ": "
                 + (null == header.getValue() ? "" : header.getValue()) + "\r\n");
     }

@@ -57,7 +57,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 public class JettyMockEngine implements MockEngine {
-    public final static Logger log = Logger.getLogger(JettyMockEngine.class);
+    private final static Logger log = Logger.getLogger(JettyMockEngine.class);
 
     private Server server;
     private Map<Integer, Map<String, List<MockRunner>>> runners = new HashMap<Integer, Map<String, List<MockRunner>>>();
@@ -255,7 +255,7 @@ public class JettyMockEngine implements MockEngine {
             return new SoapUIHttpConnection(SoapUIConnector.this, selectChannelEndPoint, getServer());
         }
 
-        public boolean waitUntilIdle(long maxWait) throws Exception {
+        boolean waitUntilIdle(long maxWait) throws Exception {
             while (maxWait > 0 && hasActiveConnections()) {
                 System.out.println("Waiting for active connections to finish..");
                 Thread.sleep(500);
@@ -281,7 +281,7 @@ public class JettyMockEngine implements MockEngine {
         private BufferedServletInputStream bufferedServletInputStream;
         private CapturingServletOutputStream capturingServletOutputStream;
 
-        public SoapUIHttpConnection(Connector connector, EndPoint endPoint, Server server) {
+        SoapUIHttpConnection(Connector connector, EndPoint endPoint, Server server) {
             super(connector, endPoint, server);
         }
 
@@ -317,12 +317,12 @@ public class JettyMockEngine implements MockEngine {
         private byte[] data = null;
         private InputStream buffer1 = null;
 
-        public BufferedServletInputStream(InputStream is) {
+        BufferedServletInputStream(InputStream is) {
             super();
             source = is;
         }
 
-        public InputStream getBuffer() throws IOException {
+        InputStream getBuffer() throws IOException {
             if (source.available() > 0) {
                 // New request content available
                 data = null;
@@ -395,7 +395,7 @@ public class JettyMockEngine implements MockEngine {
         private ServletOutputStream outputStream;
         private ByteArrayOutputStream captureOutputStream = new ByteArrayOutputStream();
 
-        public CapturingServletOutputStream(ServletOutputStream outputStream) {
+        CapturingServletOutputStream(ServletOutputStream outputStream) {
             this.outputStream = outputStream;
         }
 
@@ -489,7 +489,7 @@ public class JettyMockEngine implements MockEngine {
         private ServletInputStream inputStream;
         private ByteArrayOutputStream captureOutputStream = new ByteArrayOutputStream();
 
-        public CapturingServletInputStream(ServletInputStream inputStream) {
+        CapturingServletInputStream(ServletInputStream inputStream) {
             this.inputStream = inputStream;
         }
 

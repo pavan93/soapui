@@ -28,9 +28,9 @@ import static org.junit.Assert.assertThat;
  */
 public class OAuth2AccessTokenResponseTest {
 
-    public static final String DUMMY_ACCESS_TOKEN = "dummy_access_token";
-    public static final String DUMMY_REFRESH_TOKEN = "dummy_refresh_token";
-    public static final long EXPIRES_IN = 3600L;
+    private static final String DUMMY_ACCESS_TOKEN = "dummy_access_token";
+    private static final String DUMMY_REFRESH_TOKEN = "dummy_refresh_token";
+    private static final long EXPIRES_IN = 3600L;
     private OAuth2AccessTokenResponse tokenResponse;
 
     @Before

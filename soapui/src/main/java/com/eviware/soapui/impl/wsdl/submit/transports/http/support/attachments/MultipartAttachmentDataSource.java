@@ -31,7 +31,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class MultipartAttachmentDataSource implements DataSource {
+class MultipartAttachmentDataSource implements DataSource {
     private final MimeMultipart multipart;
 
     public MultipartAttachmentDataSource(MimeMultipart multipart) {

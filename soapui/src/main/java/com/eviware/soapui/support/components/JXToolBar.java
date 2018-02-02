@@ -18,21 +18,12 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractButton;
-import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JToolBar;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
+import javax.swing.*;
+import java.awt.*;
 
 public class JXToolBar extends JToolBar {
 
-    public static final int STANDARD_COMPONENT_HEIGHT = 18;
+    private static final int STANDARD_COMPONENT_HEIGHT = 18;
     public static final int MAIN_COMPONENT_HEIGHT = 50;
 
     @Override

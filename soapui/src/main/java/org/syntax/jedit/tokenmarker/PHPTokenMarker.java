@@ -16,10 +16,10 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
 import org.syntax.jedit.SyntaxUtilities;
+
+import javax.swing.text.Segment;
 
 /**
  * PHP token marker.
@@ -28,7 +28,7 @@ import org.syntax.jedit.SyntaxUtilities;
  * @version $Id: PHPTokenMarker.java,v 1.1 1999/12/14 04:20:35 sp Exp $
  */
 public class PHPTokenMarker extends TokenMarker {
-    public static final byte SCRIPT = Token.INTERNAL_FIRST;
+    private static final byte SCRIPT = Token.INTERNAL_FIRST;
 
     public byte markTokensImpl(byte token, Segment line, int lineIndex) {
         char[] array = line.array;

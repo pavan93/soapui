@@ -31,15 +31,15 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import junit.framework.Assert;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public class JsonPathExistenceAssertion extends JsonPathAssertionBase implements RequestAssertion, ResponseAssertion {
 
-    public static final String ID = "JsonPath Existence Match";
+    private static final String ID = "JsonPath Existence Match";
     public static final String LABEL = "JsonPath Existence Match";
-    public static final String DESCRIPTION = "Uses an JsonPath expression to select content from the target property and compares the result to an expected value. Applicable to any property containing JSON.";
+    private static final String DESCRIPTION = "Uses an JsonPath expression to select content from the target property and compares the result to an expected value. Applicable to any property containing JSON.";
 
-    public JsonPathExistenceAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JsonPathExistenceAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable);
     }
 

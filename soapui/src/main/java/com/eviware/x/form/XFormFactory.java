@@ -25,5 +25,5 @@ public abstract class XFormFactory {
         public static XFormFactory instance;
     }
 
-    public abstract XFormDialogBuilder createDialogBuilder2(String name);
+    protected abstract XFormDialogBuilder createDialogBuilder2(String name);
 }

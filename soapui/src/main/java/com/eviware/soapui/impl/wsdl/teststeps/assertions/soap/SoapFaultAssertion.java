@@ -40,11 +40,11 @@ import com.eviware.soapui.model.testsuite.ResponseAssertion;
  */
 
 public class SoapFaultAssertion extends WsdlMessageAssertion implements ResponseAssertion {
-    public static final String ID = "Not SOAP Fault Assertion";
+    private static final String ID = "Not SOAP Fault Assertion";
     public static final String LABEL = "SOAP Fault";
-    public static final String DESCRIPTION = "Validates that the last received message is a SOAP Fault. Applicable to SOAP TestSteps.";
+    private static final String DESCRIPTION = "Validates that the last received message is a SOAP Fault. Applicable to SOAP TestSteps.";
 
-    public SoapFaultAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private SoapFaultAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

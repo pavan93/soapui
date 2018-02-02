@@ -39,13 +39,8 @@ import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.xml.XmlObjectConfigurationBuilder;
@@ -72,7 +67,7 @@ public class SchemaComplianceAssertion extends WsdlMessageAssertion implements R
     private static Map<String, WsdlContext> wsdlContextMap = new HashMap<String, WsdlContext>();
     private static final String SCHEMA_COMPLIANCE_HAS_CLEARED_CACHE_FLAG = SchemaComplianceAssertion.class.getName()
             + "@SchemaComplianceHasClearedCacheFlag";
-    public static final String DESCRIPTION = "Validates that the last received message is compliant with the associated WSDL or WADL schema definition. Applicable to SOAP and REST TestSteps.";
+    private static final String DESCRIPTION = "Validates that the last received message is compliant with the associated WSDL or WADL schema definition. Applicable to SOAP and REST TestSteps.";
 
     public SchemaComplianceAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, true, false, true);
@@ -265,7 +260,7 @@ public class SchemaComplianceAssertion extends WsdlMessageAssertion implements R
         }
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         return builder.add("definition", definition).finish();
     }

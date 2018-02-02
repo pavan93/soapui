@@ -75,12 +75,12 @@ public class RestMockResponseWriterTest {
         verify(servletResponse).setStatus(HttpStatus.SC_CONFLICT);
     }
 
-    public MockResult createMockResult() throws Exception {
+    private MockResult createMockResult() throws Exception {
         WsdlMockRunContext runContext = mock(WsdlMockRunContext.class);
         return new RestMockResult(createMockRequest(runContext));
     }
 
-    public RestMockRequest createMockRequest(WsdlMockRunContext runContext) throws Exception {
+    private RestMockRequest createMockRequest(WsdlMockRunContext runContext) throws Exception {
         return new RestMockRequest(servletRequest, servletResponse, runContext);
     }
 

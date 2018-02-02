@@ -44,9 +44,9 @@
 
 package org.apache.commons.httpclient;
 
-import java.io.Serializable;
-
 import org.apache.commons.httpclient.util.LangUtils;
+
+import java.io.Serializable;
 
 /**
  * <p>A simple class encapsulating a name/value pair.</p>
@@ -73,7 +73,7 @@ public class NameValuePair implements Serializable {
      * @param name  The name.
      * @param value The value.
      */
-    public NameValuePair(String name, String value) {
+    private NameValuePair(String name, String value) {
         this.name = name;
         this.value = value;
     }

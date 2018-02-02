@@ -16,13 +16,9 @@
 
 package com.eviware.soapui.support.editor.support;
 
-import com.eviware.soapui.support.editor.Editor;
-import com.eviware.soapui.support.editor.EditorDocument;
-import com.eviware.soapui.support.editor.EditorLocation;
-import com.eviware.soapui.support.editor.EditorLocationListener;
-import com.eviware.soapui.support.editor.EditorView;
+import com.eviware.soapui.support.editor.*;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashSet;
@@ -73,7 +69,7 @@ public abstract class AbstractEditorView<T extends EditorDocument> implements Ed
         }
     }
 
-    public abstract JComponent buildUI();
+    protected abstract JComponent buildUI();
 
     public boolean activate(EditorLocation<T> location) {
         isActive = true;

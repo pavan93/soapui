@@ -23,7 +23,7 @@ import com.google.common.collect.Lists;
 import java.util.Collections;
 import java.util.List;
 
-public class MessageExchangeUtil {
+class MessageExchangeUtil {
     public static MessageExchange findMessageExchangeByTestStepId(List<TestStepResult> results, String testStepId) {
         List<TestStepResult> tmpList = Lists.newArrayList(results);
         Collections.reverse(tmpList);

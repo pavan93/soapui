@@ -28,17 +28,8 @@ import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 
@@ -48,7 +39,7 @@ import java.util.Date;
  * @author Ole.Matzura
  */
 
-public class ViewWsdlMockResultAction extends AbstractAction {
+class ViewWsdlMockResultAction extends AbstractAction {
     private final WsdlMockResult result;
     private DefaultDesktopPanel desktopPanel;
 

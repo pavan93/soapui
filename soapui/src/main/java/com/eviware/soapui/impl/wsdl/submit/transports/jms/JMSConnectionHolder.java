@@ -29,7 +29,7 @@ import javax.naming.NamingException;
  *
  * @author nebojsa.tasic
  */
-public class JMSConnectionHolder {
+class JMSConnectionHolder {
     private ConnectionFactory connectionFactory = null;
     private Connection connection = null;
     private Session session = null;

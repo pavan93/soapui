@@ -77,39 +77,39 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         SubmitListener {
     private final static Logger log = Logger.getLogger(AbstractHttpRequestDesktopPanel.class);
     private final static MessageSupport messages = MessageSupport.getMessages(JdbcRequestTestStepDesktopPanel.class);
-    protected JPanel configPanel;
+    private static final String DRIVER_FIELD = "Driver";
     private JButton addAssertionButton;
-    protected JInspectorPanel inspectorPanel;
-    protected JdbcRequestTestStep jdbcRequestTestStep;
-    protected JComponentInspector<?> assertionInspector;
-    protected AssertionsPanel assertionsPanel;
+    private static final String CONNSTR_FIELD = "Connection String";
+    private static final String PASS_FIELD = "Password";
+    private static final String QUERY_FIELD = "SQL Query";
+    private static final String STOREDPROCEDURE_FIELD = "Stored Procedure";
     private InternalAssertionsListener assertionsListener = new InternalAssertionsListener();
     private InternalTestMonitorListener testMonitorListener = new InternalTestMonitorListener();
-    protected JComponent requestEditor;
-    protected ModelItemXmlEditor<?, ?> responseEditor;
-    protected JPanel panel;
-    protected SimpleForm configForm;
-    protected static final String DRIVER_FIELD = "Driver";
-    protected static final String CONNSTR_FIELD = "Connection String";
-    protected static final String PASS_FIELD = "Password";
-    public static final String QUERY_FIELD = "SQL Query";
-    protected static final String STOREDPROCEDURE_FIELD = "Stored Procedure";
-    protected static final String RESULT_COLUMNS_NAMES_TO_UPPER_CASE = messages.get("JdbcRequestTestStepDesktopPanel.ResultColumnsToUpperCase.Name");
+    private static final String RESULT_COLUMNS_NAMES_TO_UPPER_CASE = messages.get("JdbcRequestTestStepDesktopPanel.ResultColumnsToUpperCase.Name");
+    private JPanel configPanel;
+    private JInspectorPanel inspectorPanel;
+    private JdbcRequestTestStep jdbcRequestTestStep;
+    private JComponentInspector<?> assertionInspector;
+    private AssertionsPanel assertionsPanel;
+    private JComponent requestEditor;
+    private ModelItemXmlEditor<?, ?> responseEditor;
+    private JPanel panel;
+    private SimpleForm configForm;
     protected static final String DATA_CONNECTION_FIELD = "Connection";
 
     protected static final String QUERY_ELEMENT = "query";
     protected static final String STOREDPROCEDURE_ELEMENT = "stored-procedure";
     protected Connection connection;
-    protected RSyntaxTextArea queryArea;
-    protected JCheckBox isStoredProcedureCheckBox;
-    protected JCheckBox resultColumnsNamesToUpperCaseCheckBox;
-    protected JTextField driverTextField;
-    protected JTextField connStrTextField;
-    protected JButton testConnectionButton;
-    protected JPasswordField passField;
+    private RSyntaxTextArea queryArea;
+    private JCheckBox isStoredProcedureCheckBox;
+    private JCheckBox resultColumnsNamesToUpperCaseCheckBox;
+    private JTextField driverTextField;
+    private JTextField connStrTextField;
+    private JButton testConnectionButton;
+    private JPasswordField passField;
     private Submit submit;
     private SubmitAction submitAction;
-    protected JButton submitButton;
+    private JButton submitButton;
     private JToggleButton tabsButton;
     private JTabbedPane requestTabs;
     private JPanel requestTabPanel;
@@ -118,13 +118,13 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
     private JEditorStatusBarWithProgress statusBar;
     private JButton cancelButton;
     private JButton splitButton;
-    protected JComponent propertiesTableComponent;
+    private JComponent propertiesTableComponent;
     private JComponentInspector<?> logInspector;
-    protected JLogList logArea;
+    private JLogList logArea;
     private long startTime;
-    protected JButton reconfigureConnPropertiesButton;
-    protected PropertyHolderTable propertyHolderTable;
-    protected JdbcRequestTestStepConfig jdbcRequestTestStepConfig;
+    private JButton reconfigureConnPropertiesButton;
+    private PropertyHolderTable propertyHolderTable;
+    private JdbcRequestTestStepConfig jdbcRequestTestStepConfig;
 
     public JdbcRequestTestStepDesktopPanel(JdbcRequestTestStep modelItem) {
         super(modelItem);
@@ -140,11 +140,11 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
 
     // added this again cause without it connection is set to none whenever jdbc
     // test step is reopened
-    protected void initConfig() {
+    private void initConfig() {
         jdbcRequestTestStepConfig = jdbcRequestTestStep.getJdbcRequestTestStepConfig();
     }
 
-    protected JComponent buildContent() {
+    private JComponent buildContent() {
         requestSplitPane = UISupport.createHorizontalSplit();
         requestSplitPane.setResizeWeight(0.5);
         requestSplitPane.setBorder(null);
@@ -231,7 +231,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         return inspectorPanel.getComponent();
     }
 
-    protected JComponent buildRequestConfigPanel() {
+    private JComponent buildRequestConfigPanel() {
         configPanel = UISupport.addTitledBorder(new JPanel(new BorderLayout()), "Configuration");
         if (panel == null) {
             panel = new JPanel(new BorderLayout());
@@ -253,7 +253,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
 
     }
 
-    protected void initContent() {
+    private void initContent() {
         jdbcRequestTestStep.getJdbcRequest().addSubmitListener(this);
 
         add(buildContent(), BorderLayout.CENTER);
@@ -275,14 +275,14 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected JComponent buildStatusLabel() {
+    private JComponent buildStatusLabel() {
         statusBar = new JEditorStatusBarWithProgress();
         statusBar.setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
 
         return statusBar;
     }
 
-    protected JComponent buildProperties() {
+    private JComponent buildProperties() {
         propertyHolderTable = new PropertyHolderTable(getModelItem()) {
             @Override
             protected DefaultPropertyHolderTableModel getPropertyHolderTableModel() {
@@ -310,7 +310,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         return propertyHolderTable;
     }
 
-    public PropertyHolderTable getPropertyHolderTable() {
+    private PropertyHolderTable getPropertyHolderTable() {
         return propertyHolderTable;
     }
 
@@ -335,7 +335,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         }
     }
 
-    protected JComponent buildToolbar() {
+    private JComponent buildToolbar() {
         JXToolBar toolbar = UISupport.createToolbar();
 
         toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -366,7 +366,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         }
     }
 
-    protected JComponent buildLogPanel() {
+    private JComponent buildLogPanel() {
         logArea = new JLogList("Request Log");
 
         logArea.getLogList().getModel().addListDataListener(new ListDataChangeListener() {
@@ -378,18 +378,12 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         return logArea;
     }
 
-    protected AssertionsPanel buildAssertionsPanel() {
+    private AssertionsPanel buildAssertionsPanel() {
         return new JdbcAssertionsPanel(jdbcRequestTestStep) {
         };
     }
 
-    protected class JdbcAssertionsPanel extends AssertionsPanel {
-        public JdbcAssertionsPanel(Assertable assertable) {
-            super(assertable);
-        }
-    }
-
-    protected void createSimpleJdbcConfigForm() {
+    private void createSimpleJdbcConfigForm() {
         configForm.addSpace(5);
         configForm.setDefaultTextFieldColumns(SimpleForm.LONG_TEXT_FIELD_COLUMNS);
 
@@ -439,7 +433,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
                 messages.get("JdbcRequestTestStepDesktopPanel.ResultColumnsToUpperCase.Description"), jdbcRequestTestStep.isConvertColumnNamesToUpperCase());
     }
 
-    protected void addPasswordDocumentListener() {
+    private void addPasswordDocumentListener() {
         passField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
 
             @Override
@@ -451,7 +445,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected void addConnStrDocumentListener() {
+    private void addConnStrDocumentListener() {
         connStrTextField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
             @Override
             public void update(Document document) {
@@ -462,7 +456,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected void addDriverDocumentListener() {
+    private void addDriverDocumentListener() {
         driverTextField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
             @Override
             public void update(Document document) {
@@ -473,7 +467,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected void addStoreProcedureChangeListener() {
+    private void addStoreProcedureChangeListener() {
         isStoredProcedureCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent arg0) {
                 jdbcRequestTestStep.setStoredProcedure(((JCheckBox) arg0.getSource()).isSelected());
@@ -491,7 +485,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected void addResultColumnsNamesToUpperCaseChangeListener() {
+    private void addResultColumnsNamesToUpperCaseChangeListener() {
         resultColumnsNamesToUpperCaseCheckBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent arg0) {
                 jdbcRequestTestStep.setConvertColumnNamesToUpperCase(((JCheckBox) arg0.getSource()).isSelected());
@@ -499,7 +493,7 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         });
     }
 
-    protected boolean enableTestConnection() {
+    private boolean enableTestConnection() {
         if (StringUtils.isNullOrEmpty(jdbcRequestTestStep.getDriver())
                 || StringUtils.isNullOrEmpty(jdbcRequestTestStep.getConnectionString())
                 || (JdbcRequestTestStep.isNeededPassword(jdbcRequestTestStep.getConnectionString()) && StringUtils
@@ -514,18 +508,33 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         }
     }
 
-    protected boolean enableSubmit() {
+    private boolean enableSubmit() {
         return enableTestConnection() && !StringUtils.isNullOrEmpty(jdbcRequestTestStep.getQuery());
     }
 
-    protected ModelItemXmlEditor<?, ?> buildResponseEditor() {
+    private ModelItemXmlEditor<?, ?> buildResponseEditor() {
         return new JdbcResponseMessageEditor();
     }
 
-    public class JdbcResponseMessageEditor extends ResponseMessageXmlEditor<JdbcRequestTestStep, JdbcResponseDocument> {
-        public JdbcResponseMessageEditor() {
-            super(new JdbcResponseDocument(), jdbcRequestTestStep);
+    private void onSubmit() {
+        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
+            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
+                submit.cancel();
+            } else {
+                return;
+            }
         }
+
+        try {
+            submit = doSubmit();
+        } catch (SubmitException e1) {
+            SoapUI.logError(e1);
+        }
+    }
+
+    private Submit doSubmit() {
+        Analytics.trackAction(SoapUIActions.RUN_TEST_STEP_FROM_PANEL, "StepType", "JDBC");
+        return jdbcRequestTestStep.getJdbcRequest().submit(new WsdlTestRunContext(getModelItem()), true);
     }
 
     public boolean dependsOn(ModelItem modelItem) {
@@ -549,58 +558,29 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         return release();
     }
 
-    public class JdbcResponseDocument extends AbstractXmlDocument implements PropertyChangeListener {
-        public JdbcResponseDocument() {
-            jdbcRequestTestStep.addPropertyChangeListener(JdbcRequestTestStep.RESPONSE_PROPERTY, this);
-        }
-
-        public void propertyChange(PropertyChangeEvent evt) {
-            fireContentChanged();
-        }
-
-        @Override
-        public void setDocumentContent(DocumentContent documentContent) {
-            if (jdbcRequestTestStep.getJdbcRequest().getResponse() != null) {
-                jdbcRequestTestStep.getJdbcRequest().getResponse().setContentAsString(documentContent.getContentAsString());
-            }
-        }
-
-        public void release() {
-            super.release();
-            jdbcRequestTestStep.removePropertyChangeListener(JdbcRequestTestStep.RESPONSE_PROPERTY, this);
-        }
-
-        @Nonnull
-        @Override
-        public DocumentContent getDocumentContent(Format format) {
-            JdbcResponse response = jdbcRequestTestStep.getJdbcRequest().getResponse();
-            return new DocumentContent(response == null ? null : response.getContentType(), response == null ? null : response.getContentAsString());
-        }
+    private void setContent(JComponent content) {
+        inspectorPanel.setContentComponent(content);
     }
 
-    protected class TestConnectionAction extends AbstractAction {
-        public TestConnectionAction() {
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Test the current Connection");
+    private void removeContent(JComponent content) {
+        inspectorPanel.setContentComponent(null);
+    }
 
-            setEnabled(false);
+    private void onCancel() {
+        if (submit == null) {
+            return;
         }
 
-        public void actionPerformed(ActionEvent arg0) {
-            try {
+        cancelButton.setEnabled(false);
+        submit.cancel();
+        setEnabled(true);
+        submit = null;
+    }
 
-                PropertyExpansionContext context = new DefaultPropertyExpansionContext(getModelItem());
-                JdbcUtils.initConnection(context, jdbcRequestTestStep.getDriver(),
-                        jdbcRequestTestStep.getConnectionString(), jdbcRequestTestStep.getPassword());
-                UISupport.showInfoMessage("The Connection Successfully Tested");
-            } catch (SoapUIException e) {
-                SoapUI.logError(e);
-                UISupport.showErrorMessage(e.toString());
-            } catch (SQLException e) {
-                SoapUI.logError(e);
-                UISupport.showErrorMessage("Can't get the Connection for specified properties; " + e.toString());
-            }
-        }
+    private void logMessages(String message, String infoMessage) {
+        log.info(infoMessage);
+        statusBar.setInfo(message);
+        logArea.addLine(DateUtil.formatFull(new Date(startTime)) + " - " + message);
     }
 
     private class InternalTestMonitorListener extends TestMonitorListenerAdapter {
@@ -635,8 +615,74 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         }
     }
 
-    public class SubmitAction extends AbstractAction {
-        public SubmitAction() {
+    class JdbcAssertionsPanel extends AssertionsPanel {
+        JdbcAssertionsPanel(Assertable assertable) {
+            super(assertable);
+        }
+    }
+
+    class JdbcResponseMessageEditor extends ResponseMessageXmlEditor<JdbcRequestTestStep, JdbcResponseDocument> {
+        JdbcResponseMessageEditor() {
+            super(new JdbcResponseDocument(), jdbcRequestTestStep);
+        }
+    }
+
+    public class JdbcResponseDocument extends AbstractXmlDocument implements PropertyChangeListener {
+        JdbcResponseDocument() {
+            jdbcRequestTestStep.addPropertyChangeListener(JdbcRequestTestStep.RESPONSE_PROPERTY, this);
+        }
+
+        public void propertyChange(PropertyChangeEvent evt) {
+            fireContentChanged();
+        }
+
+        @Override
+        public void setDocumentContent(DocumentContent documentContent) {
+            if (jdbcRequestTestStep.getJdbcRequest().getResponse() != null) {
+                jdbcRequestTestStep.getJdbcRequest().getResponse().setContentAsString(documentContent.getContentAsString());
+            }
+        }
+
+        public void release() {
+            super.release();
+            jdbcRequestTestStep.removePropertyChangeListener(JdbcRequestTestStep.RESPONSE_PROPERTY, this);
+        }
+
+        @Nonnull
+        @Override
+        public DocumentContent getDocumentContent(Format format) {
+            JdbcResponse response = jdbcRequestTestStep.getJdbcRequest().getResponse();
+            return new DocumentContent(response == null ? null : response.getContentType(), response == null ? null : response.getContentAsString());
+        }
+    }
+
+    class TestConnectionAction extends AbstractAction {
+        TestConnectionAction() {
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Test the current Connection");
+
+            setEnabled(false);
+        }
+
+        public void actionPerformed(ActionEvent arg0) {
+            try {
+
+                PropertyExpansionContext context = new DefaultPropertyExpansionContext(getModelItem());
+                JdbcUtils.initConnection(context, jdbcRequestTestStep.getDriver(),
+                        jdbcRequestTestStep.getConnectionString(), jdbcRequestTestStep.getPassword());
+                UISupport.showInfoMessage("The Connection Successfully Tested");
+            } catch (SoapUIException e) {
+                SoapUI.logError(e);
+                UISupport.showErrorMessage(e.toString());
+            } catch (SQLException e) {
+                SoapUI.logError(e);
+                UISupport.showErrorMessage("Can't get the Connection for specified properties; " + e.toString());
+            }
+        }
+    }
+
+    class SubmitAction extends AbstractAction {
+        SubmitAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/submit_request.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Submit request to specified database");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt ENTER"));
@@ -647,29 +693,8 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         }
     }
 
-    protected void onSubmit() {
-        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
-            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
-                submit.cancel();
-            } else {
-                return;
-            }
-        }
-
-        try {
-            submit = doSubmit();
-        } catch (SubmitException e1) {
-            SoapUI.logError(e1);
-        }
-    }
-
-    protected Submit doSubmit() {
-        Analytics.trackAction(SoapUIActions.RUN_TEST_STEP_FROM_PANEL, "StepType", "JDBC");
-        return jdbcRequestTestStep.getJdbcRequest().submit(new WsdlTestRunContext(getModelItem()), true);
-    }
-
     private final class ChangeToTabsAction extends AbstractAction {
-        public ChangeToTabsAction() {
+        ChangeToTabsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/toggle_tabs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Toggles to tab-based layout");
         }
@@ -712,38 +737,6 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
 
             revalidate();
         }
-    }
-
-    public void setContent(JComponent content) {
-        inspectorPanel.setContentComponent(content);
-    }
-
-    public void removeContent(JComponent content) {
-        inspectorPanel.setContentComponent(null);
-    }
-
-    private class CancelAction extends AbstractAction {
-        public CancelAction() {
-            super();
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
-            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            onCancel();
-        }
-    }
-
-    protected void onCancel() {
-        if (submit == null) {
-            return;
-        }
-
-        cancelButton.setEnabled(false);
-        submit.cancel();
-        setEnabled(true);
-        submit = null;
     }
 
     public void setEnabled(boolean enabled) {
@@ -818,10 +811,17 @@ public class JdbcRequestTestStepDesktopPanel extends ModelItemDesktopPanel<JdbcR
         updateStatusIcon();
     }
 
-    protected void logMessages(String message, String infoMessage) {
-        log.info(infoMessage);
-        statusBar.setInfo(message);
-        logArea.addLine(DateUtil.formatFull(new Date(startTime)) + " - " + message);
+    private class CancelAction extends AbstractAction {
+        CancelAction() {
+            super();
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
+            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            onCancel();
+        }
     }
 
     public boolean beforeSubmit(Submit submit, SubmitContext context) {

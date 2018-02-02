@@ -53,7 +53,7 @@ import static org.mockito.Mockito.when;
  */
 public class JsonMediaTypeHandlerTest {
 
-    public static final String ENDPOINT = "http://somehost.com";
+    private static final String ENDPOINT = "http://somehost.com";
     private RestRequest restRequest;
     private JsonMediaTypeHandler mediaTypeHandler;
 

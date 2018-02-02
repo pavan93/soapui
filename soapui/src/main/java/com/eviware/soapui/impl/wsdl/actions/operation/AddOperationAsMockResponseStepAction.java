@@ -49,7 +49,7 @@ public class AddOperationAsMockResponseStepAction extends AbstractAddToTestCaseA
         }
     }
 
-    protected boolean addMockResponse(WsdlTestCase testCase, WsdlOperation operation) {
+    private boolean addMockResponse(WsdlTestCase testCase, WsdlOperation operation) {
         if (dialog == null) {
             dialog = ADialogBuilder.buildDialog(Form.class);
             dialog.setWidth(450);

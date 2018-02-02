@@ -70,10 +70,10 @@ public class AttachmentUtils {
     private static final QName XMLMIME_CONTENTTYPE_200411 = new QName("http://www.w3.org/2004/11/xmlmime",
             "contentType");
     private static final QName SWAREF_QNAME = new QName("http://ws-i.org/profiles/basic/1.1/xsd", "swaRef");
-    public static final QName XOP_HREF_QNAME = new QName("href");
+    private static final QName XOP_HREF_QNAME = new QName("href");
     private static final QName XOP_INCLUDE_QNAME = new QName("http://www.w3.org/2004/08/xop/include", "Include");
     public static final String ROOTPART_SOAPUI_ORG = "<rootpart@soapui.org>";
-    public static final long MAX_SIZE_IN_MEMORY_ATTACHMENT = 500 * 1024;
+    private static final long MAX_SIZE_IN_MEMORY_ATTACHMENT = 500 * 1024;
 
     public static boolean prepareMessagePart(WsdlAttachmentContainer container, MimeMultipart mp,
                                              MessageXmlPart messagePart, StringToStringMap contentIds) throws Exception {
@@ -328,11 +328,11 @@ public class AttachmentUtils {
         return contentType + "\"; " + header.substring(ix);
     }
 
-    public static boolean isSwaRefType(SchemaType schemaType) {
+    private static boolean isSwaRefType(SchemaType schemaType) {
         return schemaType != null && schemaType.getName() != null && schemaType.getName().equals(SWAREF_QNAME);
     }
 
-    public static String getXmlMimeContentType(XmlCursor cursor) {
+    private static String getXmlMimeContentType(XmlCursor cursor) {
         String attributeText = cursor.getAttributeText(XMLMIME_CONTENTTYPE_200411);
         if (attributeText == null) {
             attributeText = cursor.getAttributeText(XMLMIME_CONTENTTYPE_200505);
@@ -392,7 +392,7 @@ public class AttachmentUtils {
         return AttachmentEncoding.NONE;
     }
 
-    public static boolean isXopInclude(SchemaType schemaType) {
+    private static boolean isXopInclude(SchemaType schemaType) {
         return XOP_INCLUDE_QNAME.equals(schemaType.getName());
     }
 
@@ -526,8 +526,8 @@ public class AttachmentUtils {
      * Adds a mulitpart MimeBodyPart from an array of attachments
      */
 
-    public static void addMultipartAttachment(MimeMultipart mp, StringToStringMap contentIds,
-                                              List<Attachment> attachments) throws MessagingException {
+    private static void addMultipartAttachment(MimeMultipart mp, StringToStringMap contentIds,
+                                               List<Attachment> attachments) throws MessagingException {
         MimeMultipart multipart = new MimeMultipart("mixed");
         long totalSize = 0;
 
@@ -558,8 +558,8 @@ public class AttachmentUtils {
         mp.addBodyPart(part);
     }
 
-    public static void initPartContentId(StringToStringMap contentIds, MimeBodyPart part, Attachment attachment,
-                                         boolean isMultipart) throws MessagingException {
+    private static void initPartContentId(StringToStringMap contentIds, MimeBodyPart part, Attachment attachment,
+                                          boolean isMultipart) throws MessagingException {
         String partName = attachment.getPart();
 
         String contentID = attachment.getContentID();
@@ -611,7 +611,7 @@ public class AttachmentUtils {
      * Adds a simple MimeBodyPart from an attachment
      */
 
-    public static void addSingleAttachment(MimeMultipart mp, StringToStringMap contentIds, Attachment att)
+    private static void addSingleAttachment(MimeMultipart mp, StringToStringMap contentIds, Attachment att)
             throws MessagingException {
         String contentType = att.getContentType();
         MimeBodyPart part = contentType.startsWith("text/") ? new MimeBodyPart()

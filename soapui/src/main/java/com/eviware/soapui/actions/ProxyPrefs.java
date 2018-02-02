@@ -23,23 +23,17 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.components.SimpleForm;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JRadioButton;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProxyPrefs implements Prefs {
 
-    public static final String HOST = "Host";
-    public static final String PORT = "Port";
-    public static final String USERNAME = "Username";
-    public static final String PASSWORD = "Password";
-    public static final String EXCLUDES = "Excludes";
+    private static final String HOST = "Host";
+    private static final String PORT = "Port";
+    private static final String USERNAME = "Username";
+    private static final String PASSWORD = "Password";
+    private static final String EXCLUDES = "Excludes";
 
     private JTextField hostTextField;
     private JTextField portTextField;

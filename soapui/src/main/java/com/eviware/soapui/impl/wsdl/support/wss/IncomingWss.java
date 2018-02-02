@@ -46,7 +46,7 @@ public class IncomingWss {
         this.container = container;
     }
 
-    public WssContainer getWssContainer() {
+    private WssContainer getWssContainer() {
         return container;
     }
 
@@ -121,10 +121,10 @@ public class IncomingWss {
         }
     }
 
-    public class WSSCallbackHandler implements CallbackHandler {
+    class WSSCallbackHandler implements CallbackHandler {
         private final Crypto dec;
 
-        public WSSCallbackHandler(Crypto dec) {
+        WSSCallbackHandler(Crypto dec) {
             this.dec = dec;
         }
 

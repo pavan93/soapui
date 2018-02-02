@@ -37,7 +37,7 @@ public class AddRestUriAction extends AbstractSoapUIAction<WsdlProject> {
     private RestUriDialogHandler dialogBuilder = new RestUriDialogHandler();
     private RestServiceBuilder serviceBuilder = new RestServiceBuilder();
 
-    public AddRestUriAction() {
+    private AddRestUriAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

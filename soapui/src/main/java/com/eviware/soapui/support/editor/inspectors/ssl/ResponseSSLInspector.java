@@ -24,12 +24,9 @@ import com.eviware.soapui.support.editor.EditorView;
 import com.eviware.soapui.support.editor.inspectors.AbstractXmlInspector;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 
-import javax.swing.JComponent;
-import javax.swing.JEditorPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.text.html.HTMLEditorKit;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.security.cert.Certificate;
@@ -39,7 +36,7 @@ public class ResponseSSLInspector extends AbstractXmlInspector implements Proper
     private JPanel panel;
     private AbstractHttpRequest<?> request;
 
-    protected ResponseSSLInspector(AbstractHttpRequest<?> abstractHttpRequest) {
+    ResponseSSLInspector(AbstractHttpRequest<?> abstractHttpRequest) {
         super("SSL Info", "SSL Certificate Information for this response", true, SSLInspectorFactory.INSPECTOR_ID);
         this.request = abstractHttpRequest;
         abstractHttpRequest.addPropertyChangeListener(WsdlRequest.RESPONSE_PROPERTY, this);

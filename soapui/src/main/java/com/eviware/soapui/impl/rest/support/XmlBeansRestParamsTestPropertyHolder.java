@@ -43,7 +43,7 @@ import static com.eviware.soapui.impl.rest.actions.support.NewRestResourceAction
 
 public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyHolder {
     public static final String PROPERTY_STYLE = "style";
-    public static final String PARAM_LOCATION = "paramLocation";
+    private static final String PARAM_LOCATION = "paramLocation";
     private RestParametersConfig config;
     private List<RestParamProperty> properties = new ArrayList<RestParamProperty>();
     private Map<String, RestParamProperty> propertyMap = new HashMap<String, RestParamProperty>();
@@ -90,7 +90,7 @@ public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyH
         }
     }
 
-    protected XmlBeansRestParamProperty addProperty(RestParameterConfig propertyConfig, boolean notify) {
+    private XmlBeansRestParamProperty addProperty(RestParameterConfig propertyConfig, boolean notify) {
         XmlBeansRestParamProperty propertiesStepProperty = new XmlBeansRestParamProperty(propertyConfig,
                 defaultParamLocation);
         properties.add(propertiesStepProperty);
@@ -266,261 +266,6 @@ public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyH
         }
 
         return -1;
-    }
-
-    public class XmlBeansRestParamProperty implements RestParamProperty {
-        private RestParameterConfig propertyConfig;
-        private PropertyChangeSupport propertySupport;
-        private ParamLocation paramLocation;
-
-        public XmlBeansRestParamProperty(RestParameterConfig propertyConfig, ParamLocation location) {
-            this.propertyConfig = propertyConfig;
-            this.paramLocation = location;
-            propertySupport = new PropertyChangeSupport(this);
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
-         * addPropertyChangeListener(java.beans.PropertyChangeListener)
-         */
-        public void addPropertyChangeListener(PropertyChangeListener listener) {
-            propertySupport.addPropertyChangeListener(listener);
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
-         * addPropertyChangeListener(java.lang.String,
-         * java.beans.PropertyChangeListener)
-         */
-        public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-            propertySupport.addPropertyChangeListener(propertyName, listener);
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
-         * removePropertyChangeListener(java.beans.PropertyChangeListener)
-         */
-        public void removePropertyChangeListener(PropertyChangeListener listener) {
-            propertySupport.removePropertyChangeListener(listener);
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
-         * removePropertyChangeListener(java.lang.String,
-         * java.beans.PropertyChangeListener)
-         */
-        public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-            propertySupport.removePropertyChangeListener(propertyName, listener);
-        }
-
-        public void setConfig(RestParameterConfig restParameterConfig) {
-            this.propertyConfig = restParameterConfig;
-        }
-
-        public String getName() {
-            return propertyConfig.getName();
-        }
-
-        public void setName(String name) {
-            String oldName = getName();
-            propertyConfig.setName(name);
-
-            propertyMap.remove(oldName.toUpperCase());
-            propertyMap.put(name.toUpperCase(), this);
-
-            firePropertyRenamed(oldName, name);
-        }
-
-        public String getDescription() {
-            return propertyConfig.getDescription();
-        }
-
-        public void setDescription(String description) {
-            String old = getDescription();
-            propertyConfig.setDescription(description);
-            propertySupport.firePropertyChange("description", old, description);
-        }
-
-        public ParamLocation getParamLocation() {
-            return this.paramLocation;
-        }
-
-        public void setParamLocation(ParamLocation paramLocation) {
-            if (this.paramLocation == paramLocation) {
-                return;
-            }
-            ParamLocation old = this.paramLocation;
-            this.paramLocation = paramLocation;
-            propertySupport.firePropertyChange(PARAM_LOCATION, old, this.paramLocation);
-        }
-
-        public ParameterStyle getStyle() {
-            if (propertyConfig.xgetStyle() == null) {
-                propertyConfig.setStyle(RestParameterConfig.Style.QUERY);
-            }
-
-            return ParameterStyle.valueOf(propertyConfig.getStyle().toString());
-        }
-
-        public void setStyle(ParameterStyle style) {
-            ParameterStyle old = getStyle();
-
-            propertyConfig.setStyle(RestParameterConfig.Style.Enum.forString(style.name()));
-            propertySupport.firePropertyChange(PROPERTY_STYLE, old, style);
-        }
-
-        public String getValue() {
-            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
-                return overrideProperties.getProperty(getName());
-            }
-
-            return propertyConfig.getValue() == null ? "" : propertyConfig.getValue();
-        }
-
-        public void setValue(String value) {
-            String oldValue = getValue();
-            propertyConfig.setValue(value);
-
-            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
-                overrideProperties.remove(getName());
-                if (overrideProperties.isEmpty()) {
-                    overrideProperties = null;
-                }
-            }
-
-            firePropertyValueChanged(getName(), oldValue, value);
-        }
-
-        public boolean isReadOnly() {
-            return false;
-        }
-
-        public ModelItem getModelItem() {
-            return modelItem;
-        }
-
-        public String getDefaultValue() {
-            return propertyConfig.isSetDefault() ? propertyConfig.getDefault() : "";
-        }
-
-        public String[] getOptions() {
-            return propertyConfig.getOptionList().toArray(new String[propertyConfig.sizeOfOptionArray()]);
-        }
-
-        public boolean getRequired() {
-            return propertyConfig.getRequired();
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @see
-         * com.eviware.soapui.impl.rest.support.RestParamProperty#isDisableUrlEncoding
-         * ()
-         */
-        public boolean isDisableUrlEncoding() {
-            return propertyConfig.getDisableUrlEncoding();
-        }
-
-        /*
-         * (non-Javadoc)
-         *
-         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
-         * setDisableUrlEncoding(boolean)
-         */
-        public void setDisableUrlEncoding(boolean encode) {
-            boolean old = isDisableUrlEncoding();
-            if (old == encode) {
-                return;
-            }
-
-            propertyConfig.setDisableUrlEncoding(encode);
-            propertySupport.firePropertyChange("disableUrlEncoding", old, encode);
-        }
-
-        public QName getType() {
-            return propertyConfig.isSetType() ? propertyConfig.getType() : XmlString.type.getName();
-        }
-
-        public void setOptions(String[] arg0) {
-            String[] old = getOptions();
-            propertyConfig.setOptionArray(arg0);
-            propertySupport.firePropertyChange("options", old, arg0);
-        }
-
-        public void setRequired(boolean arg0) {
-            boolean old = getRequired();
-            if (old == arg0) {
-                return;
-            }
-            propertyConfig.setRequired(arg0);
-            propertySupport.firePropertyChange("required", old, arg0);
-        }
-
-        public void setType(QName arg0) {
-            QName old = getType();
-            if (old.equals(arg0)) {
-                return;
-            }
-            propertyConfig.setType(arg0);
-            propertySupport.firePropertyChange("type", old, arg0);
-        }
-
-        public void setDefaultValue(String default1) {
-            String old = default1;
-            propertyConfig.setDefault(default1);
-            propertySupport.firePropertyChange("defaultValue", old, default1);
-        }
-
-        public RestParameterConfig getConfig() {
-            return propertyConfig;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof XmlBeansRestParamProperty) {
-                return propertyConfig.toString().equals(((XmlBeansRestParamProperty) obj).propertyConfig.toString());
-            }
-
-            return super.equals(obj);
-        }
-
-        public void reset() {
-            setValue(getDefaultValue());
-        }
-
-        @Override
-        public String getPath() {
-            return propertyConfig.getPath();
-
-        }
-
-        @Override
-        public void setPath(String path) {
-            String old = getPath();
-            propertyConfig.setPath(path);
-            propertySupport.firePropertyChange("path", old, path);
-
-        }
-
-        @Override
-        public boolean isRequestPart() {
-            return false;
-        }
-
-        @Override
-        public SchemaType getSchemaType() {
-            return XmlBeans.getBuiltinTypeSystem().findType(getType());
-        }
-
     }
 
     /*
@@ -724,7 +469,7 @@ public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyH
         private K key;
         private V value;
 
-        public HashMapEntry(K key, V value) {
+        HashMapEntry(K key, V value) {
             this.key = key;
             this.value = value;
         }
@@ -740,6 +485,261 @@ public class XmlBeansRestParamsTestPropertyHolder implements RestParamsPropertyH
         public V setValue(V value) {
             throw new UnsupportedOperationException();
         }
+    }
+
+    public class XmlBeansRestParamProperty implements RestParamProperty {
+        private RestParameterConfig propertyConfig;
+        private PropertyChangeSupport propertySupport;
+        private ParamLocation paramLocation;
+
+        XmlBeansRestParamProperty(RestParameterConfig propertyConfig, ParamLocation location) {
+            this.propertyConfig = propertyConfig;
+            this.paramLocation = location;
+            propertySupport = new PropertyChangeSupport(this);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
+         * addPropertyChangeListener(java.beans.PropertyChangeListener)
+         */
+        public void addPropertyChangeListener(PropertyChangeListener listener) {
+            propertySupport.addPropertyChangeListener(listener);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
+         * addPropertyChangeListener(java.lang.String,
+         * java.beans.PropertyChangeListener)
+         */
+        public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+            propertySupport.addPropertyChangeListener(propertyName, listener);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
+         * removePropertyChangeListener(java.beans.PropertyChangeListener)
+         */
+        public void removePropertyChangeListener(PropertyChangeListener listener) {
+            propertySupport.removePropertyChangeListener(listener);
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
+         * removePropertyChangeListener(java.lang.String,
+         * java.beans.PropertyChangeListener)
+         */
+        public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+            propertySupport.removePropertyChangeListener(propertyName, listener);
+        }
+
+        RestParameterConfig getConfig() {
+            return propertyConfig;
+        }
+
+        public String getName() {
+            return propertyConfig.getName();
+        }
+
+        public void setName(String name) {
+            String oldName = getName();
+            propertyConfig.setName(name);
+
+            propertyMap.remove(oldName.toUpperCase());
+            propertyMap.put(name.toUpperCase(), this);
+
+            firePropertyRenamed(oldName, name);
+        }
+
+        public String getDescription() {
+            return propertyConfig.getDescription();
+        }
+
+        public void setDescription(String description) {
+            String old = getDescription();
+            propertyConfig.setDescription(description);
+            propertySupport.firePropertyChange("description", old, description);
+        }
+
+        public ParamLocation getParamLocation() {
+            return this.paramLocation;
+        }
+
+        public void setParamLocation(ParamLocation paramLocation) {
+            if (this.paramLocation == paramLocation) {
+                return;
+            }
+            ParamLocation old = this.paramLocation;
+            this.paramLocation = paramLocation;
+            propertySupport.firePropertyChange(PARAM_LOCATION, old, this.paramLocation);
+        }
+
+        public ParameterStyle getStyle() {
+            if (propertyConfig.xgetStyle() == null) {
+                propertyConfig.setStyle(RestParameterConfig.Style.QUERY);
+            }
+
+            return ParameterStyle.valueOf(propertyConfig.getStyle().toString());
+        }
+
+        public void setStyle(ParameterStyle style) {
+            ParameterStyle old = getStyle();
+
+            propertyConfig.setStyle(RestParameterConfig.Style.Enum.forString(style.name()));
+            propertySupport.firePropertyChange(PROPERTY_STYLE, old, style);
+        }
+
+        public String getValue() {
+            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
+                return overrideProperties.getProperty(getName());
+            }
+
+            return propertyConfig.getValue() == null ? "" : propertyConfig.getValue();
+        }
+
+        public void setValue(String value) {
+            String oldValue = getValue();
+            propertyConfig.setValue(value);
+
+            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
+                overrideProperties.remove(getName());
+                if (overrideProperties.isEmpty()) {
+                    overrideProperties = null;
+                }
+            }
+
+            firePropertyValueChanged(getName(), oldValue, value);
+        }
+
+        public boolean isReadOnly() {
+            return false;
+        }
+
+        public ModelItem getModelItem() {
+            return modelItem;
+        }
+
+        public String getDefaultValue() {
+            return propertyConfig.isSetDefault() ? propertyConfig.getDefault() : "";
+        }
+
+        public String[] getOptions() {
+            return propertyConfig.getOptionList().toArray(new String[propertyConfig.sizeOfOptionArray()]);
+        }
+
+        public boolean getRequired() {
+            return propertyConfig.getRequired();
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @see
+         * com.eviware.soapui.impl.rest.support.RestParamProperty#isDisableUrlEncoding
+         * ()
+         */
+        public boolean isDisableUrlEncoding() {
+            return propertyConfig.getDisableUrlEncoding();
+        }
+
+        /*
+         * (non-Javadoc)
+         *
+         * @seecom.eviware.soapui.impl.rest.support.RestParamProperty#
+         * setDisableUrlEncoding(boolean)
+         */
+        public void setDisableUrlEncoding(boolean encode) {
+            boolean old = isDisableUrlEncoding();
+            if (old == encode) {
+                return;
+            }
+
+            propertyConfig.setDisableUrlEncoding(encode);
+            propertySupport.firePropertyChange("disableUrlEncoding", old, encode);
+        }
+
+        public QName getType() {
+            return propertyConfig.isSetType() ? propertyConfig.getType() : XmlString.type.getName();
+        }
+
+        public void setOptions(String[] arg0) {
+            String[] old = getOptions();
+            propertyConfig.setOptionArray(arg0);
+            propertySupport.firePropertyChange("options", old, arg0);
+        }
+
+        public void setRequired(boolean arg0) {
+            boolean old = getRequired();
+            if (old == arg0) {
+                return;
+            }
+            propertyConfig.setRequired(arg0);
+            propertySupport.firePropertyChange("required", old, arg0);
+        }
+
+        public void setType(QName arg0) {
+            QName old = getType();
+            if (old.equals(arg0)) {
+                return;
+            }
+            propertyConfig.setType(arg0);
+            propertySupport.firePropertyChange("type", old, arg0);
+        }
+
+        public void setDefaultValue(String default1) {
+            String old = default1;
+            propertyConfig.setDefault(default1);
+            propertySupport.firePropertyChange("defaultValue", old, default1);
+        }
+
+        void setConfig(RestParameterConfig restParameterConfig) {
+            this.propertyConfig = restParameterConfig;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof XmlBeansRestParamProperty) {
+                return propertyConfig.toString().equals(((XmlBeansRestParamProperty) obj).propertyConfig.toString());
+            }
+
+            return super.equals(obj);
+        }
+
+        void reset() {
+            setValue(getDefaultValue());
+        }
+
+        @Override
+        public String getPath() {
+            return propertyConfig.getPath();
+
+        }
+
+        @Override
+        public void setPath(String path) {
+            String old = getPath();
+            propertyConfig.setPath(path);
+            propertySupport.firePropertyChange("path", old, path);
+
+        }
+
+        @Override
+        public boolean isRequestPart() {
+            return false;
+        }
+
+        @Override
+        public SchemaType getSchemaType() {
+            return XmlBeans.getBuiltinTypeSystem().findType(getType());
+        }
+
     }
 
     public RestParamProperty get(Object key) {

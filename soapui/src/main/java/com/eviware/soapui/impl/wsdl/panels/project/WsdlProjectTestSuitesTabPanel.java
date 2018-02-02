@@ -27,35 +27,15 @@ import com.eviware.soapui.impl.wsdl.panels.teststeps.support.AbstractGroovyEdito
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlProjectRunner;
 import com.eviware.soapui.model.support.ProjectListenerAdapter;
-import com.eviware.soapui.model.testsuite.ProjectRunContext;
-import com.eviware.soapui.model.testsuite.ProjectRunListener;
-import com.eviware.soapui.model.testsuite.ProjectRunner;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestSuite.TestSuiteRunType;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.SwingActionDelegate;
-import com.eviware.soapui.support.components.GroovyEditorComponent;
-import com.eviware.soapui.support.components.GroovyEditorInspector;
-import com.eviware.soapui.support.components.JComponentInspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.JXToolBar;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.types.StringToObjectMap;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JToggleButton;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -103,7 +83,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
         return inspectorPanel.getComponent();
     }
 
-    protected void addInspectors(JInspectorPanel inspectorPanel) {
+    private void addInspectors(JInspectorPanel inspectorPanel) {
         inspectorPanel.addInspector(new JComponentInspector<JComponent>(buildRunLog(), "TestSuite Log",
                 "Log of executed TestSuites, TestCases and TestSteps", true));
     }
@@ -138,7 +118,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
         return panel;
     }
 
-    protected void addToolbarActions(JXToolBar toolbar) {
+    private void addToolbarActions(JXToolBar toolbar) {
         toolbar.add(UISupport.createToolbarButton(runAction));
         toolbar.add(UISupport.createToolbarButton(cancelAction));
 
@@ -189,24 +169,24 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
         return UISupport.createTabPanel(tabs, true);
     }
 
-    protected void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
+    private void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
         inspectorPanel.addInspector(new GroovyEditorInspector(buildSetupScriptPanel(), "Setup Script",
                 "Script to run before running TestSuites"));
         inspectorPanel.addInspector(new GroovyEditorInspector(buildTearDownScriptPanel(), "TearDown Script",
                 "Script to run after running TestSuites"));
     }
 
-    protected GroovyEditorComponent buildTearDownScriptPanel() {
+    private GroovyEditorComponent buildTearDownScriptPanel() {
         tearDownGroovyEditor = new GroovyEditorComponent(new TearDownScriptGroovyEditorModel(), HelpUrls.FUNCTIONAL_TESTING_TEARDOWN_SCRIPT);
         return tearDownGroovyEditor;
     }
 
-    protected GroovyEditorComponent buildSetupScriptPanel() {
+    private GroovyEditorComponent buildSetupScriptPanel() {
         setupGroovyEditor = new GroovyEditorComponent(new SetupScriptGroovyEditorModel(), HelpUrls.FUNCTIONAL_TESTING_SETUP_SCRIPT);
         return setupGroovyEditor;
     }
 
-    protected JComponent buildTestSuiteList(WsdlProject testSuite) {
+    private JComponent buildTestSuiteList(WsdlProject testSuite) {
         testSuiteList = new JProjectTestSuiteList(testSuite);
 
         JPanel p = new JPanel(new BorderLayout());
@@ -242,18 +222,18 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
         project.removeProjectListener(testSuiteListener);
     }
 
-    protected void runProject() {
+    private void runProject() {
         projectRunner = project.run(new StringToObjectMap(), true);
     }
 
-    protected void beforeRun() {
+    private void beforeRun() {
         runAction.setEnabled(false);
         cancelAction.setEnabled(true);
         testSuiteList.setEnabled(false);
         progressBar.setForeground(Color.GREEN.darker());
     }
 
-    protected void afterRun() {
+    private void afterRun() {
         runAction.setEnabled(true);
         cancelAction.setEnabled(false);
         testSuiteList.setEnabled(true);
@@ -273,7 +253,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
     }
 
     private class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs the selected TestSuites");
         }
@@ -285,7 +265,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/stop.png"));
             putValue(Action.SHORT_DESCRIPTION, "Cancels ongoing TestSuite runs");
         }
@@ -296,7 +276,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
     }
 
     private class SetupScriptGroovyEditorModel extends AbstractGroovyEditorModel {
-        public SetupScriptGroovyEditorModel() {
+        SetupScriptGroovyEditorModel() {
             super(new String[]{"log", "runner", "context", "project"}, project, "Setup");
         }
 
@@ -325,7 +305,7 @@ public class WsdlProjectTestSuitesTabPanel extends JPanel {
     }
 
     private class TearDownScriptGroovyEditorModel extends AbstractGroovyEditorModel {
-        public TearDownScriptGroovyEditorModel() {
+        TearDownScriptGroovyEditorModel() {
             super(new String[]{"log", "runner", "context", "project"}, project, "TearDown");
         }
 

@@ -27,7 +27,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 import com.eviware.x.form.XFormDialog;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -48,7 +48,7 @@ public class NewRestProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     private RestServiceBuilder serviceBuilder = new RestServiceBuilder();
 
 
-    public NewRestProjectAction() {
+    private NewRestProjectAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

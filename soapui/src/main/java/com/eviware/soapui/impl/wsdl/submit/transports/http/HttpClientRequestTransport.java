@@ -25,14 +25,7 @@ import com.eviware.soapui.impl.wsdl.AbstractWsdlModelItem;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.submit.RequestFilter;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.attachments.MimeMessageResponse;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedDeleteMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedGetMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedHeadMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedOptionsMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPatchMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPostMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedPutMethod;
-import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.ExtendedTraceMethod;
+import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.*;
 import com.eviware.soapui.impl.wsdl.support.PathUtils;
 import com.eviware.soapui.impl.wsdl.support.http.HeaderRequestInterceptor;
 import com.eviware.soapui.impl.wsdl.support.http.HttpClientSupport;
@@ -123,7 +116,7 @@ public class HttpClientRequestTransport implements BaseHttpRequestTransport {
     }
 
     @CheckForNull
-    public <T extends Object> RequestFilter findFilterByType(Class<T> filterType) {
+    private <T extends Object> RequestFilter findFilterByType(Class<T> filterType) {
         for (int i = 0; i < filters.size(); i++) {
             RequestFilter filter = filters.get(i);
             if (filter.getClass() == filterType) {
@@ -292,11 +285,11 @@ public class HttpClientRequestTransport implements BaseHttpRequestTransport {
         return (Response) submitContext.getProperty(BaseHttpRequestTransport.RESPONSE);
     }
 
-    protected org.apache.http.HttpResponse submitRequest(ExtendedHttpMethod httpMethod, HttpContext httpContext) throws IOException {
+    org.apache.http.HttpResponse submitRequest(ExtendedHttpMethod httpMethod, HttpContext httpContext) throws IOException {
         return HttpClientSupport.execute(httpMethod, httpContext);
     }
 
-    protected HttpClientSupport.SoapUIHttpClient getSoapUIHttpClient() {
+    HttpClientSupport.SoapUIHttpClient getSoapUIHttpClient() {
         return HttpClientSupport.getHttpClient();
     }
 
@@ -440,7 +433,7 @@ public class HttpClientRequestTransport implements BaseHttpRequestTransport {
         }
     }
 
-    protected int getDefaultHttpPort(ExtendedHttpMethod httpMethod, HttpClient httpClient) {
+    int getDefaultHttpPort(ExtendedHttpMethod httpMethod, HttpClient httpClient) {
         return httpClient.getConnectionManager().getSchemeRegistry().getScheme(httpMethod.getURI().getScheme())
                 .getDefaultPort();
     }

@@ -21,21 +21,9 @@ import com.eviware.soapui.support.UISupport;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 import javax.swing.text.BadLocationException;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -159,7 +147,7 @@ public class ProcessDialog extends JDialog implements RunnerContext {
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             super("Cancel");
         }
 
@@ -171,7 +159,7 @@ public class ProcessDialog extends JDialog implements RunnerContext {
     }
 
     private final class CloseAction extends AbstractAction {
-        public CloseAction() {
+        CloseAction() {
             super("Close");
             setEnabled(false);
         }

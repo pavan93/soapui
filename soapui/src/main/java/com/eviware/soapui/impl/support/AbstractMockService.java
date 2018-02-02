@@ -28,14 +28,7 @@ import com.eviware.soapui.impl.wsdl.support.IconAnimator;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext;
 import com.eviware.soapui.impl.wsdl.teststeps.BeanPathPropertySupport;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.mock.MockOperation;
-import com.eviware.soapui.model.mock.MockRequest;
-import com.eviware.soapui.model.mock.MockResponse;
-import com.eviware.soapui.model.mock.MockResult;
-import com.eviware.soapui.model.mock.MockRunListener;
-import com.eviware.soapui.model.mock.MockRunner;
-import com.eviware.soapui.model.mock.MockService;
-import com.eviware.soapui.model.mock.MockServiceListener;
+import com.eviware.soapui.model.mock.*;
 import com.eviware.soapui.model.support.ModelSupport;
 import com.eviware.soapui.settings.HttpSettings;
 import com.eviware.soapui.settings.SSLSettings;
@@ -49,18 +42,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractMockService<MockOperationType extends MockOperation,
         MockServiceConfigType extends BaseMockServiceConfig>
         extends AbstractTestPropertyHolderWsdlModelItem<MockServiceConfigType>
         implements MockService, HasHelpUrl {
-    public final static String START_SCRIPT_PROPERTY = AbstractMockService.class.getName() + "@startScript";
-    public final static String STOP_SCRIPT_PROPERTY = AbstractMockService.class.getName() + "@stopScript";
+    private final static String START_SCRIPT_PROPERTY = AbstractMockService.class.getName() + "@startScript";
+    private final static String STOP_SCRIPT_PROPERTY = AbstractMockService.class.getName() + "@stopScript";
 
     protected List<MockOperation> mockOperations = new ArrayList<MockOperation>();
     private Set<MockRunListener> mockRunListeners = new HashSet<MockRunListener>();
@@ -284,7 +273,7 @@ public abstract class AbstractMockService<MockOperationType extends MockOperatio
         return mockRunListeners.toArray(new MockRunListener[mockRunListeners.size()]);
     }
 
-    public MockServiceListener[] getMockServiceListeners() {
+    private MockServiceListener[] getMockServiceListeners() {
         return mockServiceListeners.toArray(new MockServiceListener[mockServiceListeners.size()]);
     }
 
@@ -562,7 +551,7 @@ public abstract class AbstractMockService<MockOperationType extends MockOperatio
         notifyPropertyChanged("dispatchResponseMessages", old, dispatchResponseMessages);
     }
 
-    public abstract String getIconName();
+    protected abstract String getIconName();
 
     public void fireOnMockResult(Object result) {
         if (result != null && result instanceof MockResult) {
@@ -575,7 +564,7 @@ public abstract class AbstractMockService<MockOperationType extends MockOperatio
     private class MockServiceIconAnimator
             extends IconAnimator<MockService>
             implements MockRunListener {
-        public MockServiceIconAnimator() {
+        MockServiceIconAnimator() {
             super(AbstractMockService.this, getIconName(), getIconName(), 4);
         }
 

@@ -27,7 +27,7 @@ public class AutoValueProviderFactory extends
 
     private final static Logger logger = LoggerFactory.getLogger(AutoValueProviderFactory.class);
 
-    public AutoValueProviderFactory(PluginValueProvider annotation, Class<DynamicPropertyResolver.ValueProvider> valueProviderClass) {
+    private AutoValueProviderFactory(PluginValueProvider annotation, Class<DynamicPropertyResolver.ValueProvider> valueProviderClass) {
         super(DynamicPropertyResolver.ValueProviderFactory.class, valueProviderClass);
         valueId = valueProviderClass.getAnnotation(PluginValueProvider.class).valueName();
         logger.debug("Added ValueProvider for [" + valueId + "]");

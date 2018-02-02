@@ -22,7 +22,7 @@ package com.eviware.soapui.plugins;
  * fields.
  * @see PluginLoader
  */
-public interface PluginAware {
+interface PluginAware {
 
     /**
      * Setter used to pass a reference to the plugin into the plugin component class (action or factory)

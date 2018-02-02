@@ -37,8 +37,8 @@ public class SoapVersion11 extends AbstractSoapVersion {
     private final static QName faultQName = new QName(Constants.SOAP11_ENVELOPE_NS, "Fault");
     private final static QName headerQName = new QName(Constants.SOAP11_ENVELOPE_NS, "Header");
 
-    SchemaTypeLoader soapSchema;
-    SchemaType soapEnvelopeType;
+    private SchemaTypeLoader soapSchema;
+    private SchemaType soapEnvelopeType;
     private XmlObject soapSchemaXml;
     private XmlObject soapEncodingXml;
     private SchemaType soapFaultType;

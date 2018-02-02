@@ -22,9 +22,7 @@ import com.eviware.soapui.support.HelpActionMarker;
 import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 import static com.eviware.soapui.analytics.SoapUIActions.APPLY_TRIAL_FROM_TOOLBAR;
@@ -56,15 +54,15 @@ public class ShowOnlineHelpAction extends AbstractAction implements HelpActionMa
         this(title, url, null, description, iconPath);
     }
 
-    public ShowOnlineHelpAction(String title, String url, KeyStroke accelerator) {
+    private ShowOnlineHelpAction(String title, String url, KeyStroke accelerator) {
         this(title, url, accelerator, null);
     }
 
-    public ShowOnlineHelpAction(String title, String url, KeyStroke accelerator, String description) {
+    private ShowOnlineHelpAction(String title, String url, KeyStroke accelerator, String description) {
         this(title, url, accelerator, description, null);
     }
 
-    public ShowOnlineHelpAction(String title, String url, KeyStroke accelerator, String description, String iconPath) {
+    private ShowOnlineHelpAction(String title, String url, KeyStroke accelerator, String description, String iconPath) {
         super(title);
         this.url = url;
         putValue(Action.SHORT_DESCRIPTION, description == null ? "Show online help" : description);

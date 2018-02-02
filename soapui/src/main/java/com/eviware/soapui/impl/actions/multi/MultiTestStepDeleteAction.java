@@ -22,7 +22,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.support.AbstractSoapUIMultiAction;
 
 public class MultiTestStepDeleteAction extends AbstractSoapUIMultiAction<ModelItem> {
-    public static final String SOAPUI_ACTION_ID = "MultiTestStepDeleteAction";
+    private static final String SOAPUI_ACTION_ID = "MultiTestStepDeleteAction";
 
     public MultiTestStepDeleteAction() {
         super(SOAPUI_ACTION_ID, "Delete TestSteps", "Delete selected TestSteps");

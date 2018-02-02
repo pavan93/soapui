@@ -399,8 +399,8 @@ public class WsdlValidator {
     }
 
     @SuppressWarnings("unchecked")
-    public void validateMessage(WsdlMessageExchange messageExchange, String message, BindingOperation bindingOperation,
-                                Part[] parts, List<XmlError> errors, boolean isResponse) {
+    private void validateMessage(WsdlMessageExchange messageExchange, String message, BindingOperation bindingOperation,
+                                 Part[] parts, List<XmlError> errors, boolean isResponse) {
         try {
             if (!wsdlContext.hasSchemaTypes()) {
                 errors.add(XmlError.forMessage("Missing schema types for message"));

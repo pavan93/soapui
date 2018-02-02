@@ -57,10 +57,10 @@ import static org.junit.matchers.JUnitMatchers.containsString;
  */
 public class RestRequestDesktopPanelTest {
 
-    public static final String PARAMETER_NAME = "jsessionid";
-    public static final String PARAMETER_VALUE = "Da Value";
-    public static final String ENDPOINT = "http://sunet.se/search";
-    public static final String RESOURCE_PATH = "abc/path";
+    private static final String PARAMETER_NAME = "jsessionid";
+    private static final String PARAMETER_VALUE = "Da Value";
+    private static final String ENDPOINT = "http://sunet.se/search";
+    private static final String RESOURCE_PATH = "abc/path";
 
     private RestRequestDesktopPanel requestDesktopPanel;
     private RestRequest restRequest;

@@ -46,12 +46,12 @@ import java.util.List;
 
 public class NewWadlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "NewWadlProjectAction";
-    public static final String DEFAULT_PROJECT_NAME = "REST Project";
+    private static final String DEFAULT_PROJECT_NAME = "REST Project";
     private XFormDialog dialog;
 
-    public static final MessageSupport messages = MessageSupport.getMessages(NewWadlProjectAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewWadlProjectAction.class);
 
-    public NewWadlProjectAction() {
+    private NewWadlProjectAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 
@@ -122,7 +122,7 @@ public class NewWadlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
         return findLeafItem(item.getChildren().get(0));
     }
 
-    public String createProjectName(String filePath, List<? extends Project> projectList) {
+    private String createProjectName(String filePath, List<? extends Project> projectList) {
         if (StringUtils.hasContent(filePath)) {
             String projectName = filePath;
 
@@ -160,7 +160,7 @@ public class NewWadlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEW_WADL_PROJECT_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.InitialWadl.Description", type = AField.AFieldType.FILE)
         String INITIALWADL = messages.get("Form.InitialWadl.Label");
     }

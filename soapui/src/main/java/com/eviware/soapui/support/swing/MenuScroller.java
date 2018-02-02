@@ -181,7 +181,7 @@ public class MenuScroller {
      *
      * @param menu the menu
      */
-    public MenuScroller(JMenu menu) {
+    private MenuScroller(JMenu menu) {
         this(menu, 15);
     }
 
@@ -192,7 +192,7 @@ public class MenuScroller {
      *
      * @param menu the popup menu
      */
-    public MenuScroller(JPopupMenu menu) {
+    private MenuScroller(JPopupMenu menu) {
         this(menu, 15);
     }
 
@@ -205,7 +205,7 @@ public class MenuScroller {
      * @param scrollCount the number of items to display at a time
      * @throws IllegalArgumentException if scrollCount is 0 or negative
      */
-    public MenuScroller(JMenu menu, int scrollCount) {
+    private MenuScroller(JMenu menu, int scrollCount) {
         this(menu, scrollCount, 150);
     }
 
@@ -218,7 +218,7 @@ public class MenuScroller {
      * @param scrollCount the number of items to display at a time
      * @throws IllegalArgumentException if scrollCount is 0 or negative
      */
-    public MenuScroller(JPopupMenu menu, int scrollCount) {
+    private MenuScroller(JPopupMenu menu, int scrollCount) {
         this(menu, scrollCount, 150);
     }
 
@@ -232,7 +232,7 @@ public class MenuScroller {
      * @param interval    the scroll interval, in milliseconds
      * @throws IllegalArgumentException if scrollCount or interval is 0 or negative
      */
-    public MenuScroller(JMenu menu, int scrollCount, int interval) {
+    private MenuScroller(JMenu menu, int scrollCount, int interval) {
         this(menu, scrollCount, interval, 0, 0);
     }
 
@@ -246,7 +246,7 @@ public class MenuScroller {
      * @param interval    the scroll interval, in milliseconds
      * @throws IllegalArgumentException if scrollCount or interval is 0 or negative
      */
-    public MenuScroller(JPopupMenu menu, int scrollCount, int interval) {
+    private MenuScroller(JPopupMenu menu, int scrollCount, int interval) {
         this(menu, scrollCount, interval, 0, 0);
     }
 
@@ -264,7 +264,7 @@ public class MenuScroller {
      * @throws IllegalArgumentException if scrollCount or interval is 0 or negative or if topFixedCount
      *                                  or bottomFixedCount is negative
      */
-    public MenuScroller(JMenu menu, int scrollCount, int interval, int topFixedCount, int bottomFixedCount) {
+    private MenuScroller(JMenu menu, int scrollCount, int interval, int topFixedCount, int bottomFixedCount) {
         this(menu.getPopupMenu(), scrollCount, interval, topFixedCount, bottomFixedCount);
     }
 
@@ -282,7 +282,7 @@ public class MenuScroller {
      * @throws IllegalArgumentException if scrollCount or interval is 0 or negative or if topFixedCount
      *                                  or bottomFixedCount is negative
      */
-    public MenuScroller(JPopupMenu menu, int scrollCount, int interval, int topFixedCount, int bottomFixedCount) {
+    private MenuScroller(JPopupMenu menu, int scrollCount, int interval, int topFixedCount, int bottomFixedCount) {
         if (scrollCount <= 0 || interval <= 0) {
             throw new IllegalArgumentException("scrollCount and interval must be greater than 0");
         }
@@ -316,7 +316,7 @@ public class MenuScroller {
      * @param interval the scroll interval in milliseconds
      * @throws IllegalArgumentException if interval is 0 or negative
      */
-    public void setInterval(int interval) {
+    private void setInterval(int interval) {
         if (interval <= 0) {
             throw new IllegalArgumentException("interval must be greater than 0");
         }
@@ -340,7 +340,7 @@ public class MenuScroller {
      * @param scrollCount the number of items to display at a time
      * @throws IllegalArgumentException if scrollCount is 0 or negative
      */
-    public void setScrollCount(int scrollCount) {
+    private void setScrollCount(int scrollCount) {
         if (scrollCount <= 0) {
             throw new IllegalArgumentException("scrollCount must be greater than 0");
         }
@@ -362,7 +362,7 @@ public class MenuScroller {
      *
      * @param topFixedCount the number of items
      */
-    public void setTopFixedCount(int topFixedCount) {
+    private void setTopFixedCount(int topFixedCount) {
         if (firstIndex <= topFixedCount) {
             firstIndex = topFixedCount;
         } else {
@@ -385,7 +385,7 @@ public class MenuScroller {
      *
      * @param bottomFixedCount the number of items
      */
-    public void setBottomFixedCount(int bottomFixedCount) {
+    private void setBottomFixedCount(int bottomFixedCount) {
         this.bottomFixedCount = bottomFixedCount;
     }
 
@@ -422,7 +422,7 @@ public class MenuScroller {
      * Removes this MenuScroller from the associated menu and restores the
      * default behavior of the menu.
      */
-    public void dispose() {
+    private void dispose() {
         if (menu != null) {
             menu.removePopupMenuListener(menuListener);
             menu = null;
@@ -520,7 +520,7 @@ public class MenuScroller {
 
     private class MenuScrollTimer extends Timer {
 
-        public MenuScrollTimer(final int increment, int interval) {
+        MenuScrollTimer(final int increment, int interval) {
             super(interval, new ActionListener() {
 
                 @Override
@@ -536,14 +536,14 @@ public class MenuScroller {
 
         private MenuScrollTimer timer;
 
-        public MenuScrollItem(MenuIcon icon, int increment) {
+        MenuScrollItem(MenuIcon icon, int increment) {
             setIcon(icon);
             setDisabledIcon(icon);
             timer = new MenuScrollTimer(increment, interval);
             addChangeListener(this);
         }
 
-        public void setInterval(int interval) {
+        void setInterval(int interval) {
             timer.setDelay(interval);
         }
 

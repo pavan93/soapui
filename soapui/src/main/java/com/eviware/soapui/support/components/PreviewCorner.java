@@ -93,7 +93,7 @@ class PreviewPopup extends JPopupMenu implements MouseListener, MouseMotionListe
 
     private boolean _doCloseAfterClick;
 
-    float _ratio;
+    private float _ratio;
 
     // DELTA is the space between the scroll pane and the preview popup menu.
     private static int DELTA = 5;
@@ -247,23 +247,18 @@ class PreviewPopup extends JPopupMenu implements MouseListener, MouseMotionListe
 
     }
 
-    public JPanel createCursor() {
-        JPanel label = new JPanel() {
-
-            @Override
-            protected void paintComponent(Graphics g) {
-                Composite composite = ((Graphics2D) g).getComposite();
-                ((Graphics2D) g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
-                super.paintComponent(g);
-                ((Graphics2D) g).setComposite(composite);
-            }
-
-        };
-        label.setBorder(BorderFactory.createLineBorder(Color.gray));
-        label.setVisible(false);
-        label.setOpaque(true);
-        label.setBackground(Color.orange.darker());
-        return label;
+    /**
+     * takes a java component and generates an image out of it.
+     *
+     * @param c the component for which image needs to be generated
+     * @return the generated image
+     */
+    private static BufferedImage captureComponentViewAsBufferedImage(Component c) {
+        Dimension size = c.getSize();
+        BufferedImage bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
+        Graphics bufferedGraphics = bufferedImage.createGraphics();
+        c.paint(bufferedGraphics);
+        return bufferedImage;
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -331,18 +326,23 @@ class PreviewPopup extends JPopupMenu implements MouseListener, MouseMotionListe
                 _viewPort.getHeight()));
     }
 
-    /**
-     * takes a java component and generates an image out of it.
-     *
-     * @param c the component for which image needs to be generated
-     * @return the generated image
-     */
-    public static BufferedImage captureComponentViewAsBufferedImage(Component c) {
-        Dimension size = c.getSize();
-        BufferedImage bufferedImage = new BufferedImage(size.width, size.height, BufferedImage.TYPE_INT_RGB);
-        Graphics bufferedGraphics = bufferedImage.createGraphics();
-        c.paint(bufferedGraphics);
-        return bufferedImage;
+    private JPanel createCursor() {
+        JPanel label = new JPanel() {
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                Composite composite = ((Graphics2D) g).getComposite();
+                ((Graphics2D) g).setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.2f));
+                super.paintComponent(g);
+                ((Graphics2D) g).setComposite(composite);
+            }
+
+        };
+        label.setBorder(BorderFactory.createLineBorder(Color.gray));
+        label.setVisible(false);
+        label.setOpaque(true);
+        label.setBackground(Color.orange.darker());
+        return label;
     }
 
 }

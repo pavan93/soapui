@@ -20,7 +20,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 
-import javax.swing.JList;
+import javax.swing.*;
 
 /**
  * ListMouseListener for ModelItems
@@ -33,7 +33,7 @@ public class ModelItemListMouseListener extends AbstractListMouseListener {
         this(true);
     }
 
-    public ModelItemListMouseListener(boolean enablePopup) {
+    private ModelItemListMouseListener(boolean enablePopup) {
         super(enablePopup);
     }
 

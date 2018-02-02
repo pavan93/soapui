@@ -60,7 +60,7 @@ public class HttpCredentialsProvider implements CredentialsProvider {
         this.requestAuthPolicy = requestAuthPolicy;
     }
 
-    public void setProxyCredentials(String proxyHost, String proxyPort, String proxyUsername, String proxyPassword) {
+    private void setProxyCredentials(String proxyHost, String proxyPort, String proxyUsername, String proxyPassword) {
         setProxy(proxyHost, proxyPort);
         this.proxyUsername = proxyUsername;
         this.proxyPassword = proxyPassword == null ? "" : proxyPassword;

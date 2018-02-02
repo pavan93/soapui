@@ -45,7 +45,7 @@ public abstract class AbstractXmlEditorView<T extends XmlDocument> implements Xm
     private XmlEditor<T> editor;
     private final String viewId;
 
-    public AbstractXmlEditorView(String title, XmlEditor<T> xmlEditor, String viewId) {
+    protected AbstractXmlEditorView(String title, XmlEditor<T> xmlEditor, String viewId) {
         super();
         this.title = title;
         editor = xmlEditor;
@@ -68,7 +68,7 @@ public abstract class AbstractXmlEditorView<T extends XmlDocument> implements Xm
         return true;
     }
 
-    public void update() {
+    private void update() {
         if (editorDocumentChanged) {
             documentUpdated();
             editorDocumentChanged = false;
@@ -82,7 +82,7 @@ public abstract class AbstractXmlEditorView<T extends XmlDocument> implements Xm
         return true;
     }
 
-    public boolean isActive() {
+    protected boolean isActive() {
         return isActive;
     }
 
@@ -154,7 +154,7 @@ public abstract class AbstractXmlEditorView<T extends XmlDocument> implements Xm
     /**
      * Called when document content is updated. If not active at the moment the call will come once the editor becomes active.
      */
-    public void documentUpdated(){
+    protected void documentUpdated() {
     }
 
     public void release() {

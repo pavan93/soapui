@@ -42,9 +42,9 @@ import com.eviware.soapui.model.testsuite.ResponseAssertion;
 public class NotSoapFaultAssertion extends WsdlMessageAssertion implements ResponseAssertion {
     public static final String ID = "SOAP Fault Assertion";
     public static final String LABEL = "Not SOAP Fault";
-    public static final String DESCRIPTION = "Validates that the last received message is not a SOAP Fault. Applicable to SOAP TestSteps.";
+    private static final String DESCRIPTION = "Validates that the last received message is not a SOAP Fault. Applicable to SOAP TestSteps.";
 
-    public NotSoapFaultAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private NotSoapFaultAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

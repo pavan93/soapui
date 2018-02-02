@@ -34,7 +34,7 @@ import java.util.Map;
  */
 
 public class SoapUIExtensionClassLoader extends URLClassLoader {
-    public SoapUIExtensionClassLoader(URL[] urls, ClassLoader parent) {
+    private SoapUIExtensionClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
     }
 

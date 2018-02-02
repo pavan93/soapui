@@ -29,11 +29,7 @@ import org.apache.xmlbeans.XmlObject;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Utility for implementing the Assertable interface
@@ -56,7 +52,7 @@ public class AssertionsSupport implements PropertyChangeListener {
         }
     }
 
-    public WsdlMessageAssertion addWsdlAssertion(TestAssertionConfig config) {
+    private WsdlMessageAssertion addWsdlAssertion(TestAssertionConfig config) {
         try {
             WsdlMessageAssertion assertion = TestAssertionRegistry.getInstance().buildAssertion(config, assertable);
             if (assertion == null) {
@@ -163,7 +159,7 @@ public class AssertionsSupport implements PropertyChangeListener {
         }
     }
 
-    public void fireAssertionRemoved(WsdlMessageAssertion assertion) {
+    private void fireAssertionRemoved(WsdlMessageAssertion assertion) {
         AssertionsListener[] listeners = assertionsListeners.toArray(new AssertionsListener[assertionsListeners.size()]);
 
         for (int c = 0; c < listeners.length; c++) {
@@ -171,7 +167,7 @@ public class AssertionsSupport implements PropertyChangeListener {
         }
     }
 
-    public void fireAssertionMoved(WsdlMessageAssertion assertion, int ix, int offset) {
+    private void fireAssertionMoved(WsdlMessageAssertion assertion, int ix, int offset) {
         AssertionsListener[] listeners = assertionsListeners.toArray(new AssertionsListener[assertionsListeners.size()]);
 
         for (int c = 0; c < listeners.length; c++) {
@@ -198,7 +194,7 @@ public class AssertionsSupport implements PropertyChangeListener {
         return assertions;
     }
 
-    public List<WsdlMessageAssertion> getAssertionsOfType(Class<? extends WsdlMessageAssertion> class1) {
+    private List<WsdlMessageAssertion> getAssertionsOfType(Class<? extends WsdlMessageAssertion> class1) {
         List<WsdlMessageAssertion> result = new ArrayList<WsdlMessageAssertion>();
 
         for (WsdlMessageAssertion assertion : assertions) {

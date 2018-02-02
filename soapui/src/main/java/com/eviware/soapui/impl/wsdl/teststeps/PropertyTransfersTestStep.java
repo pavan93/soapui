@@ -32,7 +32,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.resolver.ResolveContext;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -207,11 +207,11 @@ public class PropertyTransfersTestStep extends WsdlTestStepWithProperties implem
         private List<String[]> values = new ArrayList<String[]>();
         private boolean addedAction;
 
-        public PropertyTransferResult() {
+        PropertyTransferResult() {
             super(PropertyTransfersTestStep.this);
         }
 
-        public void addTransferResult(PropertyTransfer transfer, String[] values) {
+        void addTransferResult(PropertyTransfer transfer, String[] values) {
             // save a copy, so we dont mirror changes
             transfers.add((PropertyTransferConfig) transfer.getConfig().copy());
             this.values.add(values);

@@ -24,7 +24,7 @@ import java.text.SimpleDateFormat;
 public class TimeBoundary extends AbstractBoundary {
 
     private static final int OFFSET = 60;
-    public static final String TIME_FORMAT = "HH:mm:ssZ";
+    private static final String TIME_FORMAT = "HH:mm:ssZ";
 
     private static final ThreadLocal<SimpleDateFormat> simpleDateFormat = new ThreadLocal<SimpleDateFormat>() {
         @Override

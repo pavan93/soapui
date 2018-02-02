@@ -37,7 +37,7 @@ import com.eviware.soapui.monitor.TestMonitor;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveContext;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +79,7 @@ public class RestTestRequest extends RestRequest implements RestTestRequestInter
         return testStep.getTestCase();
     }
 
-    protected void initIcons() {
+    private void initIcons() {
         validRequestIcon = UISupport.createImageIcon("/valid_rest_request_step.png");
         failedRequestIcon = UISupport.createImageIcon("/invalid_rest_request_step.png");
         unknownRequestIcon = UISupport.createImageIcon("/rest_request_step.png");
@@ -143,29 +143,27 @@ public class RestTestRequest extends RestRequest implements RestTestRequestInter
         notifier.notifyChange();
     }
 
-    private class PropertyChangeNotifier {
-        private AssertionStatus oldStatus;
-        private ImageIcon oldIcon;
-
-        public PropertyChangeNotifier() {
-            oldStatus = getAssertionStatus();
-            oldIcon = getIcon();
+    protected static class TestRequestIconAnimator extends RequestIconAnimator<RestTestRequest> {
+        TestRequestIconAnimator(RestTestRequestInterface modelItem) {
+            super((RestTestRequest) modelItem, "/rest_request.gif", "/exec_rest_request.gif", 4);
         }
 
-        public void notifyChange() {
-            AssertionStatus newStatus = getAssertionStatus();
-            ImageIcon newIcon = getIcon();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+        @Override
+        public boolean beforeSubmit(Submit submit, SubmitContext context) {
+            if (SoapUI.getTestMonitor() != null
+                    && (SoapUI.getTestMonitor().hasRunningLoadTest(getTarget().getTestCase()) || SoapUI.getTestMonitor()
+                    .hasRunningSecurityTest(getTarget().getTestCase()))) {
+                return true;
             }
 
-            if (oldIcon != newIcon) {
-                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
-            }
+            return super.beforeSubmit(submit, context);
+        }
 
-            oldStatus = newStatus;
-            oldIcon = newIcon;
+        @Override
+        public void afterSubmit(Submit submit, SubmitContext context) {
+            if (submit.getRequest() == getTarget()) {
+                stop();
+            }
         }
     }
 
@@ -305,27 +303,29 @@ public class RestTestRequest extends RestRequest implements RestTestRequestInter
         return testStep != null ? testStep.getResource() : null;
     }
 
-    protected static class TestRequestIconAnimator extends RequestIconAnimator<RestTestRequest> {
-        public TestRequestIconAnimator(RestTestRequestInterface modelItem) {
-            super((RestTestRequest) modelItem, "/rest_request.gif", "/exec_rest_request.gif", 4);
+    private class PropertyChangeNotifier {
+        private AssertionStatus oldStatus;
+        private ImageIcon oldIcon;
+
+        PropertyChangeNotifier() {
+            oldStatus = getAssertionStatus();
+            oldIcon = getIcon();
         }
 
-        @Override
-        public boolean beforeSubmit(Submit submit, SubmitContext context) {
-            if (SoapUI.getTestMonitor() != null
-                    && (SoapUI.getTestMonitor().hasRunningLoadTest(getTarget().getTestCase()) || SoapUI.getTestMonitor()
-                    .hasRunningSecurityTest(getTarget().getTestCase()))) {
-                return true;
+        void notifyChange() {
+            AssertionStatus newStatus = getAssertionStatus();
+            ImageIcon newIcon = getIcon();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
             }
 
-            return super.beforeSubmit(submit, context);
-        }
-
-        @Override
-        public void afterSubmit(Submit submit, SubmitContext context) {
-            if (submit.getRequest() == getTarget()) {
-                stop();
+            if (oldIcon != newIcon) {
+                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
             }
+
+            oldStatus = newStatus;
+            oldIcon = newIcon;
         }
     }
 

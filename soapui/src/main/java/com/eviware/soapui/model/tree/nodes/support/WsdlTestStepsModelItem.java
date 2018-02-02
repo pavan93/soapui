@@ -64,7 +64,7 @@ public class WsdlTestStepsModelItem extends EmptyModelItem {
         testCase.getTestSuite().removeTestSuiteListener(listener);
     }
 
-    public void updateLabel() {
+    private void updateLabel() {
         setName(createLabel(testCase));
     }
 

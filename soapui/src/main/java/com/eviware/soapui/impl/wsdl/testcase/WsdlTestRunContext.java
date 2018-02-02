@@ -148,7 +148,7 @@ public class WsdlTestRunContext extends AbstractSubmitContext<TestModelItem> imp
         return PropertyExpander.expandProperties(this, content);
     }
 
-    public Settings getSettings() {
+    protected Settings getSettings() {
         return testCase == null ? SoapUI.getSettings() : testCase.getSettings();
     }
 

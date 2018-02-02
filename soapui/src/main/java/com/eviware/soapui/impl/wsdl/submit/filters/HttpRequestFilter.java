@@ -385,7 +385,7 @@ public class HttpRequestFilter extends AbstractRequestFilter {
         formMp.addBodyPart(part);
     }
 
-    protected void initRootPart(HttpRequestInterface<?> wsdlRequest, String requestContent, MimeMultipart mp)
+    private void initRootPart(HttpRequestInterface<?> wsdlRequest, String requestContent, MimeMultipart mp)
             throws MessagingException {
         MimeBodyPart rootPart = new PreencodedMimeBodyPart("8bit");
         // rootPart.setContentID( AttachmentUtils.ROOTPART_SOAPUI_ORG );
@@ -395,7 +395,7 @@ public class HttpRequestFilter extends AbstractRequestFilter {
         rootPart.setDataHandler(dataHandler);
     }
 
-    protected String getEncodedValue(String value, String encoding, boolean isDisableUrlEncoding, boolean isPreEncoded) throws UnsupportedEncodingException {
+    String getEncodedValue(String value, String encoding, boolean isDisableUrlEncoding, boolean isPreEncoded) throws UnsupportedEncodingException {
 
         if (value == null) {
             return "";
@@ -421,7 +421,7 @@ public class HttpRequestFilter extends AbstractRequestFilter {
 
     }
 
-    protected boolean isAlreadyEncoded(String path, String encoding) throws UnsupportedEncodingException {
+    boolean isAlreadyEncoded(String path, String encoding) throws UnsupportedEncodingException {
         String decodedPath = java.net.URLDecoder.decode(path, encoding);
         return !path.equals(decodedPath);
 

@@ -30,17 +30,9 @@ import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.UISupport;
 import org.apache.log4j.Logger;
 
-import javax.wsdl.Binding;
-import javax.wsdl.Definition;
-import javax.wsdl.Port;
-import javax.wsdl.PortType;
-import javax.wsdl.Service;
+import javax.wsdl.*;
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Importer for WsdlInterfaces from WSDL urls / files
@@ -70,7 +62,7 @@ public class WsdlImporter {
         return importWsdl(project, wsdlUrl, null);
     }
 
-    public static WsdlInterface[] importWsdl(WsdlProject project, String wsdlUrl, QName bindingName) throws Exception {
+    private static WsdlInterface[] importWsdl(WsdlProject project, String wsdlUrl, QName bindingName) throws Exception {
         return importWsdl(project, wsdlUrl, bindingName, null);
     }
 
@@ -218,7 +210,7 @@ public class WsdlImporter {
         return result.toArray(new WsdlInterface[result.size()]);
     }
 
-    public final static String getInterfaceNameForBinding(Binding binding) {
+    private static String getInterfaceNameForBinding(Binding binding) {
         if (SoapUI.getSettings().getBoolean(WsdlSettings.NAME_WITH_BINDING)) {
             return binding.getQName().getLocalPart();
         } else {

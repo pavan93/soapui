@@ -54,7 +54,7 @@ public class GenerateRestTestSuiteAction extends AbstractSoapUIAction<RestServic
         generateTestSuite(target, false);
     }
 
-    public WsdlTestSuite generateTestSuite(RestService service, boolean atCreation) {
+    private WsdlTestSuite generateTestSuite(RestService service, boolean atCreation) {
         XFormDialog dialog = ADialogBuilder.buildDialog(GenerateForm.class);
         dialog.setValue(GenerateForm.STYLE, "One TestCase for each Resource");
 
@@ -161,16 +161,16 @@ public class GenerateRestTestSuiteAction extends AbstractSoapUIAction<RestServic
     @AForm(name = "Generate TestSuite", description = "Generates TestSuite with TestCase(s) for all Resources in this Service", helpUrl = HelpUrls.GENERATE_TESTSUITE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     private class GenerateForm {
         @AField(name = "TestSuite", description = "The TestSuite to create or use", type = AFieldType.ENUMERATION)
-        public final static String TESTSUITE = "TestSuite";
+        final static String TESTSUITE = "TestSuite";
 
         @AField(name = "Style", description = "Select the style of TestCases to create", type = AFieldType.RADIOGROUP, values = {
                 "One TestCase for each Resource", "Single TestCase with one Request for each Method"})
-        public final static String STYLE = "Style";
+        final static String STYLE = "Style";
 
         @AField(name = "Resources", description = "The Resources for which to Generate Tests", type = AFieldType.MULTILIST)
-        public final static String RESOURCES = "Resources";
+        final static String RESOURCES = "Resources";
 
         @AField(name = "Generate LoadTest", description = "Generates a default LoadTest for each created TestCase", type = AFieldType.BOOLEAN)
-        public final static String GENERATE_LOADTEST = "Generate LoadTest";
+        final static String GENERATE_LOADTEST = "Generate LoadTest";
     }
 }

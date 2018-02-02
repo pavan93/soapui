@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.SortedSet;
 
 public class AssertionsListTableModel extends DefaultTableModel {
-    SortedSet<AssertionListEntry> listEntriesSet;
+    private SortedSet<AssertionListEntry> listEntriesSet;
 
     public AssertionsListTableModel() {
     }

@@ -20,13 +20,7 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.model.testsuite.TestPropertyListener;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Base class for WSDL TestCase test steps.
@@ -91,11 +85,11 @@ abstract public class WsdlTestStepWithProperties extends WsdlTestStep {
         }
     }
 
-    protected void addProperty(TestProperty property) {
+    void addProperty(TestProperty property) {
         addProperty(property, false);
     }
 
-    protected void addProperty(TestProperty property, boolean notify) {
+    void addProperty(TestProperty property, boolean notify) {
         if (properties == null) {
             properties = new HashMap<String, TestProperty>();
         }
@@ -129,7 +123,7 @@ abstract public class WsdlTestStepWithProperties extends WsdlTestStep {
         return name;
     }
 
-    protected TestProperty deleteProperty(String name, boolean notify) {
+    TestProperty deleteProperty(String name, boolean notify) {
         if (properties != null) {
             name = getPropertyKeyName(name);
             TestProperty result = properties.remove(name);
@@ -149,7 +143,7 @@ abstract public class WsdlTestStepWithProperties extends WsdlTestStep {
         return null;
     }
 
-    public void propertyRenamed(String oldName) {
+    void propertyRenamed(String oldName) {
         if (properties == null) {
             return;
         }
@@ -187,28 +181,28 @@ abstract public class WsdlTestStepWithProperties extends WsdlTestStep {
         listeners.remove(listener);
     }
 
-    protected void firePropertyAdded(String name) {
+    private void firePropertyAdded(String name) {
         TestPropertyListener[] array = listeners.toArray(new TestPropertyListener[listeners.size()]);
         for (TestPropertyListener listener : array) {
             listener.propertyAdded(name);
         }
     }
 
-    protected void firePropertyRemoved(String name) {
+    private void firePropertyRemoved(String name) {
         TestPropertyListener[] array = listeners.toArray(new TestPropertyListener[listeners.size()]);
         for (TestPropertyListener listener : array) {
             listener.propertyRemoved(name);
         }
     }
 
-    protected void firePropertyRenamed(String oldName, String newName) {
+    private void firePropertyRenamed(String oldName, String newName) {
         TestPropertyListener[] array = listeners.toArray(new TestPropertyListener[listeners.size()]);
         for (TestPropertyListener listener : array) {
             listener.propertyRenamed(oldName, newName);
         }
     }
 
-    public void firePropertyValueChanged(String name, String oldValue, String newValue) {
+    void firePropertyValueChanged(String name, String oldValue, String newValue) {
         if (oldValue == null && newValue == null) {
             return;
         }
@@ -264,7 +258,7 @@ abstract public class WsdlTestStepWithProperties extends WsdlTestStep {
         return Collections.unmodifiableList(propertyList);
     }
 
-    protected void firePropertyMoved(String name, int oldIndex, int newIndex) {
+    void firePropertyMoved(String name, int oldIndex, int newIndex) {
         TestPropertyListener[] listenersArray = listeners.toArray(new TestPropertyListener[listeners.size()]);
         for (TestPropertyListener listener : listenersArray) {
             listener.propertyMoved(name, oldIndex, newIndex);

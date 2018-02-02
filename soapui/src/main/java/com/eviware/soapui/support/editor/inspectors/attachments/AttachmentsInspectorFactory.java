@@ -71,7 +71,7 @@ public class AttachmentsInspectorFactory implements RequestInspectorFactory, Res
     protected static class WsdlMessageExchangeRequestAttachmentsContainer implements AttachmentContainer {
         private final MessageExchangeModelItem request;
 
-        public WsdlMessageExchangeRequestAttachmentsContainer(MessageExchangeModelItem request) {
+        WsdlMessageExchangeRequestAttachmentsContainer(MessageExchangeModelItem request) {
             this.request = request;
         }
 
@@ -137,7 +137,7 @@ public class AttachmentsInspectorFactory implements RequestInspectorFactory, Res
     protected static class WsdlMessageExchangeResponseAttachmentsContainer implements AttachmentContainer {
         private final MessageExchangeModelItem response;
 
-        public WsdlMessageExchangeResponseAttachmentsContainer(MessageExchangeModelItem response) {
+        WsdlMessageExchangeResponseAttachmentsContainer(MessageExchangeModelItem response) {
             this.response = response;
         }
 
@@ -202,7 +202,7 @@ public class AttachmentsInspectorFactory implements RequestInspectorFactory, Res
     protected static class ResponseAttachmentsContainer implements AttachmentContainer {
         private final AbstractHttpRequest<?> request;
 
-        public ResponseAttachmentsContainer(AbstractHttpRequest<?> abstractHttpRequest) {
+        ResponseAttachmentsContainer(AbstractHttpRequest<?> abstractHttpRequest) {
             this.request = abstractHttpRequest;
         }
 
@@ -260,7 +260,7 @@ public class AttachmentsInspectorFactory implements RequestInspectorFactory, Res
     protected static class MockRequestAttachmentsContainer implements AttachmentContainer {
         private final WsdlMockResponse mockResponse;
 
-        public MockRequestAttachmentsContainer(WsdlMockResponse mockResponse) {
+        MockRequestAttachmentsContainer(WsdlMockResponse mockResponse) {
             this.mockResponse = mockResponse;
         }
 

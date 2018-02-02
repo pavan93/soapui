@@ -41,8 +41,8 @@ import static org.junit.Assert.assertThat;
  */
 public class WsrmUtilsTest {
 
-    public static final String WSRM_1_0_SCHEMA_200502_LOCATION = "/xsds/wsrm-1.0-schema-200502.xsd";
-    public static final String WSRM_1_1_SCHEMA_200702_LOCATION = "/xsds/wsrm-1.1-schema-200702.xsd";
+    private static final String WSRM_1_0_SCHEMA_200502_LOCATION = "/xsds/wsrm-1.0-schema-200502.xsd";
+    private static final String WSRM_1_1_SCHEMA_200702_LOCATION = "/xsds/wsrm-1.1-schema-200702.xsd";
 
     @Before
     public void setUp() throws Exception {

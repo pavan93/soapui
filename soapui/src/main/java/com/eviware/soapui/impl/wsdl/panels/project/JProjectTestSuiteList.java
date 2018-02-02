@@ -33,21 +33,8 @@ import com.eviware.soapui.support.dnd.SoapUIDragAndDropHandler;
 import com.eviware.soapui.support.dnd.SoapUIDragAndDropable;
 import com.eviware.soapui.support.swing.AutoscrollSupport;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.dnd.Autoscroll;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DragSource;
@@ -156,7 +143,60 @@ public class JProjectTestSuiteList extends JPanel {
         }
     }
 
-    public final class TestSuiteListPanel extends JPanel implements Autoscroll {
+    private int getIndexOf(TestSuiteListPanel panel) {
+        return Arrays.asList(getComponents()).indexOf(panel);
+    }
+
+    private TestSuiteListPanel createTestSuiteListPanel(TestSuite testSuite) {
+        TestSuiteListPanel testSuiteListPanel = new TestSuiteListPanel((WsdlTestSuite) testSuite);
+
+        DragSource dragSource = DragSource.getDefaultDragSource();
+
+        SoapUIDragAndDropHandler dragAndDropHandler = new SoapUIDragAndDropHandler(
+                new TestSuiteListPanelDragAndDropable(testSuiteListPanel), DropType.BEFORE_AND_AFTER);
+
+        dragSource.createDefaultDragGestureRecognizer(testSuiteListPanel, DnDConstants.ACTION_COPY_OR_MOVE,
+                dragAndDropHandler);
+
+        return testSuiteListPanel;
+    }
+
+    private static class TestSuiteListPanelDragAndDropable implements SoapUIDragAndDropable<ModelItem> {
+        private final TestSuiteListPanel testSuitePanel;
+
+        TestSuiteListPanelDragAndDropable(TestSuiteListPanel testSuitePanel) {
+            this.testSuitePanel = testSuitePanel;
+        }
+
+        public JComponent getComponent() {
+            return testSuitePanel;
+        }
+
+        public void setDragInfo(String dropInfo) {
+            testSuitePanel.setToolTipText(dropInfo.length() == 0 ? null : dropInfo);
+        }
+
+        public Rectangle getModelItemBounds(ModelItem path) {
+            return new Rectangle(testSuitePanel.getSize());
+        }
+
+        public ModelItem getModelItemForLocation(int x, int y) {
+            return testSuitePanel.getModelItem();
+        }
+
+        public Component getRenderer(ModelItem path) {
+            return null;
+        }
+
+        public void selectModelItem(ModelItem path) {
+            testSuitePanel.setSelected(!testSuitePanel.isSelected());
+        }
+
+        public void toggleExpansion(ModelItem last) {
+        }
+    }
+
+    protected final class TestSuiteListPanel extends JPanel implements Autoscroll {
         private final WsdlTestSuite testSuite;
         private JProgressBar progressBar;
         private JLabel label;
@@ -164,7 +204,7 @@ public class JProjectTestSuiteList extends JPanel {
         private TestSuitePropertyChangeListener testSuitePropertyChangeListener;
         private AutoscrollSupport autoscrollSupport;
 
-        public TestSuiteListPanel(WsdlTestSuite testSuite) {
+        TestSuiteListPanel(WsdlTestSuite testSuite) {
             super(new BorderLayout());
 
             setFocusable(true);
@@ -245,7 +285,7 @@ public class JProjectTestSuiteList extends JPanel {
             setSelected(false);
         }
 
-        public void reset() {
+        void reset() {
             progressBar.setValue(0);
             progressBar.setString("");
         }
@@ -281,16 +321,16 @@ public class JProjectTestSuiteList extends JPanel {
             return size;
         }
 
-        public void setSelected(boolean selected) {
+        boolean isSelected() {
+            return selectedTestSuite != null && selectedTestSuite.getTestSuite() == testSuite;
+        }
+
+        void setSelected(boolean selected) {
             if (selected) {
                 setBorder(BorderFactory.createLineBorder(Color.GRAY));
             } else {
                 setBorder(BorderFactory.createLineBorder(Color.WHITE));
             }
-        }
-
-        public boolean isSelected() {
-            return selectedTestSuite != null && selectedTestSuite.getTestSuite() == testSuite;
         }
 
         private final class TestSuitePropertyChangeListener implements PropertyChangeListener {
@@ -304,11 +344,11 @@ public class JProjectTestSuiteList extends JPanel {
             }
         }
 
-        protected WsdlTestSuite getTestSuite() {
+        WsdlTestSuite getTestSuite() {
             return testSuite;
         }
 
-        public ModelItem getModelItem() {
+        ModelItem getModelItem() {
             return testSuite;
         }
 
@@ -342,28 +382,10 @@ public class JProjectTestSuiteList extends JPanel {
         }
     }
 
-    protected int getIndexOf(TestSuiteListPanel panel) {
-        return Arrays.asList(getComponents()).indexOf(panel);
-    }
-
-    protected TestSuiteListPanel createTestSuiteListPanel(TestSuite testSuite) {
-        TestSuiteListPanel testSuiteListPanel = new TestSuiteListPanel((WsdlTestSuite) testSuite);
-
-        DragSource dragSource = DragSource.getDefaultDragSource();
-
-        SoapUIDragAndDropHandler dragAndDropHandler = new SoapUIDragAndDropHandler(
-                new TestSuiteListPanelDragAndDropable(testSuiteListPanel), DropType.BEFORE_AND_AFTER);
-
-        dragSource.createDefaultDragGestureRecognizer(testSuiteListPanel, DnDConstants.ACTION_COPY_OR_MOVE,
-                dragAndDropHandler);
-
-        return testSuiteListPanel;
-    }
-
     private class TestSuiteListDragAndDropable implements SoapUIDragAndDropable<ModelItem> {
         private final JProjectTestSuiteList list;
 
-        public TestSuiteListDragAndDropable(JProjectTestSuiteList list) {
+        TestSuiteListDragAndDropable(JProjectTestSuiteList list) {
             this.list = list;
         }
 
@@ -392,41 +414,6 @@ public class JProjectTestSuiteList extends JPanel {
         }
 
         public void toggleExpansion(ModelItem modelItem) {
-        }
-    }
-
-    private static class TestSuiteListPanelDragAndDropable implements SoapUIDragAndDropable<ModelItem> {
-        private final TestSuiteListPanel testSuitePanel;
-
-        public TestSuiteListPanelDragAndDropable(TestSuiteListPanel testSuitePanel) {
-            this.testSuitePanel = testSuitePanel;
-        }
-
-        public JComponent getComponent() {
-            return testSuitePanel;
-        }
-
-        public void setDragInfo(String dropInfo) {
-            testSuitePanel.setToolTipText(dropInfo.length() == 0 ? null : dropInfo);
-        }
-
-        public Rectangle getModelItemBounds(ModelItem path) {
-            return new Rectangle(testSuitePanel.getSize());
-        }
-
-        public ModelItem getModelItemForLocation(int x, int y) {
-            return testSuitePanel.getModelItem();
-        }
-
-        public Component getRenderer(ModelItem path) {
-            return null;
-        }
-
-        public void selectModelItem(ModelItem path) {
-            testSuitePanel.setSelected(!testSuitePanel.isSelected());
-        }
-
-        public void toggleExpansion(ModelItem last) {
         }
     }
 }

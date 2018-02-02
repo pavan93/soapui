@@ -29,9 +29,9 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 
 public class NewEmptyProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "NewEmptyProjectAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewEmptyProjectAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewEmptyProjectAction.class);
 
-    public NewEmptyProjectAction() {
+    private NewEmptyProjectAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

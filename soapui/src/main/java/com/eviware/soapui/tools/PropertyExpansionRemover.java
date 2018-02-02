@@ -26,7 +26,7 @@ public class PropertyExpansionRemover {
 
     private static final Logger log = Logger.getLogger(PropertyExpansionRemover.class);
 
-    public static final String EXPANSION_START = "${";
+    private static final String EXPANSION_START = "${";
 
     public static String removeExpansions(String input) {
         if (input == null) {

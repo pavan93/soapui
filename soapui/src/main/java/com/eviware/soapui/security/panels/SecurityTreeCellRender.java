@@ -39,10 +39,10 @@ import java.util.Map;
 @SuppressWarnings("serial")
 public class SecurityTreeCellRender implements TreeCellRenderer {
 
-    Map<DefaultMutableTreeNode, Component> componentTree = new HashMap<DefaultMutableTreeNode, Component>();
+    private Map<DefaultMutableTreeNode, Component> componentTree = new HashMap<DefaultMutableTreeNode, Component>();
     private JTree tree;
-    Color selected = new Color(205, 205, 205);
-    Color unselected = new Color(228, 228, 228);
+    private Color selected = new Color(205, 205, 205);
+    private Color unselected = new Color(228, 228, 228);
     //	Color noSecurable = new Color( 102, 102, 102 );
     private boolean released;
 
@@ -105,8 +105,8 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
         private JPanel progressPanel;
         private JLabel cntLabel;
 
-        public TestStepCellRender(final JTree tree, TestStepNode node, boolean sel, boolean exp, boolean leaf, int arg5,
-                                  boolean arg6) {
+        TestStepCellRender(final JTree tree, TestStepNode node, boolean sel, boolean exp, boolean leaf, int arg5,
+                           boolean arg6) {
             super(new BorderLayout());
 
             this.node = node;
@@ -267,7 +267,7 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
             }
         }
 
-        public boolean isOnExpandButton(int x, int y) {
+        boolean isOnExpandButton(int x, int y) {
             y = y - 30 * (tree.getRowForLocation(x, y));
             return (5 <= x) && (20 >= x) && (5 <= y) && (20 >= y);
         }
@@ -292,8 +292,8 @@ public class SecurityTreeCellRender implements TreeCellRenderer {
         private SecurityScanNode node;
         private JPanel leftInnerPanel;
 
-        public SecurityScanCellRender(JTree tree, SecurityScanNode node, boolean sel, boolean arg3, boolean arg4,
-                                      int arg5, boolean arg6) {
+        SecurityScanCellRender(JTree tree, SecurityScanNode node, boolean sel, boolean arg3, boolean arg4,
+                               int arg5, boolean arg6) {
             super(new BorderLayout());
 
             this.node = node;

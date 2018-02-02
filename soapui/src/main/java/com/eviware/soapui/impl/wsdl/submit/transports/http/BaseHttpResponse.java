@@ -60,11 +60,11 @@ public abstract class BaseHttpResponse implements HttpResponse {
     private int requestContentPos = -1;
     private String xmlContent;
     private Attachment[] attachments = new Attachment[0];
-    protected HTMLPageSourceDownloader downloader;
+    private HTMLPageSourceDownloader downloader;
     private int statusCode;
 
-    public BaseHttpResponse(ExtendedHttpMethod httpMethod, AbstractHttpRequestInterface<?> httpRequest,
-                            PropertyExpansionContext context) {
+    protected BaseHttpResponse(ExtendedHttpMethod httpMethod, AbstractHttpRequestInterface<?> httpRequest,
+                               PropertyExpansionContext context) {
         this.httpRequest = new WeakReference<AbstractHttpRequestInterface<?>>(httpRequest);
         this.timeTaken = httpMethod.getTimeTaken();
 
@@ -163,7 +163,7 @@ public abstract class BaseHttpResponse implements HttpResponse {
         }
     }
 
-    protected void initHeaders(ExtendedHttpMethod httpMethod) {
+    private void initHeaders(ExtendedHttpMethod httpMethod) {
         try {
             ByteArrayOutputStream rawResponse = new ByteArrayOutputStream();
             ByteArrayOutputStream rawRequest = new ByteArrayOutputStream();
@@ -231,45 +231,7 @@ public abstract class BaseHttpResponse implements HttpResponse {
         }
     }
 
-    public static class MaxSizeByteArrayOutputStream extends ByteArrayOutputStream {
-        private final long maxSize;
-
-        public MaxSizeByteArrayOutputStream(long maxSize) {
-            this.maxSize = maxSize;
-        }
-
-        @Override
-        public synchronized void write(int b) {
-            if (maxSize > 0 && size() < maxSize) {
-                super.write(b);
-            }
-        }
-
-        @Override
-        public synchronized void write(byte[] b, int off, int len) {
-            if (maxSize > 0 && size() < maxSize) {
-                if (size() + len < maxSize) {
-                    super.write(b, off, len);
-                } else {
-                    super.write(b, off, (int) (maxSize - size()));
-                }
-            }
-        }
-
-        @Override
-        public void write(byte[] b) throws IOException {
-            if (maxSize > 0 && size() < maxSize) {
-                if (size() + b.length < maxSize) {
-                    super.write(b);
-                } else {
-                    super.write(b, 0, (int) (maxSize - size()));
-                }
-            }
-        }
-
-    }
-
-    protected void initHeadersForLoadTest(ExtendedHttpMethod httpMethod) {
+    private void initHeadersForLoadTest(ExtendedHttpMethod httpMethod) {
         try {
             requestHeaders = new StringToStringsMap();
             Header[] headers = httpMethod.getAllHeaders();
@@ -289,6 +251,16 @@ public abstract class BaseHttpResponse implements HttpResponse {
         } catch (Throwable e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * Returns a {@link String} representation of the header.
+     *
+     * @return stringHEAD
+     */
+    private String toExternalForm(Header header) {
+        return ((null == header.getName() ? "" : header.getName()) + ": "
+                + (null == header.getValue() ? "" : header.getValue()) + "\r\n");
     }
 
     public StringToStringsMap getRequestHeaders() {
@@ -384,14 +356,42 @@ public abstract class BaseHttpResponse implements HttpResponse {
         return xmlContent;
     }
 
-    /**
-     * Returns a {@link String} representation of the header.
-     *
-     * @return stringHEAD
-     */
-    public String toExternalForm(Header header) {
-        return ((null == header.getName() ? "" : header.getName()) + ": "
-                + (null == header.getValue() ? "" : header.getValue()) + "\r\n");
+    static class MaxSizeByteArrayOutputStream extends ByteArrayOutputStream {
+        private final long maxSize;
+
+        MaxSizeByteArrayOutputStream(long maxSize) {
+            this.maxSize = maxSize;
+        }
+
+        @Override
+        public synchronized void write(int b) {
+            if (maxSize > 0 && size() < maxSize) {
+                super.write(b);
+            }
+        }
+
+        @Override
+        public synchronized void write(byte[] b, int off, int len) {
+            if (maxSize > 0 && size() < maxSize) {
+                if (size() + len < maxSize) {
+                    super.write(b, off, len);
+                } else {
+                    super.write(b, off, (int) (maxSize - size()));
+                }
+            }
+        }
+
+        @Override
+        public void write(byte[] b) throws IOException {
+            if (maxSize > 0 && size() < maxSize) {
+                if (size() + b.length < maxSize) {
+                    super.write(b);
+                } else {
+                    super.write(b, 0, (int) (maxSize - size()));
+                }
+            }
+        }
+
     }
 
 }

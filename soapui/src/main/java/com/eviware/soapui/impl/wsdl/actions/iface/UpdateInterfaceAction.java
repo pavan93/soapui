@@ -61,7 +61,7 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         this("Update Definition", "Reloads the definition for this interface and its operations");
     }
 
-    protected UpdateInterfaceAction(String name, String description) {
+    private UpdateInterfaceAction(String name, String description) {
         super(name, description);
     }
 
@@ -134,8 +134,8 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         }
     }
 
-    public static List<WsdlTestRequestStep> recreateTestRequests(WsdlInterface iface, boolean buildOptional,
-                                                                 boolean createBackups, boolean keepExisting, boolean keepHeaders) {
+    private static List<WsdlTestRequestStep> recreateTestRequests(WsdlInterface iface, boolean buildOptional,
+                                                                  boolean createBackups, boolean keepExisting, boolean keepHeaders) {
         int count = 0;
 
         List<WsdlTestRequestStep> result = new ArrayList<WsdlTestRequestStep>();
@@ -182,8 +182,8 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         return result;
     }
 
-    public static List<Request> recreateRequests(WsdlInterface iface, boolean buildOptional, boolean createBackups,
-                                                 boolean keepExisting, boolean keepHeaders) {
+    private static List<Request> recreateRequests(WsdlInterface iface, boolean buildOptional, boolean createBackups,
+                                                  boolean keepExisting, boolean keepHeaders) {
         int count = 0;
 
         List<Request> result = new ArrayList<Request>();
@@ -223,7 +223,7 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         return result;
     }
 
-    protected void afterUpdate(WsdlInterface iface) {
+    private void afterUpdate(WsdlInterface iface) {
         if (dialog.getBooleanValue(Form.RECREATE_REQUESTS)) {
             boolean buildOptional = dialog.getBooleanValue(Form.RECREATE_OPTIONAL);
             boolean createBackups = dialog.getBooleanValue(Form.CREATE_BACKUPS);
@@ -253,7 +253,7 @@ public class UpdateInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
     }
 
     @AForm(description = "Specify Update Definition options", name = "Update Definition", helpUrl = HelpUrls.UPDATE_INTERFACE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    protected interface Form {
+    interface Form {
         @AField(name = "Definition URL", description = "The URL or file for the updated definition", type = AFieldType.FILE)
         String DEFINITION_URL = "Definition URL";
 

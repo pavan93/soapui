@@ -26,10 +26,7 @@ import com.eviware.x.form.XFormDialog;
 import com.eviware.x.form.XFormDialogBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class SwingXFormDialogBuilder extends XFormDialogBuilder {
@@ -100,8 +97,8 @@ public class SwingXFormDialogBuilder extends XFormDialogBuilder {
         return actions;
     }
 
-    protected final class OKAction extends AbstractAction {
-        public OKAction() {
+    final class OKAction extends AbstractAction {
+        OKAction() {
             super("OK");
         }
 
@@ -113,8 +110,8 @@ public class SwingXFormDialogBuilder extends XFormDialogBuilder {
         }
     }
 
-    protected final class CancelAction extends AbstractAction {
-        public CancelAction() {
+    final class CancelAction extends AbstractAction {
+        CancelAction() {
             super("Cancel");
         }
 
@@ -129,7 +126,7 @@ public class SwingXFormDialogBuilder extends XFormDialogBuilder {
     public final class HelpAction extends AbstractAction implements HelpActionMarker {
         private String url;
 
-        public HelpAction(String url) {
+        HelpAction(String url) {
             this("Online Help", url, UISupport.getKeyStroke("F1"));
         }
 
@@ -137,7 +134,7 @@ public class SwingXFormDialogBuilder extends XFormDialogBuilder {
             this(title, url, null);
         }
 
-        public HelpAction(String title, String url, KeyStroke accelerator) {
+        HelpAction(String title, String url, KeyStroke accelerator) {
             super(title);
             this.url = url;
             putValue(Action.SHORT_DESCRIPTION, "Show online help");

@@ -41,20 +41,14 @@
 
 package org.apache.http.localserver;
 
-import java.io.IOException;
-import java.util.Locale;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpEntityEnclosingRequest;
-import org.apache.http.HttpException;
-import org.apache.http.HttpRequest;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.MethodNotSupportedException;
+import org.apache.http.*;
 import org.apache.http.entity.ByteArrayEntity;
 import org.apache.http.protocol.HttpContext;
 import org.apache.http.protocol.HttpRequestHandler;
 import org.apache.http.util.EntityUtils;
+
+import java.io.IOException;
+import java.util.Locale;
 
 /**
  * A handler that echos the incoming request entity.
@@ -63,7 +57,7 @@ import org.apache.http.util.EntityUtils;
  * <p/>
  * <!-- empty lines to avoid 'svn diff' problems -->
  */
-public class EchoHandler implements HttpRequestHandler {
+class EchoHandler implements HttpRequestHandler {
     // public default constructor
 
     /**

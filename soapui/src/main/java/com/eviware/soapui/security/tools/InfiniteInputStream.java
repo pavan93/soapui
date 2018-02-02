@@ -19,7 +19,7 @@ package com.eviware.soapui.security.tools;
 import java.io.InputStream;
 import java.util.Random;
 
-public class InfiniteInputStream extends InputStream {
+class InfiniteInputStream extends InputStream {
     private long bytesSent = 0;
     private long byteLimit;
 

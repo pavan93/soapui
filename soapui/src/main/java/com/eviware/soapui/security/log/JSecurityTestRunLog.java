@@ -63,7 +63,7 @@ public class JSecurityTestRunLog extends JPanel {
     private final Settings settings;
     private Set<String> boldTexts = new HashSet<String>();
     private boolean follow = true;
-    protected int selectedIndex;
+    private int selectedIndex;
     private XFormDialog optionsDialog;
     private Logger log = Logger.getLogger(JSecurityTestRunLog.class);
 
@@ -109,7 +109,7 @@ public class JSecurityTestRunLog extends JPanel {
         return follow;
     }
 
-    protected void addToolbarButtons(JXToolBar toolbar) {
+    private void addToolbarButtons(JXToolBar toolbar) {
         toolbar.addFixed(UISupport.createToolbarButton(new ClearLogAction()));
         toolbar.addFixed(UISupport.createToolbarButton(new SetLogOptionsAction()));
         toolbar.addFixed(UISupport.createToolbarButton(new ExportLogAction()));
@@ -197,8 +197,36 @@ public class JSecurityTestRunLog extends JPanel {
         }
     }
 
+    private void printLog(PrintWriter out) {
+        for (int c = 0; c < logListModel.getSize(); c++) {
+            Object value = logListModel.getElementAt(c);
+            if (value instanceof String) {
+                out.println(value.toString());
+            }
+        }
+    }
+
+    public void release() {
+        if (optionsDialog != null) {
+            optionsDialog.release();
+            optionsDialog = null;
+        }
+    }
+
+    @AForm(name = "Log Options", description = "Set options for the run log below", helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
+    private interface OptionsForm {
+        @AField(name = "Max Rows", description = "Sets the maximum number of rows to keep in the log", type = AFieldType.INT)
+        String MAXROWS = "Max Rows";
+
+        @AField(name = "Warnings Only", description = "Logs only TestStep warnings in the log", type = AFieldType.BOOLEAN)
+        String ERRORSONLY = "Warnings Only";
+
+        @AField(name = "Follow", description = "Follow log content", type = AFieldType.BOOLEAN)
+        String FOLLOW = "Follow";
+    }
+
     private class SetLogOptionsAction extends AbstractAction {
-        public SetLogOptionsAction() {
+        SetLogOptionsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/preferences.png"));
             putValue(Action.SHORT_DESCRIPTION, "Sets TestCase Log Options");
         }
@@ -226,20 +254,8 @@ public class JSecurityTestRunLog extends JPanel {
         }
     }
 
-    @AForm(name = "Log Options", description = "Set options for the run log below", helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
-    private interface OptionsForm {
-        @AField(name = "Max Rows", description = "Sets the maximum number of rows to keep in the log", type = AFieldType.INT)
-        String MAXROWS = "Max Rows";
-
-        @AField(name = "Warnings Only", description = "Logs only TestStep warnings in the log", type = AFieldType.BOOLEAN)
-        String ERRORSONLY = "Warnings Only";
-
-        @AField(name = "Follow", description = "Follow log content", type = AFieldType.BOOLEAN)
-        String FOLLOW = "Follow";
-    }
-
     private class ClearLogAction extends AbstractAction {
-        public ClearLogAction() {
+        ClearLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clear.png"));
             putValue(Action.SHORT_DESCRIPTION, "Clears the log");
         }
@@ -250,7 +266,7 @@ public class JSecurityTestRunLog extends JPanel {
     }
 
     private class ExportLogAction extends AbstractAction {
-        public ExportLogAction() {
+        ExportLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/export.png"));
             putValue(Action.SHORT_DESCRIPTION, "Exports this log to a file");
         }
@@ -266,22 +282,6 @@ public class JSecurityTestRunLog extends JPanel {
                 } catch (FileNotFoundException e1) {
                     UISupport.showErrorMessage(e1);
                 }
-            }
-        }
-    }
-
-    public void release() {
-        if (optionsDialog != null) {
-            optionsDialog.release();
-            optionsDialog = null;
-        }
-    }
-
-    public void printLog(PrintWriter out) {
-        for (int c = 0; c < logListModel.getSize(); c++) {
-            Object value = logListModel.getElementAt(c);
-            if (value instanceof String) {
-                out.println(value.toString());
             }
         }
     }
@@ -317,7 +317,7 @@ public class JSecurityTestRunLog extends JPanel {
             }
         }
 
-        public void showPopup(MouseEvent e) {
+        void showPopup(MouseEvent e) {
             int row = testLogList.locationToIndex(e.getPoint());
             if (row == -1) {
                 return;
@@ -355,7 +355,7 @@ public class JSecurityTestRunLog extends JPanel {
         private Font normalFont;
         private JHyperlinkLabel hyperlinkLabel = new JHyperlinkLabel("");
 
-        public SecurityTestLogCellRenderer() {
+        SecurityTestLogCellRenderer() {
             setOpaque(true);
             setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
             setIcon(null);

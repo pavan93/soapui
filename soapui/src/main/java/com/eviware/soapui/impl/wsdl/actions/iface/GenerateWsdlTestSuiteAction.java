@@ -158,20 +158,20 @@ public class GenerateWsdlTestSuiteAction extends AbstractSoapUIAction<WsdlInterf
     @AForm(name = "Generate TestSuite", description = "Generates TestSuite with TestCase(s) for all Operations in this Interface", helpUrl = HelpUrls.GENERATE_TESTSUITE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
     private class GenerateForm {
         @AField(name = "TestSuite", description = "The TestSuite to create or use", type = AFieldType.ENUMERATION)
-        public final static String TESTSUITE = "TestSuite";
+        final static String TESTSUITE = "TestSuite";
 
         @AField(name = "Style", description = "Select the style of TestCases to create", type = AFieldType.RADIOGROUP, values = {
                 "One TestCase for each Operation", "Single TestCase with one Request for each Operation"})
-        public final static String STYLE = "Style";
+        final static String STYLE = "Style";
 
         @AField(name = "Request Content", description = "Select how to create Test Requests", type = AFieldType.RADIOGROUP, values = {
                 "Use existing Requests in Interface", "Create new empty requests"})
-        public final static String REQUEST_CONTENT = "Request Content";
+        final static String REQUEST_CONTENT = "Request Content";
 
         @AField(name = "Operations", description = "The Operations for which to Generate Tests", type = AFieldType.MULTILIST)
-        public final static String OPERATIONS = "Operations";
+        final static String OPERATIONS = "Operations";
 
         @AField(name = "Generate LoadTest", description = "Generates a default LoadTest for each created TestCase", type = AFieldType.BOOLEAN)
-        public final static String GENERATE_LOADTEST = "Generate LoadTest";
+        final static String GENERATE_LOADTEST = "Generate LoadTest";
     }
 }

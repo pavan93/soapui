@@ -29,7 +29,7 @@ import java.net.URL;
 /**
  *
  */
-public class OAuthParameterValidator {
+class OAuthParameterValidator {
 
     static void validate(OAuth2Parameters parameters) {
         if (parameters.getOAuth2Flow() == OAuth2Profile.OAuth2Flow.RESOURCE_OWNER_PASSWORD_CREDENTIALS) {

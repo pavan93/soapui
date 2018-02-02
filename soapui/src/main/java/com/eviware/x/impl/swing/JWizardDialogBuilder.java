@@ -19,18 +19,18 @@ package com.eviware.x.impl.swing;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class JWizardDialogBuilder extends SwingXFormDialogBuilder {
+class JWizardDialogBuilder extends SwingXFormDialogBuilder {
     private SwingXFormDialog dialog;
 
     public JWizardDialogBuilder(String name) {
         super(name);
     }
 
-    protected final class NextAction extends AbstractAction {
-        public NextAction() {
+    final class NextAction extends AbstractAction {
+        NextAction() {
             super("Next");
         }
 

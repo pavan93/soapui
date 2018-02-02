@@ -39,7 +39,7 @@ import java.awt.*;
  * @email santhosh@in.fiorano.com
  */
 
-public class CheckTreeCellRenderer extends JPanel implements TreeCellRenderer {
+class CheckTreeCellRenderer extends JPanel implements TreeCellRenderer {
     private CheckTreeSelectionModel selectionModel;
     private TreePathSelectable selectable;
     private TreeCellRenderer delegate;

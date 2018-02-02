@@ -18,16 +18,10 @@ package com.eviware.soapui.support.dnd;
 
 import com.eviware.soapui.SoapUI;
 
-import java.awt.Component;
-import java.awt.Point;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.*;
 
 public abstract class AbstractSoapUIDropTarget implements DropTargetListener {
     public AbstractSoapUIDropTarget() {
@@ -76,7 +70,7 @@ public abstract class AbstractSoapUIDropTarget implements DropTargetListener {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
 
-    public boolean isAcceptable(Transferable transferable, Point point) {
+    private boolean isAcceptable(Transferable transferable, Point point) {
         return isAcceptable(getTransferData(transferable), point);
     }
 

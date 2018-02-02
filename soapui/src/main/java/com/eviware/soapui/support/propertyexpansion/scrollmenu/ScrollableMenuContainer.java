@@ -18,7 +18,7 @@ package com.eviware.soapui.support.propertyexpansion.scrollmenu;
 
 import javax.swing.*;
 
-public interface ScrollableMenuContainer {
+interface ScrollableMenuContainer {
     JMenuItem add(JMenuItem menuItem);
 
     JMenuItem addHeader(JMenuItem header);

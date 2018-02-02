@@ -58,15 +58,15 @@ public class SoapUIVersionInfo implements Comparator<SoapUIVersionInfo> {
         }
     }
 
-    public int getMajorVersion() {
+    private int getMajorVersion() {
         return this.majorVersion;
     }
 
-    public int getMiddleVersion() {
+    private int getMiddleVersion() {
         return this.middleVersion;
     }
 
-    public int getMinorVersion() {
+    private int getMinorVersion() {
         return this.minorVersion;
     }
 

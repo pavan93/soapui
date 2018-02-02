@@ -34,7 +34,7 @@ public abstract class AbstractMockOperation
         extends AbstractWsdlModelItem<BaseMockOperationConfigType>
         implements MockOperation, PropertyChangeListener {
     public final static String DISPATCH_PATH_PROPERTY = MockOperation.class.getName() + "@dispatchpath";
-    public final static String DISPATCH_STYLE_PROPERTY = MockOperation.class.getName() + "@dispatchstyle";
+    private final static String DISPATCH_STYLE_PROPERTY = MockOperation.class.getName() + "@dispatchstyle";
 
     private MockOperationDispatcher dispatcher;
 
@@ -111,7 +111,7 @@ public abstract class AbstractMockOperation
         }
     }
 
-    public abstract void removeResponseFromConfig(int index);
+    protected abstract void removeResponseFromConfig(int index);
 
     public String getDefaultResponse() {
         return getConfig().getDefaultResponse();
@@ -136,7 +136,7 @@ public abstract class AbstractMockOperation
     }
 
     // Hook for subclasses
-    public void setExampleScript() {
+    protected void setExampleScript() {
     }
 
     public MockOperationDispatcher getDispatcher() {

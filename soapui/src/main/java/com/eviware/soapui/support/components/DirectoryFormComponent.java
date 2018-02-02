@@ -20,10 +20,7 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.JTextComponent;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -49,8 +46,8 @@ public class DirectoryFormComponent extends JPanel implements JFormComponent {
         return textField.getText();
     }
 
-    public class SelectDirectoryAction extends AbstractAction {
-        public SelectDirectoryAction() {
+    class SelectDirectoryAction extends AbstractAction {
+        SelectDirectoryAction() {
             super("Browse...");
         }
 

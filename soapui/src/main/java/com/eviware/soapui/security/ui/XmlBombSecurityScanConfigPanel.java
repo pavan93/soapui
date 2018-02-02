@@ -21,22 +21,9 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.components.SimpleForm;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -130,7 +117,7 @@ public class XmlBombSecurityScanConfigPanel extends JPanel {
 
     private class PreviousAttachement extends AbstractAction {
 
-        public PreviousAttachement() {
+        PreviousAttachement() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/left_arrow.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Previous Xml Bomb");
         }
@@ -150,7 +137,7 @@ public class XmlBombSecurityScanConfigPanel extends JPanel {
 
     private class NextAttachement extends AbstractAction {
 
-        public NextAttachement() {
+        NextAttachement() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/right_arrow.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Next Xml Bomb");
         }
@@ -170,7 +157,7 @@ public class XmlBombSecurityScanConfigPanel extends JPanel {
 
     private class SaveAttachement extends AbstractAction {
 
-        public SaveAttachement() {
+        SaveAttachement() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/save_all.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Save Xml Bomb");
         }
@@ -184,7 +171,7 @@ public class XmlBombSecurityScanConfigPanel extends JPanel {
 
     private class AddXmlAttachement extends AbstractAction {
 
-        public AddXmlAttachement() {
+        AddXmlAttachement() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Add new Xml Bomb");
         }
@@ -206,7 +193,7 @@ public class XmlBombSecurityScanConfigPanel extends JPanel {
 
     private class RemoveAttachement extends AbstractAction {
 
-        public RemoveAttachement() {
+        RemoveAttachement() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Remove current Xml Bomb");
         }

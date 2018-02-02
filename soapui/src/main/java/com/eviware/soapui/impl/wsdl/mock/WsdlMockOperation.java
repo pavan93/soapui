@@ -52,7 +52,7 @@ public class WsdlMockOperation extends AbstractMockOperation<MockOperationConfig
     @SuppressWarnings("unused")
     private final static Logger log = Logger.getLogger(WsdlMockOperation.class);
 
-    public final static String OPERATION_PROPERTY = WsdlMockOperation.class.getName() + "@operation";
+    private final static String OPERATION_PROPERTY = WsdlMockOperation.class.getName() + "@operation";
     public static final String ICON_NAME = "/mockOperation.gif";
 
     private WsdlOperation operation;
@@ -315,19 +315,19 @@ public class WsdlMockOperation extends AbstractMockOperation<MockOperationConfig
         }
     }
 
-    public boolean isOneWay() {
+    private boolean isOneWay() {
         return operation != null && operation.isOneWay();
     }
 
-    public boolean isNotification() {
+    private boolean isNotification() {
         return operation != null && operation.isNotification();
     }
 
-    public boolean isSolicitResponse() {
+    private boolean isSolicitResponse() {
         return operation != null && operation.isSolicitResponse();
     }
 
-    public boolean isUnidirectional() {
+    private boolean isUnidirectional() {
         return operation != null && operation.isUnidirectional();
     }
 

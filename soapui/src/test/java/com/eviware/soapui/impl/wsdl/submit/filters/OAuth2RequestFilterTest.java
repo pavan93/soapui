@@ -48,7 +48,7 @@ import static org.mockito.Mockito.*;
 
 public class OAuth2RequestFilterTest {
 
-    public static final String EXPIRED_TOKEN = "EXPIRED#TOKEN";
+    private static final String EXPIRED_TOKEN = "EXPIRED#TOKEN";
     private static final String ACCESS_TOKEN = "ACDFECDSFKJFK#SDFSD8df#ACCESS-TOKEN";
     private static final String RETRIEVED_ACCESS_TOKEN = "yyCDFECDSFKJFK#dsfsddf#28317";
 

@@ -16,13 +16,12 @@
 
 package com.eviware.soapui.autoupdate;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
-public class VersionUpdateAction extends AbstractAction {
+class VersionUpdateAction extends AbstractAction {
 
-    SoapUIUpdateProvider updateProvider;
+    private SoapUIUpdateProvider updateProvider;
 
     public VersionUpdateAction() {
         super("Check for Updates");

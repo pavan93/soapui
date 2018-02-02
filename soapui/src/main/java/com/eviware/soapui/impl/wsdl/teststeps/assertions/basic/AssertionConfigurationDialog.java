@@ -29,19 +29,8 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -52,14 +41,14 @@ import java.awt.event.WindowEvent;
 public class AssertionConfigurationDialog {
     private final static Logger log = Logger.getLogger(AssertionConfigurationDialog.class);
 
-    protected JDialog configurationDialog;
+    private JDialog configurationDialog;
     private JCheckBox allowWildcardsCheckBox;
     private JCheckBox ignoreNamespaceDifferencesCheckBox;
     private JCheckBox ignoreCommentsCheckBox;
-    protected JTextArea pathArea;
-    protected JTextArea contentArea;
-    protected AbstractXmlContainsAssertion assertion;
-    protected boolean configureResult;
+    private JTextArea pathArea;
+    private JTextArea contentArea;
+    private AbstractXmlContainsAssertion assertion;
+    private boolean configureResult;
 
     public AssertionConfigurationDialog(AbstractXmlContainsAssertion assertion) {
         this.assertion = assertion;
@@ -85,11 +74,11 @@ public class AssertionConfigurationDialog {
     }
 
 
-    public String getHelpURL() {
+    protected String getHelpURL() {
         return HelpUrls.ASSERTION_JSON_CONTENT;
     }
 
-    protected void buildConfigurationDialog() {
+    private void buildConfigurationDialog() {
         configurationDialog = new JDialog(UISupport.getMainFrame());
         configurationDialog.setTitle(assertion.getConfigurationDialogTitle());
         configurationDialog.addWindowListener(new WindowAdapter() {
@@ -177,7 +166,7 @@ public class AssertionConfigurationDialog {
         return pathArea;
     }
 
-    protected void addMatchEditorActions(JXToolBar toolbar) {
+    void addMatchEditorActions(JXToolBar toolbar) {
         toolbar.addFixed(new JButton(createSelectFromCurrentAction()));
         toolbar.addRelatedGap();
         toolbar.addFixed(new JButton(createTestPathAction()));
@@ -241,8 +230,8 @@ public class AssertionConfigurationDialog {
         }
     }
 
-    public class CancelAction extends AbstractAction {
-        public CancelAction() {
+    class CancelAction extends AbstractAction {
+        CancelAction() {
             super("Cancel");
         }
 
@@ -252,8 +241,8 @@ public class AssertionConfigurationDialog {
         }
     }
 
-    public class DeclareNamespacesFromCurrentAction extends AbstractAction {
-        public DeclareNamespacesFromCurrentAction() {
+    class DeclareNamespacesFromCurrentAction extends AbstractAction {
+        DeclareNamespacesFromCurrentAction() {
             super("Declare");
             putValue(Action.SHORT_DESCRIPTION, "Add namespace declaration from current message to " + assertion.getQueryType() + " expression");
         }

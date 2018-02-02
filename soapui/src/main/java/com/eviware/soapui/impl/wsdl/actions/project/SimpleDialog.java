@@ -81,13 +81,13 @@ public abstract class SimpleDialog extends JDialog {
     protected void modifyButtons() {
     }
 
-    public SimpleDialog(String title, String description, String helpUrl) {
+    protected SimpleDialog(String title, String description, String helpUrl) {
         this(title, description, helpUrl, true);
     }
 
     protected abstract Component buildContent();
 
-    public ActionList buildActions(String url, boolean okAndCancel) {
+    protected ActionList buildActions(String url, boolean okAndCancel) {
         DefaultActionList actions = new DefaultActionList("Actions");
         if (url != null) {
             actions.addAction(new ShowOnlineHelpAction(url));
@@ -125,13 +125,13 @@ public abstract class SimpleDialog extends JDialog {
         }
     }
 
-    protected void afterHide() {
+    private void afterHide() {
     }
 
-    protected void afterShow() {
+    private void afterShow() {
     }
 
-    protected void beforeHide() {
+    private void beforeHide() {
     }
 
     protected void beforeShow() {
@@ -141,8 +141,8 @@ public abstract class SimpleDialog extends JDialog {
         return true;
     }
 
-    protected final class OKAction extends AbstractAction {
-        public OKAction() {
+    final class OKAction extends AbstractAction {
+        OKAction() {
             super("OK");
         }
 
@@ -154,7 +154,7 @@ public abstract class SimpleDialog extends JDialog {
     }
 
     protected final class CancelAction extends AbstractAction {
-        public CancelAction() {
+        protected CancelAction() {
             super("Cancel");
         }
 
@@ -165,7 +165,7 @@ public abstract class SimpleDialog extends JDialog {
         }
     }
 
-    public final class HelpAction extends AbstractAction implements HelpActionMarker {
+    final class HelpAction extends AbstractAction implements HelpActionMarker {
         private final String url;
 
         public HelpAction(String url) {
@@ -176,7 +176,7 @@ public abstract class SimpleDialog extends JDialog {
             this(title, url, null);
         }
 
-        public HelpAction(String title, String url, KeyStroke accelerator) {
+        HelpAction(String title, String url, KeyStroke accelerator) {
             super(title);
             this.url = url;
             putValue(Action.SHORT_DESCRIPTION, "Show online help");

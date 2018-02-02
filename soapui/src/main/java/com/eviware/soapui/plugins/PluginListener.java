@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.plugins;
 
-public interface PluginListener {
+interface PluginListener {
 
     void pluginUnloaded(Plugin plugin);
 

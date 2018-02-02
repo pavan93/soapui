@@ -25,9 +25,8 @@ import com.eviware.soapui.support.components.SimpleForm;
 import com.eviware.soapui.support.resolver.ResolveContext.Resolver;
 import com.eviware.soapui.support.swing.ModelItemListCellRenderer;
 
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -58,7 +57,7 @@ public abstract class ChangeOperationResolver implements Resolver {
         return resolved;
     }
 
-    public abstract boolean update();
+    protected abstract boolean update();
 
     protected abstract Interface[] getInterfaces(WsdlProject project);
 
@@ -76,7 +75,7 @@ public abstract class ChangeOperationResolver implements Resolver {
         private JComboBox sourceStepCombo;
         private JComboBox propertiesCombo;
 
-        public PropertyChangeDialog(String title) {
+        PropertyChangeDialog(String title) {
             super(title, getDescription(), null);
         }
 

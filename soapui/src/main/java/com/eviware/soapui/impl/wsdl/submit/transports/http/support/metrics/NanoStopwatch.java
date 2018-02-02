@@ -18,9 +18,9 @@ package com.eviware.soapui.impl.wsdl.submit.transports.http.support.metrics;
 
 public class NanoStopwatch implements Stopwatch {
 
-    protected long start;
+    private long start;
 
-    protected long stop;
+    private long stop;
 
     @Override
     public long getDuration() {
@@ -55,7 +55,7 @@ public class NanoStopwatch implements Stopwatch {
         stop = 0;
     }
 
-    protected long getCurrentTime() {
+    private long getCurrentTime() {
         // return System.nanoTime();
         return System.currentTimeMillis();
     }

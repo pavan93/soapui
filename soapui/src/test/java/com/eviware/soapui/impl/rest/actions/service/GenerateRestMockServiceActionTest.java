@@ -69,7 +69,7 @@ public class GenerateRestMockServiceActionTest {
         }
     }
 
-    public void mockFormDialog() {
+    private void mockFormDialog() {
         dialog = mock(XFormDialog.class);
         when(dialog.getValue(GenerateRestMockServiceAction.Form.MOCKSERVICE_NAME)).thenReturn(restMockServiceName);
         when(dialog.show()).thenReturn(true).thenReturn(false);
@@ -95,7 +95,7 @@ public class GenerateRestMockServiceActionTest {
         assertThat(restMockService.getMockRunner(), is(Null.NULL));
     }
 
-    public RestMockService getResultingRestMockService() {
+    private RestMockService getResultingRestMockService() {
         return restService.getProject().getRestMockServiceByName(restMockServiceName);
     }
 

@@ -52,7 +52,7 @@ public class SoapUIToolRunner extends AbstractSoapUIRunner implements ToolHost, 
     private RunnerStatus status;
     private String projectPassword;
 
-    public static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " Tool Runner";
+    private static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " Tool Runner";
 
     /**
      * Runs the specified tool in the specified soapUI project file, see SoapUI
@@ -80,7 +80,7 @@ public class SoapUIToolRunner extends AbstractSoapUIRunner implements ToolHost, 
         this.iface = iface;
     }
 
-    public SoapUIToolRunner() {
+    private SoapUIToolRunner() {
         super(TITLE);
     }
 
@@ -125,7 +125,7 @@ public class SoapUIToolRunner extends AbstractSoapUIRunner implements ToolHost, 
      *
      * @param iface an interface that exposes an invokable operation
      */
-    public void runTool(Interface iface) {
+    private void runTool(Interface iface) {
         AbstractToolsAction<Interface> action = null;
 
         String[] tools = tool.split(",");

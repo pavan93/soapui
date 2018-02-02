@@ -39,7 +39,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GroovyUtils {
-    protected final PropertyExpansionContext context;
+    private final PropertyExpansionContext context;
 
     public GroovyUtils(PropertyExpansionContext context) {
         this.context = context;

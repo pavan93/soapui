@@ -23,13 +23,8 @@ import com.eviware.soapui.impl.wsdl.panels.support.MockTestRunContext;
 import com.eviware.soapui.impl.wsdl.panels.support.MockTestRunner;
 import com.eviware.soapui.impl.wsdl.panels.support.TestRunComponentEnabler;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
-import com.eviware.soapui.impl.wsdl.teststeps.PathLanguage;
-import com.eviware.soapui.impl.wsdl.teststeps.PropertyTransfer;
-import com.eviware.soapui.impl.wsdl.teststeps.PropertyTransfersTestStep;
+import com.eviware.soapui.impl.wsdl.teststeps.*;
 import com.eviware.soapui.impl.wsdl.teststeps.PropertyTransfersTestStep.PropertyTransferResult;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequest;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequestStep;
-import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.TestModelItem;
 import com.eviware.soapui.model.TestPropertyHolder;
@@ -37,52 +32,23 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.model.support.TestRunListenerAdapter;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestPropertyListener;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.DocumentListenerAdapter;
 import com.eviware.soapui.support.UISupport;
-import com.eviware.soapui.support.components.JComponentInspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.JUndoableTextArea;
-import com.eviware.soapui.support.components.JXToolBar;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.swing.JTableFactory;
 import com.eviware.soapui.support.xml.XmlUtils;
 import com.eviware.soapui.ui.support.ModelItemDesktopPanel;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTextArea;
-import javax.swing.JToggleButton;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -156,7 +122,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         transferStep.addPropertyChangeListener(PropertyTransfersTestStep.TRANSFERS, transferListListener);
     }
 
-    protected void buildUI() {
+    private void buildUI() {
         JSplitPane splitPane = UISupport.createHorizontalSplit();
 
         listModel = createListModel();
@@ -298,7 +264,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return logPanel;
     }
 
-    protected JXToolBar createPropertiesToolbar() {
+    private JXToolBar createPropertiesToolbar() {
         JXToolBar toolbar = UISupport.createSmallToolbar();
         toolbar.addFixed(UISupport.createToolbarButton(new AddAction()));
         deleteButton = UISupport.createToolbarButton(new DeleteAction());
@@ -320,7 +286,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return toolbar;
     }
 
-    protected JXToolBar createConfigToolbar() {
+    private JXToolBar createConfigToolbar() {
         JXToolBar toolbar = UISupport.createToolbar();
 
         toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -342,7 +308,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return toolbar;
     }
 
-    protected JPanel createTransferOptions() {
+    private JPanel createTransferOptions() {
         JPanel panel = new JPanel(new GridLayout(4, 2));
         failTransferCheckBox = new JCheckBox("Fail transfer on error", false);
         failTransferCheckBox.setToolTipText("Fails the Property Transfer Step if an error occurs");
@@ -440,7 +406,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return panel;
     }
 
-    protected JXToolBar createTargetToolbar() {
+    private JXToolBar createTargetToolbar() {
         JXToolBar toolbar;
         toolbar = UISupport.createToolbar();
         toolbar.addSpace(3);
@@ -524,11 +490,11 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return UISupport.addTooltipListener(new JComboBox(transferLanguageModel), context + " Transfer Path Language");
     }
 
-    protected void customizeTargetToolbar(JXToolBar toolbar) {
+    private void customizeTargetToolbar(JXToolBar toolbar) {
         toolbar.addGlue();
     }
 
-    protected JXToolBar createSourceToolbar() {
+    private JXToolBar createSourceToolbar() {
         JXToolBar toolbar = UISupport.createToolbar();
         toolbar.addSpace(3);
         toolbar.addFixed(new JLabel("<html><b>Source: </b></html>"));
@@ -646,223 +612,16 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
         return toolbar;
     }
 
-    protected void customizeSourceToolbar(JXToolBar toolbar) {
+    private void customizeSourceToolbar(JXToolBar toolbar) {
         toolbar.addGlue();
     }
 
-    public PropertyTransfer getCurrentTransfer() {
+    private PropertyTransfer getCurrentTransfer() {
         int ix = transferList.getSelectedIndex();
         return ix == -1 ? null : transferStep.getTransferAt(ix);
     }
 
-    /**
-     * Listen for testStep property changes and update properties combo
-     * accordingly
-     */
-
-    private final class TestStepPropertiesListener implements TestPropertyListener {
-        private final JComboBox combo;
-
-        public TestStepPropertiesListener(JComboBox combo) {
-            this.combo = combo;
-        }
-
-        public void propertyAdded(String name) {
-            TestProperty property = combo == targetPropertyCombo ? getCurrentTransfer().getTargetStep().getProperty(name)
-                    : getCurrentTransfer().getSourceStep().getProperty(name);
-
-            combo.addItem(property);
-            combo.setEnabled(true);
-        }
-
-        public void propertyRemoved(String name) {
-            if (combo.getSelectedItem() != null && ((TestProperty) combo.getSelectedItem()).getName().equals(name)) {
-                combo.setSelectedItem(null);
-            }
-
-            for (int c = 0; c < combo.getItemCount(); c++) {
-                if (((TestProperty) combo.getItemAt(c)).getName().equals(name)) {
-                    combo.removeItemAt(c);
-                    break;
-                }
-            }
-
-            combo.setEnabled(combo.getItemCount() > 0);
-        }
-
-        public void propertyRenamed(String oldName, String newName) {
-        }
-
-        public void propertyValueChanged(String name, String oldValue, String newValue) {
-        }
-
-        public void propertyMoved(String name, int oldIndex, int newIndex) {
-            combo.removeItemAt(oldIndex);
-
-            TestProperty property = combo == targetPropertyCombo ? getCurrentTransfer().getTargetStep().getProperty(name)
-                    : getCurrentTransfer().getSourceStep().getProperty(name);
-
-            combo.insertItemAt(property, newIndex);
-        }
-    }
-
-    /**
-     * Listen for teststep changes and update source/target step combos
-     * accordingly
-     */
-
-    private final class InternalTestSuiteListener extends TestSuiteListenerAdapter {
-        public void testStepAdded(TestStep testStep, int index) {
-            if (testStep.getTestCase() == transferStep.getTestCase()) {
-                sourceStepModel.addElement(testStep);
-                targetStepModel.addElement(testStep);
-            }
-        }
-
-        public void testStepMoved(TestStep testStep, int fromIndex, int offset) {
-            if (testStep.getTestCase() == transferStep.getTestCase()) {
-                String testStepName = testStep.getName();
-                if (sourceStepModel.getIndexOf(testStepName) == fromIndex) {
-                    String sourceStep = (String) sourceStepCombo.getSelectedItem();
-                    String sourceProperty = (String) sourcePropertyCombo.getSelectedItem();
-
-                    sourceStepModel.removeElementAt(fromIndex);
-                    if (fromIndex + offset > sourceStepModel.getSize()) {
-                        sourceStepModel.addElement(testStepName);
-                    } else {
-                        sourceStepModel.insertElementAt(testStepName, fromIndex + offset);
-                    }
-
-                    sourceStepCombo.setSelectedItem(sourceStep);
-                    sourcePropertyCombo.setSelectedItem(sourceProperty);
-                }
-
-                if (targetStepModel.getIndexOf(testStepName) == fromIndex) {
-                    String targetStep = (String) targetStepCombo.getSelectedItem();
-                    String targetProperty = (String) targetPropertyCombo.getSelectedItem();
-
-                    targetStepModel.removeElementAt(fromIndex);
-                    if (fromIndex + offset > targetStepModel.getSize()) {
-                        targetStepModel.addElement(testStepName);
-                    } else {
-                        targetStepModel.insertElementAt(testStepName, fromIndex + offset);
-                    }
-
-                    targetStepCombo.setSelectedItem(targetStep);
-                    targetPropertyCombo.setSelectedItem(targetProperty);
-                }
-            }
-        }
-
-        public void testStepRemoved(TestStep testStep, int index) {
-            if (testStep.getTestCase() == transferStep.getTestCase()) {
-                sourceStepModel.removeElement(testStep);
-                targetStepModel.removeElement(testStep);
-            }
-        }
-    }
-
-    /**
-     * Listen to step selections and update properties combo accordingly
-     */
-
-    private final class StepComboItemListener implements ItemListener {
-        private final JComboBox propertyCombo;
-        private final TestStepPropertiesListener testStepPropertiesListener;
-
-        public StepComboItemListener(final JComboBox propertyCombo, TestStepPropertiesListener testStepPropertiesListener) {
-            this.propertyCombo = propertyCombo;
-            this.testStepPropertiesListener = testStepPropertiesListener;
-        }
-
-        public void itemStateChanged(ItemEvent e) {
-            if (e.getStateChange() == ItemEvent.SELECTED) {
-                TestPropertyHolder selectedItem = (TestPropertyHolder) e.getItem();
-                String[] propertyNames = selectedItem.getPropertyNames();
-
-                // remove read-only properties from target property
-                if (propertyCombo == targetPropertyCombo) {
-                    List<String> names = new ArrayList<String>();
-                    for (String name : propertyNames) {
-                        TestProperty property = selectedItem.getProperty(name);
-                        if (property != null && !property.isReadOnly()) {
-                            names.add(property.getName());
-                        }
-                    }
-
-                    propertyNames = names.toArray(new String[names.size()]);
-                }
-
-                DefaultComboBoxModel model = new DefaultComboBoxModel();
-                for (String name : propertyNames) {
-                    model.addElement(selectedItem.getProperty(name));
-                }
-
-                propertyCombo.setModel(model);
-                propertyCombo.setEnabled(propertyNames.length > 0);
-
-                if (propertyCombo == targetPropertyCombo) {
-                    propertyCombo.setSelectedItem(getCurrentTransfer().getTargetProperty());
-                } else {
-                    propertyCombo.setSelectedItem(getCurrentTransfer().getSourceProperty());
-                }
-
-                selectedItem.addTestPropertyListener(testStepPropertiesListener);
-            } else {
-                propertyCombo.removeAllItems();
-                propertyCombo.setEnabled(false);
-            }
-        }
-    }
-
-    /**
-     * Handle updates to source path
-     */
-
-    private final class SourceAreaDocumentListener extends DocumentListenerAdapter {
-        public void update(Document document) {
-            int ix = transferList.getSelectedIndex();
-            if (ix != -1) {
-                transferStep.getTransferAt(ix).setSourcePath(sourceArea.getText());
-            }
-        }
-    }
-
-    /**
-     * Handle updates to target path
-     */
-
-    private final class TargetAreaDocumentListener extends DocumentListenerAdapter {
-        public void update(Document document) {
-            int ix = transferList.getSelectedIndex();
-            if (ix != -1) {
-                transferStep.getTransferAt(ix).setTargetPath(targetArea.getText());
-            }
-        }
-    }
-
-    /**
-     * Listen to selection changes in transfer list and update controls
-     * accordingly
-     */
-
-    private final class TransferListSelectionListener implements ListSelectionListener {
-        private PropertyTransfer transfer;
-
-        public void valueChanged(ListSelectionEvent e) {
-            selecting = true;
-
-            if (transfer != null) {
-                transfer.removePropertyChangeListener(transferPropertyChangeListener);
-            }
-
-            transfer = getCurrentTransfer();
-            setSelectedTransfer(transfer);
-            selecting = false;
-        }
-    }
-
-    protected void setSelectedTransfer(PropertyTransfer transfer) {
+    private void setSelectedTransfer(PropertyTransfer transfer) {
         if (transfer == null) {
             sourceArea.setText("");
             targetArea.setText("");
@@ -924,6 +683,213 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     /**
+     * Listen for teststep changes and update source/target step combos
+     * accordingly
+     */
+
+    private final class InternalTestSuiteListener extends TestSuiteListenerAdapter {
+        public void testStepAdded(TestStep testStep, int index) {
+            if (testStep.getTestCase() == transferStep.getTestCase()) {
+                sourceStepModel.addElement(testStep);
+                targetStepModel.addElement(testStep);
+            }
+        }
+
+        public void testStepMoved(TestStep testStep, int fromIndex, int offset) {
+            if (testStep.getTestCase() == transferStep.getTestCase()) {
+                String testStepName = testStep.getName();
+                if (sourceStepModel.getIndexOf(testStepName) == fromIndex) {
+                    String sourceStep = (String) sourceStepCombo.getSelectedItem();
+                    String sourceProperty = (String) sourcePropertyCombo.getSelectedItem();
+
+                    sourceStepModel.removeElementAt(fromIndex);
+                    if (fromIndex + offset > sourceStepModel.getSize()) {
+                        sourceStepModel.addElement(testStepName);
+                    } else {
+                        sourceStepModel.insertElementAt(testStepName, fromIndex + offset);
+                    }
+
+                    sourceStepCombo.setSelectedItem(sourceStep);
+                    sourcePropertyCombo.setSelectedItem(sourceProperty);
+                }
+
+                if (targetStepModel.getIndexOf(testStepName) == fromIndex) {
+                    String targetStep = (String) targetStepCombo.getSelectedItem();
+                    String targetProperty = (String) targetPropertyCombo.getSelectedItem();
+
+                    targetStepModel.removeElementAt(fromIndex);
+                    if (fromIndex + offset > targetStepModel.getSize()) {
+                        targetStepModel.addElement(testStepName);
+                    } else {
+                        targetStepModel.insertElementAt(testStepName, fromIndex + offset);
+                    }
+
+                    targetStepCombo.setSelectedItem(targetStep);
+                    targetPropertyCombo.setSelectedItem(targetProperty);
+                }
+            }
+        }
+
+        public void testStepRemoved(TestStep testStep, int index) {
+            if (testStep.getTestCase() == transferStep.getTestCase()) {
+                sourceStepModel.removeElement(testStep);
+                targetStepModel.removeElement(testStep);
+            }
+        }
+    }
+
+    /**
+     * Listen for testStep property changes and update properties combo
+     * accordingly
+     */
+
+    private final class TestStepPropertiesListener implements TestPropertyListener {
+        private final JComboBox combo;
+
+        TestStepPropertiesListener(JComboBox combo) {
+            this.combo = combo;
+        }
+
+        public void propertyAdded(String name) {
+            TestProperty property = combo == targetPropertyCombo ? getCurrentTransfer().getTargetStep().getProperty(name)
+                    : getCurrentTransfer().getSourceStep().getProperty(name);
+
+            combo.addItem(property);
+            combo.setEnabled(true);
+        }
+
+        public void propertyRemoved(String name) {
+            if (combo.getSelectedItem() != null && ((TestProperty) combo.getSelectedItem()).getName().equals(name)) {
+                combo.setSelectedItem(null);
+            }
+
+            for (int c = 0; c < combo.getItemCount(); c++) {
+                if (((TestProperty) combo.getItemAt(c)).getName().equals(name)) {
+                    combo.removeItemAt(c);
+                    break;
+                }
+            }
+
+            combo.setEnabled(combo.getItemCount() > 0);
+        }
+
+        public void propertyRenamed(String oldName, String newName) {
+        }
+
+        public void propertyValueChanged(String name, String oldValue, String newValue) {
+        }
+
+        public void propertyMoved(String name, int oldIndex, int newIndex) {
+            combo.removeItemAt(oldIndex);
+
+            TestProperty property = combo == targetPropertyCombo ? getCurrentTransfer().getTargetStep().getProperty(name)
+                    : getCurrentTransfer().getSourceStep().getProperty(name);
+
+            combo.insertItemAt(property, newIndex);
+        }
+    }
+
+    /**
+     * Handle updates to source path
+     */
+
+    private final class SourceAreaDocumentListener extends DocumentListenerAdapter {
+        public void update(Document document) {
+            int ix = transferList.getSelectedIndex();
+            if (ix != -1) {
+                transferStep.getTransferAt(ix).setSourcePath(sourceArea.getText());
+            }
+        }
+    }
+
+    /**
+     * Handle updates to target path
+     */
+
+    private final class TargetAreaDocumentListener extends DocumentListenerAdapter {
+        public void update(Document document) {
+            int ix = transferList.getSelectedIndex();
+            if (ix != -1) {
+                transferStep.getTransferAt(ix).setTargetPath(targetArea.getText());
+            }
+        }
+    }
+
+    /**
+     * Listen to selection changes in transfer list and update controls
+     * accordingly
+     */
+
+    private final class TransferListSelectionListener implements ListSelectionListener {
+        private PropertyTransfer transfer;
+
+        public void valueChanged(ListSelectionEvent e) {
+            selecting = true;
+
+            if (transfer != null) {
+                transfer.removePropertyChangeListener(transferPropertyChangeListener);
+            }
+
+            transfer = getCurrentTransfer();
+            setSelectedTransfer(transfer);
+            selecting = false;
+        }
+    }
+
+    /**
+     * Listen to step selections and update properties combo accordingly
+     */
+
+    private final class StepComboItemListener implements ItemListener {
+        private final JComboBox propertyCombo;
+        private final TestStepPropertiesListener testStepPropertiesListener;
+
+        StepComboItemListener(final JComboBox propertyCombo, TestStepPropertiesListener testStepPropertiesListener) {
+            this.propertyCombo = propertyCombo;
+            this.testStepPropertiesListener = testStepPropertiesListener;
+        }
+
+        public void itemStateChanged(ItemEvent e) {
+            if (e.getStateChange() == ItemEvent.SELECTED) {
+                TestPropertyHolder selectedItem = (TestPropertyHolder) e.getItem();
+                String[] propertyNames = selectedItem.getPropertyNames();
+
+                // remove read-only properties from target property
+                if (propertyCombo == targetPropertyCombo) {
+                    List<String> names = new ArrayList<String>();
+                    for (String name : propertyNames) {
+                        TestProperty property = selectedItem.getProperty(name);
+                        if (property != null && !property.isReadOnly()) {
+                            names.add(property.getName());
+                        }
+                    }
+
+                    propertyNames = names.toArray(new String[names.size()]);
+                }
+
+                DefaultComboBoxModel model = new DefaultComboBoxModel();
+                for (String name : propertyNames) {
+                    model.addElement(selectedItem.getProperty(name));
+                }
+
+                propertyCombo.setModel(model);
+                propertyCombo.setEnabled(propertyNames.length > 0);
+
+                if (propertyCombo == targetPropertyCombo) {
+                    propertyCombo.setSelectedItem(getCurrentTransfer().getTargetProperty());
+                } else {
+                    propertyCombo.setSelectedItem(getCurrentTransfer().getSourceProperty());
+                }
+
+                selectedItem.addTestPropertyListener(testStepPropertiesListener);
+            } else {
+                propertyCombo.removeAllItems();
+                propertyCombo.setEnabled(false);
+            }
+        }
+    }
+
+    /**
      * Listen to property changes and update UI objects. These may have been
      * triggered by UI so first check for actual difference so we dont end up in
      * loop.
@@ -970,7 +936,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class AddAction extends AbstractAction {
-        public AddAction() {
+        AddAction() {
             putValue(Action.SHORT_DESCRIPTION, "Adds a new Property Transfer");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
         }
@@ -989,7 +955,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class CopyAction extends AbstractAction {
-        public CopyAction() {
+        CopyAction() {
             putValue(Action.SHORT_DESCRIPTION, "Copies the selected Property Transfer");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clone.png"));
         }
@@ -1029,7 +995,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class DeleteAction extends AbstractAction {
-        public DeleteAction() {
+        DeleteAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Deletes the selected Property Transfer");
         }
@@ -1049,7 +1015,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class ClearLogAction extends AbstractAction {
-        public ClearLogAction() {
+        ClearLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clear.png"));
             putValue(Action.SHORT_DESCRIPTION, "Clears the property-transfer log");
         }
@@ -1060,7 +1026,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class RenameAction extends AbstractAction {
-        public RenameAction() {
+        RenameAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/rename.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Renames the selected Property Transfer");
         }
@@ -1078,7 +1044,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class DisableAction extends AbstractAction {
-        public DisableAction() {
+        DisableAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/bullet_green.png"));
             putValue(Action.SHORT_DESCRIPTION, "Disables the selected Property Transfer");
         }
@@ -1097,7 +1063,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class DeclareNamespacesAction extends AbstractAction {
-        public DeclareNamespacesAction() {
+        DeclareNamespacesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/declareNs.gif"));
             putValue(Action.SHORT_DESCRIPTION,
                     "Declare available response/request namespaces in source/target expressions");
@@ -1131,7 +1097,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class RunAllAction extends AbstractAction {
-        public RunAllAction() {
+        RunAllAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run_all.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs all Property Transfers");
         }
@@ -1155,7 +1121,7 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
     }
 
     private final class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs selected PropertyTransfer");
         }
@@ -1247,13 +1213,13 @@ public class PropertyTransfersDesktopPanel extends ModelItemDesktopPanel<Propert
             return sum;
         }
 
-        public synchronized void clear() {
+        synchronized void clear() {
             results.clear();
             fireTableDataChanged();
             logInspector.setTitle("Transfer Log (0)");
         }
 
-        public void addResult(PropertyTransfersTestStep.PropertyTransferResult result) {
+        void addResult(PropertyTransfersTestStep.PropertyTransferResult result) {
             int rowCount;
             synchronized (this) {
                 rowCount = getRowCount();

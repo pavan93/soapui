@@ -28,9 +28,9 @@ import com.eviware.soapui.impl.wadl.inference.schema.Type;
  * @author Dain Nilsson
  */
 public class TypeReferenceType implements Type {
-    String name;
-    String namespace;
-    SchemaSystem schemaSystem;
+    private String name;
+    private String namespace;
+    private SchemaSystem schemaSystem;
 
     /**
      * Constructs a new TypeReferenceType from previously saved data. Should be

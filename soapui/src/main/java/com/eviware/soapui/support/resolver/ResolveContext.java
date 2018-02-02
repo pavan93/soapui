@@ -69,7 +69,7 @@ public class ResolveContext<T extends AbstractWsdlModelItem<?>> {
         private Resolver resolver;
         private boolean resolved;
 
-        public PathToResolve(AbstractWsdlModelItem<?> owner, String description, String path) {
+        PathToResolve(AbstractWsdlModelItem<?> owner, String description, String path) {
             this.owner = owner;
             this.description = description;
             this.path = path;
@@ -89,7 +89,7 @@ public class ResolveContext<T extends AbstractWsdlModelItem<?>> {
             return description;
         }
 
-        public Resolver getResolver() {
+        Resolver getResolver() {
             return resolver;
         }
 

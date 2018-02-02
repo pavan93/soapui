@@ -63,7 +63,7 @@ public class WssInspectorFactory implements RequestInspectorFactory, ResponseIns
             PropertyChangeListener {
         private final WsdlMockResponse response;
 
-        public WsdlMockRequestWssInspector(WsdlMockResponse response) {
+        WsdlMockRequestWssInspector(WsdlMockResponse response) {
             this.response = response;
 
             response.addPropertyChangeListener(WsdlMockResponse.MOCKRESULT_PROPERTY, this);
@@ -88,7 +88,7 @@ public class WssInspectorFactory implements RequestInspectorFactory, ResponseIns
             PropertyChangeListener {
         private final MessageExchangeModelItem item;
 
-        public RequestMessageExchangeWssInspector(MessageExchangeModelItem item) {
+        RequestMessageExchangeWssInspector(MessageExchangeModelItem item) {
             this.item = item;
 
             item.addPropertyChangeListener(MessageExchangeModelItem.MESSAGE_EXCHANGE, this);
@@ -113,7 +113,7 @@ public class WssInspectorFactory implements RequestInspectorFactory, ResponseIns
     public class WsdlResponseWssInspector extends AbstractWssInspector implements XmlInspector, PropertyChangeListener {
         private final WsdlRequest response;
 
-        public WsdlResponseWssInspector(WsdlRequest response) {
+        WsdlResponseWssInspector(WsdlRequest response) {
             this.response = response;
 
             response.addPropertyChangeListener(WsdlRequest.RESPONSE_PROPERTY, this);
@@ -138,7 +138,7 @@ public class WssInspectorFactory implements RequestInspectorFactory, ResponseIns
             PropertyChangeListener {
         private final MessageExchangeModelItem item;
 
-        public ResponseMessageExchangeWssInspector(MessageExchangeModelItem item) {
+        ResponseMessageExchangeWssInspector(MessageExchangeModelItem item) {
             this.item = item;
 
             item.addPropertyChangeListener(MessageExchangeModelItem.MESSAGE_EXCHANGE, this);

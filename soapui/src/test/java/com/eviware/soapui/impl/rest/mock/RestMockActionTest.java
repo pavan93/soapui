@@ -38,10 +38,10 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class RestMockActionTest {
-    RestMockRequest restMockRequest;
-    RestMockAction mockAction;
+    private RestMockRequest restMockRequest;
+    private RestMockAction mockAction;
 
-    RestMockResponse mockResponse;
+    private RestMockResponse mockResponse;
 
 
     @Before

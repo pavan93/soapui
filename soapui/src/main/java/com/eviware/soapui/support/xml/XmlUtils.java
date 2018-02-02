@@ -83,7 +83,7 @@ public final class XmlUtils {
         return xml.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll("'", "&apos;");
     }
 
-    static synchronized public Document parse(InputSource inputSource) throws IOException {
+    private static synchronized Document parse(InputSource inputSource) throws IOException {
         try {
             return ensureDocumentBuilder().parse(inputSource);
         } catch (SAXException e) {
@@ -232,7 +232,7 @@ public final class XmlUtils {
         serialize(dom.getDocumentElement(), writer);
     }
 
-    public static void serialize(Element elm, Writer writer) throws IOException {
+    private static void serialize(Element elm, Writer writer) throws IOException {
         try {
             XmlObject xmlObject = XmlObject.Factory.parse(elm);
             xmlObject.save(writer);
@@ -268,7 +268,7 @@ public final class XmlUtils {
         }
     }
 
-    public static String getChildElementText(Element elm, String name) {
+    private static String getChildElementText(Element elm, String name) {
         Element child = getFirstChildElement(elm, name);
         return child == null ? null : getElementText(child);
     }
@@ -346,7 +346,7 @@ public final class XmlUtils {
         return null;
     }
 
-    static public String getFragmentText(DocumentFragment elm) {
+    private static String getFragmentText(DocumentFragment elm) {
         Node node = elm.getFirstChild();
         if (node != null && node.getNodeType() == Node.TEXT_NODE) {
             return node.getNodeValue();
@@ -595,7 +595,7 @@ public final class XmlUtils {
         return buf.toString();
     }
 
-    public static String createXPath(Node domNode, boolean normalize) {
+    private static String createXPath(Node domNode, boolean normalize) {
         return createXPath(domNode, false, false, false, null, normalize);
     }
 
@@ -616,8 +616,8 @@ public final class XmlUtils {
         return createXPath(node, anonymous, selectText, absolute, modifier, false);
     }
 
-    public static String createXPath(Node node, boolean anonymous, boolean selectText, boolean absolute,
-                                     XPathModifier modifier, boolean normalize) {
+    private static String createXPath(Node node, boolean anonymous, boolean selectText, boolean absolute,
+                                      XPathModifier modifier, boolean normalize) {
         XPathData xpathData = createXPathData(node, anonymous, selectText, absolute, normalize);
         if (xpathData == null) {
             return null;
@@ -629,8 +629,8 @@ public final class XmlUtils {
         return createXPathData(node, anonymous, selectText, absolute, false);
     }
 
-    public static XPathData createXPathData(Node node, boolean anonymous, boolean selectText, boolean absolute,
-                                            boolean normalize) {
+    private static XPathData createXPathData(Node node, boolean anonymous, boolean selectText, boolean absolute,
+                                             boolean normalize) {
         StringToStringMap nsMap = new StringToStringMap();
         List<String> pathComponents = new ArrayList<String>();
 
@@ -949,7 +949,7 @@ public final class XmlUtils {
         return getChildElementsByTagNameNS(elm, name.getNamespaceURI(), name.getLocalPart());
     }
 
-    public static NodeList getChildElementsByTagNameNS(Element elm, String namespaceUri, String localName) {
+    private static NodeList getChildElementsByTagNameNS(Element elm, String namespaceUri, String localName) {
         List<Element> list = new ArrayList<Element>();
 
         NodeList nl = elm.getChildNodes();
@@ -1096,7 +1096,7 @@ public final class XmlUtils {
         return stringValue;
     }
 
-    public static boolean hasContentAttributes(Element elm) {
+    private static boolean hasContentAttributes(Element elm) {
         NamedNodeMap attributes = elm.getAttributes();
         for (int c = 0; c < attributes.getLength(); c++) {
             Node item = attributes.item(c);
@@ -1182,20 +1182,46 @@ public final class XmlUtils {
         return result.toArray(new Node[result.size()]);
     }
 
-    private final static class ElementNodeList implements NodeList {
-        private final List<Element> list;
+    private static Document addResultSetXmlPart(Element resultsElement, ResultSet rs, Document xmlDocumentResult, boolean uppercase)
+            throws SQLException {
+        final String TABLE_COLUMN_DELIMITER = ".";
+        ResultSetMetaData rsmd = rs.getMetaData();
+        Element resultSetElement = xmlDocumentResult.createElement("ResultSet");
 
-        public ElementNodeList(List<Element> list) {
-            this.list = list;
-        }
+        resultSetElement.setAttribute("fetchSize", String.valueOf(rs.getFetchSize()));
+        resultsElement.appendChild(resultSetElement);
 
-        public int getLength() {
-            return list.size();
-        }
+        int colCount = rsmd.getColumnCount();
+        while (rs.next()) {
+            Element rowElement = xmlDocumentResult.createElement("Row");
+            rowElement.setAttribute("rowNumber", String.valueOf(rs.getRow()));
 
-        public Node item(int index) {
-            return list.get(index);
+            resultsElement.appendChild(rowElement);
+            for (int i = 1; i <= colCount; i++) {
+                StringBuffer resultColumnName = new StringBuffer();
+                String tableName = rsmd.getTableName(i);
+                String columnName = rsmd.getColumnName(i);
+                if (uppercase) {
+                    tableName = tableName.toUpperCase();
+                    columnName = columnName.toUpperCase();
+                }
+                if (StringUtils.hasContent(tableName)) {
+                    resultColumnName.append(tableName);
+                    resultColumnName.append(TABLE_COLUMN_DELIMITER);
+                }
+                resultColumnName.append(columnName);
+                String xmlName = StringUtils.createXmlName(resultColumnName.toString());
+                Element node = xmlDocumentResult.createElement(xmlName);
+                String value = rs.getString(i);
+                if (StringUtils.hasContent(value)) {
+                    Text textNode = xmlDocumentResult.createTextNode(value);
+                    node.appendChild(textNode);
+                }
+                rowElement.appendChild(node);
+            }
+            resultSetElement.appendChild(rowElement);
         }
+        return xmlDocumentResult;
     }
 
     public static boolean seemsToBeXml(String str) {
@@ -1378,46 +1404,20 @@ public final class XmlUtils {
         return out.toString();
     }
 
-    public static Document addResultSetXmlPart(Element resultsElement, ResultSet rs, Document xmlDocumentResult, boolean uppercase)
-            throws SQLException {
-        final String TABLE_COLUMN_DELIMITER = ".";
-        ResultSetMetaData rsmd = rs.getMetaData();
-        Element resultSetElement = xmlDocumentResult.createElement("ResultSet");
+    private final static class ElementNodeList implements NodeList {
+        private final List<Element> list;
 
-        resultSetElement.setAttribute("fetchSize", String.valueOf(rs.getFetchSize()));
-        resultsElement.appendChild(resultSetElement);
-
-        int colCount = rsmd.getColumnCount();
-        while (rs.next()) {
-            Element rowElement = xmlDocumentResult.createElement("Row");
-            rowElement.setAttribute("rowNumber", String.valueOf(rs.getRow()));
-
-            resultsElement.appendChild(rowElement);
-            for (int i = 1; i <= colCount; i++) {
-                StringBuffer resultColumnName = new StringBuffer();
-                String tableName = rsmd.getTableName(i);
-                String columnName = rsmd.getColumnName(i);
-                if (uppercase) {
-                    tableName = tableName.toUpperCase();
-                    columnName = columnName.toUpperCase();
-                }
-                if (StringUtils.hasContent(tableName)) {
-                    resultColumnName.append(tableName);
-                    resultColumnName.append(TABLE_COLUMN_DELIMITER);
-                }
-                resultColumnName.append(columnName);
-                String xmlName = StringUtils.createXmlName(resultColumnName.toString());
-                Element node = xmlDocumentResult.createElement(xmlName);
-                String value = rs.getString(i);
-                if (StringUtils.hasContent(value)) {
-                    Text textNode = xmlDocumentResult.createTextNode(value);
-                    node.appendChild(textNode);
-                }
-                rowElement.appendChild(node);
-            }
-            resultSetElement.appendChild(rowElement);
+        ElementNodeList(List<Element> list) {
+            this.list = list;
         }
-        return xmlDocumentResult;
+
+        public int getLength() {
+            return list.size();
+        }
+
+        public Node item(int index) {
+            return list.get(index);
+        }
     }
 
 }

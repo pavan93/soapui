@@ -20,7 +20,7 @@ import com.google.common.base.Preconditions;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.swing.JComponent;
+import javax.swing.*;
 
 /**
  * A wrapper class to accociate
@@ -35,7 +35,7 @@ public final class PropertyComponent {
         this(null, component);
     }
 
-    public PropertyComponent(String property, JComponent component) {
+    private PropertyComponent(String property, JComponent component) {
         this.property = property;
 
         Preconditions.checkNotNull("You must provide a component", component);

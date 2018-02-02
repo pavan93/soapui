@@ -32,7 +32,7 @@ import java.awt.event.ActionEvent;
  * @author Ole.Matzura
  */
 
-public class CreateRequestAction extends AbstractAction {
+class CreateRequestAction extends AbstractAction {
     private final WsdlTestRequestStepResult result;
 
     public CreateRequestAction(WsdlTestStepResult result) {

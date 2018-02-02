@@ -160,7 +160,7 @@ public class AMFTestStepResult extends WsdlTestStepResult implements AssertedXPa
         return request.getEndpoint();
     }
 
-    public AMFRequest getRequest() {
+    private AMFRequest getRequest() {
         return request;
     }
 

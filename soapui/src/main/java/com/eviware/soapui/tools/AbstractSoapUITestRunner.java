@@ -21,11 +21,7 @@ import com.eviware.soapui.impl.support.http.HttpRequestTestStep;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlRunTestCaseTestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestRequest;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunListener;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.Tools;
 
@@ -38,7 +34,7 @@ public abstract class AbstractSoapUITestRunner extends AbstractSoapUIRunner impl
     private String wssPasswordType;
     private String projectPassword;
 
-    public AbstractSoapUITestRunner(String title) {
+    AbstractSoapUITestRunner(String title) {
         super(title);
     }
 
@@ -137,7 +133,7 @@ public abstract class AbstractSoapUITestRunner extends AbstractSoapUIRunner impl
         return wssPasswordType;
     }
 
-    protected void prepareRequestStep(HttpRequestTestStep requestStep) {
+    private void prepareRequestStep(HttpRequestTestStep requestStep) {
         AbstractHttpRequest<?> httpRequest = requestStep.getHttpRequest();
         if (StringUtils.hasContent(endpoint)) {
             httpRequest.setEndpoint(endpoint);

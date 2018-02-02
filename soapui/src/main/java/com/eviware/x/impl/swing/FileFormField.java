@@ -27,11 +27,7 @@ import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JFileChooser;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.Document;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -122,10 +118,10 @@ public class FileFormField extends AbstractSwingXFormField<JPanel> implements XF
         this.currentDirectory = currentDirectory;
     }
 
-    public class SelectDirectoryAction extends AbstractAction {
+    class SelectDirectoryAction extends AbstractAction {
         private JFileChooser fileChooser;
 
-        public SelectDirectoryAction() {
+        SelectDirectoryAction() {
             super("Browse...");
         }
 

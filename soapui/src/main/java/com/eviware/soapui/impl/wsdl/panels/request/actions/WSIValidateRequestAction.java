@@ -46,7 +46,7 @@ import java.util.List;
  */
 
 public class WSIValidateRequestAction extends AbstractToolsAction<WsdlRequest> {
-    public final static Logger log = Logger.getLogger(WSIValidateRequestAction.class);
+    private final static Logger log = Logger.getLogger(WSIValidateRequestAction.class);
     private String configFile;
     private File logFile;
     private String wsiDir;
@@ -256,7 +256,7 @@ public class WSIValidateRequestAction extends AbstractToolsAction<WsdlRequest> {
         private final File reportFile;
         private final WsdlRequest modelItem;
 
-        public WSIProcessToolRunner(ProcessBuilder builder, File reportFile, WsdlRequest modelItem) {
+        WSIProcessToolRunner(ProcessBuilder builder, File reportFile, WsdlRequest modelItem) {
             super(builder, "WSI Message Validation", modelItem);
             this.reportFile = reportFile;
             this.modelItem = modelItem;

@@ -38,9 +38,7 @@ import org.apache.ws.security.message.WSSecEncrypt;
 import org.apache.ws.security.message.WSSecHeader;
 import org.w3c.dom.Document;
 
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.StringWriter;
@@ -149,7 +147,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveTableValues(builder, parts, "encryptionPart");
     }
 
-    public String getEmbeddedKeyName() {
+    private String getEmbeddedKeyName() {
         return embeddedKeyName;
     }
 
@@ -158,7 +156,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public String getEmbeddedKeyPassword() {
+    private String getEmbeddedKeyPassword() {
         return embeddedKeyPassword;
     }
 
@@ -167,7 +165,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public String getEncKeyTransport() {
+    private String getEncKeyTransport() {
         return StringUtils.isNullOrEmpty(encKeyTransport) ? DEFAULT_OPTION : encKeyTransport;
     }
 
@@ -193,7 +191,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public boolean isEncryptSymmetricKey() {
+    private boolean isEncryptSymmetricKey() {
         return encryptSymmetricKey;
     }
 
@@ -202,7 +200,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public int getKeyIdentifierType() {
+    private int getKeyIdentifierType() {
         return keyIdentifierType;
     }
 
@@ -216,7 +214,7 @@ public class EncryptionEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public String getSymmetricEncAlgorithm() {
+    private String getSymmetricEncAlgorithm() {
         return StringUtils.isNullOrEmpty(symmetricEncAlgorithm) ? DEFAULT_OPTION : symmetricEncAlgorithm;
     }
 
@@ -299,7 +297,7 @@ public class EncryptionEntry extends WssEntryBase {
         super.addPropertyExpansions(result);
     }
 
-    public String getCrypto() {
+    private String getCrypto() {
         return crypto;
     }
 

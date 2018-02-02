@@ -61,7 +61,7 @@ public class InspectorRegistry implements SoapUIFactoryRegistryListener {
         return instance;
     }
 
-    public void removeFactory(InspectorFactory factory) {
+    private void removeFactory(InspectorFactory factory) {
         factories.remove(factory);
     }
 

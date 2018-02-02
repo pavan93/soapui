@@ -93,11 +93,11 @@ public class PropertyExpansionImpl implements PropertyExpansion {
         this.containerInfo = containerInfo;
     }
 
-    protected void setProperty(TestProperty property) {
+    void setProperty(TestProperty property) {
         this.property = property;
     }
 
-    protected void setXPath(String xpath) {
+    void setXPath(String xpath) {
         this.xpath = xpath;
     }
 }

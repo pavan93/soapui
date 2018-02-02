@@ -233,7 +233,7 @@ public class OAuth2TokenExtractorTest {
 
         OAuthClientRequest oAuthClientRequest;
 
-        public SpyingOauthClientStub() {
+        SpyingOauthClientStub() {
             super(new HttpClient4());
         }
 

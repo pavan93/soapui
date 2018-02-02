@@ -24,11 +24,7 @@ import com.eviware.soapui.model.mock.MockOperation;
 import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.model.mock.MockService;
 import com.eviware.soapui.model.project.Project;
-import com.eviware.soapui.model.support.InterfaceListenerAdapter;
-import com.eviware.soapui.model.support.MockServiceListenerAdapter;
-import com.eviware.soapui.model.support.ProjectListenerAdapter;
-import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.support.WorkspaceListenerAdapter;
+import com.eviware.soapui.model.support.*;
 import com.eviware.soapui.model.testsuite.LoadTest;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestStep;
@@ -37,7 +33,7 @@ import com.eviware.soapui.model.workspace.Workspace;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.support.action.swing.ActionList;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -56,7 +52,7 @@ public abstract class AbstractSoapUIDesktop implements SoapUIDesktop {
     private Set<DesktopListener> listeners = new HashSet<DesktopListener>();
     private InternalWorkspaceListener workspaceListener = new InternalWorkspaceListener();
 
-    public AbstractSoapUIDesktop(Workspace workspace) {
+    protected AbstractSoapUIDesktop(Workspace workspace) {
         this.workspace = workspace;
 
         initListeners();

@@ -129,12 +129,12 @@ public class PluginLoaderTest {
 
     @PluginConfiguration(groupId = "com.smartbear.ready", name = "Time warp plugin", version = "0.1",
             minimumReadyApiVersion = "99.0.0", autoDetect = false)
-    public static class ScienceFictionPlugin extends PluginAdapter {
+    private static class ScienceFictionPlugin extends PluginAdapter {
 
     }
 
     @PluginConfiguration(groupId = "com.smartbear.ready", name = "Down to earth plugin", version = "0.1", autoDetect = false)
-    public static class VanillaPlugin extends PluginAdapter {
+    private static class VanillaPlugin extends PluginAdapter {
 
     }
 
@@ -158,7 +158,7 @@ public class PluginLoaderTest {
     private static class AwareAction extends AbstractSoapUIAction implements PluginAware {
         private Plugin plugin;
 
-        public AwareAction() {
+        AwareAction() {
             super("AwareAction", "An Aware Action");
         }
 

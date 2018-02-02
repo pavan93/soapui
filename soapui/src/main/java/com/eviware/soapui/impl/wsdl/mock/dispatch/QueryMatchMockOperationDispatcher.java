@@ -40,24 +40,10 @@ import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
-import javax.swing.Action;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -81,7 +67,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     private JButton declareNsButton = new JButton(new DeclareNamespacesAction());
     private JButton extractFromCurrentButton = new JButton(new ExtractFromCurrentAction());
 
-    public QueryMatchMockOperationDispatcher(MockOperation mockOperation) {
+    private QueryMatchMockOperationDispatcher(MockOperation mockOperation) {
         super(mockOperation);
 
         try {
@@ -116,7 +102,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return true;
     }
 
-    protected Component buildQueryListComponent() {
+    private Component buildQueryListComponent() {
         JPanel panel = new JPanel(new BorderLayout());
 
         queryItemListModel = new QueryItemListModel();
@@ -135,7 +121,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return panel;
     }
 
-    protected void setEnabled() {
+    private void setEnabled() {
         QueryMatchMockOperationDispatcher.Query bean = queryDetailFormPresentationModel.getBean();
 
         detailForm.setEnabled(bean != null);
@@ -172,7 +158,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return toolbar;
     }
 
-    protected Component buildQueryDetailComponent() {
+    private Component buildQueryDetailComponent() {
         queryDetailFormPresentationModel = new PresentationModel<Query>(null);
         detailForm = new SimpleBindingForm(queryDetailFormPresentationModel);
 
@@ -190,7 +176,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return new JScrollPane(detailForm.getPanel());
     }
 
-    protected JXToolBar buildQueryToolbar() {
+    private JXToolBar buildQueryToolbar() {
         JXToolBar toolBar = UISupport.createSmallToolbar();
 
         addQueryToolbarActions(toolBar);
@@ -202,7 +188,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return toolBar;
     }
 
-    protected void addQueryToolbarActions(JXToolBar toolBar) {
+    private void addQueryToolbarActions(JXToolBar toolBar) {
         toolBar.addFixed(declareNsButton);
         toolBar.addFixed(extractFromCurrentButton);
     }
@@ -301,7 +287,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return queries.toArray(new Query[queries.size()]);
     }
 
-    public int getQueryCount() {
+    private int getQueryCount() {
         return queries.size();
     }
 
@@ -315,7 +301,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         return null;
     }
 
-    public Query getQueryAt(int index) {
+    private Query getQueryAt(int index) {
         return queries.get(index);
     }
 
@@ -331,25 +317,33 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         }
     }
 
+    private Query getSelectedQuery() {
+        return queryDetailFormPresentationModel == null ? null : queryDetailFormPresentationModel.getBean();
+    }
+
+    private void saveConfig() {
+        ((WsdlMockOperation) getMockOperation()).getConfig().getDispatchConfig().set(conf);
+    }
+
     public class Query extends AbstractPropertyChangeNotifier {
         private MockOperationQueryMatchDispatchConfig.Query config;
 
-        protected Query(MockOperationQueryMatchDispatchConfig.Query config) {
+        Query(MockOperationQueryMatchDispatchConfig.Query config) {
             this.config = config;
         }
 
-        public String getName() {
+        String getName() {
             return config.getName();
         }
 
-        public void setName(String s) {
+        void setName(String s) {
             String old = config.getName();
             config.setName(s);
             saveConfig();
             firePropertyChange("name", old, s);
         }
 
-        public boolean isDisabled() {
+        boolean isDisabled() {
             return config.getDisabled();
         }
 
@@ -364,7 +358,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
             queryItemListModel.refresh();
         }
 
-        public String getQuery() {
+        String getQuery() {
             return config.getQuery();
         }
 
@@ -375,7 +369,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
             firePropertyChange("query", old, s);
         }
 
-        public String getMatch() {
+        String getMatch() {
             return config.getMatch();
         }
 
@@ -386,7 +380,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
             firePropertyChange("match", old, s);
         }
 
-        public String getResponse() {
+        String getResponse() {
             return config.getResponse();
         }
 
@@ -395,32 +389,6 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
             config.setResponse(s);
             saveConfig();
             firePropertyChange("response", old, s);
-        }
-    }
-
-    private void saveConfig() {
-        ((WsdlMockOperation) getMockOperation()).getConfig().getDispatchConfig().set(conf);
-    }
-
-    private class QueryItemListModel extends AbstractListModel {
-        public int getSize() {
-            return getQueryCount();
-        }
-
-        public Object getElementAt(int index) {
-            return getQueryAt(index);
-        }
-
-        public void refresh() {
-            fireContentsChanged(this, 0, getQueryCount());
-        }
-
-        public void fireAdded() {
-            fireIntervalAdded(this, getQueryCount(), getQueryCount());
-        }
-
-        public void fireRemoved(int index) {
-            fireIntervalRemoved(this, index, index);
         }
     }
 
@@ -446,12 +414,30 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
         }
     }
 
-    protected Query getSelectedQuery() {
-        return queryDetailFormPresentationModel == null ? null : queryDetailFormPresentationModel.getBean();
+    private class QueryItemListModel extends AbstractListModel {
+        public int getSize() {
+            return getQueryCount();
+        }
+
+        public Object getElementAt(int index) {
+            return getQueryAt(index);
+        }
+
+        void refresh() {
+            fireContentsChanged(this, 0, getQueryCount());
+        }
+
+        void fireAdded() {
+            fireIntervalAdded(this, getQueryCount(), getQueryCount());
+        }
+
+        void fireRemoved(int index) {
+            fireIntervalRemoved(this, index, index);
+        }
     }
 
     private final class AddAction extends AbstractAction {
-        public AddAction() {
+        AddAction() {
             putValue(Action.SHORT_DESCRIPTION, "Adds a new Match");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
         }
@@ -467,7 +453,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class CopyAction extends AbstractAction {
-        public CopyAction() {
+        CopyAction() {
             putValue(Action.SHORT_DESCRIPTION, "Copies the selected Match");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clone.png"));
         }
@@ -493,7 +479,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class DeleteAction extends AbstractAction {
-        public DeleteAction() {
+        DeleteAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Deletes the selected Property Transfer");
         }
@@ -514,7 +500,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class RenameAction extends AbstractAction {
-        public RenameAction() {
+        RenameAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/rename.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Renames the selected Property Transfer");
         }
@@ -535,7 +521,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class DeclareNamespacesAction extends AbstractAction {
-        public DeclareNamespacesAction() {
+        DeclareNamespacesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/declareNs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Declare request namespaces in current query");
         }
@@ -573,7 +559,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs Queries on last request");
         }
@@ -594,7 +580,7 @@ public class QueryMatchMockOperationDispatcher extends AbstractMockOperationDisp
     }
 
     private final class ExtractFromCurrentAction extends AbstractAction {
-        public ExtractFromCurrentAction() {
+        ExtractFromCurrentAction() {
             super("Extract");
             putValue(Action.SHORT_DESCRIPTION, "Extracts the current value into the Value field");
         }

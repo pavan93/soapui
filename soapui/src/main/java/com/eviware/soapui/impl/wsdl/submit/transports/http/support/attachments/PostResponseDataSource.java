@@ -33,7 +33,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class PostResponseDataSource implements DataSource {
+class PostResponseDataSource implements DataSource {
     private final ExtendedHttpMethod postMethod;
     private byte[] data;
 

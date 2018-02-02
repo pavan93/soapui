@@ -28,7 +28,7 @@ public abstract class AbstractModelItemDropHandler<T1 extends ModelItem, T2 exte
     private final Class<T1> sourceClass;
     private final Class<T2> targetClass;
 
-    protected AbstractModelItemDropHandler(Class<T1> sourceClass, Class<T2> targetClass) {
+    AbstractModelItemDropHandler(Class<T1> sourceClass, Class<T2> targetClass) {
         this.sourceClass = sourceClass;
         this.targetClass = targetClass;
     }

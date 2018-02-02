@@ -24,12 +24,12 @@ import org.syntax.jedit.KeywordMap;
  * @author Slava Pestov
  * @version $Id: CCTokenMarker.java,v 1.6 1999/12/13 03:40:29 sp Exp $
  */
-public class CCTokenMarker extends CTokenMarker {
+class CCTokenMarker extends CTokenMarker {
     public CCTokenMarker() {
         super(true, getKeywords());
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (ccKeywords == null) {
             ccKeywords = new KeywordMap(false);
 

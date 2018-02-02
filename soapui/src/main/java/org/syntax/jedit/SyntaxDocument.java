@@ -16,16 +16,15 @@
 
 package org.syntax.jedit;
 
+import com.eviware.soapui.SoapUI;
+import org.syntax.jedit.tokenmarker.TokenMarker;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.Segment;
 import javax.swing.undo.UndoableEdit;
-
-import org.syntax.jedit.tokenmarker.TokenMarker;
-
-import com.eviware.soapui.SoapUI;
 
 /**
  * A document implementation that can be tokenized by the syntax highlighting
@@ -60,41 +59,15 @@ public class SyntaxDocument extends PlainDocument {
         tokenizeLines();
     }
 
+    // protected members
+    private TokenMarker tokenMarker;
+
     /**
      * Reparses the document, by passing all lines to the token marker. This
      * should be called after the document is first loaded.
      */
-    public void tokenizeLines() {
+    private void tokenizeLines() {
         tokenizeLines(0, getDefaultRootElement().getElementCount());
-    }
-
-    /**
-     * Reparses the document, by passing the specified lines to the token marker.
-     * This should be called after a large quantity of text is first inserted.
-     *
-     * @param start The first line to parse
-     * @param len   The number of lines, after the first one to parse
-     */
-    public void tokenizeLines(int start, int len) {
-        if (tokenMarker == null || !tokenMarker.supportsMultilineTokens()) {
-            return;
-        }
-
-        Segment lineSegment = new Segment();
-        Element map = getDefaultRootElement();
-
-        len += start;
-
-        try {
-            for (int i = start; i < len; i++) {
-                Element lineElement = map.getElement(i);
-                int lineStart = lineElement.getStartOffset();
-                getText(lineStart, lineElement.getEndOffset() - lineStart - 1, lineSegment);
-                tokenMarker.markTokens(lineSegment, i);
-            }
-        } catch (BadLocationException bl) {
-            SoapUI.logError(bl);
-        }
     }
 
     /**
@@ -123,8 +96,34 @@ public class SyntaxDocument extends PlainDocument {
     public void addUndoableEdit(UndoableEdit edit) {
     }
 
-    // protected members
-    protected TokenMarker tokenMarker;
+    /**
+     * Reparses the document, by passing the specified lines to the token marker.
+     * This should be called after a large quantity of text is first inserted.
+     *
+     * @param start The first line to parse
+     * @param len   The number of lines, after the first one to parse
+     */
+    private void tokenizeLines(int start, int len) {
+        if (tokenMarker == null || !tokenMarker.supportsMultilineTokens()) {
+            return;
+        }
+
+        Segment lineSegment = new Segment();
+        Element map = getDefaultRootElement();
+
+        len += start;
+
+        try {
+            for (int i = start; i < len; i++) {
+                Element lineElement = map.getElement(i);
+                int lineStart = lineElement.getStartOffset();
+                getText(lineStart, lineElement.getEndOffset() - lineStart - 1, lineSegment);
+                tokenMarker.markTokens(lineSegment, i);
+            }
+        } catch (BadLocationException bl) {
+            SoapUI.logError(bl);
+        }
+    }
 
     /**
      * We overwrite this method to update the token marker state immediately so

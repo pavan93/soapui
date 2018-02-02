@@ -56,7 +56,7 @@ public class WsaUtils {
     /*
      * see http://www.w3.org/TR/2006/WD-ws-addr-wsdl-20060216/#actioninwsdl
      */
-    public static final String WS_A_NAMESPACE_200602 = "http://www.w3.org/2006/02/addressing/wsdl";
+    private static final String WS_A_NAMESPACE_200602 = "http://www.w3.org/2006/02/addressing/wsdl";
     public static final String WS_A_NAMESPACE_200605 = "http://www.w3.org/2006/05/addressing/wsdl";
     /*
      * see http://www.w3.org/TR/2007/REC-ws-addr-metadata-20070904/#actioninwsdl
@@ -66,24 +66,24 @@ public class WsaUtils {
     public static final String[] wsaNamespaces = {WS_A_NAMESPACE_200705, WS_A_NAMESPACE_200508, WS_A_NAMESPACE_200408,
             WS_A_NAMESPACE_200605, WS_A_NAMESPACE_200602};
 
-    SoapVersion soapVersion;
-    WsdlOperation operation;
-    WsaBuilder builder;
-    XmlObject xmlContentObject;
+    private SoapVersion soapVersion;
+    private WsdlOperation operation;
+    private WsaBuilder builder;
+    private XmlObject xmlContentObject;
     // element to add every property to
-    Element envelopeElement;
-    String wsaVersionNameSpace;
+    private Element envelopeElement;
+    private String wsaVersionNameSpace;
 
-    String wsaPrefix = null;
-    String wsaVersionNamespaceOld = null;
+    private String wsaPrefix = null;
+    private String wsaVersionNamespaceOld = null;
 
-    String anonymousType;
-    String anonymousAddress;
-    String noneAddress;
-    String relationshipTypeReply;
+    private String anonymousType;
+    private String anonymousAddress;
+    private String noneAddress;
+    private String relationshipTypeReply;
     // used for mock response relates to if request.messageId not specified
-    String unspecifiedMessage;
-    String content;
+    private String unspecifiedMessage;
+    private String content;
     // needed for checking if ws-a already applied before
     XmlObject xmlHeaderObject;
     ArrayList<Node> headerWsaElementList;
@@ -504,17 +504,17 @@ public class WsaUtils {
         return content;
     }
 
-    public class WsaBuilder {
+    class WsaBuilder {
         private final String wsaVersionNameSpace;
         private final Boolean mustUnderstand;
 
-        public WsaBuilder(String wsaVersionNameSpace, Boolean mustUnderstand) {
+        WsaBuilder(String wsaVersionNameSpace, Boolean mustUnderstand) {
             // TODO Auto-generated constructor stub
             this.wsaVersionNameSpace = wsaVersionNameSpace;
             this.mustUnderstand = mustUnderstand;
         }
 
-        public Element createWsaChildElement(String elementName, Element addToElement, String wsaProperty) {
+        Element createWsaChildElement(String elementName, Element addToElement, String wsaProperty) {
             Element wsaElm = addToElement.getOwnerDocument().createElementNS(wsaVersionNameSpace, elementName);
             Text txtElm = addToElement.getOwnerDocument().createTextNode(wsaProperty);
             if (mustUnderstand != null) {
@@ -524,8 +524,8 @@ public class WsaUtils {
             return wsaElm;
         }
 
-        public Element createWsaAddressChildElement(String elementName, Element addToElement, String wsaProperty,
-                                                    String refParamsContent) {
+        Element createWsaAddressChildElement(String elementName, Element addToElement, String wsaProperty,
+                                             String refParamsContent) {
             Document document = addToElement.getOwnerDocument();
             Element wsAddressElm = document.createElementNS(wsaVersionNameSpace, wsaPrefix + ":Address");
             Element wsaElm = document.createElementNS(wsaVersionNameSpace, elementName);
@@ -562,8 +562,8 @@ public class WsaUtils {
             return wsaElm;
         }
 
-        public Element createRelatesToElement(String elementName, Element addToElement, String relationshipType,
-                                              String relatesTo) {
+        Element createRelatesToElement(String elementName, Element addToElement, String relationshipType,
+                                       String relatesTo) {
             Element wsaElm = addToElement.getOwnerDocument().createElementNS(wsaVersionNameSpace, elementName);
             wsaElm.setAttribute("RelationshipType", relationshipType);
             Text txtElm = addToElement.getOwnerDocument().createTextNode(relatesTo);

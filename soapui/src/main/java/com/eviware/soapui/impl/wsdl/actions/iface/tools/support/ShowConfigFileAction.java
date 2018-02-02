@@ -19,18 +19,8 @@ package com.eviware.soapui.impl.wsdl.actions.iface.tools.support;
 import com.eviware.soapui.support.UISupport;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.HeadlessException;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -61,10 +51,10 @@ public abstract class ShowConfigFileAction extends AbstractAction {
 
     protected abstract String getConfigFile();
 
-    public class ContentDialog extends JDialog {
+    class ContentDialog extends JDialog {
         private JTextArea contentArea;
 
-        public ContentDialog(String title, String description) throws HeadlessException {
+        ContentDialog(String title, String description) throws HeadlessException {
             super(UISupport.getMainFrame());
             setTitle(title);
             setModal(true);
@@ -88,7 +78,7 @@ public abstract class ShowConfigFileAction extends AbstractAction {
             UISupport.initDialogActions(this, null, closeButton);
         }
 
-        public void showDialog() {
+        void showDialog() {
             contentArea.setText(getConfigFile());
             setVisible(true);
         }
@@ -104,7 +94,7 @@ public abstract class ShowConfigFileAction extends AbstractAction {
         }
 
         private final class CloseAction extends AbstractAction {
-            public CloseAction() {
+            CloseAction() {
                 super("Close");
             }
 

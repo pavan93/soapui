@@ -40,7 +40,7 @@ public class ActionSupport {
         return ActionSupport.addActions(actions, popup);
     }
 
-    public static JMenu buildMenu(ActionList actions) {
+    private static JMenu buildMenu(ActionList actions) {
         if (actions == null || actions.getActionCount() == 0) {
             return null;
         }
@@ -118,7 +118,7 @@ public class ActionSupport {
             this.actionList = actionList;
         }
 
-        public ActionList getActionList() {
+        ActionList getActionList() {
             return actionList;
         }
 

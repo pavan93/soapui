@@ -59,7 +59,7 @@ import java.util.Locale;
  * <p/>
  * <!-- empty lines to avoid 'svn diff' problems -->
  */
-public class RandomHandler implements HttpRequestHandler {
+class RandomHandler implements HttpRequestHandler {
     // public default constructor
 
     /**
@@ -124,7 +124,7 @@ public class RandomHandler implements HttpRequestHandler {
      * An entity that generates random data. This is an outgoing entity, it
      * supports {@link #writeTo writeTo} but not {@link #getContent getContent}.
      */
-    public static class RandomEntity extends AbstractHttpEntity {
+    static class RandomEntity extends AbstractHttpEntity {
 
         /**
          * The range from which to generate random data.
@@ -145,14 +145,14 @@ public class RandomHandler implements HttpRequestHandler {
         /**
          * The length of the random data to generate.
          */
-        protected final long length;
+        final long length;
 
         /**
          * Creates a new entity generating the given amount of data.
          *
          * @param len the number of random bytes to generate, 0 to maxint
          */
-        public RandomEntity(long len) {
+        RandomEntity(long len) {
             if (len < 0L) {
                 throw new IllegalArgumentException("Length must not be negative");
             }

@@ -16,9 +16,9 @@
 
 package com.eviware.x.form;
 
-import java.awt.Component;
+import java.awt.*;
 
-public class XFormBuilder {
+class XFormBuilder {
     public static Component buildForm(XForm form) {
         return null;
     }

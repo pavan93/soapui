@@ -189,45 +189,42 @@ public abstract class TokenMarker {
     // protected members
 
     /**
-     * The first token in the list. This should be used as the return value from
-     * <code>markTokens()</code>.
-     */
-    protected Token firstToken;
-
-    /**
-     * The last token in the list. New tokens are added here. This should be set
-     * to null before a new line is to be tokenized.
-     */
-    protected Token lastToken;
-
-    /**
      * An array for storing information about lines. It is enlarged and shrunk
      * automatically by the <code>insertLines()</code> and
      * <code>deleteLines()</code> methods.
      */
-    protected LineInfo[] lineInfo;
-
+    LineInfo[] lineInfo;
+    /**
+     * The first token in the list. This should be used as the return value from
+     * <code>markTokens()</code>.
+     */
+    private Token firstToken;
+    /**
+     * The last token in the list. New tokens are added here. This should be set
+     * to null before a new line is to be tokenized.
+     */
+    private Token lastToken;
     /**
      * The number of lines in the model being tokenized. This can be less than
      * the length of the <code>lineInfo</code> array.
      */
-    protected int length;
+    private int length;
 
     /**
      * The last tokenized line.
      */
-    protected int lastLine;
+    private int lastLine;
 
     /**
      * True if the next line should be painted.
      */
-    protected boolean nextLineRequested;
+    private boolean nextLineRequested;
 
     /**
      * Creates a new <code>TokenMarker</code>. This DOES NOT create a lineInfo
      * array; an initial call to <code>insertLines()</code> does that.
      */
-    protected TokenMarker() {
+    TokenMarker() {
         lastLine = -1;
     }
 
@@ -243,7 +240,7 @@ public abstract class TokenMarker {
      *
      * @param index The array index
      */
-    protected void ensureCapacity(int index) {
+    private void ensureCapacity(int index) {
         if (lineInfo == null) {
             lineInfo = new LineInfo[index + 1];
         } else if (lineInfo.length <= index) {
@@ -259,7 +256,7 @@ public abstract class TokenMarker {
      * @param length The length of the token
      * @param id     The id of the token
      */
-    protected void addToken(int length, byte id) {
+    void addToken(int length, byte id) {
         if (id >= Token.INTERNAL_FIRST && id <= Token.INTERNAL_LAST) {
             throw new InternalError("Invalid id: " + id);
         }
@@ -288,12 +285,11 @@ public abstract class TokenMarker {
     /**
      * Inner class for storing information about tokenized lines.
      */
-    public class LineInfo {
+    protected class LineInfo {
         /**
-         * Creates a new LineInfo object with token = Token.NULL and obj = null.
+         * The id of the last token of the line.
          */
-        public LineInfo() {
-        }
+        byte token;
 
         /**
          * Creates a new LineInfo object with the specified parameters.
@@ -302,17 +298,17 @@ public abstract class TokenMarker {
             this.token = token;
             this.obj = obj;
         }
-
-        /**
-         * The id of the last token of the line.
-         */
-        public byte token;
-
         /**
          * This is for use by the token marker implementations themselves. It can
          * be used to store anything that is an object and that needs to exist on
          * a per-line basis.
          */
-        public Object obj;
+        Object obj;
+
+        /**
+         * Creates a new LineInfo object with token = Token.NULL and obj = null.
+         */
+        LineInfo() {
+        }
     }
 }

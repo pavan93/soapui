@@ -24,8 +24,7 @@ import com.eviware.soapui.support.xml.SyntaxEditorUtil;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
 
@@ -56,7 +55,7 @@ public class DefaultEditorFactory implements EditorFactory {
         private EditorModel editorModel;
         private final RSyntaxTextArea xmlEditor;
 
-        public EditorModelDocumentListener(EditorModel editorModel, RSyntaxTextArea xmlEditor) {
+        EditorModelDocumentListener(EditorModel editorModel, RSyntaxTextArea xmlEditor) {
             this.editorModel = editorModel;
             this.xmlEditor = xmlEditor;
 
@@ -79,7 +78,7 @@ public class DefaultEditorFactory implements EditorFactory {
         private final JTextComponent textField;
         private final EditorModel editorModel;
 
-        public JTextComponentEditorModelDocumentListener(EditorModel editorModel, JTextComponent textField) {
+        JTextComponentEditorModelDocumentListener(EditorModel editorModel, JTextComponent textField) {
             this.editorModel = editorModel;
             editorModel.addEditorModelListener(this);
             this.textField = textField;

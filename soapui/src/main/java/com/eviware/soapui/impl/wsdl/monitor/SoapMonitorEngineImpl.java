@@ -37,8 +37,8 @@ public class SoapMonitorEngineImpl implements SoapMonitorEngine {
     private static final String ROOT = "/";
     private static final String HTTP = "http://";
     private static final String HTTPS = "https://";
-    JettyServer server = new JettyServer();
-    SocketConnector connector = new SocketConnector();
+    private JettyServer server = new JettyServer();
+    private SocketConnector connector = new SocketConnector();
     private SslSocketConnector sslConnector;
     private final String sslEndpoint;
     private boolean proxyOrTunnel = true;

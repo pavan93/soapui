@@ -18,19 +18,14 @@ package com.eviware.soapui.tools;
 
 import org.apache.log4j.Logger;
 
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.jar.JarEntry;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 
-public class JarPackager {
-    public static int BUFFER_SIZE = 10240;
-    static Logger log = Logger.getLogger(JarPackager.class);
+class JarPackager {
+    private static int BUFFER_SIZE = 10240;
+    private static Logger log = Logger.getLogger(JarPackager.class);
 
     public static File copyFileToDir(File fromFile, File toDir) {
         File toFile = new File(toDir, fromFile.getName());

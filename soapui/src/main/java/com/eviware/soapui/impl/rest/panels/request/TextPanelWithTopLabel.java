@@ -16,15 +16,13 @@
 
 package com.eviware.soapui.impl.rest.panels.request;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public class TextPanelWithTopLabel extends JPanel {
 
-    JLabel textLabel;
-    JTextField textField;
+    private JLabel textLabel;
+    private JTextField textField;
 
 
     public TextPanelWithTopLabel(String label, String text, JTextField textField) {

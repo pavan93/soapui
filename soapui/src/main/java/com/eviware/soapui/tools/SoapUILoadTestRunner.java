@@ -26,16 +26,8 @@ import com.eviware.soapui.impl.wsdl.loadtest.data.actions.ExportStatisticsAction
 import com.eviware.soapui.impl.wsdl.loadtest.log.LoadTestLog;
 import com.eviware.soapui.impl.wsdl.loadtest.log.LoadTestLogEntry;
 import com.eviware.soapui.model.project.ProjectFactoryRegistry;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunListener;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
-import com.eviware.soapui.model.testsuite.TestSuite;
 import com.eviware.soapui.settings.UISettings;
 import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.support.StringUtils;
@@ -73,7 +65,7 @@ public class SoapUILoadTestRunner extends AbstractSoapUITestRunner implements Lo
     private long threadCount = -1;
     private boolean saveAfterRun;
 
-    public static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " LoadTest Runner";
+    private static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " LoadTest Runner";
 
     /**
      * Runs the loadtests in the specified soapUI project file, see SoapUI xdocs
@@ -209,7 +201,7 @@ public class SoapUILoadTestRunner extends AbstractSoapUITestRunner implements Lo
         return options;
     }
 
-    public SoapUILoadTestRunner() {
+    private SoapUILoadTestRunner() {
         this(TITLE);
     }
 
@@ -309,7 +301,7 @@ public class SoapUILoadTestRunner extends AbstractSoapUITestRunner implements Lo
      * @param suite the TestSuite to run
      */
 
-    public void runSuite(TestSuite suite) {
+    private void runSuite(TestSuite suite) {
         if (testCase != null && suite.getTestCaseByName(testCase) == null) {
             return;
         }
@@ -353,7 +345,7 @@ public class SoapUILoadTestRunner extends AbstractSoapUITestRunner implements Lo
      * @param loadTest the loadTest to run
      */
 
-    protected void runWsdlLoadTest(WsdlLoadTest loadTest) {
+    private void runWsdlLoadTest(WsdlLoadTest loadTest) {
         try {
             log.info("Running LoadTest [" + loadTest.getName() + "]");
             if (limit >= 0) {

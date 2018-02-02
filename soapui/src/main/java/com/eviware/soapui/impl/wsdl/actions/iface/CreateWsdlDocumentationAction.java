@@ -48,7 +48,7 @@ public class CreateWsdlDocumentationAction extends AbstractSoapUIAction<WsdlInte
     private XFormDialog dialog;
     private static Map<String, Transformer> transformers;
 
-    public CreateWsdlDocumentationAction() {
+    private CreateWsdlDocumentationAction() {
         super("CreateWsdlDocumentationAction", "Generate Documentation",
                 "Generate simple HTML Documentation for this WSDL");
     }
@@ -103,7 +103,7 @@ public class CreateWsdlDocumentationAction extends AbstractSoapUIAction<WsdlInte
         return reportUrl;
     }
 
-    protected static void initTransformers() throws Exception {
+    private static void initTransformers() throws Exception {
         transformers = new HashMap<String, Transformer>();
         TransformerFactory xformFactory = TransformerFactory.newInstance();
 
@@ -116,7 +116,7 @@ public class CreateWsdlDocumentationAction extends AbstractSoapUIAction<WsdlInte
     }
 
     @AForm(description = "Creates an HTML-Report for the interface WSDL", name = "Create Documentation", helpUrl = HelpUrls.CREATEWADLDOC_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(name = "Output Folder", description = "The folder where to create the report", type = AFieldType.FOLDER)
         String OUTPUT_FOLDER = "Output Folder";
     }

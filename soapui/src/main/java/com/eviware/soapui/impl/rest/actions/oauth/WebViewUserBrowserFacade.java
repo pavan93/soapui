@@ -20,8 +20,7 @@ import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.support.components.WebViewBasedBrowserComponent;
 import com.eviware.soapui.support.components.WebViewBasedBrowserComponentFactory;
 
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.net.URL;
@@ -38,7 +37,7 @@ public class WebViewUserBrowserFacade implements UserBrowserFacade {
         this(false);
     }
 
-    public WebViewUserBrowserFacade(boolean addNavigationBar) {
+    private WebViewUserBrowserFacade(boolean addNavigationBar) {
         browserComponent = WebViewBasedBrowserComponentFactory.createBrowserComponent(addNavigationBar);
     }
 

@@ -48,10 +48,10 @@ import static com.eviware.soapui.impl.rest.actions.support.NewRestResourceAction
 
 public class NewRestMethodAction extends AbstractSoapUIAction<RestResource> {
     public static final String SOAPUI_ACTION_ID = "NewRestMethodAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestMethodAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestMethodAction.class);
     private XFormDialog dialog;
 
-    public NewRestMethodAction() {
+    private NewRestMethodAction() {
         super(messages.get("title"), messages.get("description"));
     }
 
@@ -89,7 +89,7 @@ public class NewRestMethodAction extends AbstractSoapUIAction<RestResource> {
         }
     }
 
-    protected void createRequest(RestMethod method, RestParamsPropertyHolder params) {
+    private void createRequest(RestMethod method, RestParamsPropertyHolder params) {
         RestRequest request = method.addNewRequest("Request " + (method.getRequestCount() + 1));
         for (TestProperty param : params.getProperties().values()) {
             ((RestParamProperty) param).addPropertyChangeListener(request);
@@ -99,7 +99,7 @@ public class NewRestMethodAction extends AbstractSoapUIAction<RestResource> {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWRESTSERVICE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.ResourceName.Description", type = AFieldType.STRING)
         String RESOURCENAME = messages.get("Form.ResourceName.Label");
 

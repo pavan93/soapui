@@ -34,11 +34,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class PolicyUtils {
-    public final static String WS_XMLSOAP_POLICY_NAMESPACE = "http://schemas.xmlsoap.org/ws/2004/09/policy";
+    private final static String WS_XMLSOAP_POLICY_NAMESPACE = "http://schemas.xmlsoap.org/ws/2004/09/policy";
     public final static String WS_W3_POLICY_NAMESPACE = "http://www.w3.org/ns/ws-policy";
-    public final static String WS_SECURITY_NAMESPACE = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
+    private final static String WS_SECURITY_NAMESPACE = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd";
 
-    public static List<Policy> getPolicies(WsdlContext wsdlContext) {
+    private static List<Policy> getPolicies(WsdlContext wsdlContext) {
 
         List<Policy> policies = new ArrayList<Policy>();
         try {
@@ -89,7 +89,7 @@ public class PolicyUtils {
         return null;
     }
 
-    public static boolean isAddressing(Policy policy) {
+    private static boolean isAddressing(Policy policy) {
 
         return policy.getAddressingList().size() > 0;
 
@@ -243,7 +243,7 @@ public class PolicyUtils {
         return rtnPolicy;
     }
 
-    public static Policy getPolicy(Element policy, String usedPolicyNamespace) {
+    private static Policy getPolicy(Element policy, String usedPolicyNamespace) {
         // policy = PolicyUtils.normalize(policy);
 
         Policy newPolicy = null;

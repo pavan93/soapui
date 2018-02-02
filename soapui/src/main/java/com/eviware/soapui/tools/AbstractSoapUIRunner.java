@@ -16,12 +16,8 @@
 
 package com.eviware.soapui.tools;
 
-import com.eviware.soapui.DefaultSoapUICore;
-import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.SoapUICore;
-import com.eviware.soapui.SoapUIExtensionClassLoader;
+import com.eviware.soapui.*;
 import com.eviware.soapui.SoapUIExtensionClassLoader.SoapUIClassLoaderState;
-import com.eviware.soapui.StandaloneSoapUICore;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.submit.filters.GlobalHttpHeadersRequestFilter;
 import com.eviware.soapui.impl.wsdl.support.PathUtils;
@@ -31,30 +27,22 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.PosixParser;
+import org.apache.commons.cli.*;
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
 import java.io.File;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public abstract class AbstractSoapUIRunner implements CmdLineRunner {
-    public static final int NORMAL_TERMINATION = 0;
-    public static final int ABNORMAL_TERMINATION = -1;
+    private static final int NORMAL_TERMINATION = 0;
+    private static final int ABNORMAL_TERMINATION = -1;
 
     private boolean groovyLogInitialized;
     private String projectFile;
-    protected final Logger log = Logger.getLogger(getClass());
+    final Logger log = Logger.getLogger(getClass());
     private String settingsFile;
     private String soapUISettingsPassword;
     private String projectPassword;
@@ -64,7 +52,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
     private String[] projectProperties;
     private Map<String, String> runnerGlobalProperties = new HashMap<String, String>();
 
-    public AbstractSoapUIRunner(String title) {
+    AbstractSoapUIRunner(String title) {
         if (title != null) {
             System.out.println(title);
         }
@@ -72,7 +60,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         SoapUI.setCmdLineRunner(this);
     }
 
-    protected void initGroovyLog() {
+    void initGroovyLog() {
         if (!groovyLogInitialized) {
             ensureConsoleAppenderIsDefined(Logger.getLogger("groovy.log"));
             groovyLogInitialized = true;
@@ -84,7 +72,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
      *
      * @param logger
      */
-    protected void ensureConsoleAppenderIsDefined(Logger logger) {
+    private void ensureConsoleAppenderIsDefined(Logger logger) {
         if (logger != null) {
             // ensure there is a ConsoleAppender defined, adding one if necessary
             for (Object appender : Collections.list(logger.getAllAppenders())) {
@@ -106,7 +94,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
      * @return status code to be used with System.exit()
      * @see java.lang.System
      */
-    public int runFromCommandLine(String[] args) {
+    int runFromCommandLine(String[] args) {
         int results = ABNORMAL_TERMINATION;
         if (validateCommandLineArgument(args)) {
             results = run(args);
@@ -114,7 +102,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         return results;
     }
 
-    public boolean validateCommandLineArgument(String[] args) {
+    private boolean validateCommandLineArgument(String[] args) {
         boolean commandLineArgumentsAreValid = false;
         try {
             commandLineArgumentsAreValid = initFromCommandLine(args, true);
@@ -132,7 +120,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
      * @return status code to be used with System.exit()
      * @see java.lang.System
      */
-    public int run(String[] args) {
+    private int run(String[] args) {
         try {
             if (run()) {
                 return NORMAL_TERMINATION;
@@ -144,7 +132,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         return ABNORMAL_TERMINATION;
     }
 
-    public boolean initFromCommandLine(String[] args, boolean printHelp) throws Exception {
+    private boolean initFromCommandLine(String[] args, boolean printHelp) throws Exception {
         SoapUIOptions options = initCommandLineOptions();
 
         CommandLineParser parser = new PosixParser();
@@ -175,7 +163,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
      * @param cmd The command line
      * @return true as default
      */
-    protected boolean requiresProjectArgument(CommandLine cmd) {
+    private boolean requiresProjectArgument(CommandLine cmd) {
         return true;
     }
 
@@ -205,7 +193,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         }
     }
 
-    protected SoapUICore createSoapUICore() {
+    private SoapUICore createSoapUICore() {
         if (enableUI) {
             StandaloneSoapUICore core = new StandaloneSoapUICore(settingsFile);
             log.info("Enabling UI Components");
@@ -223,7 +211,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
 
     protected abstract boolean runRunner() throws Exception;
 
-    protected String getCommandLineOptionSubstSpace(CommandLine cmd, String key) {
+    String getCommandLineOptionSubstSpace(CommandLine cmd, String key) {
         return cmd.getOptionValue(key).replaceAll("%20", " ");
     }
 
@@ -293,11 +281,11 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         return dir.getAbsolutePath();
     }
 
-    protected void ensureOutputFolder(ModelItem modelItem) {
+    void ensureOutputFolder(ModelItem modelItem) {
         ensureFolder(getAbsoluteOutputFolder(modelItem));
     }
 
-    public void ensureFolder(String path) {
+    private void ensureFolder(String path) {
         if (path == null) {
             return;
         }
@@ -332,15 +320,12 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         this.enableUI = enableUI;
     }
 
-    public static class SoapUIOptions extends Options {
-        private final String runnerName;
-
-        public SoapUIOptions(String runnerName) {
-            this.runnerName = runnerName;
-        }
-
-        public String getRunnerName() {
-            return runnerName;
+    void setSystemProperties(String[] optionValues) {
+        for (String option : optionValues) {
+            int ix = option.indexOf('=');
+            if (ix != -1) {
+                System.setProperty(option.substring(0, ix), option.substring(ix + 1));
+            }
         }
     }
 
@@ -352,16 +337,7 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         this.soapUISettingsPassword = soapUISettingsPassword;
     }
 
-    public void setSystemProperties(String[] optionValues) {
-        for (String option : optionValues) {
-            int ix = option.indexOf('=');
-            if (ix != -1) {
-                System.setProperty(option.substring(0, ix), option.substring(ix + 1));
-            }
-        }
-    }
-
-    public void setCustomHeaders( String[] optionValues )
+    void setCustomHeaders(String[] optionValues)
     {
         for( String option : optionValues )
         {
@@ -375,6 +351,20 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
                 log.info( "Adding global HTTP Header [" + name + "] = [" + value + "]");
 
                 GlobalHttpHeadersRequestFilter.addGlobalHeader(name, value);
+            }
+        }
+    }
+
+    void initProjectProperties(WsdlProject project) {
+        if (projectProperties != null) {
+            for (String option : projectProperties) {
+                int ix = option.indexOf('=');
+                if (ix != -1) {
+                    String name = option.substring(0, ix);
+                    String value = option.substring(ix + 1);
+                    log.info("Setting project property [" + name + "] to [" + value + "]");
+                    project.setPropertyValue(name, value);
+                }
             }
         }
     }
@@ -416,29 +406,27 @@ public abstract class AbstractSoapUIRunner implements CmdLineRunner {
         return projectProperties;
     }
 
-    protected void initProjectProperties(WsdlProject project) {
-        if (projectProperties != null) {
-            for (String option : projectProperties) {
-                int ix = option.indexOf('=');
-                if (ix != -1) {
-                    String name = option.substring(0, ix);
-                    String value = option.substring(ix + 1);
-                    log.info("Setting project property [" + name + "] to [" + value + "]");
-                    project.setPropertyValue(name, value);
-                }
-            }
-        }
+    String getProjectPassword() {
+        return projectPassword;
     }
 
     public boolean isEnableUI() {
         return enableUI;
     }
 
-    public String getProjectPassword() {
-        return projectPassword;
+    void setProjectPassword(String projectPassword) {
+        this.projectPassword = projectPassword;
     }
 
-    public void setProjectPassword(String projectPassword) {
-        this.projectPassword = projectPassword;
+    protected static class SoapUIOptions extends Options {
+        private final String runnerName;
+
+        SoapUIOptions(String runnerName) {
+            this.runnerName = runnerName;
+        }
+
+        String getRunnerName() {
+            return runnerName;
+        }
     }
 }

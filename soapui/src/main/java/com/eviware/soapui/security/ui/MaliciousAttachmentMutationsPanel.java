@@ -119,7 +119,7 @@ public class MaliciousAttachmentMutationsPanel {
         return tablesDialog.getPanel();
     }
 
-    protected JPanel buildGenerateTable(MaliciousAttachmentTableModel tableModel) {
+    private JPanel buildGenerateTable(MaliciousAttachmentTableModel tableModel) {
         final JPanel panel = new JPanel(new BorderLayout());
         final JXTable table = JTableFactory.getInstance().makeJXTable(tableModel);
         setupTable(table);
@@ -154,7 +154,7 @@ public class MaliciousAttachmentMutationsPanel {
         return panel;
     }
 
-    protected JPanel buildReplacementTable(MaliciousAttachmentTableModel tableModel) {
+    private JPanel buildReplacementTable(MaliciousAttachmentTableModel tableModel) {
         final JPanel panel = new JPanel(new BorderLayout());
         final JXTable table = JTableFactory.getInstance().makeJXTable(tableModel);
         setupTable(table);
@@ -189,7 +189,7 @@ public class MaliciousAttachmentMutationsPanel {
         return panel;
     }
 
-    protected void setupTable(JXTable table) {
+    private void setupTable(JXTable table) {
         table.setPreferredScrollableViewportSize(new Dimension(50, 90));
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.getTableHeader().setReorderingAllowed(false);
@@ -219,10 +219,8 @@ public class MaliciousAttachmentMutationsPanel {
         return dialog.getPanel();
     }
 
-    @AForm(description = "Malicious Attachment Mutations", name = "Malicious Attachment Mutations")
-    public interface MutationSettings {
-        @AField(description = "###Mutations panel", name = "###Mutations panel", type = AFieldType.COMPONENT)
-        String MUTATIONS_PANEL = "###Mutations panel";
+    private TableCellEditor getDefaultCellEditor() {
+        return new XPathCellRender();
     }
 
     @AForm(description = "Malicious Attachment Mutation Tables", name = "Malicious Attachment Mutation Tables")
@@ -238,18 +236,32 @@ public class MaliciousAttachmentMutationsPanel {
         String REMOVE_FILE = "Remove";
     }
 
+    public MaliciousAttachmentSecurityScanConfig getConfig() {
+        return config;
+    }
+
+    private void setConfig(MaliciousAttachmentSecurityScanConfig config) {
+        this.config = config;
+    }
+
+    @AForm(description = "Malicious Attachment Mutations", name = "Malicious Attachment Mutations")
+    interface MutationSettings {
+        @AField(description = "###Mutations panel", name = "###Mutations panel", type = AFieldType.COMPONENT)
+        String MUTATIONS_PANEL = "###Mutations panel";
+    }
+
     @AForm(description = "Generate File Mutation", name = "Generate File Mutation")
-    public interface GenerateFile {
+    interface GenerateFile {
         @AField(description = "Size (bytes)", name = "Size (bytes)", type = AFieldType.INT)
         String SIZE = "Size (bytes)";
         @AField(description = "Content type", name = "Content type", type = AFieldType.STRING)
         String CONTENT_TYPE = "Content type";
     }
 
-    public class AddFileAction extends AbstractAction {
+    class AddFileAction extends AbstractAction {
         private JFileChooser fileChooser;
 
-        public AddFileAction() {
+        AddFileAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Add file");
         }
@@ -311,10 +323,10 @@ public class MaliciousAttachmentMutationsPanel {
         }
     }
 
-    public class GenerateFileAction extends AbstractAction {
+    class GenerateFileAction extends AbstractAction {
         private XFormDialog dialog;
 
-        public GenerateFileAction() {
+        GenerateFileAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Generate file");
         }
@@ -379,11 +391,11 @@ public class MaliciousAttachmentMutationsPanel {
         }
     }
 
-    public class RemoveReplacementFileAction extends AbstractAction {
+    class RemoveReplacementFileAction extends AbstractAction {
         private final MaliciousAttachmentTableModel tableModel;
         private final JXTable table;
 
-        public RemoveReplacementFileAction(MaliciousAttachmentTableModel tableModel, JXTable table) {
+        RemoveReplacementFileAction(MaliciousAttachmentTableModel tableModel, JXTable table) {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Remove file");
 
@@ -414,11 +426,11 @@ public class MaliciousAttachmentMutationsPanel {
         }
     }
 
-    public class RemoveGeneratedFileAction extends AbstractAction {
+    class RemoveGeneratedFileAction extends AbstractAction {
         private final MaliciousAttachmentTableModel tableModel;
         private final JXTable table;
 
-        public RemoveGeneratedFileAction(MaliciousAttachmentTableModel tableModel, JXTable table) {
+        RemoveGeneratedFileAction(MaliciousAttachmentTableModel tableModel, JXTable table) {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Remove file");
 
@@ -449,10 +461,10 @@ public class MaliciousAttachmentMutationsPanel {
         }
     }
 
-    public class HelpAction extends AbstractAction implements HelpActionMarker {
+    class HelpAction extends AbstractAction implements HelpActionMarker {
         private final String url;
 
-        public HelpAction(String url) {
+        HelpAction(String url) {
             this("Online Help", url, UISupport.getKeyStroke("F1"));
         }
 
@@ -460,7 +472,7 @@ public class MaliciousAttachmentMutationsPanel {
             this(title, url, null);
         }
 
-        public HelpAction(String title, String url, KeyStroke accelerator) {
+        HelpAction(String title, String url, KeyStroke accelerator) {
             super(title);
             this.url = url;
             putValue(Action.SHORT_DESCRIPTION, "Show online help");
@@ -475,18 +487,6 @@ public class MaliciousAttachmentMutationsPanel {
         public void actionPerformed(ActionEvent e) {
             Tools.openURL(url);
         }
-    }
-
-    protected TableCellEditor getDefaultCellEditor() {
-        return new XPathCellRender();
-    }
-
-    public MaliciousAttachmentSecurityScanConfig getConfig() {
-        return config;
-    }
-
-    public void setConfig(MaliciousAttachmentSecurityScanConfig config) {
-        this.config = config;
     }
 
     public void updateConfig(MaliciousAttachmentSecurityScanConfig config) {

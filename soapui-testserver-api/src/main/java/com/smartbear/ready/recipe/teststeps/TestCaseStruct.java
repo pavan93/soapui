@@ -15,15 +15,15 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
 @ApiModel(value = "TestCase", description = "Test case definition")
 public class TestCaseStruct {
     public String name;
-    public Boolean searchProperties;
+    private Boolean searchProperties;
     public boolean maintainSession;
     public boolean abortOnError;
-    public Boolean failTestCaseOnError;
-    public Boolean discardOkResults;
+    private Boolean failTestCaseOnError;
+    private Boolean discardOkResults;
     public String socketTimeout;
     public int testCaseTimeout;
-    public String clientCertFileName;
-    public String clientCertPassword;
+    private String clientCertFileName;
+    private String clientCertPassword;
     public Map<String, String> properties;
 
     /**

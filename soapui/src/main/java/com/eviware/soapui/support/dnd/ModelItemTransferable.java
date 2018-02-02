@@ -22,7 +22,7 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
 
-public class ModelItemTransferable implements Transferable {
+class ModelItemTransferable implements Transferable {
     public static final DataFlavor MODELITEM_DATAFLAVOR = new DataFlavor(DataFlavor.javaJVMLocalObjectMimeType,
             "SoapUIModelItem");
 

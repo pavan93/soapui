@@ -26,7 +26,7 @@ import com.eviware.soapui.model.tree.SoapUITreeModel;
  * @author Ole.Matzura
  */
 
-public class TestStepTreeNode extends PropertiesTreeNode<TestStep> {
+class TestStepTreeNode extends PropertiesTreeNode<TestStep> {
     public TestStepTreeNode(TestStep testStep, ModelItem parent, SoapUITreeModel treeModel) {
         super(testStep, parent, testStep, treeModel);
     }

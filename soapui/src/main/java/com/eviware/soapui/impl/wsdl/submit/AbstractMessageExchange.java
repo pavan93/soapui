@@ -22,12 +22,12 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.xml.XmlUtils;
 
 public abstract class AbstractMessageExchange<T extends ModelItem> implements MessageExchange {
-    protected StringToStringMap properties;
+    private StringToStringMap properties;
     private String[] messages;
     private T modelItem;
     protected boolean discardResponse;
 
-    public AbstractMessageExchange(T modelItem) {
+    protected AbstractMessageExchange(T modelItem) {
         super();
         this.modelItem = modelItem;
         discardResponse = modelItem.getSettings().getBoolean("discardResponse");
@@ -53,7 +53,7 @@ public abstract class AbstractMessageExchange<T extends ModelItem> implements Me
         }
     }
 
-    public void addProperty(String name, String value) {
+    protected void addProperty(String name, String value) {
         if (properties == null) {
             properties = new StringToStringMap();
         }

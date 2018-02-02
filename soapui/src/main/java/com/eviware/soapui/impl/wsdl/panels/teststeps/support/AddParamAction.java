@@ -19,21 +19,18 @@ package com.eviware.soapui.impl.wsdl.panels.teststeps.support;
 import com.eviware.soapui.impl.wsdl.MutableTestPropertyHolder;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.CellEditorListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.table.TableCellEditor;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
  * @author Prakash
  */
 public class AddParamAction extends AbstractAction {
-    public static final String EMPTY_STRING = "";
+    private static final String EMPTY_STRING = "";
     public static final String ADD_PARAM_ACTION_NAME = "Add Param";
     private MutableTestPropertyHolder propertyHolder;
     private JTable parameterTable;

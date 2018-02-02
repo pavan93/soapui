@@ -144,7 +144,7 @@ public class JPropertiesTable<T> extends JPanel {
         return addProperty(caption, name, editable, null);
     }
 
-    public PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
+    private PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
         return tableModel.addProperty(caption, name, editable, formatter);
     }
 
@@ -153,31 +153,31 @@ public class JPropertiesTable<T> extends JPanel {
         private T propertyObject;
         private boolean attached;
 
-        public PropertiesTableModel(T propertyObject) {
+        PropertiesTableModel(T propertyObject) {
             this.propertyObject = propertyObject;
         }
 
-        public void attach() {
+        void attach() {
             if (!attached && propertyObject instanceof PropertyChangeNotifier) {
                 ((PropertyChangeNotifier) propertyObject).addPropertyChangeListener(this);
                 attached = true;
             }
         }
 
-        public void setPropertyObject(T propertyObject) {
+        void setPropertyObject(T propertyObject) {
             release();
             this.propertyObject = propertyObject;
             attach();
             fireTableDataChanged();
         }
 
-        public PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
+        PropertyDescriptor addProperty(String caption, String name, boolean editable, PropertyFormatter formatter) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, editable, formatter);
             properties.add(propertyDescriptor);
             return propertyDescriptor;
         }
 
-        public PropertyDescriptor addProperty(String caption, String name, Object[] options) {
+        PropertyDescriptor addProperty(String caption, String name, Object[] options) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, options);
             properties.add(propertyDescriptor);
             return propertyDescriptor;
@@ -245,14 +245,14 @@ public class JPropertiesTable<T> extends JPanel {
             fireTableDataChanged();
         }
 
-        public void release() {
+        void release() {
             if (propertyObject instanceof PropertyChangeNotifier && attached) {
                 ((PropertyChangeNotifier) propertyObject).removePropertyChangeListener(this);
                 attached = false;
             }
         }
 
-        public PropertyDescriptor addPropertyShadow(String caption, String name, boolean editable) {
+        PropertyDescriptor addPropertyShadow(String caption, String name, boolean editable) {
             PropertyDescriptor propertyDescriptor = new PropertyDescriptor(caption, name, editable);
             properties.add(propertyDescriptor);
             return propertyDescriptor;
@@ -327,7 +327,7 @@ public class JPropertiesTable<T> extends JPanel {
             return caption;
         }
 
-        public String getDescription() {
+        String getDescription() {
             return description;
         }
 
@@ -335,7 +335,7 @@ public class JPropertiesTable<T> extends JPanel {
             this.description = description;
         }
 
-        public boolean isEditable() {
+        boolean isEditable() {
             return editable;
         }
 
@@ -404,7 +404,7 @@ public class JPropertiesTable<T> extends JPanel {
     private static class DefaultFormatter implements PropertyFormatter {
         private static PropertyFormatter instance;
 
-        public static PropertyFormatter getInstance() {
+        static PropertyFormatter getInstance() {
             if (instance == null) {
                 instance = new DefaultFormatter();
             }
@@ -422,7 +422,7 @@ public class JPropertiesTable<T> extends JPanel {
     }
 
     private class PTable extends JTable {
-        public PTable(TableModel tableModel) {
+        PTable(TableModel tableModel) {
             super(tableModel);
 
             getActionMap().put(TransferHandler.getCopyAction().getValue(Action.NAME), new AbstractAction() {

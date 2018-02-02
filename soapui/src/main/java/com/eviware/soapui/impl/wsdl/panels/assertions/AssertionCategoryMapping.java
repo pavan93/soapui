@@ -31,7 +31,7 @@ public class AssertionCategoryMapping {
     public final static String SLA_CATEGORY = "SLA";
     public final static String JMS_CATEGORY = "JMS";
     public final static String SECURITY_CATEGORY = "Security";
-    public final static String RECENTLY_USED = "Recently used";
+    private final static String RECENTLY_USED = "Recently used";
     public static final String JDBC_CATEGORY = "JDBC";
     //this category shouldn't be shown anywhere as such
     //group assertion is not assertion but rather container for a group of assertions

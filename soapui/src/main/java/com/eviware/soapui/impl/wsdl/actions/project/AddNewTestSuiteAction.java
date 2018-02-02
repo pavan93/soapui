@@ -45,7 +45,7 @@ public class AddNewTestSuiteAction extends AbstractSoapUIAction<WsdlProject> {
         }
     }
 
-    public WsdlTestSuite createTestSuite(WsdlProject project) {
+    private WsdlTestSuite createTestSuite(WsdlProject project) {
         String name = UISupport.prompt("Specify name of TestSuite", "New TestSuite",
                 "TestSuite " + (project.getTestSuiteCount() + 1));
         if (name == null) {

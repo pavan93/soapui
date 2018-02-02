@@ -31,7 +31,7 @@ import java.util.List;
 /**
  * NOT USED ANY MORE
  */
-public class EnumerationValuesExtractor {
+class EnumerationValuesExtractor {
     private WsdlRequest request;
     // private List<String> enumerationParameters = new ArrayList<String>();
     private List<String> selectedEnumerationParameters = new ArrayList<String>();
@@ -133,19 +133,19 @@ public class EnumerationValuesExtractor {
         private String type;
         private List<String> valuesList = new ArrayList<String>();
 
-        public EnumerationValues(String type) {
+        EnumerationValues(String type) {
             this.type = type;
         }
 
-        public String getType() {
+        String getType() {
             return type;
         }
 
-        public void addValue(String value) {
+        void addValue(String value) {
             valuesList.add(value);
         }
 
-        public List<String> getValuesList() {
+        List<String> getValuesList() {
             return valuesList;
         }
 

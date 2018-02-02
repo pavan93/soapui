@@ -28,7 +28,7 @@ import com.eviware.soapui.model.iface.SubmitContext;
 import org.apache.log4j.Logger;
 
 public class WsrmRequestFilter extends AbstractRequestFilter {
-    public final static Logger log = Logger.getLogger(WsrmRequestFilter.class);
+    private final static Logger log = Logger.getLogger(WsrmRequestFilter.class);
 
     public void filterAbstractHttpRequest(SubmitContext context, AbstractHttpRequest<?> wsdlRequest) {
         if (!(wsdlRequest instanceof WsrmContainer) || !((WsrmContainer) wsdlRequest).isWsrmEnabled()

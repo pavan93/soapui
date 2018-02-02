@@ -25,17 +25,15 @@ import com.eviware.soapui.support.editor.views.xml.raw.RawXmlEditorFactory;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.jgoodies.binding.PresentationModel;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class AbstractJMSHeaderInspector extends AbstractXmlInspector {
     private JPanel mainPanel;
     private SimpleBindingForm form;
     private final JMSHeaderContainer jmsContainer;
 
-    protected AbstractJMSHeaderInspector(JMSHeaderContainer jmsContainer) {
+    AbstractJMSHeaderInspector(JMSHeaderContainer jmsContainer) {
         super("JMS Headers", "JMS header settings and properties", true, JMSHeaderInspectorFactory.INSPECTOR_ID);
         this.jmsContainer = jmsContainer;
     }
@@ -60,7 +58,7 @@ public abstract class AbstractJMSHeaderInspector extends AbstractXmlInspector {
         }
     }
 
-    public abstract void buildContent(SimpleBindingForm form);
+    protected abstract void buildContent(SimpleBindingForm form);
 
     @Override
     public boolean isEnabledFor(EditorView<XmlDocument> view) {

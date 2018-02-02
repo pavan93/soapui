@@ -26,20 +26,8 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 
-import javax.swing.AbstractListModel;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ScrollPaneConstants;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
@@ -143,7 +131,7 @@ public class StatisticsDesktopPanel extends DefaultDesktopPanel {
         private TestStep selectedStep;
         private InternalTestSuiteListener testSuiteListener = new InternalTestSuiteListener();
 
-        public SelectStepComboBoxModel() {
+        SelectStepComboBoxModel() {
             loadTest.getTestCase().getTestSuite().addTestSuiteListener(testSuiteListener);
         }
 
@@ -194,7 +182,7 @@ public class StatisticsDesktopPanel extends DefaultDesktopPanel {
             }
         }
 
-        public void release() {
+        void release() {
             loadTest.getTestCase().getTestSuite().removeTestSuiteListener(testSuiteListener);
         }
     }

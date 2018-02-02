@@ -82,7 +82,7 @@ public abstract class AbstractModelItem implements ModelItem {
         }
     }
 
-    public void notifyPropertyChanged(String name, int oldValue, int newValue) {
+    protected void notifyPropertyChanged(String name, int oldValue, int newValue) {
         try {
             propertyChangeSupport.firePropertyChange(name, oldValue, newValue);
         } catch (Throwable t) {
@@ -90,7 +90,7 @@ public abstract class AbstractModelItem implements ModelItem {
         }
     }
 
-    public void notifyPropertyChanged(String name, boolean oldValue, boolean newValue) {
+    protected void notifyPropertyChanged(String name, boolean oldValue, boolean newValue) {
         try {
             propertyChangeSupport.firePropertyChange(name, oldValue, newValue);
         } catch (Throwable t) {
@@ -114,7 +114,7 @@ public abstract class AbstractModelItem implements ModelItem {
         }
     }
 
-    public void fireIndexedPropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
+    protected void fireIndexedPropertyChange(String propertyName, int index, Object oldValue, Object newValue) {
         try {
             propertyChangeSupport.fireIndexedPropertyChange(propertyName, index, oldValue, newValue);
         } catch (Throwable t) {

@@ -46,7 +46,7 @@ public interface JMSHeaderAndPropertyInspectorModel {
         private final T modelItem;
         private final String propertyName;
 
-        protected AbstractJMSHeaderAndPropertyModel(boolean readOnly, T modelItem, String propertyName) {
+        AbstractJMSHeaderAndPropertyModel(boolean readOnly, T modelItem, String propertyName) {
             this.readOnly = readOnly;
             this.modelItem = modelItem;
             this.propertyName = propertyName;
@@ -74,7 +74,7 @@ public interface JMSHeaderAndPropertyInspectorModel {
             modelItem.removePropertyChangeListener(propertyName, this);
         }
 
-        public T getModelItem() {
+        T getModelItem() {
             return modelItem;
         }
 

@@ -25,11 +25,7 @@ import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.testsuite.TestProperty;
 import com.eviware.soapui.settings.UISettings;
 import com.eviware.soapui.support.action.swing.ActionList;
-import com.eviware.soapui.support.components.ConfigurationDialog;
-import com.eviware.soapui.support.components.JButtonBar;
-import com.eviware.soapui.support.components.JXToolBar;
-import com.eviware.soapui.support.components.PreviewCorner;
-import com.eviware.soapui.support.components.SwingConfigurationDialogImpl;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.swing.GradientPanel;
 import com.eviware.soapui.support.swing.SoapUISplitPaneUI;
 import com.eviware.soapui.support.swing.SwingUtils;
@@ -43,53 +39,13 @@ import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
 import org.syntax.jedit.InputHandler;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JProgressBar;
-import javax.swing.JRootPane;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
-import javax.swing.KeyStroke;
-import javax.swing.ScrollPaneConstants;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicProgressBarUI;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Event;
-import java.awt.Font;
-import java.awt.Frame;
-import java.awt.GraphicsConfiguration;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.Window;
-import java.awt.event.ActionEvent;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
@@ -126,12 +82,12 @@ public class UISupport {
     private static Cursor defaultCursor;
     private static Boolean isHeadless;
 
-    public static final String DEFAULT_EDITOR_FONT = "Courier plain";
-    public static final int DEFAULT_EDITOR_FONT_SIZE = 11;
+    private static final String DEFAULT_EDITOR_FONT = "Courier plain";
+    private static final int DEFAULT_EDITOR_FONT_SIZE = 11;
     public static final Color MAC_BACKGROUND_COLOR = new Color(255, 255, 255);
-    public static final Color MAC_PROGRESSBAR_BACKGROUND_COLOR = new Color(196, 196, 196);
-    public static final Color MAC_PROGRESSBAR_MATTE_BORDER_COLOR = new Color(238, 238, 238);
-    public static final Color MAC_PROGRESSBAR_LINE_BORDER_COLOR = new Color(166, 166, 166);
+    private static final Color MAC_PROGRESSBAR_BACKGROUND_COLOR = new Color(196, 196, 196);
+    private static final Color MAC_PROGRESSBAR_MATTE_BORDER_COLOR = new Color(238, 238, 238);
+    private static final Color MAC_PROGRESSBAR_LINE_BORDER_COLOR = new Color(166, 166, 166);
 
     static {
         setDialogs(new ConsoleDialogs());
@@ -942,7 +898,7 @@ public class UISupport {
         private final JComboBox combo;
         private final String defaultTooltip;
 
-        public ItemListenerImplementation(JComboBox combo, String defaultTooltip) {
+        ItemListenerImplementation(JComboBox combo, String defaultTooltip) {
             this.combo = combo;
             this.defaultTooltip = defaultTooltip;
         }

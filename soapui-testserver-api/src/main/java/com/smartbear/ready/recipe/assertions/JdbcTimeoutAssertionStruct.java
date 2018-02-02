@@ -8,9 +8,9 @@ import io.swagger.annotations.ApiModel;
 import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
 
 @ApiModel(value = "JdbcTimeoutAssertion", description = JdbcTimeoutAssertion.DESCRIPTION)
-public class JdbcTimeoutAssertionStruct extends AssertionStruct<JdbcTimeoutAssertion> {
+class JdbcTimeoutAssertionStruct extends AssertionStruct<JdbcTimeoutAssertion> {
 
-    public final String timeout;
+    private final String timeout;
 
     @JsonCreator
     public JdbcTimeoutAssertionStruct(@JsonProperty("name") String name, @JsonProperty("timeout") String timeout) {

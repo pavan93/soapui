@@ -41,7 +41,7 @@ import java.util.Stack;
  */
 public class PreorderEnumeration implements Enumeration {
     private TreeModel model;
-    protected Stack stack = new Stack();
+    private Stack stack = new Stack();
 
     public PreorderEnumeration(TreePath path, TreeModel model) {
         this(Collections.enumeration(Collections.singletonList(path)), model);

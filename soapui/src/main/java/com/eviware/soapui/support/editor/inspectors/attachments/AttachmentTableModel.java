@@ -26,6 +26,6 @@ import java.io.IOException;
  * @author ole.matzura
  */
 
-public interface AttachmentTableModel extends TableModel {
+interface AttachmentTableModel extends TableModel {
     void addFile(File file, boolean cacheInRequest) throws IOException;
 }

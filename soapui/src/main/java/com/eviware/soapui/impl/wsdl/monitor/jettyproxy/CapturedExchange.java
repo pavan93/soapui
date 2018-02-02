@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.Enumeration;
 
-public class CapturedExchange {
+class CapturedExchange {
 
     private boolean startCapture;
     private boolean stopCapture;

@@ -77,7 +77,7 @@ public class ModelItemFactory {
         return new WsdlProject((WorkspaceImpl) WorkspaceFactory.getInstance().openWorkspace("testWorkSpace", new StringToStringMap()));
     }
 
-    public static WsdlTestCase makeTestCase() throws SoapUIException {
+    private static WsdlTestCase makeTestCase() throws SoapUIException {
         return new WsdlTestCase(new WsdlTestSuite(makeWsdlProject(), TestSuiteConfig.Factory.newInstance()), TestCaseConfig.Factory.newInstance(), false);
     }
 

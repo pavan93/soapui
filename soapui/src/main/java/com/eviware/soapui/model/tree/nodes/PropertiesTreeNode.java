@@ -30,8 +30,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +43,7 @@ public class PropertiesTreeNode<T extends ModelItem> extends AbstractModelItemTr
     private InternalTestPropertyListener testPropertyListener;
     private final TestPropertyHolder holder;
 
-    public PropertiesTreeNode(T modelItem, ModelItem parentItem, TestPropertyHolder holder, SoapUITreeModel treeModel) {
+    PropertiesTreeNode(T modelItem, ModelItem parentItem, TestPropertyHolder holder, SoapUITreeModel treeModel) {
         super(modelItem, parentItem, treeModel);
         this.holder = holder;
 
@@ -146,16 +145,16 @@ public class PropertiesTreeNode<T extends ModelItem> extends AbstractModelItemTr
         }
     }
 
-    public static class PropertiesModelItem extends EmptyModelItem {
+    static class PropertiesModelItem extends EmptyModelItem {
         private final TestPropertyHolder holder;
 
-        public PropertiesModelItem(TestPropertyHolder holder) {
+        PropertiesModelItem(TestPropertyHolder holder) {
             super("Properties (" + holder.getPropertyNames().length + ")", UISupport
                     .createImageIcon("/properties_step.png"));
             this.holder = holder;
         }
 
-        public void updateName() {
+        void updateName() {
             setName("Properties (" + holder.getPropertyNames().length + ")");
         }
     }
@@ -171,7 +170,7 @@ public class PropertiesTreeNode<T extends ModelItem> extends AbstractModelItemTr
     }
 
     private class AddPropertyAction extends AbstractAction {
-        public AddPropertyAction() {
+        AddPropertyAction() {
             super("Add Property");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Adds a property to the property list");

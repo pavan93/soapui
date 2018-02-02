@@ -52,7 +52,7 @@ public class TestOnDemandCallerTest {
     private WsdlTestCase testCase;
     private static final String NOT_THE_RIGHT_HOST = "You need to specify the host name of the test server";
 
-    public final static Logger log = Logger.getLogger(TestOnDemandCallerTest.class);
+    private final static Logger log = Logger.getLogger(TestOnDemandCallerTest.class);
 
     @Before
     public void setUp() {

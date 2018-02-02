@@ -79,7 +79,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
     private JScrollPane scrollPane;
     private EnableDisableSecurityScan enableDisableSecurityScan;
     private JPopupMenu multySecurityScanPopUp;
-    protected boolean multypopupvisible;
+    private boolean multypopupvisible;
     private EnableSecurityScans enableSecurityScansAction;
     private DisableSecurityScans disableSecurityScansAction;
     private ShowOnlineHelpAction showOnlineHelpAction;
@@ -191,7 +191,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         return testStepPopUp;
     }
 
-    protected void initTestStepPopUpActions() {
+    private void initTestStepPopUpActions() {
         testStepPopUp.add(openTestStepEditorAction);
         testStepPopUp.add(addSecurityScanAction);
     }
@@ -218,7 +218,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         return toolbar;
     }
 
-    protected void initToolbarLeft(JXToolBar toolbar) {
+    private void initToolbarLeft(JXToolBar toolbar) {
         addSecurityScanAction = new AddSecurityScanAction();
         configureSecurityScanAction = new ConfigureSecurityScanAction();
         removeSecurityScanAction = new RemoveSecurityScanAction();
@@ -325,9 +325,96 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
 
     }
 
-    public class OpenTestStepEditorAction extends AbstractAction {
+    /**
+     *
+     */
+    private void enableActionsAfterRun() {
+        DefaultMutableTreeNode node = (DefaultMutableTreeNode) securityTestTree.getLastSelectedPathComponent();
 
-        public OpenTestStepEditorAction() {
+        /* if nothing is selected */
+        if (node == null) {
+            return;
+        }
+
+        if (node instanceof TestStepNode) {
+            enableTestStepActions(node);
+        } else if (node instanceof SecurityScanNode) {
+            enableSecurityScanActions();
+        }
+    }
+
+    private void enableSecurityScanActions() {
+        if (securityTest.isRunning()) {
+            return;
+        }
+        securityTestLog.locateSecurityScan(((SecurityScanNode) securityTestTree.getLastSelectedPathComponent())
+                .getSecurityScan());
+        addSecurityScanAction.setEnabled(false);
+        configureSecurityScanAction.setEnabled(true);
+        removeSecurityScanAction.setEnabled(true);
+        if (((SecurityScanNode) securityTestTree.getLastSelectedPathComponent()).getSecurityScan() instanceof AbstractSecurityScanWithProperties) {
+            cloneParametersAction.setEnabled(true);
+            cloneParametersAction
+                    .setSecurityScan((AbstractSecurityScanWithProperties) ((SecurityScanNode) securityTestTree
+                            .getLastSelectedPathComponent()).getSecurityScan());
+        }
+    }
+
+    private void enableTestStepActions(DefaultMutableTreeNode node) {
+        if (securityTest.isRunning()) {
+            return;
+        }
+        if (node.getAllowsChildren()) {
+            addSecurityScanAction.setEnabled(true);
+        } else {
+            addSecurityScanAction.setEnabled(false);
+        }
+        configureSecurityScanAction.setEnabled(false);
+        removeSecurityScanAction.setEnabled(false);
+        cloneParametersAction.setEnabled(false);
+    }
+
+    /**
+     *
+     */
+    private void disableAllActions() {
+        addSecurityScanAction.setEnabled(false);
+        configureSecurityScanAction.setEnabled(false);
+        removeSecurityScanAction.setEnabled(false);
+        cloneParametersAction.setEnabled(false);
+    }
+
+    // tree selection
+    @Override
+    public void valueChanged(TreeSelectionEvent e) {
+        enableActionsAfterRun();
+    }
+
+    public void release() {
+        cellRender.release();
+        securityTest.getTestCase().getTestSuite().removeTestSuiteListener(testSuiteListener);
+        securityTest.removeSecurityTestListener(this);
+        securityTest.removeSecurityTestRunListener(testRunListener);
+        if (treeModel != null) {
+            treeModel.release();
+        }
+    }
+
+    @Override
+    public void securityScanAdded(SecurityScan securityScan) {
+        treeModel.addSecurityScanNode(securityTestTree, securityScan);
+
+    }
+
+    @Override
+    public void securityScanRemoved(SecurityScan securityScan) {
+        cellRender.remove(treeModel.getSecurityScanNode(securityScan));
+        treeModel.removeSecurityScanNode(securityScan);
+    }
+
+    class OpenTestStepEditorAction extends AbstractAction {
+
+        OpenTestStepEditorAction() {
             super("Open Editor");
 
             putValue(Action.SHORT_DESCRIPTION, "Opens the editor for this TestStep");
@@ -342,7 +429,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
 
     }
 
-    public class EnableDisableSecurityScan extends AbstractAction {
+    class EnableDisableSecurityScan extends AbstractAction {
 
         EnableDisableSecurityScan() {
             super("Enable Scan");
@@ -356,7 +443,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
             securityScan.setDisabled(!securityScan.isDisabled());
         }
 
-        public void setText(boolean disabled) {
+        void setText(boolean disabled) {
             if (disabled) {
                 this.putValue(Action.NAME, "Enable Security Scan");
             } else {
@@ -367,8 +454,8 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
     }
 
     // toolbar actions
-    public class AddSecurityScanAction extends AbstractAction {
-        public AddSecurityScanAction() {
+    class AddSecurityScanAction extends AbstractAction {
+        AddSecurityScanAction() {
             super("Add SecurityScan");
 
             putValue(Action.SHORT_DESCRIPTION, "Adds a security scan to this item");
@@ -428,7 +515,7 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
 
     }
 
-    public class ConfigureSecurityScanAction extends AbstractAction {
+    class ConfigureSecurityScanAction extends AbstractAction {
         ConfigureSecurityScanAction() {
             super("Configure");
             putValue(Action.SHORT_DESCRIPTION, "Configures selected security scan");
@@ -455,67 +542,6 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         }
     }
 
-    public class EnableSecurityScans extends AbstractAction {
-        EnableSecurityScans() {
-            super("Enable Scans");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            for (TreePath path : securityTestTree.getSelectionPaths()) {
-                if (path.getLastPathComponent() instanceof SecurityScanNode) {
-                    ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan().setDisabled(false);
-                }
-            }
-        }
-
-    }
-
-    public class DisableSecurityScans extends AbstractAction {
-
-        public DisableSecurityScans() {
-            super("Disable Scans");
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            for (TreePath path : securityTestTree.getSelectionPaths()) {
-                if (path.getLastPathComponent() instanceof SecurityScanNode) {
-                    ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan().setDisabled(true);
-                }
-            }
-        }
-
-    }
-
-    public class ExpandTreeAction extends AbstractAction {
-        public ExpandTreeAction() {
-            super("Expand Tree");
-            putValue(Action.SHORT_DESCRIPTION, "Expand Tree");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-            for (int row = 0; row < securityTestTree.getRowCount(); row++) {
-                securityTestTree.expandRow(row);
-            }
-        }
-    }
-
-    public class CollapsTreeAction extends AbstractAction {
-        public CollapsTreeAction() {
-            super("Collaps Tree");
-            putValue(Action.SHORT_DESCRIPTION, "Collaps Tree");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-
-            for (int row = securityTestTree.getRowCount() - 1; row >= 0; row--) {
-                securityTestTree.collapseRow(row);
-            }
-        }
-    }
-
     public class InternalSecurityTestRunListener extends SecurityTestRunListenerAdapter {
 
         @Override
@@ -536,97 +562,20 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         }
     }
 
-    // tree selection
-    @Override
-    public void valueChanged(TreeSelectionEvent e) {
-        enableActionsAfterRun();
-    }
-
-    /**
-     *
-     */
-    protected void enableActionsAfterRun() {
-        DefaultMutableTreeNode node = (DefaultMutableTreeNode) securityTestTree.getLastSelectedPathComponent();
-
-		/* if nothing is selected */
-        if (node == null) {
-            return;
+    class EnableSecurityScans extends AbstractAction {
+        EnableSecurityScans() {
+            super("Enable Scans");
         }
 
-        if (node instanceof TestStepNode) {
-            enableTestStepActions(node);
-        } else if (node instanceof SecurityScanNode) {
-            enableSecurityScanActions();
-        }
-    }
-
-    protected void enableSecurityScanActions() {
-        if (securityTest.isRunning()) {
-            return;
-        }
-        securityTestLog.locateSecurityScan(((SecurityScanNode) securityTestTree.getLastSelectedPathComponent())
-                .getSecurityScan());
-        addSecurityScanAction.setEnabled(false);
-        configureSecurityScanAction.setEnabled(true);
-        removeSecurityScanAction.setEnabled(true);
-        if (((SecurityScanNode) securityTestTree.getLastSelectedPathComponent()).getSecurityScan() instanceof AbstractSecurityScanWithProperties) {
-            cloneParametersAction.setEnabled(true);
-            cloneParametersAction
-                    .setSecurityScan((AbstractSecurityScanWithProperties) ((SecurityScanNode) securityTestTree
-                            .getLastSelectedPathComponent()).getSecurityScan());
-        }
-    }
-
-    protected void enableTestStepActions(DefaultMutableTreeNode node) {
-        if (securityTest.isRunning()) {
-            return;
-        }
-        if (node.getAllowsChildren()) {
-            addSecurityScanAction.setEnabled(true);
-        } else {
-            addSecurityScanAction.setEnabled(false);
-        }
-        configureSecurityScanAction.setEnabled(false);
-        removeSecurityScanAction.setEnabled(false);
-        cloneParametersAction.setEnabled(false);
-    }
-
-    public class RemoveSecurityScanAction extends AbstractAction {
-        public RemoveSecurityScanAction() {
-            super("Remove SecurityScan");
-            putValue(Action.SHORT_DESCRIPTION, "Removes the selected security scan");
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_security_scan.gif"));
-            setEnabled(false);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if (securityTest.isRunning()) {
-                UISupport.showErrorMessage("Can not delete SecurityScan while the SecurityTest is running");
-                return;
-            }
-
-            if (securityTestTree.getSelectionCount() == 1) {
-                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
-                SecurityScan securityScan = node.getSecurityScan();
-
-                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
-                if (UISupport.confirm("Remove security scan [" + securityScan.getName() + "]", "Remove SecurityScan")) {
-                    securityTest.removeSecurityScan(testStep, securityScan);
-                }
-            } else {
-                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
-
-                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
-                if (UISupport.confirm("Remove all selected security scans", "Remove SecurityScan")) {
-                    for (TreePath path : securityTestTree.getSelectionPaths()) {
-                        if (path.getLastPathComponent() instanceof SecurityScanNode) {
-                            SecurityScan securityScan = ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan();
-                            securityTest.removeSecurityScan(testStep, securityScan);
-                        }
-                    }
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            for (TreePath path : securityTestTree.getSelectionPaths()) {
+                if (path.getLastPathComponent() instanceof SecurityScanNode) {
+                    ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan().setDisabled(false);
                 }
             }
         }
+
     }
 
     @Override
@@ -702,9 +651,92 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
         }
     }
 
-    public class CustomTreeUI extends BasicTreeUI {
+    class DisableSecurityScans extends AbstractAction {
 
-        public CustomTreeUI() {
+        DisableSecurityScans() {
+            super("Disable Scans");
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            for (TreePath path : securityTestTree.getSelectionPaths()) {
+                if (path.getLastPathComponent() instanceof SecurityScanNode) {
+                    ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan().setDisabled(true);
+                }
+            }
+        }
+
+    }
+
+    class ExpandTreeAction extends AbstractAction {
+        ExpandTreeAction() {
+            super("Expand Tree");
+            putValue(Action.SHORT_DESCRIPTION, "Expand Tree");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            for (int row = 0; row < securityTestTree.getRowCount(); row++) {
+                securityTestTree.expandRow(row);
+            }
+        }
+    }
+
+    class CollapsTreeAction extends AbstractAction {
+        CollapsTreeAction() {
+            super("Collaps Tree");
+            putValue(Action.SHORT_DESCRIPTION, "Collaps Tree");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+
+            for (int row = securityTestTree.getRowCount() - 1; row >= 0; row--) {
+                securityTestTree.collapseRow(row);
+            }
+        }
+    }
+
+    class RemoveSecurityScanAction extends AbstractAction {
+        RemoveSecurityScanAction() {
+            super("Remove SecurityScan");
+            putValue(Action.SHORT_DESCRIPTION, "Removes the selected security scan");
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_security_scan.gif"));
+            setEnabled(false);
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if (securityTest.isRunning()) {
+                UISupport.showErrorMessage("Can not delete SecurityScan while the SecurityTest is running");
+                return;
+            }
+
+            if (securityTestTree.getSelectionCount() == 1) {
+                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
+                SecurityScan securityScan = node.getSecurityScan();
+
+                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
+                if (UISupport.confirm("Remove security scan [" + securityScan.getName() + "]", "Remove SecurityScan")) {
+                    securityTest.removeSecurityScan(testStep, securityScan);
+                }
+            } else {
+                SecurityScanNode node = (SecurityScanNode) securityTestTree.getLastSelectedPathComponent();
+
+                TestStep testStep = ((TestStepNode) node.getParent()).getTestStep();
+                if (UISupport.confirm("Remove all selected security scans", "Remove SecurityScan")) {
+                    for (TreePath path : securityTestTree.getSelectionPaths()) {
+                        if (path.getLastPathComponent() instanceof SecurityScanNode) {
+                            SecurityScan securityScan = ((SecurityScanNode) path.getLastPathComponent()).getSecurityScan();
+                            securityTest.removeSecurityScan(testStep, securityScan);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    class CustomTreeUI extends BasicTreeUI {
+
+        CustomTreeUI() {
             super();
             leftChildIndent = 0;
             rightChildIndent = 0;
@@ -774,38 +806,6 @@ public class JSecurityTestTestStepList extends JPanel implements TreeSelectionLi
             // TODO Auto-generated method stub
             // super.paintVerticalPartOfLeg( g, clipBounds, insets, path );
         }
-    }
-
-    public void release() {
-        cellRender.release();
-        securityTest.getTestCase().getTestSuite().removeTestSuiteListener(testSuiteListener);
-        securityTest.removeSecurityTestListener(this);
-        securityTest.removeSecurityTestRunListener(testRunListener);
-        if (treeModel != null) {
-            treeModel.release();
-        }
-    }
-
-    @Override
-    public void securityScanAdded(SecurityScan securityScan) {
-        treeModel.addSecurityScanNode(securityTestTree, securityScan);
-
-    }
-
-    @Override
-    public void securityScanRemoved(SecurityScan securityScan) {
-        cellRender.remove(treeModel.getSecurityScanNode(securityScan));
-        treeModel.removeSecurityScanNode(securityScan);
-    }
-
-    /**
-     *
-     */
-    protected void disableAllActions() {
-        addSecurityScanAction.setEnabled(false);
-        configureSecurityScanAction.setEnabled(false);
-        removeSecurityScanAction.setEnabled(false);
-        cloneParametersAction.setEnabled(false);
     }
 
 }

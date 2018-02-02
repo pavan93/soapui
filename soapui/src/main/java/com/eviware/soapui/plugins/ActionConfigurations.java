@@ -18,11 +18,7 @@ package com.eviware.soapui.plugins;
 
 import com.eviware.soapui.model.ModelItem;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Created by ole on 08/06/14.
@@ -30,7 +26,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ActionConfigurations {
+@interface ActionConfigurations {
     ActionConfiguration[] configurations();
 
     Class targetType() default ModelItem.class;

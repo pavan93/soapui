@@ -29,14 +29,12 @@ import java.util.Enumeration;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class WsdlMockOperationTest {
-    WsdlMockRequest restMockRequest;
-    WsdlMockResponse mockResponse;
-    WsdlMockOperation mockOperation;
+    private WsdlMockRequest restMockRequest;
+    private WsdlMockResponse mockResponse;
+    private WsdlMockOperation mockOperation;
 
     @Before
     public void setUp() throws Exception {

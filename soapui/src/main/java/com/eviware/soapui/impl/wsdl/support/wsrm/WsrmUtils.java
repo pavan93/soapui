@@ -60,7 +60,7 @@ public class WsrmUtils {
 
     public final static String WSRM_NS_1_0 = "http://schemas.xmlsoap.org/ws/2005/02/rm";
     public final static String WSRM_NS_1_1 = "http://docs.oasis-open.org/ws-rx/wsrm/200702";
-    public final static String WSRM_NS_1_2 = "http://docs.oasis-open.org/ws-rx/wsrm/200702";
+    private final static String WSRM_NS_1_2 = "http://docs.oasis-open.org/ws-rx/wsrm/200702";
 
     private SoapVersion soapVersion;
     private XmlObject xmlContentObject;

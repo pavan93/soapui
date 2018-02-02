@@ -28,7 +28,7 @@ public class SecurityConfigurationDialogBuilder {
     }
 
     @AForm(description = "Strategy", name = "Strategy")
-    protected interface Strategy {
+    interface Strategy {
 
         @AField(description = "Strategy", name = "Select strategy", type = AFieldType.RADIOGROUP)
         String STRATEGY = "Select strategy";

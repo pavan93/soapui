@@ -106,7 +106,7 @@ public class RestService extends AbstractInterface<RestServiceConfig> implements
         return isGenerated() ? generateWadlUrl() : getConfig().getDefinitionUrl();
     }
 
-    public String generateWadlUrl() {
+    private String generateWadlUrl() {
         return getName() + ".wadl";
     }
 

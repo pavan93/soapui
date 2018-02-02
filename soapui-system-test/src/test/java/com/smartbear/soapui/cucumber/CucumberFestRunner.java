@@ -33,7 +33,7 @@ import org.junit.runner.RunWith;
         tags = "@AutomatedWithFest",
         format = "json:target/cucumber-fest-results.json")
 public class CucumberFestRunner {
-    public static final int WAIT_FOR_LAST_TEST_TO_SHUTDOWN = 3000;
+    private static final int WAIT_FOR_LAST_TEST_TO_SHUTDOWN = 3000;
     private static NoExitSecurityManagerInstaller noExitSecurityManagerInstaller;
 
     @BeforeClass

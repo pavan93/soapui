@@ -47,8 +47,8 @@ public class DefaultTestStepProperty implements TestStepProperty, RenameableTest
         this.testStep = testStep;
     }
 
-    public DefaultTestStepProperty(String name, boolean isReadOnly, PropertyHandler handler, WsdlTestStep testStep,
-                                   boolean requestPart) {
+    DefaultTestStepProperty(String name, boolean isReadOnly, PropertyHandler handler, WsdlTestStep testStep,
+                            boolean requestPart) {
         this.name = name;
         this.isReadOnly = isReadOnly;
         this.handler = handler;

@@ -34,10 +34,10 @@ import static org.junit.Assert.assertThat;
  */
 public class RestTestRequestStepTest {
 
-    public static final String INTERFACE_NAME = "My Interface";
-    public static final String RESOURCE_NAME = "My Resource";
-    public static final String METHOD_NAME = "My Method";
-    public static final String PATH = "/";
+    private static final String INTERFACE_NAME = "My Interface";
+    private static final String RESOURCE_NAME = "My Resource";
+    private static final String METHOD_NAME = "My Method";
+    private static final String PATH = "/";
 
     @Test
     public void resourceIsFoundEvenThoughMultipleInterfacesWithDuplicateNameExists() throws RestRequestStepFactory.ItemDeletedException {

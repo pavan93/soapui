@@ -21,7 +21,7 @@ import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 
 import java.awt.*;
 
-public interface PropertyExpansionTarget {
+interface PropertyExpansionTarget {
     void insertPropertyExpansion(PropertyExpansion expansion, Point point);
 
     ModelItem getContextModelItem();

@@ -42,10 +42,10 @@ import java.util.List;
  */
 public class OAuth2TokenExtractor {
 
-    public static final String CODE = "code";
-    public static final String TITLE = "<TITLE>";
-    public static final String TOKEN = "token";
-    public static final String ACCESS_TOKEN = "access_token";
+    private static final String CODE = "code";
+    private static final String TITLE = "<TITLE>";
+    private static final String TOKEN = "token";
+    private static final String ACCESS_TOKEN = "access_token";
 
     protected List<BrowserListener> browserListeners = new ArrayList<BrowserListener>();
 
@@ -100,7 +100,7 @@ public class OAuth2TokenExtractor {
         parameters.waitingForAuthorization();
     }
 
-    void extractAccessTokenForROPC(final OAuth2Parameters parameters) throws OAuthProblemException, OAuthSystemException {
+    private void extractAccessTokenForROPC(final OAuth2Parameters parameters) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest accessTokenRequest = getClientRequestForROPC(parameters);
         OAuthClient oAuthClient = getOAuthClient();
 
@@ -125,7 +125,7 @@ public class OAuth2TokenExtractor {
         return accessTokenRequest;
     }
 
-    public void extractAccessTokenForClientCredentialsGrant(final OAuth2Parameters parameters) throws OAuthProblemException, OAuthSystemException {
+    private void extractAccessTokenForClientCredentialsGrant(final OAuth2Parameters parameters) throws OAuthProblemException, OAuthSystemException {
         OAuthClientRequest accessTokenRequest = getClientRequestForClientCredentialsGrant(parameters);
         OAuthClient oAuthClient = getOAuthClient();
 
@@ -198,11 +198,11 @@ public class OAuth2TokenExtractor {
         browserListeners.add(listener);
     }
 
-    protected OAuthClient getOAuthClient() {
+    OAuthClient getOAuthClient() {
         return new OAuthClient(new HttpClient4(HttpClientSupport.getHttpClient()));
     }
 
-    protected UserBrowserFacade getBrowserFacade() {
+    UserBrowserFacade getBrowserFacade() {
         return new WebViewUserBrowserFacade();
     }
 
@@ -299,7 +299,7 @@ public class OAuth2TokenExtractor {
         int pageIndex = 0;
         private UserBrowserFacade browserFacade;
 
-        public BrowserInteractionMonitor(UserBrowserFacade browserFacade, List<String> javaScripts) {
+        BrowserInteractionMonitor(UserBrowserFacade browserFacade, List<String> javaScripts) {
             this.browserFacade = browserFacade;
             this.javaScripts = javaScripts;
         }

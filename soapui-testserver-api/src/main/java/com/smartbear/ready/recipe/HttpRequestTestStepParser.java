@@ -14,9 +14,9 @@ import com.smartbear.ready.recipe.teststeps.RequestAttachmentStruct;
 import java.util.List;
 import java.util.Map;
 
-public abstract class HttpRequestTestStepParser implements TestStepJsonParser {
+abstract class HttpRequestTestStepParser implements TestStepJsonParser {
     @SuppressWarnings("unchecked")
-    protected void addAssertions(HttpTestRequestStepStruct testStepStruct, TestRequest testRequest) {
+    void addAssertions(HttpTestRequestStepStruct testStepStruct, TestRequest testRequest) {
         if (testStepStruct.assertions != null) {
             for (AssertionStruct assertion : testStepStruct.assertions) {
                 if( assertion != null ) {
@@ -27,7 +27,7 @@ public abstract class HttpRequestTestStepParser implements TestStepJsonParser {
         }
     }
 
-    protected void addHeaders(HttpTestRequestStepStruct testStepStruct, AbstractHttpRequest<? extends AbstractRequestConfig> testRequest) {
+    void addHeaders(HttpTestRequestStepStruct testStepStruct, AbstractHttpRequest<? extends AbstractRequestConfig> testRequest) {
         if (testStepStruct.headers != null) {
             StringToStringsMap requestHeaders = new StringToStringsMap();
             for (Map.Entry<String, Object> headerEntry : testStepStruct.headers.entrySet()) {
@@ -53,7 +53,7 @@ public abstract class HttpRequestTestStepParser implements TestStepJsonParser {
         }
     }
 
-    public void addProperties(HttpTestRequestStepStruct testStepStruct, AbstractHttpRequest<? extends AbstractRequestConfig> testRequest) {
+    void addProperties(HttpTestRequestStepStruct testStepStruct, AbstractHttpRequest<? extends AbstractRequestConfig> testRequest) {
         testRequest.setEncoding(testStepStruct.encoding);
         testRequest.setTimeout(testStepStruct.timeout);
         testRequest.setEntitizeProperties(testStepStruct.entitizeParameters);

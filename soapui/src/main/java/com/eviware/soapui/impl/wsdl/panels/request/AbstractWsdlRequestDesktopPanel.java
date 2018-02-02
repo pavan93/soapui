@@ -41,11 +41,7 @@ import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.editor.xml.support.DefaultXmlDocument;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
 /**
  * Abstract DesktopPanel for WsdlRequests
@@ -61,7 +57,7 @@ public abstract class AbstractWsdlRequestDesktopPanel<T extends ModelItem, T2 ex
     private JButton addToMockServiceButton;
     private AbstractAction wsiValidateAction;
 
-    public AbstractWsdlRequestDesktopPanel(T modelItem, T2 request) {
+    protected AbstractWsdlRequestDesktopPanel(T modelItem, T2 request) {
         super(modelItem, request);
     }
 
@@ -90,7 +86,7 @@ public abstract class AbstractWsdlRequestDesktopPanel<T extends ModelItem, T2 ex
         return new WsdlRequestMessageEditor(new RequestXmlDocument(getRequest()));
     }
 
-    public static class OneWayResponseMessageEditor extends ModelItemXmlEditor<ModelItem, DefaultXmlDocument> {
+    private static class OneWayResponseMessageEditor extends ModelItemXmlEditor<ModelItem, DefaultXmlDocument> {
         public OneWayResponseMessageEditor(ModelItem modelItem) {
             super(new DefaultXmlDocument(), modelItem);
         }
@@ -111,9 +107,9 @@ public abstract class AbstractWsdlRequestDesktopPanel<T extends ModelItem, T2 ex
         cloneButton.setEnabled(enabled);
     }
 
-    public class WsdlRequestMessageEditor extends
+    class WsdlRequestMessageEditor extends
             AbstractHttpRequestDesktopPanel<T, T2>.AbstractHttpRequestMessageEditor<XmlDocument> {
-        public WsdlRequestMessageEditor(XmlDocument document) {
+        WsdlRequestMessageEditor(XmlDocument document) {
             super(document);
 
             XmlSourceEditorView<?> editor = getSourceEditor();
@@ -122,9 +118,9 @@ public abstract class AbstractWsdlRequestDesktopPanel<T extends ModelItem, T2 ex
         }
     }
 
-    public class WsdlResponseMessageEditor extends
+    class WsdlResponseMessageEditor extends
             AbstractHttpRequestDesktopPanel<T, T2>.AbstractHttpResponseMessageEditor<XmlDocument> {
-        public WsdlResponseMessageEditor(XmlDocument document) {
+        WsdlResponseMessageEditor(XmlDocument document) {
             super(document);
 
             XmlSourceEditorView<?> editor = getSourceEditor();

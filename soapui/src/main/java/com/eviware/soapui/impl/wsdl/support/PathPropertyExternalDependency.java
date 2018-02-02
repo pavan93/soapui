@@ -26,7 +26,7 @@ public class PathPropertyExternalDependency implements ExternalDependency {
         this(pathProperty, Type.FILE);
     }
 
-    public PathPropertyExternalDependency(AbstractPathPropertySupport pathProperty, Type type) {
+    PathPropertyExternalDependency(AbstractPathPropertySupport pathProperty, Type type) {
         this.pathProperty = pathProperty;
         this.type = type;
     }

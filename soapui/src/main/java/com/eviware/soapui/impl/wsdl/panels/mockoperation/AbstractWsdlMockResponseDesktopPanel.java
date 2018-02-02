@@ -31,10 +31,7 @@ import com.eviware.soapui.support.editor.views.xml.source.XmlSourceEditorView;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.ui.support.AbstractMockResponseDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -49,7 +46,7 @@ public class AbstractWsdlMockResponseDesktopPanel<ModelItemType extends ModelIte
     private JButton openRequestButton;
     private JButton recreateButton;
 
-    public AbstractWsdlMockResponseDesktopPanel(ModelItemType modelItem) {
+    protected AbstractWsdlMockResponseDesktopPanel(ModelItemType modelItem) {
         super(modelItem);
         modelItem.addPropertyChangeListener(propertyChangeListener);
     }
@@ -106,8 +103,8 @@ public class AbstractWsdlMockResponseDesktopPanel<ModelItemType extends ModelIte
         return super.onClose(canCancel);
     }
 
-    public class WsdlMockResponseMessageEditor extends MockResponseMessageEditor {
-        public WsdlMockResponseMessageEditor(XmlDocument document) {
+    class WsdlMockResponseMessageEditor extends MockResponseMessageEditor {
+        WsdlMockResponseMessageEditor(XmlDocument document) {
             super(document);
 
             if (isBidirectional()) {

@@ -161,12 +161,12 @@ public class AuthorizationSelectionDialog<T extends AbstractHttpRequest> {
         return request.getOperation().getInterface().getProject().getOAuth1ProfileContainer();
     }
 
-    public List<String> getBasicAuthenticationTypes() {
+    private List<String> getBasicAuthenticationTypes() {
         return basicAuthTypes;
     }
 
     @AForm(name = "AuthorizationTypeForm.Title", description = "AuthorizationTypeForm.Description", helpUrl = HelpUrls.ADD_AUTHORIZATION)
-    public interface AuthorizationTypeForm {
+    interface AuthorizationTypeForm {
         MessageSupport messages = MessageSupport.getMessages(AuthorizationTypeForm.class);
 
         @AField(description = "AuthorizationTypeForm.AuthorizationType.Description", type = AField.AFieldType.COMBOBOX)
@@ -183,7 +183,7 @@ public class AuthorizationSelectionDialog<T extends AbstractHttpRequest> {
     private static class ProfileNameFieldListener implements XFormFieldListener {
         private final XFormDialog dialog;
 
-        public ProfileNameFieldListener(XFormDialog dialog) {
+        ProfileNameFieldListener(XFormDialog dialog) {
             this.dialog = dialog;
         }
 

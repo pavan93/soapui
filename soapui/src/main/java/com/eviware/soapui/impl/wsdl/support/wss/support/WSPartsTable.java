@@ -22,20 +22,11 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.JTableFactory;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.AbstractAction;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -160,19 +151,19 @@ public class WSPartsTable extends JPanel {
             return null;
         }
 
-        public void remove(int row) {
+        void remove(int row) {
             parts.remove(row);
             fireTableRowsDeleted(row, row);
         }
 
-        public void addParts(StringToStringMap map) {
+        void addParts(StringToStringMap map) {
             parts.add(map);
             fireTableRowsInserted(parts.size() - 1, parts.size() - 1);
         }
     }
 
     private class AddPartAction extends AbstractAction {
-        public AddPartAction() {
+        AddPartAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(SHORT_DESCRIPTION, "Adds a new part");
         }
@@ -184,7 +175,7 @@ public class WSPartsTable extends JPanel {
     }
 
     private class RemovePartAction extends AbstractAction {
-        public RemovePartAction() {
+        RemovePartAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(SHORT_DESCRIPTION, "Removes the selected part");
             setEnabled(false);

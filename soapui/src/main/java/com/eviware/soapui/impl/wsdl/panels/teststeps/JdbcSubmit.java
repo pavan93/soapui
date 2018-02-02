@@ -46,8 +46,8 @@ public class JdbcSubmit implements Submit, Runnable {
     private SubmitListener[] listeners;
     private Exception error;
     private long timestamp;
-    protected ResultSet resultSet;
-    protected PreparedStatement statement;
+    private ResultSet resultSet;
+    private PreparedStatement statement;
     private Connection connection;
     private long timeTaken;
     private final JdbcRequest request;
@@ -175,7 +175,7 @@ public class JdbcSubmit implements Submit, Runnable {
         createResponse();
     }
 
-    public void cancelQuery() {
+    private void cancelQuery() {
         try {
             if (statement != null) {
                 statement.cancel();
@@ -271,7 +271,7 @@ public class JdbcSubmit implements Submit, Runnable {
         return rawSql;
     }
 
-    protected String createResponse() {
+    private String createResponse() {
         try {
             response = new JdbcResponse(request, statement, rawSql);
             response.setTimestamp(timestamp);

@@ -64,7 +64,7 @@ public class SchemaUtils {
         });
     }
 
-    public static void initDefaultSchemas() {
+    private static void initDefaultSchemas() {
         SoapUIClassLoaderState state = SoapUIExtensionClassLoader.ensure();
 
         try {
@@ -161,7 +161,7 @@ public class SchemaUtils {
         }
     }
 
-    public static SchemaTypeSystem buildSchemaTypes(List<XmlObject> schemas) throws SchemaException {
+    private static SchemaTypeSystem buildSchemaTypes(List<XmlObject> schemas) throws SchemaException {
         XmlOptions options = new XmlOptions();
         options.setCompileNoValidation();
         options.setCompileNoPvrRule();
@@ -249,7 +249,7 @@ public class SchemaUtils {
         }
     }
 
-    public static boolean toNextContainer(XmlCursor cursor) {
+    private static boolean toNextContainer(XmlCursor cursor) {
         while (!cursor.isContainer() && !cursor.isEnddoc()) {
             cursor.toNextToken();
         }
@@ -272,7 +272,7 @@ public class SchemaUtils {
      * specified wsdlUrl
      */
 
-    public static void getSchemas(String wsdlUrl, Map<String, XmlObject> existing, SchemaLoader loader, String tns)
+    private static void getSchemas(String wsdlUrl, Map<String, XmlObject> existing, SchemaLoader loader, String tns)
             throws SchemaException {
 
         if (existing.containsKey(wsdlUrl)) {
@@ -450,7 +450,7 @@ public class SchemaUtils {
         return result;
     }
 
-    public static void getDefinitionParts(String origWsdlUrl, Map<String, XmlObject> existing, SchemaLoader loader)
+    private static void getDefinitionParts(String origWsdlUrl, Map<String, XmlObject> existing, SchemaLoader loader)
             throws Exception {
         String wsdlUrl = origWsdlUrl;
         if (existing.containsKey(wsdlUrl)) {
@@ -518,7 +518,7 @@ public class SchemaUtils {
      * SchemaDocuments so that referenced types are not downloaded (again)
      */
 
-    public static void removeImports(XmlObject xmlObject) {
+    private static void removeImports(XmlObject xmlObject) {
         XmlObject[] imports = xmlObject.selectPath("declare namespace s='" + Constants.XSD_NS + "' .//s:import");
 
         for (int c = 0; c < imports.length; c++) {

@@ -24,7 +24,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 @SuppressWarnings("serial")
-public class SecurityTreeRootNode extends DefaultMutableTreeNode implements PropertyChangeListener {
+class SecurityTreeRootNode extends DefaultMutableTreeNode implements PropertyChangeListener {
 
     private SecurityTest securityTest;
 

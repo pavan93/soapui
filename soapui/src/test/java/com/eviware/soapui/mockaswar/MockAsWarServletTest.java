@@ -85,7 +85,7 @@ public class MockAsWarServletTest {
 
 class StubMockAsWarServlet extends MockAsWarServlet {
 
-    ServletContext stubbedServletContext = stubbedServletContext();
+    private ServletContext stubbedServletContext = stubbedServletContext();
 
     public void init() throws ServletException {
         SoapUI.setSoapUICore(new MockServletSoapUICore(getServletContext()), true);

@@ -36,7 +36,7 @@ public class AddNewRestMockServiceAction extends AbstractSoapUIAction<WsdlProjec
         }
     }
 
-    public MockService createRestMockService(WsdlProject project) {
+    private MockService createRestMockService(WsdlProject project) {
         String name = UISupport.prompt("Specify name of MockService", "New MockService",
                 "REST MockService " + (project.getRestMockServiceCount() + 1));
         if (name == null) {

@@ -110,7 +110,7 @@ public class WsdlUtils {
         return result.toArray(new Element[result.size()]);
     }
 
-    public static String[] getExentsibilityAttributes(AttributeExtensible item, QName qname) {
+    private static String[] getExentsibilityAttributes(AttributeExtensible item, QName qname) {
         if (item == null) {
             return new String[0];
         }
@@ -164,7 +164,7 @@ public class WsdlUtils {
         return result.toArray(new String[result.size()]);
     }
 
-    public static Binding findBindingForOperation(Definition definition, BindingOperation bindingOperation) {
+    private static Binding findBindingForOperation(Definition definition, BindingOperation bindingOperation) {
         Map services = definition.getAllServices();
         Iterator<Service> s = services.values().iterator();
 
@@ -418,7 +418,7 @@ public class WsdlUtils {
         return getContentParts(part, multipartInput);
     }
 
-    public static MIMEContent[] getContentParts(Part part, MIMEMultipartRelated multipart) {
+    private static MIMEContent[] getContentParts(Part part, MIMEMultipartRelated multipart) {
         List<MIMEContent> result = new ArrayList<MIMEContent>();
 
         if (multipart != null) {
@@ -698,7 +698,7 @@ public class WsdlUtils {
         return null;
     }
 
-    public static boolean replaceSoapEndpoint(Port port, String endpoint) {
+    private static boolean replaceSoapEndpoint(Port port, String endpoint) {
         SOAPAddress soapAddress = WsdlUtils.getExtensiblityElement(port.getExtensibilityElements(), SOAPAddress.class);
         if (soapAddress != null) {
             soapAddress.setLocationURI(endpoint);
@@ -729,7 +729,7 @@ public class WsdlUtils {
         return null;
     }
 
-    public static final class NonSchemaImportingWsdlReaderImpl extends WSDLReaderImpl {
+    static final class NonSchemaImportingWsdlReaderImpl extends WSDLReaderImpl {
         @SuppressWarnings("unchecked")
         @Override
         protected ExtensibilityElement parseSchema(Class parentType, Element el, Definition def, ExtensionRegistry extReg)
@@ -767,7 +767,7 @@ public class WsdlUtils {
     public static class Soap11Header implements SoapHeader {
         private final SOAPHeader soapHeader;
 
-        public Soap11Header(SOAPHeader soapHeader) {
+        Soap11Header(SOAPHeader soapHeader) {
             this.soapHeader = soapHeader;
         }
 
@@ -789,7 +789,7 @@ public class WsdlUtils {
     public static class Soap12Header implements SoapHeader {
         private final SOAP12Header soapHeader;
 
-        public Soap12Header(SOAP12Header soapHeader) {
+        Soap12Header(SOAP12Header soapHeader) {
             this.soapHeader = soapHeader;
         }
 

@@ -51,7 +51,7 @@ public class MetricsPanel extends JPanel {
     public class Metric {
         private final JLabel label;
 
-        public Metric(JLabel label) {
+        Metric(JLabel label) {
             this.label = label;
         }
 
@@ -67,7 +67,7 @@ public class MetricsPanel extends JPanel {
     public class MetricsSection extends JCollapsiblePanel {
         private MetricsForm form;
 
-        public MetricsSection(String name) {
+        MetricsSection(String name) {
             super(name);
 
             form = new MetricsForm();
@@ -161,14 +161,14 @@ public class MetricsPanel extends JPanel {
     private class MetricsForm extends SimpleForm {
         private Dimension labelDimensions = new Dimension(200, 16);
 
-        public MetricsForm() {
+        MetricsForm() {
             super();
 
             addSpace(7);
             setRowSpacing(3);
         }
 
-        public JPanel finish() {
+        JPanel finish() {
             addSpace(7);
 
             JPanel formPanel = getPanel();
@@ -178,7 +178,7 @@ public class MetricsPanel extends JPanel {
             return formPanel;
         }
 
-        public Metric addMetric(String labelText, ImageIcon icon, boolean isHyperlink) {
+        Metric addMetric(String labelText, ImageIcon icon, boolean isHyperlink) {
             return addMetric(labelText, "", icon, isHyperlink);
         }
 
@@ -186,7 +186,7 @@ public class MetricsPanel extends JPanel {
             return addMetric(labelText, "", icon, false);
         }
 
-        public Metric addMetric(String labelText, String text, ImageIcon icon, boolean isHyperlink) {
+        Metric addMetric(String labelText, String text, ImageIcon icon, boolean isHyperlink) {
             JLabel label = new JLabel(labelText, icon, SwingConstants.LEFT);
             UISupport.setFixedSize(label, labelDimensions);
             label.setIconTextGap(5);
@@ -241,7 +241,7 @@ public class MetricsPanel extends JPanel {
     }
 
     private class InternalCellRenderer extends DefaultTableCellRenderer {
-        public InternalCellRenderer() {
+        InternalCellRenderer() {
             super();
 
             setHorizontalAlignment(SwingConstants.LEFT);

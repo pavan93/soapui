@@ -45,19 +45,19 @@ public abstract class AbstractSAMLCallbackHandler implements SAMLCallbackHandler
         AUTHN, ATTR, AUTHZ
     }
 
-    protected String subjectName = null;
-    protected String subjectQualifier = null;
-    protected String confirmationMethod = null;
-    protected X509Certificate[] certs;
-    protected Statement statement = Statement.AUTHN;
-    protected CERT_IDENTIFIER certIdentifier = CERT_IDENTIFIER.X509_CERT;
-    protected byte[] ephemeralKey = null;
-    protected String issuer = null;
-    protected String subjectNameIDFormat = null;
-    protected String subjectLocalityIpAddress = null;
-    protected String subjectLocalityDnsAddress = null;
-    protected String resource = null;
-    protected List<?> customAttributeValues = null;
+    String subjectName = null;
+    String subjectQualifier = null;
+    String confirmationMethod = null;
+    X509Certificate[] certs;
+    String issuer = null;
+    String subjectNameIDFormat = null;
+    private Statement statement = Statement.AUTHN;
+    private CERT_IDENTIFIER certIdentifier = CERT_IDENTIFIER.X509_CERT;
+    private byte[] ephemeralKey = null;
+    private String subjectLocalityIpAddress = null;
+    private String subjectLocalityDnsAddress = null;
+    private String resource = null;
+    private List<?> customAttributeValues = null;
     private Crypto crypto;
     private String alias;
     private String customAttributeName;
@@ -65,8 +65,8 @@ public abstract class AbstractSAMLCallbackHandler implements SAMLCallbackHandler
     /**
      * Use this for signed assertion
      */
-    public AbstractSAMLCallbackHandler(Crypto crypto, String alias, String assertionTypeFriendlyName,
-                                       String confirmationMethodFriendlyName) {
+    AbstractSAMLCallbackHandler(Crypto crypto, String alias, String assertionTypeFriendlyName,
+                                String confirmationMethodFriendlyName) {
         this.crypto = crypto;
         this.alias = alias;
         setStatement(assertionTypeFriendlyName);
@@ -76,7 +76,7 @@ public abstract class AbstractSAMLCallbackHandler implements SAMLCallbackHandler
     /**
      * Use this is for unsigned assertions
      */
-    public AbstractSAMLCallbackHandler(String assertionTypeFriendlyName, String confirmationMethodFriendlyName) {
+    AbstractSAMLCallbackHandler(String assertionTypeFriendlyName, String confirmationMethodFriendlyName) {
         setStatement(assertionTypeFriendlyName);
         setConfirmationMethod(confirmationMethodFriendlyName);
     }
@@ -171,7 +171,7 @@ public abstract class AbstractSAMLCallbackHandler implements SAMLCallbackHandler
     /**
      * Note that the SubjectBean parameter should be null for SAML2.0
      */
-    protected void createAndSetStatement(SubjectBean subjectBean, SAMLCallback callback) {
+    void createAndSetStatement(SubjectBean subjectBean, SAMLCallback callback) {
         if (statement == Statement.AUTHN) {
             AuthenticationStatementBean authBean = new AuthenticationStatementBean();
             if (subjectBean != null) {
@@ -218,7 +218,7 @@ public abstract class AbstractSAMLCallbackHandler implements SAMLCallbackHandler
         }
     }
 
-    protected KeyInfoBean createKeyInfo() throws Exception {
+    KeyInfoBean createKeyInfo() throws Exception {
         KeyInfoBean keyInfo = new KeyInfoBean();
         if (statement == Statement.AUTHN) {
             keyInfo.setCertificate(certs[0]);

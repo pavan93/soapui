@@ -39,7 +39,7 @@ public class TupleList<T1 extends Object, T2 extends Object> extends ArrayList<T
         private T1 value1;
         private T2 value2;
 
-        public Tuple(T1 value1, T2 value2) {
+        Tuple(T1 value1, T2 value2) {
             this.value1 = value1;
             this.value2 = value2;
         }

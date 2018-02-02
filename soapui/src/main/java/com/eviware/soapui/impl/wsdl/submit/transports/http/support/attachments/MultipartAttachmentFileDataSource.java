@@ -22,7 +22,7 @@ import javax.activation.DataSource;
 import javax.mail.internet.MimeMultipart;
 import java.io.*;
 
-public class MultipartAttachmentFileDataSource implements DataSource {
+class MultipartAttachmentFileDataSource implements DataSource {
     private final MimeMultipart multipart;
 
     public MultipartAttachmentFileDataSource(MimeMultipart multipart) {

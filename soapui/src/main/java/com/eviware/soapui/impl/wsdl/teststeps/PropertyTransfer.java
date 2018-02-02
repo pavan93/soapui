@@ -31,11 +31,7 @@ import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.support.JsonPathFacade;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 import com.eviware.soapui.support.StringUtils;
-import com.eviware.soapui.support.resolver.ChooseAnotherPropertySourceResolver;
-import com.eviware.soapui.support.resolver.ChooseAnotherPropertyTargetResolver;
-import com.eviware.soapui.support.resolver.CreateMissingPropertyResolver;
-import com.eviware.soapui.support.resolver.DisablePropertyTransferResolver;
-import com.eviware.soapui.support.resolver.ResolveContext;
+import com.eviware.soapui.support.resolver.*;
 import com.eviware.soapui.support.resolver.ResolveContext.PathToResolve;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.log4j.Logger;
@@ -75,9 +71,9 @@ public class PropertyTransfer implements PropertyChangeNotifier {
     public final static String TARGET_PATH_PROPERTY = PropertyTransfer.class.getName() + "@targetPath";
     public final static String TARGET_TYPE_PROPERTY = PropertyTransfer.class.getName() + "@targetProperty";
     public final static String TARGET_STEP_PROPERTY = PropertyTransfer.class.getName() + "@targetStep";
-    public final static String NAME_PROPERTY = PropertyTransfer.class.getName() + "@name";
+    private final static String NAME_PROPERTY = PropertyTransfer.class.getName() + "@name";
     public final static String DISABLED_PROPERTY = PropertyTransfer.class.getName() + "@disabled";
-    public final static String CONFIG_PROPERTY = PropertyTransfer.class.getName() + "@config";
+    private final static String CONFIG_PROPERTY = PropertyTransfer.class.getName() + "@config";
 
     private TestStep testStep;
 
@@ -103,7 +99,7 @@ public class PropertyTransfer implements PropertyChangeNotifier {
 
     private InternalTestSuiteListener testSuiteListener = new InternalTestSuiteListener();
 
-    public PropertyTransfer(TestStep testStep) {
+    private PropertyTransfer(TestStep testStep) {
         this(testStep, PropertyTransferConfig.Factory.newInstance());
     }
 
@@ -122,7 +118,7 @@ public class PropertyTransfer implements PropertyChangeNotifier {
         this.config = config;
     }
 
-    void setConfig(PropertyTransferConfig config) {
+    private void setConfig(PropertyTransferConfig config) {
         releaseListeners();
 
         this.config = config;
@@ -239,7 +235,7 @@ public class PropertyTransfer implements PropertyChangeNotifier {
         }
     }
 
-    public void releaseListeners() {
+    private void releaseListeners() {
         if (currentSourceStep != null) {
             if (currentSourceStep instanceof TestStep) {
                 ((TestStep) currentSourceStep).removePropertyChangeListener(TestStep.NAME_PROPERTY,
@@ -466,8 +462,8 @@ public class PropertyTransfer implements PropertyChangeNotifier {
         return path != null && path.trim().length() > 0;
     }
 
-    protected String[] transferXPathToXml(TestProperty sourceProperty, TestProperty targetProperty,
-                                          SubmitContext context) throws Exception {
+    private String[] transferXPathToXml(TestProperty sourceProperty, TestProperty targetProperty,
+                                        SubmitContext context) throws Exception {
         XmlCursor sourceXml;
         try {
             String sourcePropertyValue = sourceProperty.getValue();

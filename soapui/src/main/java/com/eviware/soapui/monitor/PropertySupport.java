@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.PropertyUtils;
 import java.beans.PropertyDescriptor;
 import java.util.Properties;
 
-public class PropertySupport {
+class PropertySupport {
     public static void applySystemProperties(Object target, String scope, ModelItem modelItem) {
         PropertyDescriptor[] descriptors = PropertyUtils.getPropertyDescriptors(target);
         DefaultPropertyExpansionContext context = new DefaultPropertyExpansionContext(modelItem);

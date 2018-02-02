@@ -38,7 +38,7 @@ import java.util.List;
 import static com.eviware.soapui.analytics.SoapUIActions.GENERATE_REST_MOCK_FROM_NAVIGATOR;
 
 public class GenerateRestMockServiceAction extends AbstractSoapUIAction<RestService> {
-    XFormDialog dialog = null;
+    private XFormDialog dialog = null;
 
     public GenerateRestMockServiceAction() {
         super("Generate REST Mock Service", "Generates a REST mock service containing all resources of this REST service");
@@ -120,12 +120,12 @@ public class GenerateRestMockServiceAction extends AbstractSoapUIAction<RestServ
     /*
      * only for injecting the dialog when testing
      */
-    protected void setFormDialog(XFormDialog dialog) {
+    void setFormDialog(XFormDialog dialog) {
         this.dialog = dialog;
     }
 
     @AForm(name = "Generate REST Mock Service", description = "Set name for the new REST Mock Service", helpUrl = HelpUrls.GENERATE_REST_MOCKSERVICE)
-    protected interface Form {
+    interface Form {
         @AField(name = "MockService Name", description = "The Mock Service name", type = AField.AFieldType.STRING)
         String MOCKSERVICE_NAME = "MockService Name";
     }

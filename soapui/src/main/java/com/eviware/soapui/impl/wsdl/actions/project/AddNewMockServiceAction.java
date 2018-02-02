@@ -43,7 +43,7 @@ public class AddNewMockServiceAction extends AbstractSoapUIAction<WsdlProject> {
         }
     }
 
-    public WsdlMockService createMockService(WsdlProject project) {
+    private WsdlMockService createMockService(WsdlProject project) {
         String name = UISupport.prompt("Specify name of MockService", "New MockService",
                 "MockService " + (project.getMockServiceCount() + 1));
         if (name == null) {

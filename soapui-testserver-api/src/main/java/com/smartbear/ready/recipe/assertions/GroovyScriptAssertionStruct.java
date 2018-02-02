@@ -11,9 +11,9 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures the JSON configuration of a Groovy script tests step.
  */
 @ApiModel(value = "GroovyScriptAssertion", description = "Groovy script assertion definition")
-public class GroovyScriptAssertionStruct extends AssertionStruct<GroovyScriptAssertion> {
+class GroovyScriptAssertionStruct extends AssertionStruct<GroovyScriptAssertion> {
 
-    public final String script;
+    private final String script;
 
     @JsonCreator
     public GroovyScriptAssertionStruct(@JsonProperty("name") String name, @JsonProperty("script") String script) {

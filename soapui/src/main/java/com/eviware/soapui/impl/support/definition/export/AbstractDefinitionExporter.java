@@ -37,15 +37,15 @@ import java.util.Map;
 public abstract class AbstractDefinitionExporter<T extends Interface> implements DefinitionExporter {
     private InterfaceDefinition<T> definition;
 
-    public AbstractDefinitionExporter(InterfaceDefinition<T> definition) {
+    AbstractDefinitionExporter(InterfaceDefinition<T> definition) {
         this.definition = definition;
     }
 
-    public InterfaceDefinition<T> getDefinition() {
+    InterfaceDefinition<T> getDefinition() {
         return definition;
     }
 
-    public void setDefinition(InterfaceDefinition<T> definition) {
+    void setDefinition(InterfaceDefinition<T> definition) {
         this.definition = definition;
     }
 
@@ -116,7 +116,7 @@ public abstract class AbstractDefinitionExporter<T extends Interface> implements
         return result;
     }
 
-    protected void postProcessing(XmlObject obj, InterfaceDefinitionPart part) {
+    void postProcessing(XmlObject obj, InterfaceDefinitionPart part) {
     }
 
     private void setFilenameForPart(InterfaceDefinitionPart part, Map<String, String> urlToFileMap, String urlPrefix) {

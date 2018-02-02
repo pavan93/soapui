@@ -33,7 +33,7 @@ class MutableValue {
 
     private Object value;
 
-    MutableValue(Object value) {
+    private MutableValue(Object value) {
         this.value = value;
     }
 
@@ -45,7 +45,7 @@ class MutableValue {
         }
     }
 
-    Object getValue() {
+    private Object getValue() {
         return value;
     }
 

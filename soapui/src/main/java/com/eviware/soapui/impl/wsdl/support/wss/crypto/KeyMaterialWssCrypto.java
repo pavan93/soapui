@@ -128,7 +128,7 @@ public class KeyMaterialWssCrypto implements WssCrypto {
         sourceProperty.setConfig(config);
     }
 
-    public void setSource(String source) {
+    private void setSource(String source) {
         sourceProperty.set(source, true);
         keyStore = null;
     }
@@ -305,7 +305,7 @@ public class KeyMaterialWssCrypto implements WssCrypto {
         return type;
     }
 
-    public void setType(@Nonnull CryptoType type) {
+    private void setType(@Nonnull CryptoType type) {
         config.setType(type.name());
     }
 

@@ -23,14 +23,8 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.SimpleForm;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -84,7 +78,7 @@ public class SetCredentialsAction extends AbstractAction {
     }
 
     private class OkAction extends AbstractAction {
-        public OkAction() {
+        OkAction() {
             super("OK");
         }
 
@@ -104,7 +98,7 @@ public class SetCredentialsAction extends AbstractAction {
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             super("Cancel");
         }
 

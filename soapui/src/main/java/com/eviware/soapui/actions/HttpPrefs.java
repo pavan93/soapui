@@ -31,26 +31,26 @@ import java.util.TreeMap;
  */
 
 public class HttpPrefs implements Prefs {
-    public static final String AUTHENTICATE_PREEMPTIVELY = "Authenticate Preemptively";
-    public static final String EXPECT_CONTINUE = "Expect Continue";
-    public static final String INCLUDE_REQUEST_IN_TIME_TAKEN = "Include request in time taken";
-    public static final String INCLUDE_RESPONSE_IN_TIME_TAKEN = "Include response in time taken";
-    public static final String REQUEST_COMPRESSION = "Request compression";
-    public static final String RESPONSE_COMPRESSION = "Response compression";
-    public static final String CLOSE_CONNECTIONS_AFTER_REQUEST = "Close connections after request";
-    public static final String USER_AGENT_HEADER = "User-Agent Header";
-    public static final String SOCKET_TIMEOUT = "Socket Timeout";
-    public static final String MAX_RESPONSE_SIZE = "Max response size";
-    public static final String ENCODED_URLS = "Pre-encoded Endpoints";
-    public static final String MAX_CONNECTIONS_PER_HOST = "Max Connections Per Host";
-    public static final String MAX_TOTAL_CONNECTIONS = "Max Total Connections";
-    public static final String BIND_ADDRESS = "Bind Address";
-    public static final String LEAVE_MOCKENGINE = "Leave MockEngine";
-    public static final String CHUNKING_THRESHOLD = "Chunking Threshold";
-    public static final String HTTP_VERSION = "HTTP Version";
-    public static final String ENABLE_MOCK_WIRE_LOG = "Enable Mock HTTP Log";
-    public static final String DISABLE_RESPONSE_DECOMPRESSION = "Disable Response Decompression";
-    public static final String FORWARD_SLASHES = "Normalize Forward Slashes";
+    private static final String AUTHENTICATE_PREEMPTIVELY = "Authenticate Preemptively";
+    private static final String EXPECT_CONTINUE = "Expect Continue";
+    private static final String INCLUDE_REQUEST_IN_TIME_TAKEN = "Include request in time taken";
+    private static final String INCLUDE_RESPONSE_IN_TIME_TAKEN = "Include response in time taken";
+    private static final String REQUEST_COMPRESSION = "Request compression";
+    private static final String RESPONSE_COMPRESSION = "Response compression";
+    private static final String CLOSE_CONNECTIONS_AFTER_REQUEST = "Close connections after request";
+    private static final String USER_AGENT_HEADER = "User-Agent Header";
+    private static final String SOCKET_TIMEOUT = "Socket Timeout";
+    private static final String MAX_RESPONSE_SIZE = "Max response size";
+    private static final String ENCODED_URLS = "Pre-encoded Endpoints";
+    private static final String MAX_CONNECTIONS_PER_HOST = "Max Connections Per Host";
+    private static final String MAX_TOTAL_CONNECTIONS = "Max Total Connections";
+    private static final String BIND_ADDRESS = "Bind Address";
+    private static final String LEAVE_MOCKENGINE = "Leave MockEngine";
+    private static final String CHUNKING_THRESHOLD = "Chunking Threshold";
+    private static final String HTTP_VERSION = "HTTP Version";
+    private static final String ENABLE_MOCK_WIRE_LOG = "Enable Mock HTTP Log";
+    private static final String DISABLE_RESPONSE_DECOMPRESSION = "Disable Response Decompression";
+    private static final String FORWARD_SLASHES = "Normalize Forward Slashes";
 
     private static TreeMap<String, String> compressionAlgs = new TreeMap<String, String>();
 

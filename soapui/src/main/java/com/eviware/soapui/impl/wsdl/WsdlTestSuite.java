@@ -23,12 +23,7 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestSuiteRunner;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.support.ModelSupport;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestSuite;
-import com.eviware.soapui.model.testsuite.TestSuiteListener;
-import com.eviware.soapui.model.testsuite.TestSuiteRunContext;
-import com.eviware.soapui.model.testsuite.TestSuiteRunListener;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
@@ -39,14 +34,7 @@ import com.eviware.soapui.support.types.StringToObjectMap;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * TestSuite implementation for WSDL projects.
@@ -55,8 +43,8 @@ import java.util.UUID;
  */
 
 public class WsdlTestSuite extends AbstractTestPropertyHolderWsdlModelItem<TestSuiteConfig> implements TestSuite {
-    public final static String SETUP_SCRIPT_PROPERTY = WsdlTestSuite.class.getName() + "@setupScript";
-    public final static String TEARDOWN_SCRIPT_PROPERTY = WsdlTestSuite.class.getName() + "@tearDownScript";
+    private final static String SETUP_SCRIPT_PROPERTY = WsdlTestSuite.class.getName() + "@setupScript";
+    private final static String TEARDOWN_SCRIPT_PROPERTY = WsdlTestSuite.class.getName() + "@tearDownScript";
     public static final String ICON_NAME = "/test_suite.png";
 
     private final WsdlProject project;
@@ -230,7 +218,7 @@ public class WsdlTestSuite extends AbstractTestPropertyHolderWsdlModelItem<TestS
         }
     }
 
-    public void fireTestCaseAdded(WsdlTestCase testCase) {
+    private void fireTestCaseAdded(WsdlTestCase testCase) {
         TestSuiteListener[] a = testSuiteListeners.toArray(new TestSuiteListener[testSuiteListeners.size()]);
 
         for (int c = 0; c < a.length; c++) {
@@ -238,7 +226,7 @@ public class WsdlTestSuite extends AbstractTestPropertyHolderWsdlModelItem<TestS
         }
     }
 
-    public void fireTestCaseRemoved(WsdlTestCase testCase) {
+    private void fireTestCaseRemoved(WsdlTestCase testCase) {
         TestSuiteListener[] a = testSuiteListeners.toArray(new TestSuiteListener[testSuiteListeners.size()]);
 
         for (int c = 0; c < a.length; c++) {

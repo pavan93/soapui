@@ -77,10 +77,10 @@ public class PropertyHolderTable extends JPanel {
     protected final TestPropertyHolder holder;
     protected DefaultPropertyHolderTableModel propertiesModel;
     protected RemovePropertyAction removePropertyAction;
-    protected AddParamAction addPropertyAction;
+    private AddParamAction addPropertyAction;
     protected JTable propertiesTable;
-    protected JXToolBar toolbar;
-    protected LoadPropertiesAction loadPropertiesAction;
+    private JXToolBar toolbar;
+    private LoadPropertiesAction loadPropertiesAction;
     protected MovePropertyUpAction movePropertyUpAction;
     protected MovePropertyDownAction movePropertyDownAction;
     private EnvironmentListener environmentListener;
@@ -266,8 +266,33 @@ public class PropertyHolderTable extends JPanel {
         super.setEnabled(enabled);
     }
 
+    /**
+     * Idea is that all values which property name starts or ends with 'password'
+     * case insesitive be shadowed.
+     * This cell render in applied only on property value column.
+     *
+     * @author robert
+     */
+    static class PropertiesTableCellRenderer extends DefaultTableCellRenderer {
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+            if (value instanceof String) {
+                if (((String) value).length() > 0) {
+                    String val = ((String) table.getValueAt(row, 0)).toLowerCase();
+                    if (val.startsWith("password") || val.endsWith("password")) {
+                        component = super.getTableCellRendererComponent(table, "**************", isSelected, hasFocus, row,
+                                column);
+                    }
+                }
+            }
+
+            return component;
+        }
+    }
+
     protected class RemovePropertyAction extends AbstractAction {
-        public RemovePropertyAction() {
+        RemovePropertyAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Removes the selected property from the property list");
             setEnabled(false);
@@ -289,8 +314,8 @@ public class PropertyHolderTable extends JPanel {
         }
     }
 
-    protected class ClearPropertiesAction extends AbstractAction {
-        public ClearPropertiesAction() {
+    class ClearPropertiesAction extends AbstractAction {
+        ClearPropertiesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clear.png"));
             putValue(Action.SHORT_DESCRIPTION, "Clears all current property values");
         }
@@ -311,7 +336,7 @@ public class PropertyHolderTable extends JPanel {
     protected class LoadPropertiesAction extends AbstractAction {
         private XFormDialog dialog;
 
-        public LoadPropertiesAction() {
+        LoadPropertiesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/load_properties.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Loads property values from an external file");
         }
@@ -450,7 +475,7 @@ public class PropertyHolderTable extends JPanel {
     }
 
     private class SavePropertiesAction extends AbstractAction {
-        public SavePropertiesAction() {
+        SavePropertiesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/set_properties_target.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Saves current property-values to a file");
         }
@@ -473,28 +498,6 @@ public class PropertyHolderTable extends JPanel {
         }
     }
 
-    private class SortPropertiesAction extends AbstractAction {
-        public SortPropertiesAction() {
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/arrow_down.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Sorts properties alphabetically");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if (holder.getPropertyCount() == 0) {
-                UISupport.showErrorMessage("No properties to sort!");
-                return;
-            }
-
-            try {
-                UISupport.setHourglassCursor();
-                propertiesModel.sort();
-            } finally {
-                UISupport.resetCursor();
-            }
-
-        }
-    }
-
     @AForm(name = "Load Properties", description = "Set load options below")
     private interface LoadOptionsForm {
         @AField(name = "File", description = "The Properties file to load", type = AFieldType.FILE)
@@ -513,6 +516,28 @@ public class PropertyHolderTable extends JPanel {
 
     public PropertyHolderTableModel getPropertiesModel() {
         return propertiesModel;
+    }
+
+    private class SortPropertiesAction extends AbstractAction {
+        SortPropertiesAction() {
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/arrow_down.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Sorts properties alphabetically");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if (holder.getPropertyCount() == 0) {
+                UISupport.showErrorMessage("No properties to sort!");
+                return;
+            }
+
+            try {
+                UISupport.setHourglassCursor();
+                propertiesModel.sort();
+            } finally {
+                UISupport.resetCursor();
+            }
+
+        }
     }
 
     public final class PropertyHolderTablePropertyExpansionDropTarget implements DropTargetListener {
@@ -593,7 +618,7 @@ public class PropertyHolderTable extends JPanel {
         public void dropActionChanged(DropTargetDragEvent dtde) {
         }
 
-        public boolean isAcceptable(Transferable transferable, Point point) {
+        boolean isAcceptable(Transferable transferable, Point point) {
             int row = getPropertiesTable().rowAtPoint(point);
             if (row >= 0) {
                 int column = getPropertiesTable().columnAtPoint(point);
@@ -627,31 +652,6 @@ public class PropertyHolderTable extends JPanel {
             }
 
             return false;
-        }
-    }
-
-    /**
-     * Idea is that all values which property name starts or ends with 'password'
-     * case insesitive be shadowed.
-     * This cell render in applied only on property value column.
-     *
-     * @author robert
-     */
-    protected static class PropertiesTableCellRenderer extends DefaultTableCellRenderer {
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                                                       int row, int column) {
-            Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-            if (value instanceof String) {
-                if (((String) value).length() > 0) {
-                    String val = ((String) table.getValueAt(row, 0)).toLowerCase();
-                    if (val.startsWith("password") || val.endsWith("password")) {
-                        component = super.getTableCellRendererComponent(table, "**************", isSelected, hasFocus, row,
-                                column);
-                    }
-                }
-            }
-
-            return component;
         }
     }
 

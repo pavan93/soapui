@@ -19,7 +19,7 @@ package com.eviware.soapui.impl.wsdl.monitor;
 /**
  * class to simulate slow connections by slowing down the system
  */
-public class SlowLinkSimulator {
+class SlowLinkSimulator {
 
     /**
      * Field delayBytes

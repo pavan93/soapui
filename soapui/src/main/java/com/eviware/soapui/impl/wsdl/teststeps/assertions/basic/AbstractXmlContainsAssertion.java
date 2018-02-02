@@ -51,18 +51,18 @@ import java.util.List;
 public abstract class AbstractXmlContainsAssertion extends WsdlMessageAssertion implements RequestAssertion, ResponseAssertion,
 XPathReferenceContainer{
 
-    protected String expectedContent;
-    protected String path;
+    String expectedContent;
+    String path;
 
-    protected boolean allowWildcards;
-    protected boolean ignoreNamespaceDifferences;
-    protected boolean ignoreComments;
+    boolean allowWildcards;
+    boolean ignoreComments;
+    private boolean ignoreNamespaceDifferences;
     
     protected AssertionConfigurationDialog configurationDialog;
-    
-	protected AbstractXmlContainsAssertion(TestAssertionConfig assertionConfig,
-			Assertable modelItem, boolean cloneable, boolean configurable,
-			boolean multiple, boolean requiresResponseContent) {
+
+    AbstractXmlContainsAssertion(TestAssertionConfig assertionConfig,
+                                 Assertable modelItem, boolean cloneable, boolean configurable,
+                                 boolean multiple, boolean requiresResponseContent) {
 		super(assertionConfig, modelItem, cloneable, configurable, multiple,
 				requiresResponseContent);
 
@@ -245,12 +245,12 @@ XPathReferenceContainer{
 	    public boolean canAssertXmlContent() {
 	        return true;
 	    }
-	    
-	    protected void addMatchEditorActions(JXToolBar toolbar) {
+
+    void addMatchEditorActions(JXToolBar toolbar) {
 	        configurationDialog.addMatchEditorActions(toolbar);
 	    }
-	    
-	    protected void addPathEditorActions(JXToolBar toolbar) {
+
+    void addPathEditorActions(JXToolBar toolbar) {
 	        configurationDialog.addDeclareNamespaceButton(toolbar);
 	    }
 	    
@@ -271,8 +271,8 @@ XPathReferenceContainer{
 
 	        return result.toArray(new XPathReference[result.size()]);
 	    }
-	    
-	    protected final class InternalDifferenceListener implements DifferenceListener {
+
+    final class InternalDifferenceListener implements DifferenceListener {
 	        private StringList nodesToRemove = new StringList();
 	 
 	        public int differenceFound(Difference diff) {
@@ -307,7 +307,7 @@ XPathReferenceContainer{
 
 	        }
 
-	        public StringList getNodesToRemove() {
+        StringList getNodesToRemove() {
 	            return nodesToRemove;
 	        }
 	    }

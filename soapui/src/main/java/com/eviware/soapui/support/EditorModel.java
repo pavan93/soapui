@@ -22,7 +22,7 @@ import com.eviware.soapui.model.settings.Settings;
  * Basic EditorModel for SoapUI editors
  */
 
-public interface EditorModel {
+interface EditorModel {
     /**
      * Return the settings to use for storing customizations (line-numbers, etc)
      *

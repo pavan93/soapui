@@ -171,7 +171,7 @@ public class JsonXmlSerializer {
      * @param uri         namespace uri
      * @param elementName name of target element
      */
-    public void addNamespace(String prefix, String uri, String elementName) {
+    private void addNamespace(String prefix, String uri, String elementName) {
         if (StringUtils.isBlank(uri)) {
             return;
         }
@@ -216,15 +216,16 @@ public class JsonXmlSerializer {
     /**
      * Returns the name used for JSONArray.
      */
-    public String getArrayName() {
+    private String getArrayName() {
         return arrayName;
     }
 
     /**
-     * Returns the name used for JSONArray elements.
+     * Sets the name used for JSONArray.<br>
+     * Default is 'a'.
      */
-    public String getElementName() {
-        return elementName;
+    private void setArrayName(String arrayName) {
+        this.arrayName = StringUtils.isBlank(arrayName) ? "a" : arrayName;
     }
 
     /**
@@ -235,17 +236,18 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Returns the name used for JSONArray.
+     * Returns the name used for JSONArray elements.
      */
-    public String getObjectName() {
-        return objectName;
+    private String getElementName() {
+        return elementName;
     }
 
     /**
-     * Returns the name used for the root element.
+     * Sets the name used for JSONArray elements.<br>
+     * Default is 'e'.
      */
-    public String getRootName() {
-        return rootName;
+    private void setElementName(String elementName) {
+        this.elementName = StringUtils.isBlank(elementName) ? "e" : elementName;
     }
 
     public boolean isForceTopLevelObject() {
@@ -253,19 +255,18 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Returns wether this serializer is tolerant to namespaces without URIs or
-     * not.
+     * Returns the name used for JSONArray.
      */
-    public boolean isNamespaceLenient() {
-        return namespaceLenient;
+    private String getObjectName() {
+        return objectName;
     }
 
     /**
-     * Returns wether this serializer will remove namespace prefix from elements
-     * or not.
+     * Sets the name used for JSONObject.<br>
+     * Default is 'o'.
      */
-    public boolean isRemoveNamespacePrefixFromElements() {
-        return removeNamespacePrefixFromElements;
+    private void setObjectName(String objectName) {
+        this.objectName = StringUtils.isBlank(objectName) ? "o" : objectName;
     }
 
     /**
@@ -284,25 +285,25 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Returns wether this serializer will trim leading and trealing whitespace
-     * from values or not.
+     * Returns the name used for the root element.
      */
-    public boolean isTrimSpaces() {
-        return trimSpaces;
+    private String getRootName() {
+        return rootName;
     }
 
     /**
-     * Returns true if types hints will have a 'json_' prefix or not.
+     * Sets the name used for the root element.
      */
-    public boolean isTypeHintsCompatibility() {
-        return typeHintsCompatibility;
+    public void setRootName(String rootName) {
+        this.rootName = StringUtils.isBlank(rootName) ? null : rootName;
     }
 
     /**
-     * Returns true if JSON types will be included as attributes.
+     * Returns wether this serializer is tolerant to namespaces without URIs or
+     * not.
      */
-    public boolean isTypeHintsEnabled() {
-        return typeHintsEnabled;
+    private boolean isNamespaceLenient() {
+        return namespaceLenient;
     }
 
     /**
@@ -381,25 +382,26 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Creates a JSON value from an input stream.
-     *
-     * @param stream
-     * @return a JSONNull, JSONObject or JSONArray
-     * @throws JSONException if the conversion from XML to JSON can't be made for I/O or
-     *                       format reasons.
+     * Sets wether this serializer is tolerant to namespaces without URIs or not.
      */
-    public JSON readFromStream(InputStream stream) {
-        try {
-            StringBuffer xml = new StringBuffer();
-            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
-            String line = null;
-            while ((line = in.readLine()) != null) {
-                xml.append(line);
-            }
-            return read(xml.toString());
-        } catch (IOException ioe) {
-            throw new JSONException(ioe);
-        }
+    private void setNamespaceLenient(boolean namespaceLenient) {
+        this.namespaceLenient = namespaceLenient;
+    }
+
+    /**
+     * Returns wether this serializer will remove namespace prefix from elements
+     * or not.
+     */
+    private boolean isRemoveNamespacePrefixFromElements() {
+        return removeNamespacePrefixFromElements;
+    }
+
+    /**
+     * Sets if this serializer will remove namespace prefix from elements when
+     * reading.
+     */
+    private void setRemoveNamespacePrefixFromElements(boolean removeNamespacePrefixFromElements) {
+        this.removeNamespacePrefixFromElements = removeNamespacePrefixFromElements;
     }
 
     /**
@@ -412,46 +414,33 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Removes a namespace from the root element.<br>
-     * If the elementName is null or blank, the namespace will be removed from
-     * the root element.
-     *
-     * @param prefix      namespace prefix
-     * @param elementName name of target element
+     * Returns wether this serializer will trim leading and trealing whitespace
+     * from values or not.
      */
-    public void removeNamespace(String prefix, String elementName) {
-        if (prefix == null) {
-            prefix = "";
-        }
-        if (StringUtils.isBlank(elementName)) {
-            rootNamespace.remove(prefix.trim());
-        } else {
-            Map nameSpaces = (Map) namespacesPerElement.get(elementName);
-            nameSpaces.remove(prefix);
-        }
+    private boolean isTrimSpaces() {
+        return trimSpaces;
     }
 
     /**
-     * Sets the name used for JSONArray.<br>
-     * Default is 'a'.
+     * Sets if this serializer will trim leading and trealing whitespace from
+     * values when reading.
      */
-    public void setArrayName(String arrayName) {
-        this.arrayName = StringUtils.isBlank(arrayName) ? "a" : arrayName;
+    private void setTrimSpaces(boolean trimSpaces) {
+        this.trimSpaces = trimSpaces;
     }
 
     /**
-     * Sets the name used for JSONArray elements.<br>
-     * Default is 'e'.
+     * Returns true if types hints will have a 'json_' prefix or not.
      */
-    public void setElementName(String elementName) {
-        this.elementName = StringUtils.isBlank(elementName) ? "e" : elementName;
+    private boolean isTypeHintsCompatibility() {
+        return typeHintsCompatibility;
     }
 
     /**
-     * Sets the list of properties to be expanded from child to parent.
+     * Sets wether types hints will have a 'json_' prefix or not.
      */
-    public void setExpandableProperties(String[] expandableProperties) {
-        this.expandableProperties = expandableProperties == null ? EMPTY_ARRAY : expandableProperties;
+    private void setTypeHintsCompatibility(boolean typeHintsCompatibility) {
+        this.typeHintsCompatibility = typeHintsCompatibility;
     }
 
     public void setForceTopLevelObject(boolean forceTopLevelObject) {
@@ -470,6 +459,69 @@ public class JsonXmlSerializer {
     }
 
     /**
+     * Returns true if JSON types will be included as attributes.
+     */
+    private boolean isTypeHintsEnabled() {
+        return typeHintsEnabled;
+    }
+
+    /**
+     * Creates a JSON value from an input stream.
+     *
+     * @param stream
+     * @return a JSONNull, JSONObject or JSONArray
+     * @throws JSONException if the conversion from XML to JSON can't be made for I/O or
+     *                       format reasons.
+     */
+    private JSON readFromStream(InputStream stream) {
+        try {
+            StringBuffer xml = new StringBuffer();
+            BufferedReader in = new BufferedReader(new InputStreamReader(stream));
+            String line = null;
+            while ((line = in.readLine()) != null) {
+                xml.append(line);
+            }
+            return read(xml.toString());
+        } catch (IOException ioe) {
+            throw new JSONException(ioe);
+        }
+    }
+
+    /**
+     * Removes a namespace from the root element.<br>
+     * If the elementName is null or blank, the namespace will be removed from
+     * the root element.
+     *
+     * @param prefix      namespace prefix
+     * @param elementName name of target element
+     */
+    private void removeNamespace(String prefix, String elementName) {
+        if (prefix == null) {
+            prefix = "";
+        }
+        if (StringUtils.isBlank(elementName)) {
+            rootNamespace.remove(prefix.trim());
+        } else {
+            Map nameSpaces = (Map) namespacesPerElement.get(elementName);
+            nameSpaces.remove(prefix);
+        }
+    }
+
+    /**
+     * Sets the list of properties to be expanded from child to parent.
+     */
+    private void setExpandableProperties(String[] expandableProperties) {
+        this.expandableProperties = expandableProperties == null ? EMPTY_ARRAY : expandableProperties;
+    }
+
+    /**
+     * Sets if this serializer will skip whitespace when reading.
+     */
+    public void setSkipWhitespace(boolean skipWhitespace) {
+        this.skipWhitespace = skipWhitespace;
+    }
+
+    /**
      * Adds a namespace declaration to an element.<br>
      * Any previous values are discarded. If the elementName param is null or
      * blank, the namespace declaration will be added to the root element.
@@ -478,7 +530,7 @@ public class JsonXmlSerializer {
      * @param uri         namespace uri
      * @param elementName name of target element
      */
-    public void setNamespace(String prefix, String uri, String elementName) {
+    private void setNamespace(String prefix, String uri, String elementName) {
         if (StringUtils.isBlank(uri)) {
             return;
         }
@@ -500,63 +552,11 @@ public class JsonXmlSerializer {
     }
 
     /**
-     * Sets wether this serializer is tolerant to namespaces without URIs or not.
-     */
-    public void setNamespaceLenient(boolean namespaceLenient) {
-        this.namespaceLenient = namespaceLenient;
-    }
-
-    /**
-     * Sets the name used for JSONObject.<br>
-     * Default is 'o'.
-     */
-    public void setObjectName(String objectName) {
-        this.objectName = StringUtils.isBlank(objectName) ? "o" : objectName;
-    }
-
-    /**
-     * Sets if this serializer will remove namespace prefix from elements when
-     * reading.
-     */
-    public void setRemoveNamespacePrefixFromElements(boolean removeNamespacePrefixFromElements) {
-        this.removeNamespacePrefixFromElements = removeNamespacePrefixFromElements;
-    }
-
-    /**
-     * Sets the name used for the root element.
-     */
-    public void setRootName(String rootName) {
-        this.rootName = StringUtils.isBlank(rootName) ? null : rootName;
-    }
-
-    /**
      * Sets if this serializer will skip adding namespace declarations to
      * elements when reading.
      */
-    public void setSkipNamespaces(boolean skipNamespaces) {
+    private void setSkipNamespaces(boolean skipNamespaces) {
         this.skipNamespaces = skipNamespaces;
-    }
-
-    /**
-     * Sets if this serializer will skip whitespace when reading.
-     */
-    public void setSkipWhitespace(boolean skipWhitespace) {
-        this.skipWhitespace = skipWhitespace;
-    }
-
-    /**
-     * Sets if this serializer will trim leading and trealing whitespace from
-     * values when reading.
-     */
-    public void setTrimSpaces(boolean trimSpaces) {
-        this.trimSpaces = trimSpaces;
-    }
-
-    /**
-     * Sets wether types hints will have a 'json_' prefix or not.
-     */
-    public void setTypeHintsCompatibility(boolean typeHintsCompatibility) {
-        this.typeHintsCompatibility = typeHintsCompatibility;
     }
 
     /**
@@ -588,7 +588,7 @@ public class JsonXmlSerializer {
      * @throws JSONException if the conversion from JSON to XML can't be made for I/O
      *                       reasons or the encoding is not supported.
      */
-    public String write(JSON json, String encoding) {
+    private String write(JSON json, String encoding) {
         if (JSONNull.getInstance().equals(json)) {
             Element root = null;
             root = newElement(getRootName() == null ? getObjectName() : getRootName());
@@ -1330,12 +1330,12 @@ public class JsonXmlSerializer {
 
         private String prefix;
 
-        public CustomElement(String name) {
+        CustomElement(String name) {
             super(CustomElement.getName(name));
             prefix = CustomElement.getPrefix(name);
         }
 
-        public final String getQName() {
+        final String getQName() {
             if (prefix.length() == 0) {
                 return getLocalName();
             } else {
@@ -1345,11 +1345,11 @@ public class JsonXmlSerializer {
     }
 
     private class XomSerializer extends Serializer {
-        public XomSerializer(OutputStream out) {
+        XomSerializer(OutputStream out) {
             super(out);
         }
 
-        public XomSerializer(OutputStream out, String encoding) throws UnsupportedEncodingException {
+        XomSerializer(OutputStream out, String encoding) throws UnsupportedEncodingException {
             super(out, encoding);
         }
 

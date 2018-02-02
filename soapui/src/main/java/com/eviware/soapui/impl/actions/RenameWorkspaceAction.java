@@ -31,9 +31,9 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 
 public class RenameWorkspaceAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "RenameWorkspaceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(RenameWorkspaceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(RenameWorkspaceAction.class);
 
-    public RenameWorkspaceAction() {
+    private RenameWorkspaceAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

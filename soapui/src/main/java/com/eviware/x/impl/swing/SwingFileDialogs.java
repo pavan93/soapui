@@ -19,9 +19,8 @@ package com.eviware.x.impl.swing;
 import com.eviware.soapui.support.ExtensionFileFilter;
 import com.eviware.x.dialogs.XFileDialogs;
 
-import javax.swing.JFileChooser;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
@@ -37,7 +36,7 @@ public class SwingFileDialogs implements XFileDialogs {
         SwingFileDialogs.parent = parent;
     }
 
-    public static synchronized JFileChooser getChooser(Object action) {
+    private static synchronized JFileChooser getChooser(Object action) {
         action = null;
         JFileChooser chooser = choosers.get(action);
         if (chooser == null) {
@@ -50,7 +49,7 @@ public class SwingFileDialogs implements XFileDialogs {
         return chooser;
     }
 
-    public static Component getParent() {
+    private static Component getParent() {
         return parent;
     }
 
@@ -87,7 +86,7 @@ public class SwingFileDialogs implements XFileDialogs {
         return openFile(action, title, extension, fileType, current);
     }
 
-    public static File openFile(Object action, String title, String extension, String fileType, String current) {
+    private static File openFile(Object action, String title, String extension, String fileType, String current) {
         JFileChooser chooser = getChooser(action);
         chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         chooser.setDialogTitle(title);

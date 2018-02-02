@@ -53,27 +53,27 @@ public class Install4jSoapUIUpdateProvider extends Thread implements SoapUIUpdat
     private volatile boolean autoCheckCancelled = false;
 
     private static class UpdateCheckResult {
-        public SoapUIVersionInfo version = null;
-        public String comments = null;
-        public String errorText = null;
+        SoapUIVersionInfo version = null;
+        String comments = null;
+        String errorText = null;
 
         private UpdateCheckResult() {
         }
 
-        public static UpdateCheckResult error(String errorText) {
+        static UpdateCheckResult error(String errorText) {
             UpdateCheckResult result = new UpdateCheckResult();
             result.errorText = errorText;
             return result;
         }
 
-        public static UpdateCheckResult found(SoapUIVersionInfo version, String comments) {
+        static UpdateCheckResult found(SoapUIVersionInfo version, String comments) {
             UpdateCheckResult result = new UpdateCheckResult();
             result.version = version;
             result.comments = comments;
             return result;
         }
 
-        public static UpdateCheckResult noUpdate() {
+        static UpdateCheckResult noUpdate() {
             return new UpdateCheckResult();
         }
 

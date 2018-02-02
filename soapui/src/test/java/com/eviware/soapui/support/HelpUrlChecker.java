@@ -27,7 +27,7 @@ import java.net.UnknownHostException;
 /**
  * @author joel.jonsson
  */
-public class HelpUrlChecker {
+class HelpUrlChecker {
     public static void main(String[] args) throws IllegalAccessException {
         openHelpUrls(HelpUrls.class);
     }

@@ -62,7 +62,7 @@ public class WsdlMockResponseWithAttachmentTest {
         mockResponse.writeResponse(mockResult, content);
     }
 
-    public WsdlMockResponse createWsdlMockResponse() throws Exception {
+    private WsdlMockResponse createWsdlMockResponse() throws Exception {
         WsdlMockOperation mockOperation = createWsdlMockOperation();
         MockResponseConfig responseConfig = MockResponseConfig.Factory.newInstance();
         WsdlMockResponse mockResponse = new MockedWsdlMockResponse(mockOperation, responseConfig);
@@ -71,18 +71,18 @@ public class WsdlMockResponseWithAttachmentTest {
         return mockResponse;
     }
 
-    public void addAttachment(WsdlMockResponse mockResponse) throws IOException {
+    private void addAttachment(WsdlMockResponse mockResponse) throws IOException {
         Attachment attachment = new MockFileAttachment(File.createTempFile("attach", "file"), false, mockResponse);
         mockResponse.addAttachment(attachment);
     }
 
-    public WsdlMockOperation createWsdlMockOperation() throws Exception {
+    private WsdlMockOperation createWsdlMockOperation() throws Exception {
         WsdlMockOperation mockOperation = ModelItemFactory.makeWsdlMockOperation();
         mockOperation.setOperation(createWsdlOperation());
         return mockOperation;
     }
 
-    public WsdlOperation createWsdlOperation() throws Exception {
+    private WsdlOperation createWsdlOperation() throws Exception {
         WsdlOperation operation = mock(WsdlOperation.class);
 
         BindingOperation bindingOperation = mock(BindingOperation.class);
@@ -93,7 +93,7 @@ public class WsdlMockResponseWithAttachmentTest {
         return operation;
     }
 
-    public WsdlInterface createWsdlInterface() throws Exception {
+    private WsdlInterface createWsdlInterface() throws Exception {
         WsdlInterface wsdlInterface = mock(WsdlInterface.class);
         when(wsdlInterface.getSoapVersion()).thenReturn(SoapVersion.Soap12);
 
@@ -103,7 +103,7 @@ public class WsdlMockResponseWithAttachmentTest {
         return wsdlInterface;
     }
 
-    public WsdlContext createWsdlContext() throws Exception {
+    private WsdlContext createWsdlContext() throws Exception {
         WsdlContext wsdlContext = mock(WsdlContext.class);
         when(wsdlContext.hasSchemaTypes()).thenReturn(true);
 
@@ -113,12 +113,12 @@ public class WsdlMockResponseWithAttachmentTest {
         return wsdlContext;
     }
 
-    public MockResult createMockResult() throws Exception {
+    private MockResult createMockResult() throws Exception {
         WsdlMockRunContext runContext = mock(WsdlMockRunContext.class);
         return new WsdlMockResult(createMockRequest(runContext));
     }
 
-    public WsdlMockRequest createMockRequest(WsdlMockRunContext runContext) throws Exception {
+    private WsdlMockRequest createMockRequest(WsdlMockRunContext runContext) throws Exception {
         return new WsdlMockRequest(servletRequest, servletResponse, runContext);
     }
 }

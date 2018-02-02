@@ -50,7 +50,7 @@ import java.util.StringTokenizer;
  */
 
 public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
-    protected static final String ALL_VALUE = "<all>";
+    private static final String ALL_VALUE = "<all>";
     protected static final String ENVIRONMENT = "Environment";
     protected static final String ENDPOINT = "Endpoint";
     protected static final String HOSTPORT = "Host:Port";
@@ -63,10 +63,10 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
     protected static final String PRINTREPORT = "Print Report";
     protected static final String ROOTFOLDER = "Root Folder";
     protected static final String EXPORTJUNITRESULTS = "Export JUnit Results";
-    protected static final String EXPORTJUNITRESULTSWITHPROPERTIES = "Export JUnit Results with test properties";
+    private static final String EXPORTJUNITRESULTSWITHPROPERTIES = "Export JUnit Results with test properties";
     protected static final String EXPORTALL = "Export All";
     protected static final String ENABLEUI = "Enable UI";
-    protected static final String TESTRUNNERPATH = "TestRunner Path";
+    private static final String TESTRUNNERPATH = "TestRunner Path";
     protected static final String SAVEPROJECT = "Save Project";
     protected static final String ADDSETTINGS = "Add Settings";
     protected static final String OPEN_REPORT = "Open Report";
@@ -94,11 +94,11 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
 
     protected boolean proVersion;
 
-    public TestRunnerAction() {
+    protected TestRunnerAction() {
         super("Launch TestRunner", "Launch command-line TestRunner for this project");
     }
 
-    public TestRunnerAction(String name, String description) {
+    protected TestRunnerAction(String name, String description) {
         super(name, description);
     }
 
@@ -385,7 +385,7 @@ public class TestRunnerAction extends AbstractToolsAction<WsdlProject> {
         builder.addArgs(propertyArguments.toArray(new String[propertyArguments.size()]));
     }
 
-    protected void addProperties(List<String> propertyArguments, String propertiyDomain, String arg) {
+    private void addProperties(List<String> propertyArguments, String propertiyDomain, String arg) {
         StringTokenizer tokenizer = new StringTokenizer(getDialog().getValue(propertiyDomain));
 
         while (tokenizer.hasMoreTokens()) {

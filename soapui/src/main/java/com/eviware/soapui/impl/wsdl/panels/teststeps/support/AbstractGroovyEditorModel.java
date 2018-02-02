@@ -19,7 +19,7 @@ package com.eviware.soapui.impl.wsdl.panels.teststeps.support;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.settings.Settings;
 
-import javax.swing.Action;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -31,7 +31,7 @@ public abstract class AbstractGroovyEditorModel implements GroovyEditorModel {
     private PropertyChangeSupport propertyChangeSupport;
     private final ModelItem modelItem;
 
-    public AbstractGroovyEditorModel(String[] keywords, ModelItem modelItem, String name) {
+    protected AbstractGroovyEditorModel(String[] keywords, ModelItem modelItem, String name) {
         this.keywords = keywords;
         this.modelItem = modelItem;
         this.name = name;
@@ -49,7 +49,7 @@ public abstract class AbstractGroovyEditorModel implements GroovyEditorModel {
         return runAction;
     }
 
-    public Action createRunAction() {
+    protected Action createRunAction() {
         return null;
     }
 

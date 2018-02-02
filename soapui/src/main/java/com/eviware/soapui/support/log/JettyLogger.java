@@ -26,7 +26,7 @@ import org.mortbay.log.Logger;
  */
 
 public class JettyLogger implements Logger {
-    org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("jetty");
+    private org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger("jetty");
 
     public void debug(String arg0, Throwable arg1) {
         log.debug(arg0, arg1);

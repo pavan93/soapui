@@ -26,7 +26,7 @@ public abstract class AbstractResponse<T extends Request> implements Response {
     private StringToStringMap properties = new StringToStringMap();
     private final T request;
 
-    public AbstractResponse(T request) {
+    protected AbstractResponse(T request) {
         this.request = request;
     }
 

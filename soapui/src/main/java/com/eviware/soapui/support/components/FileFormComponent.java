@@ -22,10 +22,7 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 
@@ -54,7 +51,7 @@ public class FileFormComponent extends JPanel implements JFormComponent {
         return textField.getText();
     }
 
-    public void setFile(File file) {
+    private void setFile(File file) {
         setValue(file.getAbsolutePath());
     }
 
@@ -62,8 +59,8 @@ public class FileFormComponent extends JPanel implements JFormComponent {
         this.modelItem = modelItem;
     }
 
-    public class SelectFileAction extends AbstractAction {
-        public SelectFileAction() {
+    class SelectFileAction extends AbstractAction {
+        SelectFileAction() {
             super("Browse...");
         }
 

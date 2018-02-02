@@ -27,7 +27,7 @@ import com.eviware.soapui.security.SecurityTest;
  * @author Ole.Matzura
  */
 
-public class SecurityTestTreeNode extends AbstractModelItemTreeNode<SecurityTest> {
+class SecurityTestTreeNode extends AbstractModelItemTreeNode<SecurityTest> {
     public SecurityTestTreeNode(SecurityTest securityTest, ModelItem parent, SoapUITreeModel treeModel) {
         super(securityTest, parent, treeModel);
     }

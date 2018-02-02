@@ -1,12 +1,6 @@
 package com.smartbear.ready.recipe.assertions;
 
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.GroovyScriptAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.ResponseSLAAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.SchemaComplianceAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.SimpleContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.SimpleNotContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XPathContainsAssertion;
-import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.XQueryContainsAssertion;
+import com.eviware.soapui.impl.wsdl.teststeps.assertions.basic.*;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.jdbc.JdbcStatusAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.jdbc.JdbcTimeoutAssertion;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.json.JsonPathContentAssertion;
@@ -22,7 +16,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.jsontype.TypeIdResolver;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
-public class AssertionTypeResolver implements TypeIdResolver {
+class AssertionTypeResolver implements TypeIdResolver {
     private JavaType baseType;
 
     @Override

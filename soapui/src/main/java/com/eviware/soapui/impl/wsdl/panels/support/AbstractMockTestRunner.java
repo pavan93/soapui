@@ -36,7 +36,7 @@ public abstract class AbstractMockTestRunner<T extends TestRunnable> implements 
     private Status status = Status.RUNNING;
     private TestRunContext context;
 
-    public AbstractMockTestRunner(T modelItem, Logger logger) {
+    AbstractMockTestRunner(T modelItem, Logger logger) {
         this.modelItem = modelItem;
         this.logger = logger == null ? SoapUI.ensureGroovyLog() : logger;
         startTime = System.currentTimeMillis();
@@ -46,7 +46,7 @@ public abstract class AbstractMockTestRunner<T extends TestRunnable> implements 
         return false;
     }
 
-    public void setRunContext(TestRunContext context) {
+    void setRunContext(TestRunContext context) {
         this.context = context;
     }
 

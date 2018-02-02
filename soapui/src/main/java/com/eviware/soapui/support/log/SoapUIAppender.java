@@ -26,7 +26,7 @@ import org.apache.log4j.spi.LoggingEvent;
  * @author Ole.Matzura
  */
 
-public class SoapUIAppender extends AppenderSkeleton {
+class SoapUIAppender extends AppenderSkeleton {
     public SoapUIAppender() {
     }
 

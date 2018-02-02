@@ -16,24 +16,7 @@
 
 package com.eviware.soapui.impl.wadl.inference.support;
 
-import org.apache.xmlbeans.XmlAnySimpleType;
-import org.apache.xmlbeans.XmlBase64Binary;
-import org.apache.xmlbeans.XmlBoolean;
-import org.apache.xmlbeans.XmlDate;
-import org.apache.xmlbeans.XmlDateTime;
-import org.apache.xmlbeans.XmlDecimal;
-import org.apache.xmlbeans.XmlGDay;
-import org.apache.xmlbeans.XmlGMonth;
-import org.apache.xmlbeans.XmlGYear;
-import org.apache.xmlbeans.XmlGYearMonth;
-import org.apache.xmlbeans.XmlHexBinary;
-import org.apache.xmlbeans.XmlInteger;
-import org.apache.xmlbeans.XmlNegativeInteger;
-import org.apache.xmlbeans.XmlNonNegativeInteger;
-import org.apache.xmlbeans.XmlNonPositiveInteger;
-import org.apache.xmlbeans.XmlPositiveInteger;
-import org.apache.xmlbeans.XmlString;
-import org.apache.xmlbeans.XmlTime;
+import org.apache.xmlbeans.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -196,16 +179,16 @@ public class TypeInferrer {
     }
 
     private class TypeTree {
-        public XmlAnySimpleType type;
-        public TypeTree parent;
-        public List<TypeTree> children;
+        XmlAnySimpleType type;
+        TypeTree parent;
+        List<TypeTree> children;
 
-        public TypeTree(XmlAnySimpleType type) {
+        TypeTree(XmlAnySimpleType type) {
             this.type = type;
             children = new ArrayList<TypeTree>();
         }
 
-        public void addChild(TypeTree type) {
+        void addChild(TypeTree type) {
             children.add(type);
             type.parent = this;
         }

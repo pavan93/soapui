@@ -66,7 +66,7 @@ public class WsrmSequence {
         return soapVersion;
     }
 
-    public void setWsrmNameSpace(String wsrmNameSpace) {
+    private void setWsrmNameSpace(String wsrmNameSpace) {
         this.wsrmNameSpace = wsrmNameSpace;
     }
 
@@ -74,7 +74,7 @@ public class WsrmSequence {
         return wsrmNameSpace;
     }
 
-    public void setOperation(WsdlOperation operation) {
+    private void setOperation(WsdlOperation operation) {
         this.operation = operation;
     }
 

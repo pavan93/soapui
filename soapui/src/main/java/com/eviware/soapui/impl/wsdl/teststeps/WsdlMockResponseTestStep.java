@@ -68,7 +68,7 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
     private final static Logger log = Logger.getLogger(WsdlMockResponseTestStep.class);
 
     public static final String STATUS_PROPERTY = WsdlMockResponseTestStep.class.getName() + "@status";
-    public static final String TIMEOUT_PROPERTY = WsdlMockResponseTestStep.class.getName() + "@timeout";
+    private static final String TIMEOUT_PROPERTY = WsdlMockResponseTestStep.class.getName() + "@timeout";
 
     private MockResponseStepConfig mockResponseStepConfig;
     private MockResponseConfig mockResponseConfig;
@@ -185,7 +185,7 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         return icon;
     }
 
-    public void initIcons() {
+    private void initIcons() {
         if (validRequestIcon == null) {
             validRequestIcon = UISupport.createImageIcon("/valid_soap_request_step.png");
         }
@@ -321,7 +321,7 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         }
     }
 
-    protected void initTestMockResponse(TestCaseRunContext testRunContext) {
+    private void initTestMockResponse(TestCaseRunContext testRunContext) {
         if (StringUtils.hasContent(getQuery()) && StringUtils.hasContent(getMatch())) {
             String name = "MockResponse" + Math.random();
             testMockResponse = mockOperation.addNewMockResponse(name, false);
@@ -518,81 +518,8 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         return lastResult;
     }
 
-    public class InternalMockRunListener extends MockRunListenerAdapter {
-        private boolean canceled;
-        private boolean waiting;
-        private WsdlMockResult lastResult;
-
-        public synchronized void onMockResult(MockResult result) {
-            System.out.println("in onMockResult for [" + getName() + "] for result " + result.hashCode());
-
-            // is this for us?
-            if (this.lastResult == null && waiting && result.getMockResponse() == testMockResponse) {
-                waiting = false;
-                System.out.println("Got mockrequest to [" + getName() + "]");
-                // save
-                this.lastResult = (WsdlMockResult) result;
-                notifyPropertyChanged("lastResult", null, lastResult);
-
-                // stop runner -> NO, we can't stop, mockengine is still writing
-                // response..
-                // actually we have to - but this is not a problem if soapUI has been configured to leave the mockengine running
-                // in which case it won't terminate the connector during the response
-                mockRunner.stop();
-
-                // testMockResponse.setMockResult( null );
-
-                synchronized (this) {
-                    notifyAll();
-                }
-            }
-        }
-
-        public void setLastResult(WsdlMockResult lastResult) {
-            this.lastResult = lastResult;
-        }
-
-        public void cancel() {
-            canceled = true;
-            if (waiting) {
-                synchronized (this) {
-                    notifyAll();
-                }
-            }
-            // mockRunListener.onMockResult( null );
-        }
-
-        public WsdlMockResult getLastResult() {
-            return lastResult;
-        }
-
-        public boolean isCanceled() {
-            return canceled;
-        }
-
-        public boolean hasResult() {
-            return lastResult != null;
-        }
-
-        public boolean isWaiting() {
-            return waiting;
-        }
-
-        public void setWaiting(boolean waiting) {
-            this.waiting = waiting;
-        }
-
-        public void waitForRequest(long timeout) throws InterruptedException {
-            waiting = true;
-            wait(timeout);
-        }
-
-        @Override
-        public void onMockRunnerStart(MockRunner mockRunner) {
-            waiting = false;
-            lastResult = null;
-            canceled = false;
-        }
+    private String getEncoding() {
+        return mockResponse.getEncoding();
     }
 
     public WsdlMockResponse getMockResponse() {
@@ -622,8 +549,8 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         return mockResponseStepConfig.getPort();
     }
 
-    public String getEncoding() {
-        return mockResponse.getEncoding();
+    private boolean isMtomEnabled() {
+        return mockResponse.isMtomEnabled();
     }
 
     public void setEncoding(String encoding) {
@@ -632,8 +559,8 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         notifyPropertyChanged("encoding", old, encoding);
     }
 
-    public boolean isMtomEnabled() {
-        return mockResponse.isMtomEnabled();
+    private String getOutgoingWss() {
+        return mockResponse.getOutgoingWss();
     }
 
     public void setMtomEnabled(boolean enabled) {
@@ -645,8 +572,8 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         notifyPropertyChanged("mtomEnabled", !enabled, enabled);
     }
 
-    public String getOutgoingWss() {
-        return mockResponse.getOutgoingWss();
+    private String getMatch() {
+        return mockResponseStepConfig.getMatch();
     }
 
     public void setOutgoingWss(String outgoingWss) {
@@ -665,8 +592,8 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         return mockResponseStepConfig.getQuery();
     }
 
-    public String getMatch() {
-        return mockResponseStepConfig.getMatch();
+    private String getStartStep() {
+        return startTestStep == null ? "" : startTestStep.getName();
     }
 
     public void setMatch(String s) {
@@ -675,11 +602,7 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         notifyPropertyChanged("match", old, s);
     }
 
-    public String getStartStep() {
-        return startTestStep == null ? "" : startTestStep.getName();
-    }
-
-    public void setStartStep(String startStep) {
+    private void setStartStep(String startStep) {
         String old = getStartStep();
         if (startTestStep != null) {
             startTestStep.removePropertyChangeListener(this);
@@ -695,6 +618,10 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
 
         mockResponseStepConfig.setStartStep(startStep);
         notifyPropertyChanged("startStep", old, startStep);
+    }
+
+    private long getTimeout() {
+        return mockResponseStepConfig.getTimeout();
     }
 
     public boolean isRemoveEmptyContent() {
@@ -882,26 +809,80 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         }
     }
 
-    private class PropertyChangeNotifier {
-        private AssertionStatus oldStatus;
-        private ImageIcon oldIcon;
+    public class InternalMockRunListener extends MockRunListenerAdapter {
+        private boolean canceled;
+        private boolean waiting;
+        private WsdlMockResult lastResult;
 
-        public PropertyChangeNotifier() {
-            oldStatus = getAssertionStatus();
-            oldIcon = getIcon();
+        public synchronized void onMockResult(MockResult result) {
+            System.out.println("in onMockResult for [" + getName() + "] for result " + result.hashCode());
+
+            // is this for us?
+            if (this.lastResult == null && waiting && result.getMockResponse() == testMockResponse) {
+                waiting = false;
+                System.out.println("Got mockrequest to [" + getName() + "]");
+                // save
+                this.lastResult = (WsdlMockResult) result;
+                notifyPropertyChanged("lastResult", null, lastResult);
+
+                // stop runner -> NO, we can't stop, mockengine is still writing
+                // response..
+                // actually we have to - but this is not a problem if soapUI has been configured to leave the mockengine running
+                // in which case it won't terminate the connector during the response
+                mockRunner.stop();
+
+                // testMockResponse.setMockResult( null );
+
+                synchronized (this) {
+                    notifyAll();
+                }
+            }
         }
 
-        public void notifyChange() {
-            AssertionStatus newStatus = getAssertionStatus();
-            ImageIcon newIcon = getIcon();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+        void cancel() {
+            canceled = true;
+            if (waiting) {
+                synchronized (this) {
+                    notifyAll();
+                }
             }
+            // mockRunListener.onMockResult( null );
+        }
 
-            if (oldIcon != newIcon) {
-                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
-            }
+        WsdlMockResult getLastResult() {
+            return lastResult;
+        }
+
+        void setLastResult(WsdlMockResult lastResult) {
+            this.lastResult = lastResult;
+        }
+
+        boolean isCanceled() {
+            return canceled;
+        }
+
+        boolean hasResult() {
+            return lastResult != null;
+        }
+
+        boolean isWaiting() {
+            return waiting;
+        }
+
+        void setWaiting(boolean waiting) {
+            this.waiting = waiting;
+        }
+
+        void waitForRequest(long timeout) throws InterruptedException {
+            waiting = true;
+            wait(timeout);
+        }
+
+        @Override
+        public void onMockRunnerStart(MockRunner mockRunner) {
+            waiting = false;
+            lastResult = null;
+            canceled = false;
         }
     }
 
@@ -965,8 +946,27 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         }
     }
 
-    public long getTimeout() {
-        return mockResponseStepConfig.getTimeout();
+    private class PropertyChangeNotifier {
+        private AssertionStatus oldStatus;
+        private ImageIcon oldIcon;
+
+        PropertyChangeNotifier() {
+            oldStatus = getAssertionStatus();
+            oldIcon = getIcon();
+        }
+
+        void notifyChange() {
+            AssertionStatus newStatus = getAssertionStatus();
+            ImageIcon newIcon = getIcon();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+            }
+
+            if (oldIcon != newIcon) {
+                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
+            }
+        }
     }
 
     public void setTimeout(long timeout) {
@@ -1059,7 +1059,7 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
             RequestAssertedMessageExchange, AssertedXPathsContainer {
         private List<AssertedXPath> assertedXPaths;
 
-        public AssertedWsdlMockResultMessageExchange(WsdlMockResult mockResult) {
+        AssertedWsdlMockResultMessageExchange(WsdlMockResult mockResult) {
             super(mockResult, mockResult == null ? null : (WsdlMockResponse) mockResult.getMockResponse());
         }
 
@@ -1175,13 +1175,13 @@ public class WsdlMockResponseTestStep extends WsdlTestStepWithProperties impleme
         private TestCaseRunContext runContext;
         private WsdlMockResponseTestStep wsdlMockResponseTestStep;
 
-        public StartStepMockRunListener(TestCaseRunContext runContext, WsdlMockResponseTestStep wsdlMockResponseTestStep) {
+        StartStepMockRunListener(TestCaseRunContext runContext, WsdlMockResponseTestStep wsdlMockResponseTestStep) {
             this.runContext = runContext;
             this.wsdlMockResponseTestStep = wsdlMockResponseTestStep;
             wsdlMockResponseTestStep.addPropertyChangeListener("lastResult", this);
         }
 
-        public void release() {
+        void release() {
             wsdlMockResponseTestStep.removePropertyChangeListener("lastResult", this);
             wsdlMockResponseTestStep = null;
             runContext = null;

@@ -22,21 +22,8 @@ import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.SearchContext;
 import org.fife.ui.rtextarea.SearchEngine;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.Window;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class FindAndReplaceDialogView extends AbstractAction {
@@ -69,7 +56,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
         show();
     }
 
-    public void show() {
+    private void show() {
         if (dialog == null) {
             buildDialog();
         }
@@ -180,7 +167,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
         UISupport.initDialogActions(dialog, null, findButton);
     }
 
-    protected SearchContext createSearchAndReplaceContext() {
+    private SearchContext createSearchAndReplaceContext() {
         if (findCombo.getSelectedItem() == null) {
             return null;
         }
@@ -201,7 +188,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
         return context;
     }
 
-    protected SearchContext createSearchContext() {
+    private SearchContext createSearchContext() {
         if (findCombo.getSelectedItem() == null) {
             return null;
         }
@@ -218,7 +205,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
     }
 
     private class FindAction extends AbstractAction {
-        public FindAction(JComboBox findCombo) {
+        FindAction(JComboBox findCombo) {
             super("Find/Find Next");
         }
 
@@ -238,7 +225,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
     }
 
     private class ReplaceAction extends AbstractAction {
-        public ReplaceAction() {
+        ReplaceAction() {
             super("Replace/Replace Next");
         }
 
@@ -259,7 +246,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
     }
 
     private class ReplaceAllAction extends AbstractAction {
-        public ReplaceAllAction() {
+        ReplaceAllAction() {
             super("Replace All");
         }
 
@@ -282,7 +269,7 @@ public class FindAndReplaceDialogView extends AbstractAction {
     private class CloseAction extends AbstractAction {
         final JDialog dialog;
 
-        public CloseAction(JDialog d) {
+        CloseAction(JDialog d) {
             super("Close");
             dialog = d;
         }

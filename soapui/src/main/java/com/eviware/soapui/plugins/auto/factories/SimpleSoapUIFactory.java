@@ -18,15 +18,15 @@ package com.eviware.soapui.plugins.auto.factories;
 
 import com.eviware.soapui.plugins.PluginProxies;
 
-public class SimpleSoapUIFactory<T extends Object> extends AbstractSoapUIFactory<T> {
+class SimpleSoapUIFactory<T extends Object> extends AbstractSoapUIFactory<T> {
     private Class<T> objectClass;
 
-    protected SimpleSoapUIFactory(Class<?> factoryType, Class<T> objectClass) {
+    SimpleSoapUIFactory(Class<?> factoryType, Class<T> objectClass) {
         super(factoryType);
         this.objectClass = objectClass;
     }
 
-    public T create() {
+    T create() {
         try {
             T returnValue = createByReflection(objectClass);
             return PluginProxies.proxyIfApplicable(returnValue);

@@ -25,19 +25,15 @@ import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 
-import javax.swing.JPopupMenu;
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Enumeration;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Abstract base class for SoapUITreeNode implementations
@@ -137,7 +133,7 @@ public abstract class AbstractModelItemTreeNode<T extends ModelItem> implements 
         getTreeModel().unmapModelItem(modelItem);
     }
 
-    public <T2 extends SoapUITreeNode> void initOrdering(List<T2> items, String setting) {
+    protected <T2 extends SoapUITreeNode> void initOrdering(List<T2> items, String setting) {
         this.orderItems = items;
         this.orderSetting = setting;
 
@@ -146,11 +142,42 @@ public abstract class AbstractModelItemTreeNode<T extends ModelItem> implements 
         sortModelItems(items, setting);
     }
 
+    private <T2 extends SoapUITreeNode> void sortModelItems(List<T2> modelItems, final String setting) {
+        Collections.sort(modelItems, new Comparator<T2>() {
+            public int compare(T2 o1, T2 o2) {
+                String name1 = o1.getModelItem().getName();
+                String name2 = o2.getModelItem().getName();
+
+                if (name1 == null && name2 == null) {
+                    return 0;
+                } else if (name1 == null) {
+                    return -1;
+                } else if (name2 == null) {
+                    return 1;
+                } else if (setting != null && SoapUI.getSettings().getBoolean(setting)) {
+                    return name1.compareToIgnoreCase(name2);
+                } else {
+                    return name1.compareTo(name2);
+                }
+            }
+        });
+    }
+
+    public void reorder(boolean notify) {
+        if (orderItems != null) {
+            sortModelItems(orderItems, orderSetting);
+
+            if (notify) {
+                getTreeModel().notifyStructureChanged(new TreeModelEvent(this, getTreeModel().getPath(this)));
+            }
+        }
+    }
+
     private final class InternalSettingsListener implements SettingsListener {
         private final AbstractModelItemTreeNode<?> node;
         private final String setting;
 
-        public InternalSettingsListener(AbstractModelItemTreeNode<?> node, String setting) {
+        InternalSettingsListener(AbstractModelItemTreeNode<?> node, String setting) {
             this.node = node;
             this.setting = setting;
         }
@@ -176,37 +203,6 @@ public abstract class AbstractModelItemTreeNode<T extends ModelItem> implements 
         public void settingsReloaded() {
             // TODO Auto-generated method stub
         }
-    }
-
-    public void reorder(boolean notify) {
-        if (orderItems != null) {
-            sortModelItems(orderItems, orderSetting);
-
-            if (notify) {
-                getTreeModel().notifyStructureChanged(new TreeModelEvent(this, getTreeModel().getPath(this)));
-            }
-        }
-    }
-
-    public <T2 extends SoapUITreeNode> void sortModelItems(List<T2> modelItems, final String setting) {
-        Collections.sort(modelItems, new Comparator<T2>() {
-            public int compare(T2 o1, T2 o2) {
-                String name1 = o1.getModelItem().getName();
-                String name2 = o2.getModelItem().getName();
-
-                if (name1 == null && name2 == null) {
-                    return 0;
-                } else if (name1 == null) {
-                    return -1;
-                } else if (name2 == null) {
-                    return 1;
-                } else if (setting != null && SoapUI.getSettings().getBoolean(setting)) {
-                    return name1.compareToIgnoreCase(name2);
-                } else {
-                    return name1.compareTo(name2);
-                }
-            }
-        });
     }
 
     public Enumeration<?> children() {

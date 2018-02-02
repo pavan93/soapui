@@ -19,21 +19,8 @@ package com.eviware.soapui.autoupdate;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -60,7 +47,7 @@ public class NewSoapUIVersionAvailableDialog extends JDialog {
         Init();
     }
 
-    protected void Init() {
+    private void Init() {
         JPanel mainPanel = new JPanel(new GridBagLayout());
         mainPanel.add(UISupport.buildDescription(NEW_VERSION_AVAILABLE_MESSAGE, NEW_VERSION_AVAILABLE_MESSAGE_EX, null), new GridBagConstraints(0, 0, 2, 1, 0, 0, GridBagConstraints.WEST, GridBagConstraints.HORIZONTAL, new Insets(0, 0, 0, 0), 0, 0));
 
@@ -88,7 +75,7 @@ public class NewSoapUIVersionAvailableDialog extends JDialog {
         return dialogResult;
     }
 
-    protected JEditorPane createReleaseNotesPane() {
+    private JEditorPane createReleaseNotesPane() {
         JEditorPane text = new JEditorPane();
         try {
             //text.setPage("Release notes");
@@ -101,7 +88,7 @@ public class NewSoapUIVersionAvailableDialog extends JDialog {
         return text;
     }
 
-    protected JPanel buildToolbar(JDialog dialog) {
+    private JPanel buildToolbar(JDialog dialog) {
         final JComboBox<String> choice = new JComboBox<String>();
         choice.addItem("1 day");
         choice.addItem("3 days");
@@ -150,10 +137,10 @@ public class NewSoapUIVersionAvailableDialog extends JDialog {
         return toolbarPanel;
     }
 
-    protected class IgnoreUpdateAction extends AbstractAction {
+    class IgnoreUpdateAction extends AbstractAction {
         private JDialog dialog;
 
-        public IgnoreUpdateAction(JDialog dialog) {
+        IgnoreUpdateAction(JDialog dialog) {
             super("Ignore this update");
             this.dialog = dialog;
         }

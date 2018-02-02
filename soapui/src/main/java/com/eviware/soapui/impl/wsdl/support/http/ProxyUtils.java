@@ -195,7 +195,7 @@ public class ProxyUtils {
         HttpClientSupport.getHttpClient().setCredentialsProvider(getProxyCredentialsProvider(settings));
     }
 
-    public static ProxySelector filterHttpHttpsProxy(ProxySelector proxySelector) {
+    private static ProxySelector filterHttpHttpsProxy(ProxySelector proxySelector) {
         return new ProxyBypassListSelector(
                 Arrays.asList(new SchemeProxyFilter("http", "https")),
                 proxySelector);

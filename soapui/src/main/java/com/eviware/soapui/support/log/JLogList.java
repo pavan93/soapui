@@ -24,23 +24,10 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.apache.log4j.spi.LoggingEvent;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JCheckBoxMenuItem;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
@@ -48,13 +35,8 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
-import java.util.StringTokenizer;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
@@ -198,27 +180,16 @@ public class JLogList extends JPanel {
         }
     }
 
-    private final static class LoggingEventWrapper {
-        private final LoggingEvent loggingEvent;
-        private String str;
-
-        public LoggingEventWrapper(LoggingEvent loggingEvent) {
-            this.loggingEvent = loggingEvent;
-        }
-
-        public Level getLevel() {
-            return loggingEvent.getLevel();
-        }
-
-        public String toString() {
-            if (str == null) {
-                StringBuilder builder = new StringBuilder();
-                builder.append(new Date(loggingEvent.timeStamp));
-                builder.append(':').append(loggingEvent.getLevel()).append(':').append(loggingEvent.getMessage());
-                str = builder.toString();
+    private void saveToFile(File file) {
+        try {
+            PrintWriter writer = new PrintWriter(file);
+            for (int c = 0; c < model.getSize(); c++) {
+                writer.println(model.getElementAt(c));
             }
 
-            return str;
+            writer.close();
+        } catch (Exception e) {
+            UISupport.showErrorMessage(e);
         }
     }
 
@@ -282,16 +253,27 @@ public class JLogList extends JPanel {
         }
     }
 
-    public void saveToFile(File file) {
-        try {
-            PrintWriter writer = new PrintWriter(file);
-            for (int c = 0; c < model.getSize(); c++) {
-                writer.println(model.getElementAt(c));
+    private final static class LoggingEventWrapper {
+        private final LoggingEvent loggingEvent;
+        private String str;
+
+        LoggingEventWrapper(LoggingEvent loggingEvent) {
+            this.loggingEvent = loggingEvent;
+        }
+
+        Level getLevel() {
+            return loggingEvent.getLevel();
+        }
+
+        public String toString() {
+            if (str == null) {
+                StringBuilder builder = new StringBuilder();
+                builder.append(new Date(loggingEvent.timeStamp));
+                builder.append(':').append(loggingEvent.getLevel()).append(':').append(loggingEvent.getMessage());
+                str = builder.toString();
             }
 
-            writer.close();
-        } catch (Exception e) {
-            UISupport.showErrorMessage(e);
+            return str;
         }
     }
 
@@ -308,7 +290,7 @@ public class JLogList extends JPanel {
 	*/
 
     private class ClearAction extends AbstractAction {
-        public ClearAction() {
+        ClearAction() {
             super("Clear");
         }
 
@@ -318,7 +300,7 @@ public class JLogList extends JPanel {
     }
 
     private class SetMaxRowsAction extends AbstractAction {
-        public SetMaxRowsAction() {
+        SetMaxRowsAction() {
             super("Set Max Rows");
         }
 
@@ -337,7 +319,7 @@ public class JLogList extends JPanel {
     }
 
     private class ExportToFileAction extends AbstractAction {
-        public ExportToFileAction() {
+        ExportToFileAction() {
             super("Export to File");
         }
 
@@ -355,7 +337,7 @@ public class JLogList extends JPanel {
     }
 
     private class CopyAction extends AbstractAction {
-        public CopyAction() {
+        CopyAction() {
             super("Copy to clipboard");
         }
 
@@ -382,7 +364,7 @@ public class JLogList extends JPanel {
     }
 
     private class EnableAction extends AbstractAction {
-        public EnableAction() {
+        EnableAction() {
             super("Enable");
         }
 
@@ -410,7 +392,7 @@ public class JLogList extends JPanel {
             return lines.get(index);
         }
 
-        public void clear() {
+        void clear() {
             final int size = lines.size();
             if (size == 0) {
                 return;
@@ -424,7 +406,7 @@ public class JLogList extends JPanel {
             });
         }
 
-        public void ensureUpdateIsStarted() {
+        void ensureUpdateIsStarted() {
             updater.ensureUpdateIsStarted();
         }
 
@@ -462,7 +444,7 @@ public class JLogList extends JPanel {
                 }
             }
 
-            public synchronized void ensureUpdateIsStarted() {
+            synchronized void ensureUpdateIsStarted() {
                 if (!updating) {
                     setUpdating(true);
                     SoapUI.getThreadPool().submit(this);

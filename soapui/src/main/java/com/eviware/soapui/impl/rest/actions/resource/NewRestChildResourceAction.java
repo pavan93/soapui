@@ -32,9 +32,9 @@ import java.util.List;
 
 public class NewRestChildResourceAction extends NewRestResourceActionBase<RestResource> {
     public static final String SOAPUI_ACTION_ID = "NewRestChildResourceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestChildResourceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestChildResourceAction.class);
 
-    public NewRestChildResourceAction() {
+    private NewRestChildResourceAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -52,7 +52,7 @@ public class ComponentBag {
         }
     }
 
-    public void setEnabled(boolean enabled, String name) {
+    private void setEnabled(boolean enabled, String name) {
         if (components.containsKey(name)) {
             components.get(name).setEnabled(enabled);
         }

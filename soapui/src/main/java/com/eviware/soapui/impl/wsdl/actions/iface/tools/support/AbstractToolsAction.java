@@ -52,12 +52,12 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
 
     protected static final String WSDL = "WSDL";
     protected static final String CACHED_WSDL = "Use cached WSDL";
-    protected static final String JAVA_ARGS = "Java Args";
-    protected static final String TOOL_ARGS = "Tool Args";
+    private static final String JAVA_ARGS = "Java Args";
+    private static final String TOOL_ARGS = "Tool Args";
     protected static final String SOAPUISETTINGSPASSWORD = "user-settings.xml Password";
 
     private XFormDialog dialog;
-    protected String valuesSettingID;
+    private String valuesSettingID;
     private XFormField useCached;
     private T modelItem;
 
@@ -65,11 +65,11 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
     private boolean fixedWSDL = false;
     private Action toolsSettingsAction = new ShowIntegratedToolsSettingsAction();
 
-    public AbstractToolsAction(String name, String description) {
+    protected AbstractToolsAction(String name, String description) {
         super(name, description);
     }
 
-    public XFormDialog getDialog() {
+    protected XFormDialog getDialog() {
         return dialog;
     }
 
@@ -90,7 +90,7 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         this.fixedWSDL = b;
     }
 
-    public T getModelItem() {
+    protected T getModelItem() {
         return modelItem;
     }
 
@@ -185,7 +185,7 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         }
     }
 
-    protected void initWSDL(StringToStringMap values, WsdlInterface iface) {
+    private void initWSDL(StringToStringMap values, WsdlInterface iface) {
         boolean cached = iface.isCached();
         if (useCached != null) {
             useCached.setEnabled(cached);
@@ -210,7 +210,7 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
      * To be overridden..
      */
 
-    public void onClose(T modelItem) {
+    private void onClose(T modelItem) {
         if (dialog == null) {
             return;
         }
@@ -297,7 +297,7 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         return toolsSettingsAction;
     }
 
-    public void setToolsSettingsAction(Action toolsSettingsAction) {
+    protected void setToolsSettingsAction(Action toolsSettingsAction) {
         this.toolsSettingsAction = toolsSettingsAction;
     }
 
@@ -342,8 +342,15 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         return argsForm;
     }
 
-    public static final class ShowIntegratedToolsSettingsAction extends AbstractAction {
-        public ShowIntegratedToolsSettingsAction() {
+    protected void closeDialog(T modelItem) {
+        onClose(modelItem);
+        if (dialog != null) {
+            dialog.setVisible(false);
+        }
+    }
+
+    static final class ShowIntegratedToolsSettingsAction extends AbstractAction {
+        ShowIntegratedToolsSettingsAction() {
             super("Tools");
         }
 
@@ -352,10 +359,10 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         }
     }
 
-    protected final class CloseAction extends AbstractAction {
+    final class CloseAction extends AbstractAction {
         private final T modelItem;
 
-        public CloseAction(T modelItem) {
+        CloseAction(T modelItem) {
             super("Close");
             this.modelItem = modelItem;
         }
@@ -365,17 +372,10 @@ public abstract class AbstractToolsAction<T extends ModelItem> extends AbstractS
         }
     }
 
-    public void closeDialog(T modelItem) {
-        onClose(modelItem);
-        if (dialog != null) {
-            dialog.setVisible(false);
-        }
-    }
-
-    protected final class GenerateAction extends AbstractAction {
+    final class GenerateAction extends AbstractAction {
         private final T modelItem;
 
-        public GenerateAction(T modelItem) {
+        GenerateAction(T modelItem) {
             super("Generate");
             this.modelItem = modelItem;
         }

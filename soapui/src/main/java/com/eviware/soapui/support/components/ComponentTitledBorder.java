@@ -16,27 +16,19 @@
 
 package com.eviware.soapui.support.components;
 
-import javax.swing.JComponent;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ComponentTitledBorder implements Border, MouseListener, SwingConstants {
-    int offset = 5;
+class ComponentTitledBorder implements Border, MouseListener, SwingConstants {
+    private int offset = 5;
 
-    Component comp;
-    JComponent container;
-    Rectangle rect;
-    Border border;
+    private Component comp;
+    private JComponent container;
+    private Rectangle rect;
+    private Border border;
 
     public ComponentTitledBorder(Component comp, JComponent container, Border border) {
         this.comp = comp;

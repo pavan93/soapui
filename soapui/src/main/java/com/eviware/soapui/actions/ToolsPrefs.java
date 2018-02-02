@@ -31,24 +31,24 @@ import java.util.ArrayList;
  */
 
 public class ToolsPrefs implements Prefs {
-    public static final String AXIS_1_X = "Axis 1.X";
-    public static final String WSCOMPILE = "JAX-RPC WSCompile";
-    public static final String WSIMPORT = "JAX-WS WSImport";
-    public static final String AXIS_2 = "Axis 2";
-    public static final String WSTOOLS = "JBossWS wstools";
-    public static final String JAVAC = "JDK 1.5 javac";
-    public static final String DOTNET = ".NET 2.0 wsdl.exe";
-    public static final String XFIRE = "XFire 1.X";
-    public static final String CXF = "CXF 2.X";
-    public static final String GSOAP = "GSoap";
-    public static final String ANT = "ANT 1.6+";
-    public static final String XMLBEANS = "XmlBeans 2.X";
-    public static final String JAXB = "JAXB xjc";
-    public static final String TCPMON = "Apache TcpMon";
-    public static final String WSA = "Oracle wsa.jar";
-    public static final String WADL = "WADL2Java";
+    private static final String AXIS_1_X = "Axis 1.X";
+    private static final String WSCOMPILE = "JAX-RPC WSCompile";
+    private static final String WSIMPORT = "JAX-WS WSImport";
+    private static final String AXIS_2 = "Axis 2";
+    private static final String WSTOOLS = "JBossWS wstools";
+    private static final String JAVAC = "JDK 1.5 javac";
+    private static final String DOTNET = ".NET 2.0 wsdl.exe";
+    private static final String XFIRE = "XFire 1.X";
+    private static final String CXF = "CXF 2.X";
+    private static final String GSOAP = "GSoap";
+    private static final String ANT = "ANT 1.6+";
+    private static final String XMLBEANS = "XmlBeans 2.X";
+    private static final String JAXB = "JAXB xjc";
+    private static final String TCPMON = "Apache TcpMon";
+    private static final String WSA = "Oracle wsa.jar";
+    private static final String WADL = "WADL2Java";
     public static final String LIBRARIES = "Script libraries";
-    public static final String HERMES_JMS = "Hermes JMS";
+    private static final String HERMES_JMS = "Hermes JMS";
 
     private static final String[][] TOOLS = {{WSTOOLS, ToolsSettings.JBOSSWS_WSTOOLS_LOCATION},
             {AXIS_1_X, ToolsSettings.AXIS_1_X_LOCATION}, {AXIS_2, ToolsSettings.AXIS_2_LOCATION},

@@ -24,7 +24,7 @@ import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class MediaTypeComboBoxTest {
-    MediaType model = mock(MediaType.class);
+    private MediaType model = mock(MediaType.class);
 
     @Test
     public void shouldSetSelectedItem() {

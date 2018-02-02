@@ -30,7 +30,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class HttpRequestDataSource implements DataSource {
+class HttpRequestDataSource implements DataSource {
     private final HttpRequestInterface<?> restRequest;
     private final String requestContent;
 

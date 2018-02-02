@@ -66,7 +66,7 @@ public class SoapUIAMFConnection {
     private HttpContext httpState = new BasicHttpContext();
     private PropertyExpansionContext context;
 
-    public int getObjectEncoding() {
+    private int getObjectEncoding() {
         if (!objectEncodingSet) {
             return DEFAULT_OBJECT_ENCODING;
         }
@@ -91,7 +91,7 @@ public class SoapUIAMFConnection {
      * @param mustUnderstand Whether the header must be processed or not.
      * @param data           The value of the header.
      */
-    public void addAmfHeader(String name, boolean mustUnderstand, Object data) {
+    private void addAmfHeader(String name, boolean mustUnderstand, Object data) {
         if (amfHeaders == null) {
             amfHeaders = new ArrayList<MessageHeader>();
         }
@@ -304,7 +304,7 @@ public class SoapUIAMFConnection {
      *
      * @return The response URI.
      */
-    protected String getResponseURI() {
+    private String getResponseURI() {
         String responseURI = "/" + responseCounter;
         responseCounter++;
         return responseURI;
@@ -315,7 +315,7 @@ public class SoapUIAMFConnection {
      *
      * @throws IOException If an exception is encountered during URL connection setup.
      */
-    protected void internalConnect() {
+    private void internalConnect() {
         serializationContext.instantiateTypes = false;
         postMethod = new ExtendedPostMethod(url);
         setHttpRequestHeaders();
@@ -326,14 +326,14 @@ public class SoapUIAMFConnection {
     /**
      * Processes the HTTP response headers and body.
      */
-    protected Object processHttpResponse(InputStream inputStream) throws ClassNotFoundException, IOException {
+    private Object processHttpResponse(InputStream inputStream) throws ClassNotFoundException, IOException {
         return processHttpResponseBody(inputStream);
     }
 
     /**
      * Processes the HTTP response body.
      */
-    protected Object processHttpResponseBody(InputStream inputStream) throws ClassNotFoundException, IOException {
+    private Object processHttpResponseBody(InputStream inputStream) throws ClassNotFoundException, IOException {
         DataInputStream din = new DataInputStream(inputStream);
         ActionMessage message = new ActionMessage();
         actionContext.setRequestMessage(message);
@@ -349,7 +349,7 @@ public class SoapUIAMFConnection {
      * Processes the AMF packet.
      */
     @SuppressWarnings("unchecked")
-    protected Object processAmfPacket(ActionMessage packet) {
+    private Object processAmfPacket(ActionMessage packet) {
         processAmfHeaders(packet.getHeaders());
         return processAmfBody(packet.getBodies());
     }
@@ -358,7 +358,7 @@ public class SoapUIAMFConnection {
      * Processes the AMF headers by dispatching them to an AMF header processor,
      * if one exists.
      */
-    protected void processAmfHeaders(ArrayList<MessageHeader> headers) {
+    private void processAmfHeaders(ArrayList<MessageHeader> headers) {
         // No need to process headers if there's no AMF header processor.
         if (amfHeaderProcessor == null) {
             return;
@@ -374,7 +374,7 @@ public class SoapUIAMFConnection {
      * AMF messages is supported at some point but for now we are guaranteed to
      * have a single message.
      */
-    protected Object processAmfBody(ArrayList<MessageBody> messages) {
+    private Object processAmfBody(ArrayList<MessageBody> messages) {
         for (MessageBody message : messages) {
             String targetURI = message.getTargetURI();
 
@@ -396,8 +396,7 @@ public class SoapUIAMFConnection {
     /**
      * Writes the output buffer and processes the HTTP response.
      */
-    protected Object send(ByteArrayOutputStream outBuffer) throws ClassNotFoundException, IOException,
-            ClientStatusException, ServerStatusException {
+    private Object send(ByteArrayOutputStream outBuffer) throws ClassNotFoundException, IOException {
         // internalConnect.
         internalConnect();
 
@@ -419,7 +418,7 @@ public class SoapUIAMFConnection {
     /**
      * Sets the Http request headers, including the cookie headers.
      */
-    protected void setHttpRequestHeaders() {
+    private void setHttpRequestHeaders() {
         if (httpRequestHeaders != null) {
             for (Map.Entry<String, String> element : httpRequestHeaders.entrySet()) {
                 String key = element.getKey();

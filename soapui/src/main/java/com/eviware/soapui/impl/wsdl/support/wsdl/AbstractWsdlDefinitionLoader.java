@@ -46,7 +46,7 @@ public abstract class AbstractWsdlDefinitionLoader extends AbstractDefinitionLoa
     private XProgressMonitor monitor;
     private int progressIndex;
 
-    public AbstractWsdlDefinitionLoader(String url) {
+    protected AbstractWsdlDefinitionLoader(String url) {
         this.url = url;
 
         if (!PathUtils.isFilePath(url) && !PathUtils.isRelativePath(url)) {
@@ -82,7 +82,7 @@ public abstract class AbstractWsdlDefinitionLoader extends AbstractDefinitionLoa
         }
     }
 
-    public abstract InputStream load(String url) throws Exception;
+    protected abstract InputStream load(String url) throws Exception;
 
     public XmlObject loadXmlObject(String url, XmlOptions options) throws Exception {
         try {
@@ -123,7 +123,7 @@ public abstract class AbstractWsdlDefinitionLoader extends AbstractDefinitionLoa
         }
     }
 
-    protected boolean isAbsoluteUrl(String tempImp) {
+    private boolean isAbsoluteUrl(String tempImp) {
         tempImp = tempImp.toUpperCase();
         return tempImp.startsWith("HTTP:") || tempImp.startsWith("HTTPS:") || tempImp.startsWith("FILE:");
     }

@@ -58,7 +58,7 @@ public class OltuOAuth2ClientFacade implements OAuth2ClientFacade {
 
     }
 
-    protected OAuth2TokenExtractor getOAuth2TokenExtractor() {
+    OAuth2TokenExtractor getOAuth2TokenExtractor() {
         return new OAuth2TokenExtractor();
     }
 

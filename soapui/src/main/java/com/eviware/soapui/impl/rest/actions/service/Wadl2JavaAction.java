@@ -116,7 +116,7 @@ public class Wadl2JavaAction extends AbstractToolsAction<Interface> {
         return builder;
     }
 
-    protected String getWadlUrl(StringToStringMap values, RestService modelItem) throws Exception {
+    private String getWadlUrl(StringToStringMap values, RestService modelItem) throws Exception {
         String expandPath = PathUtils.expandPath(modelItem.getDefinition(), modelItem);
         if (PathUtils.isHttpPath(expandPath) && !modelItem.isGenerated()) {
             return expandPath;

@@ -26,11 +26,7 @@ import com.eviware.soapui.model.iface.InterfaceListener;
 import com.eviware.soapui.model.iface.Operation;
 import com.eviware.soapui.model.iface.Request;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractInterface<T extends InterfaceConfig> extends AbstractWsdlModelItem<T> implements
         Interface {
@@ -128,7 +124,7 @@ public abstract class AbstractInterface<T extends InterfaceConfig> extends Abstr
         }
     }
 
-    public void fireOperationUpdated(Operation operation) {
+    protected void fireOperationUpdated(Operation operation) {
         InterfaceListener[] a = interfaceListeners.toArray(new InterfaceListener[interfaceListeners.size()]);
 
         for (int c = 0; c < a.length; c++) {

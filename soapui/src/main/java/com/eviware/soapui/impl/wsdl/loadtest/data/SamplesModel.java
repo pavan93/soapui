@@ -18,14 +18,7 @@ package com.eviware.soapui.impl.wsdl.loadtest.data;
 
 import com.eviware.soapui.model.support.LoadTestRunListenerAdapter;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import org.apache.log4j.Logger;
 
 import javax.swing.table.AbstractTableModel;
@@ -49,7 +42,7 @@ public class SamplesModel extends AbstractTableModel {
     private TestCase testCase;
     private final static Logger log = Logger.getLogger(SamplesModel.class);
 
-    public SamplesModel(LoadTest loadTest) {
+    private SamplesModel(LoadTest loadTest) {
         this.loadTest = loadTest;
 
         testRunListener = new InternalTestRunListener();
@@ -78,7 +71,7 @@ public class SamplesModel extends AbstractTableModel {
         return testSamples == null ? "discarded" : testSamples[columnIndex];
     }
 
-    public void addSamples(TestSample[] newSamples) {
+    private void addSamples(TestSample[] newSamples) {
         if (newSamples.length != getColumnCount()) {
             throw new RuntimeException("Invalid number of samples reported: " + newSamples.length + ", expected "
                     + getColumnCount());
@@ -163,15 +156,15 @@ public class SamplesModel extends AbstractTableModel {
      * @author ole.matzura
      */
 
-    public static final class TestSample {
+    static final class TestSample {
         private final TestStep testStep;
         private List<TestStepResult> results;
 
-        public TestSample(TestStep testStep) {
+        TestSample(TestStep testStep) {
             this.testStep = testStep;
         }
 
-        public void addTestStepResult(TestStepResult result) {
+        void addTestStepResult(TestStepResult result) {
             if (result.getTestStep() != testStep) {
                 throw new RuntimeException("Trying to add sample for false testStep [" + result.getTestStep().getName()
                         + "], " + "expecting [" + testStep.getName() + "]");

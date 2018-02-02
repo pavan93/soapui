@@ -52,7 +52,7 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
     private WsdlProject project;
     private boolean saveAfterRun;
 
-    public static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " MockService Runner";
+    private static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " MockService Runner";
 
     /**
      * Runs the specified MockService in the specified SoapUI project file, see
@@ -78,7 +78,7 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
         this.port = port;
     }
 
-    public SoapUIMockServiceRunner() {
+    private SoapUIMockServiceRunner() {
         super(TITLE);
     }
 
@@ -170,11 +170,11 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
         return block;
     }
 
-    protected void initProject() {
+    private void initProject() {
         initProjectProperties(project);
     }
 
-    protected void exportReports() {
+    private void exportReports() {
     }
 
     /**
@@ -183,7 +183,7 @@ public class SoapUIMockServiceRunner extends AbstractSoapUIRunner {
      * @param mockService
      */
 
-    public void runMockService(MockService mockService) {
+    private void runMockService(MockService mockService) {
         try {
             if (path != null) {
                 mockService.setPath(path);

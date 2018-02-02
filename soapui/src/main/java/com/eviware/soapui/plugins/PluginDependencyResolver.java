@@ -20,7 +20,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
-public class PluginDependencyResolver {
+class PluginDependencyResolver {
     private final Map<PluginInfo,File> infoToFileMap;
 
     public PluginDependencyResolver(PluginLoader pluginLoader, Iterable<File> pluginFiles) throws IOException {

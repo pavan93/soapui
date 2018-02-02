@@ -30,7 +30,7 @@ import static org.mockito.Mockito.when;
 
 public class WsdlMockResponseTest {
 
-    MockResponse mockResponse;
+    private MockResponse mockResponse;
     private CompressedStringConfig compressedStringConfig;
 
     @Before

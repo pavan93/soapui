@@ -26,7 +26,7 @@ import com.eviware.soapui.security.result.SecurityTestStepResult;
 import com.eviware.soapui.security.scan.AbstractSecurityScan;
 import org.apache.commons.collections.list.TreeList;
 
-import javax.swing.AbstractListModel;
+import javax.swing.*;
 import java.lang.ref.SoftReference;
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +37,7 @@ import java.util.List;
  * @author SoapUI team
  */
 @SuppressWarnings({"serial", "unchecked"})
-public class SecurityTestLogModel extends AbstractListModel {
+class SecurityTestLogModel extends AbstractListModel {
     private List<Object> items = Collections.synchronizedList(new TreeList());
     private List<SoftReference<SecurityResult>> results = Collections.synchronizedList(new TreeList());
     private int maxSize = 100;

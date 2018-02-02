@@ -27,11 +27,7 @@ import org.apache.log4j.Logger;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Collector of statistics to be exposed as TableModels
@@ -169,7 +165,7 @@ public class StatisticsHistory {
     public class TestStepStatisticsHistory extends StatisticsHistoryModel {
         private final int testStepIndex;
 
-        public TestStepStatisticsHistory(int testStepIndex) {
+        TestStepStatisticsHistory(int testStepIndex) {
             this.testStepIndex = testStepIndex == -1 ? statistics.getRowCount() - 1 : testStepIndex;
         }
 
@@ -214,7 +210,7 @@ public class StatisticsHistory {
     private class StatisticsValueHistory extends StatisticsHistoryModel {
         private final Statistic statistic;
 
-        public StatisticsValueHistory(Statistic statistic) {
+        StatisticsValueHistory(Statistic statistic) {
             this.statistic = statistic;
         }
 

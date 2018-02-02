@@ -39,19 +39,16 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class ProxyUtilsTestCase {
     private static final String URL = "http://example.com";
 
-    public static final String SYSTEM_PROPERTY_PROXY_HOST = "systempropertyhost.com";
-    public static final String SYSTEM_PROPERTY_PROXY_PORT = "1";
+    private static final String SYSTEM_PROPERTY_PROXY_HOST = "systempropertyhost.com";
+    private static final String SYSTEM_PROPERTY_PROXY_PORT = "1";
 
-    public static final String MANUAL_SETTING_PROXY_HOST = "manualsettingshost.com";
-    public static final String MANUAL_SETTING_PROXY_PORT = "2";
+    private static final String MANUAL_SETTING_PROXY_HOST = "manualsettingshost.com";
+    private static final String MANUAL_SETTING_PROXY_PORT = "2";
 
     public static final String AUTOMATIC_PROXY_HOST = "autosettingshost.com";
     public static final String AUTOMATIC_PROXY_PORT = "3";

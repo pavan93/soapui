@@ -20,7 +20,7 @@ import com.eviware.soapui.model.testsuite.TestStepResult;
 
 import java.io.PrintWriter;
 
-public interface TestRunLog {
+interface TestRunLog {
     void clear();
 
     void addText(String string);

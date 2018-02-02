@@ -43,9 +43,9 @@ import java.util.Hashtable;
  * @author <a href="mailto:nenadn@eviware.com">Nenad V. Nikolic</a>
  */
 @SuppressWarnings("unchecked")
-public class ToolActionFactory {
+class ToolActionFactory {
 
-    protected static final Logger log = Logger.getLogger(ToolActionFactory.class);
+    private static final Logger log = Logger.getLogger(ToolActionFactory.class);
     private static Hashtable<String, Class> toolActionTypeMap;
 
     static {

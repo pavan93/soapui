@@ -17,12 +17,7 @@
 package com.eviware.soapui.impl.rest.support;
 
 import com.eviware.soapui.SoapUI;
-import com.eviware.soapui.impl.rest.RestMethod;
-import com.eviware.soapui.impl.rest.RestRepresentation;
-import com.eviware.soapui.impl.rest.RestRequest;
-import com.eviware.soapui.impl.rest.RestRequestInterface;
-import com.eviware.soapui.impl.rest.RestResource;
-import com.eviware.soapui.impl.rest.RestService;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStep;
 import com.eviware.soapui.model.iface.Interface;
@@ -37,11 +32,7 @@ import org.apache.xmlbeans.XmlObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Convert old-style REST Requests to new ones, creating REST Methods for them
@@ -238,7 +229,7 @@ public class RestRequestConverter {
 
     }
 
-    public static HttpRequestConfig convert(OldRestRequestConfig old) {
+    private static HttpRequestConfig convert(OldRestRequestConfig old) {
         HttpRequestConfig config = HttpRequestConfig.Factory.newInstance();
         config.setAssertionArray(old.getAssertionList().toArray(new TestAssertionConfig[old.sizeOfAssertionArray()]));
         config.setAttachmentArray(old.getAttachmentList().toArray(new AttachmentConfig[old.sizeOfAttachmentArray()]));
@@ -294,7 +285,7 @@ public class RestRequestConverter {
     }
 
     public static class RestConversionException extends RuntimeException {
-        public RestConversionException(String message) {
+        RestConversionException(String message) {
             super(message);
         }
     }

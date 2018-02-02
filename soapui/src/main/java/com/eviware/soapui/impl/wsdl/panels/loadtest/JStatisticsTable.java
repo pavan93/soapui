@@ -27,18 +27,10 @@ import com.eviware.soapui.support.action.swing.ActionSupport;
 import com.eviware.soapui.support.swing.JTableFactory;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumnModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -49,7 +41,7 @@ import java.awt.event.MouseEvent;
  * @author Ole.Matzura
  */
 
-public class JStatisticsTable extends JPanel {
+class JStatisticsTable extends JPanel {
     private final WsdlLoadTest loadTest;
     private JXTable statisticsTable;
     private JPopupMenu popup;
@@ -130,28 +122,7 @@ public class JStatisticsTable extends JPanel {
         }
     }
 
-    private static final class ColorLabelTableCellRenderer extends JPanel implements TableCellRenderer {
-        private Color bgColor;
-
-        public ColorLabelTableCellRenderer() {
-            super();
-
-            bgColor = getBackground();
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                                                       int row, int column) {
-            if (value instanceof Color) {
-                setBackground((Color) value);
-            } else {
-                setBackground(bgColor);
-            }
-
-            return this;
-        }
-    }
-
-    public void showPopup(MouseEvent e) {
+    private void showPopup(MouseEvent e) {
         int row = statisticsTable.rowAtPoint(e.getPoint());
         if (row == -1) {
             return;
@@ -177,10 +148,31 @@ public class JStatisticsTable extends JPanel {
         popup.setVisible(true);
     }
 
+    private static final class ColorLabelTableCellRenderer extends JPanel implements TableCellRenderer {
+        private Color bgColor;
+
+        ColorLabelTableCellRenderer() {
+            super();
+
+            bgColor = getBackground();
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            if (value instanceof Color) {
+                setBackground((Color) value);
+            } else {
+                setBackground(bgColor);
+            }
+
+            return this;
+        }
+    }
+
     private class AddAssertionAction extends AbstractAction {
         private final String type;
 
-        public AddAssertionAction(String type) {
+        AddAssertionAction(String type) {
             super(type);
             this.type = type;
         }

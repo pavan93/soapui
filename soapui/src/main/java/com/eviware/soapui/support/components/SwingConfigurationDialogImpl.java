@@ -22,18 +22,8 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
@@ -157,7 +147,7 @@ public class SwingConfigurationDialogImpl implements ConfigurationDialog {
     }
 
     private class OkAction extends AbstractAction {
-        public OkAction() {
+        OkAction() {
             super("OK");
         }
 
@@ -176,7 +166,7 @@ public class SwingConfigurationDialogImpl implements ConfigurationDialog {
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             super("Cancel");
         }
 

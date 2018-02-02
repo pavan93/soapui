@@ -11,11 +11,11 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures a XQuery Contains assertion in JSON format.
  */
 @ApiModel(value = "XQueryContainsAssertion", description = "XQuery contains assertion definition")
-public class XQueryContainsAssertionStruct extends AssertionStruct<XQueryContainsAssertion> {
+class XQueryContainsAssertionStruct extends AssertionStruct<XQueryContainsAssertion> {
 
-    public final String xquery;
-    public final String expectedContent;
-    public final boolean allowWildcards;
+    private final String xquery;
+    private final String expectedContent;
+    private final boolean allowWildcards;
 
     @JsonCreator
     public XQueryContainsAssertionStruct(@JsonProperty("name") String name, @JsonProperty("xquery") String xquery,

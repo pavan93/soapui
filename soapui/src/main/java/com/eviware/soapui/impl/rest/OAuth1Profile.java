@@ -14,29 +14,29 @@ import java.beans.PropertyChangeSupport;
 import static org.opensaml.xml.util.DatatypeHelper.safeTrim;
 
 public class OAuth1Profile implements PropertyExpansionContainer {
-    public static final String CLIENT_ID_PROPERTY = "clientID";
-    public static final String CLIENT_SECRET_PROPERTY = "clientSecret";
+    private static final String CLIENT_ID_PROPERTY = "clientID";
+    private static final String CLIENT_SECRET_PROPERTY = "clientSecret";
     public static final String AUTHORIZATION_URI_PROPERTY = "authorizationURI";
     public static final String ACCESS_TOKEN_URI_PROPERTY = "accessTokenURI";
     public static final String REDIRECT_URI_PROPERTY = "redirectURI";
-    public static final String ACCESS_TOKEN_PROPERTY = "accessToken";
+    private static final String ACCESS_TOKEN_PROPERTY = "accessToken";
     public static final String REFRESH_TOKEN_PROPERTY = "refreshToken";
-    public static final String SCOPE_PROPERTY = "scope";
+    private static final String SCOPE_PROPERTY = "scope";
     public static final String ACCESS_TOKEN_STATUS_PROPERTY = "accessTokenStatus";
-    public static final String ACCESS_TOKEN_POSITION_PROPERTY = "accessTokenPosition";
+    private static final String ACCESS_TOKEN_POSITION_PROPERTY = "accessTokenPosition";
     public static final String ACCESS_TOKEN_EXPIRATION_TIME = "accessTokenExpirationTime";
-    public static final String ACCESS_TOKEN_ISSUED_TIME = "accessTokenIssuedTime";
-    public static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "manualAccessTokenExpirationTime";
-    public static final String USE_MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "useManualAccessTokenExpirationTime";
+    private static final String ACCESS_TOKEN_ISSUED_TIME = "accessTokenIssuedTime";
+    private static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "manualAccessTokenExpirationTime";
+    private static final String USE_MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "useManualAccessTokenExpirationTime";
     public static final String REFRESH_ACCESS_TOKEN_METHOD_PROPERTY = "refreshAccessTokenMethod";
-    public static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME_UNIT_PROPERTY = "manualAccessTokenExpirationTimeUnit";
-    public static final String TOKEN_SECRET_PROPERTY = "tokenSecret";
+    private static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME_UNIT_PROPERTY = "manualAccessTokenExpirationTimeUnit";
+    private static final String TOKEN_SECRET_PROPERTY = "tokenSecret";
     public static final String TEMPORARY_TOKEN_URI_PROPERTY = "temporaryTokenURI";
     public static final String CONSUMER_SECRET_PROPERTY = "consumerSecret";
     public static final String CONSUMER_KEY_PROPERTY = "consumerKey";
 
-    public static final String RESOURCE_OWNER_LOGIN_PROPERTY = "resourceOwnerName";
-    public static final String RESOURCE_OWNER_PASSWORD_PROPERTY = "resourceOwnerPassword";
+    private static final String RESOURCE_OWNER_LOGIN_PROPERTY = "resourceOwnerName";
+    private static final String RESOURCE_OWNER_PASSWORD_PROPERTY = "resourceOwnerPassword";
     public static final String TOKEN_SECRET_STATUS_PROPERTY = "tokenSecretStatus";
     private final OAuth1ProfileContainer OAuth1ProfileContainer;
     private final OAuth1ProfileConfig configuration;
@@ -154,7 +154,7 @@ public class OAuth1Profile implements PropertyExpansionContainer {
         setTokenSecretStatus(getTokenSecretStartingStatus());
     }
 
-    public AccessTokenStatusConfig.Enum getTokenSecretStartingStatus() {
+    private AccessTokenStatusConfig.Enum getTokenSecretStartingStatus() {
         AccessTokenStatusConfig.Enum result = configuration.getTokenSecretStartingStatus();
         if (result == null) {
             result = AccessTokenStatusConfig.UNKNOWN;
@@ -162,7 +162,7 @@ public class OAuth1Profile implements PropertyExpansionContainer {
         return result;
     }
 
-    public void setTokenSecretStartingStatus(AccessTokenStatusConfig.Enum startingStatus) {
+    private void setTokenSecretStartingStatus(AccessTokenStatusConfig.Enum startingStatus) {
         if (startingStatus == null) {
             startingStatus = AccessTokenStatusConfig.UNKNOWN;
         }
@@ -177,7 +177,7 @@ public class OAuth1Profile implements PropertyExpansionContainer {
         return result;
     }
 
-    public void setTokenSecretStatus(AccessTokenStatusConfig.Enum newStatus) {
+    private void setTokenSecretStatus(AccessTokenStatusConfig.Enum newStatus) {
         if (newStatus == null) {
             newStatus = AccessTokenStatusConfig.UNKNOWN;
         }
@@ -284,7 +284,7 @@ public class OAuth1Profile implements PropertyExpansionContainer {
         pcs.firePropertyChange(ACCESS_TOKEN_STATUS_PROPERTY, oldStatus, newStatus);
     }
 
-    public AccessTokenStatusConfig.Enum getAccessTokenStartingStatus() {
+    private AccessTokenStatusConfig.Enum getAccessTokenStartingStatus() {
         return getSavedAccessTokenStartingStatusEnum(configuration.getAccessTokenStartingStatus());
     }
 
@@ -349,7 +349,7 @@ public class OAuth1Profile implements PropertyExpansionContainer {
         }
     }
 
-    public TimeUnitConfig.Enum getManualAccessTokenExpirationTimeUnit() {
+    private TimeUnitConfig.Enum getManualAccessTokenExpirationTimeUnit() {
         if (configuration.getManualAccessTokenExpirationTimeUnit() == null) {
             configuration.setManualAccessTokenExpirationTimeUnit(TimeUnitConfig.SECONDS);
         }

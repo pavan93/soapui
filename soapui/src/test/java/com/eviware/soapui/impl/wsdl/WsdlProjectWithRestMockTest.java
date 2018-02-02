@@ -35,7 +35,7 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.assertThat;
 
 public class WsdlProjectWithRestMockTest {
-    public static final String TEST_PROJECT_PATH = "/soapui-projects/BasicMock-soapui-4.6.3-Project.xml";
+    private static final String TEST_PROJECT_PATH = "/soapui-projects/BasicMock-soapui-4.6.3-Project.xml";
     private final String restMockResponseContent = "Some response";
     private WsdlProject project;
     private final String restMockServiceName = "Another Great Wow";
@@ -120,7 +120,7 @@ public class WsdlProjectWithRestMockTest {
         mockResponse.setName(restMockResponseName);
     }
 
-    protected WsdlProject saveAndReloadProject(WsdlProject project) throws Exception {
+    private WsdlProject saveAndReloadProject(WsdlProject project) throws Exception {
         File tempFile = File.createTempFile("soapuitemptestfile", ".xml");
         tempFile.deleteOnExit();
         project.saveIn(tempFile);

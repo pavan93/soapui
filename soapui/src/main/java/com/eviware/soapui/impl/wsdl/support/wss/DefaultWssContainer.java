@@ -88,13 +88,13 @@ public class DefaultWssContainer implements WssContainer {
         return result;
     }
 
-    protected void fireCryptoAdded(WssCrypto crypto) {
+    private void fireCryptoAdded(WssCrypto crypto) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.cryptoAdded(crypto);
         }
     }
 
-    protected void fireCryptoRemoved(WssCrypto crypto) {
+    private void fireCryptoRemoved(WssCrypto crypto) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.cryptoRemoved(crypto);
         }
@@ -106,7 +106,7 @@ public class DefaultWssContainer implements WssContainer {
         }
     }
 
-    public WssContainerConfig getConfig() {
+    private WssContainerConfig getConfig() {
         return config;
     }
 
@@ -150,13 +150,13 @@ public class DefaultWssContainer implements WssContainer {
         getConfig().removeIncoming(row);
     }
 
-    protected void fireIncomingWssAdded(IncomingWss incomingWss) {
+    private void fireIncomingWssAdded(IncomingWss incomingWss) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.incomingWssAdded(incomingWss);
         }
     }
 
-    protected void fireIncomingWssRemoved(IncomingWss incomingWss) {
+    private void fireIncomingWssRemoved(IncomingWss incomingWss) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.incomingWssRemoved(incomingWss);
         }
@@ -177,13 +177,13 @@ public class DefaultWssContainer implements WssContainer {
         return result;
     }
 
-    protected void fireOutgoingWssAdded(OutgoingWss result) {
+    private void fireOutgoingWssAdded(OutgoingWss result) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.outgoingWssAdded(result);
         }
     }
 
-    protected void fireOutgoingWssRemoved(OutgoingWss result) {
+    private void fireOutgoingWssRemoved(OutgoingWss result) {
         for (WssContainerListener listener : listeners.toArray(new WssContainerListener[listeners.size()])) {
             listener.outgoingWssRemoved(result);
         }

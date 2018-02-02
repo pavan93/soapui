@@ -16,26 +16,22 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import java.awt.Component;
-import java.awt.Insets;
-import java.awt.Point;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.dnd.Autoscroll;
 
 public class AutoscrollSupport implements Autoscroll {
     private static final int AUTOSCROLL_MARGIN = 12;
 
-    Component comp;
-    Insets insets;
-    Insets scrollUnits;
+    private Component comp;
+    private Insets insets;
+    private Insets scrollUnits;
 
     public AutoscrollSupport(Component comp, Insets insets) {
         this(comp, insets, insets);
     }
 
-    public AutoscrollSupport(Component comp, Insets insets, Insets scrollUnits) {
+    private AutoscrollSupport(Component comp, Insets insets, Insets scrollUnits) {
         this.comp = comp;
         this.insets = insets;
         this.scrollUnits = scrollUnits;
@@ -76,7 +72,7 @@ public class AutoscrollSupport implements Autoscroll {
                 - raInner.x + raOuter.x + AUTOSCROLL_MARGIN);
     }
 
-    JViewport getViewport() {
+    private JViewport getViewport() {
         return (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, comp);
     }
 }

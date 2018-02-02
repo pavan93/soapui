@@ -38,7 +38,7 @@ public class SoapUIScriptEngineRegistry {
 
     private static Map<String, SoapUIScriptEngineFactory> factories = new HashMap<String, SoapUIScriptEngineFactory>();
 
-    public static void registerScriptEngine(String id, SoapUIScriptEngineFactory factory) {
+    private static void registerScriptEngine(String id, SoapUIScriptEngineFactory factory) {
         factories.put(id, factory);
     }
 

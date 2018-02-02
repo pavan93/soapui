@@ -111,7 +111,7 @@ public class MockTestRunContext extends AbstractSubmitContext<ModelItem> impleme
         return testStep == null ? null : testStep.getTestCase();
     }
 
-    public Settings getSettings() {
+    private Settings getSettings() {
         return testStep == null ? null : testStep.getSettings();
     }
 }

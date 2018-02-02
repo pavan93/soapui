@@ -44,7 +44,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.junit.Assert.assertTrue;
 
-public class RestProjectStepdefs {
+class RestProjectStepdefs {
     private final Robot robot;
     private final FrameFixture rootWindow;
     private final List<String> existingProjectNameList;
@@ -162,7 +162,7 @@ public class RestProjectStepdefs {
     }
 
     @Then("^resource editor has parameter with name (.+) and value (.+) at row (.+)$")
-    public void verifyResourceEditorShowsTheParameter(String parameterName, String parameterValue, Integer index) {
+    private void verifyResourceEditorShowsTheParameter(String parameterName, String parameterValue, Integer index) {
         JPanelFixture resourceEditor = findResourceEditor(rootWindow, newProjectIndexInNavigationTree, robot);
         verifyParamValues(resourceEditor, index, parameterName, parameterValue);
     }
@@ -316,7 +316,7 @@ public class RestProjectStepdefs {
     }
 
     @And("^user open the request at path (.+)$")
-    public void openTreeItemWithPath(String path) {
+    private void openTreeItemWithPath(String path) {
         String fullPath = WorkspaceUtils.getProjectNavigationPath(projectName) + path;
         WorkspaceUtils.getNavigationTree(rootWindow).node(fullPath).doubleClick();
     }

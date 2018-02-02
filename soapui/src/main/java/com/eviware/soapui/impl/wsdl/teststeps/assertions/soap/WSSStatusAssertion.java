@@ -26,11 +26,8 @@ import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFa
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 
 import java.util.Vector;
 
@@ -41,9 +38,9 @@ import java.util.Vector;
  */
 
 public class WSSStatusAssertion extends WsdlMessageAssertion implements ResponseAssertion, RequestAssertion {
-    public static final String ID = "WSS Status Assertion";
-    public static final String LABEL = "WS-Security Status";
-    public static final String DESCRIPTION = "Validates that the last received message contained valid WS-Security headers. Applicable to SOAP TestSteps.";
+    private static final String ID = "WSS Status Assertion";
+    private static final String LABEL = "WS-Security Status";
+    private static final String DESCRIPTION = "Validates that the last received message contained valid WS-Security headers. Applicable to SOAP TestSteps.";
 
     /**
      * Constructor for our assertion.
@@ -51,7 +48,7 @@ public class WSSStatusAssertion extends WsdlMessageAssertion implements Response
      * @param assertionConfig
      * @param modelItem
      */
-    public WSSStatusAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
+    private WSSStatusAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
         super(assertionConfig, modelItem, false, false, false, true);
     }
 

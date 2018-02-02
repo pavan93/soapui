@@ -26,9 +26,9 @@ import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
-public class WebstartUtil {
+class WebstartUtil {
 
-    protected static String createWebStartDirectory(String name, String jarUrl) throws IOException {
+    static String createWebStartDirectory(String name, String jarUrl) throws IOException {
 
         String deploymentUserTmp = System.getProperty("deployment.user.tmp");
         JarFile jar = getJar(jarUrl);
@@ -93,7 +93,7 @@ public class WebstartUtil {
         return folder.getAbsolutePath();
     }
 
-    protected static boolean isWebStart() {
+    static boolean isWebStart() {
         String webstart = System.getProperty("com.eviware.soapui.webstart", "false");
         return "true".equalsIgnoreCase(webstart);
 

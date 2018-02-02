@@ -18,18 +18,10 @@ package com.eviware.soapui.support.swing;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JSplitPane;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicSplitPaneDivider;
 import javax.swing.plaf.basic.BasicSplitPaneUI;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.LayoutManager;
+import java.awt.*;
 
 /**
  * SplitPaneUI that draws nicer buttons and enables/disables them appropriately
@@ -71,8 +63,8 @@ public class SoapUISplitPaneUI extends BasicSplitPaneUI {
         return new SoapUIDivider(this);
     }
 
-    public class SoapUIDivider extends BasicSplitPaneDivider {
-        public SoapUIDivider(BasicSplitPaneUI ui) {
+    class SoapUIDivider extends BasicSplitPaneDivider {
+        SoapUIDivider(BasicSplitPaneUI ui) {
             super(ui);
 
             setLayout(new SoapUIDividerLayout());
@@ -130,10 +122,18 @@ public class SoapUISplitPaneUI extends BasicSplitPaneUI {
             }
         }
 
-        protected class SoapUIDividerLayout implements LayoutManager {
+        JButton getLeftButton() {
+            return leftButton;
+        }
+
+        JButton getRightButton() {
+            return rightButton;
+        }
+
+        class SoapUIDividerLayout implements LayoutManager {
             private int lastOrientation;
 
-            public SoapUIDividerLayout() {
+            SoapUIDividerLayout() {
                 lastOrientation = getOrientation();
             }
 
@@ -186,14 +186,6 @@ public class SoapUISplitPaneUI extends BasicSplitPaneUI {
             public Dimension minimumLayoutSize(Container parent) {
                 return new Dimension(10, 10);
             }
-        }
-
-        public JButton getLeftButton() {
-            return leftButton;
-        }
-
-        public JButton getRightButton() {
-            return rightButton;
         }
     }
 

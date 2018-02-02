@@ -50,11 +50,11 @@ import java.net.InetSocketAddress;
  * Base class for tests using {@link LocalTestServer}. The server will not be
  * started per default.
  */
-public abstract class BasicServerTestBase {
+abstract class BasicServerTestBase {
     /**
      * The local server for testing.
      */
-    protected LocalTestServer localServer;
+    LocalTestServer localServer;
 
     @After
     public void tearDown() {

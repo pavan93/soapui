@@ -16,14 +16,13 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.AbstractListModel;
-import javax.swing.MutableComboBoxModel;
+import javax.swing.*;
 import java.io.Serializable;
 import java.util.Vector;
 
 public class ExtendedComboBoxModel extends AbstractListModel implements MutableComboBoxModel, Serializable {
-    Vector objects;
-    Object selectedObject;
+    private Vector objects;
+    private Object selectedObject;
 
     /**
      * Constructs an empty DefaultComboBoxModel object.

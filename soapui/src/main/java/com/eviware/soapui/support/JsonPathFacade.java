@@ -146,7 +146,7 @@ public class JsonPathFacade {
         private final PlainJavaJsonProvider provider;
         private final Object value;
 
-        public JsonWriteDecorator(PlainJavaJsonProvider provider, int index, PathToken endToken, Object value) {
+        JsonWriteDecorator(PlainJavaJsonProvider provider, int index, PathToken endToken, Object value) {
             super(endToken.getFragment(), index, true);
             this.provider = provider;
             this.value = value;

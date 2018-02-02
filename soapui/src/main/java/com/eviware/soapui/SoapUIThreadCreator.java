@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadFactory;
  * @author Ole
  */
 
-public class SoapUIThreadCreator implements ThreadFactory {
+class SoapUIThreadCreator implements ThreadFactory {
     public Thread newThread(Runnable r) {
         Thread thread = new Thread(r);
         thread.setContextClassLoader(SoapUI.getSoapUICore().getExtensionClassLoader());

@@ -19,13 +19,13 @@ package com.eviware.x.impl.swing;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.x.form.AbstractXFormField;
 
-import javax.swing.JComponent;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class AbstractSwingXFormField<T extends JComponent> extends AbstractXFormField<T> {
     private T component;
 
-    public AbstractSwingXFormField(T component) {
+    protected AbstractSwingXFormField(T component) {
         this.component = component;
     }
 

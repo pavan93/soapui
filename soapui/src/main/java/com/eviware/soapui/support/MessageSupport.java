@@ -26,16 +26,16 @@ public final class MessageSupport {
     private static final Map<String, ResourceBundle> bundles = new HashMap<String, ResourceBundle>();
     private final Class<? extends Object> clazz;
 
-    public MessageSupport(Class<? extends Object> clazz) {
+    private MessageSupport(Class<? extends Object> clazz) {
         this.clazz = clazz;
     }
 
-    public static String get(Class<? extends Object> clazz, String key, Object... args) {
+    private static String get(Class<? extends Object> clazz, String key, Object... args) {
         String result = get(clazz, key);
         return MessageFormat.format(result, args);
     }
 
-    public static String get(Class<? extends Object> clazz, String key) {
+    private static String get(Class<? extends Object> clazz, String key) {
         ResourceBundle bundle = null;
 
         try {
@@ -56,7 +56,7 @@ public final class MessageSupport {
         }
     }
 
-    public static String[] getArray(Class<? extends Object> clazz, String key) {
+    private static String[] getArray(Class<? extends Object> clazz, String key) {
         ResourceBundle bundle = null;
 
         try {
@@ -111,7 +111,7 @@ public final class MessageSupport {
         return MessageSupport.get(clazz, key, args);
     }
 
-    public String[] getArray(String key) {
+    private String[] getArray(String key) {
         return MessageSupport.getArray(clazz, key);
     }
 

@@ -27,7 +27,7 @@ public abstract class AbstractInterfaceDefinition<T extends AbstractInterface<?>
     private DefinitionCache definitionCache;
     private T iface;
 
-    protected AbstractInterfaceDefinition(T iface) {
+    AbstractInterfaceDefinition(T iface) {
         this.iface = iface;
     }
 

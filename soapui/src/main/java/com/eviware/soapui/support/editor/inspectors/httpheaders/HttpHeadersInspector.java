@@ -28,18 +28,12 @@ import com.eviware.soapui.support.editor.views.xml.raw.RawXmlEditorFactory;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.swing.JTableFactory;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -50,7 +44,7 @@ public class HttpHeadersInspector extends AbstractXmlInspector implements Proper
     private JTable headersTable;
     private JPanel panel;
     private JButton removeButton;
-    public boolean changing;
+    private boolean changing;
 
     public HttpHeadersInspector(HttpHeadersInspectorModel model) {
         super("Headers (" + (model.getHeaders() == null ? "0" : model.getHeaders().valueCount()) + ")",

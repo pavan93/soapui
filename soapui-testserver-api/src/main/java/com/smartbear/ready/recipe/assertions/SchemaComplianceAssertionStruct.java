@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModel;
  * Captures the JSON configuration of a Schema Compliance assertion.
  */
 @ApiModel(value = "SchemaComplianceAssertion", description = "Schema compliance assertion definition")
-public class SchemaComplianceAssertionStruct extends AssertionStruct<SchemaComplianceAssertion> {
+class SchemaComplianceAssertionStruct extends AssertionStruct<SchemaComplianceAssertion> {
 
     @JsonCreator
     public SchemaComplianceAssertionStruct(@JsonProperty("name") String name) {

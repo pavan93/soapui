@@ -219,7 +219,7 @@ public class OAuth2ScriptsEditorTest extends StubbedDialogsTestBase {
     }
 
     private class TestableOAuth2ScriptsEditor extends OAuth2ScriptsEditor {
-        public TestableOAuth2ScriptsEditor(OAuth2Profile profile) {
+        TestableOAuth2ScriptsEditor(OAuth2Profile profile) {
             super(profile);
         }
 

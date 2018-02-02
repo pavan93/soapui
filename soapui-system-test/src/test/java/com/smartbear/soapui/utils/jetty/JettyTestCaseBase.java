@@ -66,11 +66,11 @@ public class JettyTestCaseBase {
         Files.write(wsdl, wsdlFile, Charset.forName("UTF-8"));
     }
 
-    protected void startJetty() throws Exception {
+    private void startJetty() throws Exception {
         server.start();
     }
 
-    protected void stopJetty() throws Exception {
+    private void stopJetty() throws Exception {
         try {
             server.stop();
         } finally {
@@ -92,7 +92,7 @@ public class JettyTestCaseBase {
         stopJetty();
     }
 
-    protected String getResourceBase() {
+    private String getResourceBase() {
         return resourceBase;
     }
 

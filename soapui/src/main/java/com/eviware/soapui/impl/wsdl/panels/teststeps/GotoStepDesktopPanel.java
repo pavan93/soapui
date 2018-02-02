@@ -229,7 +229,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
         return toolbar;
     }
 
-    protected JXToolBar buildTargetToolbar() {
+    private JXToolBar buildTargetToolbar() {
         JXToolBar builder = UISupport.createSmallToolbar();
         testStepsModel = new GotoTestStepsComboBoxModel(gotoStep.getTestCase(), null);
         testStepsCombo = new JComboBox(testStepsModel);
@@ -275,8 +275,41 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
         }
     }
 
+    private void enableEditComponents(boolean b) {
+        expressionArea.setEnabled(b);
+        testStepsCombo.setEnabled(b);
+        copyButton.setEnabled(b);
+        deleteButton.setEnabled(b);
+        declareButton.setEnabled(b);
+        testConditionButton.setEnabled(b);
+        renameButton.setEnabled(b);
+    }
+
+    public boolean onClose(boolean canCancel) {
+        componentEnabler.release();
+        gotoStep.getTestCase().removeTestRunListener(testRunListener);
+        testStepsModel.release();
+        inspectorPanel.release();
+
+        return release();
+    }
+
+    public JComponent getComponent() {
+        return this;
+    }
+
+    public boolean dependsOn(ModelItem modelItem) {
+        return modelItem == gotoStep || modelItem == gotoStep.getTestCase()
+                || modelItem == gotoStep.getTestCase().getTestSuite()
+                || modelItem == gotoStep.getTestCase().getTestSuite().getProject();
+    }
+
+    public GotoCondition getCurrentCondition() {
+        return currentCondition;
+    }
+
     private final class AddAction extends AbstractAction {
-        public AddAction() {
+        AddAction() {
             putValue(Action.SHORT_DESCRIPTION, "Adds a new Condition");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
         }
@@ -296,7 +329,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class CopyAction extends AbstractAction {
-        public CopyAction() {
+        CopyAction() {
             putValue(Action.SHORT_DESCRIPTION, "Copies the selected Condition");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clone.png"));
         }
@@ -321,7 +354,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class DeleteAction extends AbstractAction {
-        public DeleteAction() {
+        DeleteAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Deletes the selected Condition");
         }
@@ -343,7 +376,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class RenameAction extends AbstractAction {
-        public RenameAction() {
+        RenameAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/rename.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Renames the selected Condition");
         }
@@ -363,7 +396,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class DeclareNamespacesAction extends AbstractAction {
-        public DeclareNamespacesAction() {
+        DeclareNamespacesAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/declareNs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Declare available response namespaces in condition expression");
         }
@@ -392,7 +425,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run_all.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs the current conditions against the previous response");
         }
@@ -428,7 +461,7 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
     }
 
     private final class TestConditionAction extends AbstractAction {
-        public TestConditionAction() {
+        TestConditionAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION,
                     "Runs the current condition against the previous response and shows the result");
@@ -462,39 +495,6 @@ public class GotoStepDesktopPanel extends ModelItemDesktopPanel<WsdlGotoTestStep
                 }
             }
         }
-    }
-
-    public boolean onClose(boolean canCancel) {
-        componentEnabler.release();
-        gotoStep.getTestCase().removeTestRunListener(testRunListener);
-        testStepsModel.release();
-        inspectorPanel.release();
-
-        return release();
-    }
-
-    public JComponent getComponent() {
-        return this;
-    }
-
-    public boolean dependsOn(ModelItem modelItem) {
-        return modelItem == gotoStep || modelItem == gotoStep.getTestCase()
-                || modelItem == gotoStep.getTestCase().getTestSuite()
-                || modelItem == gotoStep.getTestCase().getTestSuite().getProject();
-    }
-
-    public GotoCondition getCurrentCondition() {
-        return currentCondition;
-    }
-
-    protected void enableEditComponents(boolean b) {
-        expressionArea.setEnabled(b);
-        testStepsCombo.setEnabled(b);
-        copyButton.setEnabled(b);
-        deleteButton.setEnabled(b);
-        declareButton.setEnabled(b);
-        testConditionButton.setEnabled(b);
-        renameButton.setEnabled(b);
     }
 
     private class InternalTestRunListener extends TestRunListenerAdapter {

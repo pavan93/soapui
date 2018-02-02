@@ -37,7 +37,7 @@ import static com.eviware.soapui.impl.rest.RestRequestInterface.HttpMethod;
 public class RestMockService extends AbstractMockService<RestMockAction, RESTMockServiceConfig> {
 
     public final static String ICON_NAME = "/rest_virt.png";
-    public static final String STRING_ID = "REST";
+    private static final String STRING_ID = "REST";
 
     public String getStringID() {
         return STRING_ID;
@@ -113,12 +113,12 @@ public class RestMockService extends AbstractMockService<RestMockAction, RESTMoc
         return matchedOperation;
     }
 
-    protected MockOperation findBestMatchedOperation(String pathToFind, HttpMethod verbToFind) {
+    MockOperation findBestMatchedOperation(String pathToFind, HttpMethod verbToFind) {
         boolean includePartialMatch = true;
         return findMatchedOperation(pathToFind, verbToFind, includePartialMatch);
     }
 
-    protected MockOperation findMatchingOperationWithExactPath(String pathToFind, HttpMethod verbToFind) {
+    MockOperation findMatchingOperationWithExactPath(String pathToFind, HttpMethod verbToFind) {
         boolean dontIncludePartialMatch = false;
         return findMatchedOperation(pathToFind, verbToFind, dontIncludePartialMatch);
     }

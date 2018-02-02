@@ -28,7 +28,7 @@ public class RequestJMSHeaderInspector extends AbstractJMSHeaderInspector implem
         PropertyChangeListener {
 
     private SimpleBindingForm simpleform;
-    AbstractHttpRequest<?> request;
+    private AbstractHttpRequest<?> request;
 
     public RequestJMSHeaderInspector(AbstractHttpRequest<?> request) {
         super(request);

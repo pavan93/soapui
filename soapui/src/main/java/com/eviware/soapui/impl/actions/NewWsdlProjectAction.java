@@ -52,9 +52,9 @@ public class NewWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "NewWsdlProjectAction";
     private XFormDialog dialog;
 
-    public static final MessageSupport messages = MessageSupport.getMessages(NewWsdlProjectAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewWsdlProjectAction.class);
 
-    public NewWsdlProjectAction() {
+    private NewWsdlProjectAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 
@@ -140,7 +140,7 @@ public class NewWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
         }
     }
 
-    public void initProjectName(String newValue) {
+    private void initProjectName(String newValue) {
         if (StringUtils.isNullOrEmpty(dialog.getValue(Form.PROJECTNAME)) && StringUtils.hasContent(newValue)) {
             int ix = newValue.lastIndexOf('.');
             if (ix > 0) {
@@ -173,7 +173,7 @@ public class NewWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.NEWPROJECT_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.ProjectName.Description", type = AFieldType.STRING)
         String PROJECTNAME = messages.get("Form.ProjectName.Label");
 

@@ -38,7 +38,7 @@ import static org.junit.Assert.assertThat;
  */
 public class NewRestResourceActionBaseTest {
 
-    public static final String ENDPOINT = "http://sopranos.com";
+    private static final String ENDPOINT = "http://sopranos.com";
     private static final String PARENT_RESOURCE_PATH = "godfather";
     private XDialogs originalDialogs;
     private StubbedDialogs stubbedDialogs;

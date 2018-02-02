@@ -22,7 +22,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 @SuppressWarnings("serial")
-public class BoundedQueue {
+class BoundedQueue {
     private final int MAX_SIZE = 5;
 
     private LinkedList<String> queue;

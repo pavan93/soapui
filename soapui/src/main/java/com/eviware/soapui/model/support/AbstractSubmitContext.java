@@ -41,7 +41,7 @@ public abstract class AbstractSubmitContext<T extends ModelItem> implements Subm
     private DefaultPropertyExpansionContext properties;
     private final T modelItem;
 
-    public AbstractSubmitContext(T modelItem) {
+    protected AbstractSubmitContext(T modelItem) {
         this.modelItem = modelItem;
         this.properties = new DefaultPropertyExpansionContext(modelItem);
 
@@ -49,7 +49,7 @@ public abstract class AbstractSubmitContext<T extends ModelItem> implements Subm
         setProperty(TestCaseRunContext.THREAD_INDEX, 0);
     }
 
-    public AbstractSubmitContext(T modelItem, StringToObjectMap properties) {
+    protected AbstractSubmitContext(T modelItem, StringToObjectMap properties) {
         this(modelItem);
 
         if (properties != null && properties.size() > 0) {
@@ -65,7 +65,7 @@ public abstract class AbstractSubmitContext<T extends ModelItem> implements Subm
         return modelItem;
     }
 
-    public Object getProperty(String name, TestStep testStep, WsdlTestCase testCase) {
+    protected Object getProperty(String name, TestStep testStep, WsdlTestCase testCase) {
         if (properties != null && properties.containsKey(name)) {
             return properties.get(name);
         }
@@ -138,7 +138,7 @@ public abstract class AbstractSubmitContext<T extends ModelItem> implements Subm
         return properties != null && properties.containsKey(name);
     }
 
-    public void resetProperties() {
+    protected void resetProperties() {
         if (properties != null) {
             properties.clear();
         }

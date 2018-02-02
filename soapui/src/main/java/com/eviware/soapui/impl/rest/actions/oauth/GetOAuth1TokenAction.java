@@ -5,8 +5,7 @@ import com.eviware.soapui.impl.rest.OAuth1Profile;
 import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class GetOAuth1TokenAction extends AbstractAction {
@@ -30,7 +29,7 @@ public class GetOAuth1TokenAction extends AbstractAction {
         }
     }
 
-    protected OAuth1ClientFacade getOAuthClientFacade() {
+    private OAuth1ClientFacade getOAuthClientFacade() {
         return new GoogleOAuth1ClientFacade();
     }
 

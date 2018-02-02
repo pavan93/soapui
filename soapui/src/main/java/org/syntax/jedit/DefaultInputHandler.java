@@ -16,14 +16,13 @@
 
 package org.syntax.jedit;
 
-import java.awt.Toolkit;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.Hashtable;
 import java.util.StringTokenizer;
-
-import javax.swing.KeyStroke;
 
 /**
  * The default input handler. It maps sequences of keystrokes into actions and
@@ -256,7 +255,7 @@ public class DefaultInputHandler extends InputHandler {
      *
      * @param keyStroke A string description of the key stroke
      */
-    public static KeyStroke parseKeyStroke(String keyStroke) {
+    private static KeyStroke parseKeyStroke(String keyStroke) {
         if (keyStroke == null) {
             return null;
         }

@@ -18,13 +18,11 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.ListSelectionModel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 
 @SuppressWarnings("serial")
-public class JCollapsibleTablePanel extends JCollapsiblePanel {
+class JCollapsibleTablePanel extends JCollapsiblePanel {
 
     private JTable table;
     private String title;

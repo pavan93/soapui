@@ -26,26 +26,10 @@ import com.eviware.soapui.support.swing.ModelItemListMouseListener;
 import com.eviware.soapui.support.types.StringList;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.DefaultListModel;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
-import javax.swing.event.ListDataEvent;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.event.TreeModelEvent;
-import javax.swing.event.TreeModelListener;
+import javax.swing.*;
+import javax.swing.event.*;
 import javax.swing.tree.TreePath;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.HashMap;
 import java.util.Map;
@@ -147,7 +131,7 @@ public class ModelItemListDesktopPanel extends DefaultDesktopPanel {
             }
         }
 
-        public void refresh() {
+        void refresh() {
             fireContentsChanged(this, 0, getSize() - 1);
         }
 
@@ -162,19 +146,19 @@ public class ModelItemListDesktopPanel extends DefaultDesktopPanel {
     }
 
     private class ItemsListModel extends DefaultListModel {
-        public ItemsListModel(ModelItem[] modelItems) {
+        ItemsListModel(ModelItem[] modelItems) {
             for (ModelItem item : modelItems) {
                 addElement(item);
             }
         }
 
-        public void nodesChanged() {
+        void nodesChanged() {
             fireContentsChanged(this, 0, getSize() - 1);
         }
     }
 
     private class RemoveAction extends AbstractAction {
-        public RemoveAction() {
+        RemoveAction() {
             super("Remove");
             putValue(SHORT_DESCRIPTION, "Removes this item from the list");
         }
@@ -188,7 +172,7 @@ public class ModelItemListDesktopPanel extends DefaultDesktopPanel {
     }
 
     private class HighlightAction extends AbstractAction {
-        public HighlightAction() {
+        HighlightAction() {
             super("Select in Tree");
             putValue(SHORT_DESCRIPTION, "Selects this node in the Navigator Tree");
         }

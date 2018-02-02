@@ -16,9 +16,9 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.SyntaxUtilities;
+
+import javax.swing.text.Segment;
 
 /**
  * Shell script token marker.
@@ -28,7 +28,7 @@ import org.syntax.jedit.SyntaxUtilities;
  */
 public class ShellScriptTokenMarker extends TokenMarker {
     // public members
-    public static final byte LVARIABLE = Token.INTERNAL_FIRST;
+    private static final byte LVARIABLE = Token.INTERNAL_FIRST;
 
     public byte markTokensImpl(byte token, Segment line, int lineIndex) {
         char[] array = line.array;

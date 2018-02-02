@@ -59,7 +59,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
     private SecurityScanResult securityScanResult;
     private SecurityScanRequestResult securityScanRequestResult;
     private TestStep testStep;
-    protected AssertionsSupport assertionsSupport;
+    AssertionsSupport assertionsSupport;
 
     private AssertionStatus currentStatus;
     private ExecutionStrategyHolder executionStrategy;
@@ -67,7 +67,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
     private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private boolean skipFurtherRunning;
 
-    public AbstractSecurityScan(TestStep testStep, SecurityScanConfig config, ModelItem parent, String icon) {
+    AbstractSecurityScan(TestStep testStep, SecurityScanConfig config, ModelItem parent, String icon) {
         super(config, parent, icon);
         if (config == null) {
             config = SecurityScanConfig.Factory.newInstance();
@@ -136,7 +136,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         }
     }
 
-    protected void initAssertions() {
+    void initAssertions() {
         assertionsSupport = new AssertionsSupport(this, new AssertableConfig() {
             public TestAssertionConfig addNewAssertion() {
                 return getConfig().addNewAssertion();
@@ -211,7 +211,7 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         return securityScanResult;
     }
 
-    protected void clear() {
+    void clear() {
 
     }
 
@@ -326,29 +326,15 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         return getRequest(testStep);
     }
 
-    protected TestRequest getRequest(TestStep testStep) {
+    TestRequest getRequest(TestStep testStep) {
         if (testStep instanceof SamplerTestStep) {
             return ((SamplerTestStep) testStep).getTestRequest();
         }
         return null;
     }
 
-    private class PropertyChangeNotifier {
-        private ResultStatus oldStatus;
-
-        public PropertyChangeNotifier() {
-            oldStatus = getSecurityStatus();
-        }
-
-        public void notifyChange() {
-            ResultStatus newStatus = getSecurityStatus();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
-            }
-
-            oldStatus = newStatus;
-        }
+    private ResultStatus getSecurityStatus() {
+        return securityScanResult != null ? securityScanResult.getStatus() : ResultStatus.UNKNOWN;
     }
 
     @Override
@@ -465,8 +451,8 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         return currentStatus;
     }
 
-    public ResultStatus getSecurityStatus() {
-        return securityScanResult != null ? securityScanResult.getStatus() : ResultStatus.UNKNOWN;
+    SecurityScanRequestResult getSecurityScanRequestResult() {
+        return securityScanRequestResult;
     }
 
     @Override
@@ -632,8 +618,13 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         this.securityScanRequestResult = securityScanRequestResult;
     }
 
-    protected SecurityScanRequestResult getSecurityScanRequestResult() {
-        return securityScanRequestResult;
+    /**
+     * @param message
+     */
+    void reportSecurityScanException(String message) {
+        getSecurityScanRequestResult().setMessageExchange(new FailedSecurityMessageExchange());
+        getSecurityScanRequestResult().setStatus(ResultStatus.FAILED);
+        getSecurityScanRequestResult().addMessage(message);
     }
 
     /**
@@ -649,13 +640,22 @@ public abstract class AbstractSecurityScan extends AbstractWsdlModelItem<Securit
         return securityScanResult;
     }
 
-    /**
-     * @param message
-     */
-    protected void reportSecurityScanException(String message) {
-        getSecurityScanRequestResult().setMessageExchange(new FailedSecurityMessageExchange());
-        getSecurityScanRequestResult().setStatus(ResultStatus.FAILED);
-        getSecurityScanRequestResult().addMessage(message);
+    private class PropertyChangeNotifier {
+        private ResultStatus oldStatus;
+
+        PropertyChangeNotifier() {
+            oldStatus = getSecurityStatus();
+        }
+
+        void notifyChange() {
+            ResultStatus newStatus = getSecurityStatus();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+            }
+
+            oldStatus = newStatus;
+        }
     }
 
     @Override

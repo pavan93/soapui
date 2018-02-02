@@ -32,15 +32,15 @@ import com.eviware.soapui.support.xml.XmlObjectTreeModel.XmlTreeNode;
 import com.eviware.x.impl.swing.JFormDialog;
 import org.apache.commons.lang.RandomStringUtils;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 
 public class FuzzerSecurityScan extends AbstractSecurityScanWithProperties {
 
     public static final String TYPE = "FuzzingScan";
     public static final String NAME = "Fuzzing Scan";
-    public static final int DEFAULT_MINIMAL = 5;
-    public static final int DEFAULT_MAXIMAL = 15;
-    public static final int DEFAULT_NUMBER_OF_REQUESTS = 100;
+    private static final int DEFAULT_MINIMAL = 5;
+    private static final int DEFAULT_MAXIMAL = 15;
+    private static final int DEFAULT_NUMBER_OF_REQUESTS = 100;
     private JFormDialog dialog;
     private FuzzerScanConfig fuzzerScanConfig;
     private Integer numberOfRequests;

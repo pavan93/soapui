@@ -21,7 +21,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveContext.Resolver;
 
 public class DisablePropertyTransferResolver implements Resolver {
-    PropertyTransfer transfer = null;
+    private PropertyTransfer transfer = null;
     private boolean resolved;
 
     public DisablePropertyTransferResolver(PropertyTransfer transfer) {

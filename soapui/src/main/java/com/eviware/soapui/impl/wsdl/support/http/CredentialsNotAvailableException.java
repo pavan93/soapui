@@ -23,7 +23,7 @@ package com.eviware.soapui.impl.wsdl.support.http;
  * @author <a href="mailto:oleg@ural.ru">Oleg Kalnichevski</a>
  * @since 3.0
  */
-public class CredentialsNotAvailableException extends AuthenticationException {
+class CredentialsNotAvailableException extends AuthenticationException {
     /**
      * Creates a new CredentialsNotAvailableException with a <tt>null</tt> detail
      * message.

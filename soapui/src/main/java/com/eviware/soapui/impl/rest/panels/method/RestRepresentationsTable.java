@@ -24,14 +24,11 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.JTableFactory;
 import com.eviware.soapui.support.types.StringList;
 
-import javax.swing.AbstractAction;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -83,10 +80,10 @@ public class RestRepresentationsTable extends JPanel implements PropertyChangeLi
         return toolbar;
     }
 
-    public class RepresentationsTableModel extends AbstractTableModel implements PropertyChangeListener {
+    class RepresentationsTableModel extends AbstractTableModel implements PropertyChangeListener {
         private List<RestRepresentation> data = new ArrayList<RestRepresentation>();
 
-        public RepresentationsTableModel() {
+        RepresentationsTableModel() {
             initData();
         }
 
@@ -186,7 +183,7 @@ public class RestRepresentationsTable extends JPanel implements PropertyChangeLi
             return null;
         }
 
-        public void refresh() {
+        void refresh() {
             initData();
             fireTableDataChanged();
         }
@@ -195,13 +192,13 @@ public class RestRepresentationsTable extends JPanel implements PropertyChangeLi
             fireTableDataChanged();
         }
 
-        public void release() {
+        void release() {
             for (RestRepresentation representation : data) {
                 representation.removePropertyChangeListener(this);
             }
         }
 
-        public RestRepresentation getRepresentationAtRow(int rowIndex) {
+        RestRepresentation getRepresentationAtRow(int rowIndex) {
             return data.get(rowIndex);
         }
     }

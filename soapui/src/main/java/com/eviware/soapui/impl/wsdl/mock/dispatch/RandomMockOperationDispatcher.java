@@ -22,7 +22,7 @@ import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.model.mock.MockResult;
 
 public class RandomMockOperationDispatcher extends AbstractMockOperationDispatcher {
-    public RandomMockOperationDispatcher(MockOperation mockOperation) {
+    private RandomMockOperationDispatcher(MockOperation mockOperation) {
         super(mockOperation);
     }
 

@@ -38,7 +38,7 @@ public class SoapUIGroovyScriptEngine implements SoapUIScriptEngine {
     private Binding binding;
     private Script script;
     private String scriptText;
-    protected ScriptSaver saver = new ScriptSaver();
+    private ScriptSaver saver = new ScriptSaver();
 
     public SoapUIGroovyScriptEngine(ClassLoader parentClassLoader) {
         classLoader = new GroovyClassLoader(parentClassLoader);
@@ -49,29 +49,23 @@ public class SoapUIGroovyScriptEngine implements SoapUIScriptEngine {
         shell = new GroovyShell(classLoader, binding, config);
     }
 
-    protected class ScriptSaver {
-        private String text = null;
-        private boolean locked = false;
+    private synchronized void synchronizedSetScript(String scriptText) {
+        if (scriptText != null && scriptText.equals(this.scriptText)) {
+            return;
+        }
 
-        public synchronized void save(String scriptText) {
-            if (locked) {
-                text = scriptText;
-            } else {
-                synchronizedSetScript(scriptText);
+        if (script != null) {
+            script.setBinding(null);
+            script = null;
+
+            if (shell != null) {
+                shell.resetLoadedClasses();
             }
+
+            classLoader.clearCache();
         }
 
-        public synchronized void lockSave() {
-            locked = true;
-        }
-
-        public synchronized void unlockSave() {
-            if (text != null) {
-                synchronizedSetScript(text);
-                text = null;
-            }
-            locked = false;
-        }
+        this.scriptText = scriptText;
     }
 
     public synchronized Object run() {
@@ -96,23 +90,29 @@ public class SoapUIGroovyScriptEngine implements SoapUIScriptEngine {
         }
     }
 
-    protected synchronized void synchronizedSetScript(String scriptText) {
-        if (scriptText != null && scriptText.equals(this.scriptText)) {
-            return;
-        }
+    protected class ScriptSaver {
+        private String text = null;
+        private boolean locked = false;
 
-        if (script != null) {
-            script.setBinding(null);
-            script = null;
-
-            if (shell != null) {
-                shell.resetLoadedClasses();
+        synchronized void save(String scriptText) {
+            if (locked) {
+                text = scriptText;
+            } else {
+                synchronizedSetScript(scriptText);
             }
-
-            classLoader.clearCache();
         }
 
-        this.scriptText = scriptText;
+        synchronized void lockSave() {
+            locked = true;
+        }
+
+        synchronized void unlockSave() {
+            if (text != null) {
+                synchronizedSetScript(text);
+                text = null;
+            }
+            locked = false;
+        }
     }
 
     public synchronized void setScript(String scriptText) {

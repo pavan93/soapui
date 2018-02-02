@@ -153,7 +153,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
         inputTabsChangeListener.refreshVisibleInspectors();
     }
 
-    public final EditorView<T> getCurrentView() {
+    protected final EditorView<T> getCurrentView() {
         return currentView;
     }
 
@@ -165,7 +165,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
         return views;
     }
 
-    public EditorView<T> getView(String viewId) {
+    protected EditorView<T> getView(String viewId) {
         for (EditorView<T> view : views) {
             if (view.getViewId().equals(viewId)) {
                 return view;
@@ -185,7 +185,7 @@ public class Editor<T extends EditorDocument> extends JPanel implements Property
         }
     }
 
-    public void addInspector(EditorInspector<T> inspector) {
+    protected void addInspector(EditorInspector<T> inspector) {
         inspectorPanel.addInspector(inspector);
         inspector.init(this);
         inspectorPanel

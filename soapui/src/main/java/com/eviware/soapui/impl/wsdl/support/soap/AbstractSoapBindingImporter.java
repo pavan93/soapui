@@ -27,15 +27,13 @@ import javax.wsdl.Definition;
 import java.text.Collator;
 import java.util.Comparator;
 
-public abstract class AbstractSoapBindingImporter implements BindingImporter {
+abstract class AbstractSoapBindingImporter implements BindingImporter {
 
-    protected static final class BindingOperationComparator implements Comparator<BindingOperation> {
-        public int compare(BindingOperation o1, BindingOperation o2) {
-            return Collator.getInstance().compare(o1.getOperation().getName(), o2.getOperation().getName());
-        }
+    AbstractSoapBindingImporter() {
+        super();
     }
 
-    protected void initWsAddressing(Binding binding, WsdlInterface iface, Definition def) throws Exception {
+    void initWsAddressing(Binding binding, WsdlInterface iface, Definition def) throws Exception {
         iface.setWsaVersion(WsdlUtils.getUsingAddressing(binding));
         // if (iface.getWsaVersion().equals(WsaVersionTypeConfig.NONE.toString()))
         // {
@@ -43,8 +41,10 @@ public abstract class AbstractSoapBindingImporter implements BindingImporter {
         // }
     }
 
-    public AbstractSoapBindingImporter() {
-        super();
+    static final class BindingOperationComparator implements Comparator<BindingOperation> {
+        public int compare(BindingOperation o1, BindingOperation o2) {
+            return Collator.getInstance().compare(o1.getOperation().getName(), o2.getOperation().getName());
+        }
     }
 
 }

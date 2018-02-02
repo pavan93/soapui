@@ -21,6 +21,6 @@ import com.eviware.soapui.model.project.Project;
 
 import java.util.List;
 
-public interface ApiImporter {
+interface ApiImporter {
     List<Interface> importApis(Project project);
 }

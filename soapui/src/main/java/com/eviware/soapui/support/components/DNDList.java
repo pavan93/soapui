@@ -30,38 +30,24 @@ package com.eviware.soapui.support.components;
 
 import com.eviware.soapui.SoapUI;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.ListModel;
+import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
-import java.awt.dnd.DnDConstants;
-import java.awt.dnd.DragGestureEvent;
-import java.awt.dnd.DragGestureListener;
-import java.awt.dnd.DragSource;
-import java.awt.dnd.DragSourceDragEvent;
-import java.awt.dnd.DragSourceDropEvent;
-import java.awt.dnd.DragSourceEvent;
-import java.awt.dnd.DragSourceListener;
-import java.awt.dnd.DropTarget;
-import java.awt.dnd.DropTargetDragEvent;
-import java.awt.dnd.DropTargetDropEvent;
-import java.awt.dnd.DropTargetEvent;
-import java.awt.dnd.DropTargetListener;
+import java.awt.dnd.*;
 
-public class DNDList extends JList implements DropTargetListener, DragSourceListener, DragGestureListener {
+class DNDList extends JList implements DropTargetListener, DragSourceListener, DragGestureListener {
 
     /**
      * enables this component to be a dropTarget
      */
 
-    DropTarget dropTarget = null;
+    private DropTarget dropTarget = null;
 
     /**
      * enables this component to be a Drag Source
      */
-    DragSource dragSource = null;
+    private DragSource dragSource = null;
 
     /**
      * constructor - initializes the DropTarget and DragSource.
@@ -204,7 +190,7 @@ public class DNDList extends JList implements DropTargetListener, DragSourceList
      * adds elements to itself
      */
 
-    public void addElement(Object s) {
+    private void addElement(Object s) {
         ((DefaultListModel) getModel()).addElement(s.toString());
     }
 
@@ -212,7 +198,7 @@ public class DNDList extends JList implements DropTargetListener, DragSourceList
      * removes an element from itself
      */
 
-    public void removeElement() {
+    private void removeElement() {
         ((DefaultListModel) getModel()).removeElement(getSelectedValue());
     }
 

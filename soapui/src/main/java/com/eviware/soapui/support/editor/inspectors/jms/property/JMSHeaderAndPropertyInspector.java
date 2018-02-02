@@ -24,13 +24,10 @@ import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.swing.JTableFactory;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -40,9 +37,9 @@ public class JMSHeaderAndPropertyInspector extends AbstractXmlInspector implemen
     private JTable headersTable;
 
     private JPanel panel;
-    public boolean changing;
+    private boolean changing;
 
-    protected JMSHeaderAndPropertyInspector(JMSHeaderAndPropertyInspectorModel model) {
+    JMSHeaderAndPropertyInspector(JMSHeaderAndPropertyInspectorModel model) {
         super("JMS (" + (model.getJMSHeadersAndProperties() == null ? "0" : model.getJMSHeadersAndProperties().size())
                 + ")", "JMS Header and Property for this message", true, JMSHeaderAndPropertyInspectorFactory.INSPECTOR_ID);
 

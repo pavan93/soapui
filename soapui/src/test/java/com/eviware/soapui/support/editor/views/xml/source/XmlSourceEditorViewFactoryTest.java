@@ -31,9 +31,9 @@ import static org.mockito.Mockito.mock;
 
 public class XmlSourceEditorViewFactoryTest {
 
-    XmlSourceEditorViewFactory xmlSourceEditorViewFactory;
-    XmlEditor<MockResponseXmlDocument> editor;
-    MockResponse mockResponse;
+    private XmlSourceEditorViewFactory xmlSourceEditorViewFactory;
+    private XmlEditor<MockResponseXmlDocument> editor;
+    private MockResponse mockResponse;
 
     @Before
     public void setUp() throws Exception {

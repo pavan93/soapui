@@ -238,7 +238,7 @@ public class AttachmentsPanel extends javax.swing.JPanel {
         });
     }
 
-    protected void exportBtnActionPerformed(ActionEvent evt) {
+    private void exportBtnActionPerformed(ActionEvent evt) {
         File file = UISupport.getFileDialogs().saveAs(this, "Export Attachment..");
         while (file != null && file.exists()
                 && !UISupport.confirm("File " + file.getName() + " exists, overwrite?", "Export Attachment")) {
@@ -268,7 +268,7 @@ public class AttachmentsPanel extends javax.swing.JPanel {
         }
     }
 
-    protected void reloadBtnActionPerformed(ActionEvent evt) {
+    private void reloadBtnActionPerformed(ActionEvent evt) {
         int selectedRow = fileTable.getSelectedRow();
         if (selectedRow == -1) {
             return;
@@ -340,11 +340,11 @@ public class AttachmentsPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private class AttachmentPartCellEditor extends DefaultCellEditor {
-        public AttachmentPartCellEditor() {
+        AttachmentPartCellEditor() {
             super(new JComboBox(new PartsComboBoxModel()));
         }
 
-        public void release() {
+        void release() {
             ((PartsComboBoxModel) ((JComboBox) editorComponent).getModel()).release();
         }
 
@@ -360,15 +360,15 @@ public class AttachmentsPanel extends javax.swing.JPanel {
         private Attachment attachment;
         private AttachmentPart[] parts;
 
-        public PartsComboBoxModel() {
+        PartsComboBoxModel() {
             container.addAttachmentsChangeListener(this);
         }
 
-        public void release() {
+        void release() {
             container.removeAttachmentsChangeListener(this);
         }
 
-        public PartsComboBoxModel init(Attachment attachment) {
+        PartsComboBoxModel init(Attachment attachment) {
             this.attachment = attachment;
 
             int previousPartsCount = parts == null ? 0 : parts.length;

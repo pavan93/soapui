@@ -60,7 +60,7 @@ public class TestMonitor {
         return runStatusHistory.get(testCase.getId());
     }
 
-    protected void notifyLoadTestStarted(LoadTestRunner runner) {
+    private void notifyLoadTestStarted(LoadTestRunner runner) {
         runningLoadTests.add(runner);
 
         if (listeners.isEmpty()) {
@@ -73,7 +73,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifySecurityTestStarted(SecurityTestRunner runner) {
+    private void notifySecurityTestStarted(SecurityTestRunner runner) {
         runningSecurityTests.add(runner);
 
         if (listeners.isEmpty()) {
@@ -86,7 +86,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifySecurityTestFinished(SecurityTestRunner runner) {
+    private void notifySecurityTestFinished(SecurityTestRunner runner) {
         // this makes no sense but initially added as for loadtests
         // runningSecurityTests.remove( runner.getSecurityTest().getTestCase() );
 
@@ -100,7 +100,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifyLoadTestFinished(LoadTestRunner runner) {
+    private void notifyLoadTestFinished(LoadTestRunner runner) {
         // runningLoadTests.remove( runner.getLoadTest().getTestCase() );
 
         if (listeners.isEmpty()) {
@@ -113,7 +113,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifyTestCaseStarted(TestCaseRunner runner) {
+    private void notifyTestCaseStarted(TestCaseRunner runner) {
         if (listeners.isEmpty()) {
             return;
         }
@@ -124,7 +124,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifyTestCaseFinished(TestCaseRunner runner) {
+    private void notifyTestCaseFinished(TestCaseRunner runner) {
         if (listeners.isEmpty()) {
             return;
         }
@@ -135,7 +135,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifyMockServiceStarted(MockRunner runner) {
+    private void notifyMockServiceStarted(MockRunner runner) {
         if (listeners.isEmpty()) {
             return;
         }
@@ -146,7 +146,7 @@ public class TestMonitor {
         }
     }
 
-    protected void notifyMockServiceStopped(MockRunner runner) {
+    private void notifyMockServiceStopped(MockRunner runner) {
         if (listeners.isEmpty()) {
             return;
         }
@@ -312,7 +312,7 @@ public class TestMonitor {
         workspace.addWorkspaceListener(workspaceListener);
     }
 
-    public void monitorProject(Project project) {
+    private void monitorProject(Project project) {
         project.addProjectListener(projectListener);
 
         for (int i = 0; i < project.getTestSuiteCount(); i++) {
@@ -355,7 +355,7 @@ public class TestMonitor {
         securityTest.addSecurityTestRunListener(securityTestRunListener);
     }
 
-    public void unmonitorProject(Project project) {
+    private void unmonitorProject(Project project) {
         project.removeProjectListener(projectListener);
 
         for (int c = 0; c < project.getTestSuiteCount(); c++) {

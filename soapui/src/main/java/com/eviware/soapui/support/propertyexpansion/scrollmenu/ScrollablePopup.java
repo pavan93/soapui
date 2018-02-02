@@ -284,7 +284,7 @@ public class ScrollablePopup extends JPopupMenu implements ScrollableMenuContain
     /**
      * Hides the scrollButtons.
      */
-    public void hideButtons() {
+    private void hideButtons() {
         upButton.setVisible(false);
         downButton.setVisible(false);
     }

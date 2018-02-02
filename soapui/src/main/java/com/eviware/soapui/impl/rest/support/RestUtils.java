@@ -167,7 +167,7 @@ public class RestUtils {
         return resultPath.toString();
     }
 
-    public static void extractParamsFromQueryString(RestParamsPropertyHolder params, String queryString) {
+    private static void extractParamsFromQueryString(RestParamsPropertyHolder params, String queryString) {
         String[] items;
         items = queryString.split("&");
         for (String item : items) {
@@ -259,7 +259,7 @@ public class RestUtils {
     }
 
 
-    public static String getQueryParamsString(RestRequestInterface request) {
+    private static String getQueryParamsString(RestRequestInterface request) {
         if (isRequestWithoutQueryString(request)) {
             return "";
         }

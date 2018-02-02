@@ -36,17 +36,8 @@ import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.model.support.TestStepBeanProperty;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.SamplerTestStep;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestPropertyListener;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.support.scripting.SoapUIScriptEngine;
 import com.eviware.soapui.support.scripting.SoapUIScriptEngineRegistry;
@@ -54,7 +45,7 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.types.StringToStringsMap;
 import org.apache.log4j.Logger;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -72,12 +63,12 @@ public class AMFRequestTestStep extends WsdlTestStepWithProperties implements As
         PropertyChangeListener, SamplerTestStep {
     @SuppressWarnings("unused")
     private final static Logger log = Logger.getLogger(WsdlTestRequestStep.class);
-    protected AMFRequestTestStepConfig amfRequestTestStepConfig;
+    private static final String HTTP_HEADERS_PROPERTY = AMFRequest.class.getName() + "@request-headers";
     public final static String amfREQUEST = AMFRequestTestStep.class.getName() + "@amfrequest";
     public static final String STATUS_PROPERTY = WsdlTestRequest.class.getName() + "@status";
     public static final String RESPONSE_PROPERTY = "response";
     public static final String REQUEST_PROPERTY = "request";
-    public static final String HTTP_HEADERS_PROPERTY = AMFRequest.class.getName() + "@request-headers";
+    private AMFRequestTestStepConfig amfRequestTestStepConfig;
     public static final String AMF_HEADERS_PROPERTY = AMFRequest.class.getName() + "@amfrequest-amfheaders";
     private AMFSubmit submit;
 
@@ -294,29 +285,22 @@ public class AMFRequestTestStep extends WsdlTestStepWithProperties implements As
         });
     }
 
-    private class PropertyChangeNotifier {
-        private AssertionStatus oldStatus;
-        private ImageIcon oldIcon;
-
-        public PropertyChangeNotifier() {
-            oldStatus = getAssertionStatus();
-            oldIcon = getIcon();
-        }
-
-        public void notifyChange() {
-            AssertionStatus newStatus = getAssertionStatus();
-            ImageIcon newIcon = getIcon();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+    private void assertResponse(SubmitContext context) {
+        try {
+            if (notifier == null) {
+                notifier = new PropertyChangeNotifier();
             }
 
-            if (oldIcon != newIcon) {
-                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
+            AMFMessageExchange messageExchange = new AMFMessageExchange(this, getAMFRequest().getResponse());
+
+            // assert!
+            for (WsdlMessageAssertion assertion : assertionsSupport.getAssertionList()) {
+                assertion.assertResponse(messageExchange, context);
             }
 
-            oldStatus = newStatus;
-            oldIcon = newIcon;
+            notifier.notifyChange();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -439,23 +423,8 @@ public class AMFRequestTestStep extends WsdlTestStepWithProperties implements As
         assertionsSupport.removeAssertionsListener(listener);
     }
 
-    public void assertResponse(SubmitContext context) {
-        try {
-            if (notifier == null) {
-                notifier = new PropertyChangeNotifier();
-            }
-
-            AMFMessageExchange messageExchange = new AMFMessageExchange(this, getAMFRequest().getResponse());
-
-            // assert!
-            for (WsdlMessageAssertion assertion : assertionsSupport.getAssertionList()) {
-                assertion.assertResponse(messageExchange, context);
-            }
-
-            notifier.notifyChange();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private boolean isDiscardResponse() {
+        return amfRequest.isDiscardResponse();
     }
 
     public TestProperty addProperty(String name) {
@@ -633,8 +602,30 @@ public class AMFRequestTestStep extends WsdlTestStepWithProperties implements As
         return this;
     }
 
-    public boolean isDiscardResponse() {
-        return amfRequest.isDiscardResponse();
+    private class PropertyChangeNotifier {
+        private AssertionStatus oldStatus;
+        private ImageIcon oldIcon;
+
+        PropertyChangeNotifier() {
+            oldStatus = getAssertionStatus();
+            oldIcon = getIcon();
+        }
+
+        void notifyChange() {
+            AssertionStatus newStatus = getAssertionStatus();
+            ImageIcon newIcon = getIcon();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+            }
+
+            if (oldIcon != newIcon) {
+                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
+            }
+
+            oldStatus = newStatus;
+            oldIcon = newIcon;
+        }
     }
 
     public void setDiscardResponse(boolean discardResponse) {

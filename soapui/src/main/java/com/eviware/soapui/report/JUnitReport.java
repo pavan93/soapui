@@ -27,14 +27,16 @@ import java.util.Set;
  * Wrapper for a number of Test runs
  */
 
-public class JUnitReport {
-    TestsuiteDocument testsuiteDoc;
-    int noofTestCases, noofFailures, noofErrors;
-    double totalTime;
-    StringBuffer systemOut;
-    StringBuffer systemErr;
+class JUnitReport {
+    private TestsuiteDocument testsuiteDoc;
+    private int noofTestCases;
+    private int noofFailures;
+    private int noofErrors;
+    private double totalTime;
+    private StringBuffer systemOut;
+    private StringBuffer systemErr;
 
-    boolean includeTestProperties;
+    private boolean includeTestProperties;
 
     public JUnitReport() {
         systemOut = new StringBuffer();
@@ -171,7 +173,7 @@ public class JUnitReport {
                 .setSaveImplicitNamespaces(prefixes));
     }
 
-    public TestsuiteDocument finishReport() {
+    private TestsuiteDocument finishReport() {
         testsuiteDoc.getTestsuite().setTests(noofTestCases);
         testsuiteDoc.getTestsuite().setFailures(noofFailures);
         testsuiteDoc.getTestsuite().setErrors(noofErrors);

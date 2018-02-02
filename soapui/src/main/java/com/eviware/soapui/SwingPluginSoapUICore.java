@@ -25,7 +25,7 @@ public class SwingPluginSoapUICore extends SwingSoapUICore {
         this(root, SoapUICore.DEFAULT_SETTINGS_FILE);
     }
 
-    public SwingPluginSoapUICore(String root, String settingsFile) {
+    private SwingPluginSoapUICore(String root, String settingsFile) {
         super(root, settingsFile);
 
         prepareUI();
@@ -33,7 +33,7 @@ public class SwingPluginSoapUICore extends SwingSoapUICore {
     }
 
     @Override
-    protected String importSettingsOnStartup(String fileName) {
+    protected String importSettingsOnStartup(String fileName, Object settingFactory, Runnable runnable) {
         return fileName;
     }
 }

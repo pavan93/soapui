@@ -54,7 +54,7 @@ public abstract class AbstractSecurityScanWithProperties extends AbstractSecurit
         return this.parameterHolder;
     }
 
-    protected void setParameterHolder(SecurityCheckedParameterHolder parameterHolder) {
+    private void setParameterHolder(SecurityCheckedParameterHolder parameterHolder) {
         this.parameterHolder = parameterHolder;
     }
 
@@ -127,8 +127,8 @@ public abstract class AbstractSecurityScanWithProperties extends AbstractSecurit
         }
     }
 
-    protected void createMessageExchange(StringToStringMap updatedParams, MessageExchange message,
-                                         SecurityTestRunContext context) {
+    void createMessageExchange(StringToStringMap updatedParams, MessageExchange message,
+                               SecurityTestRunContext context) {
         for (Map.Entry<String, String> param : updatedParams.entrySet()) {
             String value = context.expand(param.getValue());
             updatedParams.put(param.getKey(), value);

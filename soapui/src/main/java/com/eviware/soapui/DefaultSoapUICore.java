@@ -59,7 +59,7 @@ public class DefaultSoapUICore implements SoapUICore {
 
     private boolean logIsInitialized;
     private String root;
-    protected SoapuiSettingsDocumentConfig settingsDocument;
+    private SoapuiSettingsDocumentConfig settingsDocument;
     private volatile MockEngine mockEngine;
     private XmlBeansSettingsImpl settings;
     private SoapUIListenerRegistry listenerRegistry;
@@ -69,29 +69,18 @@ public class DefaultSoapUICore implements SoapUICore {
 
     private String settingsFile;
     private String password;
-    protected boolean initialImport;
+    private boolean initialImport;
     private TimerTask settingsWatcher;
     private SoapUIExtensionClassLoader extClassLoader;
 
     private PluginManager pluginManager;
 
-    public boolean isSavingSettings;
+    private boolean isSavingSettings;
 
-    protected SecurityScanRegistry securityScanRegistry;
+    private SecurityScanRegistry securityScanRegistry;
 
     public boolean getInitialImport() {
         return initialImport;
-    }
-
-    public void setInitialImport(boolean initialImport) {
-        this.initialImport = initialImport;
-    }
-
-    public static DefaultSoapUICore createDefault() {
-        return new DefaultSoapUICore(null, DEFAULT_SETTINGS_FILE);
-    }
-
-    public DefaultSoapUICore() {
     }
 
     /*
@@ -99,17 +88,28 @@ public class DefaultSoapUICore implements SoapUICore {
      * way down in hierarchy boolean settingPassword is a dummy parameter, because
      * the constructor with only one string parameter already existed
      */
-    public DefaultSoapUICore(boolean settingPassword, String soapUISettingsPassword) {
+    DefaultSoapUICore(boolean settingPassword, String soapUISettingsPassword) {
         this.password = soapUISettingsPassword;
     }
 
-    public DefaultSoapUICore(String root) {
+    public DefaultSoapUICore() {
+    }
+
+    private DefaultSoapUICore(String root) {
         this.root = root;
     }
 
-    public DefaultSoapUICore(String root, String settingsFile) {
+    protected DefaultSoapUICore(String root, String settingsFile) {
         this(root);
         init(settingsFile);
+    }
+
+    public static DefaultSoapUICore createDefault() {
+        return new DefaultSoapUICore(null, DEFAULT_SETTINGS_FILE);
+    }
+
+    private void setInitialImport(boolean initialImport) {
+        this.initialImport = initialImport;
     }
 
     public DefaultSoapUICore(String root, String settingsFile, String password) {
@@ -118,7 +118,7 @@ public class DefaultSoapUICore implements SoapUICore {
         init(settingsFile);
     }
 
-    public void init(String settingsFile) {
+    void init(String settingsFile) {
         initLog();
 
         SoapUI.setSoapUICore(this);
@@ -135,7 +135,7 @@ public class DefaultSoapUICore implements SoapUICore {
 
     }
 
-    protected void loadPlugins() {
+    private void loadPlugins() {
         File pluginDirectory = new File(System.getProperty("soapui.home"), "plugins");
         File[] pluginFiles = pluginDirectory.listFiles();
         if (pluginFiles != null) {
@@ -155,7 +155,7 @@ public class DefaultSoapUICore implements SoapUICore {
 
     }
 
-    protected void initExtensions(ClassLoader extensionClassLoader) {
+    private void initExtensions(ClassLoader extensionClassLoader) {
         /* We break the general rule that you shouldn't catch Throwable, because we don't want extensions to crash SoapUI. */
         try {
             String extDir = System.getProperty("soapui.ext.listeners");
@@ -174,10 +174,10 @@ public class DefaultSoapUICore implements SoapUICore {
         }
     }
 
-    protected void initCoreComponents() {
+    private void initCoreComponents() {
     }
 
-    public void loadOldStylePluginFrom(File pluginFile) throws IOException {
+    private void loadOldStylePluginFrom(File pluginFile) throws IOException {
         JarFile jarFile = new JarFile(pluginFile);
         // add jar to our extension classLoader
         SoapUIExtensionClassLoader extensionClassLoader = getExtensionClassLoader();
@@ -206,14 +206,14 @@ public class DefaultSoapUICore implements SoapUICore {
 
     }
 
-    public String getRoot() {
+    String getRoot() {
         if (root == null || root.length() == 0) {
             root = System.getProperty("soapui.home", new File(".").getAbsolutePath());
         }
         return FilenameUtils.normalize(root);
     }
 
-    protected Settings initSettings(String fileName) {
+    Settings initSettings(String fileName) {
         // TODO Why try to load settings from current directory before using root?
         // This caused a bug in Eclipse:
         // https://sourceforge.net/tracker/?func=detail&atid=737763&aid=2620284&group_id=136013
@@ -405,7 +405,7 @@ public class DefaultSoapUICore implements SoapUICore {
         return settings;
     }
 
-    protected void initDefaultSettings(Settings settings2) {
+    private void initDefaultSettings(Settings settings2) {
 
     }
 
@@ -465,11 +465,11 @@ public class DefaultSoapUICore implements SoapUICore {
         return settingsFile;
     }
 
-    public void setSettingsFile(String settingsFile) {
+    void setSettingsFile(String settingsFile) {
         this.settingsFile = settingsFile;
     }
 
-    protected void initLog() {
+    private void initLog() {
         if (!logIsInitialized) {
             String logFileName = System.getProperty(SoapUISystemProperties.SOAPUI_LOG4j_CONFIG_FILE, "soapui-log4j.xml");
             File log4jconfig = root == null ? new File(logFileName) : new File(new File(getRoot()), logFileName);
@@ -491,7 +491,7 @@ public class DefaultSoapUICore implements SoapUICore {
         }
     }
 
-    public synchronized void loadExternalLibraries() {
+    private synchronized void loadExternalLibraries() {
         if (extClassLoader == null) {
             try {
                 extClassLoader = SoapUIExtensionClassLoader.create(getRoot(), getExtensionClassLoaderParent());
@@ -501,7 +501,7 @@ public class DefaultSoapUICore implements SoapUICore {
         }
     }
 
-    protected ClassLoader getExtensionClassLoaderParent() {
+    private ClassLoader getExtensionClassLoaderParent() {
         return SoapUI.class.getClassLoader();
     }
 
@@ -547,7 +547,7 @@ public class DefaultSoapUICore implements SoapUICore {
         return listenerRegistry;
     }
 
-    protected void initListenerRegistry() {
+    private void initListenerRegistry() {
         listenerRegistry = new SoapUIListenerRegistry(null);
     }
 
@@ -564,12 +564,12 @@ public class DefaultSoapUICore implements SoapUICore {
         return actionRegistry;
     }
 
-    protected SoapUIActionRegistry initActionRegistry() {
+    private SoapUIActionRegistry initActionRegistry() {
         return new SoapUIActionRegistry(
                 DefaultSoapUICore.class.getResourceAsStream("/com/eviware/soapui/resources/conf/soapui-actions.xml"));
     }
 
-    protected void addExternalListeners(String folder, ClassLoader classLoader) {
+    private void addExternalListeners(String folder, ClassLoader classLoader) {
         File[] actionFiles = new File(folder).listFiles();
         if (actionFiles != null) {
             for (File actionFile : actionFiles) {
@@ -593,7 +593,7 @@ public class DefaultSoapUICore implements SoapUICore {
         }
     }
 
-    protected void addExternalFactories(String folder, ClassLoader classLoader) {
+    private void addExternalFactories(String folder, ClassLoader classLoader) {
         File[] factoryFiles = new File(folder).listFiles();
         if (factoryFiles != null) {
             for (File factoryFile : factoryFiles) {
@@ -648,11 +648,11 @@ public class DefaultSoapUICore implements SoapUICore {
         return factoryRegistry;
     }
 
-    protected void initFactoryRegistry() {
+    private void initFactoryRegistry() {
         factoryRegistry = new SoapUIFactoryRegistry(null);
     }
 
-    protected void initSecurityScanRegistry() {
+    private void initSecurityScanRegistry() {
         securityScanRegistry = SecurityScanRegistry.getInstance();
     }
 

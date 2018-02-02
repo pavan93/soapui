@@ -30,8 +30,8 @@ public class RestParamsTableModel extends DirectAccessPropertyHolderTableModel<R
     private static final String VALUE = "Value";
     private static final String STYLE = "Style";
 
-    public static final int NAME_COLUMN_INDEX = 0;
-    public static final int VALUE_COLUMN_INDEX = 1;
+    private static final int NAME_COLUMN_INDEX = 0;
+    private static final int VALUE_COLUMN_INDEX = 1;
     public static final int STYLE_COLUMN_INDEX = 2;
     public static final int LOCATION_COLUMN_INDEX = 3;
 

@@ -33,7 +33,7 @@ import org.apache.log4j.Logger;
  */
 
 public class WsaRequestFilter extends AbstractRequestFilter {
-    public final static Logger log = Logger.getLogger(WsaRequestFilter.class);
+    private final static Logger log = Logger.getLogger(WsaRequestFilter.class);
 
     public void filterAbstractHttpRequest(SubmitContext context, AbstractHttpRequest<?> wsdlRequest) {
         if (!(wsdlRequest instanceof WsdlRequest) || !((WsdlRequest) wsdlRequest).isWsAddressing()) {

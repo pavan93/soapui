@@ -37,7 +37,7 @@ import java.io.File;
 
 public class ImportWsdlProjectAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "ImportWsdlProjectAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(ImportWsdlProjectAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(ImportWsdlProjectAction.class);
 
     public ImportWsdlProjectAction() {
         super(messages.get("title"), messages.get("description"));

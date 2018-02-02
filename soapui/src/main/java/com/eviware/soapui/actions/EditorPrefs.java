@@ -24,11 +24,8 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import com.l2fprod.common.swing.JFontChooser;
 
-import javax.swing.AbstractAction;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JTextField;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,13 +36,13 @@ import java.awt.event.ActionListener;
  */
 
 public class EditorPrefs implements Prefs {
-    public static final String NO_RESIZE_REQUEST_EDITOR = "Disable auto-resize";
-    public static final String START_WITH_REQUEST_TABS = "Tabbed request view";
-    public static final String AUTO_VALIDATE_REQUEST = "Validate Requests";
-    public static final String ABORT_ON_INVALID_REQUEST = "Abort on invalid";
-    public static final String AUTO_VALIDATE_RESPONSE = "Validate Responses";
-    public static final String XML_LINE_NUMBERS = "XML Line Numbers";
-    public static final String GROOVY_LINE_NUMBERS = "Groovy Line Numbers";
+    private static final String NO_RESIZE_REQUEST_EDITOR = "Disable auto-resize";
+    private static final String START_WITH_REQUEST_TABS = "Tabbed request view";
+    private static final String AUTO_VALIDATE_REQUEST = "Validate Requests";
+    private static final String ABORT_ON_INVALID_REQUEST = "Abort on invalid";
+    private static final String AUTO_VALIDATE_RESPONSE = "Validate Responses";
+    private static final String XML_LINE_NUMBERS = "XML Line Numbers";
+    private static final String GROOVY_LINE_NUMBERS = "Groovy Line Numbers";
 
     private JTextField editorFontTextField;
     private SimpleForm editorForm;
@@ -126,7 +123,7 @@ public class EditorPrefs implements Prefs {
         settings.setBoolean(UISettings.SHOW_GROOVY_LINE_NUMBERS, values.getBoolean(GROOVY_LINE_NUMBERS));
     }
 
-    public static String encodeFont(Font font) {
+    private static String encodeFont(Font font) {
         String editorFont = font.getFontName() + " ";
         if (font.isBold()) {
             editorFont += "bold ";

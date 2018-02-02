@@ -23,7 +23,6 @@ import com.eviware.soapui.impl.rest.RestService;
 import com.eviware.soapui.impl.rest.support.RestParamProperty;
 import com.eviware.soapui.impl.wsdl.teststeps.RestTestRequestStep;
 import com.eviware.soapui.impl.wsdl.teststeps.registry.RestRequestStepFactory;
-import com.eviware.soapui.support.SoapUIException;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.utils.ContainerWalker;
 import com.eviware.soapui.utils.StatefulModelItemFactory;
@@ -40,9 +39,9 @@ import static org.junit.Assert.assertThat;
 
 public class RestTestRequestDesktopPanelTest {
 
-    public static final String PARAMETER_NAME = "jsessionid";
-    public static final String PARAMETER_VALUE = "Da Value";
-    public static final String ENDPOINT = "http://sunet.se/search";
+    private static final String PARAMETER_NAME = "jsessionid";
+    private static final String PARAMETER_VALUE = "Da Value";
+    private static final String ENDPOINT = "http://sunet.se/search";
 
     private RestTestRequestDesktopPanel restTestDesktopPanel;
     private RestRequest restRequest;
@@ -104,7 +103,7 @@ public class RestTestRequestDesktopPanelTest {
         return restRequest.getOperation().getInterface();
     }
 
-    private void buildRestTestPanel() throws SoapUIException, RestRequestStepFactory.ItemDeletedException {
+    private void buildRestTestPanel() throws RestRequestStepFactory.ItemDeletedException {
         StatefulModelItemFactory modelItemFactory = new StatefulModelItemFactory();
         RestResource restResource = createRestRequestModel(modelItemFactory);
         mockPromptDiaglog(restResource);

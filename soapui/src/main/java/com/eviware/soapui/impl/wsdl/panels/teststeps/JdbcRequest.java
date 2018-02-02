@@ -266,7 +266,7 @@ public class JdbcRequest extends AbstractModelItem implements Assertable, TestRe
         return response;
     }
 
-    public void initIcons() {
+    private void initIcons() {
         if (validRequestIcon == null) {
             validRequestIcon = UISupport.createImageIcon("/valid_jdbc_request_step.png");
         }
@@ -290,9 +290,22 @@ public class JdbcRequest extends AbstractModelItem implements Assertable, TestRe
         return new RequestIconAnimator<JdbcRequest>(this, "/jdbc_request.png", "/exec_jdbc_request", 4);
     }
 
+    private RequestIconAnimator<?> getIconAnimator() {
+        return iconAnimator;
+    }
+
+    private void setIconAnimator(RequestIconAnimator<?> iconAnimator) {
+        if (this.iconAnimator != null) {
+            removeSubmitListener(this.iconAnimator);
+        }
+
+        this.iconAnimator = iconAnimator;
+        addSubmitListener(this.iconAnimator);
+    }
+
     public static class RequestIconAnimator<T extends JdbcRequest> extends IconAnimator<T> implements
             SubmitListener {
-        public RequestIconAnimator(T modelItem, String baseIcon, String baseAnimateIcon, int iconCount) {
+        RequestIconAnimator(T modelItem, String baseIcon, String baseAnimateIcon, int iconCount) {
             super(modelItem, baseIcon, baseAnimateIcon, iconCount);
         }
 
@@ -308,19 +321,6 @@ public class JdbcRequest extends AbstractModelItem implements Assertable, TestRe
                 stop();
             }
         }
-    }
-
-    public RequestIconAnimator<?> getIconAnimator() {
-        return iconAnimator;
-    }
-
-    public void setIconAnimator(RequestIconAnimator<?> iconAnimator) {
-        if (this.iconAnimator != null) {
-            removeSubmitListener(this.iconAnimator);
-        }
-
-        this.iconAnimator = iconAnimator;
-        addSubmitListener(this.iconAnimator);
     }
 
     public ImageIcon getIcon() {

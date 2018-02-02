@@ -70,7 +70,7 @@ public class URLDesktopPanel extends DefaultDesktopPanel {
         private final String url;
         private final String errorUrl;
 
-        public Navigator(String url, String errorUrl) {
+        Navigator(String url, String errorUrl) {
             this.url = url;
             this.errorUrl = errorUrl;
         }

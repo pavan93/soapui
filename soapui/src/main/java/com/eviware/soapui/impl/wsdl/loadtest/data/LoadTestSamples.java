@@ -18,13 +18,7 @@ package com.eviware.soapui.impl.wsdl.loadtest.data;
 
 import com.eviware.soapui.model.support.LoadTestRunListenerAdapter;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import org.apache.log4j.Logger;
 
 import javax.swing.table.AbstractTableModel;
@@ -46,7 +40,7 @@ public class LoadTestSamples extends AbstractTableModel {
     private InternalTestSuiteListener testSuiteListener = new InternalTestSuiteListener();
     private final static Logger log = Logger.getLogger(LoadTestSamples.class);
 
-    public LoadTestSamples(LoadTest loadTest) {
+    private LoadTestSamples(LoadTest loadTest) {
         this.loadTest = loadTest;
 
         loadTest.addLoadTestRunListener(loadTestRunListener);

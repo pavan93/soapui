@@ -77,7 +77,7 @@ public class SoapUIMockServlet extends HttpServlet {
 
     // </editor-fold>
 
-    protected SoapUICore createSoapUICore(String settingsFile, String soapUISettingsPassword) {
+    private SoapUICore createSoapUICore(String settingsFile, String soapUISettingsPassword) {
         return new DefaultSoapUICore(null, settingsFile, soapUISettingsPassword);
     }
 }

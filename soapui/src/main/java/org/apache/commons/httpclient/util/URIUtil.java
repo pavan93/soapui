@@ -59,11 +59,11 @@ import java.util.BitSet;
  * @author <a href="mailto:jericho@apache.org">Sung-Gu</a>
  * @version $Revision: 507321 $ $Date: 2002/03/14 15:14:01
  */
-public class URIUtil {
+class URIUtil {
 
     // ----------------------------------------------------- Instance variables
 
-    protected static final BitSet empty = new BitSet(1);
+    private static final BitSet empty = new BitSet(1);
 
     // ---------------------------------------------------------- URI utilities
 
@@ -124,7 +124,7 @@ public class URIUtil {
      * @param uri a string regarded an URI
      * @return the path string
      */
-    public static String getPath(String uri) {
+    private static String getPath(String uri) {
         if (uri == null) {
             return null;
         }
@@ -226,7 +226,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeAll(String unescaped, String charset) {
+    private static String encodeAll(String unescaped, String charset) {
 
         return encode(unescaped, empty, charset);
     }
@@ -262,7 +262,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinAuthority(String unescaped, String charset) {
+    private static String encodeWithinAuthority(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_authority, charset);
     }
@@ -293,7 +293,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodePathQuery(String unescaped, String charset) {
+    private static String encodePathQuery(String unescaped, String charset) {
 
         int at = unescaped.indexOf('?');
         if (at < 0) {
@@ -337,7 +337,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinPath(String unescaped, String charset) {
+    private static String encodeWithinPath(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_path, charset);
     }
@@ -368,7 +368,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodePath(String unescaped, String charset) {
+    private static String encodePath(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_abs_path, charset);
     }
@@ -406,7 +406,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeWithinQuery(String unescaped, String charset) {
+    private static String encodeWithinQuery(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_within_query, charset);
     }
@@ -443,7 +443,7 @@ public class URIUtil {
      * @throws URIException if the charset is not supported
      * @see #encode
      */
-    public static String encodeQuery(String unescaped, String charset) {
+    private static String encodeQuery(String unescaped, String charset) {
 
         return encode(unescaped, URI.allowed_query, charset);
     }
@@ -474,8 +474,8 @@ public class URIUtil {
      * @param charset   the charset
      * @return the escaped string
      */
-    public static String encode(String unescaped, BitSet allowed,
-                                String charset) {
+    private static String encode(String unescaped, BitSet allowed,
+                                 String charset) {
         byte[] rawdata = URLCodec.encodeUrl(allowed,
                 EncodingUtil.getBytes(unescaped, charset));
         return EncodingUtil.getAsciiString(rawdata);
@@ -605,7 +605,7 @@ public class URIUtil {
          * @param to       a replaced character array
          * @return the replaced string
          */
-        public static String replace(String original, char from, char to) {
+        static String replace(String original, char from, char to) {
             StringBuffer result = new StringBuffer(original.length());
             int at, saved = 0;
             do {

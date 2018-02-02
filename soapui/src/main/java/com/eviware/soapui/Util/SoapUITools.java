@@ -39,7 +39,7 @@ public class SoapUITools {
         return libDirectory;
     }
 
-    public static void deleteDirectoryOnExit(final File directory) {
+    private static void deleteDirectoryOnExit(final File directory) {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
             public void run() {
@@ -62,7 +62,7 @@ public class SoapUITools {
         return ensureExists(Paths.get(homePath));
     }
 
-    public static Path ensureExists(Path path) {
+    private static Path ensureExists(Path path) {
         File file = path.toFile();
         boolean ok = true;
         if (!file.exists()) {

@@ -30,7 +30,7 @@ import static org.junit.Assert.assertTrue;
 public class ClientCredentialsInputParamsTest {
     private OAuth2TokenExtractor oAuth2TokenExtractor;
     private OAuth2Parameters parameters;
-    OAuthClientRequest clientRequest;
+    private OAuthClientRequest clientRequest;
 
     @Before
     public void setUp() throws SoapUIException {

@@ -50,10 +50,10 @@ public class AddRestRequestToMockServiceActionTest {
     private static final String HEADER_CONTENT_LENGTH = "Content-Length";
     private static final String HEADER_CONTENT_TYPE = "Content-Type";
     private final String requestPath = "/some/path";
-    AddRestRequestToMockServiceAction action = new AddRestRequestToMockServiceAction();
-    RestRequest restRequest;
-    Object notUsed = null;
-    String mockServiceName = "Mock Service1 1";
+    private AddRestRequestToMockServiceAction action = new AddRestRequestToMockServiceAction();
+    private RestRequest restRequest;
+    private Object notUsed = null;
+    private String mockServiceName = "Mock Service1 1";
     private XDialogs originalDialogs;
     private WsdlProject project;
 
@@ -71,7 +71,7 @@ public class AddRestRequestToMockServiceActionTest {
         SoapUI.getSettings().setBoolean(HttpSettings.LEAVE_MOCKENGINE, FALSE);
     }
 
-    public void setUpResponse() {
+    private void setUpResponse() {
         HttpResponse response = mock(HttpResponse.class);
 
         StringToStringsMap headers = new StringToStringsMap();
@@ -146,11 +146,11 @@ public class AddRestRequestToMockServiceActionTest {
         assertThat(getFirstRestMockService().getMockOperationCount(), is(2));
     }
 
-    public RestMockAction getFirstMockOperation() {
+    private RestMockAction getFirstMockOperation() {
         return getFirstRestMockService().getMockOperationAt(0);
     }
 
-    public RestMockService getFirstRestMockService() {
+    private RestMockService getFirstRestMockService() {
         return project.getRestMockServiceAt(0);
     }
 
@@ -175,7 +175,7 @@ public class AddRestRequestToMockServiceActionTest {
         assertThat(responseHeaders.get(ANOTHER_HEADER).get(0), is("anotherValue"));
     }
 
-    public StringToStringsMap getActualResponseHeaders() {
+    private StringToStringsMap getActualResponseHeaders() {
         return getFirstMockOperation().getMockResponseAt(0).getResponseHeaders();
     }
 

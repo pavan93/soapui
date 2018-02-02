@@ -41,7 +41,7 @@ import java.util.List;
  */
 
 public class RestRequestStepFactory extends WsdlTestStepFactory {
-    public static final String RESTREQUEST_TYPE = "restrequest";
+    private static final String RESTREQUEST_TYPE = "restrequest";
     public static final String STEP_NAME = "Name";
 
     // private XFormDialog dialog;
@@ -137,7 +137,7 @@ public class RestRequestStepFactory extends WsdlTestStepFactory {
         return null;
     }
 
-    public TestStepConfig createNewTestStep(RestMethod restMethod, String name) {
+    private TestStepConfig createNewTestStep(RestMethod restMethod, String name) {
         RestRequestStepConfig requestStepConfig = RestRequestStepConfig.Factory.newInstance();
         RestRequestConfig testRequestConfig = requestStepConfig.addNewRestRequest();
 

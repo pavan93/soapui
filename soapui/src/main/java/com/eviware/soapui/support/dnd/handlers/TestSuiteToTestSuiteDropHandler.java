@@ -121,7 +121,7 @@ public class TestSuiteToTestSuiteDropHandler extends
         return testCase != null;
     }
 
-    public static WsdlTestSuite moveTestSuite(WsdlTestSuite testSuite, WsdlProject target, int position) {
+    private static WsdlTestSuite moveTestSuite(WsdlTestSuite testSuite, WsdlProject target, int position) {
         if (testSuite.getProject() == target) {
             int ix = target.getIndexOfTestSuite(testSuite);
 
@@ -159,7 +159,7 @@ public class TestSuiteToTestSuiteDropHandler extends
         return null;
     }
 
-    public static WsdlTestSuite copyTestSuite(WsdlTestSuite testSuite, WsdlProject target, int position) {
+    private static WsdlTestSuite copyTestSuite(WsdlTestSuite testSuite, WsdlProject target, int position) {
         String name = UISupport.prompt("Specify name of copied TestCase", "Copy TestCase",
                 "Copy of " + testSuite.getName());
         if (name == null) {

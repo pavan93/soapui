@@ -20,7 +20,7 @@ import org.apache.commons.lang.ClassUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -55,7 +55,7 @@ public class PluginProxies {
     }
 
     @SuppressWarnings("unchecked")
-    static <T> T createProxyFor(T delegate) {
+    private static <T> T createProxyFor(T delegate) {
 
         if (delegate instanceof JComponent) {
             log.warn("Can't proxy JComponent derived classes");
@@ -107,7 +107,7 @@ public class PluginProxies {
 
         private T innerObject;
 
-        public DelegatingHandler(T innerObject) {
+        DelegatingHandler(T innerObject) {
             this.innerObject = innerObject;
         }
 

@@ -53,12 +53,12 @@ import java.util.List;
 import java.util.Map;
 
 public class ProxyServlet implements Servlet {
-    protected ServletConfig config;
-    protected ServletContext context;
-    protected WsdlProject project;
-    protected HttpContext httpState = new BasicHttpContext();
-    protected Settings settings;
-    protected final SoapMonitorListenerCallBack listenerCallBack;
+    final SoapMonitorListenerCallBack listenerCallBack;
+    ServletConfig config;
+    ServletContext context;
+    WsdlProject project;
+    HttpContext httpState = new BasicHttpContext();
+    Settings settings;
     private ContentTypes includedContentTypes = SoapMonitorAction.defaultContentTypes();
     static HashSet<String> dontProxyHeaders = new HashSet<String>();
 
@@ -272,7 +272,7 @@ public class ProxyServlet implements Servlet {
         }
     }
 
-    protected boolean contentTypeMatches(ExtendedHttpMethod method) {
+    boolean contentTypeMatches(ExtendedHttpMethod method) {
         if (method.hasHttpResponse()) {
             Header[] headers = method.getHttpResponse().getHeaders("Content-Type");
             if (headers.length == 0) {
@@ -330,7 +330,7 @@ public class ProxyServlet implements Servlet {
         return out.toByteArray();
     }
 
-    protected void setProtocolversion(ExtendedHttpMethod postMethod, String protocolVersion) {
+    void setProtocolversion(ExtendedHttpMethod postMethod, String protocolVersion) {
         if (protocolVersion.equals(HttpVersion.HTTP_1_1.toString())) {
             postMethod.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION, HttpVersion.HTTP_1_1);
         } else if (protocolVersion.equals(HttpVersion.HTTP_1_0.toString())) {

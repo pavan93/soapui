@@ -21,8 +21,7 @@ import com.eviware.soapui.support.xml.XmlUtils;
 import org.apache.log4j.Logger;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -39,7 +38,7 @@ public class FormatXmlAction extends AbstractAction {
         this(editArea, "Format XML");
     }
 
-    public FormatXmlAction(RSyntaxTextArea editArea, String title) {
+    private FormatXmlAction(RSyntaxTextArea editArea, String title) {
         super(title);
         putValue(Action.SMALL_ICON, UISupport.createImageIcon("/format_request.gif"));
         putValue(Action.SHORT_DESCRIPTION, "Pretty-prints the xml");

@@ -28,10 +28,7 @@ import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.Document;
 
 /**
@@ -43,7 +40,7 @@ import javax.swing.text.Document;
 public class VarianceLoadStrategy extends AbstractLoadStrategy {
     private final static Logger log = Logger.getLogger(VarianceLoadStrategy.class);
 
-    public static final String STRATEGY_TYPE = "Variance";
+    private static final String STRATEGY_TYPE = "Variance";
     private static final String INTERVAL_ELEMENT = "interval";
     private static final String VARIANCE_ELEMENT = "variance";
     private static final int DEFAULT_INTERVAL = 60000;
@@ -60,14 +57,14 @@ public class VarianceLoadStrategy extends AbstractLoadStrategy {
     private long startTime;
     private ComponentBag stateDependantComponents = new ComponentBag();
 
-    public VarianceLoadStrategy(WsdlLoadTest loadTest) {
+    private VarianceLoadStrategy(WsdlLoadTest loadTest) {
         super(STRATEGY_TYPE, loadTest);
 
         interval = DEFAULT_INTERVAL;
         variance = DEFAULT_VARIANCE;
     }
 
-    public VarianceLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
+    private VarianceLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
         super(STRATEGY_TYPE, loadTest);
 
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(config);

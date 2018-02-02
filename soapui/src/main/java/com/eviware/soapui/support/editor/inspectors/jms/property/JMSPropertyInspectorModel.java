@@ -46,7 +46,7 @@ public interface JMSPropertyInspectorModel {
         private final T modelItem;
         private final String propertyName;
 
-        protected AbstractJMSPropertyModel(boolean readOnly, T modelItem, String propertyName) {
+        AbstractJMSPropertyModel(boolean readOnly, T modelItem, String propertyName) {
             this.readOnly = readOnly;
             this.modelItem = modelItem;
             this.propertyName = propertyName;

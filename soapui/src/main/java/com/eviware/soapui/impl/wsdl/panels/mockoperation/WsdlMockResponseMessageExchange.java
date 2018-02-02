@@ -120,7 +120,7 @@ public class WsdlMockResponseMessageExchange extends AbstractWsdlMessageExchange
         return getModelItem().getMockResult().getMockRequest().getRawRequestData();
     }
 
-    public WsdlMockResult getWsdlMockResult() {
+    private WsdlMockResult getWsdlMockResult() {
         return (WsdlMockResult) getModelItem().getMockResult();
     }
 

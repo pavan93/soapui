@@ -32,27 +32,10 @@ import com.eviware.soapui.ui.desktop.AbstractSoapUIDesktop;
 import com.eviware.soapui.ui.desktop.DesktopPanel;
 import com.eviware.soapui.ui.desktop.SoapUIDesktop;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DesktopManager;
-import javax.swing.JComponent;
-import javax.swing.JDesktopPane;
-import javax.swing.JInternalFrame;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.event.InternalFrameAdapter;
 import javax.swing.event.InternalFrameEvent;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.Point;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -60,12 +43,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyVetoException;
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * The default standalone SoapUI desktop using a JDesktopPane
@@ -316,8 +295,8 @@ public class StandaloneDesktop extends AbstractSoapUIDesktop {
         }
     }
 
-    public class CloseCurrentAction extends AbstractAction {
-        public CloseCurrentAction() {
+    class CloseCurrentAction extends AbstractAction {
+        CloseCurrentAction() {
             super("Close Current");
             putValue(Action.SHORT_DESCRIPTION, "Closes the current window");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu F4"));
@@ -331,8 +310,8 @@ public class StandaloneDesktop extends AbstractSoapUIDesktop {
         }
     }
 
-    public class CloseOtherAction extends AbstractAction {
-        public CloseOtherAction() {
+    class CloseOtherAction extends AbstractAction {
+        CloseOtherAction() {
             super("Close Others");
             putValue(Action.SHORT_DESCRIPTION, "Closes all windows except the current one");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu alt O"));
@@ -353,8 +332,8 @@ public class StandaloneDesktop extends AbstractSoapUIDesktop {
         }
     }
 
-    public class CloseAllAction extends AbstractAction {
-        public CloseAllAction() {
+    class CloseAllAction extends AbstractAction {
+        CloseAllAction() {
             super("Close All");
             putValue(Action.SHORT_DESCRIPTION, "Closes all windows");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("menu alt L"));
@@ -434,7 +413,7 @@ public class StandaloneDesktop extends AbstractSoapUIDesktop {
         private int imageWidth;
         private int imageHeight;
 
-        public SoapUIDesktopPane() {
+        SoapUIDesktopPane() {
             try {
                 File file = new File("soapui-background.gif");
                 if (!file.exists())

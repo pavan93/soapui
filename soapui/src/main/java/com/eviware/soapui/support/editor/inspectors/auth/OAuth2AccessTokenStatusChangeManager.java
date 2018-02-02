@@ -28,7 +28,7 @@ import java.beans.PropertyChangeListener;
  * <b>Note!</b> You need to call <i>unregister()</i> when you are done with the manager to remove its internal property listener
  */
 final class OAuth2AccessTokenStatusChangeManager implements PropertyChangeListener {
-    OAuth2AccessTokenStatusChangeListener listener = null;
+    private OAuth2AccessTokenStatusChangeListener listener = null;
 
     public OAuth2AccessTokenStatusChangeManager(OAuth2AccessTokenStatusChangeListener listener) {
         this.listener = listener;

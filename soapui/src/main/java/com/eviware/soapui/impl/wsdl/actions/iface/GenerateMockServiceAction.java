@@ -128,7 +128,7 @@ public class GenerateMockServiceAction extends AbstractSoapUIAction<WsdlInterfac
         }
     }
 
-    public MockService getMockService(AbstractInterface modelItem, WsdlProject project, String mockServiceName) {
+    private MockService getMockService(AbstractInterface modelItem, WsdlProject project, String mockServiceName) {
         MockService mockService = project.getMockServiceByName(mockServiceName);
 
         if (mockService == null || mockServiceName.equals(CREATE_MOCKSUITE_OPTION)) {

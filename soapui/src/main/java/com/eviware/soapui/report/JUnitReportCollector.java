@@ -36,18 +36,17 @@ import java.util.*;
 
 public class JUnitReportCollector implements TestRunListener, TestSuiteRunListener, ProjectRunListener {
     HashMap<String, JUnitReport> reports;
-    HashMap<TestCase, String> failures;
-    HashMap<TestCase, Integer> errorCount;
-
-    protected boolean includeTestPropertiesInReport = false;
+    boolean includeTestPropertiesInReport = false;
+    private HashMap<TestCase, String> failures;
+    private HashMap<TestCase, Integer> errorCount;
     private int maxErrors = 0;
 
 
-    public JUnitReportCollector() {
+    JUnitReportCollector() {
         this(0);
     }
 
-    public JUnitReportCollector(int maxErrors) {
+    private JUnitReportCollector(int maxErrors) {
         this.maxErrors = maxErrors;
         reports = new HashMap<String, JUnitReport>();
         errorCount = new HashMap<TestCase, Integer>();
@@ -79,7 +78,7 @@ public class JUnitReportCollector implements TestRunListener, TestSuiteRunListen
         return reports;
     }
 
-    public void saveReport(JUnitReport report, String filename) {
+    private void saveReport(JUnitReport report, String filename) {
         report.save(new File(filename));
     }
 
@@ -116,7 +115,7 @@ public class JUnitReportCollector implements TestRunListener, TestSuiteRunListen
         }
     }
 
-    protected HashMap<String, String> getTestPropertiesAsHashMap(TestModelItem testCase) {
+    HashMap<String, String> getTestPropertiesAsHashMap(TestModelItem testCase) {
         HashMap<String, String> testProperties = new HashMap<>();
         for (Map.Entry<String, TestProperty> stringTestPropertyEntry : testCase.getProperties().entrySet()) {
             testProperties.put(stringTestPropertyEntry.getKey(), stringTestPropertyEntry.getValue().getValue());

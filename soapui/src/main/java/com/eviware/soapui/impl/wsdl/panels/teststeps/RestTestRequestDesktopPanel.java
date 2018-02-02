@@ -36,10 +36,7 @@ import com.eviware.soapui.model.iface.Submit;
 import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.testsuite.Assertable.AssertionStatus;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.monitor.support.TestMonitorListenerAdapter;
 import com.eviware.soapui.security.SecurityTestRunner;
 import com.eviware.soapui.support.DateUtil;
@@ -51,19 +48,8 @@ import com.eviware.soapui.support.components.JInspectorPanelFactory;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.log.JLogList;
 
-import javax.swing.AbstractListModel;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.ListModel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.util.Date;
 
@@ -71,14 +57,14 @@ public class RestTestRequestDesktopPanel extends AbstractRestRequestDesktopPanel
     private JLogList logArea;
     private InternalTestMonitorListener testMonitorListener = new InternalTestMonitorListener();
     private JButton addAssertionButton;
-    protected JComboBox methodResourceCombo;
+    JComboBox methodResourceCombo;
     private AssertionsPanel assertionsPanel;
     private JInspectorPanel inspectorPanel;
     private JComponentInspector<?> assertionInspector;
     private JComponentInspector<?> logInspector;
     private InternalAssertionsListener assertionsListener = new InternalAssertionsListener();
     private long startTime;
-    protected JLabel pathLabel;
+    JLabel pathLabel;
 
 
     public RestTestRequestDesktopPanel(RestTestRequestStep requestStep) {
@@ -90,7 +76,7 @@ public class RestTestRequestDesktopPanel extends AbstractRestRequestDesktopPanel
         requestStep.getTestRequest().addAssertionsListener(assertionsListener);
     }
 
-    protected JComponent buildLogPanel() {
+    private JComponent buildLogPanel() {
         logArea = new JLogList("Request Log");
 
         logArea.getLogList().getModel().addListDataListener(new ListDataChangeListener() {
@@ -103,7 +89,7 @@ public class RestTestRequestDesktopPanel extends AbstractRestRequestDesktopPanel
         return logArea;
     }
 
-    protected AssertionsPanel buildAssertionsPanel() {
+    private AssertionsPanel buildAssertionsPanel() {
         return new AssertionsPanel(getRequest()) {
             protected void selectError(AssertionError error) {
                 ModelItemXmlEditor<?, ?> editor = getResponseEditor();

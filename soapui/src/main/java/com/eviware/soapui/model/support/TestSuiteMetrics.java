@@ -21,7 +21,7 @@ import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.model.testsuite.TestSuite;
 
-public class TestSuiteMetrics {
+class TestSuiteMetrics {
     final private TestSuite testSuite;
 
     public TestSuiteMetrics(TestSuite testSuite) {

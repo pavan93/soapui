@@ -19,8 +19,8 @@ package com.eviware.soapui.impl.wsdl.panels.assertions;
 import javax.swing.table.DefaultTableModel;
 import java.util.Set;
 
-public class AssertionCategoriesTableModel extends DefaultTableModel {
-    Set<String> listEntriesSet;
+class AssertionCategoriesTableModel extends DefaultTableModel {
+    private Set<String> listEntriesSet;
 
     public AssertionCategoriesTableModel() {
     }

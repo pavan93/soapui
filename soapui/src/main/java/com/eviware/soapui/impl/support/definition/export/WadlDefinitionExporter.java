@@ -26,7 +26,7 @@ import org.w3c.dom.Element;
 import java.util.List;
 
 public class WadlDefinitionExporter extends AbstractDefinitionExporter<RestService> {
-    public WadlDefinitionExporter(InterfaceDefinition<RestService> definition) {
+    private WadlDefinitionExporter(InterfaceDefinition<RestService> definition) {
         super(definition);
     }
 

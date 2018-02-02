@@ -55,7 +55,7 @@ public class XPathInjectionSecurityScan extends AbstractSecurityScanWithProperti
 
     private Map<SecurityCheckedParameter, ArrayList<String>> parameterMutations = new HashMap<SecurityCheckedParameter, ArrayList<String>>();
 
-    String[] defaultXPathInjectionStrings = {" or name(//users/LoginID[1]) = 'LoginID' or 'a'='b", "' or '1'='1",
+    private String[] defaultXPathInjectionStrings = {" or name(//users/LoginID[1]) = 'LoginID' or 'a'='b", "' or '1'='1",
             "1/0", "'%20o/**/r%201/0%20--", "' o/**/r 1/0 --", ";", "'%20and%201=2%20--", "' and 1=2 --",
             "test�%20UNION%20select%201,%20@@version,%201,%201;�", "test� UNION select 1, @@version, 1, 1;�"};
 
@@ -367,7 +367,7 @@ public class XPathInjectionSecurityScan extends AbstractSecurityScanWithProperti
     }
 
     @AForm(description = "XPath Injection Strings", name = "XPath Injection Strings")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
 
         @AField(description = "XPath Strings", name = "###Injection Strings", type = AFieldType.STRINGLIST)
         String INJECTION_STRINGS = "###Injection Strings";

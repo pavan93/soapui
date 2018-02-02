@@ -42,11 +42,11 @@ public class SoapUIHttpRoute {
         return false;
     }
 
-    public String getParam() {
+    private String getParam() {
         return this.param;
     }
 
-    public HttpRoute getHttpRoute() {
+    private HttpRoute getHttpRoute() {
         return this.httpRoute;
     }
 

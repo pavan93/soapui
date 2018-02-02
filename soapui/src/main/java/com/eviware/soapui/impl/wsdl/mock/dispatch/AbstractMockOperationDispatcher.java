@@ -19,8 +19,7 @@ package com.eviware.soapui.impl.wsdl.mock.dispatch;
 import com.eviware.soapui.model.mock.MockOperation;
 import com.eviware.soapui.support.PropertyChangeNotifier;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -28,7 +27,7 @@ public abstract class AbstractMockOperationDispatcher implements PropertyChangeN
     private MockOperation mockOperation;
     private PropertyChangeSupport propertyChangeSupport;
 
-    protected AbstractMockOperationDispatcher(MockOperation mockOperation) {
+    AbstractMockOperationDispatcher(MockOperation mockOperation) {
         this.mockOperation = mockOperation;
         propertyChangeSupport = new PropertyChangeSupport(this);
     }
@@ -49,7 +48,7 @@ public abstract class AbstractMockOperationDispatcher implements PropertyChangeN
         //mockOperation = null;
     }
 
-    public MockOperation getMockOperation() {
+    MockOperation getMockOperation() {
         return mockOperation;
     }
 
@@ -69,7 +68,7 @@ public abstract class AbstractMockOperationDispatcher implements PropertyChangeN
         propertyChangeSupport.removePropertyChangeListener(propertyName, listener);
     }
 
-    protected PropertyChangeSupport getPropertyChangeSupport() {
+    PropertyChangeSupport getPropertyChangeSupport() {
         return propertyChangeSupport;
     }
 }

@@ -18,11 +18,7 @@ package com.eviware.x.form;
 
 import com.eviware.x.form.validators.RequiredValidator;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public abstract class AbstractXFormField<T> implements XFormField {
     private Set<XFormFieldListener> listeners;
@@ -30,7 +26,7 @@ public abstract class AbstractXFormField<T> implements XFormField {
     private RequiredValidator requiredValidator;
     private ComponentEnabler enabler = null;
 
-    public AbstractXFormField() {
+    protected AbstractXFormField() {
     }
 
     @Override

@@ -40,10 +40,10 @@ import com.eviware.soapui.model.testsuite.ResponseAssertion;
 
 public class SoapResponseAssertion extends WsdlMessageAssertion implements ResponseAssertion {
     public static final String ID = "SOAP Response";
-    public static final String LABEL = "SOAP Response";
-    public static final String DESCRIPTION = "Validates that the last received response is a valid SOAP Response. Applicable to SOAP TestRequest Steps only.";
+    private static final String LABEL = "SOAP Response";
+    private static final String DESCRIPTION = "Validates that the last received response is a valid SOAP Response. Applicable to SOAP TestRequest Steps only.";
 
-    public SoapResponseAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private SoapResponseAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, true);
     }
 

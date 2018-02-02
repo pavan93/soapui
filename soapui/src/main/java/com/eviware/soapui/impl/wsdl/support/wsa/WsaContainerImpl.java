@@ -20,9 +20,9 @@ import com.eviware.soapui.impl.wsdl.WsdlOperation;
 
 public class WsaContainerImpl implements WsaContainer {
 
-    WsdlOperation operation;
-    WsaConfig wsaConfig;
-    boolean enabled = false;
+    private WsdlOperation operation;
+    private WsaConfig wsaConfig;
+    private boolean enabled = false;
 
     public WsdlOperation getOperation() {
         return operation;

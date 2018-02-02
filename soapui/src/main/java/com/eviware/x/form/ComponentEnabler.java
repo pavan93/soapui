@@ -28,7 +28,7 @@ public class ComponentEnabler implements XFormFieldListener {
         XFormField field;
         String value;
 
-        public FieldValue(XFormField field, String value) {
+        FieldValue(XFormField field, String value) {
             this.field = field;
             this.value = value;
         }

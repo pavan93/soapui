@@ -21,7 +21,7 @@ import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import javax.swing.tree.TreeNode;
 import java.util.Enumeration;
 import java.util.Vector;
@@ -35,7 +35,7 @@ import java.util.Vector;
 public abstract class AbstractTreeNode<T extends ModelItem> implements SoapUITreeNode {
     private T modelItem;
 
-    public AbstractTreeNode(T modelItem) {
+    protected AbstractTreeNode(T modelItem) {
         this.modelItem = modelItem;
     }
 

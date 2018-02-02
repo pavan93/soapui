@@ -9,7 +9,7 @@ import io.swagger.annotations.ApiModel;
  * Captures the JSON configuration of a Schema Compliance assertion.
  */
 @ApiModel(value = "SoapFaultAssertion", description = "SOAP Fault assertion definition")
-public class SoapFaultAssertionStruct extends AssertionStruct<SoapFaultAssertion> {
+class SoapFaultAssertionStruct extends AssertionStruct<SoapFaultAssertion> {
 
     @JsonCreator
     public SoapFaultAssertionStruct(@JsonProperty("name") String name) {

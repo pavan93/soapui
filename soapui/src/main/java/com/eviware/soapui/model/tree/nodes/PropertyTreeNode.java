@@ -27,16 +27,15 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 public class PropertyTreeNode extends AbstractModelItemTreeNode<PropertyTreeNode.PropertyModelItem> {
     private boolean readOnly;
     private final TestProperty property;
 
-    protected PropertyTreeNode(TestProperty property, ModelItem parent, TestPropertyHolder holder,
-                               SoapUITreeModel treeModel) {
+    PropertyTreeNode(TestProperty property, ModelItem parent, TestPropertyHolder holder,
+                     SoapUITreeModel treeModel) {
         super(new PropertyModelItem(property, property.isReadOnly()), parent, treeModel);
         this.property = property;
         readOnly = property.isReadOnly();
@@ -96,7 +95,7 @@ public class PropertyTreeNode extends AbstractModelItemTreeNode<PropertyTreeNode
     }
 
     private class SetPropertyValueAction extends AbstractAction {
-        public SetPropertyValueAction() {
+        SetPropertyValueAction() {
             super("Set Value");
             putValue(Action.SHORT_DESCRIPTION, "Prompts to set the value of this property");
         }

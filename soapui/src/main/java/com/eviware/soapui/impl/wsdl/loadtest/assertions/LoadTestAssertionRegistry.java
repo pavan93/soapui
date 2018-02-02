@@ -38,7 +38,7 @@ public class LoadTestAssertionRegistry {
     @SuppressWarnings("unused")
     private final static Logger logger = Logger.getLogger(LoadTestAssertionRegistry.class);
 
-    public LoadTestAssertionRegistry() {
+    private LoadTestAssertionRegistry() {
         availableAssertions.put(TestStepAverageAssertion.STEP_AVERAGE_TYPE, TestStepAverageAssertion.class);
         availableAssertions.put(TestStepTpsAssertion.STEP_TPS_TYPE, TestStepTpsAssertion.class);
         availableAssertions.put(TestStepMaxAssertion.STEP_MAXIMUM_TYPE, TestStepMaxAssertion.class);
@@ -46,7 +46,7 @@ public class LoadTestAssertionRegistry {
         availableAssertions.put(MaxErrorsAssertion.MAX_ERRORS_TYPE, MaxErrorsAssertion.class);
     }
 
-    public static synchronized LoadTestAssertionRegistry getInstance() {
+    private static synchronized LoadTestAssertionRegistry getInstance() {
         if (instance == null) {
             instance = new LoadTestAssertionRegistry();
         }
@@ -77,7 +77,7 @@ public class LoadTestAssertionRegistry {
         return null;
     }
 
-    public static LoadTestAssertionConfig createAssertionConfig(String type) {
+    private static LoadTestAssertionConfig createAssertionConfig(String type) {
         LoadTestAssertionConfig config = LoadTestAssertionConfig.Factory.newInstance();
         config.setType(type);
         return config;

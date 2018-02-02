@@ -166,7 +166,7 @@ public class ResolveDialog {
 
     }
 
-    public boolean isShowOkMessage() {
+    private boolean isShowOkMessage() {
         return showOkMessage;
     }
 
@@ -202,7 +202,7 @@ public class ResolveDialog {
         private ArrayList<JComboBox> jbcList = new ArrayList<JComboBox>();
 
         @SuppressWarnings("unchecked")
-        public ResolveContextTableModel(ResolveContext<?> context2) {
+        ResolveContextTableModel(ResolveContext<?> context2) {
             context = context2;
             for (PathToResolve path : context.getPathsToResolve()) {
                 ArrayList<Object> resolversAndDefaultAction = new ArrayList<Object>();
@@ -216,7 +216,7 @@ public class ResolveDialog {
 
         }
 
-        public JComboBox getResolversAndActions(int row) {
+        JComboBox getResolversAndActions(int row) {
             return jbcList.get(row);
         }
 
@@ -297,7 +297,7 @@ public class ResolveDialog {
             return name;
         }
 
-        public ResolveContext<?> getContext() {
+        ResolveContext<?> getContext() {
             return context;
         }
 

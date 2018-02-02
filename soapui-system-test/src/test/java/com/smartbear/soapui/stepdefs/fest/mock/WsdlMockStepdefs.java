@@ -27,7 +27,7 @@ import static com.smartbear.soapui.utils.fest.ApplicationUtils.getMainWindow;
 import static com.smartbear.soapui.utils.fest.SoapProjectUtils.findSoapOperationPopupMenu;
 import static org.junit.Assert.assertTrue;
 
-public class WsdlMockStepdefs {
+class WsdlMockStepdefs {
     private Robot robot;
     private FrameFixture rootWindow;
     private JTreeNodeFixture rightClickMenu;

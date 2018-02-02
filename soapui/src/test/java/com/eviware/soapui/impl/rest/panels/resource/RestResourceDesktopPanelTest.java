@@ -35,9 +35,9 @@ import static org.junit.Assert.assertThat;
  * Unit tests for the RestResourceDesktopPanel class.
  */
 public class RestResourceDesktopPanelTest {
-    static final String PARAM_2 = "Param2";
-    static final String PARAM_3 = "Param3";
-    static final String PARAM_1 = "Param1";
+    private static final String PARAM_2 = "Param2";
+    private static final String PARAM_3 = "Param3";
+    private static final String PARAM_1 = "Param1";
 
     private RestResource parentResource;
     private RestResource childResource;

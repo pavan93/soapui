@@ -35,7 +35,7 @@ public abstract class XmlSchemaBasedInterfaceDefinition<T extends AbstractInterf
     private SchemaTypeSystem schemaTypes;
     private SchemaTypeLoader schemaTypeLoader;
 
-    public XmlSchemaBasedInterfaceDefinition(T iface) {
+    protected XmlSchemaBasedInterfaceDefinition(T iface) {
         super(iface);
     }
 

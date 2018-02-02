@@ -90,7 +90,7 @@ public class WsdlTestSuiteRunContext extends AbstractSubmitContext<WsdlTestSuite
         return PropertyExpander.expandProperties(this, content);
     }
 
-    public Settings getSettings() {
+    private Settings getSettings() {
         return testSuite == null ? SoapUI.getSettings() : testSuite.getSettings();
     }
 

@@ -11,11 +11,11 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures a JsonPath count assertion in JSON format.
  */
 @ApiModel(value = "JsonPathCountAssertion", description = "JsonPath count assertion definition")
-public class JsonPathCountAssertionStruct extends AssertionStruct<JsonPathCountAssertion> {
+class JsonPathCountAssertionStruct extends AssertionStruct<JsonPathCountAssertion> {
 
-    public final String jsonPath;
-    public final String expectedCount;
-    public final boolean allowWildcards;
+    private final String jsonPath;
+    private final String expectedCount;
+    private final boolean allowWildcards;
 
     @JsonCreator
     public JsonPathCountAssertionStruct(@JsonProperty("name") String name, @JsonProperty("jsonPath") String jsonPath, @JsonProperty("expectedCount") String expectedCount, @JsonProperty("allowWildcards") boolean allowWildcards) {

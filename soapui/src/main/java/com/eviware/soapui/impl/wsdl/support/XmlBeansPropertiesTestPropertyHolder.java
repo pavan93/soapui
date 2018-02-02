@@ -34,15 +34,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class XmlBeansPropertiesTestPropertyHolder implements MutableTestPropertyHolder, Map<String, TestProperty> {
     private PropertiesTypeConfig config;
@@ -68,8 +60,8 @@ public class XmlBeansPropertiesTestPropertyHolder implements MutableTestProperty
         }
     }
 
-    protected PropertiesStepProperty addProperty(PropertyConfig propertyConfig, boolean notify,
-                                                 TestProperty virtualProperty) {
+    private PropertiesStepProperty addProperty(PropertyConfig propertyConfig, boolean notify,
+                                               TestProperty virtualProperty) {
         PropertiesStepProperty propertiesStepProperty = new PropertiesStepProperty(propertyConfig, virtualProperty);
 
         properties.add(propertiesStepProperty);
@@ -231,148 +223,32 @@ public class XmlBeansPropertiesTestPropertyHolder implements MutableTestProperty
         return true;
     }
 
-    /**
-     * Internal property class
-     *
-     * @author ole
-     */
-
-    public class PropertiesStepProperty implements RenameableTestProperty {
-        private PropertyConfig propertyConfig;
-        private final TestProperty virtualProperty;
-
-        public PropertiesStepProperty(PropertyConfig propertyConfig, TestProperty virtualProperty) {
-            this.propertyConfig = propertyConfig;
-            this.virtualProperty = virtualProperty;
-        }
-
-        public boolean isVirtualProperty() {
-            return virtualProperty != null;
-        }
-
-        public void setConfig(PropertyConfig propertyConfig) {
-            this.propertyConfig = propertyConfig;
-        }
-
-        public String getName() {
-            return propertyConfig.getName();
-        }
-
-        public void setName(String name) {
-            String oldName = getName();
-            propertyConfig.setName(name);
-
-            propertyMap.remove(oldName.toUpperCase());
-            propertyMap.put(name.toUpperCase(), this);
-
-            firePropertyRenamed(oldName, name);
-        }
-
-        public String getDescription() {
-            if (virtualProperty != null) {
-                return virtualProperty.getDescription();
-            }
-
-            return null;
-        }
-
-        public String getValue() {
-            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
-                return overrideProperties.getProperty(getName());
-            }
-
-            if (virtualProperty != null) {
-                return virtualProperty.getValue();
-            }
-
-            return propertyConfig.getValue();
-        }
-
-        public void setValue(String value) {
-            String oldValue = getValue();
-            propertyConfig.setValue(value);
-
-            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
-                overrideProperties.remove(getName());
-                if (overrideProperties.isEmpty()) {
-                    overrideProperties = null;
-                }
-            }
-
-            firePropertyValueChanged(getName(), oldValue, value);
-        }
-
-        public void firePropertyValueChanged(String name, String oldValue, String newValue) {
-            XmlBeansPropertiesTestPropertyHolder.this.firePropertyValueChanged(name, oldValue, newValue);
-        }
-
-        public boolean isReadOnly() {
-            if (virtualProperty != null) {
-                return virtualProperty.isReadOnly();
-            }
-
-            return false;
-        }
-
-        public QName getType() {
-            if (virtualProperty != null) {
-                return virtualProperty.getType();
-            }
-
-            return XmlString.type.getName();
-        }
-
-        public ModelItem getModelItem() {
-            return modelItem;
-        }
-
-        public String getDefaultValue() {
-            if (virtualProperty != null) {
-                return virtualProperty.getDefaultValue();
-            }
-
-            return null;
-        }
-
-        @Override
-        public boolean isRequestPart() {
-            return false;
-        }
-
-        @Override
-        public SchemaType getSchemaType() {
-            if (virtualProperty != null) {
-                return virtualProperty.getSchemaType();
-            }
-
-            return XmlString.type;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj instanceof TestProperty) {
-                TestProperty testProperty = (TestProperty) obj;
-                if (getModelItem() != null && testProperty.getModelItem() != null) {
-                    return getModelItem().equals(testProperty.getModelItem()) && getName().equals(testProperty.getName());
-                } else {
-                    return getName().equals(testProperty.getName());
-                }
-            } else {
-                return false;
-            }
-        }
-
-        @Override
-        public int hashCode() {
-            return super.hashCode();
-        }
-
-    }
-
-    public void firePropertyValueChanged(String name, String oldValue, String newValue) {
+    private void firePropertyValueChanged(String name, String oldValue, String newValue) {
         TestPropertyListener[] listenersArray = listeners.toArray(new TestPropertyListener[listeners.size()]);
         for (TestPropertyListener listener : listenersArray) {
             listener.propertyValueChanged(name, oldValue, newValue);
+        }
+    }
+
+    private static class HashMapEntry<K, V> implements java.util.Map.Entry<K, V> {
+        private K key;
+        private V value;
+
+        HashMapEntry(K key, V value) {
+            this.key = key;
+            this.value = value;
+        }
+
+        public K getKey() {
+            return key;
+        }
+
+        public V getValue() {
+            return value;
+        }
+
+        public V setValue(V value) {
+            throw new UnsupportedOperationException();
         }
     }
 
@@ -516,26 +392,142 @@ public class XmlBeansPropertiesTestPropertyHolder implements MutableTestProperty
         return result;
     }
 
-    private static class HashMapEntry<K, V> implements java.util.Map.Entry<K, V> {
-        private K key;
-        private V value;
+    /**
+     * Internal property class
+     *
+     * @author ole
+     */
 
-        public HashMapEntry(K key, V value) {
-            this.key = key;
-            this.value = value;
+    public class PropertiesStepProperty implements RenameableTestProperty {
+        private final TestProperty virtualProperty;
+        private PropertyConfig propertyConfig;
+
+        PropertiesStepProperty(PropertyConfig propertyConfig, TestProperty virtualProperty) {
+            this.propertyConfig = propertyConfig;
+            this.virtualProperty = virtualProperty;
         }
 
-        public K getKey() {
-            return key;
+        boolean isVirtualProperty() {
+            return virtualProperty != null;
         }
 
-        public V getValue() {
-            return value;
+        void setConfig(PropertyConfig propertyConfig) {
+            this.propertyConfig = propertyConfig;
         }
 
-        public V setValue(V value) {
-            throw new UnsupportedOperationException();
+        public String getName() {
+            return propertyConfig.getName();
         }
+
+        public void setName(String name) {
+            String oldName = getName();
+            propertyConfig.setName(name);
+
+            propertyMap.remove(oldName.toUpperCase());
+            propertyMap.put(name.toUpperCase(), this);
+
+            firePropertyRenamed(oldName, name);
+        }
+
+        public String getDescription() {
+            if (virtualProperty != null) {
+                return virtualProperty.getDescription();
+            }
+
+            return null;
+        }
+
+        public String getValue() {
+            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
+                return overrideProperties.getProperty(getName());
+            }
+
+            if (virtualProperty != null) {
+                return virtualProperty.getValue();
+            }
+
+            return propertyConfig.getValue();
+        }
+
+        public void setValue(String value) {
+            String oldValue = getValue();
+            propertyConfig.setValue(value);
+
+            if (overrideProperties != null && overrideProperties.containsKey(getName())) {
+                overrideProperties.remove(getName());
+                if (overrideProperties.isEmpty()) {
+                    overrideProperties = null;
+                }
+            }
+
+            firePropertyValueChanged(getName(), oldValue, value);
+        }
+
+        void firePropertyValueChanged(String name, String oldValue, String newValue) {
+            XmlBeansPropertiesTestPropertyHolder.this.firePropertyValueChanged(name, oldValue, newValue);
+        }
+
+        public boolean isReadOnly() {
+            if (virtualProperty != null) {
+                return virtualProperty.isReadOnly();
+            }
+
+            return false;
+        }
+
+        public QName getType() {
+            if (virtualProperty != null) {
+                return virtualProperty.getType();
+            }
+
+            return XmlString.type.getName();
+        }
+
+        public ModelItem getModelItem() {
+            return modelItem;
+        }
+
+        public String getDefaultValue() {
+            if (virtualProperty != null) {
+                return virtualProperty.getDefaultValue();
+            }
+
+            return null;
+        }
+
+        @Override
+        public boolean isRequestPart() {
+            return false;
+        }
+
+        @Override
+        public SchemaType getSchemaType() {
+            if (virtualProperty != null) {
+                return virtualProperty.getSchemaType();
+            }
+
+            return XmlString.type;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof TestProperty) {
+                TestProperty testProperty = (TestProperty) obj;
+                if (getModelItem() != null && testProperty.getModelItem() != null) {
+                    return getModelItem().equals(testProperty.getModelItem()) && getName().equals(testProperty.getName());
+                } else {
+                    return getName().equals(testProperty.getName());
+                }
+            } else {
+                return false;
+            }
+        }
+
+        @Override
+        public int hashCode() {
+            return super.hashCode();
+        }
+
     }
 
     public TestProperty get(Object key) {

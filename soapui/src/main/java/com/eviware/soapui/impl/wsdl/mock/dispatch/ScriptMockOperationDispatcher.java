@@ -26,13 +26,7 @@ import com.eviware.soapui.impl.wsdl.mock.WsdlMockRunContext;
 import com.eviware.soapui.impl.wsdl.panels.teststeps.support.GroovyEditor;
 import com.eviware.soapui.impl.wsdl.panels.teststeps.support.GroovyEditorModel;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.mock.MockOperation;
-import com.eviware.soapui.model.mock.MockRequest;
-import com.eviware.soapui.model.mock.MockResponse;
-import com.eviware.soapui.model.mock.MockResult;
-import com.eviware.soapui.model.mock.MockRunContext;
-import com.eviware.soapui.model.mock.MockRunner;
-import com.eviware.soapui.model.mock.MockService;
+import com.eviware.soapui.model.mock.*;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
@@ -41,12 +35,8 @@ import com.eviware.soapui.support.scripting.ScriptEnginePool;
 import com.eviware.soapui.support.scripting.SoapUIScriptEngine;
 import com.eviware.soapui.ui.support.ModelItemDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -138,7 +128,7 @@ public class ScriptMockOperationDispatcher extends AbstractMockOperationDispatch
         return true;
     }
 
-    protected JXToolBar buildGroovyEditorToolbar(DispatchScriptGroovyEditorModel editorModel) {
+    private JXToolBar buildGroovyEditorToolbar(DispatchScriptGroovyEditorModel editorModel) {
         JXToolBar toolbar = UISupport.createToolbar();
         toolbar.addSpace(3);
         toolbar.addFixed(UISupport.createToolbarButton(editorModel.getRunAction()));
@@ -204,7 +194,7 @@ public class ScriptMockOperationDispatcher extends AbstractMockOperationDispatch
     }
 
     private class RunScriptAction extends AbstractAction {
-        public RunScriptAction() {
+        RunScriptAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs this script using a mockRequest and context");
         }

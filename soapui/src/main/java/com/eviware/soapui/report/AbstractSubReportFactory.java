@@ -19,12 +19,12 @@ package com.eviware.soapui.report;
 import com.eviware.soapui.plugins.SoapUIFactory;
 
 public abstract class AbstractSubReportFactory implements SubReportFactory, SoapUIFactory {
-    public final ReportTypeConfig.Enum[] levels;
+    private final ReportTypeConfig.Enum[] levels;
     private final String description;
     private final String name;
     private final String id;
 
-    protected AbstractSubReportFactory(String name, String description, String id, ReportTypeConfig.Enum[] levels) {
+    private AbstractSubReportFactory(String name, String description, String id, ReportTypeConfig.Enum[] levels) {
         this.name = name;
         this.description = description;
         this.id = id;
@@ -53,7 +53,7 @@ public abstract class AbstractSubReportFactory implements SubReportFactory, Soap
         return subReport == null ? new SubReport[0] : new SubReport[]{subReport};
     }
 
-    public SubReport buildSubReport(ModelItemReport modelItem) {
+    private SubReport buildSubReport(ModelItemReport modelItem) {
         return null;
     }
 

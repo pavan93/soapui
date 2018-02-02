@@ -30,7 +30,7 @@ import org.codehaus.jettison.json.JSONException;
 /**
  *
  */
-public class OAuth2AccessTokenResponse extends OAuthAccessTokenResponse {
+class OAuth2AccessTokenResponse extends OAuthAccessTokenResponse {
 
     private static final String EXPIRES = "expires";
 

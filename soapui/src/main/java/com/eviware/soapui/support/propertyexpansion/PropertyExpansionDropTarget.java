@@ -31,7 +31,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 
-public final class PropertyExpansionDropTarget implements DropTargetListener {
+final class PropertyExpansionDropTarget implements DropTargetListener {
     private final PropertyExpansionTarget target;
 
     public PropertyExpansionDropTarget(PropertyExpansionTarget target) {
@@ -107,7 +107,7 @@ public final class PropertyExpansionDropTarget implements DropTargetListener {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
 
-    public boolean isAcceptable(Transferable transferable) {
+    private boolean isAcceptable(Transferable transferable) {
         DataFlavor[] flavors = transferable.getTransferDataFlavors();
         for (int i = 0; i < flavors.length; i++) {
             DataFlavor flavor = flavors[i];

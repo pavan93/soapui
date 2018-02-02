@@ -34,12 +34,7 @@ import com.eviware.soapui.support.StringUtils;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * WSDL implementation of Operation, maps to a WSDL BindingOperation
@@ -435,7 +430,7 @@ public class RestResource extends AbstractWsdlModelItem<RestResourceConfig> impl
         getConfig().removeMethod(ix);
     }
 
-    protected void deleteAllChildResources(RestResource resource) {
+    void deleteAllChildResources(RestResource resource) {
         for (RestResource childResource : resource.getChildResourceList()) {
             resource.deleteResource(childResource);
         }

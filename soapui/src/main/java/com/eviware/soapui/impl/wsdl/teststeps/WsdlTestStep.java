@@ -58,7 +58,7 @@ abstract public class WsdlTestStep extends AbstractWsdlModelItem<TestStepConfig>
         return hasEditor;
     }
 
-    public boolean isForLoadTest() {
+    boolean isForLoadTest() {
         return forLoadTest;
     }
 
@@ -143,7 +143,7 @@ abstract public class WsdlTestStep extends AbstractWsdlModelItem<TestStepConfig>
         return false;
     }
 
-    public String getTestStepTitle() {
+    String getTestStepTitle() {
         return getTestCase().getTestSuite().getName() + "#" + getTestCase().getName();
     }
 

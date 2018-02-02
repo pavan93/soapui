@@ -22,8 +22,8 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Method;
 
 public class WeakPropertyChangeListener implements PropertyChangeListener {
-    WeakReference<?> listenerRef;
-    Object src;
+    private WeakReference<?> listenerRef;
+    private Object src;
 
     @SuppressWarnings("unchecked")
     public WeakPropertyChangeListener(PropertyChangeListener listener, Object src) {

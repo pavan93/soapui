@@ -44,7 +44,7 @@ public class ProcessToolRunner implements ToolRunner {
         this(new ProcessBuilder[]{builder}, name, modelItem, args);
     }
 
-    public ProcessToolRunner(ProcessBuilder[] builders, String name, ModelItem modelItem, ArgumentBuilder args) {
+    private ProcessToolRunner(ProcessBuilder[] builders, String name, ModelItem modelItem, ArgumentBuilder args) {
         this.builders = builders;
         this.name = name;
         this.modelItem = modelItem;
@@ -59,11 +59,11 @@ public class ProcessToolRunner implements ToolRunner {
         this(builder, s, modelItem, null);
     }
 
-    public ProcessBuilder[] getBuilders() {
+    protected ProcessBuilder[] getBuilders() {
         return builders;
     }
 
-    public Process getProcess() {
+    private Process getProcess() {
         return process;
     }
 
@@ -147,14 +147,14 @@ public class ProcessToolRunner implements ToolRunner {
         }
     }
 
-    protected void beforeRun(RunnerContext context) {
+    private void beforeRun(RunnerContext context) {
     }
 
     protected void beforeProcess(ProcessBuilder processBuilder, RunnerContext context) {
         processBuilder.environment().put(STARTED_FROM_GUI, "true");
     }
 
-    protected void afterProcess(Process process2, RunnerContext context) {
+    private void afterProcess(Process process2, RunnerContext context) {
     }
 
     protected void afterRun(int exitCode, RunnerContext context) {

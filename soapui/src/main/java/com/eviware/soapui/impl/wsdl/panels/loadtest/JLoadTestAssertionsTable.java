@@ -158,13 +158,13 @@ public class JLoadTestAssertionsTable extends JPanel {
     }
 
     private class LoadTestAssertionsTableModel extends AbstractTableModel implements PropertyChangeListener {
-        public LoadTestAssertionsTableModel() {
+        LoadTestAssertionsTableModel() {
             for (int c = 0; c < loadTest.getAssertionCount(); c++) {
                 loadTest.getAssertionAt(c).addPropertyChangeListener(LoadTestAssertion.CONFIGURATION_PROPERTY, this);
             }
         }
 
-        public void release() {
+        void release() {
             for (int c = 0; c < loadTest.getAssertionCount(); c++) {
                 loadTest.getAssertionAt(c).removePropertyChangeListener(LoadTestAssertion.CONFIGURATION_PROPERTY, this);
             }
@@ -219,12 +219,12 @@ public class JLoadTestAssertionsTable extends JPanel {
             return null;
         }
 
-        public void assertionRemoved(LoadTestAssertion assertion) {
+        void assertionRemoved(LoadTestAssertion assertion) {
             assertion.removePropertyChangeListener(LoadTestAssertion.CONFIGURATION_PROPERTY, this);
             fireTableDataChanged();
         }
 
-        public void assertionAdded(LoadTestAssertion assertion) {
+        void assertionAdded(LoadTestAssertion assertion) {
             assertion.addPropertyChangeListener(LoadTestAssertion.CONFIGURATION_PROPERTY, this);
             fireTableRowsInserted(getRowCount() - 1, getRowCount() - 1);
         }
@@ -253,8 +253,8 @@ public class JLoadTestAssertionsTable extends JPanel {
         }
     }
 
-    public class AddLoadTestAssertionAction extends AbstractAction {
-        public AddLoadTestAssertionAction() {
+    class AddLoadTestAssertionAction extends AbstractAction {
+        AddLoadTestAssertionAction() {
             super("Add Assertion");
 
             putValue(Action.SHORT_DESCRIPTION, "Adds an assertion to this LoadTest");
@@ -271,7 +271,7 @@ public class JLoadTestAssertionsTable extends JPanel {
         }
     }
 
-    public class ConfigureAssertionAction extends AbstractAction {
+    class ConfigureAssertionAction extends AbstractAction {
         ConfigureAssertionAction() {
             super("Configure");
             putValue(Action.SHORT_DESCRIPTION, "Configures the selection assertion");
@@ -296,8 +296,8 @@ public class JLoadTestAssertionsTable extends JPanel {
         }
     }
 
-    public class RemoveAssertionAction extends AbstractAction {
-        public RemoveAssertionAction() {
+    class RemoveAssertionAction extends AbstractAction {
+        RemoveAssertionAction() {
             super("Remove Assertion");
             putValue(Action.SHORT_DESCRIPTION, "Removes the selected assertion from this LoadTest");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_assertion.gif"));

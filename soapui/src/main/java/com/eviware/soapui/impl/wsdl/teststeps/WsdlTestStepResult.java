@@ -22,8 +22,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -124,7 +123,7 @@ public class WsdlTestStepResult implements TestStepResult {
         return actionList;
     }
 
-    public void addAction(Action action, boolean isDefault) {
+    void addAction(Action action, boolean isDefault) {
         if (isDiscarded()) {
             return;
         }

@@ -28,33 +28,37 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(org.mockito.runners.MockitoJUnitRunner.class)
 public class HttpClientSupportSoapUIHttpRequestExecutorTest {
 
     @Mock
+    private
     HttpProcessor processor;
 
     @Mock
+    private
     HttpContext context;
 
     @Mock
+    private
     RequestWrapper wrappedRequest;
 
     @Mock
+    private
     ExtendedHttpMethod extendedHttpMethod;
 
     @Mock
+    private
     SoapUIMetrics metrics;
 
     @Mock
+    private
     Stopwatch stopWatch;
 
     @Mock
+    private
     Stopwatch startWatch;
 
     @Test

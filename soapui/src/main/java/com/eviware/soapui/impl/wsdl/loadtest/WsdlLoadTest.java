@@ -23,27 +23,15 @@ import com.eviware.soapui.impl.wsdl.loadtest.assertions.LoadTestAssertionRegistr
 import com.eviware.soapui.impl.wsdl.loadtest.data.LoadTestStatistics;
 import com.eviware.soapui.impl.wsdl.loadtest.log.LoadTestLog;
 import com.eviware.soapui.impl.wsdl.loadtest.log.LoadTestLogErrorEntry;
-import com.eviware.soapui.impl.wsdl.loadtest.strategy.BurstLoadStrategy;
-import com.eviware.soapui.impl.wsdl.loadtest.strategy.LoadStrategy;
-import com.eviware.soapui.impl.wsdl.loadtest.strategy.LoadStrategyFactory;
-import com.eviware.soapui.impl.wsdl.loadtest.strategy.LoadStrategyRegistry;
-import com.eviware.soapui.impl.wsdl.loadtest.strategy.SimpleLoadStrategy;
+import com.eviware.soapui.impl.wsdl.loadtest.strategy.*;
 import com.eviware.soapui.impl.wsdl.support.Configurable;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCaseRunner;
 import com.eviware.soapui.impl.wsdl.teststeps.SimplePathPropertySupport;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.model.support.LoadTestRunListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunListener;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunnable;
-import com.eviware.soapui.model.testsuite.TestRunner;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestRunner.Status;
-import com.eviware.soapui.model.testsuite.TestStepResult;
 import com.eviware.soapui.settings.HttpSettings;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.scripting.SoapUIScriptEngine;
@@ -58,11 +46,7 @@ import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * TestCase implementation for LoadTests
@@ -75,14 +59,14 @@ import java.util.Set;
 @SuppressWarnings("unchecked")
 public class WsdlLoadTest extends AbstractWsdlModelItem<LoadTestConfig> implements LoadTest, TestRunnable {
     public final static String THREADCOUNT_PROPERTY = WsdlLoadTest.class.getName() + "@threadcount";
-    public final static String STARTDELAY_PROPERTY = WsdlLoadTest.class.getName() + "@startdelay";
-    public final static String TESTLIMIT_PROPERTY = WsdlLoadTest.class.getName() + "@testlimit";
+    private final static String STARTDELAY_PROPERTY = WsdlLoadTest.class.getName() + "@startdelay";
+    private final static String TESTLIMIT_PROPERTY = WsdlLoadTest.class.getName() + "@testlimit";
     public final static String HISTORYLIMIT_PROPERTY = WsdlLoadTest.class.getName() + "@historylimit";
-    public final static String LIMITTYPE_PROPERRY = WsdlLoadTest.class.getName() + "@limittype";
-    public final static String SAMPLEINTERVAL_PROPERRY = WsdlLoadTest.class.getName() + "@sample-interval";
-    public static final String MAXASSERTIONERRORS_PROPERTY = WsdlLoadTest.class.getName() + "@max-assertion-errors";
-    public final static String SETUP_SCRIPT_PROPERTY = WsdlTestCase.class.getName() + "@setupScript";
-    public final static String TEARDOWN_SCRIPT_PROPERTY = WsdlTestCase.class.getName() + "@tearDownScript";
+    private final static String LIMITTYPE_PROPERRY = WsdlLoadTest.class.getName() + "@limittype";
+    private final static String SAMPLEINTERVAL_PROPERRY = WsdlLoadTest.class.getName() + "@sample-interval";
+    private static final String MAXASSERTIONERRORS_PROPERTY = WsdlLoadTest.class.getName() + "@max-assertion-errors";
+    private final static String SETUP_SCRIPT_PROPERTY = WsdlTestCase.class.getName() + "@setupScript";
+    private final static String TEARDOWN_SCRIPT_PROPERTY = WsdlTestCase.class.getName() + "@tearDownScript";
 
     private final static Logger logger = Logger.getLogger(WsdlLoadTest.class);
     public static final int DEFAULT_STRATEGY_INTERVAL = 500;
@@ -676,11 +660,11 @@ public class WsdlLoadTest extends AbstractWsdlModelItem<LoadTestConfig> implemen
             }
         }
 
-        public void start() {
+        void start() {
             new Thread(this, "Statistics Logger for LoadTest [" + getName() + "]").start();
         }
 
-        public void init(LoadTestRunContext context) {
+        void init(LoadTestRunContext context) {
             writers.clear();
 
             String statisticsLogFolder = context.expand(getStatisticsLogFolder());
@@ -724,7 +708,7 @@ public class WsdlLoadTest extends AbstractWsdlModelItem<LoadTestConfig> implemen
             writer.print("date,threads,elapsed,min,max,avg,last,cnt,tps,bytes,bps,err,reason\n");
         }
 
-        public void finish() {
+        void finish() {
             stopped = true;
 
             logStatistics("Finished");

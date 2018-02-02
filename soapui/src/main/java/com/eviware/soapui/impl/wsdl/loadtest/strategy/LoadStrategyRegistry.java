@@ -31,14 +31,14 @@ public class LoadStrategyRegistry {
     private static LoadStrategyRegistry instance;
     private Map<String, LoadStrategyFactory> factories = new HashMap<String, LoadStrategyFactory>();
 
-    public LoadStrategyRegistry() {
+    private LoadStrategyRegistry() {
         addFactory(new SimpleLoadStrategy.Factory());
         addFactory(new BurstLoadStrategy.Factory());
         addFactory(new VarianceLoadStrategy.Factory());
         addFactory(new ThreadCountChangeLoadStrategy.Factory());
     }
 
-    public void addFactory(LoadStrategyFactory factory) {
+    private void addFactory(LoadStrategyFactory factory) {
         factories.put(factory.getType(), factory);
     }
 

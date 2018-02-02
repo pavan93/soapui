@@ -16,10 +16,10 @@ import static org.junit.Assert.assertTrue;
 /**
  * Base class for unit test classes exercising the test recipe functionality, containing basic test functionality.
  */
-public abstract class RecipeParserTestBase {
-    protected JsonRecipeParser parser = new JsonRecipeParser();
+abstract class RecipeParserTestBase {
+    JsonRecipeParser parser = new JsonRecipeParser();
 
-    protected WsdlProject buildProjectFromRecipe(String recipeFileName, ResourceReplacement... replacements) throws Exception {
+    WsdlProject buildProjectFromRecipe(String recipeFileName, ResourceReplacement... replacements) throws Exception {
         InputStream recipeAsStream = RestRequestParsingTest.class.getResourceAsStream("/test-recipes/" + recipeFileName);
         String recipe = IOUtils.toString(recipeAsStream);
         for (ResourceReplacement replacement : replacements) {
@@ -28,11 +28,11 @@ public abstract class RecipeParserTestBase {
         return parser.parse(recipe);
     }
 
-    protected RestTestRequestStep getSingleRestRequestStepIn(WsdlProject project) {
+    RestTestRequestStep getSingleRestRequestStepIn(WsdlProject project) {
         return getSingleTestStepIn(project, RestTestRequestStep.class);
     }
 
-    protected <T extends WsdlTestStep> T getSingleTestStepIn(WsdlProject project, Class<T> clazz) {
+    <T extends WsdlTestStep> T getSingleTestStepIn(WsdlProject project, Class<T> clazz) {
         assertThat(project.getTestSuiteCount(), is(1));
         assertThat(project.getTestSuiteAt(0).getTestCaseCount(), is(1));
         WsdlTestStep singleTestStep = project.getTestSuiteAt(0).getTestCaseAt(0).getTestStepAt(0);
@@ -40,11 +40,11 @@ public abstract class RecipeParserTestBase {
         return (T) singleTestStep;
     }
 
-    protected static class ResourceReplacement {
+    static class ResourceReplacement {
         final String token;
         final String resourceToInsert;
 
-        public ResourceReplacement(String token, String resourceToInsert) throws URISyntaxException, MalformedURLException {
+        ResourceReplacement(String token, String resourceToInsert) throws URISyntaxException, MalformedURLException {
             this.token = token;
             this.resourceToInsert = RecipeParserTestBase.class.getResource(resourceToInsert).toURI().toURL().toString();
         }

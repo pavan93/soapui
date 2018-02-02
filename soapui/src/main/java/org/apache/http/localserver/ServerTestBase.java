@@ -41,10 +41,6 @@
 
 package org.apache.http.localserver;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-
 import org.apache.http.HttpHost;
 import org.apache.http.HttpVersion;
 import org.apache.http.conn.scheme.PlainSocketFactory;
@@ -55,12 +51,12 @@ import org.apache.http.impl.DefaultHttpClientConnection;
 import org.apache.http.params.HttpParams;
 import org.apache.http.params.HttpProtocolParams;
 import org.apache.http.params.SyncBasicHttpParams;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.BasicHttpProcessor;
-import org.apache.http.protocol.HttpRequestExecutor;
-import org.apache.http.protocol.RequestConnControl;
-import org.apache.http.protocol.RequestContent;
+import org.apache.http.protocol.*;
 import org.junit.Before;
+
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 /**
  * Base class for tests using {@link LocalTestServer LocalTestServer}. Note that
@@ -70,32 +66,32 @@ import org.junit.Before;
  * that require the server and others that don't, split them in two different
  * classes.
  */
-public abstract class ServerTestBase extends BasicServerTestBase {
+abstract class ServerTestBase extends BasicServerTestBase {
 
     /**
      * The available schemes.
      */
-    protected SchemeRegistry supportedSchemes;
+    private SchemeRegistry supportedSchemes;
 
     /**
      * The default parameters for the client side.
      */
-    protected HttpParams defaultParams;
+    private HttpParams defaultParams;
 
     /**
      * The HTTP processor for the client side.
      */
-    protected BasicHttpProcessor httpProcessor;
+    private BasicHttpProcessor httpProcessor;
 
     /**
      * The default context for the client side.
      */
-    protected BasicHttpContext httpContext;
+    private BasicHttpContext httpContext;
 
     /**
      * The request executor for the client side.
      */
-    protected HttpRequestExecutor httpExecutor;
+    private HttpRequestExecutor httpExecutor;
 
     /**
      * Prepares the local server for testing. Derived classes that override this
@@ -175,7 +171,7 @@ public abstract class ServerTestBase extends BasicServerTestBase {
      * @return a new connection opened to the target
      * @throws Exception in case of a problem
      */
-    protected DefaultHttpClientConnection connectTo(HttpHost target, HttpParams params) throws Exception {
+    private DefaultHttpClientConnection connectTo(HttpHost target, HttpParams params) throws Exception {
 
         Scheme schm = supportedSchemes.get(target.getSchemeName());
         int port = schm.resolvePort(target.getPort());

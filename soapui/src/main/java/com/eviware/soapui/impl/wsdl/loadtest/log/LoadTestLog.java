@@ -21,13 +21,8 @@ import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
 import com.eviware.soapui.model.testsuite.TestStep;
 
-import javax.swing.AbstractListModel;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Queue;
+import javax.swing.*;
+import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -149,7 +144,7 @@ public class LoadTestLog extends AbstractListModel implements Runnable {
         }
     }
 
-    public void clearEntries(TestStep testStep) {
+    private void clearEntries(TestStep testStep) {
         int sz = entries.size();
 
         String testStepName = testStep.getName();

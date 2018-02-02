@@ -35,9 +35,9 @@ import java.io.File;
 
 public class SwitchWorkspaceAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "SwitchWorkspaceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(SwitchWorkspaceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(SwitchWorkspaceAction.class);
 
-    public SwitchWorkspaceAction() {
+    private SwitchWorkspaceAction() {
         super(messages.get("SwitchWorkspaceAction.Title"), messages.get("SwitchWorkspaceAction.Description"));
     }
 

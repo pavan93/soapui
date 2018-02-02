@@ -25,7 +25,7 @@ import javax.annotation.Nullable;
 /**
  * Guava function that expands properties in a string, using a ModelItem as context.
  */
-public class PropertyExpansionFunction implements Function<String, String> {
+class PropertyExpansionFunction implements Function<String, String> {
 
     private ModelItem contextModelItem;
 

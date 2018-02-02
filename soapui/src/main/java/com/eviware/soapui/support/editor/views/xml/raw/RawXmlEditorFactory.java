@@ -81,7 +81,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class HttpRequestRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final AbstractHttpRequest<?> request;
 
-        public HttpRequestRawXmlEditor(AbstractHttpRequest<?> request, XmlEditor<XmlDocument> editor) {
+        HttpRequestRawXmlEditor(AbstractHttpRequest<?> request, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last submitted request");
             this.request = request;
 
@@ -122,7 +122,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class HttpResponseRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final AbstractHttpRequest<?> request;
 
-        public HttpResponseRawXmlEditor(AbstractHttpRequest<?> request, XmlEditor<XmlDocument> editor) {
+        HttpResponseRawXmlEditor(AbstractHttpRequest<?> request, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last received response");
             this.request = request;
 
@@ -163,7 +163,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class WsdlMockRequestRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final WsdlMockResponse request;
 
-        public WsdlMockRequestRawXmlEditor(WsdlMockResponse response, XmlEditor<XmlDocument> editor) {
+        WsdlMockRequestRawXmlEditor(WsdlMockResponse response, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last received mock request");
             this.request = response;
 
@@ -197,7 +197,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class WsdlMockResponseRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final WsdlMockResponse request;
 
-        public WsdlMockResponseRawXmlEditor(WsdlMockResponse response, XmlEditor<XmlDocument> editor) {
+        WsdlMockResponseRawXmlEditor(WsdlMockResponse response, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last returned Mock Response");
             this.request = response;
 
@@ -258,7 +258,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class WsdlMessageExchangeResponseRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final MessageExchangeModelItem response;
 
-        public WsdlMessageExchangeResponseRawXmlEditor(MessageExchangeModelItem response, XmlEditor<XmlDocument> editor) {
+        WsdlMessageExchangeResponseRawXmlEditor(MessageExchangeModelItem response, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The raw response data");
             this.response = response;
         }
@@ -274,7 +274,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class WsdlMessageExchangeRequestRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final MessageExchangeModelItem request;
 
-        public WsdlMessageExchangeRequestRawXmlEditor(MessageExchangeModelItem request, XmlEditor<XmlDocument> editor) {
+        WsdlMessageExchangeRequestRawXmlEditor(MessageExchangeModelItem request, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The raw request data");
             this.request = request;
         }
@@ -290,7 +290,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class AmfResponseRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final AMFRequest request;
 
-        public AmfResponseRawXmlEditor(AMFRequestTestStep requestTestStep, XmlEditor<XmlDocument> editor) {
+        AmfResponseRawXmlEditor(AMFRequestTestStep requestTestStep, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last received response");
             this.request = requestTestStep.getAMFRequest();
 
@@ -328,7 +328,7 @@ public class RawXmlEditorFactory implements ResponseEditorViewFactory, RequestEd
     private static class AmfRequestRawXmlEditor extends RawXmlEditor<XmlDocument> {
         private final AMFRequest request;
 
-        public AmfRequestRawXmlEditor(AMFRequestTestStep requestTestStep, XmlEditor<XmlDocument> editor) {
+        AmfRequestRawXmlEditor(AMFRequestTestStep requestTestStep, XmlEditor<XmlDocument> editor) {
             super("Raw", editor, "The actual content of the last request");
             this.request = requestTestStep.getAMFRequest();
 

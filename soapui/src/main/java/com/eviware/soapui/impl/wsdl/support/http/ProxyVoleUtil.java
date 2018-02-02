@@ -22,7 +22,7 @@ import com.btr.proxy.util.PlatformUtil;
 /**
  * @author Joel
  */
-public class ProxyVoleUtil {
+class ProxyVoleUtil {
     public ProxySearch createAutoProxySearch() {
         ProxySearch proxySearch = new ProxySearch();
         proxySearch.addStrategy(ProxySearch.Strategy.JAVA);

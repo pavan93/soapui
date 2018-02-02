@@ -28,7 +28,7 @@ import java.util.HashMap;
 import static org.junit.Assert.assertTrue;
 
 public class ROPCInputParamsTest {
-    OAuthClientRequest clientRequest;
+    private OAuthClientRequest clientRequest;
     private OAuth2TokenExtractor oAuth2TokenExtractor;
     private OAuth2Parameters parameters;
 

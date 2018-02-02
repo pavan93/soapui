@@ -76,7 +76,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
         }
     }
 
-    public InvalidSecurityScanConfig getInvalidTypeConfig() {
+    private InvalidSecurityScanConfig getInvalidTypeConfig() {
         if (invalidTypeConfig == null || getConfig().getConfig() == null
                 || !(getConfig().getConfig() instanceof InvalidSecurityScanConfig)) {
             initInvalidTypesConfig();
@@ -339,7 +339,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
 
         private HashMap<Integer, String> typeMap = new HashMap<Integer, String>();
 
-        public InvalidTypesForSOAP() {
+        InvalidTypesForSOAP() {
             generateInvalidTypes();
         }
 
@@ -403,7 +403,7 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
 
         }
 
-        public HashMap<Integer, String> getDefaultTypeMap() {
+        HashMap<Integer, String> getDefaultTypeMap() {
             return typeMap;
         }
 
@@ -438,13 +438,13 @@ public class InvalidTypesSecurityScan extends AbstractSecurityScanWithProperties
             setJlabel(text);
         }
 
-        public void setJlabel(String text) {
+        void setJlabel(String text) {
             text = text.replace("[", "");
             text = text.replace("]", "");
             jlabel.setText(text);
         }
 
-        public JLabel getJLabel() {
+        JLabel getJLabel() {
             return jlabel;
         }
 

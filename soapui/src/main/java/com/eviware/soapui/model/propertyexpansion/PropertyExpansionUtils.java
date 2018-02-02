@@ -35,11 +35,7 @@ import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.model.mock.MockService;
 import com.eviware.soapui.model.project.Project;
 import com.eviware.soapui.model.support.SettingsTestPropertyHolder;
-import com.eviware.soapui.model.testsuite.RenameableTestProperty;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestProperty;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.settings.GlobalPropertySettings;
 import com.eviware.soapui.support.StringUtils;
@@ -48,13 +44,7 @@ import com.eviware.soapui.support.types.StringToObjectMap;
 import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class PropertyExpansionUtils {
     public final static Logger log = Logger.getLogger(PropertyExpansionUtils.class);
@@ -318,8 +308,8 @@ public class PropertyExpansionUtils {
         return result;
     }
 
-    public static MutablePropertyExpansionImpl createMutablePropertyExpansion(String pe, ModelItem modelItem,
-                                                                              Object target, String propertyName) {
+    private static MutablePropertyExpansionImpl createMutablePropertyExpansion(String pe, ModelItem modelItem,
+                                                                               Object target, String propertyName) {
         WsdlTestStep testStep = null;
         WsdlTestCase testCase = null;
         WsdlTestSuite testSuite = null;

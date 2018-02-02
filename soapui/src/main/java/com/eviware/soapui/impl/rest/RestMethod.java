@@ -37,12 +37,7 @@ import com.eviware.soapui.ui.desktop.AbstractSoapUIDesktop;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class RestMethod extends AbstractWsdlModelItem<RestMethodConfig> implements MutableTestPropertyHolder,
         PropertyChangeListener {
@@ -235,7 +230,7 @@ public class RestMethod extends AbstractWsdlModelItem<RestMethodConfig> implemen
         return result.toArray(new RestRepresentation[result.size()]);
     }
 
-    public String[] getResponseMediaTypes() {
+    private String[] getResponseMediaTypes() {
         StringList result = new StringList();
 
         for (RestRepresentation representation : getRepresentations(Type.RESPONSE, null)) {

@@ -38,17 +38,17 @@ public class XmlObjectTreeModel implements TreeTableModel {
     private XmlCursor cursor;
     private Map<XmlObject, XmlTreeNode> treeNodeMap = new HashMap<XmlObject, XmlTreeNode>();
 
-    public final static Class<?> hierarchicalColumnClass = TreeTableModel.class;
+    private final static Class<?> hierarchicalColumnClass = TreeTableModel.class;
     private SchemaTypeSystem typeSystem;
     private RootXmlTreeNode root;
     @SuppressWarnings("unused")
     private final static Logger log = Logger.getLogger(XmlObjectTreeModel.class);
 
-    public XmlObjectTreeModel(XmlObject xmlObject) {
+    private XmlObjectTreeModel(XmlObject xmlObject) {
         this(XmlBeans.getBuiltinTypeSystem(), xmlObject);
     }
 
-    public XmlObjectTreeModel() {
+    private XmlObjectTreeModel() {
         this(XmlObject.Factory.newInstance());
     }
 
@@ -62,7 +62,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
         init();
     }
 
-    public XmlObjectTreeModel(SchemaTypeSystem typeSystem) {
+    private XmlObjectTreeModel(SchemaTypeSystem typeSystem) {
         this(typeSystem, XmlObject.Factory.newInstance());
     }
 
@@ -105,7 +105,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
         fireTreeStructureChanged(xmlTreeNode);
     }
 
-    protected void fireTreeStructureChanged(XmlTreeNode rootNode) {
+    private void fireTreeStructureChanged(XmlTreeNode rootNode) {
         for (TreeModelListener listener : listeners) {
             listener.treeStructureChanged(new XmlTreeTableModelEvent(this, rootNode.getTreePath(), -1));
         }
@@ -138,7 +138,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
         }
     }
 
-    protected void fireTreeNodeChanged(XmlTreeNode treeNode, int column) {
+    private void fireTreeNodeChanged(XmlTreeNode treeNode, int column) {
         for (TreeModelListener listener : listeners) {
             listener.treeNodesChanged(new XmlTreeTableModelEvent(this, treeNode.getTreePath(), column));
         }
@@ -217,15 +217,15 @@ public class XmlObjectTreeModel implements TreeTableModel {
     }
 
     private abstract class AbstractXmlTreeNode implements XmlTreeNode {
-        protected Node node;
-        protected TreeBookmark bm;
+        Node node;
+        TreeBookmark bm;
         private final XmlTreeNode parent;
         private XmlLineNumber lineNumber;
-        protected SchemaType schemaType;
-        protected String documentation;
+        SchemaType schemaType;
+        String documentation;
 
         @SuppressWarnings("unchecked")
-        protected AbstractXmlTreeNode(XmlCursor cursor, XmlTreeNode parent) {
+        AbstractXmlTreeNode(XmlCursor cursor, XmlTreeNode parent) {
             this.parent = parent;
 
             if (cursor != null) {
@@ -247,7 +247,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
             }
         }
 
-        protected SchemaType findSchemaType() {
+        SchemaType findSchemaType() {
             if (cursor == null) {
                 return null;
             }
@@ -377,7 +377,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
             return parent;
         }
 
-        protected void positionCursor(XmlCursor cursor) {
+        void positionCursor(XmlCursor cursor) {
             cursor.toBookmark(bm);
         }
 
@@ -496,7 +496,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
     public class RootXmlTreeNode extends AbstractXmlTreeNode {
         private ElementXmlTreeNode rootNode;
 
-        protected RootXmlTreeNode(XmlCursor cursor) {
+        RootXmlTreeNode(XmlCursor cursor) {
             super(cursor, null);
 
             if (cursor != null) {
@@ -523,7 +523,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
         private TextXmlTreeNode textTreeNode;
         private int attrCount;
 
-        protected ElementXmlTreeNode(XmlCursor cursor, XmlTreeNode parent) {
+        ElementXmlTreeNode(XmlCursor cursor, XmlTreeNode parent) {
             super(cursor, parent);
 
             TokenType token = cursor.toNextToken();
@@ -624,7 +624,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
     public class AttributeXmlTreeNode extends AbstractXmlTreeNode {
         private boolean checkedType;
 
-        protected AttributeXmlTreeNode(XmlCursor cursor, ElementXmlTreeNode parent) {
+        AttributeXmlTreeNode(XmlCursor cursor, ElementXmlTreeNode parent) {
             super(cursor, parent);
         }
 
@@ -680,7 +680,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
     }
 
     public class TextXmlTreeNode extends AbstractXmlTreeNode {
-        protected TextXmlTreeNode(XmlCursor cursor, ElementXmlTreeNode parent) {
+        TextXmlTreeNode(XmlCursor cursor, ElementXmlTreeNode parent) {
             super(cursor, parent);
         }
 
@@ -734,7 +734,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
         return treeNode;
     }
 
-    public class XmlTreeTableModelEvent extends TreeModelEvent {
+    class XmlTreeTableModelEvent extends TreeModelEvent {
         private final int column;
 
         public XmlTreeTableModelEvent(Object source, Object[] path, int[] childIndices, Object[] children, int column) {
@@ -752,7 +752,7 @@ public class XmlObjectTreeModel implements TreeTableModel {
             this.column = column;
         }
 
-        public XmlTreeTableModelEvent(Object source, TreePath path, int column) {
+        XmlTreeTableModelEvent(Object source, TreePath path, int column) {
             super(source, path);
             this.column = column;
         }

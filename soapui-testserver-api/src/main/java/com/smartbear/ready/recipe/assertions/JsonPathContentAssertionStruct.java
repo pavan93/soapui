@@ -11,11 +11,11 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures a JsonPath Contains assertion in JSON format.
  */
 @ApiModel(value = "JsonPathContentAssertion", description = "JsonPath content assertion definition")
-public class JsonPathContentAssertionStruct extends AssertionStruct<JsonPathContentAssertion> {
+class JsonPathContentAssertionStruct extends AssertionStruct<JsonPathContentAssertion> {
 
-    public final String jsonPath;
-    public final String expectedContent;
-    public final boolean allowWildcards;
+    private final String jsonPath;
+    private final String expectedContent;
+    private final boolean allowWildcards;
 
     @JsonCreator
     public JsonPathContentAssertionStruct(@JsonProperty("name") String name, @JsonProperty("jsonPath") String jsonPath, @JsonProperty("expectedContent") String expectedContent, @JsonProperty("allowWildcards") boolean allowWildcards) {

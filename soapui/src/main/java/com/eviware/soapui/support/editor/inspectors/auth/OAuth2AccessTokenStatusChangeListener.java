@@ -20,7 +20,7 @@ import com.eviware.soapui.impl.rest.OAuth2Profile;
 
 import javax.annotation.Nonnull;
 
-public interface OAuth2AccessTokenStatusChangeListener {
+interface OAuth2AccessTokenStatusChangeListener {
     /**
      * @param status The new Access Token status
      */

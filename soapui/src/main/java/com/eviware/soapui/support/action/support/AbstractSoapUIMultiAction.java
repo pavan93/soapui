@@ -45,7 +45,7 @@ public abstract class AbstractSoapUIMultiAction<T extends ModelItem> implements 
         id = getClass().getSimpleName();
     }
 
-    public AbstractSoapUIMultiAction(String id, String name, String description) {
+    protected AbstractSoapUIMultiAction(String id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

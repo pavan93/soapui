@@ -46,7 +46,7 @@ public class CachedWsdlLoader extends WsdlLoader {
     private final DefinitionCacheConfig config;
     private String rootInConfig = "";
 
-    public CachedWsdlLoader(DefinitionCacheConfig config) {
+    private CachedWsdlLoader(DefinitionCacheConfig config) {
         super(config.getRootPart());
         this.config = config;
     }
@@ -97,7 +97,7 @@ public class CachedWsdlLoader extends WsdlLoader {
         return null;
     }
 
-    public static XmlObject getPartContent(DefinitionCacheConfig config, DefintionPartConfig part) throws XmlException {
+    private static XmlObject getPartContent(DefinitionCacheConfig config, DefintionPartConfig part) throws XmlException {
         if (config.getType() == DefinitionCacheTypeConfig.TEXT) {
             Node domNode = part.getContent().getDomNode();
             String nodeValue = XmlUtils.getNodeValue(domNode);

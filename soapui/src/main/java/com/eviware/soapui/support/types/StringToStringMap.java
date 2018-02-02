@@ -91,7 +91,7 @@ public class StringToStringMap extends HashMap<String, String> {
         return new StringToStringMap();
     }
 
-    public static StringToStringMap fromXml(StringToStringMapConfig nsMapping) {
+    private static StringToStringMap fromXml(StringToStringMapConfig nsMapping) {
         StringToStringMap result = new StringToStringMap();
         for (StringToStringMapConfig.Entry entry : nsMapping.getEntryList()) {
             result.put(entry.getKey(), entry.getValue());

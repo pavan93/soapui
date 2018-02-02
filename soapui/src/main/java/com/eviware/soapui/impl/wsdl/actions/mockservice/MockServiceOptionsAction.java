@@ -74,21 +74,21 @@ public class MockServiceOptionsAction extends AbstractSoapUIAction<WsdlMockServi
     @AForm(name = "SOAP MockService Options", description = "Set options for this SOAP mock service", helpUrl = HelpUrls.MOCKSERVICEOPTIONS_HELP_URL, icon = UISupport.OPTIONS_ICON_PATH)
     private class OptionsForm {
         @AField(name = "Path", description = "The path this MockService will mount on")
-        public final static String PATH = "Path";
+        final static String PATH = "Path";
 
         @AField(name = "Port", description = "The port this MockService will mount on", type = AFieldType.INT)
-        public final static String PORT = "Port";
+        final static String PORT = "Port";
 
         @AField(name = "Host", description = "The local host to bind to and use in Port endpoints")
-        public final static String HOST = "Host";
+        final static String HOST = "Host";
 
         @AField(name = "Host Only", description = "Only binds to specified host", type = AFieldType.BOOLEAN)
-        public final static String HOSTONLY = "Host Only";
+        final static String HOSTONLY = "Host Only";
 
         @AField(name = "Docroot", description = "The document root to serve (empty = none)", type = AFieldType.FOLDER)
-        public final static String DOCROOT = "Docroot";
+        final static String DOCROOT = "Docroot";
 
         @AField(name = "Fault Operation", description = "The MockOperation that should handle incoming SOAP Faults", type = AFieldType.ENUMERATION)
-        public final static String FAULT_OPERATION = "Fault Operation";
+        final static String FAULT_OPERATION = "Fault Operation";
     }
 }

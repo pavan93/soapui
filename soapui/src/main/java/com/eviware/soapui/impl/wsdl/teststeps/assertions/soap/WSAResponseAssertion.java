@@ -29,11 +29,8 @@ import com.eviware.soapui.impl.wsdl.teststeps.assertions.AbstractTestAssertionFa
 import com.eviware.soapui.model.TestPropertyHolder;
 import com.eviware.soapui.model.iface.MessageExchange;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.xml.XmlObjectConfigurationBuilder;
@@ -52,8 +49,8 @@ import org.apache.xmlbeans.XmlObject;
  */
 
 public class WSAResponseAssertion extends WsdlMessageAssertion implements RequestAssertion, ResponseAssertion {
-    public static final String ID = "WS-A Response Assertion";
-    public static final String LABEL = "WS-Addressing Response";
+    private static final String ID = "WS-A Response Assertion";
+    private static final String LABEL = "WS-Addressing Response";
     private WsaAssertionConfiguration wsaAssertionConfiguration;
     private boolean assertWsaAction;
     private boolean assertWsaTo;
@@ -70,7 +67,7 @@ public class WSAResponseAssertion extends WsdlMessageAssertion implements Reques
     private static final String ASSERT_RELATES_TO = "wsa:RelatesTo";
     private static final String ASSERT_REPLY_TO_REF_PARAMS = "wsa:ReplyTo ReferenceParameters";
     private static final String ASSERT_FAULT_TO_REF_PARAMS = "wsa:FaultTo ReferenceParameters";
-    public static final String DESCRIPTION = "Validates that the last received response contains valid WS-Addressing Headers. Applicable to SOAP TestRequest Steps only.";
+    private static final String DESCRIPTION = "Validates that the last received response contains valid WS-Addressing Headers. Applicable to SOAP TestRequest Steps only.";
 
     /**
      * Constructor for our assertion.
@@ -78,7 +75,7 @@ public class WSAResponseAssertion extends WsdlMessageAssertion implements Reques
      * @param assertionConfig
      * @param modelItem
      */
-    public WSAResponseAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
+    private WSAResponseAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
         super(assertionConfig, modelItem, false, true, false, true);
 
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
@@ -209,7 +206,7 @@ public class WSAResponseAssertion extends WsdlMessageAssertion implements Reques
                 "Specify options", UISupport.OPTIONS_ICON);
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add("asertWsaAction", assertWsaAction);
         builder.add("asertWsaTo", assertWsaTo);

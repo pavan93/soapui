@@ -19,7 +19,7 @@ package com.eviware.soapui.security.log;
 import com.eviware.soapui.model.testsuite.TestStepResult;
 import org.apache.commons.collections.list.TreeList;
 
-import javax.swing.AbstractListModel;
+import javax.swing.*;
 import java.lang.ref.SoftReference;
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +30,7 @@ import java.util.List;
  * @author SoapUI team
  */
 @SuppressWarnings("serial")
-public class FunctionalTestLogModel extends AbstractListModel {
+class FunctionalTestLogModel extends AbstractListModel {
     private List<Object> items = Collections.synchronizedList(new TreeList());
     private List<SoftReference<TestStepResult>> results = Collections.synchronizedList(new TreeList());
     private int maxSize = 100;

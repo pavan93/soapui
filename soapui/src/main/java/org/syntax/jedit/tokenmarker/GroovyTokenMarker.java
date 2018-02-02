@@ -18,12 +18,12 @@ package org.syntax.jedit.tokenmarker;
 
 import org.syntax.jedit.KeywordMap;
 
-public class GroovyTokenMarker extends CTokenMarker {
+class GroovyTokenMarker extends CTokenMarker {
     public GroovyTokenMarker() {
         super(false, getKeywords());
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         KeywordMap groovyKeywords = new KeywordMap(false);
         groovyKeywords.add("as", Token.KEYWORD1);
         groovyKeywords.add("assert", Token.KEYWORD1);

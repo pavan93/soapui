@@ -28,14 +28,8 @@ import com.eviware.soapui.support.editor.inspectors.attachments.ContentTypeHandl
 import com.eviware.soapui.support.editor.views.AbstractXmlEditorView;
 import com.eviware.soapui.support.editor.xml.XmlEditor;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
@@ -121,7 +115,7 @@ public class HttpHtmlMessageExchangeResponseView extends AbstractXmlEditorView<H
         return deactivated;
     }
 
-    protected void setEditorContent(JProxyServletWsdlMonitorMessageExchange jproxyServletWsdlMonitorMessageExchange) {
+    private void setEditorContent(JProxyServletWsdlMonitorMessageExchange jproxyServletWsdlMonitorMessageExchange) {
         if (browser == null) {
             return;
         }
@@ -158,7 +152,7 @@ public class HttpHtmlMessageExchangeResponseView extends AbstractXmlEditorView<H
         return contentType.toLowerCase().contains("image");
     }
 
-    protected void setEditorContent(MessageExchangeModelItem messageExchangeModelItem2) {
+    private void setEditorContent(MessageExchangeModelItem messageExchangeModelItem2) {
         if (browser == null) {
             return;
         }

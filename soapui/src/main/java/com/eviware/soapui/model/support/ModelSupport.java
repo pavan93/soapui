@@ -184,7 +184,7 @@ public class ModelSupport {
         }
     }
 
-    public interface ModelItemFilter<T extends ModelItem> {
+    interface ModelItemFilter<T extends ModelItem> {
         boolean accept(T modelItem);
     }
 

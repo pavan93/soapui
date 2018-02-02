@@ -32,7 +32,7 @@ import java.util.List;
 
 public abstract class AbstractWsdlMessageExchange<T extends ModelItem> extends AbstractMessageExchange<T> implements
         WsdlMessageExchange {
-    public AbstractWsdlMessageExchange(T modelItem) {
+    protected AbstractWsdlMessageExchange(T modelItem) {
         super(modelItem);
     }
 

@@ -61,25 +61,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements ResponseAssertion {
-    public static final String ID = "CrosSiteScript";
+    private static final String ID = "CrosSiteScript";
     public static final String LABEL = "Cross Site Scripting Detection";
-    public static final String DESCRIPTION = "Cross Site Scripting....assertion for...";
-    public static final String GROOVY_SCRIPT = "groovyScript";
-    public static final String CHECK_RESPONSE = "checkResponse";
-    public static final String CHECK_SEPARATE_HTML = "checkSeparateHTML";
+    private static final String DESCRIPTION = "Cross Site Scripting....assertion for...";
+    private static final String GROOVY_SCRIPT = "groovyScript";
+    private static final String CHECK_RESPONSE = "checkResponse";
+    private static final String CHECK_SEPARATE_HTML = "checkSeparateHTML";
 
     private XFormDialog dialog;
     private String script;
     private GroovyEditorModel groovyEditorModel;
     private SoapUIScriptEngine scriptEngine;
 
-    MessageExchange messageExchange;
-    SubmitContext context;
+    private MessageExchange messageExchange;
+    private SubmitContext context;
 
     private boolean checkResponse;
     private boolean checkSeparateHTML;
 
-    public CrossSiteScriptAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private CrossSiteScriptAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, true, false, true);
         groovyEditorModel = new GroovyEditorModel(this);
         init();
@@ -248,7 +248,7 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
         return null;
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add(GROOVY_SCRIPT, script);
         builder.add(CHECK_RESPONSE, checkResponse);
@@ -270,6 +270,57 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
             setConfiguration(createConfiguration());
         }
         return true;
+    }
+
+    private GroovyEditorComponent buildGroovyPanel() {
+        return new GroovyEditorComponent(groovyEditorModel, null);
+    }
+
+    private void buildDialog() {
+        dialog = ADialogBuilder.buildDialog(CrossSiteScripSeparateHTMLConfigDialog.class);
+        dialog.setSize(600, 600);
+        dialog.setBooleanValue(CrossSiteScripSeparateHTMLConfigDialog.CHECK_RESPONSE, checkResponse);
+        dialog.setBooleanValue(CrossSiteScripSeparateHTMLConfigDialog.CHECK_SEPARATE_HTML, checkSeparateHTML);
+        final GroovyEditorComponent groovyEditorComponent = buildGroovyPanel();
+        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.GROOVY).setProperty("component",
+                new JScrollPane(groovyEditorComponent));
+        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.GROOVY).setProperty("dimension",
+                new Dimension(450, 400));
+        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.CHECK_SEPARATE_HTML).addFormFieldListener(
+                new XFormFieldListener() {
+
+                    @Override
+                    public void valueChanged(XFormField sourceField, String newValue, String oldValue) {
+                        groovyEditorComponent.setEnabled(new Boolean(newValue));
+                    }
+
+                });
+
+        groovyEditorComponent.setEnabled(checkSeparateHTML);
+    }
+
+    @Override
+    public void release() {
+        if (dialog != null) {
+            dialog.release();
+        }
+
+        super.release();
+    }
+
+    @AForm(description = "", name = "Cross Site Scripting on Separate HTML", helpUrl = HelpUrls.SECURITY_XSS_ASSERTION_HELP)
+    interface CrossSiteScripSeparateHTMLConfigDialog {
+        @AField(description = "Check Imediate Response", name = "###Check Response", type = AFieldType.BOOLEAN)
+        String CHECK_RESPONSE = "###Check Response";
+
+        @AField(description = "Check Response from URLs specified in Custom Script", name = "###Check Separate HTML", type = AFieldType.BOOLEAN)
+        String CHECK_SEPARATE_HTML = "###Check Separate HTML";
+
+        @AField(description = "", name = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ", type = AFieldType.LABEL)
+        String LABEL = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ";
+
+        @AField(description = "Groovy script", name = "###Groovy url list", type = AFieldType.COMPONENT)
+        String GROOVY = "###Groovy url list";
     }
 
     private class GroovyEditorModel extends AbstractGroovyEditorModel {
@@ -305,7 +356,7 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
             };
         }
 
-        public GroovyEditorModel(ModelItem modelItem) {
+        GroovyEditorModel(ModelItem modelItem) {
             super(new String[]{"urls", "log", "context", "messageExchange"}, modelItem, "");
         }
 
@@ -316,56 +367,5 @@ public class CrossSiteScriptAssertion extends WsdlMessageAssertion implements Re
         public void setScript(String text) {
             script = text;
         }
-    }
-
-    protected GroovyEditorComponent buildGroovyPanel() {
-        return new GroovyEditorComponent(groovyEditorModel, null);
-    }
-
-    protected void buildDialog() {
-        dialog = ADialogBuilder.buildDialog(CrossSiteScripSeparateHTMLConfigDialog.class);
-        dialog.setSize(600, 600);
-        dialog.setBooleanValue(CrossSiteScripSeparateHTMLConfigDialog.CHECK_RESPONSE, checkResponse);
-        dialog.setBooleanValue(CrossSiteScripSeparateHTMLConfigDialog.CHECK_SEPARATE_HTML, checkSeparateHTML);
-        final GroovyEditorComponent groovyEditorComponent = buildGroovyPanel();
-        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.GROOVY).setProperty("component",
-                new JScrollPane(groovyEditorComponent));
-        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.GROOVY).setProperty("dimension",
-                new Dimension(450, 400));
-        dialog.getFormField(CrossSiteScripSeparateHTMLConfigDialog.CHECK_SEPARATE_HTML).addFormFieldListener(
-                new XFormFieldListener() {
-
-                    @Override
-                    public void valueChanged(XFormField sourceField, String newValue, String oldValue) {
-                        groovyEditorComponent.setEnabled(new Boolean(newValue));
-                    }
-
-                });
-
-        groovyEditorComponent.setEnabled(checkSeparateHTML);
-    }
-
-    @Override
-    public void release() {
-        if (dialog != null) {
-            dialog.release();
-        }
-
-        super.release();
-    }
-
-    @AForm(description = "", name = "Cross Site Scripting on Separate HTML", helpUrl = HelpUrls.SECURITY_XSS_ASSERTION_HELP)
-    protected interface CrossSiteScripSeparateHTMLConfigDialog {
-        @AField(description = "Check Imediate Response", name = "###Check Response", type = AFieldType.BOOLEAN)
-        String CHECK_RESPONSE = "###Check Response";
-
-        @AField(description = "Check Response from URLs specified in Custom Script", name = "###Check Separate HTML", type = AFieldType.BOOLEAN)
-        String CHECK_SEPARATE_HTML = "###Check Separate HTML";
-
-        @AField(description = "", name = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ", type = AFieldType.LABEL)
-        String LABEL = "Enter Custom Script that returns a list of URLs to check for Cross Site Scripts ";
-
-        @AField(description = "Groovy script", name = "###Groovy url list", type = AFieldType.COMPONENT)
-        String GROOVY = "###Groovy url list";
     }
 }

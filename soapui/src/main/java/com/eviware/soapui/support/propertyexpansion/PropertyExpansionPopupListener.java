@@ -45,20 +45,11 @@ import com.eviware.soapui.support.propertyexpansion.scrollmenu.ScrollableMenu;
 import com.eviware.soapui.support.xml.XmlUtils;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JButton;
-import javax.swing.JMenu;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.text.JTextComponent;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Container;
+import java.awt.*;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.event.ActionEvent;
@@ -70,12 +61,7 @@ public class PropertyExpansionPopupListener implements PopupMenuListener {
     private final ModelItem modelItem;
     private final PropertyExpansionTarget target;
 
-    public PropertyExpansionPopupListener(Container transferMenu, ModelItem modelItem, PropertyExpansionTarget target) {
-        this.modelItem = modelItem;
-        this.target = target;
-
-        this.targetMenu = transferMenu;
-    }
+    private static final Pattern pattern = Pattern.compile("^\\$\\{(.*)\\}$");
 
     @Override
     public void popupMenuCanceled(PopupMenuEvent arg0) {
@@ -192,17 +178,105 @@ public class PropertyExpansionPopupListener implements PopupMenuListener {
         return menu;
     }
 
+    private PropertyExpansionPopupListener(Container transferMenu, ModelItem modelItem, PropertyExpansionTarget target) {
+        this.modelItem = modelItem;
+        this.target = target;
+
+        this.targetMenu = transferMenu;
+    }
+
+    private static void addMenu(JPopupMenu popup, String menuName, ModelItem item, PropertyExpansionTarget component) {
+        ScrollableMenu menu = new ScrollableMenu(menuName);
+        menu.setName(menuName);
+        boolean contains = false;
+        for (int i = 0; i < popup.getComponentCount(); i++) {
+            if (menu.getName() != null && menu.getName().equals(popup.getComponent(i).getName())) {
+                contains = true;
+                break;
+            }
+        }
+        if (!contains) {
+            popup.add(menu);
+            popup.addPopupMenuListener(new PropertyExpansionPopupListener(menu, item, component));
+        }
+    }
+
+    private static boolean userInputIsPropertyExpansion(String userSelectedValue) {
+        if (userSelectedValue == null) {
+            return false;
+        }
+        Matcher matcher = pattern.matcher(userSelectedValue);
+        return matcher.matches();
+    }
+
+    private static void enable(GroovyEditor groovyEditor, ModelItem modelItem) {
+        GroovyEditorPropertyExpansionTarget target = new GroovyEditorPropertyExpansionTarget(groovyEditor, modelItem);
+        DropTarget dropTarget = new DropTarget(groovyEditor.getEditArea(), new PropertyExpansionDropTarget(target));
+        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
+
+        JPopupMenu popup = groovyEditor.getEditArea().getComponentPopupMenu();
+
+        if (popup != null) {
+            ScrollableMenu menu = new ScrollableMenu("Get Data...");
+            popup.insert(menu, 0);
+            popup.addPopupMenuListener(new PropertyExpansionPopupListener(menu, target.getContextModelItem(), target));
+            popup.insert(new JSeparator(), 1);
+        }
+    }
+
+    public static void enable(JTextComponent textField, ModelItem modelItem, JPopupMenu popup) {
+        JTextComponentPropertyExpansionTarget target = new JTextComponentPropertyExpansionTarget(textField, modelItem);
+        DropTarget dropTarget = new DropTarget(textField, new PropertyExpansionDropTarget(target));
+        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
+
+        textField.setComponentPopupMenu(popup);
+
+        if (popup != null) {
+            PropertyExpansionPopupListener.addMenu(popup, "Get Data...", target.getContextModelItem(), target);
+        }
+    }
+
+    public static JPanel addPropertyExpansionPopup(JTextField textField, JPopupMenu popup, ModelItem modelItem) {
+        PropertyExpansionPopupListener.enable(textField, modelItem, popup);
+
+        JButton popupButton = new JButton();
+        popupButton.setAction(new ShowPopupAction(textField, popupButton));
+        popupButton.setBackground(Color.WHITE);
+        popupButton.setForeground(Color.WHITE);
+        popupButton.setBorder(null);
+        popupButton.setOpaque(true);
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.add(textField, BorderLayout.CENTER);
+        panel.add(popupButton, BorderLayout.EAST);
+        panel.setBorder(textField.getBorder());
+        textField.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+        return panel;
+    }
+
+    public static void enable(RSyntaxTextArea textField, ModelItem modelItem) {
+        RSyntaxTextAreaPropertyExpansionTarget target = new RSyntaxTextAreaPropertyExpansionTarget(textField, modelItem);
+        DropTarget dropTarget = new DropTarget(textField, new PropertyExpansionDropTarget(target));
+        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
+
+        JPopupMenu popup = textField.getPopupMenu();
+
+        if (popup != null) {
+            PropertyExpansionPopupListener.addMenu(popup, "Get Data...", target.getContextModelItem(), target);
+        }
+    }
+
     private class TransferFromPropertyActionInvoker extends AbstractAction {
         private final TestPropertyHolder sourceStep;
         private String sourceProperty;
 
-        public TransferFromPropertyActionInvoker(TestPropertyHolder sourceStep, String sourceProperty) {
+        TransferFromPropertyActionInvoker(TestPropertyHolder sourceStep, String sourceProperty) {
             super("Property [" + sourceProperty + "]");
             this.sourceStep = sourceStep;
             this.sourceProperty = sourceProperty;
         }
 
-        public TransferFromPropertyActionInvoker(MutableTestPropertyHolder testStep) {
+        TransferFromPropertyActionInvoker(MutableTestPropertyHolder testStep) {
             super("Create new...");
             this.sourceStep = testStep;
         }
@@ -280,89 +354,6 @@ public class PropertyExpansionPopupListener implements PopupMenuListener {
                     }
                 }
             }
-        }
-    }
-
-    private static final Pattern pattern = Pattern.compile("^\\$\\{(.*)\\}$");
-
-    private static boolean userInputIsPropertyExpansion(String userSelectedValue) {
-        if (userSelectedValue == null) {
-            return false;
-        }
-        Matcher matcher = pattern.matcher(userSelectedValue);
-        return matcher.matches();
-    }
-
-    public static void addMenu(JPopupMenu popup, String menuName, ModelItem item, PropertyExpansionTarget component) {
-        ScrollableMenu menu = new ScrollableMenu(menuName);
-        menu.setName(menuName);
-        boolean contains = false;
-        for (int i = 0; i < popup.getComponentCount(); i++) {
-            if (menu.getName() != null && menu.getName().equals(popup.getComponent(i).getName())) {
-                contains = true;
-                break;
-            }
-        }
-        if (!contains) {
-            popup.add(menu);
-            popup.addPopupMenuListener(new PropertyExpansionPopupListener(menu, item, component));
-        }
-    }
-
-    public static void enable(JTextComponent textField, ModelItem modelItem, JPopupMenu popup) {
-        JTextComponentPropertyExpansionTarget target = new JTextComponentPropertyExpansionTarget(textField, modelItem);
-        DropTarget dropTarget = new DropTarget(textField, new PropertyExpansionDropTarget(target));
-        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
-
-        textField.setComponentPopupMenu(popup);
-
-        if (popup != null) {
-            PropertyExpansionPopupListener.addMenu(popup, "Get Data...", target.getContextModelItem(), target);
-        }
-    }
-
-    public static JPanel addPropertyExpansionPopup(JTextField textField, JPopupMenu popup, ModelItem modelItem) {
-        PropertyExpansionPopupListener.enable(textField, modelItem, popup);
-
-        JButton popupButton = new JButton();
-        popupButton.setAction(new ShowPopupAction(textField, popupButton));
-        popupButton.setBackground(Color.WHITE);
-        popupButton.setForeground(Color.WHITE);
-        popupButton.setBorder(null);
-        popupButton.setOpaque(true);
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.add(textField, BorderLayout.CENTER);
-        panel.add(popupButton, BorderLayout.EAST);
-        panel.setBorder(textField.getBorder());
-        textField.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-
-        return panel;
-    }
-
-    public static void enable(RSyntaxTextArea textField, ModelItem modelItem) {
-        RSyntaxTextAreaPropertyExpansionTarget target = new RSyntaxTextAreaPropertyExpansionTarget(textField, modelItem);
-        DropTarget dropTarget = new DropTarget(textField, new PropertyExpansionDropTarget(target));
-        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
-
-        JPopupMenu popup = textField.getPopupMenu();
-
-        if (popup != null) {
-            PropertyExpansionPopupListener.addMenu(popup, "Get Data...", target.getContextModelItem(), target);
-        }
-    }
-
-    public static void enable(GroovyEditor groovyEditor, ModelItem modelItem) {
-        GroovyEditorPropertyExpansionTarget target = new GroovyEditorPropertyExpansionTarget(groovyEditor, modelItem);
-        DropTarget dropTarget = new DropTarget(groovyEditor.getEditArea(), new PropertyExpansionDropTarget(target));
-        dropTarget.setDefaultActions(DnDConstants.ACTION_COPY_OR_MOVE);
-
-        JPopupMenu popup = groovyEditor.getEditArea().getComponentPopupMenu();
-
-        if (popup != null) {
-            ScrollableMenu menu = new ScrollableMenu("Get Data...");
-            popup.insert(menu, 0);
-            popup.addPopupMenuListener(new PropertyExpansionPopupListener(menu, target.getContextModelItem(), target));
-            popup.insert(new JSeparator(), 1);
         }
     }
 

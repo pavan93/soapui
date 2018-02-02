@@ -91,7 +91,7 @@ public class TestOnDemandCaller {
 
     private static final String SERVER_IP_ADDRESSES_DELIMETER = ",";
 
-    protected static final String COULD_NOT_SAVE_TEMPORARY_PROJECT_MESSAGE = "Could not save temporary project file before sending TestCase";
+    private static final String COULD_NOT_SAVE_TEMPORARY_PROJECT_MESSAGE = "Could not save temporary project file before sending TestCase";
 
     private final XPath xpath = XPathFactory.newInstance().newXPath();
 
@@ -167,7 +167,7 @@ public class TestOnDemandCaller {
     }
 
     // FIXME Add to utility class and make DependencyValidator.saveProject() use this
-    protected File saveTemporaryProject(WsdlProject project) {
+    private File saveTemporaryProject(WsdlProject project) {
         File tempFile = null;
         try {
             tempFile = File.createTempFile("project-temp-", ".xml", null);

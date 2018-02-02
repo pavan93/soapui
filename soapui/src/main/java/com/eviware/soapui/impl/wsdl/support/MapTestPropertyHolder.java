@@ -31,20 +31,13 @@ import javax.xml.namespace.QName;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
+import java.util.*;
 
 public class MapTestPropertyHolder implements MutableTestPropertyHolder {
     private Map<String, TestProperty> propertyMap = new HashMap<String, TestProperty>();
     private Set<TestPropertyListener> listeners = new HashSet<TestPropertyListener>();
     private List<TestProperty> properties = new ArrayList<TestProperty>();
-    public ModelItem modelItem;
+    private ModelItem modelItem;
     private String propertiesLabel = "Test Properties";
 
     public MapTestPropertyHolder(ModelItem modelItem) {
@@ -166,7 +159,7 @@ public class MapTestPropertyHolder implements MutableTestPropertyHolder {
         private String name;
         private String value;
 
-        public InternalTestProperty(String name, String value) {
+        InternalTestProperty(String name, String value) {
             this.name = name;
             this.value = value;
         }
@@ -175,7 +168,7 @@ public class MapTestPropertyHolder implements MutableTestPropertyHolder {
             return name;
         }
 
-        public void setName(String name) {
+        void setName(String name) {
             String oldName = getName();
 
             propertyMap.remove(oldName.toUpperCase());

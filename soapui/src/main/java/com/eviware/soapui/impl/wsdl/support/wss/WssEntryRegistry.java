@@ -16,18 +16,13 @@
 
 package com.eviware.soapui.impl.wsdl.support.wss;
 
-import com.eviware.soapui.impl.wsdl.support.wss.entries.AutomaticSAMLEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.entries.EncryptionEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.entries.ManualSAMLEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.entries.SignatureEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.entries.TimestampEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.entries.UsernameEntry;
+import com.eviware.soapui.impl.wsdl.support.wss.entries.*;
 import com.eviware.soapui.support.registry.AbstractRegistry;
 
 public class WssEntryRegistry extends AbstractRegistry<WssEntry, WSSEntryConfig, OutgoingWss> {
     private static WssEntryRegistry instance;
 
-    public WssEntryRegistry() {
+    private WssEntryRegistry() {
         mapType(UsernameEntry.TYPE, UsernameEntry.class);
         mapType(TimestampEntry.TYPE, TimestampEntry.class);
         mapType(ManualSAMLEntry.TYPE, ManualSAMLEntry.class);

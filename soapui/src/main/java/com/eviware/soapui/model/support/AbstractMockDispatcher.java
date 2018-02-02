@@ -35,32 +35,32 @@ public abstract class AbstractMockDispatcher implements MockDispatcher {
     private boolean logEnabled = true;
 
 
-    public MockResult dispatchGetRequest(HttpServletRequest request, HttpServletResponse response)
+    protected MockResult dispatchGetRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: GET");
     }
 
-    public MockResult dispatchPostRequest(HttpServletRequest request, HttpServletResponse response)
+    private MockResult dispatchPostRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: POST");
     }
 
-    public MockResult dispatchHeadRequest(HttpServletRequest request, HttpServletResponse response)
+    protected MockResult dispatchHeadRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: HEAD");
     }
 
-    public MockResult dispatchPutRequest(HttpServletRequest request, HttpServletResponse response)
+    private MockResult dispatchPutRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: PUT");
     }
 
-    public MockResult dispatchDeleteRequest(HttpServletRequest request, HttpServletResponse response)
+    private MockResult dispatchDeleteRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: DELETE");
     }
 
-    public MockResult dispatchPatchRequest(HttpServletRequest request, HttpServletResponse response)
+    private MockResult dispatchPatchRequest(HttpServletRequest request, HttpServletResponse response)
             throws DispatchException {
         throw new DispatchException("Unsupported HTTP Method: PATCH");
     }
@@ -86,7 +86,7 @@ public abstract class AbstractMockDispatcher implements MockDispatcher {
         throw new DispatchException("Unsupported HTTP Method: " + method);
     }
 
-    public synchronized void addMockResult(WsdlMockResult mockResult) {
+    protected synchronized void addMockResult(WsdlMockResult mockResult) {
         if (maxResults > 0 && logEnabled) {
             mockResults.add(mockResult);
         }

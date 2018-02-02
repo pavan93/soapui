@@ -308,7 +308,7 @@ public class ScrollableMenu extends JMenu implements ScrollableMenuContainer {
     /**
      * Hides the scrollButtons.
      */
-    public void hideButtons() {
+    private void hideButtons() {
         upButton.setVisible(false);
         downButton.setVisible(false);
     }

@@ -20,8 +20,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 
-import javax.swing.JPopupMenu;
-import javax.swing.JTable;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -32,17 +31,17 @@ import java.awt.event.MouseEvent;
  * @author ole.matzura
  */
 
-public abstract class AbstractTableMouseListener extends MouseAdapter {
+abstract class AbstractTableMouseListener extends MouseAdapter {
     private boolean enablePopup;
     private JPopupMenu menu;
 
     protected abstract ActionList getActionsForRow(JTable table, int row);
 
-    public AbstractTableMouseListener() {
+    AbstractTableMouseListener() {
         this(true);
     }
 
-    public AbstractTableMouseListener(boolean enablePopup) {
+    AbstractTableMouseListener(boolean enablePopup) {
         this.enablePopup = enablePopup;
     }
 
@@ -77,7 +76,7 @@ public abstract class AbstractTableMouseListener extends MouseAdapter {
         }
     }
 
-    public void showPopup(MouseEvent e) {
+    private void showPopup(MouseEvent e) {
         if (!enablePopup) {
             return;
         }

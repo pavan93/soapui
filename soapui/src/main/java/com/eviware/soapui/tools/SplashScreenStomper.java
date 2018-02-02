@@ -17,15 +17,12 @@
 package com.eviware.soapui.tools;
 
 import javax.imageio.ImageIO;
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SplashScreenStomper {
+class SplashScreenStomper {
     public static void main(String arg[]) throws IOException {
         String version = arg[0];
         String inputFilePath = arg[1];

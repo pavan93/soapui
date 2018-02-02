@@ -44,7 +44,7 @@ public class HermesUtils {
     private static Map<String, Context> contextMap = new HashMap<String, Context>();
     public static String HERMES_CONFIG_XML = "hermes-config.xml";
 
-    public static Context hermesContext(WsdlProject project) throws NamingException,
+    private static Context hermesContext(WsdlProject project) throws NamingException,
             IOException {
         String expandedHermesConfigPath = PropertyExpander.expandProperties(project, project.getHermesConfig());
         String key = project.getName() + expandedHermesConfigPath;
@@ -156,7 +156,7 @@ public class HermesUtils {
 
     }
 
-    public static void setHermesJMSPath(String path) {
+    private static void setHermesJMSPath(String path) {
         if (path != null) {
             SoapUI.getSettings().setString(ToolsSettings.HERMES_JMS, path);
         }

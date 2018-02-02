@@ -82,18 +82,18 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
 
     public final static String MOCKRESULT_PROPERTY = WsdlMockResponse.class.getName() + "@mockresult";
     public final static String HEADERS_PROPERTY = WsdlMockResponse.class.getName() + "@headers";
-    public final static String DISABLE_MULTIPART_ATTACHMENTS = WsdlMockResponse.class.getName()
+    private final static String DISABLE_MULTIPART_ATTACHMENTS = WsdlMockResponse.class.getName()
             + "@disable-multipart-attachments";
-    public static final String FORCE_MTOM = WsdlMockResponse.class.getName() + "@force_mtom";
-    public static final String ENABLE_INLINE_FILES = WsdlMockResponse.class.getName() + "@enable_inline_files";
-    public final static String RESPONSE_DELAY_PROPERTY = WsdlMockResponse.class.getName() + "@response-delay";
-    public static final String STRIP_WHITESPACES = WsdlMockResponse.class.getName() + "@strip-whitespaces";
-    public static final String REMOVE_EMPTY_CONTENT = WsdlMockResponse.class.getName() + "@remove_empty_content";
-    public static final String ENCODE_ATTACHMENTS = WsdlMockResponse.class.getName() + "@encode_attachments";
-    public static final String OUGOING_WSS = WsdlMockResponse.class.getName() + "@outgoing-wss";
+    private static final String FORCE_MTOM = WsdlMockResponse.class.getName() + "@force_mtom";
+    private static final String ENABLE_INLINE_FILES = WsdlMockResponse.class.getName() + "@enable_inline_files";
+    private final static String RESPONSE_DELAY_PROPERTY = WsdlMockResponse.class.getName() + "@response-delay";
+    private static final String STRIP_WHITESPACES = WsdlMockResponse.class.getName() + "@strip-whitespaces";
+    private static final String REMOVE_EMPTY_CONTENT = WsdlMockResponse.class.getName() + "@remove_empty_content";
+    private static final String ENCODE_ATTACHMENTS = WsdlMockResponse.class.getName() + "@encode_attachments";
+    private static final String OUGOING_WSS = WsdlMockResponse.class.getName() + "@outgoing-wss";
     public static final String ICON_NAME = "/mockResponse.gif";
 
-    protected List<FileAttachment<WsdlMockResponse>> attachments = new ArrayList<FileAttachment<WsdlMockResponse>>();
+    private List<FileAttachment<WsdlMockResponse>> attachments = new ArrayList<FileAttachment<WsdlMockResponse>>();
     private List<HttpAttachmentPart> definedAttachmentParts;
     private IconAnimator<WsdlMockResponse> iconAnimator;
     private WsaConfig wsaConfig;
@@ -129,7 +129,7 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
         return attachments.toArray(new Attachment[attachments.size()]);
     }
 
-    protected String getContentType(Operation operation, String encoding) {
+    private String getContentType(Operation operation, String encoding) {
         SoapVersion soapVersion = ((WsdlOperation) operation).getInterface().getSoapVersion();
         return soapVersion.getContentTypeHttpHeader(encoding, null);
     }
@@ -592,11 +592,11 @@ public class WsdlMockResponse extends AbstractMockResponse<MockResponseConfig> i
         return wsaConfig;
     }
 
-    public boolean isWsAddressing() {
+    private boolean isWsAddressing() {
         return getConfig().getUseWsAddressing();
     }
 
-    public void setWsAddressing(boolean wsAddressing) {
+    private void setWsAddressing(boolean wsAddressing) {
         boolean old = getConfig().getUseWsAddressing();
         getConfig().setUseWsAddressing(wsAddressing);
         notifyPropertyChanged("wsAddressing", old, wsAddressing);

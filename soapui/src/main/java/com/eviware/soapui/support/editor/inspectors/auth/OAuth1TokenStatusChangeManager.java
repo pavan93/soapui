@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 
 public class OAuth1TokenStatusChangeManager implements PropertyChangeListener {
     private static final MessageSupport messages = MessageSupport.getMessages(com.eviware.soapui.support.editor.inspectors.auth.OAuth1TokenStatusChangeManager.class);
-    OAuth1TokenStatusChangeListener listener = null;
+    private OAuth1TokenStatusChangeListener listener = null;
 
     public OAuth1TokenStatusChangeManager(OAuth1TokenStatusChangeListener listener) {
         this.listener = listener;

@@ -30,7 +30,7 @@ import java.util.regex.Matcher;
 
 public class JdbcUtils {
 
-    public static final String PASS_TEMPLATE = "PASS_VALUE";
+    private static final String PASS_TEMPLATE = "PASS_VALUE";
 
     public static Connection initConnection(PropertyExpansionContext context, String driver, String connectionString,
                                             String password) throws SQLException, SoapUIException {
@@ -67,7 +67,7 @@ public class JdbcUtils {
         return !StringUtils.isNullOrEmpty(connStr) && connStr.contains(PASS_TEMPLATE);
     }
 
-    public static boolean missingConnSettings(String driver, String connectionString) {
+    private static boolean missingConnSettings(String driver, String connectionString) {
         return StringUtils.isNullOrEmpty(driver) || StringUtils.isNullOrEmpty(connectionString);
     }
 

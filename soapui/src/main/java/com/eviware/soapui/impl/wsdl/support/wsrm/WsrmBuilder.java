@@ -19,7 +19,7 @@ package com.eviware.soapui.impl.wsdl.support.wsrm;
 import org.apache.xmlbeans.XmlCursor;
 import org.apache.xmlbeans.XmlObject;
 
-public class WsrmBuilder {
+class WsrmBuilder {
     private static final String WSRM_CREATE_SEQUENCE = "CreateSequence";
     private static final String WSRM_EXPIRES = "Expires";
     private static final String WSRM_ACKNOWLEDGMENTS_TO = "AcksTo";

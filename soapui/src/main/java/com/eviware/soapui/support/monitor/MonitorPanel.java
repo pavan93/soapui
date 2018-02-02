@@ -16,16 +16,8 @@
 
 package com.eviware.soapui.support.monitor;
 
-import javax.swing.AbstractAction;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -35,7 +27,7 @@ import java.awt.image.BufferedImage;
  * @author Angelo De Caro
  */
 public class MonitorPanel extends JPanel {
-    public Surface surf;
+    private Surface surf;
 
     public MonitorPanel(MonitorSource monitorSource) {
         setLayout(new BorderLayout());
@@ -60,11 +52,11 @@ public class MonitorPanel extends JPanel {
         return surf.getMonitorSource();
     }
 
-    public void setMonitorSource(MonitorSource monitorSource) {
+    private void setMonitorSource(MonitorSource monitorSource) {
         surf.setMonitorSource(monitorSource);
     }
 
-    protected Surface createSurface() {
+    private Surface createSurface() {
         return new Surface(null);
     }
 
@@ -92,7 +84,7 @@ public class MonitorPanel extends JPanel {
         private Color graphColor = new Color(46, 139, 87);
         private Color mfColor = new Color(0, 100, 0);
 
-        public Surface(MonitorSource monitorSource) {
+        Surface(MonitorSource monitorSource) {
             this.monitorSource = monitorSource;
             setBackground(Color.black);
         }
@@ -258,7 +250,7 @@ public class MonitorPanel extends JPanel {
             }
         }
 
-        public void start() {
+        void start() {
             if (monitorSource == null) {
                 throw new IllegalStateException("Monitor Source cannot be null.");
             }
@@ -270,16 +262,16 @@ public class MonitorPanel extends JPanel {
             thread.start();
         }
 
-        public synchronized void stop() {
+        synchronized void stop() {
             thread = null;
             notify();
         }
 
-        public MonitorSource getMonitorSource() {
+        MonitorSource getMonitorSource() {
             return monitorSource;
         }
 
-        public void setMonitorSource(MonitorSource monitorSource) {
+        void setMonitorSource(MonitorSource monitorSource) {
             this.monitorSource = monitorSource;
         }
 

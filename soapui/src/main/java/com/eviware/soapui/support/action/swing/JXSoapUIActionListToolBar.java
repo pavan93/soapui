@@ -23,17 +23,15 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.jgoodies.looks.HeaderStyle;
 import com.jgoodies.looks.Options;
 
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
-public class JXSoapUIActionListToolBar extends JXToolBar {
+class JXSoapUIActionListToolBar extends JXToolBar {
     private Map<String, Action> actionMap = new HashMap<String, Action>();
 
     @SuppressWarnings("unchecked")
-    public JXSoapUIActionListToolBar(ActionList actions, ModelItem modelItem) {
+    private JXSoapUIActionListToolBar(ActionList actions, ModelItem modelItem) {
         addSpace(1);
         setRollover(true);
         putClientProperty(Options.HEADER_STYLE_KEY, HeaderStyle.SINGLE);

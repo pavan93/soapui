@@ -24,7 +24,7 @@ import java.net.URL;
 import java.util.Map;
 
 public abstract class WsdlMonitorMessageExchange extends AbstractWsdlMessageExchange<Operation> {
-    public WsdlMonitorMessageExchange(Operation modelItem) {
+    WsdlMonitorMessageExchange(Operation modelItem) {
         super(modelItem);
     }
 

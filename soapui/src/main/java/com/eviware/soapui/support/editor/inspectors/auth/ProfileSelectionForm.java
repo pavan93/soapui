@@ -18,13 +18,7 @@ package com.eviware.soapui.support.editor.inspectors.auth;
 
 import com.eviware.soapui.analytics.Analytics;
 import com.eviware.soapui.analytics.SoapUIActions;
-import com.eviware.soapui.impl.rest.OAuth1Profile;
-import com.eviware.soapui.impl.rest.OAuth1ProfileContainer;
-import com.eviware.soapui.impl.rest.OAuth1ProfileListener;
-import com.eviware.soapui.impl.rest.OAuth2Profile;
-import com.eviware.soapui.impl.rest.OAuth2ProfileContainer;
-import com.eviware.soapui.impl.rest.OAuth2ProfileListener;
-import com.eviware.soapui.impl.rest.RestRequest;
+import com.eviware.soapui.impl.rest.*;
 import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
@@ -39,19 +33,8 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.SwingConstants;
-import javax.swing.SwingUtilities;
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -59,25 +42,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_BASIC_AUTH;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_BASIC_AUTH_FOR_TEST_REQUEST;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_NTLM_AUTH;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_NTLM_AUTH_FOR_TEST_REQUEST;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_O_AUTH10;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_O_AUTH10_FOR_TEST_REQUEST;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_SPNEGO_KERBEROS_AUTH;
-import static com.eviware.soapui.analytics.SoapUIActions.ASSIGN_SPNEGO_KERBEROS_AUTH_FOR_TEST_REQUEST;
+import static com.eviware.soapui.analytics.SoapUIActions.*;
 
 public class ProfileSelectionForm<T extends AbstractHttpRequest> extends AbstractXmlInspector {
 
     public static final String PROFILE_COMBO_BOX = "Authorization:";
 
-    public static final String BASIC_FORM_LABEL = "Legacy form";
-    public static final String WSS_FORM_LABEL = "WSS form";
+    private static final String BASIC_FORM_LABEL = "Legacy form";
+    private static final String WSS_FORM_LABEL = "WSS form";
     public static final String OPTIONS_SEPARATOR = "------------------";
     public static final String DELETE_PROFILE_DIALOG_TITLE = "Delete Profile";
     public static final String RENAME_PROFILE_DIALOG_TITLE = "Rename Profile";
-    public static final String EMPTY_PANEL = "EmptyPanel";
+    private static final String EMPTY_PANEL = "EmptyPanel";
     static final ImageIcon AUTH_ENABLED_ICON = UISupport.createImageIcon("/lock.png");
     private static final String OAUTH_2_FORM_LABEL = "OAuth 2 form";
     private static final String OAUTH_1_FORM_LABEL = "OAuth 1 form";
@@ -96,7 +72,7 @@ public class ProfileSelectionForm<T extends AbstractHttpRequest> extends Abstrac
     private ProfileListener profileListener;
     private WSSAuthenticationForm wssAuthenticationForm;
 
-    protected ProfileSelectionForm(T request) {
+    ProfileSelectionForm(T request) {
         super(AuthInspectorFactory.INSPECTOR_ID, "Authentication and Security-related settings",
                 true, AuthInspectorFactory.INSPECTOR_ID);
         this.request = request;
@@ -107,11 +83,11 @@ public class ProfileSelectionForm<T extends AbstractHttpRequest> extends Abstrac
         getOAuth1ProfileContainer().addOAuth1ProfileListener(profileListener);
     }
 
-    protected static boolean isReservedProfileName(String newName) {
+    static boolean isReservedProfileName(String newName) {
         return getBasicAuthenticationTypes().contains(newName) || newName.equals(OPTIONS_SEPARATOR);
     }
 
-    protected static ArrayList<String> getBasicAuthenticationTypes() {
+    private static ArrayList<String> getBasicAuthenticationTypes() {
         ArrayList<String> options = new ArrayList<String>();
         options.add(AbstractHttpRequest.BASIC_AUTH_PROFILE);
         options.add(NTLM.toString());
@@ -143,7 +119,7 @@ public class ProfileSelectionForm<T extends AbstractHttpRequest> extends Abstrac
         getOAuth1ProfileContainer().removeOAuth1ProfileListener(profileListener);
     }
 
-    protected void buildUI() {
+    private void buildUI() {
         JPanel innerPanel = new JPanel(new BorderLayout());
         innerPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 

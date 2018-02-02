@@ -32,7 +32,7 @@ public abstract class AbstractPathPropertySupport {
     private final String propertyName;
     private final AbstractWsdlModelItem<?> modelItem;
 
-    public AbstractPathPropertySupport(AbstractWsdlModelItem<?> modelItem, String propertyName) {
+    AbstractPathPropertySupport(AbstractWsdlModelItem<?> modelItem, String propertyName) {
         this.modelItem = modelItem;
         this.propertyName = propertyName;
     }
@@ -61,15 +61,15 @@ public abstract class AbstractPathPropertySupport {
         }
     }
 
-    public String getPropertyName() {
+    String getPropertyName() {
         return propertyName;
     }
 
-    public AbstractWsdlModelItem<?> getModelItem() {
+    AbstractWsdlModelItem<?> getModelItem() {
         return modelItem;
     }
 
-    public abstract void setPropertyValue(String value) throws Exception;
+    protected abstract String getPropertyValue() throws Exception;
 
     protected void notifyUpdate(String value, String old) {
         modelItem.notifyPropertyChanged(modelItem.getClass().getName() + "@" + propertyName, old, value);
@@ -110,13 +110,13 @@ public abstract class AbstractPathPropertySupport {
         return result;
     }
 
-    public abstract String getPropertyValue() throws Exception;
+    protected abstract void setPropertyValue(String value) throws Exception;
 
     public void resolveFile(ResolveContext<?> context, String errorDescription) {
         resolveFile(context, errorDescription, null, null, true);
     }
 
-    public boolean containsPropertyExpansion() {
+    private boolean containsPropertyExpansion() {
         try {
             return PropertyExpansionUtils.containsPropertyExpansion(getPropertyValue());
         } catch (Exception e1) {

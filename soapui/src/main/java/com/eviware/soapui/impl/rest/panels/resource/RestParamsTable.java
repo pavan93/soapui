@@ -36,26 +36,13 @@ import com.jgoodies.binding.PresentationModel;
 import org.apache.xmlbeans.SchemaType;
 import org.apache.xmlbeans.XmlBeans;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import javax.xml.namespace.QName;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
@@ -67,15 +54,15 @@ import static com.eviware.soapui.impl.rest.actions.support.NewRestResourceAction
 public class RestParamsTable extends JPanel {
     public static final String REST_PARAMS_TABLE = "RestParamsTable";
     public static final String REVERT_PARAMETER_VALUES = "Revert Parameter Values";
-    protected RestParamsPropertyHolder params;
-    protected RestParamsTableModel paramsTableModel;
-    protected JTable paramsTable;
-    protected AddParamAction addParamAction = null;
-    protected RemovePropertyAction removeParamAction = null;
-    protected UseDefaultParamsAction defaultParamsAction = null;
-    protected MovePropertyDownAction movePropertyDownAction = null;
-    protected MovePropertyUpAction movePropertyUpAction = null;
-    protected UpdateParamsAction updateParamsAction = null;
+    JTable paramsTable;
+    private RestParamsPropertyHolder params;
+    private RestParamsTableModel paramsTableModel;
+    private AddParamAction addParamAction = null;
+    private RemovePropertyAction removeParamAction = null;
+    private UseDefaultParamsAction defaultParamsAction = null;
+    private MovePropertyDownAction movePropertyDownAction = null;
+    private MovePropertyUpAction movePropertyUpAction = null;
+    private UpdateParamsAction updateParamsAction = null;
     private PresentationModel<RestParamProperty> paramDetailsModel;
     private SimpleBindingForm detailsForm;
     private ParamLocation defaultParamLocation;
@@ -101,7 +88,7 @@ public class RestParamsTable extends JPanel {
         init(showInspector);
     }
 
-    protected void init(boolean showInspector) {
+    private void init(boolean showInspector) {
 
         paramsTable = new JTable(paramsTableModel) {
 
@@ -278,7 +265,7 @@ public class RestParamsTable extends JPanel {
         return new JScrollPane(detailsForm.getPanel());
     }
 
-    protected RestParamProperty getSelectedParameter() {
+    private RestParamProperty getSelectedParameter() {
         return paramsTable.getSelectedRow() == -1 ? null : paramsTableModel.getParameterAt(paramsTable.getSelectedRow());
     }
 
@@ -293,7 +280,7 @@ public class RestParamsTable extends JPanel {
         }
     }
 
-    protected Component buildToolbar() {
+    private Component buildToolbar() {
         JXToolBar toolbar = UISupport.createToolbar();
 
         //TODO: the action should be disabled by default if the corresponding component (button)
@@ -389,7 +376,7 @@ public class RestParamsTable extends JPanel {
     }
 
     private class UseDefaultParamsAction extends AbstractAction {
-        public UseDefaultParamsAction() {
+        UseDefaultParamsAction() {
             super(REVERT_PARAMETER_VALUES);
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/default_properties.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Reverts all current parameters to default values");

@@ -20,7 +20,7 @@ public class TestStepStruct {
     public int index;
     public String type;
     public String name;
-    public Map<String, Object> configuration;//Used only for Plugin provided test steps
+    private Map<String, Object> configuration;//Used only for Plugin provided test steps
 
     /**
      * Used by sub classes

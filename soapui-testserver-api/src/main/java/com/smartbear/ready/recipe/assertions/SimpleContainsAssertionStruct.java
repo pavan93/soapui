@@ -11,10 +11,10 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures the JSON configuration of Simple contains assertion.
  */
 @ApiModel(value = "SimpleContainsAssertion", description = "Simple contains assertion definition")
-public class SimpleContainsAssertionStruct extends AssertionStruct<SimpleContainsAssertion> {
-    public final String token;
-    public final boolean ignoreCase;
-    public final boolean useRegexp;
+class SimpleContainsAssertionStruct extends AssertionStruct<SimpleContainsAssertion> {
+    private final String token;
+    private final boolean ignoreCase;
+    private final boolean useRegexp;
 
     @JsonCreator
     public SimpleContainsAssertionStruct(@JsonProperty("name") String name, @JsonProperty("token") String token, @JsonProperty("ignoreCase") boolean ignoreCase, @JsonProperty("useRegexp") boolean useRegexp) {

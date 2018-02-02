@@ -38,7 +38,7 @@ public class EditorViewFactoryRegistry implements SoapUIFactoryRegistryListener 
     private static EditorViewFactoryRegistry instance;
     private List<EditorViewFactory> factories = new ArrayList<>();
 
-    public EditorViewFactoryRegistry() {
+    private EditorViewFactoryRegistry() {
         // this should obviously come from a configuration file..
         addFactory(new XmlSourceEditorViewFactory());
         // addFactory( new RestRequestParamsViewFactory() );
@@ -54,7 +54,7 @@ public class EditorViewFactoryRegistry implements SoapUIFactoryRegistryListener 
         SoapUI.getFactoryRegistry().addFactoryRegistryListener(this);
     }
 
-    public void addFactory(EditorViewFactory factory) {
+    private void addFactory(EditorViewFactory factory) {
         factories.add(factory);
     }
 
@@ -89,7 +89,7 @@ public class EditorViewFactoryRegistry implements SoapUIFactoryRegistryListener 
         return result.toArray(new EditorViewFactory[result.size()]);
     }
 
-    public void removeFactory(EditorViewFactory factory) {
+    private void removeFactory(EditorViewFactory factory) {
         factories.remove(factory);
     }
 

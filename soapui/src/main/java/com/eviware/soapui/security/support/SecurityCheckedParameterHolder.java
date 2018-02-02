@@ -21,12 +21,7 @@ import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.security.SecurityScanParameterHolderListener;
 import com.eviware.soapui.model.testsuite.TestPropertyListener;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Holder for SecurityScanPameters, which are request parameters on which
@@ -75,7 +70,7 @@ public class SecurityCheckedParameterHolder extends SecurityScanParameterListene
         }
     }
 
-    SecurityCheckedParameter addParameter(CheckedParameterConfig param) {
+    private SecurityCheckedParameter addParameter(CheckedParameterConfig param) {
         SecurityCheckedParameter result = new SecurityCheckedParameterImpl(param);
         params.add(result);
         paramsMap.put(result.getLabel().toUpperCase(), result);
@@ -104,7 +99,7 @@ public class SecurityCheckedParameterHolder extends SecurityScanParameterListene
         return true;
     }
 
-    public void removeParameter(SecurityCheckedParameter parameter) {
+    private void removeParameter(SecurityCheckedParameter parameter) {
 
         int index = params.indexOf(parameter);
         params.remove(parameter);
@@ -115,13 +110,13 @@ public class SecurityCheckedParameterHolder extends SecurityScanParameterListene
         fireParameterRemoved(parameter);
     }
 
-    public void fireParameterAdded(SecurityCheckedParameter parameter) {
+    private void fireParameterAdded(SecurityCheckedParameter parameter) {
         for (SecurityScanParameterHolderListener listener : listeners) {
             listener.parameterAdded(parameter);
         }
     }
 
-    public void fireParameterRemoved(SecurityCheckedParameter parameter) {
+    private void fireParameterRemoved(SecurityCheckedParameter parameter) {
         for (SecurityScanParameterHolderListener listener : listeners) {
             listener.parameterRemoved(parameter);
         }

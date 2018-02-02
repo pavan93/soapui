@@ -59,10 +59,10 @@ import java.awt.event.*;
  * @email santhosh@in.fiorano.com
  */
 
-public class TristateCheckBox extends JCheckBox {
+class TristateCheckBox extends JCheckBox {
     private final TristateDecorator model;
 
-    public TristateCheckBox(String text, Icon icon, Boolean initial) {
+    private TristateCheckBox(String text, Icon icon, Boolean initial) {
         super(text, icon);
         // Add a listener for when the mouse is pressed
         super.addMouseListener(new MouseAdapter() {
@@ -87,11 +87,11 @@ public class TristateCheckBox extends JCheckBox {
         setState(initial);
     }
 
-    public TristateCheckBox(String text, Boolean initial) {
+    private TristateCheckBox(String text, Boolean initial) {
         this(text, null, initial);
     }
 
-    public TristateCheckBox(String text) {
+    private TristateCheckBox(String text) {
         this(text, null);
     }
 

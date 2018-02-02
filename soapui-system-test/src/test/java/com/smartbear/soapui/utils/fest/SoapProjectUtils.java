@@ -23,7 +23,7 @@ import org.fest.swing.fixture.*;
  * Utility class used for generic operations on a SOAP project
  */
 public final class SoapProjectUtils {
-    public static final String ROOT_FOLDER = SoapProjectUtils.class.getResource("/").getPath();
+    private static final String ROOT_FOLDER = SoapProjectUtils.class.getResource("/").getPath();
 
     private static final String NEW_SOAP_PROJECT_MENU_ITEM_NAME = "New SOAP Project";
     private static final String NEW_SOAP_PROJECT_DIALOG_NAME = "New SOAP Project";

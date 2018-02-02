@@ -47,7 +47,7 @@ public interface AMFHeadersInspectorModel {
         private final T modelItem;
         private final String propertyName;
 
-        protected AbstractHeadersModel(boolean readOnly, T modelItem, String propertyName) {
+        AbstractHeadersModel(boolean readOnly, T modelItem, String propertyName) {
             this.readOnly = readOnly;
             this.modelItem = modelItem;
             this.propertyName = propertyName;
@@ -75,7 +75,7 @@ public interface AMFHeadersInspectorModel {
             modelItem.removePropertyChangeListener(propertyName, this);
         }
 
-        public T getModelItem() {
+        T getModelItem() {
             return modelItem;
         }
 

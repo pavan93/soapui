@@ -16,27 +16,17 @@
 
 package org.syntax.jedit;
 
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
-import java.awt.event.MouseEvent;
+import com.eviware.soapui.SoapUI;
+import org.syntax.jedit.tokenmarker.Token;
+import org.syntax.jedit.tokenmarker.TokenMarker;
 
-import javax.swing.JComponent;
-import javax.swing.ToolTipManager;
+import javax.swing.*;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.Segment;
 import javax.swing.text.TabExpander;
 import javax.swing.text.Utilities;
-
-import org.syntax.jedit.tokenmarker.Token;
-import org.syntax.jedit.tokenmarker.TokenMarker;
-
-import com.eviware.soapui.SoapUI;
+import java.awt.*;
+import java.awt.event.MouseEvent;
 
 /**
  * The text area repaint manager. It performs double buffering and paints lines
@@ -301,37 +291,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         highlights = highlight;
     }
 
-    /**
-     * Highlight interface.
-     */
-    public interface Highlight {
-        /**
-         * Called after the highlight painter has been added.
-         *
-         * @param textArea The text area
-         * @param next     The painter this one should delegate to
-         */
-        void init(JEditTextArea textArea, Highlight next);
-
-        /**
-         * This should paint the highlight and delgate to the next highlight
-         * painter.
-         *
-         * @param gfx  The graphics context
-         * @param line The line number
-         * @param y    The y co-ordinate of the line
-         */
-        void paintHighlight(Graphics gfx, int line, int y);
-
-        /**
-         * Returns the tool tip to display at the specified location. If this
-         * highlighter doesn't know what to display, it should delegate to the
-         * next highlight painter.
-         *
-         * @param evt The mouse event
-         */
-        String getToolTipText(MouseEvent evt);
-    }
+    private Segment currentLine;
 
     /**
      * Returns the tool tip to display at the specified location.
@@ -482,32 +442,26 @@ public class TextAreaPainter extends JComponent implements TabExpander {
     // package-private members
     int currentLineIndex;
     Token currentLineTokens;
-    Segment currentLine;
-
     // protected members
-    protected JEditTextArea textArea;
-
-    protected SyntaxStyle[] styles;
-    protected Color caretColor;
-    protected Color selectionColor;
-    protected Color lineHighlightColor;
-    protected Color bracketHighlightColor;
-    protected Color eolMarkerColor;
-
-    protected boolean blockCaret;
-    protected boolean lineHighlight;
-    protected boolean bracketHighlight;
-    protected boolean paintInvalid;
-    protected boolean eolMarkers;
+    private JEditTextArea textArea;
+    private SyntaxStyle[] styles;
+    private Color caretColor;
+    private Color selectionColor;
+    private Color lineHighlightColor;
+    private Color bracketHighlightColor;
+    private Color eolMarkerColor;
+    private boolean blockCaret;
+    private boolean lineHighlight;
+    private boolean bracketHighlight;
+    private boolean paintInvalid;
+    private boolean eolMarkers;
+    private int tabSize;
     // protected int cols;
     // protected int rows;
+    private FontMetrics fm;
+    private Highlight highlights;
 
-    protected int tabSize;
-    protected FontMetrics fm;
-
-    protected Highlight highlights;
-
-    protected void paintLine(Graphics gfx, TokenMarker tokenMarker, int line, int x) {
+    private void paintLine(Graphics gfx, TokenMarker tokenMarker, int line, int x) {
         Font defaultFont = getFont();
         Color defaultColor = getForeground();
 
@@ -533,7 +487,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         }
     }
 
-    protected int paintPlainLine(Graphics gfx, int line, Font defaultFont, Color defaultColor, int x, int y) {
+    private int paintPlainLine(Graphics gfx, int line, Font defaultFont, Color defaultColor, int x, int y) {
         paintHighlight(gfx, line, y);
         textArea.getLineText(line, currentLine);
 
@@ -551,8 +505,8 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         return x;
     }
 
-    protected int paintSyntaxLine(Graphics gfx, TokenMarker tokenMarker, int line, Font defaultFont,
-                                  Color defaultColor, int x, int y) {
+    private int paintSyntaxLine(Graphics gfx, TokenMarker tokenMarker, int line, Font defaultFont,
+                                Color defaultColor, int x, int y) {
         textArea.getLineText(currentLineIndex, currentLine);
         currentLineTokens = tokenMarker.markTokens(currentLine, currentLineIndex);
 
@@ -571,7 +525,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         return x;
     }
 
-    protected void paintHighlight(Graphics gfx, int line, int y) {
+    private void paintHighlight(Graphics gfx, int line, int y) {
         if (line >= textArea.getSelectionStartLine() && line <= textArea.getSelectionEndLine()) {
             paintLineHighlight(gfx, line, y);
         }
@@ -589,7 +543,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         }
     }
 
-    protected void paintLineHighlight(Graphics gfx, int line, int y) {
+    private void paintLineHighlight(Graphics gfx, int line, int y) {
         int height = fm.getHeight();
         y += fm.getLeading() + fm.getMaxDescent();
 
@@ -638,7 +592,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
 
     }
 
-    protected void paintBracketHighlight(Graphics gfx, int line, int y) {
+    private void paintBracketHighlight(Graphics gfx, int line, int y) {
         int position = textArea.getBracketPosition();
         if (position == -1) {
             return;
@@ -652,7 +606,7 @@ public class TextAreaPainter extends JComponent implements TabExpander {
         gfx.drawRect(x, y, fm.charWidth('(') - 1, fm.getHeight() - 1);
     }
 
-    protected void paintCaret(Graphics gfx, int line, int y) {
+    private void paintCaret(Graphics gfx, int line, int y) {
         if (textArea.isCaretVisible()) {
             int offset = textArea.getCaretPosition() - textArea.getLineStartOffset(line);
             int caretX = textArea._offsetToX(line, offset);
@@ -668,5 +622,37 @@ public class TextAreaPainter extends JComponent implements TabExpander {
                 gfx.drawRect(caretX, y, caretWidth, height - 1);
             }
         }
+    }
+
+    /**
+     * Highlight interface.
+     */
+    protected interface Highlight {
+        /**
+         * Called after the highlight painter has been added.
+         *
+         * @param textArea The text area
+         * @param next     The painter this one should delegate to
+         */
+        void init(JEditTextArea textArea, Highlight next);
+
+        /**
+         * This should paint the highlight and delgate to the next highlight
+         * painter.
+         *
+         * @param gfx  The graphics context
+         * @param line The line number
+         * @param y    The y co-ordinate of the line
+         */
+        void paintHighlight(Graphics gfx, int line, int y);
+
+        /**
+         * Returns the tool tip to display at the specified location. If this
+         * highlighter doesn't know what to display, it should delegate to the
+         * next highlight painter.
+         *
+         * @param evt The mouse event
+         */
+        String getToolTipText(MouseEvent evt);
     }
 }

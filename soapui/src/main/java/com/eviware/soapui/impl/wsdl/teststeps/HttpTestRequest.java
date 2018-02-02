@@ -65,7 +65,7 @@ public class HttpTestRequest extends HttpRequest implements HttpTestRequestInter
         }
     }
 
-    protected void initIcons() {
+    private void initIcons() {
         validRequestIcon = UISupport.createImageIcon("/valid_http_request_step.png");
         failedRequestIcon = UISupport.createImageIcon("/invalid_http_request_step.png");
         unknownRequestIcon = UISupport.createImageIcon("/http_request_step.png");
@@ -158,12 +158,12 @@ public class HttpTestRequest extends HttpRequest implements HttpTestRequestInter
         private AssertionStatus oldStatus;
         private ImageIcon oldIcon;
 
-        public PropertyChangeNotifier() {
+        PropertyChangeNotifier() {
             oldStatus = getAssertionStatus();
             oldIcon = getIcon();
         }
 
-        public void notifyChange() {
+        void notifyChange() {
             AssertionStatus newStatus = getAssertionStatus();
             ImageIcon newIcon = getIcon();
 

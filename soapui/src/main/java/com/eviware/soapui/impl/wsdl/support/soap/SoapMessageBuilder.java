@@ -57,7 +57,7 @@ public class SoapMessageBuilder implements MessageBuilder {
         this.wsdlContext = iface.getWsdlContext();
     }
 
-    public SoapMessageBuilder(WsdlContext wsdlContext) {
+    private SoapMessageBuilder(WsdlContext wsdlContext) {
         this.wsdlContext = wsdlContext;
     }
 
@@ -73,8 +73,12 @@ public class SoapMessageBuilder implements MessageBuilder {
         return buildFault(faultcode, faultstring, getSoapVersion());
     }
 
-    public SoapVersion getSoapVersion() {
-        return iface == null ? wsdlContext.getSoapVersion() : iface.getSoapVersion();
+    private static String buildEmptyFault(SoapVersion soapVersion) {
+        SampleXmlUtil generator = new SampleXmlUtil(false);
+
+        String emptyResponse = buildEmptyFault(generator, soapVersion);
+
+        return emptyResponse;
     }
 
     public static String buildFault(String faultcode, String faultstring, SoapVersion soapVersion) {
@@ -100,12 +104,8 @@ public class SoapMessageBuilder implements MessageBuilder {
         return buildEmptyFault(getSoapVersion());
     }
 
-    public static String buildEmptyFault(SoapVersion soapVersion) {
-        SampleXmlUtil generator = new SampleXmlUtil(false);
-
-        String emptyResponse = buildEmptyFault(generator, soapVersion);
-
-        return emptyResponse;
+    private SoapVersion getSoapVersion() {
+        return iface == null ? wsdlContext.getSoapVersion() : iface.getSoapVersion();
     }
 
     private static String buildEmptyFault(SampleXmlUtil generator, SoapVersion soapVersion) {
@@ -145,8 +145,8 @@ public class SoapMessageBuilder implements MessageBuilder {
         return buildSoapMessageFromInput(bindingOperation, buildOptional, true);
     }
 
-    public String buildSoapMessageFromInput(BindingOperation bindingOperation, boolean buildOptional,
-                                            boolean alwaysBuildHeaders) throws Exception {
+    private String buildSoapMessageFromInput(BindingOperation bindingOperation, boolean buildOptional,
+                                             boolean alwaysBuildHeaders) throws Exception {
         boolean inputSoapEncoded = WsdlUtils.isInputSoapEncoded(bindingOperation);
         SampleXmlUtil xmlGenerator = new SampleXmlUtil(inputSoapEncoded);
         xmlGenerator.setMultiValues(multiValues);
@@ -221,7 +221,7 @@ public class SoapMessageBuilder implements MessageBuilder {
         }
     }
 
-    public void createElementForPart(Part part, XmlCursor cursor, SampleXmlUtil xmlGenerator) throws Exception {
+    private void createElementForPart(Part part, XmlCursor cursor, SampleXmlUtil xmlGenerator) throws Exception {
         QName elementName = part.getElementName();
         QName typeName = part.getTypeName();
 
@@ -432,8 +432,8 @@ public class SoapMessageBuilder implements MessageBuilder {
         return buildSoapMessageFromOutput(bindingOperation, buildOptional, true);
     }
 
-    public String buildSoapMessageFromOutput(BindingOperation bindingOperation, boolean buildOptional,
-                                             boolean alwaysBuildHeaders) throws Exception {
+    private String buildSoapMessageFromOutput(BindingOperation bindingOperation, boolean buildOptional,
+                                              boolean alwaysBuildHeaders) throws Exception {
         boolean inputSoapEncoded = WsdlUtils.isInputSoapEncoded(bindingOperation);
         SampleXmlUtil xmlGenerator = new SampleXmlUtil(inputSoapEncoded);
         xmlGenerator.setIgnoreOptional(!buildOptional);

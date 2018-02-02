@@ -20,13 +20,13 @@ import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.security.SecurityTest;
 
-import javax.swing.JTree;
+import javax.swing.*;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreePath;
 
 @SuppressWarnings("serial")
-public class SecurityScanTree extends DefaultTreeModel {
+class SecurityScanTree extends DefaultTreeModel {
 
     private SecurityTest securityTest;
     private SecurityTreeRootNode treeNode;
@@ -54,7 +54,7 @@ public class SecurityScanTree extends DefaultTreeModel {
      * @param testStep
      * @return
      */
-    protected TestStepNode getTestStepNode(TestStep testStep) {
+    TestStepNode getTestStepNode(TestStep testStep) {
         for (int cnt = 0; cnt < root.getChildCount(); cnt++) {
             TestStepNode node = (TestStepNode) root.getChildAt(cnt);
             if (node.getTestStep().getId().equals(testStep.getId())) {
@@ -64,7 +64,7 @@ public class SecurityScanTree extends DefaultTreeModel {
         return null;
     }
 
-    protected SecurityScanNode getSecurityScanNode(SecurityScan securityCheck) {
+    SecurityScanNode getSecurityScanNode(SecurityScan securityCheck) {
         TestStepNode testStepNode = getTestStepNode(securityCheck.getTestStep());
         for (int cnt = 0; cnt < testStepNode.getChildCount(); cnt++) {
             SecurityScanNode node = (SecurityScanNode) testStepNode.getChildAt(cnt);

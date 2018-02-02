@@ -54,7 +54,7 @@ public class MessageExchangeResponseMessageEditor extends
         }
     }
 
-    public void updateXml() {
+    private void updateXml() {
         try {
             MessageExchange messageExchange = messageExchangeModelItem.getMessageExchange();
             DefaultXmlDocument defaultXmlDocument = getDocument();

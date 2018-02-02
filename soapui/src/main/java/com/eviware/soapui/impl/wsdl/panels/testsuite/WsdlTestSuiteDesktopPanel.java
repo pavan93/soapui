@@ -31,44 +31,20 @@ import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestSuiteRunner;
 import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.model.support.TestSuiteListenerAdapter;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestSuite.TestSuiteRunType;
-import com.eviware.soapui.model.testsuite.TestSuiteRunContext;
-import com.eviware.soapui.model.testsuite.TestSuiteRunListener;
-import com.eviware.soapui.model.testsuite.TestSuiteRunner;
 import com.eviware.soapui.settings.UISettings;
 import com.eviware.soapui.support.DocumentListenerAdapter;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.SwingActionDelegate;
-import com.eviware.soapui.support.components.GroovyEditorComponent;
-import com.eviware.soapui.support.components.GroovyEditorInspector;
-import com.eviware.soapui.support.components.JComponentInspector;
-import com.eviware.soapui.support.components.JFocusableComponentInspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.JUndoableTextArea;
-import com.eviware.soapui.support.components.JXToolBar;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.types.StringToObjectMap;
 import com.eviware.soapui.ui.support.KeySensitiveModelItemDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ButtonGroup;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JToggleButton;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -155,7 +131,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
         return panel;
     }
 
-    protected void addToolbarActions(JXToolBar toolbar) {
+    private void addToolbarActions(JXToolBar toolbar) {
         toolbar.add(UISupport.createToolbarButton(runAction));
         toolbar.add(UISupport.createToolbarButton(cancelAction));
 
@@ -203,7 +179,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
         return UISupport.createTabPanel(tabs, true);
     }
 
-    protected void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
+    private void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
         inspectorPanel.addInspector(new JFocusableComponentInspector<JPanel>(buildDescriptionPanel(), descriptionArea,
                 "Description", "Description for this TestSuite", true));
         inspectorPanel.addInspector(new JComponentInspector<JComponent>(buildPropertiesPanel(), "Properties",
@@ -214,12 +190,12 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
                 "Script to run after running the TestSuite"));
     }
 
-    protected GroovyEditorComponent buildTearDownScriptPanel() {
+    private GroovyEditorComponent buildTearDownScriptPanel() {
         tearDownGroovyEditor = new GroovyEditorComponent(new TearDownScriptGroovyEditorModel(), null);
         return tearDownGroovyEditor;
     }
 
-    protected GroovyEditorComponent buildSetupScriptPanel() {
+    private GroovyEditorComponent buildSetupScriptPanel() {
         setupGroovyEditor = new GroovyEditorComponent(new SetupScriptGroovyEditorModel(), null);
         return setupGroovyEditor;
     }
@@ -231,7 +207,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
         return panel;
     }
 
-    protected PropertyHolderTable createPropertyHolderTable() {
+    private PropertyHolderTable createPropertyHolderTable() {
         return new PropertyHolderTable(getModelItem());
     }
 
@@ -251,7 +227,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
         return panel;
     }
 
-    protected JComponent buildTestCaseList(WsdlTestSuite testSuite) {
+    private JComponent buildTestCaseList(WsdlTestSuite testSuite) {
         testCaseList = new JTestSuiteTestCaseList(testSuite);
 
         JPanel p = new JPanel(new BorderLayout());
@@ -297,18 +273,18 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
         return modelItem == getModelItem() || modelItem == getModelItem().getProject();
     }
 
-    protected void runTestSuite() {
+    private void runTestSuite() {
         testSuiteRunner = getModelItem().run(new StringToObjectMap(), true);
     }
 
-    protected void beforeRun() {
+    private void beforeRun() {
         runAction.setEnabled(false);
         cancelAction.setEnabled(testSuiteRunner != null);
         testCaseList.setEnabled(false);
         progressBar.setForeground(Color.GREEN.darker());
     }
 
-    protected void afterRun(WsdlTestSuiteRunner testSuiteRunner) {
+    private void afterRun(WsdlTestSuiteRunner testSuiteRunner) {
         runAction.setEnabled(true);
         cancelAction.setEnabled(false);
         testCaseList.setEnabled(true);
@@ -328,7 +304,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
     }
 
     private class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Runs the selected TestCases");
         }
@@ -340,7 +316,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
     }
 
     private class CancelAction extends AbstractAction {
-        public CancelAction() {
+        CancelAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/stop.png"));
             putValue(Action.SHORT_DESCRIPTION, "Cancels ongoing TestCase runs");
         }
@@ -351,7 +327,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
     }
 
     private class SetupScriptGroovyEditorModel extends AbstractGroovyEditorModel {
-        public SetupScriptGroovyEditorModel() {
+        SetupScriptGroovyEditorModel() {
             super(new String[]{"log", "runner", "context", "testSuite"},
                     WsdlTestSuiteDesktopPanel.this.getModelItem(), "Setup");
         }
@@ -383,7 +359,7 @@ public class WsdlTestSuiteDesktopPanel extends KeySensitiveModelItemDesktopPanel
     }
 
     private class TearDownScriptGroovyEditorModel extends AbstractGroovyEditorModel {
-        public TearDownScriptGroovyEditorModel() {
+        TearDownScriptGroovyEditorModel() {
             super(new String[]{"log", "runner", "context", "testSuite"},
                     WsdlTestSuiteDesktopPanel.this.getModelItem(), "TearDown");
         }

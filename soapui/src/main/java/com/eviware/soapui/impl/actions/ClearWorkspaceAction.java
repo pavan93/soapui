@@ -30,9 +30,9 @@ import com.eviware.soapui.support.action.support.AbstractSoapUIAction;
 
 public class ClearWorkspaceAction extends AbstractSoapUIAction<WorkspaceImpl> {
     public static final String SOAPUI_ACTION_ID = "ClearWorkspaceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(ClearWorkspaceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(ClearWorkspaceAction.class);
 
-    public ClearWorkspaceAction() {
+    private ClearWorkspaceAction() {
         super(messages.get("ClearWorkspaceAction.Title"), messages.get("ClearWorkspaceAction.Description"));
     }
 

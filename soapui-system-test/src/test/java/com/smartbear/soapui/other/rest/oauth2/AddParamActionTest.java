@@ -42,7 +42,7 @@ import static org.junit.Assert.assertThat;
  */
 @Category(IntegrationTest.class)
 public class AddParamActionTest {
-    public static final String PARAM = "Param";
+    private static final String PARAM = "Param";
     private static final int WAIT_FOR_LAST_TEST_TO_SHUTDOWN = 3000;
 
     private static NoExitSecurityManagerInstaller noExitSecurityManagerInstaller;

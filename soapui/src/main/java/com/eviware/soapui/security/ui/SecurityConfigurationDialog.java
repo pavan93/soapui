@@ -30,16 +30,8 @@ import com.eviware.x.form.support.ADialogBuilder;
 import com.eviware.x.form.support.XFormRadioGroup;
 import com.eviware.x.impl.swing.JFormDialog;
 
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 
 public class SecurityConfigurationDialog extends SimpleDialog {
     private SecurityScan securityCheck;
@@ -106,7 +98,7 @@ public class SecurityConfigurationDialog extends SimpleDialog {
         return mainPanel;
     }
 
-    protected Component buildParametersTable() {
+    private Component buildParametersTable() {
         parametersTable = new SecurityCheckedParametersTablePanel(new SecurityParametersTableModel(
                 ((AbstractSecurityScanWithProperties) securityCheck).getParameterHolder()), securityCheck.getTestStep()
                 .getProperties(), (AbstractSecurityScanWithProperties) securityCheck);
@@ -118,7 +110,7 @@ public class SecurityConfigurationDialog extends SimpleDialog {
         return parametersTable;
     }
 
-    protected Component buildTabs() {
+    private Component buildTabs() {
         tabs = new JTabbedPane();
         securityAssertionPanel = new SecurityAssertionPanel(securityCheck);
         tabs.addTab("Assertions", securityAssertionPanel);
@@ -135,7 +127,7 @@ public class SecurityConfigurationDialog extends SimpleDialog {
         return tabs;
     }
 
-    protected Component buildStrategyTab() {
+    private Component buildStrategyTab() {
         strategyDialog = ADialogBuilder.buildDialog(SecurityConfigurationDialogBuilder.Strategy.class, null);
 
         XFormRadioGroup strategy = (XFormRadioGroup) strategyDialog.getFormField(Strategy.STRATEGY);

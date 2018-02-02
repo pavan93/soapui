@@ -23,10 +23,10 @@ import com.eviware.soapui.settings.GlobalPropertySettings;
 import com.eviware.soapui.support.components.SimpleForm;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import java.awt.Dimension;
+import java.awt.*;
 
 public class GlobalPropertiesPrefs implements Prefs {
-    public final static String ENABLE_OVERRIDE = "Enable Override";
+    private final static String ENABLE_OVERRIDE = "Enable Override";
     private SimpleForm globalPropertiesForm;
 
     public SimpleForm getForm() {

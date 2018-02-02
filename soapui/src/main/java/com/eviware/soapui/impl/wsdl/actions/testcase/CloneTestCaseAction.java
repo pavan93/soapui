@@ -211,7 +211,7 @@ public class CloneTestCaseAction extends AbstractSoapUIAction<WsdlTestCase> {
     }
 
     @AForm(description = "Specify target Project/TestSuite and name of cloned TestCase", name = "Clone TestCase", helpUrl = HelpUrls.CLONETESTCASE_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    protected interface Form {
+    interface Form {
         @AField(name = "TestCase Name", description = "The name of the cloned TestCase", type = AFieldType.STRING)
         String NAME = "TestCase Name";
 

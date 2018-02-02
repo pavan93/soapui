@@ -21,7 +21,7 @@ import java.util.List;
 
 public class AttachmentHolder {
 
-    List<MaliciousAttachmentConfig> list;
+    private List<MaliciousAttachmentConfig> list;
 
     public void addElement(MaliciousAttachmentConfig config) {
         if (list == null) {

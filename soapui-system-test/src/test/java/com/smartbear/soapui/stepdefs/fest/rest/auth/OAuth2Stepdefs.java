@@ -44,7 +44,7 @@ import static org.hamcrest.Matchers.hasItemInArray;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-public class OAuth2Stepdefs {
+class OAuth2Stepdefs {
     private static final String CLIENT_ID = "client-id";
     private static final String CLIENT_SECRET = "client-secret";
     private static final String AUTHORIZATION_URI = "authorization-uri";
@@ -56,7 +56,7 @@ public class OAuth2Stepdefs {
     private static final String ADVANCED_OPTIONS_DIALOG_NAME = "OAuth 2 Advanced options";
 
     private static final String OAUTH_2_COMBOBOX_ITEM = CredentialsConfig.AuthType.O_AUTH_2_0.toString();
-    public static final String BUTTON_OK = "OK";
+    private static final String BUTTON_OK = "OK";
 
     private FrameFixture rootWindow;
     private final Robot robot;
@@ -84,7 +84,7 @@ public class OAuth2Stepdefs {
     }
 
     @When("^user clicks on Advanced options button$")
-    public void clickOnAdvancedOptionsButton() {
+    private void clickOnAdvancedOptionsButton() {
         rootWindow.button(OAuth2Form.ADVANCED_OPTIONS_BUTTON_NAME).click();
     }
 
@@ -94,7 +94,7 @@ public class OAuth2Stepdefs {
     }
 
     @When("^selects refresh method (.+)$")
-    public void selectRefreshMethod(String methodName) {
+    private void selectRefreshMethod(String methodName) {
         getAdvancedDialogFixture().radioButton(methodName).click();
     }
 
@@ -164,7 +164,7 @@ public class OAuth2Stepdefs {
     }
 
     @When("^the user selects (.+) in the authorization drop down$")
-    public void selectItemInProfileSelectionComboBox(String itemName) {
+    private void selectItemInProfileSelectionComboBox(String itemName) {
         JComboBoxFixture comboBox = getProfileSelectionComboBox();
         comboBox.selectItem(itemName);
     }

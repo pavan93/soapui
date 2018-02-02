@@ -16,10 +16,10 @@
 
 package org.syntax.jedit.tokenmarker;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.KeywordMap;
 import org.syntax.jedit.SyntaxUtilities;
+
+import javax.swing.text.Segment;
 
 /**
  * Python token marker.
@@ -159,7 +159,7 @@ public class PythonTokenMarker extends TokenMarker {
         return token;
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (pyKeywords == null) {
             pyKeywords = new KeywordMap(false);
             pyKeywords.add("and", Token.KEYWORD3);

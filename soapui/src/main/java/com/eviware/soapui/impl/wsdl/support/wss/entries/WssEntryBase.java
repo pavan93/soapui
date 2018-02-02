@@ -34,12 +34,8 @@ import org.apache.ws.security.WSEncryptionPart;
 import org.apache.ws.security.WSSecurityException;
 import org.apache.ws.security.components.crypto.Merlin;
 
-import javax.swing.AbstractListModel;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeListener;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -54,7 +50,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
     private JComponent configComponent;
     private String label;
 
-    public void init(WSSEntryConfig config, OutgoingWss outgoingWss, String label) {
+    void init(WSSEntryConfig config, OutgoingWss outgoingWss, String label) {
         this.config = config;
         this.outgoingWss = outgoingWss;
         this.label = label;
@@ -70,7 +66,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         return outgoingWss;
     }
 
-    public String getPassword() {
+    String getPassword() {
         String password = config.getPassword();
         if (StringUtils.isNullOrEmpty(password)) {
             password = outgoingWss.getPassword();
@@ -79,7 +75,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         return password;
     }
 
-    public String getUsername() {
+    String getUsername() {
         String username = config.getUsername();
         if (StringUtils.isNullOrEmpty(username)) {
             username = outgoingWss.getUsername();
@@ -124,7 +120,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
 
     protected abstract void save(XmlObjectConfigurationBuilder builder);
 
-    public WssContainer getWssContainer() {
+    WssContainer getWssContainer() {
         return outgoingWss.getWssContainer();
     }
 
@@ -142,7 +138,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         return result.toArray();
     }
 
-    protected void addPropertyExpansions(PropertyExpansionsResult result) {
+    void addPropertyExpansions(PropertyExpansionsResult result) {
         if (StringUtils.hasContent(config.getUsername())) {
             result.extractAndAddAll("username");
         }
@@ -152,7 +148,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         }
     }
 
-    protected int readKeyIdentifierType(XmlObjectConfigurationReader reader) {
+    int readKeyIdentifierType(XmlObjectConfigurationReader reader) {
         int identifierType = reader.readInt("keyIdentifierType", WSConstants.ISSUER_SERIAL);
 
         //For backward compatibility see SOAP-2347
@@ -173,7 +169,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
     }
 
     // Used to save values from table GUI components
-    protected List<StringToStringMap> readTableValues(XmlObjectConfigurationReader reader, String parameterName) {
+    List<StringToStringMap> readTableValues(XmlObjectConfigurationReader reader, String parameterName) {
         List<StringToStringMap> result = new ArrayList<StringToStringMap>();
         String[] tableValues = reader.readStrings(parameterName);
         if (tableValues != null && tableValues.length > 0) {
@@ -186,14 +182,14 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
     }
 
     // Used to read values from table GUI components
-    protected void saveTableValues(XmlObjectConfigurationBuilder builder, List<StringToStringMap> tableValues,
-                                   String string) {
+    void saveTableValues(XmlObjectConfigurationBuilder builder, List<StringToStringMap> tableValues,
+                         String string) {
         for (StringToStringMap tableValue : tableValues) {
             builder.add(string, tableValue.toXml());
         }
     }
 
-    protected Vector<WSEncryptionPart> createWSParts(List<StringToStringMap> parts) {
+    Vector<WSEncryptionPart> createWSParts(List<StringToStringMap> parts) {
         Vector<WSEncryptionPart> result = new Vector<WSEncryptionPart>();
 
         for (StringToStringMap map : parts) {
@@ -215,7 +211,7 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         return result;
     }
 
-    protected class KeyIdentifierTypeRenderer extends DefaultListCellRenderer {
+    class KeyIdentifierTypeRenderer extends DefaultListCellRenderer {
         @Override
         public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected,
                                                       boolean cellHasFocus) {
@@ -247,12 +243,12 @@ public abstract class WssEntryBase implements WssEntry, PropertyExpansionContain
         }
     }
 
-    protected class KeyAliasComboBoxModel extends AbstractListModel implements ComboBoxModel {
+    class KeyAliasComboBoxModel extends AbstractListModel implements ComboBoxModel {
         private KeyStore keyStore;
         private Object alias;
         private StringList aliases = new StringList();
 
-        public KeyAliasComboBoxModel(WssCrypto crypto) {
+        KeyAliasComboBoxModel(WssCrypto crypto) {
             update(crypto);
         }
 

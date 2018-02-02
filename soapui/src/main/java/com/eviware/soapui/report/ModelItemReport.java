@@ -22,7 +22,7 @@ import com.eviware.soapui.support.types.StringToObjectMap;
 
 import java.util.Collection;
 
-public interface ModelItemReport {
+interface ModelItemReport {
     ModelItem getModelItem();
 
     void addSubReport(SubReport subReport);

@@ -28,11 +28,7 @@ import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -47,7 +43,7 @@ public class ThreadCountChangeLoadStrategy extends AbstractLoadStrategy {
 
     private static final int DEFAULT_END_THREAD_COUNT = 10;
     private static final int DEFAULT_START_THREAD_COUNT = 1;
-    public static final String STRATEGY_TYPE = "Thread";
+    private static final String STRATEGY_TYPE = "Thread";
 
     private int startThreadCount = DEFAULT_START_THREAD_COUNT;
     private int endThreadCount = DEFAULT_END_THREAD_COUNT;
@@ -60,7 +56,7 @@ public class ThreadCountChangeLoadStrategy extends AbstractLoadStrategy {
     private SpinnerNumberModel endThreadCountSpinnerNumberModel;
     private JSpinner endThreadCountSpinner;
 
-    public ThreadCountChangeLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
+    private ThreadCountChangeLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
         super(STRATEGY_TYPE, loadTest);
 
         if (config != null) {

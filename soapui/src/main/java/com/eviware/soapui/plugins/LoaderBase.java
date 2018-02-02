@@ -43,22 +43,22 @@ import javax.swing.*;
 import java.lang.annotation.Annotation;
 import java.util.*;
 
-public class LoaderBase {
+class LoaderBase {
 
     private static Logger logger = LoggerFactory.getLogger(LoaderBase.class);
 
-    protected SoapUIFactoryRegistry factoryRegistry;
-    protected SoapUIActionRegistry actionRegistry;
-    protected ListenerRegistry listenerRegistry;
+    private SoapUIFactoryRegistry factoryRegistry;
+    private SoapUIActionRegistry actionRegistry;
+    private ListenerRegistry listenerRegistry;
 
-    public LoaderBase(ListenerRegistry listenerRegistry, SoapUIActionRegistry actionRegistry,
-                      SoapUIFactoryRegistry factoryRegistry) {
+    LoaderBase(ListenerRegistry listenerRegistry, SoapUIActionRegistry actionRegistry,
+               SoapUIFactoryRegistry factoryRegistry) {
         this.listenerRegistry = listenerRegistry;
         this.actionRegistry = actionRegistry;
         this.factoryRegistry = factoryRegistry;
     }
 
-    protected Collection<? extends SoapUIFactory> loadFactories(Reflections jarFileScanner)
+    Collection<? extends SoapUIFactory> loadFactories(Reflections jarFileScanner)
             throws IllegalAccessException, InstantiationException {
         Collection<SoapUIFactory> factories = new HashSet<SoapUIFactory>();
 
@@ -76,15 +76,15 @@ public class LoaderBase {
         return registerFactories(factories);
     }
 
-    protected SoapUIFactory createFactory(Class<SoapUIFactory> factoryClass) throws InstantiationException, IllegalAccessException {
+    private SoapUIFactory createFactory(Class<SoapUIFactory> factoryClass) throws InstantiationException, IllegalAccessException {
         return createObject(factoryClass);
     }
 
-    protected <T extends Object> T createObject(Class<T> objectClass) throws IllegalAccessException, InstantiationException {
+    private <T extends Object> T createObject(Class<T> objectClass) throws IllegalAccessException, InstantiationException {
         return PluginProxies.proxyIfApplicable(objectClass.newInstance());
     }
 
-    protected Collection<? extends SoapUIFactory> registerFactories(Collection<? extends SoapUIFactory> factories) {
+    Collection<? extends SoapUIFactory> registerFactories(Collection<? extends SoapUIFactory> factories) {
         for (SoapUIFactory factory : factories) {
             factoryRegistry.addFactory(factory.getFactoryType(), factory);
         }
@@ -92,7 +92,7 @@ public class LoaderBase {
         return factories;
     }
 
-    protected void loadAutoFactories(Reflections jarFileScanner, Collection<SoapUIFactory> factories) {
+    private void loadAutoFactories(Reflections jarFileScanner, Collection<SoapUIFactory> factories) {
         ConfigurationBuilder builder = new ConfigurationBuilder();
         builder.addUrls(ClasspathHelper.forClass(AutoFactory.class));
         builder.setScanners(new SubTypesScanner(), new TypeAnnotationsScanner());
@@ -113,8 +113,8 @@ public class LoaderBase {
         }
     }
 
-    protected Collection<SoapUIFactory> findAutoFactoryObjects(Reflections jarFileScanner, Class<? extends Annotation> annotationType,
-                                                               Class<? extends SoapUIFactory> factoryClass) {
+    private Collection<SoapUIFactory> findAutoFactoryObjects(Reflections jarFileScanner, Class<? extends Annotation> annotationType,
+                                                             Class<? extends SoapUIFactory> factoryClass) {
 
         Collection<SoapUIFactory> factories = new HashSet<SoapUIFactory>();
         Set<Class<?>> objectClasses = jarFileScanner.getTypesAnnotatedWith(annotationType);
@@ -133,11 +133,11 @@ public class LoaderBase {
         return factories;
     }
 
-    protected SoapUIFactory createAutoFactory(Class<? extends Annotation> annotationType, Class<? extends SoapUIFactory> factoryClass, Class<?> clazz, Annotation annotation) throws InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException, NoSuchMethodException {
+    private SoapUIFactory createAutoFactory(Class<? extends Annotation> annotationType, Class<? extends SoapUIFactory> factoryClass, Class<?> clazz, Annotation annotation) throws InstantiationException, IllegalAccessException, java.lang.reflect.InvocationTargetException, NoSuchMethodException {
         return factoryClass.getConstructor(annotationType, clazz.getClass()).newInstance(annotation, clazz);
     }
 
-    protected List<Class<? extends SoapUIListener>> registerListeners(List<Class<? extends SoapUIListener>> listeners) {
+    List<Class<? extends SoapUIListener>> registerListeners(List<Class<? extends SoapUIListener>> listeners) {
         for (Class<?> listenerClass : listeners) {
 
             Class currentListenerClass = listenerClass;
@@ -155,7 +155,7 @@ public class LoaderBase {
         return listeners;
     }
 
-    protected List<Class<? extends SoapUIListener>> loadListeners(Reflections jarFileScanner) {
+    List<Class<? extends SoapUIListener>> loadListeners(Reflections jarFileScanner) {
         List<Class<? extends SoapUIListener>> listeners = new ArrayList<Class<? extends SoapUIListener>>();
 
         Set<Class<?>> listenerClasses = jarFileScanner.getTypesAnnotatedWith(ListenerConfiguration.class);
@@ -171,7 +171,7 @@ public class LoaderBase {
         return registerListeners(listeners);
     }
 
-    protected List<? extends SoapUIAction> registerActions(List<? extends SoapUIAction> actions) {
+    List<? extends SoapUIAction> registerActions(List<? extends SoapUIAction> actions) {
         // sort actions so references work consistently
         Collections.sort(actions, new Comparator<SoapUIAction>() {
             @Override
@@ -198,7 +198,7 @@ public class LoaderBase {
         return actions;
     }
 
-    protected List<? extends SoapUIActionGroup> registerActionGroups(List<SoapUIActionGroup> actionGroups) {
+    private List<? extends SoapUIActionGroup> registerActionGroups(List<SoapUIActionGroup> actionGroups) {
 
         for (SoapUIActionGroup actionGroup : actionGroups)
             actionRegistry.addActionGroup(actionGroup);
@@ -273,7 +273,7 @@ public class LoaderBase {
         return registerActionGroups(actionGroups);
     }
 
-    protected List<? extends SoapUIAction> loadActions(Reflections jarFileScanner) throws InstantiationException, IllegalAccessException {
+    List<? extends SoapUIAction> loadActions(Reflections jarFileScanner) throws InstantiationException, IllegalAccessException {
         List<SoapUIAction> actions = new ArrayList<SoapUIAction>();
         Set<Class<?>> actionClasses = jarFileScanner.getTypesAnnotatedWith(ActionConfiguration.class);
         for (Class<?> actionClass : actionClasses) {
@@ -298,15 +298,15 @@ public class LoaderBase {
         return registerActions(actions);
     }
 
-    protected SoapUIAction createAction(Class<SoapUIAction> actionClass) throws InstantiationException, IllegalAccessException {
+    private SoapUIAction createAction(Class<SoapUIAction> actionClass) throws InstantiationException, IllegalAccessException {
         return createObject(actionClass);
     }
 
-    protected SoapUIActionGroup createActionGroup(Class<SoapUIActionGroup> actionGroupClass) throws InstantiationException, IllegalAccessException {
+    private SoapUIActionGroup createActionGroup(Class<SoapUIActionGroup> actionGroupClass) throws InstantiationException, IllegalAccessException {
         return createObject(actionGroupClass);
     }
 
-    protected void configureAction(final SoapUIAction action, ActionConfiguration configuration) {
+    private void configureAction(final SoapUIAction action, ActionConfiguration configuration) {
         String groupId = configuration.actionGroup();
         SoapUIActionGroup targetGroup = actionRegistry.getActionGroup(groupId);
         if (targetGroup == null) {
@@ -339,7 +339,8 @@ public class LoaderBase {
                     ++insertIndex, SoapUIActionRegistry.SeperatorAction.getDefaultMapping());
         }
     }
-    protected void unregisterListeners(List<Class<? extends SoapUIListener>> listeners) {
+
+    void unregisterListeners(List<Class<? extends SoapUIListener>> listeners) {
         for (Class<? extends SoapUIListener> listenerClass : listeners) {
             for (Class<?> implementedInterface : listenerClass.getInterfaces()) {
                 if (SoapUIListener.class.isAssignableFrom(implementedInterface)) {
@@ -350,13 +351,13 @@ public class LoaderBase {
         }
     }
 
-    protected void unregisterFactories(Collection<? extends SoapUIFactory> factories) {
+    void unregisterFactories(Collection<? extends SoapUIFactory> factories) {
         for (SoapUIFactory soapUIFactory : factories) {
             factoryRegistry.removeFactory(soapUIFactory.getFactoryType(), soapUIFactory);
         }
     }
 
-    protected void unregisterActions(List<? extends SoapUIAction> actions) {
+    void unregisterActions(List<? extends SoapUIAction> actions) {
         for (SoapUIAction soapUIAction : actions) {
             actionRegistry.removeAction(soapUIAction.getId());
         }
@@ -369,7 +370,7 @@ public class LoaderBase {
 
     // due to Reflections internals (or my misunderstanding of them) this class has to be
     // named as its superclass
-    protected static class TypeAnnotationsScanner extends org.reflections.scanners.TypeAnnotationsScanner {
+    static class TypeAnnotationsScanner extends org.reflections.scanners.TypeAnnotationsScanner {
         @Override
         public boolean acceptsInput(String file) {
             if (file.endsWith(".groovy")) {
@@ -381,11 +382,11 @@ public class LoaderBase {
     }
 
     // loads both groovy and java classes for Reflections package
-    protected static class GroovyAndJavaReflectionAdapter extends JavaReflectionAdapter {
+    static class GroovyAndJavaReflectionAdapter extends JavaReflectionAdapter {
 
         private final JarClassLoader jarClassLoader;
 
-        public GroovyAndJavaReflectionAdapter(JarClassLoader jarClassLoader) {
+        GroovyAndJavaReflectionAdapter(JarClassLoader jarClassLoader) {
             this.jarClassLoader = jarClassLoader;
         }
 

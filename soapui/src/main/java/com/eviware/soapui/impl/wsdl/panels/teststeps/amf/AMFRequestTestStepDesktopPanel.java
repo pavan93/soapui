@@ -91,7 +91,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     private JButton addAssertionButton;
     private JInspectorPanel inspectorPanel;
     private AMFRequestTestStep amfRequestTestStep;
-    protected AMFRequestTestStepConfig amfRequestTestStepConfig;
+    private AMFRequestTestStepConfig amfRequestTestStepConfig;
     private JComponentInspector<?> assertionInspector;
     private AssertionsPanel assertionsPanel;
     private InternalAssertionsListener assertionsListener = new InternalAssertionsListener();
@@ -113,11 +113,11 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     private RunAction runAction = new RunAction();
     private GroovyEditor groovyEditor;
     private JTextField amfCallField;
-    public boolean updating;
+    private boolean updating;
     SimpleForm configForm;
     private JTextField endpointField;
     private TestRunComponentEnabler componentEnabler;
-    protected PropertyHolderTable propertyHolderTable;
+    private PropertyHolderTable propertyHolderTable;
 
     public AMFRequestTestStepDesktopPanel(AMFRequestTestStep modelItem) {
         super(modelItem);
@@ -136,7 +136,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
     }
 
-    protected void initConfig() {
+    private void initConfig() {
         amfRequestTestStepConfig = amfRequestTestStep.getAMFRequestTestStepConfig();
     }
 
@@ -225,7 +225,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     }
 
     @SuppressWarnings("unchecked")
-    protected JComponent buildRequestConfigPanel() {
+    private JComponent buildRequestConfigPanel() {
         ModelItemXmlEditor<?, ?> reqEditor = buildRequestEditor();
 
         configPanel = UISupport.addTitledBorder(new JPanel(new BorderLayout()), "Script");
@@ -266,7 +266,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         return toolBar;
     }
 
-    protected JComponent buildToolbar() {
+    private JComponent buildToolbar() {
 
         JPanel panel = new JPanel(new BorderLayout());
         panel.add(buildToolbar1(), BorderLayout.NORTH);
@@ -275,7 +275,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
     }
 
-    protected void initContent() {
+    private void initContent() {
         amfRequestTestStep.getAMFRequest().addSubmitListener(this);
 
         add(buildContent(), BorderLayout.CENTER);
@@ -297,14 +297,14 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         });
     }
 
-    protected JComponent buildStatusLabel() {
+    private JComponent buildStatusLabel() {
         statusBar = new JEditorStatusBarWithProgress();
         statusBar.setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0));
 
         return statusBar;
     }
 
-    protected JComponent buildProperties() {
+    private JComponent buildProperties() {
         propertyHolderTable = new PropertyHolderTable(getModelItem()) {
             @Override
             protected DefaultPropertyHolderTableModel getPropertyHolderTableModel() {
@@ -332,7 +332,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         return propertyHolderTable;
     }
 
-    protected JComponent buildToolbar1() {
+    private JComponent buildToolbar1() {
         JXToolBar toolbar = UISupport.createToolbar();
 
         toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -352,7 +352,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
     }
 
-    protected JComponent buildToolbar2() {
+    private JComponent buildToolbar2() {
         JXToolBar toolbar = UISupport.createToolbar();
 
         toolbar.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
@@ -369,15 +369,21 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         return amfRequestTestStep;
     }
 
-    protected AssertionsPanel buildAssertionsPanel() {
+    private AssertionsPanel buildAssertionsPanel() {
         return new AMFAssertionsPanel(amfRequestTestStep) {
         };
     }
 
-    protected class AMFAssertionsPanel extends AssertionsPanel {
-        public AMFAssertionsPanel(Assertable assertable) {
-            super(assertable);
-        }
+    private void addAmfCallDocumentListener() {
+        amfCallField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
+            @Override
+            public void update(Document document) {
+                if (!updating) {
+                    amfRequestTestStep.setAmfCall(amfCallField.getText());
+                }
+                submitButton.setEnabled(enableSubmit());
+            }
+        });
     }
 
     private JTextField addAmfCallField() {
@@ -400,19 +406,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         return endpointField;
     }
 
-    protected void addAmfCallDocumentListener() {
-        amfCallField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
-            @Override
-            public void update(Document document) {
-                if (!updating) {
-                    amfRequestTestStep.setAmfCall(amfCallField.getText());
-                }
-                submitButton.setEnabled(enableSubmit());
-            }
-        });
-    }
-
-    protected void addEndpointCallDocumentListener() {
+    private void addEndpointCallDocumentListener() {
         endpointField.getDocument().addDocumentListener(new DocumentListenerAdapter() {
             @Override
             public void update(Document document) {
@@ -424,9 +418,13 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         });
     }
 
-    protected boolean enableSubmit() {
+    private boolean enableSubmit() {
         return !StringUtils.isNullOrEmpty(amfRequestTestStep.getEndpoint())
                 && !StringUtils.isNullOrEmpty(amfRequestTestStep.getAmfCall());
+    }
+
+    private ModelItemXmlEditor<?, ?> buildResponseEditor() {
+        return new AMFResponseMessageEditor();
     }
 
     private class ScriptStepGroovyEditorModel implements GroovyEditorModel {
@@ -471,8 +469,129 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         }
     }
 
+    private ModelItemXmlEditor<?, ?> buildRequestEditor() {
+        return new AMFRequestMessageEditor();
+    }
+
+    private void onSubmit() {
+        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
+            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
+                submit.cancel();
+            } else {
+                return;
+            }
+        }
+
+        try {
+            submit = doSubmit();
+        } catch (SubmitException e1) {
+            SoapUI.logError(e1);
+        }
+    }
+
+    private Submit doSubmit() throws SubmitException {
+
+        SubmitContext submitContext = new WsdlTestRunContext(getModelItem());
+        if (!amfRequestTestStep.initAmfRequest(submitContext)) {
+            throw new SubmitException("AMF request is not initialised properly !");
+        }
+
+        Analytics.trackAction(SoapUIActions.RUN_TEST_STEP_FROM_PANEL, "StepType", "AMF");
+
+        return amfRequestTestStep.getAMFRequest().submit(submitContext, true);
+    }
+
+    private void setContent(JComponent content) {
+        inspectorPanel.setContentComponent(content);
+    }
+
+    private void removeContent(JComponent content) {
+        inspectorPanel.setContentComponent(null);
+    }
+
+    public boolean dependsOn(ModelItem modelItem) {
+        return modelItem == getModelItem() || modelItem == getModelItem().getTestCase()
+                || modelItem == getModelItem().getTestCase().getTestSuite()
+                || modelItem == getModelItem().getTestCase().getTestSuite().getProject();
+    }
+
+    public boolean onClose(boolean canCancel) {
+        configPanel.removeAll();
+        inspectorPanel.release();
+
+        requestEditor.removeAll();
+        ((ModelItemXmlEditor<?, ?>) requestEditor).release();
+        responseEditor.release();
+        responseEditor.removeAll();
+        responseEditor = null;
+        assertionsPanel.release();
+        SoapUI.getTestMonitor().removeTestMonitorListener(testMonitorListener);
+        amfRequestTestStep.removeAssertionsListener(assertionsListener);
+        amfRequestTestStep.getAMFRequest().removeSubmitListener(this);
+        componentEnabler.release();
+        groovyEditor.release();
+        amfRequestTestStep.release();
+        propertyHolderTable.release();
+        this.removeAll();
+        return release();
+    }
+
+    private void onCancel() {
+        if (submit == null) {
+            return;
+        }
+
+        cancelButton.setEnabled(false);
+        submit.cancel();
+        setEnabled(true);
+        submit = null;
+    }
+
+    private void logMessages(String message, String infoMessage) {
+        log.info(infoMessage);
+        statusBar.setInfo(message);
+    }
+
+    private class InternalTestMonitorListener extends TestMonitorListenerAdapter {
+        public void loadTestFinished(LoadTestRunner runner) {
+            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
+        }
+
+        public void loadTestStarted(LoadTestRunner runner) {
+            if (runner.getLoadTest().getTestCase() == getModelItem().getTestCase()) {
+                setEnabled(false);
+            }
+        }
+
+        public void securityTestFinished(SecurityTestRunner runner) {
+            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
+        }
+
+        public void securityTestStarted(SecurityTestRunner runner) {
+            if (runner.getSecurityTest().getTestCase() == getModelItem().getTestCase()) {
+                setEnabled(false);
+            }
+        }
+
+        public void testCaseFinished(TestCaseRunner runner) {
+            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
+        }
+
+        public void testCaseStarted(TestCaseRunner runner) {
+            if (runner.getTestCase() == getModelItem().getTestCase()) {
+                setEnabled(false);
+            }
+        }
+    }
+
+    class AMFAssertionsPanel extends AssertionsPanel {
+        AMFAssertionsPanel(Assertable assertable) {
+            super(assertable);
+        }
+    }
+
     private class RunAction extends AbstractAction {
-        public RunAction() {
+        RunAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION,
                     "Runs this script in a seperate thread using a mock testRunner and testContext");
@@ -513,16 +632,8 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
     }
 
-    protected ModelItemXmlEditor<?, ?> buildResponseEditor() {
-        return new AMFResponseMessageEditor();
-    }
-
-    protected ModelItemXmlEditor<?, ?> buildRequestEditor() {
-        return new AMFRequestMessageEditor();
-    }
-
     public class AMFResponseMessageEditor extends ResponseMessageXmlEditor<AMFRequestTestStep, AMFResponseDocument> {
-        public AMFResponseMessageEditor() {
+        AMFResponseMessageEditor() {
             super(new AMFResponseDocument(), amfRequestTestStep);
         }
 
@@ -534,7 +645,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     }
 
     public class AMFRequestMessageEditor extends RequestMessageXmlEditor<AMFRequestTestStep, AMFRequestDocument> {
-        public AMFRequestMessageEditor() {
+        AMFRequestMessageEditor() {
             super(new AMFRequestDocument(), amfRequestTestStep);
         }
 
@@ -546,35 +657,8 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
     }
 
-    public boolean dependsOn(ModelItem modelItem) {
-        return modelItem == getModelItem() || modelItem == getModelItem().getTestCase()
-                || modelItem == getModelItem().getTestCase().getTestSuite()
-                || modelItem == getModelItem().getTestCase().getTestSuite().getProject();
-    }
-
-    public boolean onClose(boolean canCancel) {
-        configPanel.removeAll();
-        inspectorPanel.release();
-
-        requestEditor.removeAll();
-        ((ModelItemXmlEditor<?, ?>) requestEditor).release();
-        responseEditor.release();
-        responseEditor.removeAll();
-        responseEditor = null;
-        assertionsPanel.release();
-        SoapUI.getTestMonitor().removeTestMonitorListener(testMonitorListener);
-        amfRequestTestStep.removeAssertionsListener(assertionsListener);
-        amfRequestTestStep.getAMFRequest().removeSubmitListener(this);
-        componentEnabler.release();
-        groovyEditor.release();
-        amfRequestTestStep.release();
-        propertyHolderTable.release();
-        this.removeAll();
-        return release();
-    }
-
     public class AMFResponseDocument extends AbstractXmlDocument implements PropertyChangeListener {
-        public AMFResponseDocument() {
+        AMFResponseDocument() {
             amfRequestTestStep.addPropertyChangeListener(AMFRequestTestStep.RESPONSE_PROPERTY, this);
         }
 
@@ -603,7 +687,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     }
 
     public class AMFRequestDocument extends AbstractXmlDocument implements PropertyChangeListener {
-        public AMFRequestDocument() {
+        AMFRequestDocument() {
             amfRequestTestStep.addPropertyChangeListener(AMFRequestTestStep.REQUEST_PROPERTY, this);
         }
 
@@ -628,40 +712,8 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         }
     }
 
-    private class InternalTestMonitorListener extends TestMonitorListenerAdapter {
-        public void loadTestFinished(LoadTestRunner runner) {
-            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
-        }
-
-        public void loadTestStarted(LoadTestRunner runner) {
-            if (runner.getLoadTest().getTestCase() == getModelItem().getTestCase()) {
-                setEnabled(false);
-            }
-        }
-
-        public void securityTestFinished(SecurityTestRunner runner) {
-            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
-        }
-
-        public void securityTestStarted(SecurityTestRunner runner) {
-            if (runner.getSecurityTest().getTestCase() == getModelItem().getTestCase()) {
-                setEnabled(false);
-            }
-        }
-
-        public void testCaseFinished(TestCaseRunner runner) {
-            setEnabled(!SoapUI.getTestMonitor().hasRunningTest(getModelItem().getTestCase()));
-        }
-
-        public void testCaseStarted(TestCaseRunner runner) {
-            if (runner.getTestCase() == getModelItem().getTestCase()) {
-                setEnabled(false);
-            }
-        }
-    }
-
-    public class SubmitAction extends AbstractAction {
-        public SubmitAction() {
+    class SubmitAction extends AbstractAction {
+        SubmitAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/submit_request.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Submit request to specified endpoint URL");
             putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt ENTER"));
@@ -672,35 +724,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         }
     }
 
-    protected void onSubmit() {
-        if (submit != null && submit.getStatus() == Submit.Status.RUNNING) {
-            if (UISupport.confirm("Cancel current request?", "Submit Request")) {
-                submit.cancel();
-            } else {
-                return;
-            }
-        }
-
-        try {
-            submit = doSubmit();
-        } catch (SubmitException e1) {
-            SoapUI.logError(e1);
-        }
-    }
-
-    protected Submit doSubmit() throws SubmitException {
-
-        SubmitContext submitContext = new WsdlTestRunContext(getModelItem());
-        if (!amfRequestTestStep.initAmfRequest(submitContext)) {
-            throw new SubmitException("AMF request is not initialised properly !");
-        }
-
-        Analytics.trackAction(SoapUIActions.RUN_TEST_STEP_FROM_PANEL, "StepType", "AMF");
-
-        return amfRequestTestStep.getAMFRequest().submit(submitContext, true);
-    }
-
-    protected final class InputAreaFocusListener implements FocusListener {
+    private final class InputAreaFocusListener implements FocusListener {
         public InputAreaFocusListener(JComponent editor) {
         }
 
@@ -737,7 +761,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         }
     }
 
-    protected final class ResultAreaFocusListener implements FocusListener {
+    final class ResultAreaFocusListener implements FocusListener {
         @SuppressWarnings("unused")
         private final ModelItemXmlEditor<?, ?> responseEditor;
 
@@ -783,7 +807,7 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
     }
 
     private final class ChangeToTabsAction extends AbstractAction {
-        public ChangeToTabsAction() {
+        ChangeToTabsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/toggle_tabs.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Toggles to tab-based layout");
         }
@@ -826,38 +850,6 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
 
             revalidate();
         }
-    }
-
-    public void setContent(JComponent content) {
-        inspectorPanel.setContentComponent(content);
-    }
-
-    public void removeContent(JComponent content) {
-        inspectorPanel.setContentComponent(null);
-    }
-
-    private class CancelAction extends AbstractAction {
-        public CancelAction() {
-            super();
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
-            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            onCancel();
-        }
-    }
-
-    protected void onCancel() {
-        if (submit == null) {
-            return;
-        }
-
-        cancelButton.setEnabled(false);
-        submit.cancel();
-        setEnabled(true);
-        submit = null;
     }
 
     public void setEnabled(boolean enabled) {
@@ -924,9 +916,17 @@ public class AMFRequestTestStepDesktopPanel extends ModelItemDesktopPanel<AMFReq
         updateStatusIcon();
     }
 
-    protected void logMessages(String message, String infoMessage) {
-        log.info(infoMessage);
-        statusBar.setInfo(message);
+    private class CancelAction extends AbstractAction {
+        CancelAction() {
+            super();
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/cancel_request.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Aborts ongoing request");
+            putValue(Action.ACCELERATOR_KEY, UISupport.getKeyStroke("alt X"));
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            onCancel();
+        }
     }
 
     public boolean beforeSubmit(Submit submit, SubmitContext context) {

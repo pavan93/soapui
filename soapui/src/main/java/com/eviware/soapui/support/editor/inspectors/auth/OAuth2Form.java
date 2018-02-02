@@ -29,32 +29,9 @@ import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.binding.adapter.Bindings;
 
 import javax.annotation.Nonnull;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class OAuth2Form extends AbstractAuthenticationForm implements OAuth2AccessTokenStatusChangeListener {
     public static final String ADVANCED_OPTIONS_BUTTON_NAME = "Advanced...";
@@ -358,7 +335,7 @@ public class OAuth2Form extends AbstractAuthenticationForm implements OAuth2Acce
         private final JDialog accessTokenFormDialog;
         private final JLabel disclosureButton;
 
-        public DisclosureButtonMouseListener(JDialog accessTokenFormDialog, JLabel disclosureButton) {
+        DisclosureButtonMouseListener(JDialog accessTokenFormDialog, JLabel disclosureButton) {
             this.accessTokenFormDialog = accessTokenFormDialog;
             this.disclosureButton = disclosureButton;
         }
@@ -397,7 +374,7 @@ public class OAuth2Form extends AbstractAuthenticationForm implements OAuth2Acce
     private class AccessTokenFormDialogWindowListener implements WindowFocusListener {
         private final JDialog accessTokenFormDialog;
 
-        public AccessTokenFormDialogWindowListener(JDialog accessTokenFormDialog) {
+        AccessTokenFormDialogWindowListener(JDialog accessTokenFormDialog) {
             this.accessTokenFormDialog = accessTokenFormDialog;
         }
 
@@ -427,7 +404,7 @@ public class OAuth2Form extends AbstractAuthenticationForm implements OAuth2Acce
     private class SoapUIMainWindowFocusListener extends WindowAdapter {
         private final JDialog accessTokenFormDialog;
 
-        public SoapUIMainWindowFocusListener(JDialog accessTokenFormDialog) {
+        SoapUIMainWindowFocusListener(JDialog accessTokenFormDialog) {
             this.accessTokenFormDialog = accessTokenFormDialog;
         }
 

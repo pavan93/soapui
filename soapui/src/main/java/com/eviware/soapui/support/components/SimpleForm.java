@@ -44,16 +44,15 @@ import java.util.Map;
  */
 
 public class SimpleForm {
-    public static final int DEFAULT_COMPONENT_COLUMN = 4;
-    public static final int DEFAULT_LABEL_COLUMN = 2;
+    static final int DEFAULT_TEXT_FIELD_COLUMNS = MEDIUM_TEXT_FIELD_COLUMNS;
+    private static final int DEFAULT_COMPONENT_COLUMN = 4;
     public static final int SHORT_TEXT_FIELD_COLUMNS = 20;
     public static final int MEDIUM_TEXT_FIELD_COLUMNS = 30;
     public static final int LONG_TEXT_FIELD_COLUMNS = 50;
     public static final Color HINT_TEXT_COLOR = new Color(113, 102, 102);
-
-    protected static final String DEFAULT_COMPONENT_ALIGNMENT = "left,bottom";
-    protected static final int DEFAULT_TEXT_FIELD_COLUMNS = MEDIUM_TEXT_FIELD_COLUMNS;
-    protected static final String ENABLED_PROPERTY_NAME = "enabled";
+    private static final int DEFAULT_LABEL_COLUMN = 2;
+    private static final String DEFAULT_COMPONENT_ALIGNMENT = "left,bottom";
+    private static final String ENABLED_PROPERTY_NAME = "enabled";
 
     private static final int DEFAULT_COLUMN_SPAN = 1;
     private static final String DEFAULT_COLUMN_SPECS = "5px:none,left:pref,10px,left:default,5px:grow(1.0)";
@@ -81,7 +80,7 @@ public class SimpleForm {
         this(new FormLayout(columnSpec), BorderFactory.createEmptyBorder());
     }
 
-    public SimpleForm(String columnSpec, Border border) {
+    SimpleForm(String columnSpec, Border border) {
         this(new FormLayout(columnSpec), border);
     }
 
@@ -100,7 +99,7 @@ public class SimpleForm {
         return !components.isEmpty();
     }
 
-    public int getRowCount() {
+    private int getRowCount() {
         return layout.getRowCount();
     }
 
@@ -130,7 +129,7 @@ public class SimpleForm {
         return rowSpacing;
     }
 
-    public void setRowSpacing(int rowSpacing) {
+    void setRowSpacing(int rowSpacing) {
         this.rowSpacing = rowSpacing;
     }
 
@@ -404,7 +403,7 @@ public class SimpleForm {
         return textField;
     }
 
-    public JTextArea appendTextArea(String label, String tooltip) {
+    JTextArea appendTextArea(String label, String tooltip) {
         JTextArea textArea = new JUndoableTextArea();
         textArea.setColumns(defaultTextAreaColumns);
         textArea.setRows(defaultTextAreaRows);
@@ -438,7 +437,7 @@ public class SimpleForm {
      * @return The text field
      * @see com.eviware.soapui.support.components.SimpleForm
      */
-    public JTextField appendTextField(String label, String name, String tooltip, int textFieldColumns) {
+    JTextField appendTextField(String label, String name, String tooltip, int textFieldColumns) {
         JTextField textField = new JUndoableTextField();
         textField.setName(name);
         textField.setColumns(textFieldColumns);
@@ -555,7 +554,7 @@ public class SimpleForm {
         append(label, component, null);
     }
 
-    public <T extends JComponent> T append(String label, T component, String alignments) {
+    <T extends JComponent> T append(String label, T component, String alignments) {
         JLabel jlabel = null;
         if (label != null) {
             jlabel = new JLabel(label.endsWith(":") || label.isEmpty() ? label : label + ":");
@@ -569,7 +568,7 @@ public class SimpleForm {
     }
 
 
-    public <T extends JComponent> T append(String name, JLabel label, T field) {
+    <T extends JComponent> T append(String name, JLabel label, T field) {
         return append(name, label, field, null, DEFAULT_COMPONENT_COLUMN, getColumnSpanToTheEnd(DEFAULT_COMPONENT_COLUMN));
     }
 
@@ -579,7 +578,7 @@ public class SimpleForm {
      *
      * @param propertyComponents The PropertyComponents to be added
      */
-    public void appendInOneRow(PropertyComponent... propertyComponents) {
+    void appendInOneRow(PropertyComponent... propertyComponents) {
         Preconditions.checkArgument(propertyComponents.length * 2 <= layout.getColumnCount() - 1, "There is not enough room for the components to be added");
 
         int currentColumn = DEFAULT_COMPONENT_COLUMN;
@@ -663,7 +662,7 @@ public class SimpleForm {
 
         private final JComponent label;
 
-        public LabelEnabler(JComponent label) {
+        LabelEnabler(JComponent label) {
             this.label = label;
         }
 
@@ -679,7 +678,7 @@ public class SimpleForm {
         private final JComponent jlabel;
         private final int rowIndex;
 
-        public LabelHider(JComponent label, int i) {
+        LabelHider(JComponent label, int i) {
             this.jlabel = label;
             this.rowIndex = i;
         }

@@ -25,12 +25,12 @@ public abstract class AbstractSoapUIFactory<T extends Object> implements SoapUIF
 
     private Class<?> factoryType;
 
-    public T createByReflection(Class<T> clazz) throws IllegalAccessException, InstantiationException {
-        return clazz.newInstance();
+    AbstractSoapUIFactory(Class<?> factoryType) {
+        this.factoryType = factoryType;
     }
 
-    protected AbstractSoapUIFactory(Class<?> factoryType) {
-        this.factoryType = factoryType;
+    T createByReflection(Class<T> clazz) throws IllegalAccessException, InstantiationException {
+        return clazz.newInstance();
     }
 
     @Override

@@ -21,8 +21,7 @@ import com.eviware.soapui.impl.rest.OAuth2Profile;
 import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -49,7 +48,7 @@ public class GetOAuthAccessTokenAction extends AbstractAction {
         }
     }
 
-    protected OAuth2ClientFacade getOAuthClientFacade() {
+    OAuth2ClientFacade getOAuthClientFacade() {
         return new OltuOAuth2ClientFacade();
     }
 }

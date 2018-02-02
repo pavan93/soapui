@@ -46,7 +46,7 @@ import org.apache.http.HttpRequest;
 import org.apache.http.HttpRequestInterceptor;
 import org.apache.http.protocol.HttpContext;
 
-public class RequestBasicAuth implements HttpRequestInterceptor {
+class RequestBasicAuth implements HttpRequestInterceptor {
     private final BasicAuthTokenExtractor authTokenExtractor;
 
     public RequestBasicAuth() {

@@ -44,8 +44,8 @@ public class ResolverUtils {
         return ResolverUtils.parseProperty(propertyName, holder, context, globalOverride);
     }
 
-    public static String parseProperty(String name, TestPropertyHolder holder, PropertyExpansionContext context,
-                                       boolean globalOverride) {
+    private static String parseProperty(String name, TestPropertyHolder holder, PropertyExpansionContext context,
+                                        boolean globalOverride) {
         int sepIx = name.indexOf(PropertyExpansion.PROPERTY_SEPARATOR);
         if (sepIx != -1) {
             String xpath = name.substring(sepIx + 1);

@@ -27,13 +27,7 @@ import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * The Navigator TreeModel
@@ -105,14 +99,14 @@ public class SoapUITreeModel implements TreeModel {
         }
     }
 
-    public void notifyNodesInserted(TreeModelEvent e) {
+    private void notifyNodesInserted(TreeModelEvent e) {
         Iterator<TreeModelListener> i = listeners.iterator();
         while (i.hasNext()) {
             i.next().treeNodesInserted(e);
         }
     }
 
-    public void notifyNodesRemoved(TreeModelEvent e) {
+    private void notifyNodesRemoved(TreeModelEvent e) {
         Iterator<TreeModelListener> i = listeners.iterator();
         while (i.hasNext()) {
             i.next().treeNodesRemoved(e);
@@ -126,7 +120,7 @@ public class SoapUITreeModel implements TreeModel {
         }
     }
 
-    public void notifyNodesChanged(TreeModelEvent e) {
+    private void notifyNodesChanged(TreeModelEvent e) {
         Iterator<TreeModelListener> i = listeners.iterator();
         while (i.hasNext()) {
             i.next().treeNodesChanged(e);

@@ -26,7 +26,7 @@ import org.apache.commons.cli.CommandLine;
 import java.io.File;
 
 public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
-    public static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " War Generator";
+    private static String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " War Generator";
 
     private boolean includeActions;
     private boolean includeListeners;
@@ -35,7 +35,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
     private String localEndpoint;
     private String warFile;
 
-    public SoapUIMockAsWarGenerator() {
+    private SoapUIMockAsWarGenerator() {
         super(TITLE);
     }
 
@@ -139,7 +139,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return includeActions;
     }
 
-    public void setIncludeActions(boolean includeActions) {
+    private void setIncludeActions(boolean includeActions) {
         this.includeActions = includeActions;
     }
 
@@ -147,7 +147,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return includeListeners;
     }
 
-    public void setIncludeListeners(boolean includeListeners) {
+    private void setIncludeListeners(boolean includeListeners) {
         this.includeListeners = includeListeners;
     }
 
@@ -155,7 +155,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return includeLibraries;
     }
 
-    public void setIncludeLibraries(boolean includeLibraries) {
+    private void setIncludeLibraries(boolean includeLibraries) {
         this.includeLibraries = includeLibraries;
     }
 
@@ -163,7 +163,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return enableWebUI;
     }
 
-    public void setEnableWebUI(boolean enableWebUI) {
+    private void setEnableWebUI(boolean enableWebUI) {
         this.enableWebUI = enableWebUI;
     }
 
@@ -171,7 +171,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return localEndpoint;
     }
 
-    public void setLocalEndpoint(String localEndpoint) {
+    private void setLocalEndpoint(String localEndpoint) {
         this.localEndpoint = localEndpoint;
     }
 
@@ -179,7 +179,7 @@ public class SoapUIMockAsWarGenerator extends AbstractSoapUIRunner {
         return warFile;
     }
 
-    public void setWarFile(String warFile) {
+    private void setWarFile(String warFile) {
         this.warFile = warFile;
     }
 }

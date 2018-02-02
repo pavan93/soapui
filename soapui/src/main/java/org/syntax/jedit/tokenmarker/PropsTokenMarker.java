@@ -25,7 +25,7 @@ import javax.swing.text.Segment;
  * @version $Id: PropsTokenMarker.java,v 1.9 1999/12/13 03:40:30 sp Exp $
  */
 public class PropsTokenMarker extends TokenMarker {
-    public static final byte VALUE = Token.INTERNAL_FIRST;
+    private static final byte VALUE = Token.INTERNAL_FIRST;
 
     public byte markTokensImpl(byte token, Segment line, int lineIndex) {
         char[] array = line.array;

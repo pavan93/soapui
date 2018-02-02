@@ -20,7 +20,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 
-import javax.swing.JList;
+import javax.swing.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
@@ -51,5 +51,5 @@ public abstract class ModelItemListKeyListener extends KeyAdapter {
         }
     }
 
-    public abstract ModelItem getModelItemAt(int ix);
+    protected abstract ModelItem getModelItemAt(int ix);
 }

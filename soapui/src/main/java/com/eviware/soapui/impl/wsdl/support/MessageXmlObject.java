@@ -67,7 +67,7 @@ public class MessageXmlObject {
         }
     }
 
-    public XmlObject getMessageObj() throws XmlException {
+    private XmlObject getMessageObj() throws XmlException {
         if (messageObj == null) {
             // messageObj = XmlObject.Factory.parse( getMessageContent() );
             messageObj = XmlUtils.createXmlObject(getMessageContent(), XmlUtils.createDefaultXmlOptions());

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(value = "JdbcStatusAssertion", description = JdbcStatusAssertion.DESCRIPTION)
-public class JdbcStatusAssertionStruct extends AssertionStruct<JdbcStatusAssertion> {
+class JdbcStatusAssertionStruct extends AssertionStruct<JdbcStatusAssertion> {
 
     @JsonCreator
     public JdbcStatusAssertionStruct(@JsonProperty("name") String name) {

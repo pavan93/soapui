@@ -54,31 +54,51 @@ public abstract class SwingWorker {
     private ThreadVar threadVar;
 
     /**
+     * Start a thread that will call the <code>construct</code> method and then
+     * exit.
+     */
+    protected SwingWorker() {
+        final Runnable doFinished = new Runnable() {
+            public void run() {
+                finished();
+            }
+        };
+
+        Runnable doConstruct = new Runnable() {
+            public void run() {
+                try {
+                    setValue(construct());
+                } finally {
+                    threadVar.clear();
+                }
+
+                UISupport.invokeLater(doFinished);
+            }
+        };
+
+        Thread t = new Thread(doConstruct, "SwingWorker");
+        threadVar = new ThreadVar(t);
+    }
+
+    /**
      * Get the value produced by the worker thread, or null if it hasn't been
      * constructed yet.
      */
-    public synchronized Object getValue() {
+    private synchronized Object getValue() {
         return value;
     }
 
     /**
      * Set the value produced by worker thread
      */
-    public synchronized void setValue(Object x) {
+    private synchronized void setValue(Object x) {
         value = x;
     }
 
     /**
      * Compute the value to be returned by the <code>get</code> method.
      */
-    public abstract Object construct();
-
-    /**
-     * Called on the event dispatching thread (not on the worker thread) after
-     * the <code>construct</code> method has returned.
-     */
-    public void finished() {
-    }
+    protected abstract Object construct();
 
     /**
      * A new method that interrupts the worker thread. Call this method to force
@@ -115,30 +135,10 @@ public abstract class SwingWorker {
     }
 
     /**
-     * Start a thread that will call the <code>construct</code> method and then
-     * exit.
+     * Called on the event dispatching thread (not on the worker thread) after
+     * the <code>construct</code> method has returned.
      */
-    public SwingWorker() {
-        final Runnable doFinished = new Runnable() {
-            public void run() {
-                finished();
-            }
-        };
-
-        Runnable doConstruct = new Runnable() {
-            public void run() {
-                try {
-                    setValue(construct());
-                } finally {
-                    threadVar.clear();
-                }
-
-                UISupport.invokeLater(doFinished);
-            }
-        };
-
-        Thread t = new Thread(doConstruct, "SwingWorker");
-        threadVar = new ThreadVar(t);
+    void finished() {
     }
 
     /**

@@ -30,7 +30,7 @@ import java.util.Properties;
  * @goal mock
  */
 
-public class MockServiceMojo extends AbstractMojo
+class MockServiceMojo extends AbstractMojo
 {
 	public void execute() throws MojoExecutionException, MojoFailureException
 	{

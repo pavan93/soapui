@@ -24,12 +24,9 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.x.form.XForm.ToolkitType;
 import com.eviware.x.impl.swing.AbstractSwingXFormField;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -84,7 +81,7 @@ public class NamespaceTable extends AbstractSwingXFormField<JPanel> {
         private List<String> namespaces = new ArrayList<String>();
         private List<String> packages;
 
-        public NamespaceTableModel() {
+        NamespaceTableModel() {
             try {
                 if (iface != null) {
                     namespaces.addAll(iface.getWsdlContext().getInterfaceDefinition().getDefinedNamespaces());
@@ -96,16 +93,16 @@ public class NamespaceTable extends AbstractSwingXFormField<JPanel> {
             packages = new ArrayList<String>(Arrays.asList(new String[namespaces.size()]));
         }
 
-        public void setMappings(StringToStringMap mapping) {
+        StringToStringMap getMappings() {
+            StringToStringMap result = new StringToStringMap();
             for (int c = 0; c < namespaces.size(); c++) {
-                if (mapping.containsKey(namespaces.get(c))) {
-                    packages.set(c, mapping.get(namespaces.get(c)));
-                } else {
-                    packages.set(c, "");
+                String pkg = packages.get(c);
+                if (returnEmpty || (pkg != null && pkg.trim().length() > 0)) {
+                    result.put(namespaces.get(c), pkg == null ? "" : pkg.trim());
                 }
             }
 
-            fireTableDataChanged();
+            return result;
         }
 
         public int getRowCount() {
@@ -142,16 +139,16 @@ public class NamespaceTable extends AbstractSwingXFormField<JPanel> {
             }
         }
 
-        public StringToStringMap getMappings() {
-            StringToStringMap result = new StringToStringMap();
+        void setMappings(StringToStringMap mapping) {
             for (int c = 0; c < namespaces.size(); c++) {
-                String pkg = packages.get(c);
-                if (returnEmpty || (pkg != null && pkg.trim().length() > 0)) {
-                    result.put(namespaces.get(c), pkg == null ? "" : pkg.trim());
+                if (mapping.containsKey(namespaces.get(c))) {
+                    packages.set(c, mapping.get(namespaces.get(c)));
+                } else {
+                    packages.set(c, "");
                 }
             }
 
-            return result;
+            fireTableDataChanged();
         }
     }
 

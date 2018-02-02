@@ -58,7 +58,7 @@ public class XPathContainsAssertion extends AbstractXmlContainsAssertion {
 
     public static final String ID = "XPath Match";
     public static final String LABEL = "XPath Match";
-    public static final String DESCRIPTION = "Uses an XPath expression to select content from the target property and compares the result to an expected value. Applicable to any property containing XML.";
+    private static final String DESCRIPTION = "Uses an XPath expression to select content from the target property and compares the result to an expected value. Applicable to any property containing XML.";
 
     public XPathContainsAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(TestAssertionConfig , true, true, true, true);

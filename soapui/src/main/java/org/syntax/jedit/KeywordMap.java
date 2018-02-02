@@ -16,9 +16,9 @@
 
 package org.syntax.jedit;
 
-import javax.swing.text.Segment;
-
 import org.syntax.jedit.tokenmarker.Token;
+
+import javax.swing.text.Segment;
 
 /**
  * A <code>KeywordMap</code> is similar to a hashtable in that it maps keys to
@@ -41,18 +41,8 @@ public class KeywordMap {
         this.ignoreCase = ignoreCase;
     }
 
-    /**
-     * Creates a new <code>KeywordMap</code>.
-     *
-     * @param ignoreCase True if the keys are case insensitive
-     * @param mapLength  The number of `buckets' to create. A value of 52 will give good
-     *                   performance for most maps.
-     */
-    public KeywordMap(boolean ignoreCase, int mapLength) {
-        this.mapLength = mapLength;
-        this.ignoreCase = ignoreCase;
-        map = new Keyword[mapLength];
-    }
+    // protected members
+    private int mapLength;
 
     /**
      * Looks up a key.
@@ -108,29 +98,39 @@ public class KeywordMap {
         this.ignoreCase = ignoreCase;
     }
 
-    // protected members
-    protected int mapLength;
+    /**
+     * Creates a new <code>KeywordMap</code>.
+     *
+     * @param ignoreCase True if the keys are case insensitive
+     * @param mapLength  The number of `buckets' to create. A value of 52 will give good
+     *                   performance for most maps.
+     */
+    private KeywordMap(boolean ignoreCase, int mapLength) {
+        this.mapLength = mapLength;
+        this.ignoreCase = ignoreCase;
+        map = new Keyword[mapLength];
+    }
 
-    protected int getStringMapKey(String s) {
+    private int getStringMapKey(String s) {
         return (Character.toUpperCase(s.charAt(0)) + Character.toUpperCase(s.charAt(s.length() - 1)))
                 % mapLength;
     }
 
-    protected int getSegmentMapKey(Segment s, int off, int len) {
+    private int getSegmentMapKey(Segment s, int off, int len) {
         return (Character.toUpperCase(s.array[off]) + Character.toUpperCase(s.array[off + len - 1])) % mapLength;
     }
 
     // private members
     class Keyword {
-        public Keyword(char[] keyword, byte id, Keyword next) {
+        char[] keyword;
+        byte id;
+        Keyword next;
+
+        Keyword(char[] keyword, byte id, Keyword next) {
             this.keyword = keyword;
             this.id = id;
             this.next = next;
         }
-
-        public char[] keyword;
-        public byte id;
-        public Keyword next;
     }
 
     private Keyword[] map;

@@ -7,7 +7,7 @@ import com.smartbear.analytics.impl.SoapUIOSUserProvider;
 
 import java.net.*;
 
-public class OSUserProvider extends SoapUIOSUserProvider {
+class OSUserProvider extends SoapUIOSUserProvider {
 
     public OSUserProvider(ProductInfo productInfo) {
         super(productInfo);

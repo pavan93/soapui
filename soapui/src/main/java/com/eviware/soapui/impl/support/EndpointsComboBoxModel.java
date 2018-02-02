@@ -19,8 +19,7 @@ package com.eviware.soapui.impl.support;
 import com.eviware.soapui.impl.wsdl.WsdlInterface;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.ComboBoxModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 import javax.swing.text.BadLocationException;
@@ -134,12 +133,12 @@ public class EndpointsComboBoxModel implements ComboBoxModel, PropertyChangeList
         }
     }
 
-    public void refresh() {
+    private void refresh() {
         initEndpoints();
         notifyContentsChanged();
     }
 
-    protected void initEndpoints() {
+    private void initEndpoints() {
         if (request.getOperation() != null) {
             endpoints = request.getOperation().getInterface().getEndpoints();
         } else {
@@ -156,7 +155,7 @@ public class EndpointsComboBoxModel implements ComboBoxModel, PropertyChangeList
         return endpoints;
     }
 
-    protected void notifyContentsChanged() {
+    private void notifyContentsChanged() {
         ListDataEvent e = new ListDataEvent(this, ListDataEvent.CONTENTS_CHANGED, 0, getSize());
         synchronized (listeners) {
             Iterator<ListDataListener> iterator = listeners.iterator();

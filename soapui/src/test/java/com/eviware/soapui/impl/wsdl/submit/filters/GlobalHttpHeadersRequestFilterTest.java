@@ -37,7 +37,7 @@ import org.mockito.internal.verification.Times;
 
 public class GlobalHttpHeadersRequestFilterTest {
 
-    GlobalHttpHeadersRequestFilter globalHttpHeadersRequestFilter;
+    private GlobalHttpHeadersRequestFilter globalHttpHeadersRequestFilter;
 
     @Before
     public void setUp() {

@@ -21,13 +21,9 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.types.StringList;
 
 import javax.xml.namespace.QName;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class SettingUtils {
+class SettingUtils {
     public static Collection<? extends QName> string2QNames(String string) {
         List<QName> result = new ArrayList<QName>();
         if (string != null && string.trim().length() > 0) {

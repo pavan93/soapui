@@ -35,11 +35,7 @@ import com.eviware.soapui.model.iface.Attachment.AttachmentEncoding;
 import com.eviware.soapui.model.iface.Interface;
 import com.eviware.soapui.model.iface.MessagePart;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
-import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
-import com.eviware.soapui.model.propertyexpansion.PropertyExpansionContainer;
-import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
-import com.eviware.soapui.model.propertyexpansion.PropertyExpansionsResult;
+import com.eviware.soapui.model.propertyexpansion.*;
 import com.eviware.soapui.model.support.InterfaceListenerAdapter;
 import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.StringUtils;
@@ -67,16 +63,16 @@ public class WsdlRequest extends AbstractHttpRequest<WsdlRequestConfig> implemen
     public static final String RESPONSE_CONTENT_PROPERTY = WsdlRequest.class.getName() + "@response-content";
     public static final String INLINE_RESPONSE_ATTACHMENTS = WsdlRequest.class.getName()
             + "@inline-response-attachments";
-    public static final String EXPAND_MTOM_RESPONSE_ATTACHMENTS = WsdlRequest.class.getName()
+    private static final String EXPAND_MTOM_RESPONSE_ATTACHMENTS = WsdlRequest.class.getName()
             + "@expand-mtom-attachments";
-    public static final String FORCE_MTOM = WsdlRequest.class.getName() + "@force_mtom";
-    public static final String ENABLE_INLINE_FILES = WsdlRequest.class.getName() + "@enable_inline_files";
-    public static final String SKIP_SOAP_ACTION = WsdlRequest.class.getName() + "@skip_soap_action";
-    public static final String ENCODE_ATTACHMENTS = WsdlRequest.class.getName() + "@encode_attachments";
-    public static final String WSS_TIMETOLIVE = WsdlRequest.class.getName() + "@wss-time-to-live";
-    public static final String OPERATION_PROPERTY = WsdlRequest.class.getName() + "@operation";
-    public static final String INCOMING_WSS = WsdlRequest.class.getName() + "@incoming-wss";
-    public static final String OUGOING_WSS = WsdlRequest.class.getName() + "@outgoing-wss";
+    private static final String FORCE_MTOM = WsdlRequest.class.getName() + "@force_mtom";
+    private static final String ENABLE_INLINE_FILES = WsdlRequest.class.getName() + "@enable_inline_files";
+    private static final String SKIP_SOAP_ACTION = WsdlRequest.class.getName() + "@skip_soap_action";
+    private static final String ENCODE_ATTACHMENTS = WsdlRequest.class.getName() + "@encode_attachments";
+    private static final String WSS_TIMETOLIVE = WsdlRequest.class.getName() + "@wss-time-to-live";
+    private static final String OPERATION_PROPERTY = WsdlRequest.class.getName() + "@operation";
+    private static final String INCOMING_WSS = WsdlRequest.class.getName() + "@incoming-wss";
+    private static final String OUGOING_WSS = WsdlRequest.class.getName() + "@outgoing-wss";
 
     public final static String PW_TYPE_NONE = "None";
     public final static String PW_TYPE_DIGEST = "PasswordDigest";
@@ -131,7 +127,7 @@ public class WsdlRequest extends AbstractHttpRequest<WsdlRequestConfig> implemen
         }
     }
 
-    protected void initEndpoints() {
+    private void initEndpoints() {
         if (getEndpoint() == null) {
             String[] endpoints = operation.getInterface().getEndpoints();
             if (endpoints.length > 0) {
@@ -522,11 +518,11 @@ public class WsdlRequest extends AbstractHttpRequest<WsdlRequestConfig> implemen
         setWsAddressing(arg0);
     }
 
-    public boolean isWsReliableMessaging() {
+    private boolean isWsReliableMessaging() {
         return getConfig().getUseWsReliableMessaging();
     }
 
-    public void setWsReliableMessaging(boolean wsReliableMessaging) {
+    private void setWsReliableMessaging(boolean wsReliableMessaging) {
         boolean old = getConfig().getUseWsReliableMessaging();
         getConfig().setUseWsReliableMessaging(wsReliableMessaging);
         notifyPropertyChanged("wsReliableMessaging", old, wsReliableMessaging);

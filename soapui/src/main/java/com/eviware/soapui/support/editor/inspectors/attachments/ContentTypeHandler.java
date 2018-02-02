@@ -41,7 +41,7 @@ public class ContentTypeHandler {
         return DEFAULT_CONTENTTYPE;
     }
 
-    public static String getSuffixFromFilename(String fileName) {
+    private static String getSuffixFromFilename(String fileName) {
         if (fileName == null || fileName.length() == 0) {
             return "";
         }

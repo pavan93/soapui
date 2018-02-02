@@ -82,7 +82,7 @@ public class JMSHeaderAndPropertyInspectorFactory implements RequestInspectorFac
         JMSHeaderAndPropertyInspector inspector;
         StringToStringMap headersAndProperties;
 
-        public ResponseJMSHeaderAndPropertiesModel(AbstractHttpRequest<?> wsdlRequest) {
+        ResponseJMSHeaderAndPropertiesModel(AbstractHttpRequest<?> wsdlRequest) {
             super(true, wsdlRequest, "jmsHeaderAndProperties");
             this.request = wsdlRequest;
             request.addSubmitListener(this);
@@ -137,7 +137,7 @@ public class JMSHeaderAndPropertyInspectorFactory implements RequestInspectorFac
         @SuppressWarnings("unused")
         JMSHeaderAndPropertyInspector inspector;
 
-        public MessageExchangeResponseJMSHeaderAndPropertiesModel(MessageExchangeModelItem messageExchangeModelItem) {
+        MessageExchangeResponseJMSHeaderAndPropertiesModel(MessageExchangeModelItem messageExchangeModelItem) {
             super(true, messageExchangeModelItem, MessageExchangeModelItem.MESSAGE_EXCHANGE);
             this.messageExchangeModelItem = messageExchangeModelItem;
         }
@@ -166,7 +166,7 @@ public class JMSHeaderAndPropertyInspectorFactory implements RequestInspectorFac
         @SuppressWarnings("unused")
         JMSHeaderAndPropertyInspector inspector;
 
-        public MessageExchangeRequestJMSHeaderAndPropertiesModel(MessageExchangeModelItem messageExchangeModelItem) {
+        MessageExchangeRequestJMSHeaderAndPropertiesModel(MessageExchangeModelItem messageExchangeModelItem) {
             super(true, messageExchangeModelItem, MessageExchangeModelItem.MESSAGE_EXCHANGE);
             this.messageExchangeModelItem = messageExchangeModelItem;
         }

@@ -26,7 +26,7 @@ import com.eviware.soapui.model.iface.SubmitContext;
  * @author Ole.Matzura
  */
 
-public class ScriptExpansionRequestFilter extends AbstractRequestFilter {
+class ScriptExpansionRequestFilter extends AbstractRequestFilter {
     public void filterRequest(SubmitContext context, AbstractHttpRequestInterface<?> wsdlRequest) {
         /*
 		 * String content = (String) context.getProperty(

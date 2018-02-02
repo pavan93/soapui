@@ -47,11 +47,11 @@ import org.apache.xmlbeans.XmlObject;
  */
 
 public class ResponseSLAAssertion extends WsdlMessageAssertion implements ResponseAssertion {
-    public static final MessageSupport messages = MessageSupport.getMessages(ResponseSLAAssertion.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(ResponseSLAAssertion.class);
 
-    public static final String ID = "Response SLA Assertion";
+    private static final String ID = "Response SLA Assertion";
     public static final String LABEL = "Response SLA";
-    public static final String DESCRIPTION = "Validates that the last received response time was within the defined limit. Applicable to Script TestSteps and TestSteps that send requests and receive responses.";
+    private static final String DESCRIPTION = "Validates that the last received response time was within the defined limit. Applicable to Script TestSteps and TestSteps that send requests and receive responses.";
     private String SLA;
 
     private static final String SLA_VALUE_IS_NOT_NUMBER = messages.get("ResponseSLAAssertion.InfoNotNumber");
@@ -65,7 +65,7 @@ public class ResponseSLAAssertion extends WsdlMessageAssertion implements Respon
      * @param assertionConfig
      * @param modelItem
      */
-    public ResponseSLAAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
+    private ResponseSLAAssertion(TestAssertionConfig assertionConfig, Assertable modelItem) {
         super(assertionConfig, modelItem, false, true, false, false);
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
         SLA = reader.readString("SLA", "200");
@@ -141,7 +141,7 @@ public class ResponseSLAAssertion extends WsdlMessageAssertion implements Respon
     /**
      * @return XmlObject, our config chunk
      */
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         return builder.add("SLA", SLA).finish();
     }

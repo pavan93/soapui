@@ -86,7 +86,7 @@ public class SoapMonitorAction extends AbstractSoapUIAction<WsdlProject> {
     }
 
 
-    protected DialogHandler createDialogHandler(WsdlProject project, Object param) {
+    private DialogHandler createDialogHandler(WsdlProject project, Object param) {
         return new FullMonitorDialogHandler(project);
     }
 
@@ -108,8 +108,8 @@ public class SoapMonitorAction extends AbstractSoapUIAction<WsdlProject> {
         SoapMonitor createSoapMonitor();
     }
 
-    protected SoapMonitor openSoapMonitor(WsdlProject target, int listenPort, String incomingRequestWss,
-                                          String incomingResponseWss, boolean setAsProxy, String sslEndpoint) {
+    private SoapMonitor openSoapMonitor(WsdlProject target, int listenPort, String incomingRequestWss,
+                                        String incomingResponseWss, boolean setAsProxy, String sslEndpoint) {
         DesktopPanel desktopPanel = null;
         if (sslEndpoint == null) {
             desktopPanel = createDesktopPanel(target, listenPort, incomingRequestWss, incomingResponseWss, setAsProxy, null);
@@ -126,12 +126,12 @@ public class SoapMonitorAction extends AbstractSoapUIAction<WsdlProject> {
         return desktopPanel != null ? ((SoapMonitorContainer) desktopPanel).getSoapMonitor() : null;
     }
 
-    protected DesktopPanel createDesktopPanel(WsdlProject target, int listenPort, String incomingRequestWss, String incomingResponseWss, boolean setAsProxy, String ssl) {
+    private DesktopPanel createDesktopPanel(WsdlProject target, int listenPort, String incomingRequestWss, String incomingResponseWss, boolean setAsProxy, String ssl) {
         return new SoapMonitorDesktopPanel(target, listenPort, incomingRequestWss,
                 incomingResponseWss, setAsProxy, ssl);
     }
 
-    protected String validate(String sslEndpoint) {
+    private String validate(String sslEndpoint) {
         if (sslEndpoint.trim().length() > 0) {
             return sslEndpoint.trim();
         }
@@ -239,7 +239,7 @@ public class SoapMonitorAction extends AbstractSoapUIAction<WsdlProject> {
         private WsdlProject project;
         private XFormDialog dialog;
 
-        public FullMonitorDialogHandler(WsdlProject project) {
+        FullMonitorDialogHandler(WsdlProject project) {
             this.project = project;
         }
 

@@ -18,7 +18,7 @@ package com.eviware.soapui.support.action.swing;
 
 import com.eviware.soapui.support.action.SoapUIAction;
 
-public interface SoapUIActionMarker {
+interface SoapUIActionMarker {
     @SuppressWarnings("unchecked")
     SoapUIAction getSoapUIAction();
 }

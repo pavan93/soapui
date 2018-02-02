@@ -35,15 +35,11 @@ import com.eviware.soapui.model.mock.MockOperation;
 import com.eviware.soapui.model.mock.MockResponse;
 import com.eviware.soapui.model.mock.MockService;
 import com.eviware.soapui.model.project.Project;
-import com.eviware.soapui.model.testsuite.LoadTest;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCase;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestSuite;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.security.SecurityTest;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -88,7 +84,7 @@ public class ModelItemIconFactory {
     }
 
     @SuppressWarnings("unchecked")
-    public static String getIconPath(Class<? extends ModelItem> clazz) {
+    private static String getIconPath(Class<? extends ModelItem> clazz) {
         if (modelItemIcons.containsKey(clazz)) {
             return modelItemIcons.get(clazz);
         }

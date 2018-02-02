@@ -41,10 +41,7 @@ import org.apache.xml.security.signature.XMLSignature;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -255,7 +252,7 @@ public class SignatureEntry extends WssEntryBase {
         super.addPropertyExpansions(result);
     }
 
-    public String getCrypto() {
+    private String getCrypto() {
         return crypto;
     }
 
@@ -361,7 +358,7 @@ public class SignatureEntry extends WssEntryBase {
 
         private final WSSecSignature wssSign;
 
-        public BinarySecurityTokenDOMCallbackLookup(Document doc, WSSecSignature wssSign) {
+        BinarySecurityTokenDOMCallbackLookup(Document doc, WSSecSignature wssSign) {
             super(doc);
             this.wssSign = wssSign;
         }

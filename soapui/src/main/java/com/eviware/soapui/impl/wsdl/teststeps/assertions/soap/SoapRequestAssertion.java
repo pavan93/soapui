@@ -39,11 +39,11 @@ import com.eviware.soapui.model.testsuite.RequestAssertion;
  */
 
 public class SoapRequestAssertion extends WsdlMessageAssertion implements RequestAssertion {
-    public static final String ID = "SOAP Request";
-    public static final String LABEL = "SOAP Request";
-    public static final String DESCRIPTION = "Validates that the last received request is a valid SOAP Request. Applicable to MockResponse TestSteps only.";
+    private static final String ID = "SOAP Request";
+    private static final String LABEL = "SOAP Request";
+    private static final String DESCRIPTION = "Validates that the last received request is a valid SOAP Request. Applicable to MockResponse TestSteps only.";
 
-    public SoapRequestAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private SoapRequestAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, false, false, false, false);
     }
 

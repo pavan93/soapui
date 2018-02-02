@@ -59,7 +59,7 @@ public class WsdlLoadTestsModelItem extends EmptyModelItem {
         return createLabel(testCase);
     }
 
-    public void updateLabel() {
+    private void updateLabel() {
         setName(createLabel(testCase));
     }
 

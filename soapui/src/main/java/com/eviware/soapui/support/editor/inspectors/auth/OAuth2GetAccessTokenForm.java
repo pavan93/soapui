@@ -27,21 +27,9 @@ import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.binding.value.AbstractValueModel;
 
 import javax.annotation.Nonnull;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.ComboBoxModel;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.border.Border;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
@@ -54,7 +42,7 @@ public class OAuth2GetAccessTokenForm implements OAuth2AccessTokenStatusChangeLi
     public static final String AUTHORIZATION_URI_TITLE = "Authorization URI";
     public static final String ACCESS_TOKEN_URI_TITLE = "Access Token URI";
     public static final String REDIRECT_URI_TITLE = "Redirect URI";
-    public static final String SCOPE_TITLE = "Scope";
+    private static final String SCOPE_TITLE = "Scope";
     public static final String OAUTH_2_FLOW_COMBO_BOX_NAME = "OAuth2Flow";
     public static final String ACCESS_TOKEN_FORM_DIALOG_NAME = "getAccessTokenFormDialog";
 
@@ -70,7 +58,7 @@ public class OAuth2GetAccessTokenForm implements OAuth2AccessTokenStatusChangeLi
 
     private static final Color CARD_BORDER_COLOR = new Color(121, 121, 121);
 
-    static final ImageIcon DEFAULT_ICON = null;
+    private static final ImageIcon DEFAULT_ICON = null;
 
     private OAuth2Profile profile;
     private JLabel accessTokenStatusText;
@@ -292,7 +280,7 @@ public class OAuth2GetAccessTokenForm implements OAuth2AccessTokenStatusChangeLi
     private class EditAutomationScriptsAction extends AbstractAction {
         private final OAuth2Profile profile;
 
-        public EditAutomationScriptsAction(OAuth2Profile profile) {
+        EditAutomationScriptsAction(OAuth2Profile profile) {
             putValue(Action.NAME, AUTOMATION_BUTTON_TITLE);
             this.profile = profile;
         }

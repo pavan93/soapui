@@ -35,7 +35,7 @@ public abstract class DocumentListenerAdapter implements DocumentListener {
         update(e.getDocument());
     }
 
-    public abstract void update(Document document);
+    protected abstract void update(Document document);
 
     public void removeUpdate(DocumentEvent e) {
         update(e.getDocument());

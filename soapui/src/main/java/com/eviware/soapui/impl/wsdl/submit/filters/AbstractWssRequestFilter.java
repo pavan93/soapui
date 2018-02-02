@@ -34,9 +34,9 @@ import java.io.StringWriter;
 
 public abstract class AbstractWssRequestFilter extends AbstractRequestFilter {
     private static final String REQUEST_CONTENT_HASH_CODE = "requestContentHashCode";
-    public static final String WSS_DOC = "WsSecurityAuthenticationRequestFilter@Document";
-    protected static DocumentBuilderFactory dbf;
-    protected static DocumentBuilder db;
+    private static final String WSS_DOC = "WsSecurityAuthenticationRequestFilter@Document";
+    private static DocumentBuilderFactory dbf;
+    private static DocumentBuilder db;
 
     static {
         dbf = DocumentBuilderFactory.newInstance();
@@ -50,7 +50,7 @@ public abstract class AbstractWssRequestFilter extends AbstractRequestFilter {
         }
     }
 
-    protected static Document getWssDocument(SubmitContext context) throws SAXException, IOException {
+    static Document getWssDocument(SubmitContext context) throws SAXException, IOException {
         String request = (String) context.getProperty(BaseHttpRequestTransport.REQUEST_CONTENT);
         Document doc = (Document) context.getProperty(WSS_DOC);
 
@@ -67,7 +67,7 @@ public abstract class AbstractWssRequestFilter extends AbstractRequestFilter {
         return doc;
     }
 
-    protected static void updateWssDocument(SubmitContext context, Document dom) throws IOException {
+    static void updateWssDocument(SubmitContext context, Document dom) throws IOException {
         StringWriter writer = new StringWriter();
         XmlUtils.serialize(dom, writer);
         String request = writer.toString();

@@ -16,14 +16,10 @@
 
 package com.eviware.soapui.support.swing;
 
-import javax.swing.JLabel;
-import java.awt.Color;
-import java.awt.GradientPaint;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Paint;
+import javax.swing.*;
+import java.awt.*;
 
-public class GradientLabel extends JLabel {
+class GradientLabel extends JLabel {
     // ------------------------------ FIELDS ------------------------------
 
     private Color start;

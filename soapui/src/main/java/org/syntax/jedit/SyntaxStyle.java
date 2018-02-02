@@ -16,11 +16,7 @@
 
 package org.syntax.jedit;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Toolkit;
+import java.awt.*;
 
 /**
  * A simple text style class. It can specify the color, italic flag, and bold
@@ -75,7 +71,7 @@ public class SyntaxStyle {
      * Returns the specified font, but with the style's bold and italic flags
      * applied.
      */
-    public Font getStyledFont(Font font) {
+    private Font getStyledFont(Font font) {
         if (font == null) {
             throw new NullPointerException("font param must not" + " be null");
         }

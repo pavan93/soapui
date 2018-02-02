@@ -32,7 +32,7 @@ import java.util.Properties;
  * @goal tool
  */
 
-public class ToolMojo extends AbstractMojo
+class ToolMojo extends AbstractMojo
 {
 	public void execute() throws MojoExecutionException, MojoFailureException
 	{

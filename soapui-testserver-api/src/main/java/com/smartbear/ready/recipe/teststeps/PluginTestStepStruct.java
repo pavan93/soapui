@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModel;
 import java.util.Map;
 
 @ApiModel(value = "PluginTestStep", description = "Plugin test step definition")
-public class PluginTestStepStruct extends TestStepStruct {
+class PluginTestStepStruct extends TestStepStruct {
     public PluginTestStepStruct(@JsonProperty("type") String type, @JsonProperty("name") String name,
                                 @JsonProperty("configuration") Map<String, Object> configuration) {
         super(type, name, configuration);

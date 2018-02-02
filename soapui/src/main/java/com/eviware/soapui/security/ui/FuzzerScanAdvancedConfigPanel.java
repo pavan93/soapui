@@ -111,7 +111,7 @@ public class FuzzerScanAdvancedConfigPanel {
 
 
     @AForm(description = "Fuzzer Scan", name = "Fuzzer Scan")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
 
         @AField(description = "Minimal length of Fuzzed value", name = "Minimal length", type = AFieldType.INT)
         String MINIMAL = "Minimal length";

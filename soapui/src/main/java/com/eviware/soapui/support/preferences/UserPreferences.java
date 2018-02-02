@@ -19,8 +19,7 @@ package com.eviware.soapui.support.preferences;
 import com.eviware.soapui.SoapUI;
 import com.smartbear.analytics.api.UserIdentificationInformation;
 
-import java.awt.Frame;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
@@ -34,11 +33,11 @@ public class UserPreferences {
 
     // package protected to help unit test
     static final String WINDOW_X = "SoapUIWindowX";
-    static final String WINDOW_Y = "SoapUIWindowY";
-    static final String WINDOW_WIDTH = "SoapUIWindowWidth";
-    static final String WINDOW_HEIGHT = "SoapUIWindowHeight";
-    static final String EXTENDED_STATE = "SoapUIExtendedState";
-    static final String INSTALLATION_TYPE = "SoapUIInstallationType";
+    private static final String WINDOW_Y = "SoapUIWindowY";
+    private static final String WINDOW_WIDTH = "SoapUIWindowWidth";
+    private static final String WINDOW_HEIGHT = "SoapUIWindowHeight";
+    private static final String EXTENDED_STATE = "SoapUIExtendedState";
+    private static final String INSTALLATION_TYPE = "SoapUIInstallationType";
     private static final Preferences unifiedPreferences = Preferences.userRoot().node(UserIdentificationInformation.UNIQUE_ID_SETTINGS_NODE_NAME);
 
     private Preferences preferences = Preferences.userRoot().node(ROOT_NODE_NAME);

@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.support;
 
-public class SoapUIUrl {
+class SoapUIUrl {
     public SoapUIUrl(String url) {
 
     }

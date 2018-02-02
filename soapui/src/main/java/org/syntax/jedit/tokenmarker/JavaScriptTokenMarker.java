@@ -24,7 +24,7 @@ import org.syntax.jedit.KeywordMap;
  * @author Slava Pestov
  * @version $Id: JavaScriptTokenMarker.java,v 1.3 1999/12/13 03:40:29 sp Exp $
  */
-public class JavaScriptTokenMarker extends CTokenMarker {
+class JavaScriptTokenMarker extends CTokenMarker {
     public JavaScriptTokenMarker() {
         super(false, getKeywords());
     }

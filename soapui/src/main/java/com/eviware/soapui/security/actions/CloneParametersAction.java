@@ -51,7 +51,7 @@ import java.util.List;
 public class CloneParametersAction extends AbstractAction {
 
     private XFormDialog dialog;
-    protected DefaultActionList actionList;
+    private DefaultActionList actionList;
     private AbstractSecurityScanWithProperties securityScan;
 
     public CloneParametersAction() {
@@ -79,45 +79,7 @@ public class CloneParametersAction extends AbstractAction {
         this.securityScan = securityScan;
     }
 
-    private class OkAction extends AbstractAction {
-
-        private XFormDialog dialog;
-
-        public OkAction() {
-            super("OK");
-        }
-
-        public void setDialog(XFormDialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            if (dialog != null) {
-                ((SwingXFormDialog) dialog).setReturnValue(XFormDialog.OK_OPTION);
-                List<ModelItem> items = performClone(true);
-                UISupport.showInfoMessage("Updated " + items.size() + " scans");
-                dialog.setVisible(false);
-            }
-        }
-    }
-
-    private String[] getSecurableTestStepsNames(TestCase testCase) {
-        List<TestStep> testStepList = testCase.getTestStepList();
-        List<String> namesList = new ArrayList<String>();
-        for (TestStep testStep : testStepList) {
-            if (AbstractSecurityScan.isSecurable(testStep)) {
-                namesList.add(testStep.getName());
-            }
-        }
-        String[] names = new String[namesList.size()];
-        for (int c = 0; c < namesList.size(); c++) {
-            names[c] = namesList.get(c);
-        }
-        return names;
-    }
-
-    public List<ModelItem> performClone(boolean showErrorMessage) {
+    private List<ModelItem> performClone(boolean showErrorMessage) {
         List<ModelItem> items = new ArrayList<ModelItem>();
         String targetTestSuiteName = dialog.getValue(CloneParameterDialog.TARGET_TESTSUITE);
         String targetTestCaseName = dialog.getValue(CloneParameterDialog.TARGET_TESTCASE);
@@ -171,56 +133,22 @@ public class CloneParametersAction extends AbstractAction {
         return items;
     }
 
-    private class CancelAction extends AbstractAction {
-
-        private XFormDialog dialog;
-
-        public CancelAction() {
-            super("Cancel");
-        }
-
-        public void setDialog(XFormDialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            if (dialog != null) {
-                ((SwingXFormDialog) dialog).setReturnValue(XFormDialog.CANCEL_OPTION);
-                dialog.setVisible(false);
+    private String[] getSecurableTestStepsNames(TestCase testCase) {
+        List<TestStep> testStepList = testCase.getTestStepList();
+        List<String> namesList = new ArrayList<String>();
+        for (TestStep testStep : testStepList) {
+            if (AbstractSecurityScan.isSecurable(testStep)) {
+                namesList.add(testStep.getName());
             }
         }
+        String[] names = new String[namesList.size()];
+        for (int c = 0; c < namesList.size(); c++) {
+            names[c] = namesList.get(c);
+        }
+        return names;
     }
 
-    private class ApplyAction extends AbstractAction {
-
-        private XFormDialog dialog;
-
-        public ApplyAction() {
-            super("Apply");
-        }
-
-        public void setDialog(XFormDialog dialog) {
-            this.dialog = dialog;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent arg0) {
-            if (dialog != null) {
-                List<ModelItem> items = performClone(true);
-                UISupport.showInfoMessage("Updated " + items.size() + " scans");
-
-                if (items.size() > 0) {
-                    ((XFormMultiSelectList) dialog.getFormField(CloneParameterDialog.TARGET_SECURITYSCAN))
-                            .setSelectedOptions(new String[0]);
-                    ((XFormMultiSelectList) dialog.getFormField(CloneParameterDialog.PARAMETERS))
-                            .setSelectedOptions(new String[0]);
-                }
-            }
-        }
-    }
-
-    protected XFormDialog createCloneParameterDialog() {
+    private XFormDialog createCloneParameterDialog() {
         actionList = new DefaultActionList();
         OkAction okAction = new OkAction();
         actionList.addAction(okAction, true);
@@ -377,6 +305,78 @@ public class CloneParametersAction extends AbstractAction {
         ((JFormDialog) dialog).getDialog().setResizable(false);
 
         return dialog;
+    }
+
+    private class OkAction extends AbstractAction {
+
+        private XFormDialog dialog;
+
+        OkAction() {
+            super("OK");
+        }
+
+        void setDialog(XFormDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            if (dialog != null) {
+                ((SwingXFormDialog) dialog).setReturnValue(XFormDialog.OK_OPTION);
+                List<ModelItem> items = performClone(true);
+                UISupport.showInfoMessage("Updated " + items.size() + " scans");
+                dialog.setVisible(false);
+            }
+        }
+    }
+
+    private class CancelAction extends AbstractAction {
+
+        private XFormDialog dialog;
+
+        CancelAction() {
+            super("Cancel");
+        }
+
+        void setDialog(XFormDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            if (dialog != null) {
+                ((SwingXFormDialog) dialog).setReturnValue(XFormDialog.CANCEL_OPTION);
+                dialog.setVisible(false);
+            }
+        }
+    }
+
+    private class ApplyAction extends AbstractAction {
+
+        private XFormDialog dialog;
+
+        ApplyAction() {
+            super("Apply");
+        }
+
+        void setDialog(XFormDialog dialog) {
+            this.dialog = dialog;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent arg0) {
+            if (dialog != null) {
+                List<ModelItem> items = performClone(true);
+                UISupport.showInfoMessage("Updated " + items.size() + " scans");
+
+                if (items.size() > 0) {
+                    ((XFormMultiSelectList) dialog.getFormField(CloneParameterDialog.TARGET_SECURITYSCAN))
+                            .setSelectedOptions(new String[0]);
+                    ((XFormMultiSelectList) dialog.getFormField(CloneParameterDialog.PARAMETERS))
+                            .setSelectedOptions(new String[0]);
+                }
+            }
+        }
     }
 
     @AForm(description = "Specify target TestSuite/TestCase/Security Test(s)/Security Scan(s) and select Parameters to clone", name = "Clone Parameters", icon = UISupport.TOOL_ICON_PATH, helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)

@@ -109,9 +109,19 @@ public class InvalidTypesTable extends JPanel {
 
     }
 
+    @AForm(description = "Add new type", name = "Add new type", helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
+    interface AddParameterActionDialog {
+
+        @AField(description = "Choose Type", name = "Choose type", type = AFieldType.ENUMERATION)
+        String TYPE = "Choose type";
+
+        @AField(description = "Set a value", name = "Value", type = AFieldType.STRING)
+        String VALUE = "Value";
+    }
+
     private class RemoveTypeAction extends AbstractAction {
 
-        public RemoveTypeAction() {
+        RemoveTypeAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(Action.SHORT_DESCRIPTION, "Removes type from security scan");
         }
@@ -125,7 +135,7 @@ public class InvalidTypesTable extends JPanel {
 
     private class AddNewTypeAction extends AbstractAction {
 
-        public AddNewTypeAction() {
+        AddNewTypeAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(Action.SHORT_DESCRIPTION, "Adds new type to use in security scan");
         }
@@ -147,11 +157,11 @@ public class InvalidTypesTable extends JPanel {
         private InvalidSecurityScanConfig data;
         private String[] columns = {"Type Name", "Type Value"};
 
-        public InvalidTypeTableModel(InvalidSecurityScanConfig invalidTypeConfig) {
+        InvalidTypeTableModel(InvalidSecurityScanConfig invalidTypeConfig) {
             this.data = invalidTypeConfig;
         }
 
-        public void removeRows(int[] selectedRows) {
+        void removeRows(int[] selectedRows) {
             @SuppressWarnings("rawtypes")
             List toRemove = new ArrayList();
             /*
@@ -168,7 +178,7 @@ public class InvalidTypesTable extends JPanel {
             fireTableDataChanged();
         }
 
-        public void addNewType(int type, String value) {
+        void addNewType(int type, String value) {
             SchemaTypeForSecurityScanConfig newtype = data.addNewTypesList();
             newtype.setType(type);
             newtype.setValue(value);
@@ -306,15 +316,5 @@ public class InvalidTypesTable extends JPanel {
             }
             return result;
         }
-    }
-
-    @AForm(description = "Add new type", name = "Add new type", helpUrl = HelpUrls.SECURITY_SCANS_OVERVIEW)
-    protected interface AddParameterActionDialog {
-
-        @AField(description = "Choose Type", name = "Choose type", type = AFieldType.ENUMERATION)
-        String TYPE = "Choose type";
-
-        @AField(description = "Set a value", name = "Value", type = AFieldType.STRING)
-        String VALUE = "Value";
     }
 }

@@ -19,8 +19,7 @@ package com.eviware.soapui.support.editor.inspectors.attachments;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.JComponent;
-import javax.swing.TransferHandler;
+import javax.swing.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -34,7 +33,7 @@ import java.util.List;
  * @author emibre
  */
 
-public class FileTransferHandler extends TransferHandler {
+class FileTransferHandler extends TransferHandler {
     private DataFlavor fileFlavor;
     private AttachmentTableModel attachmentModel;
 

@@ -22,7 +22,7 @@ public class UniqueUserIdentifier implements UserIdentificationInformation {
         }
     }
 
-    public static UniqueUserIdentifier initialize(UserPreferences prefs) {
+    private static UniqueUserIdentifier initialize(UserPreferences prefs) {
        if (instance == null) {
             instance = new UniqueUserIdentifier(prefs);
         }

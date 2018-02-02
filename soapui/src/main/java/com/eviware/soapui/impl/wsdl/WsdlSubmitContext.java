@@ -54,7 +54,7 @@ public class WsdlSubmitContext extends AbstractSubmitContext {
         return oldValue;
     }
 
-    public Settings getSettings() {
+    private Settings getSettings() {
         return step != null ? step.getSettings() : null;
     }
 

@@ -52,8 +52,8 @@ public class ProPlaceholderStepFactory extends WsdlTestStepFactory {
     public static class WsdlProPlaceholderTestStep extends WsdlTestStepWithProperties {
         private final String description;
 
-        protected WsdlProPlaceholderTestStep(WsdlTestCase testCase, TestStepConfig config, boolean forLoadTest,
-                                             String iconPath, String description) {
+        WsdlProPlaceholderTestStep(WsdlTestCase testCase, TestStepConfig config, boolean forLoadTest,
+                                   String iconPath, String description) {
             super(testCase, config, false, forLoadTest);
             this.description = description;
 

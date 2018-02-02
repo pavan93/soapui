@@ -20,14 +20,12 @@ import com.eviware.soapui.impl.support.AbstractHttpRequest;
 import com.eviware.soapui.support.components.SimpleBindingForm;
 import com.jgoodies.binding.PresentationModel;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BasicAuthenticationForm<T extends AbstractHttpRequest> extends AbstractAuthenticationForm {
-    protected T request;
+    T request;
     private JRadioButton globalButton;
     private JRadioButton preemptiveButton;
 
@@ -51,7 +49,7 @@ public class BasicAuthenticationForm<T extends AbstractHttpRequest> extends Abst
         preemptiveButton.setVisible(visible);
     }
 
-    protected void populateBasicForm(SimpleBindingForm basicConfigurationForm) {
+    void populateBasicForm(SimpleBindingForm basicConfigurationForm) {
         initForm(basicConfigurationForm);
 
         basicConfigurationForm.addSpace(TOP_SPACING);
@@ -83,7 +81,7 @@ public class BasicAuthenticationForm<T extends AbstractHttpRequest> extends Abst
     private class PreemptiveRadioButtonListener implements ActionListener {
         private final JRadioButton preemptiveButton;
 
-        public PreemptiveRadioButtonListener(JRadioButton preemptiveButton) {
+        PreemptiveRadioButtonListener(JRadioButton preemptiveButton) {
             this.preemptiveButton = preemptiveButton;
         }
 
@@ -100,7 +98,7 @@ public class BasicAuthenticationForm<T extends AbstractHttpRequest> extends Abst
     private class UseGlobalSettingsRadioButtonListener implements ActionListener {
         private final JRadioButton globalButton;
 
-        public UseGlobalSettingsRadioButtonListener(JRadioButton globalButton) {
+        UseGlobalSettingsRadioButtonListener(JRadioButton globalButton) {
             this.globalButton = globalButton;
         }
 

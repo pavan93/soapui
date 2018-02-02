@@ -25,7 +25,7 @@ import com.eviware.soapui.support.StringUtils;
 import java.util.HashMap;
 import java.util.Map;
 
-public class InterfaceFactoryRegistry {
+class InterfaceFactoryRegistry {
     private static Map<String, InterfaceFactory<?>> factories = new HashMap<String, InterfaceFactory<?>>();
 
     static {

@@ -44,11 +44,11 @@ public class JMSHeader {
     public static final String JMSTYPE = "JMSType";
     public static final String JMSPRIORITY = "JMSPriority";
     public static final String JMSDELIVERYMODE = "JMSDeliveryMode";
-    public static final String JMSEXPIRATION = "JMSExpiration";
-    public static final String JMSMESSAGEID = "JMSMessageID";
-    public static final String JMSTIMESTAMP = "JMSTimestamp";
-    public static final String JMSREDELIVERED = "JMSRedelivered";
-    public static final String JMSDESTINATION = "JMSDestination";
+    private static final String JMSEXPIRATION = "JMSExpiration";
+    private static final String JMSMESSAGEID = "JMSMessageID";
+    private static final String JMSTIMESTAMP = "JMSTimestamp";
+    private static final String JMSREDELIVERED = "JMSRedelivered";
+    private static final String JMSDESTINATION = "JMSDestination";
     public static final String DURABLE_SUBSCRIPTION_NAME = "durableSubscriptionName";
     public static final String MESSAGE_SELECTOR = "messageSelector";
     public static final String CLIENT_ID = "clientID";
@@ -146,7 +146,7 @@ public class JMSHeader {
         return timeTolive;
     }
 
-    public void setTimeTolive(long timeTolive) {
+    private void setTimeTolive(long timeTolive) {
         this.timeTolive = timeTolive;
     }
 

@@ -25,15 +25,9 @@ import com.eviware.soapui.ui.desktop.DesktopPanel;
 import com.eviware.soapui.ui.support.DefaultDesktopPanel;
 import org.jdesktop.swingx.JXTable;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Arrays;
 
@@ -63,7 +57,7 @@ public class ShowTransferValuesResultsAction extends AbstractAction {
         }
     }
 
-    public DesktopPanel showDesktopPanel() {
+    private DesktopPanel showDesktopPanel() {
         return UISupport.showDesktopPanel(buildFrame());
     }
 

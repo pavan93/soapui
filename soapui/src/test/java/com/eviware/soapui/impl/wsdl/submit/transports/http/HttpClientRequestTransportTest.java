@@ -146,7 +146,7 @@ public class HttpClientRequestTransportTest {
 
     private class StubbedSubmitContext extends AbstractSubmitContext<Request> {
 
-        public StubbedSubmitContext(Request modelItem) {
+        StubbedSubmitContext(Request modelItem) {
             super(modelItem);
         }
 

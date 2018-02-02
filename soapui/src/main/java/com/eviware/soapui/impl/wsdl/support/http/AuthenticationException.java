@@ -24,12 +24,12 @@ import org.apache.http.ProtocolException;
  * @author <a href="mailto:oleg@ural.ru">Oleg Kalnichevski</a>
  * @since 2.0
  */
-public class AuthenticationException extends ProtocolException {
+class AuthenticationException extends ProtocolException {
 
     /**
      * Creates a new AuthenticationException with a <tt>null</tt> detail message.
      */
-    public AuthenticationException() {
+    AuthenticationException() {
         super();
     }
 
@@ -38,7 +38,7 @@ public class AuthenticationException extends ProtocolException {
      *
      * @param message the exception detail message
      */
-    public AuthenticationException(String message) {
+    AuthenticationException(String message) {
         super(message);
     }
 
@@ -52,7 +52,7 @@ public class AuthenticationException extends ProtocolException {
      *                <tt>Throwable</tt>
      * @since 3.0
      */
-    public AuthenticationException(String message, Throwable cause) {
+    AuthenticationException(String message, Throwable cause) {
         super(message, cause);
     }
 

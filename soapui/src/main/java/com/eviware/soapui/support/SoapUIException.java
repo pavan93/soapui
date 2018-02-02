@@ -23,7 +23,7 @@ package com.eviware.soapui.support;
  */
 
 public class SoapUIException extends Exception {
-    public SoapUIException() {
+    protected SoapUIException() {
         super();
     }
 

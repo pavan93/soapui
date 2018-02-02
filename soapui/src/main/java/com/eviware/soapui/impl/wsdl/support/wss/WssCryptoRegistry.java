@@ -21,7 +21,7 @@ public class WssCryptoRegistry // extends
 {
     private static WssCryptoRegistry instance;
 
-    public WssCryptoRegistry() {
+    private WssCryptoRegistry() {
         // mapType( MerlinCrypto.TYPE, MerlinCrypto.class );
     }
 

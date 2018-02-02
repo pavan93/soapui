@@ -53,7 +53,7 @@ public class EnumerationValues {
         return null;
     }
 
-    public String getType() {
+    private String getType() {
         return type;
     }
 

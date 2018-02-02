@@ -29,10 +29,7 @@ import com.eviware.soapui.support.xml.XmlObjectConfigurationReader;
 import com.jgoodies.forms.builder.ButtonBarBuilder;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.Document;
 
 /**
@@ -53,7 +50,7 @@ public class SimpleLoadStrategy extends AbstractLoadStrategy {
     private JTextField testDelayField;
     private JTextField randomFactorField;
 
-    public SimpleLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
+    private SimpleLoadStrategy(XmlObject config, WsdlLoadTest loadTest) {
         super(STRATEGY_TYPE, loadTest);
 
         if (config != null) {
@@ -83,7 +80,7 @@ public class SimpleLoadStrategy extends AbstractLoadStrategy {
         }
     }
 
-    public int calculateDelay(int delay) {
+    private int calculateDelay(int delay) {
         if (delay == 0 || randomFactor == 0) {
             return delay;
         }

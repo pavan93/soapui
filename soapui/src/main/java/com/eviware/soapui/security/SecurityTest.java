@@ -45,11 +45,11 @@ import java.util.*;
  */
 public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<SecurityTestConfig> implements TestModelItem,
         TestRunnable {
-    public final static String STARTUP_SCRIPT_PROPERTY = SecurityTest.class.getName() + "@startupScript";
-    public final static String TEARDOWN_SCRIPT_PROPERTY = SecurityTest.class.getName() + "@tearDownScript";
-    public final static String FAIL_ON_SCANS_ERRORS_PROPERTY = SecurityTest.class.getName() + "@failOnScansErrors";
-    public final static String FAIL_ON_ERROR_PROPERTY = SecurityTest.class.getName() + "@failOnError";
-    public final static String SKIP_DATASOURCE_LOOP_PROPERTY = SecurityTest.class.getName() + "@skipDataSourceLoop";
+    private final static String STARTUP_SCRIPT_PROPERTY = SecurityTest.class.getName() + "@startupScript";
+    private final static String TEARDOWN_SCRIPT_PROPERTY = SecurityTest.class.getName() + "@tearDownScript";
+    private final static String FAIL_ON_SCANS_ERRORS_PROPERTY = SecurityTest.class.getName() + "@failOnScansErrors";
+    private final static String FAIL_ON_ERROR_PROPERTY = SecurityTest.class.getName() + "@failOnError";
+    private final static String SKIP_DATASOURCE_LOOP_PROPERTY = SecurityTest.class.getName() + "@skipDataSourceLoop";
     public static final String ICON_NAME = "/security_test.gif";
     private WsdlTestCase testCase;
     private Set<SecurityTestRunListener> securityTestRunListeners = Collections
@@ -113,7 +113,7 @@ public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<Securi
      * @param newScanConfig
      * @return
      */
-    public SecurityScan addSecurityScan(TestStep testStep, SecurityScanFactory factory, SecurityScanConfig newScanConfig) {
+    private SecurityScan addSecurityScan(TestStep testStep, SecurityScanFactory factory, SecurityScanConfig newScanConfig) {
         SecurityScan newSecScan = null;
 
         boolean hasScans = false;
@@ -612,7 +612,7 @@ public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<Securi
         }
     }
 
-    public boolean getSkipDataSourceLoops() {
+    private boolean getSkipDataSourceLoops() {
         return getConfig().getSkipDataSourceLoops();
     }
 
@@ -690,7 +690,7 @@ public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<Securi
      * @param testStep
      * @return boolean
      */
-    public boolean canAddSecurityScan(TestStep testStep, String securityScanName) {
+    private boolean canAddSecurityScan(TestStep testStep, String securityScanName) {
         boolean hasScansOfType = false;
         String securityScanType = SoapUI.getSoapUICore().getSecurityScanRegistry()
                 .getSecurityScanTypeForName(securityScanName);
@@ -781,7 +781,7 @@ public class SecurityTest extends AbstractTestPropertyHolderWsdlModelItem<Securi
         }
     }
 
-    protected boolean skipTest(TestStep testStep) {
+    boolean skipTest(TestStep testStep) {
         return false;
     }
 

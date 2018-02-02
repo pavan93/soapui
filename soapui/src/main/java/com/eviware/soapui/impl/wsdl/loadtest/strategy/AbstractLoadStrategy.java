@@ -17,15 +17,10 @@
 package com.eviware.soapui.impl.wsdl.loadtest.strategy;
 
 import com.eviware.soapui.impl.wsdl.loadtest.WsdlLoadTest;
-import com.eviware.soapui.model.testsuite.LoadTestRunContext;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
@@ -40,7 +35,7 @@ public abstract class AbstractLoadStrategy implements LoadStrategy {
     private final String type;
     private final WsdlLoadTest loadTest;
 
-    public AbstractLoadStrategy(String type, WsdlLoadTest loadTest) {
+    AbstractLoadStrategy(String type, WsdlLoadTest loadTest) {
         this.type = type;
         this.loadTest = loadTest;
         propertyChangeSupport = new PropertyChangeSupport(this);
@@ -58,7 +53,7 @@ public abstract class AbstractLoadStrategy implements LoadStrategy {
         return type;
     }
 
-    public WsdlLoadTest getLoadTest() {
+    private WsdlLoadTest getLoadTest() {
         return loadTest;
     }
 
@@ -70,7 +65,7 @@ public abstract class AbstractLoadStrategy implements LoadStrategy {
         propertyChangeSupport.removePropertyChangeListener(CONFIGURATION_PROPERTY, listener);
     }
 
-    public void notifyConfigurationChanged() {
+    void notifyConfigurationChanged() {
         propertyChangeSupport.firePropertyChange(CONFIGURATION_PROPERTY, null, null);
     }
 

@@ -196,7 +196,7 @@ public class HttpClientSupport {
         private final SoapUIMultiThreadedHttpConnectionManager connectionManager;
         private final SchemeRegistry registry;
 
-        public Helper() {
+        Helper() {
             Settings settings = SoapUI.getSettings();
             registry = new SchemeRegistry();
 
@@ -222,7 +222,7 @@ public class HttpClientSupport {
             settings.addSettingsListener(new SSLSettingsListener());
         }
 
-        public SoapUIHttpClient getHttpClient() {
+        SoapUIHttpClient getHttpClient() {
             return httpClient;
         }
 
@@ -230,7 +230,7 @@ public class HttpClientSupport {
             return registry;
         }
 
-        public HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext) throws
+        HttpResponse execute(ExtendedHttpMethod method, HttpContext httpContext) throws
                 IOException {
             method.afterWriteRequest();
             if (method.getMetrics() != null) {
@@ -242,7 +242,7 @@ public class HttpClientSupport {
             return httpResponse;
         }
 
-        public HttpResponse execute(ExtendedHttpMethod method) throws IOException {
+        HttpResponse execute(ExtendedHttpMethod method) throws IOException {
             method.afterWriteRequest();
             if (method.getMetrics() != null) {
                 method.getMetrics().getConnectTimer().start();
@@ -283,7 +283,7 @@ public class HttpClientSupport {
             }
         }
 
-        public SoapUISSLSocketFactory initSocketFactory() throws KeyStoreException, NoSuchAlgorithmException,
+        SoapUISSLSocketFactory initSocketFactory() throws KeyStoreException, NoSuchAlgorithmException,
                 UnrecoverableKeyException, KeyManagementException {
             KeyStore keyStore = null;
             Settings settings = SoapUI.getSettings();

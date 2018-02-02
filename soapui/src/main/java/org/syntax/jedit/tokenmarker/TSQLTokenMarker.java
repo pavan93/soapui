@@ -24,13 +24,13 @@ import org.syntax.jedit.KeywordMap;
  * @author mike dillon
  * @version $Id: TSQLTokenMarker.java,v 1.9 1999/12/13 03:40:30 sp Exp $
  */
-public class TSQLTokenMarker extends SQLTokenMarker {
+class TSQLTokenMarker extends SQLTokenMarker {
     // public members
     public TSQLTokenMarker() {
         super(getKeywordMap(), true);
     }
 
-    public static KeywordMap getKeywordMap() {
+    private static KeywordMap getKeywordMap() {
         if (tsqlKeywords == null) {
             tsqlKeywords = new KeywordMap(true);
             addKeywords();

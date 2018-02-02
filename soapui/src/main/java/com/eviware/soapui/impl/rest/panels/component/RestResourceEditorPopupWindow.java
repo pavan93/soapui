@@ -24,23 +24,9 @@ import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.jgoodies.forms.factories.ButtonBarFactory;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -197,7 +183,7 @@ class RestResourceEditorPopupWindow extends JDialog {
             return textField;
         }
 
-        public RestResource getRestResource() {
+        RestResource getRestResource() {
             return restResource;
         }
     }
@@ -222,7 +208,7 @@ class RestResourceEditorPopupWindow extends JDialog {
         private final JLabel changeWarningLabel;
         private RestResource affectedRestResource;
 
-        public PathChangeListener(JLabel changeWarningLabel, RestResource affectedRestResource) {
+        PathChangeListener(JLabel changeWarningLabel, RestResource affectedRestResource) {
             this.changeWarningLabel = changeWarningLabel;
             this.affectedRestResource = affectedRestResource;
         }

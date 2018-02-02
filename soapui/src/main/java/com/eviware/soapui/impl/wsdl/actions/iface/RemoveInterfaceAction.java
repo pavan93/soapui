@@ -110,7 +110,7 @@ public class RemoveInterfaceAction extends AbstractSoapUIAction<WsdlInterface> {
         return false;
     }
 
-    public static boolean hasDependingMockOperations(WsdlInterface iface) {
+    private static boolean hasDependingMockOperations(WsdlInterface iface) {
         for (int c = 0; c < iface.getProject().getMockServiceCount(); c++) {
             MockService mockService = iface.getProject().getMockServiceAt(c);
             for (int i = 0; i < mockService.getMockOperationCount(); i++) {

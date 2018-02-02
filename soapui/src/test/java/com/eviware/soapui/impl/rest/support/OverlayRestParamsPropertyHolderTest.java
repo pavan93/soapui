@@ -31,7 +31,7 @@ import static org.mockito.Mockito.when;
  * @author : Shadid Chowdhury
  */
 public class OverlayRestParamsPropertyHolderTest {
-    OverlayRestParamsPropertyHolder propertyHolder;
+    private OverlayRestParamsPropertyHolder propertyHolder;
 
     @Before
     public void setUP() {

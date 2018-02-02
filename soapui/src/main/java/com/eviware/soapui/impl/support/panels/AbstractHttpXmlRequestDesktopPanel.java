@@ -42,7 +42,7 @@ import static com.eviware.soapui.support.JsonUtil.seemsToBeJsonContentType;
 public abstract class AbstractHttpXmlRequestDesktopPanel<T extends ModelItem, T2 extends HttpRequestInterface<?>>
         extends AbstractHttpRequestDesktopPanel<T, T2> {
 
-    public AbstractHttpXmlRequestDesktopPanel(T modelItem, T2 requestItem) {
+    protected AbstractHttpXmlRequestDesktopPanel(T modelItem, T2 requestItem) {
         super(modelItem, requestItem);
     }
 
@@ -56,31 +56,17 @@ public abstract class AbstractHttpXmlRequestDesktopPanel<T extends ModelItem, T2
         return new HttpResponseMessageEditor(getRequest());
     }
 
-    public class HttpRequestMessageEditor extends
-            AbstractHttpRequestDesktopPanel.AbstractHttpRequestMessageEditor {
-        public HttpRequestMessageEditor(HttpRequestInterface<?> modelItem) {
-            super(new HttpRequestDocument(modelItem));
-        }
-    }
-
-    public class HttpResponseMessageEditor extends
-            AbstractHttpRequestDesktopPanel.AbstractHttpResponseMessageEditor {
-        public HttpResponseMessageEditor(HttpRequestInterface<?> modelItem) {
-            super(new HttpResponseDocument(modelItem));
-        }
-    }
-
     public static class HttpRequestDocument extends AbstractXmlDocument implements PropertyChangeListener {
         private final HttpRequestInterface<?> request;
         private boolean updating;
 
-        public HttpRequestDocument(HttpRequestInterface<?> request) {
+        HttpRequestDocument(HttpRequestInterface<?> request) {
             this.request = request;
 
             request.addPropertyChangeListener(this);
         }
 
-        public HttpRequestInterface<?> getRequest() {
+        HttpRequestInterface<?> getRequest() {
             return request;
         }
 
@@ -175,13 +161,13 @@ public abstract class AbstractHttpXmlRequestDesktopPanel<T extends ModelItem, T2
     public static class HttpResponseDocument extends AbstractXmlDocument implements PropertyChangeListener {
         private final HttpRequestInterface<?> modelItem;
 
-        public HttpResponseDocument(HttpRequestInterface<?> modelItem) {
+        HttpResponseDocument(HttpRequestInterface<?> modelItem) {
             this.modelItem = modelItem;
 
             modelItem.addPropertyChangeListener(RestRequestInterface.RESPONSE_PROPERTY, this);
         }
 
-        public HttpRequestInterface<?> getRequest() {
+        HttpRequestInterface<?> getRequest() {
             return modelItem;
         }
 
@@ -220,6 +206,20 @@ public abstract class AbstractHttpXmlRequestDesktopPanel<T extends ModelItem, T2
         public void release() {
             super.release();
             modelItem.removePropertyChangeListener(RestRequestInterface.RESPONSE_PROPERTY, this);
+        }
+    }
+
+    public class HttpRequestMessageEditor extends
+            AbstractHttpRequestDesktopPanel.AbstractHttpRequestMessageEditor {
+        HttpRequestMessageEditor(HttpRequestInterface<?> modelItem) {
+            super(new HttpRequestDocument(modelItem));
+        }
+    }
+
+    public class HttpResponseMessageEditor extends
+            AbstractHttpRequestDesktopPanel.AbstractHttpResponseMessageEditor {
+        HttpResponseMessageEditor(HttpRequestInterface<?> modelItem) {
+            super(new HttpResponseDocument(modelItem));
         }
     }
 

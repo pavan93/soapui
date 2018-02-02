@@ -21,12 +21,7 @@ import com.eviware.soapui.impl.WorkspaceImpl;
 import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.WsdlProject;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
-import com.eviware.soapui.impl.wsdl.support.wss.IncomingWss;
-import com.eviware.soapui.impl.wsdl.support.wss.OutgoingWss;
-import com.eviware.soapui.impl.wsdl.support.wss.WssContainer;
-import com.eviware.soapui.impl.wsdl.support.wss.WssCrypto;
-import com.eviware.soapui.impl.wsdl.support.wss.WssEntry;
-import com.eviware.soapui.impl.wsdl.support.wss.WssEntryRegistry;
+import com.eviware.soapui.impl.wsdl.support.wss.*;
 import com.eviware.soapui.impl.wsdl.support.wss.crypto.CryptoType;
 import com.eviware.soapui.impl.wsdl.support.wss.crypto.KeyMaterialWssCrypto;
 import com.eviware.soapui.impl.wsdl.support.wss.entries.WssContainerListenerAdapter;
@@ -38,27 +33,12 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.support.swing.JTableFactory;
 
 import javax.annotation.Nonnull;
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.DefaultCellEditor;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.util.ArrayList;
@@ -391,14 +371,28 @@ public class WSSTabPanel extends JPanel {
 
     // :: Table models ::
 
-    public class OutgoingWssTableModel extends AbstractTableModel {
+    static class PasswordTableCellRenderer extends JPasswordField implements TableCellRenderer {
+        PasswordTableCellRenderer() {
+            setEditable(false);
+            setBorder(null);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                                                       int row, int column) {
+            setBackground(table.getBackground());
+            setText(value == null ? "" : value.toString());
+            return this;
+        }
+    }
+
+    class OutgoingWssTableModel extends AbstractTableModel {
         private List<OutgoingWss> outgoingWss;
 
-        public OutgoingWssTableModel() {
+        OutgoingWssTableModel() {
             outgoingWss = wssContainer.getOutgoingWssList();
         }
 
-        public void release() {
+        void release() {
             outgoingWss = null;
         }
 
@@ -477,12 +471,12 @@ public class WSSTabPanel extends JPanel {
             }
         }
 
-        public void outgoingWssAdded(OutgoingWss outgoing) {
+        void outgoingWssAdded(OutgoingWss outgoing) {
             outgoingWss.add(outgoing);
             fireTableRowsInserted(outgoingWss.size() - 1, outgoingWss.size() - 1);
         }
 
-        public void outgoingWssRemoved(OutgoingWss outgoing) {
+        void outgoingWssRemoved(OutgoingWss outgoing) {
             int ix = outgoingWss.indexOf(outgoing);
             if (ix != -1) {
                 outgoingWss.remove(ix);
@@ -491,14 +485,14 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    public class IncomingWssTableModel extends AbstractTableModel {
+    class IncomingWssTableModel extends AbstractTableModel {
         private List<IncomingWss> incomingWss;
 
-        public IncomingWssTableModel() {
+        IncomingWssTableModel() {
             incomingWss = wssContainer.getIncomingWssList();
         }
 
-        public void release() {
+        void release() {
             incomingWss = null;
         }
 
@@ -565,13 +559,13 @@ public class WSSTabPanel extends JPanel {
             }
         }
 
-        public void incomingWssAdded(IncomingWss incoming) {
+        void incomingWssAdded(IncomingWss incoming) {
             incomingWss.add(incoming);
             fireTableRowsInserted(incomingWss.size() - 1, incomingWss.size() - 1);
 
         }
 
-        public void incomingWssRemoved(IncomingWss incoming) {
+        void incomingWssRemoved(IncomingWss incoming) {
             int ix = incomingWss.indexOf(incoming);
             if (ix != -1) {
                 incomingWss.remove(ix);
@@ -580,11 +574,13 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    public class CryptoTableModel extends AbstractTableModel {
+    // :: Actions ::
+
+    class CryptoTableModel extends AbstractTableModel {
         private static final String DEFAULT_OPTION = "<Default>";
         private List<WssCrypto> cryptos;
 
-        public CryptoTableModel(CryptoType cryptoType) {
+        CryptoTableModel(CryptoType cryptoType) {
             cryptos = new ArrayList<WssCrypto>();
             for (WssCrypto crypto : wssContainer.getCryptoList()) {
                 if (crypto.getType() == cryptoType) {
@@ -593,7 +589,7 @@ public class WSSTabPanel extends JPanel {
             }
         }
 
-        public void release() {
+        void release() {
             cryptos = null;
         }
 
@@ -653,7 +649,7 @@ public class WSSTabPanel extends JPanel {
             return null;
         }
 
-        public WssCrypto getCryptoAt(int row) {
+        WssCrypto getCryptoAt(int row) {
             return cryptos.get(row);
         }
 
@@ -680,12 +676,12 @@ public class WSSTabPanel extends JPanel {
             }
         }
 
-        public void cryptoAdded(WssCrypto crypto) {
+        void cryptoAdded(WssCrypto crypto) {
             cryptos.add(crypto);
             fireTableRowsInserted(cryptos.size() - 1, cryptos.size() - 1);
         }
 
-        public void cryptoRemoved(WssCrypto crypto) {
+        void cryptoRemoved(WssCrypto crypto) {
             int ix = cryptos.indexOf(crypto);
             if (ix != -1) {
                 cryptos.remove(ix);
@@ -694,10 +690,8 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    // :: Actions ::
-
     private class AddOutgoingWssAction extends AbstractAction {
-        public AddOutgoingWssAction() {
+        AddOutgoingWssAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(SHORT_DESCRIPTION, "Adds a new Outgoing WSS Configuration");
         }
@@ -713,7 +707,7 @@ public class WSSTabPanel extends JPanel {
     }
 
     private class RemoveOutgoingWssAction extends AbstractAction {
-        public RemoveOutgoingWssAction() {
+        RemoveOutgoingWssAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(SHORT_DESCRIPTION, "Removes the selected Outgoing WSS Configuration");
 
@@ -733,8 +727,8 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    public class AddOutgoingEntryAction extends AbstractAction {
-        public AddOutgoingEntryAction() {
+    class AddOutgoingEntryAction extends AbstractAction {
+        AddOutgoingEntryAction() {
             putValue(SHORT_DESCRIPTION, "Adds a new WSS Entry");
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             setEnabled(false);
@@ -754,8 +748,8 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    public class RemoveOutgoingEntryAction extends AbstractAction {
-        public RemoveOutgoingEntryAction() {
+    class RemoveOutgoingEntryAction extends AbstractAction {
+        RemoveOutgoingEntryAction() {
             putValue(SHORT_DESCRIPTION, "Removes the selected WSS-Entry");
             putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
         }
@@ -773,7 +767,7 @@ public class WSSTabPanel extends JPanel {
     }
 
     private class MoveOutgoingEntryUpAction extends AbstractAction {
-        public MoveOutgoingEntryUpAction() {
+        MoveOutgoingEntryUpAction() {
             super("Move entry Up");
             putValue(Action.SHORT_DESCRIPTION, "Moves selected entry up one row");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/up_arrow.gif"));
@@ -786,7 +780,7 @@ public class WSSTabPanel extends JPanel {
 
     private class MoveOutgoingEntryDownAction extends AbstractAction {
 
-        public MoveOutgoingEntryDownAction() {
+        MoveOutgoingEntryDownAction() {
             super("Move entry Down");
             putValue(Action.SHORT_DESCRIPTION, "Moves selected entry down one row");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/down_arrow.gif"));
@@ -798,7 +792,7 @@ public class WSSTabPanel extends JPanel {
     }
 
     private class AddIncomingWssAction extends AbstractAction {
-        public AddIncomingWssAction() {
+        AddIncomingWssAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(SHORT_DESCRIPTION, "Adds a new Incoming WSS Configuration");
         }
@@ -814,7 +808,7 @@ public class WSSTabPanel extends JPanel {
     }
 
     private class RemoveIncomingWssAction extends AbstractAction {
-        public RemoveIncomingWssAction() {
+        RemoveIncomingWssAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
             putValue(SHORT_DESCRIPTION, "Removes the selected Incoming WSS Configuration");
 
@@ -833,7 +827,7 @@ public class WSSTabPanel extends JPanel {
         }
     }
 
-    public class ImportWssSettingsAction extends AbstractAction {
+    private class ImportWssSettingsAction extends AbstractAction {
         public ImportWssSettingsAction() {
             putValue(SHORT_DESCRIPTION, "Imports an existing WS-Security configuration from another project");
             putValue(SMALL_ICON, UISupport.createImageIcon("/load_properties.gif"));
@@ -852,7 +846,7 @@ public class WSSTabPanel extends JPanel {
     private class AddCryptoAction extends AbstractAction {
         private final CryptoType cryptoType;
 
-        public AddCryptoAction(CryptoType cryptoType) {
+        AddCryptoAction(CryptoType cryptoType) {
             this.cryptoType = cryptoType;
             putValue(SMALL_ICON, UISupport.createImageIcon("/add.png"));
             putValue(SHORT_DESCRIPTION, "Adds a new " + cryptoType.toString() + " to this configuration");
@@ -867,34 +861,6 @@ public class WSSTabPanel extends JPanel {
                         "Add Key Material"));
                 wssContainer.addCrypto(file.getAbsolutePath(), password, cryptoType);
                 cryptoTable.setRowSelectionInterval(cryptoTable.getRowCount() - 1, cryptoTable.getRowCount() - 1);
-            }
-        }
-    }
-
-    private class RemoveCryptoAction extends AbstractAction {
-        private final CryptoType cryptoType;
-
-        public RemoveCryptoAction(CryptoType cryptoType) {
-            this.cryptoType = cryptoType;
-            putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
-            putValue(SHORT_DESCRIPTION, "Removes the selected " + cryptoType + " from this configuration");
-
-            setEnabled(false);
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            JTable cryptoTable = getCryptoTable(cryptoType);
-
-            int row = cryptoTable.getSelectedRow();
-            if (row == -1) {
-                return;
-            }
-
-            CryptoTableModel tableModel = (CryptoTableModel) cryptoTable.getModel();
-            WssCrypto crypto = tableModel.getCryptoAt(row);
-
-            if (UISupport.confirm("Removes selected " + cryptoType + "?", "Remove " + cryptoType)) {
-                wssContainer.removeCrypto(crypto);
             }
         }
     }
@@ -969,17 +935,31 @@ public class WSSTabPanel extends JPanel {
 
     // :: Table cell renderer::
 
-    public static class PasswordTableCellRenderer extends JPasswordField implements TableCellRenderer {
-        public PasswordTableCellRenderer() {
-            setEditable(false);
-            setBorder(null);
+    private class RemoveCryptoAction extends AbstractAction {
+        private final CryptoType cryptoType;
+
+        RemoveCryptoAction(CryptoType cryptoType) {
+            this.cryptoType = cryptoType;
+            putValue(SMALL_ICON, UISupport.createImageIcon("/delete.png"));
+            putValue(SHORT_DESCRIPTION, "Removes the selected " + cryptoType + " from this configuration");
+
+            setEnabled(false);
         }
 
-        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
-                                                       int row, int column) {
-            setBackground(table.getBackground());
-            setText(value == null ? "" : value.toString());
-            return this;
+        public void actionPerformed(ActionEvent e) {
+            JTable cryptoTable = getCryptoTable(cryptoType);
+
+            int row = cryptoTable.getSelectedRow();
+            if (row == -1) {
+                return;
+            }
+
+            CryptoTableModel tableModel = (CryptoTableModel) cryptoTable.getModel();
+            WssCrypto crypto = tableModel.getCryptoAt(row);
+
+            if (UISupport.confirm("Removes selected " + cryptoType + "?", "Remove " + cryptoType)) {
+                wssContainer.removeCrypto(crypto);
+            }
         }
     }
 }

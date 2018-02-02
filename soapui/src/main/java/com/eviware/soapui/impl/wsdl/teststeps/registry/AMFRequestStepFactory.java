@@ -28,7 +28,7 @@ import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
  */
 
 public class AMFRequestStepFactory extends WsdlTestStepFactory {
-    public static final String AMF_REQUEST_TYPE = "amfrequest";
+    private static final String AMF_REQUEST_TYPE = "amfrequest";
 
     public AMFRequestStepFactory() {
         super(AMF_REQUEST_TYPE, "AMF Request", "Submits a AMF Request and validates its response", "/amf_request_step.gif");

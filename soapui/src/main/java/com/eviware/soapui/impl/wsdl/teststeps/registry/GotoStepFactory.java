@@ -27,7 +27,7 @@ import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
  */
 
 public class GotoStepFactory extends WsdlTestStepFactory {
-    public static final String GOTO_TYPE = "goto";
+    private static final String GOTO_TYPE = "goto";
 
     public GotoStepFactory() {
         super(GOTO_TYPE, "Conditional Goto", "Transfers the execution to another TestStep based on xpath expressions",

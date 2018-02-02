@@ -53,7 +53,7 @@ public class HttpRequestStepFactory extends WsdlTestStepFactory {
     private static final String HTTPREQUEST = "httprequest";
     public static final String HTTPREQUEST_TYPE = HTTPREQUEST;
     private XFormDialog dialog;
-    public static final MessageSupport messages = MessageSupport.getMessages(HttpRequestStepFactory.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(HttpRequestStepFactory.class);
     private XmlBeansRestParamsTestPropertyHolder params;
     private RestParamsTable paramsTable;
 
@@ -147,7 +147,7 @@ public class HttpRequestStepFactory extends WsdlTestStepFactory {
     }
 
     @AForm(name = "Form.Title", description = "Form.Description", helpUrl = HelpUrls.HTTP_REQUEST_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(description = "Form.TestStepName.Description", type = AField.AFieldType.STRING)
         String STEPNAME = messages.get("Form.TestStepName.Label");
 
@@ -165,7 +165,7 @@ public class HttpRequestStepFactory extends WsdlTestStepFactory {
     }
 
     private class ExtractParamsAction extends AbstractAction {
-        public ExtractParamsAction() {
+        ExtractParamsAction() {
             super("Extract Params");
         }
 

@@ -11,36 +11,14 @@ import com.jgoodies.binding.PresentationModel;
 import com.jgoodies.binding.adapter.Bindings;
 
 import javax.annotation.Nonnull;
-import javax.swing.AbstractAction;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.Insets;
-import java.awt.MouseInfo;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class OAuth1Form extends AbstractAuthenticationForm implements OAuth1TokenStatusChangeListener {
-    public static final String ADVANCED_OPTIONS_BUTTON_NAME = "Advanced...";
-    static final ImageIcon SUCCESS_ICON = UISupport.createImageIcon("/check.png");
-    static final ImageIcon FAIL_ICON = UISupport.createImageIcon("/alert.png");
+    private static final String ADVANCED_OPTIONS_BUTTON_NAME = "Advanced...";
+    private static final ImageIcon SUCCESS_ICON = UISupport.createImageIcon("/check.png");
+    private static final ImageIcon FAIL_ICON = UISupport.createImageIcon("/alert.png");
     private static final MessageSupport messages = MessageSupport.getMessages(OAuth1Form.class);
     private static final int ACCESS_TOKEN_DIALOG_HORIZONTAL_OFFSET = 120;
     private static final Dimension HORIZONTAL_SPACING_IN_ACCESS_TOKEN_ROW = new Dimension(5, 0);
@@ -352,7 +330,7 @@ public class OAuth1Form extends AbstractAuthenticationForm implements OAuth1Toke
         private final JDialog accessTokenFormDialog;
         private final JLabel disclosureButton;
 
-        public DisclosureButtonMouseListener(JDialog accessTokenFormDialog, JLabel disclosureButton) {
+        DisclosureButtonMouseListener(JDialog accessTokenFormDialog, JLabel disclosureButton) {
             this.accessTokenFormDialog = accessTokenFormDialog;
             this.disclosureButton = disclosureButton;
         }
@@ -391,7 +369,7 @@ public class OAuth1Form extends AbstractAuthenticationForm implements OAuth1Toke
     private class AccessTokenFormDialogWindowListener implements WindowFocusListener {
         private final JDialog accessTokenFormDialog;
 
-        public AccessTokenFormDialogWindowListener(JDialog accessTokenFormDialog) {
+        AccessTokenFormDialogWindowListener(JDialog accessTokenFormDialog) {
             this.accessTokenFormDialog = accessTokenFormDialog;
         }
 
@@ -420,7 +398,7 @@ public class OAuth1Form extends AbstractAuthenticationForm implements OAuth1Toke
     private class SoapUIMainWindowFocusListener extends WindowAdapter {
         private final JDialog accessTokenFormDialog;
 
-        public SoapUIMainWindowFocusListener(JDialog accessTokenFormDialog) {
+        SoapUIMainWindowFocusListener(JDialog accessTokenFormDialog) {
             this.accessTokenFormDialog = accessTokenFormDialog;
         }
 

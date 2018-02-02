@@ -33,7 +33,7 @@ public class MockOperationDispatchRegistry {
                 new QueryMatchMockOperationDispatcher.Factory());
     }
 
-    public static void putFactory(String type, MockOperationDispatchFactory factory) {
+    private static void putFactory(String type, MockOperationDispatchFactory factory) {
         factories.put(type, factory);
     }
 

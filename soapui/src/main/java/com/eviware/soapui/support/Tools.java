@@ -32,7 +32,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 
 public class Tools {
-    public static final int COPY_BUFFER_SIZE = 1000;
+    private static final int COPY_BUFFER_SIZE = 1000;
 
     private static final Logger log = Logger.getLogger(Tools.class);
 
@@ -612,7 +612,7 @@ public class Tools {
         return libDirectory;
     }
 
-    public static void deleteDirectoryOnExit(final File directory) {
+    private static void deleteDirectoryOnExit(final File directory) {
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             @Override
             public void run() {

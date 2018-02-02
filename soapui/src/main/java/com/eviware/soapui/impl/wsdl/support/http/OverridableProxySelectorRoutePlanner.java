@@ -34,7 +34,7 @@ import java.net.ProxySelector;
 /**
  * @author Joel
  */
-public class OverridableProxySelectorRoutePlanner extends ProxySelectorRoutePlanner {
+class OverridableProxySelectorRoutePlanner extends ProxySelectorRoutePlanner {
     private static final String FORCE_DIRECT_CONNECTION = "FORCE_DIRECT_CONNECTION";
 
     static void setForceDirectConnection(HttpParams params) {

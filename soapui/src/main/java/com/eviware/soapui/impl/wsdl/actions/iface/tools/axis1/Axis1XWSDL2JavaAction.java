@@ -66,7 +66,7 @@ public class Axis1XWSDL2JavaAction extends AbstractToolsAction<Interface> {
     private static final String PASSWORD = "password";
 
     public static final String SOAPUI_ACTION_ID = "Axis1XWSDL2JavaAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(Axis1XWSDL2JavaAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(Axis1XWSDL2JavaAction.class);
 
     public Axis1XWSDL2JavaAction() {
         super(messages.get("Title"), messages.get("Description"));

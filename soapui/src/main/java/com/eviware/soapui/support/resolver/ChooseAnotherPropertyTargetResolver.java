@@ -29,14 +29,8 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListCellRenderer;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JDialog;
-import javax.swing.JList;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -107,7 +101,7 @@ public class ChooseAnotherPropertyTargetResolver implements Resolver {
         private JButton okBtn = new JButton(" Ok ");
         private JButton cancelBtn = new JButton(" Cancel ");
 
-        public PropertyChangeDialog(String title) {
+        PropertyChangeDialog(String title) {
             super(UISupport.getMainFrame(), title, true);
             init();
         }
@@ -199,7 +193,7 @@ public class ChooseAnotherPropertyTargetResolver implements Resolver {
             this.add(panel.getPanel());
         }
 
-        public void showAndChoose() {
+        void showAndChoose() {
             this.pack();
             this.setVisible(true);
         }

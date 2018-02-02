@@ -21,11 +21,7 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import java.io.IOException;
 import java.io.LineNumberReader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author lars
@@ -138,7 +134,7 @@ public class XPathData {
         return getHashKey().hashCode();
     }
 
-    public String getHashKey() {
+    private String getHashKey() {
         return getCanonicalPath();
     }
 
@@ -229,7 +225,7 @@ public class XPathData {
     /**
      * Get a path with all namespaces replaced.
      */
-    public String getCanonicalPath() {
+    private String getCanonicalPath() {
         HashMap<String, String> inverseNsMap = new HashMap<String, String>();
         for (String key : nsMap.keySet()) {
             String value = nsMap.get(key);
@@ -261,7 +257,7 @@ public class XPathData {
     /**
      * Get a path with no namespaces or namespace prefixes.
      */
-    public String getShortPath() {
+    private String getShortPath() {
         StringBuffer buf = new StringBuffer();
         buf.append("/");
 

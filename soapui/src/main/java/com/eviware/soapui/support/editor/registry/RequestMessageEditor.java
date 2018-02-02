@@ -28,7 +28,7 @@ import com.eviware.soapui.support.editor.EditorView;
  * @author ole.matzura
  */
 
-public class RequestMessageEditor<T1 extends EditorDocument, T2 extends ModelItem> extends Editor<T1> {
+class RequestMessageEditor<T1 extends EditorDocument, T2 extends ModelItem> extends Editor<T1> {
     private final T2 modelItem;
 
     @SuppressWarnings("unchecked")

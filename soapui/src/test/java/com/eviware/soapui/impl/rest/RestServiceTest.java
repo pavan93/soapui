@@ -31,7 +31,7 @@ import static org.junit.Assert.assertThat;
 public class RestServiceTest {
 
     private RestService restService;
-    RestResource restResource;
+    private RestResource restResource;
 
     @Before
     public void setUp() throws XmlException, IOException, SoapUIException {

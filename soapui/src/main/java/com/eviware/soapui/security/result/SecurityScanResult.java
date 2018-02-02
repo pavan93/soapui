@@ -22,7 +22,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.DefaultActionList;
 
-import javax.swing.AbstractAction;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -46,13 +46,13 @@ public class SecurityScanResult implements SecurityResult {
      * if no assertion is added, when status icon should be added to log
      */
     private ResultStatus status;
-    public SecurityScan securityCheck;
+    private final static int MAX_REQ_LOG_ENTRY_LENGTH = 100;
     private long size;
     private boolean discarded;
     private List<SecurityScanRequestResult> securityRequestResultList;
     private long timeTaken = 0;
     private long timeStamp;
-    public StringBuffer testLog = new StringBuffer();
+    private SecurityScan securityCheck;
     private DefaultActionList actionList;
     private boolean hasAddedRequests;
     // along with the status determines if canceled with or without warnings
@@ -60,7 +60,7 @@ public class SecurityScanResult implements SecurityResult {
     private ResultStatus executionProgressStatus;
     private ResultStatus logIconStatus;
     private int requestCount = 0;
-    public final static int MAX_REQ_LOG_ENTRY_LENGTH = 100;
+    private StringBuffer testLog = new StringBuffer();
     public final static int MAX_SECURITY_CHANGED_PARAMETERS_LENGTH = 100;
 
     public SecurityScanResult(SecurityScan securityCheck) {

@@ -71,7 +71,7 @@ public class AMFHeadersInspectorFactory implements RequestInspectorFactory, Resp
     }
 
     private class MessageExchangeRequestAMFHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public MessageExchangeRequestAMFHeadersModel(MessageExchangeModelItem request) {
+        MessageExchangeRequestAMFHeadersModel(MessageExchangeModelItem request) {
             super(true, request, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -85,7 +85,7 @@ public class AMFHeadersInspectorFactory implements RequestInspectorFactory, Resp
     }
 
     private class MessageExchangeResponseAMFHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public MessageExchangeResponseAMFHeadersModel(MessageExchangeModelItem messageExchange) {
+        MessageExchangeResponseAMFHeadersModel(MessageExchangeModelItem messageExchange) {
             super(true, messageExchange, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -105,7 +105,7 @@ public class AMFHeadersInspectorFactory implements RequestInspectorFactory, Resp
     }
 
     private class AMFRequestHeadersModel extends AbstractHeadersModel<AMFRequestTestStep> {
-        public AMFRequestHeadersModel(AMFRequestTestStep testStep) {
+        AMFRequestHeadersModel(AMFRequestTestStep testStep) {
             super(false, testStep, AMFRequestTestStep.AMF_HEADERS_PROPERTY);
         }
 
@@ -128,7 +128,7 @@ public class AMFHeadersInspectorFactory implements RequestInspectorFactory, Resp
     private class AMFResponseHeadersModel extends AbstractHeadersModel<AMFRequestTestStep> {
         AMFRequest request;
 
-        public AMFResponseHeadersModel(AMFRequestTestStep testStep) {
+        AMFResponseHeadersModel(AMFRequestTestStep testStep) {
             super(true, testStep, AMFRequestTestStep.AMF_HEADERS_PROPERTY);
             this.request = testStep.getAMFRequest();
             this.request.addPropertyChangeListener(AMFRequest.AMF_RESPONSE_PROPERTY, this);

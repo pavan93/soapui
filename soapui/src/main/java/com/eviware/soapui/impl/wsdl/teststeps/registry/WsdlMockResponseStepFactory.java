@@ -140,22 +140,22 @@ public class WsdlMockResponseStepFactory extends WsdlTestStepFactory {
     @AForm(description = "Specify options for new MockResponse step", name = "New MockResponse Step", helpUrl = HelpUrls.CREATEMOCKRESPONSESTEP_HELP_URL, icon = UISupport.OPTIONS_ICON_PATH)
     private class CreateForm {
         @AField(description = "The name of the MockResponse step", name = "Name", type = AFieldType.STRING)
-        public static final String NAME = "Name";
+        static final String NAME = "Name";
 
         @AField(description = "Specifies the operation to be mocked", name = "Operation", type = AFieldType.ENUMERATION)
-        public final static String OPERATION = "Operation";
+        final static String OPERATION = "Operation";
 
         @AField(description = "Specifies the interface containing the operation to be mocked", name = "Interface", type = AFieldType.ENUMERATION)
-        public final static String INTERFACE = "Interface";
+        final static String INTERFACE = "Interface";
 
         @AField(description = "Specifies if a mock response is to be created from the schema", name = "Create Response", type = AFieldType.BOOLEAN)
-        public final static String CREATE_RESPONSE = "Create Response";
+        final static String CREATE_RESPONSE = "Create Response";
 
         @AField(description = "Specifies the port to listen on", name = "Port", type = AFieldType.INT)
-        public final static String PORT = "Port";
+        final static String PORT = "Port";
 
         @AField(description = "Specifies the path to listen on", name = "Path")
-        public final static String PATH = "Path";
+        final static String PATH = "Path";
     }
 
     public static TestStepConfig createConfig(WsdlOperation operation, boolean interactive) {

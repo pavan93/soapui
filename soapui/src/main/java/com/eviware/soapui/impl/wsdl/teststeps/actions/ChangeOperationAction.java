@@ -119,7 +119,7 @@ public class ChangeOperationAction extends AbstractSoapUIAction<WsdlTestRequestS
     }
 
     @AForm(description = "Specify Interface/Operation for TestRequest", name = "Change Operation", helpUrl = HelpUrls.CHANGEOPERATION_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    protected interface Form {
+    interface Form {
         @AField(name = "Name", description = "The Name of the TestRequests", type = AFieldType.STRING)
         String NAME = "Name";
 

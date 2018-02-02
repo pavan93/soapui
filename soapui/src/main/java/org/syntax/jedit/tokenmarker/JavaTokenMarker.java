@@ -24,12 +24,12 @@ import org.syntax.jedit.KeywordMap;
  * @author Slava Pestov
  * @version $Id: JavaTokenMarker.java,v 1.5 1999/12/13 03:40:30 sp Exp $
  */
-public class JavaTokenMarker extends CTokenMarker {
+class JavaTokenMarker extends CTokenMarker {
     public JavaTokenMarker() {
         super(false, getKeywords());
     }
 
-    public static KeywordMap getKeywords() {
+    private static KeywordMap getKeywords() {
         if (javaKeywords == null) {
             javaKeywords = new KeywordMap(false);
             javaKeywords.add("package", Token.KEYWORD2);

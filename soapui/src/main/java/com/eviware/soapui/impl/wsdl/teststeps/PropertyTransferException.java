@@ -24,7 +24,7 @@ import com.eviware.soapui.model.testsuite.TestProperty;
  * @author ole.matzura
  */
 
-public class PropertyTransferException extends Exception {
+class PropertyTransferException extends Exception {
     private String message;
     private final String sourceStepName;
     private final String targetStepName;

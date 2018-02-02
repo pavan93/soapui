@@ -21,7 +21,7 @@ import java.io.File;
 /**
  * @author joel.jonsson
  */
-public class JfxrtLocator {
+class JfxrtLocator {
     public static void main(String[] args) {
         String javaHome = System.getProperty("java.home");
         File jfxrtFile = new File(new File(javaHome, "lib"), "jfxrt.jar");

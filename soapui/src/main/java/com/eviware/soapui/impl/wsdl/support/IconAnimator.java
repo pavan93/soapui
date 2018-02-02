@@ -20,8 +20,7 @@ import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.model.support.AnimatableItem;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.ImageIcon;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import java.util.concurrent.Future;
 
 /**
@@ -62,11 +61,11 @@ public class IconAnimator<T extends AnimatableItem> implements Runnable {
         stopped = true;
     }
 
-    public int getIndex() {
+    private int getIndex() {
         return index;
     }
 
-    public boolean isStopped() {
+    private boolean isStopped() {
         return stopped;
     }
 
@@ -159,11 +158,11 @@ public class IconAnimator<T extends AnimatableItem> implements Runnable {
         }
     }
 
-    public T getTarget() {
+    protected T getTarget() {
         return target;
     }
 
-    public boolean isEnabled() {
+    protected boolean isEnabled() {
         return enabled;
     }
 

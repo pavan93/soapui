@@ -23,7 +23,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.action.support.AbstractSoapUIMultiAction;
 
 public class MultiTestStepEnableAction extends AbstractSoapUIMultiAction<ModelItem> {
-    public static final String SOAPUI_ACTION_ID = "MultiTestStepEnableAction";
+    private static final String SOAPUI_ACTION_ID = "MultiTestStepEnableAction";
 
     public MultiTestStepEnableAction() {
         super(SOAPUI_ACTION_ID, "Enable", "Enables the selected items");

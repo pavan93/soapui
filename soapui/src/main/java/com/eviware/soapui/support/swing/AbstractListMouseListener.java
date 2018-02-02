@@ -20,8 +20,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 
-import javax.swing.JList;
-import javax.swing.JPopupMenu;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -38,11 +37,11 @@ public abstract class AbstractListMouseListener extends MouseAdapter {
 
     protected abstract ActionList getActionsForRow(JList list, int row);
 
-    public AbstractListMouseListener() {
+    protected AbstractListMouseListener() {
         this(true);
     }
 
-    public AbstractListMouseListener(boolean enablePopup) {
+    AbstractListMouseListener(boolean enablePopup) {
         this.enablePopup = enablePopup;
     }
 
@@ -78,7 +77,7 @@ public abstract class AbstractListMouseListener extends MouseAdapter {
         }
     }
 
-    public void showPopup(MouseEvent e) {
+    private void showPopup(MouseEvent e) {
         if (!enablePopup) {
             return;
         }

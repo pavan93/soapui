@@ -103,7 +103,7 @@ public class StartHermesJMS extends AbstractSoapUIAction<WsdlProject> {
         String path;
         DirectoryFormComponent folderComponent;
 
-        public HermesConfigDialog(String initialPath) {
+        HermesConfigDialog(String initialPath) {
             super("Start  HermesJMS", "Hermes configuration", HelpUrls.START_HERMES_HELP_URL, true);
             setVisible(false);
             folderComponent.setValue(initialPath);
@@ -128,11 +128,11 @@ public class StartHermesJMS extends AbstractSoapUIAction<WsdlProject> {
             return true;
         }
 
-        public String getPath() {
+        String getPath() {
             return path;
         }
 
-        public void setPath(String path) {
+        void setPath(String path) {
             this.path = path;
         }
 

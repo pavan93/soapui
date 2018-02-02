@@ -78,7 +78,7 @@ public class RestRepresentation implements PropertyChangeNotifier, PropertyChang
         InferredSchemaManager.addPropertyChangeListener(this.restMethod.getResource().getService(), this);
     }
 
-    public RestMethod getRestMethod() {
+    private RestMethod getRestMethod() {
         return restMethod;
     }
 
@@ -178,7 +178,7 @@ public class RestRepresentation implements PropertyChangeNotifier, PropertyChang
         propertyChangeSupport.firePropertyChange("description", old, description);
     }
 
-    public String getDescription() {
+    private String getDescription() {
         return config.getDescription();
     }
 

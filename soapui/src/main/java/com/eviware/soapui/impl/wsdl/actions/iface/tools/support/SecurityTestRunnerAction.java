@@ -43,13 +43,13 @@ public class SecurityTestRunnerAction extends TestRunnerAction {
     private static final String BAT = ".bat";
     private static final String SECURITYTESTRUNNER = "securitytestrunner";
     private static final String SECURITYTEST = "SecurityTest";
-    protected static final String TESTRUNNERPATH = "SecurityTestRunner Path";
+    private static final String TESTRUNNERPATH = "SecurityTestRunner Path";
     public static final String SOAPUI_ACTION_ID = "SecurityTestRunnerAction";
     private static final String ALL_VALUE = "<all>";
 
     private final static Logger log = Logger.getLogger(SecurityTestRunnerAction.class);
 
-    public SecurityTestRunnerAction() {
+    private SecurityTestRunnerAction() {
         super("Launch Security TestRunner", "Launch command-line SecurityTestRunner for this project");
     }
 

@@ -54,7 +54,7 @@ public class ScriptingSupport {
     public static class SoapUIGroovyShell extends GroovyShell {
         private final GroovyClassLoader classLoader;
 
-        protected SoapUIGroovyShell(GroovyClassLoader classLoader, Binding binding) {
+        SoapUIGroovyShell(GroovyClassLoader classLoader, Binding binding) {
             super(classLoader, binding);
 
             this.classLoader = classLoader;
@@ -62,7 +62,7 @@ public class ScriptingSupport {
             reloadExternalClasses();
         }
 
-        protected SoapUIGroovyShell(GroovyClassLoader classLoader) {
+        SoapUIGroovyShell(GroovyClassLoader classLoader) {
             super(classLoader);
 
             this.classLoader = classLoader;
@@ -70,7 +70,7 @@ public class ScriptingSupport {
             reloadExternalClasses();
         }
 
-        public void reloadExternalClasses() {
+        void reloadExternalClasses() {
             resetLoadedClasses();
             classLoader.clearCache();
 

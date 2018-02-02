@@ -3,7 +3,7 @@ package com.smartbear.ready.recipe.assertions;
 import com.eviware.soapui.impl.wsdl.teststeps.assertions.json.JsonPathExistenceAssertion;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonPathExistenceAssertionStruct extends AssertionStruct<JsonPathExistenceAssertion> {
+class JsonPathExistenceAssertionStruct extends AssertionStruct<JsonPathExistenceAssertion> {
     private final String jsonPath;
     private final String expectedContent;
 

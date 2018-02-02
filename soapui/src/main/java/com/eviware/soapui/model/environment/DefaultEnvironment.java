@@ -20,13 +20,13 @@ import com.eviware.soapui.model.project.Project;
 
 public class DefaultEnvironment implements Environment {
 
-    public static final String NAME = "Default";
+    private static final String NAME = "Default";
 
     private DefaultEnvironment() {
     }
 
     private static class DefaultEnvironmentHolder {
-        public static final DefaultEnvironment instance = new DefaultEnvironment();
+        static final DefaultEnvironment instance = new DefaultEnvironment();
     }
 
     public static DefaultEnvironment getInstance() {

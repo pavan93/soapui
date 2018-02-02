@@ -23,7 +23,7 @@ public enum ModuleType {
         return name;
     }
 
-    public String getId() {
+    private String getId() {
         return id;
     }
 

@@ -33,7 +33,7 @@ public abstract class AbstractModelItemTableMouseListener extends AbstractTableM
         this(true);
     }
 
-    public AbstractModelItemTableMouseListener(boolean enablePopup) {
+    private AbstractModelItemTableMouseListener(boolean enablePopup) {
         super(enablePopup);
     }
 

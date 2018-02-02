@@ -122,12 +122,12 @@ public class XmlSourceEditorViewFactory implements ResponseEditorViewFactory, Re
      * @author ole.matzura
      */
 
-    public static class WsdlRequestXmlSourceEditor extends XmlSourceEditorView<WsdlRequest> {
+    protected static class WsdlRequestXmlSourceEditor extends XmlSourceEditorView<WsdlRequest> {
         private JMenu applyMenu;
         private JMenu wsaApplyMenu;
 
         @SuppressWarnings("unchecked")
-        public WsdlRequestXmlSourceEditor(XmlEditor xmlEditor, WsdlRequest request) {
+        WsdlRequestXmlSourceEditor(XmlEditor xmlEditor, WsdlRequest request) {
             super(xmlEditor, request, false);
         }
 
@@ -196,9 +196,9 @@ public class XmlSourceEditorViewFactory implements ResponseEditorViewFactory, Re
      * @author ole.matzura
      */
 
-    public static class WsdlMockRequestXmlSourceEditor extends XmlSourceEditorView<WsdlMockResponse> {
+    protected static class WsdlMockRequestXmlSourceEditor extends XmlSourceEditorView<WsdlMockResponse> {
         @SuppressWarnings("unchecked")
-        public WsdlMockRequestXmlSourceEditor(XmlEditor xmlEditor, WsdlMockResponse mockResponse) {
+        WsdlMockRequestXmlSourceEditor(XmlEditor xmlEditor, WsdlMockResponse mockResponse) {
             super(xmlEditor, mockResponse, false);
         }
 
@@ -227,9 +227,9 @@ public class XmlSourceEditorViewFactory implements ResponseEditorViewFactory, Re
      * @author ole.matzura
      */
 
-    public static class WsdlResponseXmlSourceEditor extends XmlSourceEditorView<WsdlRequest> {
+    protected static class WsdlResponseXmlSourceEditor extends XmlSourceEditorView<WsdlRequest> {
         @SuppressWarnings("unchecked")
-        public WsdlResponseXmlSourceEditor(XmlEditor xmlEditor, WsdlRequest request) {
+        WsdlResponseXmlSourceEditor(XmlEditor xmlEditor, WsdlRequest request) {
             super(xmlEditor, request, true);
         }
 
@@ -252,12 +252,12 @@ public class XmlSourceEditorViewFactory implements ResponseEditorViewFactory, Re
      * @author ole.matzura
      */
 
-    public static class WsdlMockResponseXmlSourceEditor extends XmlSourceEditorView<WsdlMockResponse> {
+    protected static class WsdlMockResponseXmlSourceEditor extends XmlSourceEditorView<WsdlMockResponse> {
         private JMenu applyMenu;
         private JMenu wsaApplyMenu;
 
         @SuppressWarnings("unchecked")
-        public WsdlMockResponseXmlSourceEditor(XmlEditor xmlEditor, WsdlMockResponse mockResponse) {
+        WsdlMockResponseXmlSourceEditor(XmlEditor xmlEditor, WsdlMockResponse mockResponse) {
             super(xmlEditor, mockResponse, false);
         }
 
@@ -321,7 +321,7 @@ public class XmlSourceEditorViewFactory implements ResponseEditorViewFactory, Re
     }
 
     private class RestResponseXmlSourceEditor extends XmlSourceEditorView<HttpRequestInterface<?>> {
-        public RestResponseXmlSourceEditor(XmlEditor<XmlDocument> xmlEditor, HttpRequestInterface<?> restRequest) {
+        RestResponseXmlSourceEditor(XmlEditor<XmlDocument> xmlEditor, HttpRequestInterface<?> restRequest) {
             super(xmlEditor, restRequest, true);
         }
 

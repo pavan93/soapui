@@ -25,7 +25,7 @@ import javax.swing.text.Document;
  * @author Slava Pestov
  * @version $Id$
  */
-public class TextUtilities {
+class TextUtilities {
     /**
      * Returns the offset of the bracket matching the one at the specified offset
      * of the document, or -1 if the bracket is unmatched (or if the character is

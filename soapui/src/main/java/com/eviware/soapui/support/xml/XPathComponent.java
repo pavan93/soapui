@@ -23,7 +23,7 @@ import com.eviware.soapui.support.types.StringToStringMap;
  *
  * @author lars
  */
-public class XPathComponent {
+class XPathComponent {
     private String namespace;
     private String prefix;
     private String localNameWithoutBraces;
@@ -68,11 +68,11 @@ public class XPathComponent {
         return namespace;
     }
 
-    public boolean hasPrefix() {
+    private boolean hasPrefix() {
         return prefix != null;
     }
 
-    public String getPrefix() {
+    private String getPrefix() {
         if (prefix == null) {
             return "";
         } else {
@@ -84,7 +84,7 @@ public class XPathComponent {
         return localNameWithoutBraces;
     }
 
-    public String getBraces() {
+    private String getBraces() {
         return braces;
     }
 
@@ -92,7 +92,7 @@ public class XPathComponent {
         return getFullNameWithPrefix(localNameWithoutBraces);
     }
 
-    public String getFullNameWithPrefix(String aLocalName) {
+    private String getFullNameWithPrefix(String aLocalName) {
         return (hasPrefix() ? getPrefix() + ":" : "") + aLocalName + getBraces();
     }
 }

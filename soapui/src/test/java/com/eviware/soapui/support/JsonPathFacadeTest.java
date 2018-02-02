@@ -27,7 +27,7 @@ import static org.junit.Assert.assertThat;
 
 public class JsonPathFacadeTest {
 
-    public static final String SIMPLE_JSON = "{" +
+    private static final String SIMPLE_JSON = "{" +
             "children: [" +
             "'string'," +
             "{ childProperty: 'propValue'}" +

@@ -57,7 +57,7 @@ public class WsdlPackagingRequestFilter extends AbstractRequestFilter {
         }
     }
 
-    protected String initWsdlRequest(WsdlRequest wsdlRequest, ExtendedPostMethod postMethod, String requestContent)
+    private String initWsdlRequest(WsdlRequest wsdlRequest, ExtendedPostMethod postMethod, String requestContent)
             throws Exception {
         MimeMultipart mp = null;
 
@@ -130,7 +130,7 @@ public class WsdlPackagingRequestFilter extends AbstractRequestFilter {
      * Creates root BodyPart containing message
      */
 
-    protected void initRootPart(WsdlRequest wsdlRequest, String requestContent, MimeMultipart mp, boolean isXOP)
+    private void initRootPart(WsdlRequest wsdlRequest, String requestContent, MimeMultipart mp, boolean isXOP)
             throws MessagingException {
         MimeBodyPart rootPart = new PreencodedMimeBodyPart(System.getProperty("soapui.bodypart.encoding", "8bit"));
         rootPart.setContentID(AttachmentUtils.ROOTPART_SOAPUI_ORG);

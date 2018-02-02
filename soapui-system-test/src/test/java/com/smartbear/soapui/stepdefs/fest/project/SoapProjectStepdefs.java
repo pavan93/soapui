@@ -26,7 +26,7 @@ import org.fest.swing.fixture.FrameFixture;
 import static com.smartbear.soapui.utils.fest.ApplicationUtils.getMainWindow;
 import static com.smartbear.soapui.utils.fest.SoapProjectUtils.openRequestEditor;
 
-public class SoapProjectStepdefs {
+class SoapProjectStepdefs {
     private Robot robot;
     private FrameFixture rootWindow;
 

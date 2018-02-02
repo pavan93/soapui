@@ -21,16 +21,7 @@ import com.eviware.soapui.SoapUIExtensionClassLoader;
 import com.eviware.soapui.SoapUIExtensionClassLoader.SoapUIClassLoaderState;
 import com.eviware.soapui.impl.wsdl.support.http.ProxyUtils;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.propertyexpansion.resolvers.ContextPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.DynamicPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.EvalPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.GlobalPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.MockRunPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.ModelItemPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.PropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.PropertyResolverFactory;
-import com.eviware.soapui.model.propertyexpansion.resolvers.SubmitPropertyResolver;
-import com.eviware.soapui.model.propertyexpansion.resolvers.TestRunPropertyResolver;
+import com.eviware.soapui.model.propertyexpansion.resolvers.*;
 import com.eviware.soapui.model.support.ModelSupport;
 import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.settings.GlobalPropertySettings;
@@ -81,7 +72,7 @@ public class PropertyExpander implements SoapUIFactoryRegistryListener {
         debuggingExpandedProperties = new HashMap<String, StringToStringMap>();
     }
 
-    public PropertyExpander(boolean addDefaultResolvers) {
+    private PropertyExpander(boolean addDefaultResolvers) {
         if (addDefaultResolvers) {
             propertyResolvers.addAll(defaultResolvers);
 
@@ -99,11 +90,11 @@ public class PropertyExpander implements SoapUIFactoryRegistryListener {
         defaultExpander.addResolver(resolver);
     }
 
-    public void addResolver(PropertyResolver propertyResolver) {
+    private void addResolver(PropertyResolver propertyResolver) {
         propertyResolvers.add(propertyResolver);
     }
 
-    public void addResolverFactory( PropertyResolverFactory factory )
+    private void addResolverFactory(PropertyResolverFactory factory)
     {
         PropertyResolver resolver = factory.createPropertyResolver();
         addResolver( resolver );
@@ -113,7 +104,7 @@ public class PropertyExpander implements SoapUIFactoryRegistryListener {
 
     private Map<PropertyResolverFactory,PropertyResolver> resolverFactories = new HashMap<PropertyResolverFactory, PropertyResolver>();
 
-    public void removeResolverFactory( PropertyResolverFactory factory )
+    private void removeResolverFactory(PropertyResolverFactory factory)
     {
         if( resolverFactories.containsKey( factory )) {
             removeResolver( resolverFactories.get( factory ));
@@ -137,15 +128,15 @@ public class PropertyExpander implements SoapUIFactoryRegistryListener {
         return defaultExpander.expand(context, content, entitize);
     }
 
-    public String expand(String content) {
+    private String expand(String content) {
         return expand(new PropertyExpansionUtils.GlobalPropertyExpansionContext(), content, false);
     }
 
-    public String expand(PropertyExpansionContext context, String content) {
+    private String expand(PropertyExpansionContext context, String content) {
         return expand(context, content, false);
     }
 
-    public String expand(PropertyExpansionContext context, String content, boolean entitize) {
+    private String expand(PropertyExpansionContext context, String content, boolean entitize) {
         SoapUIClassLoaderState clState = SoapUIExtensionClassLoader.ensure();
 
         try {
@@ -243,7 +234,7 @@ public class PropertyExpander implements SoapUIFactoryRegistryListener {
         }
     }
 
-    public String expand(ModelItem contextModelItem, String content) {
+    private String expand(ModelItem contextModelItem, String content) {
         return expand(new DefaultPropertyExpansionContext(contextModelItem), content);
     }
 

@@ -22,14 +22,7 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCaseRunner;
 import com.eviware.soapui.model.settings.Settings;
 import com.eviware.soapui.model.support.TestRunListenerAdapter;
-import com.eviware.soapui.model.testsuite.LoadTestRunListener;
-import com.eviware.soapui.model.testsuite.LoadTestRunner;
-import com.eviware.soapui.model.testsuite.TestCaseRunContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunContext;
-import com.eviware.soapui.model.testsuite.TestRunnable;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.settings.HttpSettings;
 import com.eviware.soapui.settings.WsdlSettings;
 import com.eviware.soapui.support.UISupport;
@@ -41,12 +34,7 @@ import org.apache.xmlbeans.XmlException;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * TestRunner for load-tests.
@@ -273,7 +261,7 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
         }
     }
 
-    public synchronized void finishRunner(InternalTestCaseRunner runner) {
+    private synchronized void finishRunner(InternalTestCaseRunner runner) {
         if (!runners.contains(runner)) {
             throw new RuntimeException("Trying to finish unknown runner.. ");
         }
@@ -377,6 +365,59 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
         return true;
     }
 
+    private synchronized void updateThreadCount() {
+        if (status != Status.RUNNING) {
+            return;
+        }
+
+        long newCount = loadTest.getThreadCount();
+
+        // get list of active runners
+        Iterator<InternalTestCaseRunner> iterator = runners.iterator();
+        List<InternalTestCaseRunner> activeRunners = new ArrayList<InternalTestCaseRunner>();
+        while (iterator.hasNext()) {
+            InternalTestCaseRunner runner = iterator.next();
+            if (!runner.isCanceled()) {
+                activeRunners.add(runner);
+            }
+        }
+
+        long diff = newCount - activeRunners.size();
+
+        if (diff == 0) {
+            return;
+        }
+
+        // cancel runners if thread count has been decreased
+        if (diff < 0 && loadTest.getCancelExcessiveThreads()) {
+            diff = Math.abs(diff);
+            for (int c = 0; c < diff && c < activeRunners.size(); c++) {
+                activeRunners.get(c).cancel("excessive thread", false);
+            }
+        }
+        // start new runners if thread count has been increased
+        else if (diff > 0) {
+            for (int c = 0; c < diff; c++) {
+                int startDelay = loadTest.getStartDelay();
+                if (startDelay > 0) {
+                    try {
+                        Thread.sleep(startDelay);
+                    } catch (InterruptedException e) {
+                        SoapUI.logError(e);
+                    }
+                }
+
+                if (status == Status.RUNNING) {
+                    startTestCase(createTestCase());
+                }
+            }
+        }
+    }
+
+    public WsdlLoadTest getLoadTest() {
+        return loadTest;
+    }
+
     private final class TestCaseStarter extends Worker.WorkerAdapter {
         private List<WsdlTestCase> testCases = new ArrayList<WsdlTestCase>();
         private boolean canceled;
@@ -438,7 +479,7 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
             return false;
         }
 
-        public void stop() {
+        void stop() {
             if (!canceled) {
                 canceled = true;
                 while (!testCases.isEmpty()) {
@@ -450,14 +491,14 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
         }
     }
 
-    public class InternalTestCaseRunner implements Runnable {
+    class InternalTestCaseRunner implements Runnable {
         private final WsdlTestCase testCase;
         private boolean canceled;
         private long runCount;
         private WsdlTestCaseRunner runner;
         private final int threadIndex;
 
-        public InternalTestCaseRunner(WsdlTestCase testCase, int threadIndex) {
+        InternalTestCaseRunner(WsdlTestCase testCase, int threadIndex) {
             this.testCase = testCase;
             this.threadIndex = threadIndex;
         }
@@ -501,7 +542,7 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
             }
         }
 
-        public void cancel(String reason, boolean cancelRunner) {
+        void cancel(String reason, boolean cancelRunner) {
             if (runner != null && cancelRunner) {
                 runner.cancel(reason);
             }
@@ -509,75 +550,22 @@ public class WsdlLoadTestRunner implements LoadTestRunner {
             this.canceled = true;
         }
 
-        public boolean isCanceled() {
+        boolean isCanceled() {
             return canceled;
         }
 
-        public long getRunCount() {
+        long getRunCount() {
             return runCount;
         }
 
-        public WsdlTestCase getTestCase() {
+        WsdlTestCase getTestCase() {
             return testCase;
         }
     }
 
-    public WsdlLoadTest getLoadTest() {
-        return loadTest;
-    }
-
-    public class InternalPropertyChangeListener implements PropertyChangeListener {
+    class InternalPropertyChangeListener implements PropertyChangeListener {
         public void propertyChange(PropertyChangeEvent evt) {
             updateThreadCount();
-        }
-    }
-
-    public synchronized void updateThreadCount() {
-        if (status != Status.RUNNING) {
-            return;
-        }
-
-        long newCount = loadTest.getThreadCount();
-
-        // get list of active runners
-        Iterator<InternalTestCaseRunner> iterator = runners.iterator();
-        List<InternalTestCaseRunner> activeRunners = new ArrayList<InternalTestCaseRunner>();
-        while (iterator.hasNext()) {
-            InternalTestCaseRunner runner = iterator.next();
-            if (!runner.isCanceled()) {
-                activeRunners.add(runner);
-            }
-        }
-
-        long diff = newCount - activeRunners.size();
-
-        if (diff == 0) {
-            return;
-        }
-
-        // cancel runners if thread count has been decreased
-        if (diff < 0 && loadTest.getCancelExcessiveThreads()) {
-            diff = Math.abs(diff);
-            for (int c = 0; c < diff && c < activeRunners.size(); c++) {
-                activeRunners.get(c).cancel("excessive thread", false);
-            }
-        }
-        // start new runners if thread count has been increased
-        else if (diff > 0) {
-            for (int c = 0; c < diff; c++) {
-                int startDelay = loadTest.getStartDelay();
-                if (startDelay > 0) {
-                    try {
-                        Thread.sleep(startDelay);
-                    } catch (InterruptedException e) {
-                        SoapUI.logError(e);
-                    }
-                }
-
-                if (status == Status.RUNNING) {
-                    startTestCase(createTestCase());
-                }
-            }
         }
     }
 

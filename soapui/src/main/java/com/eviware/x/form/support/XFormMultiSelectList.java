@@ -21,20 +21,8 @@ import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.x.form.XFormOptionsField;
 import com.eviware.x.impl.swing.AbstractSwingXFormField;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -55,7 +43,7 @@ public class XFormMultiSelectList extends AbstractSwingXFormField<JPanel> implem
     private DefaultListModel listModel;
     private List<Boolean> selected = new ArrayList<Boolean>();
 
-    PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+    private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
     private int[] defaultIndex;
     private Color defaultColor;
     private SelectAllAction selectAllAction;
@@ -149,8 +137,8 @@ public class XFormMultiSelectList extends AbstractSwingXFormField<JPanel> implem
         }
     }
 
-    public class CheckListCellRenderer extends JCheckBox implements ListCellRenderer {
-        public CheckListCellRenderer() {
+    class CheckListCellRenderer extends JCheckBox implements ListCellRenderer {
+        CheckListCellRenderer() {
             setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
         }
 
@@ -186,7 +174,7 @@ public class XFormMultiSelectList extends AbstractSwingXFormField<JPanel> implem
     }
 
     private class SelectAllAction extends AbstractAction {
-        public SelectAllAction() {
+        SelectAllAction() {
             super("Select all");
             putValue(SHORT_DESCRIPTION, "Selects all items in the list");
         }
@@ -199,7 +187,7 @@ public class XFormMultiSelectList extends AbstractSwingXFormField<JPanel> implem
     }
 
     private class UnselectAllAction extends AbstractAction {
-        public UnselectAllAction() {
+        UnselectAllAction() {
             super("Unselect all");
             putValue(SHORT_DESCRIPTION, "Unselects all items in the list");
         }

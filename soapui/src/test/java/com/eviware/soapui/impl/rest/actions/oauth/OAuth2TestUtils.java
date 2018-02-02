@@ -80,7 +80,7 @@ public class OAuth2TestUtils {
         return profile;
     }
 
-    public static OAuth2TokenExtractor mockOAuth2TokenExtractor(final OAuth2Profile profile)
+    private static OAuth2TokenExtractor mockOAuth2TokenExtractor(final OAuth2Profile profile)
             throws OAuthSystemException, MalformedURLException, URISyntaxException, OAuthProblemException {
         OAuth2TokenExtractor oAuth2TokenExtractor = mock(OAuth2TokenExtractor.class);
         doAnswer(new Answer<Object>() {

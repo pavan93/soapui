@@ -30,7 +30,7 @@ import java.util.Properties;
  * @goal loadtest
  */
 
-public class LoadTestMojo extends AbstractMojo
+class LoadTestMojo extends AbstractMojo
 {
 	public void execute() throws MojoExecutionException, MojoFailureException
 	{

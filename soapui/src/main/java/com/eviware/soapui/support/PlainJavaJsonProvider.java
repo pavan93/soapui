@@ -24,19 +24,10 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.groovy.JsonSlurper;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.*;
+import java.util.*;
 
-public class PlainJavaJsonProvider extends AbstractJsonProvider {
+class PlainJavaJsonProvider extends AbstractJsonProvider {
 
     private JsonSlurper jsonSlurper = new JsonSlurper();
     private Object valueToWrite;

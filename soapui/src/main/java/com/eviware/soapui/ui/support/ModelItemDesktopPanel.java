@@ -24,13 +24,9 @@ import com.eviware.soapui.model.tree.nodes.support.EmptyModelItem;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.ui.desktop.DesktopPanel;
 
-import javax.swing.Action;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.tree.TreePath;
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -42,7 +38,7 @@ public abstract class ModelItemDesktopPanel<T extends ModelItem> extends JPanel 
         PropertyChangeListener {
     private final T modelItem;
 
-    public ModelItemDesktopPanel(T modelItem) {
+    protected ModelItemDesktopPanel(T modelItem) {
         super(new BorderLayout());
         this.modelItem = modelItem;
 
@@ -107,7 +103,7 @@ public abstract class ModelItemDesktopPanel<T extends ModelItem> extends JPanel 
         return button;
     }
 
-    public void notifyPropertyChange(String propertyName, Object oldValue, Object newValue) {
+    private void notifyPropertyChange(String propertyName, Object oldValue, Object newValue) {
         firePropertyChange(propertyName, oldValue, newValue);
     }
 

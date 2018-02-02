@@ -34,10 +34,10 @@ import java.util.Map;
  */
 public class JsonRecipeParser implements ObjectRecipeParser {
 
-    public static final String CURRENT_TEST_STEP_INDEX = "CURRENT_TEST_STEP_INDEX";
+    private static final String CURRENT_TEST_STEP_INDEX = "CURRENT_TEST_STEP_INDEX";
     private static Logger logger = LoggerFactory.getLogger(JsonRecipeParser.class);
 
-    protected static Map<String, TestStepJsonParser> testStepParsers = new HashMap<>();
+    private static Map<String, TestStepJsonParser> testStepParsers = new HashMap<>();
 
     static {
         testStepParsers.put(TestStepNames.REST_REQUEST_TYPE, new RestRequestTestStepParser());
@@ -142,7 +142,7 @@ public class JsonRecipeParser implements ObjectRecipeParser {
         return IOUtils.toString(recipeAsStream);
     }
 
-    static void addTestSteps(WsdlTestCase testCase, TestStepStruct[] testSteps, StringToObjectMap context) throws ParseException {
+    private static void addTestSteps(WsdlTestCase testCase, TestStepStruct[] testSteps, StringToObjectMap context) throws ParseException {
         addTestStepsExcludingPropertyTransferTestSteps(testCase, testSteps, context); //First we need to create all referenced test steps
         addPropertyTransferTestSteps(testCase, testSteps, context);
     }
@@ -169,7 +169,7 @@ public class JsonRecipeParser implements ObjectRecipeParser {
         }
     }
 
-    static void updateCurrentTestStepIndex(HashMap<String, Object> context, TestStepStruct testStepObject) {
+    private static void updateCurrentTestStepIndex(HashMap<String, Object> context, TestStepStruct testStepObject) {
         Integer currentTestStepIndex = (Integer) context.get(CURRENT_TEST_STEP_INDEX);
         if (currentTestStepIndex == null) {
             currentTestStepIndex = 0;

@@ -43,12 +43,7 @@ import org.apache.xml.security.algorithms.MessageDigestAlgorithm;
 import org.apache.xml.security.signature.XMLSignature;
 import org.w3c.dom.Document;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
@@ -409,7 +404,7 @@ public class AutomaticSAMLEntry extends WssEntryBase {
         saveConfig();
     }
 
-    public String getCrypto() {
+    private String getCrypto() {
         return crypto;
     }
 

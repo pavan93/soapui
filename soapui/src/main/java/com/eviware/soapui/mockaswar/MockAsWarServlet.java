@@ -58,12 +58,12 @@ import java.util.logging.Logger;
 public class MockAsWarServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    protected static Logger logger = Logger.getLogger(MockAsWarServlet.class.getName());
-    protected WsdlProject project;
-    long maxResults;
-    List<MockResult> results = new TreeList();
+    private static Logger logger = Logger.getLogger(MockAsWarServlet.class.getName());
+    WsdlProject project;
+    private long maxResults;
+    private List<MockResult> results = new TreeList();
     private List<LoggingEvent> events = new TreeList();
-    boolean enableWebUI;
+    private boolean enableWebUI;
 
     public void init() throws ServletException {
         super.init();
@@ -102,11 +102,11 @@ public class MockAsWarServlet extends HttpServlet {
         }
     }
 
-    protected void initProject(String path) throws XmlException, IOException, SoapUIException {
+    private void initProject(String path) throws XmlException, IOException, SoapUIException {
         project = (WsdlProject) ProjectFactoryRegistry.getProjectFactory("wsdl").createNew(path);
     }
 
-    protected String initMockServiceParameters() {
+    private String initMockServiceParameters() {
         try {
             if (StringUtils.hasContent(getInitParameter("listeners"))) {
                 logger.info("Init listeners");
@@ -172,7 +172,7 @@ public class MockAsWarServlet extends HttpServlet {
         getMockServletCore().stop();
     }
 
-    protected MockAsWarCoreInterface getMockServletCore() {
+    MockAsWarCoreInterface getMockServletCore() {
         return (MockAsWarCoreInterface) SoapUI.getSoapUICore();
     }
 
@@ -216,12 +216,193 @@ public class MockAsWarServlet extends HttpServlet {
         out.println("<hr/><b>Returned Response</b>:<pre>" + XmlUtils.entitize(result.getResponseContent()) + "</pre>");
     }
 
+    private void printMaster(HttpServletRequest request, HttpServletResponse response, List<MockRunner> mockRunners)
+            throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        startHtmlPage(out, "MockService Log Table", "15");
+
+        out.print("<img src=\"header_logo.png\"><h3>SoapUI MockServices Log for project [" + project.getName()
+                + "]</h3>" + "<p style=\"text-align: left\">WSDLs:");
+
+        for (MockRunner mockRunner : mockRunners) {
+            String overviewUrl = ((WsdlMockRunner) mockRunner).getOverviewUrl();
+            if (overviewUrl.startsWith("/")) {
+                overviewUrl = overviewUrl.substring(1);
+            }
+
+            out.print(" [<a target=\"new\" href=\"" + overviewUrl + "\">" + mockRunner.getMockContext().getMockService().getName()
+                    + "</a>]");
+        }
+
+        out.print("</p>");
+
+        out.print("<hr/><p><b>Processed Requests</b>: ");
+        out.print("[<a href=\"master\">Refresh</a>] ");
+        out.print("[<a href=\"master?clear\">Clear</a>]</p>");
+
+        if ("clear".equals(request.getQueryString())) {
+            results.clear();
+        }
+
+        out.print("<table border=\"1\">");
+        out.print("<tr><td></td><td>Timestamp</td><td>Time Taken</td><td>MockOperation</td><td>MockResponse</td><td>MockService</td></tr>");
+
+        int cnt = 1;
+
+        for (MockResult result : results) {
+
+            if (result != null) {
+                out.print("<tr><td>" + (cnt++) + "</td>");
+                out.print("<td><a target=\"detail\" href=\"detail?" + result.hashCode() + "\">"
+                        + new java.util.Date(result.getTimestamp()) + "</a></td>");
+                out.print("<td>" + result.getTimeTaken() + "</td>");
+                out.print("<td>" + result.getMockOperation().getName() + "</td>");
+                if (result.getMockResponse() != null) {
+                    out.print("<td>" + result.getMockResponse().getName() + "</td>");
+                }
+                out.print("<td>" + result.getMockOperation().getMockService().getName() + "</td></tr>");
+            }
+        }
+
+        out.print("</table>");
+
+        out.print("</body></html>");
+        out.flush();
+
+    }
+
+    private void printDisabledLogFrameset(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        out.print("<html><head><title>SoapUI MockServices Log for project [" + project.getName() + "]</title></head>");
+        out.print("<body>");
+        out.print("<h3>");
+        out.print("Log is disabled.");
+        out.print("</h3>");
+        out.print("</body></html>");
+        out.flush();
+    }
+
+    private void startHtmlPage(PrintWriter out, String title, String refresh) {
+        out.print("<html><head>");
+        out.print("<title>" + title + "</title>");
+        if (refresh != null) {
+            out.print("<meta http-equiv=\"refresh\" content=\"" + refresh + "\"/>");
+        }
+
+        out.print("<link type=\"text/css\" rel=\"stylesheet\" href=\"stylesheet.css\" />");
+        out.print("</head><body>");
+    }
+
+    private void printFrameset(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        out.print("<html><head><title>SoapUI MockServices Log for project [" + project.getName() + "]</title></head>");
+        out.print("<frameset rows=\"40%,40%,*\">");
+        out.print("<frame src=\"master\"/>");
+        out.print("<frame name=\"detail\" src=\"detail\"/>");
+        out.print("<frame src=\"log\"/>");
+        out.print("</frameset>");
+        out.print("</html>");
+        out.flush();
+    }
+
+    private void printDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+
+        startHtmlPage(out, "MockService Detail", null);
+
+        int id = 0;
+
+        try {
+            id = Integer.parseInt(request.getQueryString());
+        } catch (NumberFormatException e) {
+        }
+
+        if (id > 0) {
+            for (MockResult result : results) {
+                if (result.hashCode() == id) {
+                    id = 0;
+                    printResult(out, result);
+                }
+            }
+        }
+
+        if (id > 0) {
+            out.print("<p>Missing specified MockResult</p>");
+        }
+
+        out.print("</body></html>");
+        out.flush();
+    }
+
+    private void printLog(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("text/html");
+
+        PrintWriter out = response.getWriter();
+        startHtmlPage(out, "MockService Groovy Log", "15");
+        out.print("<p><b>Groovy Log output</b>: ");
+        out.print("[<a href=\"log\">Refresh</a>] ");
+        out.print("[<a href=\"log?clear\">Clear</a>]</p>");
+
+        if ("clear".equals(request.getQueryString())) {
+            events.clear();
+        }
+
+        out.print("<table border=\"1\">");
+        out.print("<tr><td></td><td>Timestamp</td><td>Message</td></tr>");
+
+        int cnt = 1;
+
+        for (LoggingEvent event : events) {
+
+            out.print("<tr><td>" + (cnt++) + "</td>");
+            out.print("<td>" + new java.util.Date(event.timeStamp) + "</td>");
+            out.print("<td>" + event.getRenderedMessage() + "</td></tr>");
+        }
+
+        out.print("</table>");
+
+        out.print("</body></html>");
+        out.flush();
+    }
+
+    private class GroovyLogAppender extends org.apache.log4j.AppenderSkeleton {
+
+        protected void append(LoggingEvent event) {
+            events.add(event);
+        }
+
+        public void close() {
+        }
+
+        public boolean requiresLayout() {
+            return false;
+        }
+    }
+
     class MockServletSoapUICore extends DefaultSoapUICore implements MockEngine, MockAsWarCoreInterface {
         private final ServletContext servletContext;
         private List<MockRunner> mockRunners = new ArrayList<MockRunner>();
 
-        public MockServletSoapUICore(ServletContext servletContext, String soapUISettings) {
+        MockServletSoapUICore(ServletContext servletContext, String soapUISettings) {
             super(servletContext.getRealPath("/"), servletContext.getRealPath(soapUISettings));
+            this.servletContext = servletContext;
+        }
+
+        MockServletSoapUICore(ServletContext servletContext) {
+            super(servletContext.getRealPath("/"), null);
             this.servletContext = servletContext;
         }
 
@@ -313,11 +494,6 @@ public class MockAsWarServlet extends HttpServlet {
             }
         }
 
-        public MockServletSoapUICore(ServletContext servletContext) {
-            super(servletContext.getRealPath("/"), null);
-            this.servletContext = servletContext;
-        }
-
         @Override
         protected MockEngine buildMockEngine() {
             return this;
@@ -344,181 +520,5 @@ public class MockAsWarServlet extends HttpServlet {
         public void stopMockService(MockRunner runner) {
             mockRunners.remove(runner);
         }
-    }
-
-    public void printMaster(HttpServletRequest request, HttpServletResponse response, List<MockRunner> mockRunners)
-            throws IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-        startHtmlPage(out, "MockService Log Table", "15");
-
-        out.print("<img src=\"header_logo.png\"><h3>SoapUI MockServices Log for project [" + project.getName()
-                + "]</h3>" + "<p style=\"text-align: left\">WSDLs:");
-
-        for (MockRunner mockRunner : mockRunners) {
-            String overviewUrl = ((WsdlMockRunner) mockRunner).getOverviewUrl();
-            if (overviewUrl.startsWith("/")) {
-                overviewUrl = overviewUrl.substring(1);
-            }
-
-            out.print(" [<a target=\"new\" href=\"" + overviewUrl + "\">" + mockRunner.getMockContext().getMockService().getName()
-                    + "</a>]");
-        }
-
-        out.print("</p>");
-
-        out.print("<hr/><p><b>Processed Requests</b>: ");
-        out.print("[<a href=\"master\">Refresh</a>] ");
-        out.print("[<a href=\"master?clear\">Clear</a>]</p>");
-
-        if ("clear".equals(request.getQueryString())) {
-            results.clear();
-        }
-
-        out.print("<table border=\"1\">");
-        out.print("<tr><td></td><td>Timestamp</td><td>Time Taken</td><td>MockOperation</td><td>MockResponse</td><td>MockService</td></tr>");
-
-        int cnt = 1;
-
-        for (MockResult result : results) {
-
-            if (result != null) {
-                out.print("<tr><td>" + (cnt++) + "</td>");
-                out.print("<td><a target=\"detail\" href=\"detail?" + result.hashCode() + "\">"
-                        + new java.util.Date(result.getTimestamp()) + "</a></td>");
-                out.print("<td>" + result.getTimeTaken() + "</td>");
-                out.print("<td>" + result.getMockOperation().getName() + "</td>");
-                if (result.getMockResponse() != null) {
-                    out.print("<td>" + result.getMockResponse().getName() + "</td>");
-                }
-                out.print("<td>" + result.getMockOperation().getMockService().getName() + "</td></tr>");
-            }
-        }
-
-        out.print("</table>");
-
-        out.print("</body></html>");
-        out.flush();
-
-    }
-
-    private void startHtmlPage(PrintWriter out, String title, String refresh) {
-        out.print("<html><head>");
-        out.print("<title>" + title + "</title>");
-        if (refresh != null) {
-            out.print("<meta http-equiv=\"refresh\" content=\"" + refresh + "\"/>");
-        }
-
-        out.print("<link type=\"text/css\" rel=\"stylesheet\" href=\"stylesheet.css\" />");
-        out.print("</head><body>");
-    }
-
-    public void printDisabledLogFrameset(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-        out.print("<html><head><title>SoapUI MockServices Log for project [" + project.getName() + "]</title></head>");
-        out.print("<body>");
-        out.print("<h3>");
-        out.print("Log is disabled.");
-        out.print("</h3>");
-        out.print("</body></html>");
-        out.flush();
-    }
-
-    public void printFrameset(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-        out.print("<html><head><title>SoapUI MockServices Log for project [" + project.getName() + "]</title></head>");
-        out.print("<frameset rows=\"40%,40%,*\">");
-        out.print("<frame src=\"master\"/>");
-        out.print("<frame name=\"detail\" src=\"detail\"/>");
-        out.print("<frame src=\"log\"/>");
-        out.print("</frameset>");
-        out.print("</html>");
-        out.flush();
-    }
-
-    public void printDetail(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-
-        startHtmlPage(out, "MockService Detail", null);
-
-        int id = 0;
-
-        try {
-            id = Integer.parseInt(request.getQueryString());
-        } catch (NumberFormatException e) {
-        }
-
-        if (id > 0) {
-            for (MockResult result : results) {
-                if (result.hashCode() == id) {
-                    id = 0;
-                    printResult(out, result);
-                }
-            }
-        }
-
-        if (id > 0) {
-            out.print("<p>Missing specified MockResult</p>");
-        }
-
-        out.print("</body></html>");
-        out.flush();
-    }
-
-    private class GroovyLogAppender extends org.apache.log4j.AppenderSkeleton {
-
-        protected void append(LoggingEvent event) {
-            events.add(event);
-        }
-
-        public void close() {
-        }
-
-        public boolean requiresLayout() {
-            return false;
-        }
-    }
-
-    public void printLog(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("text/html");
-
-        PrintWriter out = response.getWriter();
-        startHtmlPage(out, "MockService Groovy Log", "15");
-        out.print("<p><b>Groovy Log output</b>: ");
-        out.print("[<a href=\"log\">Refresh</a>] ");
-        out.print("[<a href=\"log?clear\">Clear</a>]</p>");
-
-        if ("clear".equals(request.getQueryString())) {
-            events.clear();
-        }
-
-        out.print("<table border=\"1\">");
-        out.print("<tr><td></td><td>Timestamp</td><td>Message</td></tr>");
-
-        int cnt = 1;
-
-        for (LoggingEvent event : events) {
-
-            out.print("<tr><td>" + (cnt++) + "</td>");
-            out.print("<td>" + new java.util.Date(event.timeStamp) + "</td>");
-            out.print("<td>" + event.getRenderedMessage() + "</td></tr>");
-        }
-
-        out.print("</table>");
-
-        out.print("</body></html>");
-        out.flush();
     }
 }

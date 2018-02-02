@@ -19,31 +19,16 @@ package com.eviware.soapui.actions;
 import com.eviware.soapui.SoapUI;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.model.settings.Settings;
-import com.eviware.soapui.settings.HttpSettings;
-import com.eviware.soapui.settings.SSLSettings;
-import com.eviware.soapui.settings.SecuritySettings;
-import com.eviware.soapui.settings.VersionUpdateSettings;
-import com.eviware.soapui.settings.WSISettings;
-import com.eviware.soapui.settings.WsaSettings;
-import com.eviware.soapui.settings.WsdlSettings;
+import com.eviware.soapui.settings.*;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.SwingConfigurationDialogImpl;
 import com.eviware.soapui.support.factory.SoapUIFactoryRegistryListener;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JSplitPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.CardLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -57,18 +42,18 @@ import java.util.Map;
  */
 
 public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFactoryRegistryListener {
-    public static final String GLOBAL_SECURITY_SETTINGS = "Global Security Settings";
+    private static final String GLOBAL_SECURITY_SETTINGS = "Global Security Settings";
     public static final String WS_I_SETTINGS = "WS-I Settings";
-    public static final String WSDL_SETTINGS = "WSDL Settings";
-    public static final String UI_SETTINGS = "UI Settings";
-    public static final String EDITOR_SETTINGS = "Editor Settings";
-    public static final String PROXY_SETTINGS = "Proxy Settings";
-    public static final String HTTP_SETTINGS = "HTTP Settings";
-    public static final String SSL_SETTINGS = "SSL Settings";
+    private static final String WSDL_SETTINGS = "WSDL Settings";
+    private static final String UI_SETTINGS = "UI Settings";
+    private static final String EDITOR_SETTINGS = "Editor Settings";
+    private static final String PROXY_SETTINGS = "Proxy Settings";
+    private static final String HTTP_SETTINGS = "HTTP Settings";
+    private static final String SSL_SETTINGS = "SSL Settings";
     public static final String INTEGRATED_TOOLS = "Tools";
-    public static final String WSA_SETTINGS = "WS-A Settings";
-    public static final String GLOBAL_SENSITIVE_INFORMATION_TOKENS = "Global Sensitive Information Tokens";
-    public static final String VERSIONUPDATE_SETTINGS = "Version Update Settings";
+    private static final String WSA_SETTINGS = "WS-A Settings";
+    private static final String GLOBAL_SENSITIVE_INFORMATION_TOKENS = "Global Sensitive Information Tokens";
+    private static final String VERSIONUPDATE_SETTINGS = "Version Update Settings";
     private SwingConfigurationDialogImpl dialog;
     private List<Prefs> prefs = new ArrayList<Prefs>();
     private Map<PrefsFactory, Prefs> prefsFactories = new HashMap<PrefsFactory, Prefs>();
@@ -77,7 +62,7 @@ public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFac
     private DefaultListModel<String> prefsListModel;
     private JPanel prefsPanel;
 
-    public SoapUIPreferencesAction() {
+    private SoapUIPreferencesAction() {
         super("Preferences");
 
         putValue(Action.SHORT_DESCRIPTION, "Sets global SoapUI preferences");
@@ -107,7 +92,7 @@ public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFac
         instance = this;
     }
 
-    public void addPrefsFactory(PrefsFactory factory) {
+    private void addPrefsFactory(PrefsFactory factory) {
         Prefs pref = factory.createPrefs();
         addPrefs( pref );
 
@@ -117,7 +102,7 @@ public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFac
         }
     }
 
-    public void removePrefsFactory( PrefsFactory factory )
+    private void removePrefsFactory(PrefsFactory factory)
     {
         Prefs pref = prefsFactories.get( factory );
         if( pref != null )
@@ -148,7 +133,7 @@ public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFac
             removePrefsFactory((PrefsFactory) factory);
     }
 
-    public void addPrefs(Prefs pref) {
+    private void addPrefs(Prefs pref) {
         prefs.add(pref);
     }
 
@@ -194,7 +179,7 @@ public class SoapUIPreferencesAction extends AbstractAction implements SoapUIFac
         return false;
     }
 
-    public void selectPrefs(String initialTab) {
+    private void selectPrefs(String initialTab) {
         CardLayout cl = (CardLayout) (prefsPanel.getLayout());
         cl.show(prefsPanel, initialTab);
     }

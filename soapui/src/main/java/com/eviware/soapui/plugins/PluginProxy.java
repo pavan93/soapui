@@ -21,7 +21,7 @@ import java.lang.annotation.Annotation;
 /**
  * Interface exposing information about a proxied plugin class.
  */
-public interface PluginProxy {
+interface PluginProxy {
 
     <T extends Annotation> T getProxiedClassAnnotation(Class<T> annotationClass);
 

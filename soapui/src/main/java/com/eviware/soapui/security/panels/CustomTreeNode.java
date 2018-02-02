@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.security.panels;
 
-public interface CustomTreeNode {
+interface CustomTreeNode {
     void setExpandedIcon(boolean exp);
 
     void updateLabel();

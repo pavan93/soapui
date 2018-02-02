@@ -33,7 +33,7 @@ public abstract class AbstractWsaInspector extends AbstractXmlInspector {
     private SimpleBindingForm form;
     private final WsaContainer wsaContainer;
 
-    protected AbstractWsaInspector(WsaContainer wsaContainer) {
+    AbstractWsaInspector(WsaContainer wsaContainer) {
         super("WS-A", "WS-Addressing related settings", true, WsaInspectorFactory.INSPECTOR_ID);
         this.wsaContainer = wsaContainer;
     }
@@ -57,7 +57,7 @@ public abstract class AbstractWsaInspector extends AbstractXmlInspector {
         }
     }
 
-    public void buildContent(SimpleBindingForm form) {
+    void buildContent(SimpleBindingForm form) {
     }
 
     @Override

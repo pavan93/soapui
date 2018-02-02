@@ -32,7 +32,7 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class OAuthConfigTest {
-    public static final String PROFILE_NAME = "Profile";
+    private static final String PROFILE_NAME = "Profile";
     private OAuth2Profile oAuth2Profile;
     private String projectFileName = "OAuthTestProject.xml";
 

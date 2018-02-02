@@ -20,9 +20,7 @@ import com.eviware.soapui.support.HelpActionMarker;
 import com.eviware.soapui.support.Tools;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.KeyStroke;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 
 /**
@@ -38,7 +36,7 @@ public class OpenUrlAction extends AbstractAction implements HelpActionMarker {
         this(title, url, null);
     }
 
-    public OpenUrlAction(String title, String url, KeyStroke accelerator) {
+    private OpenUrlAction(String title, String url, KeyStroke accelerator) {
         super(title);
         this.url = url;
 

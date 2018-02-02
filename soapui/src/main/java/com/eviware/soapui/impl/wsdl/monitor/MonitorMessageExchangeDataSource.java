@@ -30,7 +30,7 @@ import java.io.OutputStream;
  * @author ole.matzura
  */
 
-public class MonitorMessageExchangeDataSource implements DataSource {
+class MonitorMessageExchangeDataSource implements DataSource {
     private byte[] data;
     private String contentType;
     private String name;

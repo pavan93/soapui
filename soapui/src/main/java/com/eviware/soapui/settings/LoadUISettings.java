@@ -22,7 +22,7 @@ package com.eviware.soapui.settings;
  * @author Ole.Matzura
  */
 
-public interface LoadUISettings {
+interface LoadUISettings {
     String LOADUI_PATH = LoadUISettings.class.getSimpleName() + "@" + "loadui_path";
     String LOADUI_CAJO_SERVER = LoadUISettings.class.getSimpleName() + "@" + "cajo_server_name";
     String LOADUI_CAJO_PORT = LoadUISettings.class.getSimpleName() + "@" + "cajo_port";

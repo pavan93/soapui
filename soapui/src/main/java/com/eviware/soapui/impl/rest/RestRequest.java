@@ -211,8 +211,8 @@ public class RestRequest extends AbstractHttpRequest<RestRequestConfig> implemen
         return result.toArray();
     }
 
-    public void addJMSHeaderExpansions(PropertyExpansionsResult result, JMSHeaderConfig jmsHeaderConfig,
-                                       ModelItem modelItem) {
+    private void addJMSHeaderExpansions(PropertyExpansionsResult result, JMSHeaderConfig jmsHeaderConfig,
+                                        ModelItem modelItem) {
         result.addAll(PropertyExpansionUtils.extractPropertyExpansions(modelItem, jmsHeaderConfig,
                 JMSHeader.JMSCORRELATIONID));
         result.addAll(PropertyExpansionUtils
@@ -483,7 +483,7 @@ public class RestRequest extends AbstractHttpRequest<RestRequestConfig> implemen
         }
     }
 
-    protected void updateParams() {
+    private void updateParams() {
         StringToStringMap paramValues = StringToStringMap.fromXml(getConfig().getParameters());
         params.reset(getRestMethod().getOverlayParams(), paramValues);
         paramUpdater.setValues(paramValues);
@@ -496,11 +496,11 @@ public class RestRequest extends AbstractHttpRequest<RestRequestConfig> implemen
     private class ParamUpdater implements TestPropertyListener {
         private StringToStringMap values;
 
-        public ParamUpdater(StringToStringMap paramValues) {
+        ParamUpdater(StringToStringMap paramValues) {
             values = paramValues;
         }
 
-        public void setValues(StringToStringMap paramValues) {
+        void setValues(StringToStringMap paramValues) {
             values = paramValues;
         }
 

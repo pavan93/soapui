@@ -86,25 +86,25 @@ public class SoapMonitorListenerCallBack {
         listeners.remove(listener);
     }
 
-    public static class SoapUIListenerSupport<T> {
+    static class SoapUIListenerSupport<T> {
         private Set<T> listeners = new HashSet<T>();
         @SuppressWarnings("unused")
         private final Class<T> listenerClass;
 
-        public SoapUIListenerSupport(Class<T> listenerClass) {
+        SoapUIListenerSupport(Class<T> listenerClass) {
             this.listenerClass = listenerClass;
             listeners.addAll(SoapUI.getListenerRegistry().getListeners(listenerClass));
         }
 
-        public void add(T listener) {
+        void add(T listener) {
             listeners.add(listener);
         }
 
-        public void remove(T listener) {
+        void remove(T listener) {
             listeners.remove(listener);
         }
 
-        public Collection<T> get() {
+        Collection<T> get() {
             return listeners;
         }
     }

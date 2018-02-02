@@ -31,7 +31,7 @@ import com.eviware.soapui.support.editor.xml.XmlEditor;
 public abstract class ModelItemXmlEditor<T extends ModelItem, T2 extends XmlDocument> extends XmlEditor<T2> {
     private final T modelItem;
 
-    public ModelItemXmlEditor(T2 xmlDocument, T modelItem) {
+    protected ModelItemXmlEditor(T2 xmlDocument, T modelItem) {
         super(xmlDocument);
         this.modelItem = modelItem;
     }

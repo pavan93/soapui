@@ -62,7 +62,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
 
     private Map<SecurityCheckedParameter, ArrayList<String>> parameterMutations = new HashMap<SecurityCheckedParameter, ArrayList<String>>();
 
-    String[] defaultSqlInjectionStrings = {"' or '1'='1", "'--", "1'", "admin'--", "/*!10000%201/0%20*/",
+    private String[] defaultSqlInjectionStrings = {"' or '1'='1", "'--", "1'", "admin'--", "/*!10000%201/0%20*/",
             "/*!10000 1/0 */", "1/0", "'%20o/**/r%201/0%20--", "' o/**/r 1/0 --", ";", "'%20and%201=2%20--",
             "' and 1=2 --", "test�%20UNION%20select%201,%20@@version,%201,%201;�",
             "test� UNION select 1, @@version, 1, 1;�"};
@@ -377,7 +377,7 @@ public class SQLInjectionScan extends AbstractSecurityScanWithProperties {
     }
 
     @AForm(description = "SQL Injection Strings", name = "SQL Injection Strings")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
 
         @AField(description = "SQL Strings", name = "###Injection Strings", type = AFieldType.STRINGLIST)
         String INJECTION_STRINGS = "###Injection Strings";

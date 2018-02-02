@@ -24,10 +24,10 @@ import com.eviware.soapui.model.ModelItem;
  * @param <SourceClass> The class of the item being dragged.
  * @param <TargetClass> The class of the drop target.
  */
-public abstract class AbstractCopyingModelItemDropHandler<SourceClass extends ModelItem, TargetClass extends ModelItem>
+abstract class AbstractCopyingModelItemDropHandler<SourceClass extends ModelItem, TargetClass extends ModelItem>
         extends AbstractModelItemDropHandler<SourceClass, TargetClass> {
 
-    protected AbstractCopyingModelItemDropHandler(Class<SourceClass> sourceClass, Class<TargetClass> targetClass) {
+    AbstractCopyingModelItemDropHandler(Class<SourceClass> sourceClass, Class<TargetClass> targetClass) {
         super(sourceClass, targetClass);
     }
 

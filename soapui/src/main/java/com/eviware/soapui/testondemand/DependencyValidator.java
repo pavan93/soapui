@@ -40,7 +40,7 @@ public class DependencyValidator {
     /*
      * make sure all interfaces are loaded
      */
-    protected void loadInterfaces(WsdlProject project) {
+    private void loadInterfaces(WsdlProject project) {
         for (Interface inf : project.getInterfaceList()) {
             try {
                 if (inf instanceof WsdlInterface) {
@@ -57,7 +57,7 @@ public class DependencyValidator {
     /*
      * save interfaces to project
      */
-    protected void saveProject(WsdlProject project) throws IOException {
+    private void saveProject(WsdlProject project) throws IOException {
         boolean shouldCache = project.isCacheDefinitions();
 
         try {
@@ -91,7 +91,7 @@ public class DependencyValidator {
         return true;
     }
 
-    protected void validate(WsdlProject project) {
+    private void validate(WsdlProject project) {
         loadInterfaces(project);
 
         try {

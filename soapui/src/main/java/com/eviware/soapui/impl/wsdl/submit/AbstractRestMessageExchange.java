@@ -30,7 +30,7 @@ import java.util.List;
 
 public abstract class AbstractRestMessageExchange<T extends ModelItem> extends AbstractMessageExchange<T> implements
         RestMessageExchange {
-    public AbstractRestMessageExchange(T modelItem) {
+    protected AbstractRestMessageExchange(T modelItem) {
         super(modelItem);
     }
 

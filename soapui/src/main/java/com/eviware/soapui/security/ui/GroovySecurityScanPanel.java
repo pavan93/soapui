@@ -22,10 +22,8 @@ import com.eviware.soapui.model.security.SecurityScan;
 import com.eviware.soapui.security.scan.GroovySecurityScan;
 import com.eviware.soapui.support.components.GroovyEditorComponent;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 
 public class GroovySecurityScanPanel extends SecurityScanConfigPanel {
@@ -47,6 +45,12 @@ public class GroovySecurityScanPanel extends SecurityScanConfigPanel {
 
     }
 
+    private GroovyEditorComponent buildSetupScriptPanel(SecurityScan securityCheck) {
+        groovyEditor = new GroovyEditorComponent(new ScriptGroovyEditorModel(securityCheck.getModelItem()), null);
+        groovyEditor.setPreferredSize(new Dimension(385, 150));
+        return groovyEditor;
+    }
+
     private class ScriptGroovyEditorModel extends AbstractGroovyEditorModel {
         @Override
         public Action createRunAction() {
@@ -58,7 +62,7 @@ public class GroovySecurityScanPanel extends SecurityScanConfigPanel {
             };
         }
 
-        public ScriptGroovyEditorModel(ModelItem modelItem) {
+        ScriptGroovyEditorModel(ModelItem modelItem) {
             super(new String[]{"parameters", "log", "context", "securityScan", "testStep"}, modelItem, "");
         }
 
@@ -69,12 +73,6 @@ public class GroovySecurityScanPanel extends SecurityScanConfigPanel {
         public void setScript(String text) {
             ((GroovySecurityScan) getModelItem()).setExecuteScript(text);
         }
-    }
-
-    protected GroovyEditorComponent buildSetupScriptPanel(SecurityScan securityCheck) {
-        groovyEditor = new GroovyEditorComponent(new ScriptGroovyEditorModel(securityCheck.getModelItem()), null);
-        groovyEditor.setPreferredSize(new Dimension(385, 150));
-        return groovyEditor;
     }
 
 }

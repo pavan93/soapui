@@ -24,13 +24,13 @@ import org.syntax.jedit.KeywordMap;
  * @author oliver henning
  * @version $Id: PLSQLTokenMarker.java,v 1.9 1999/12/13 03:40:30 sp Exp $
  */
-public class PLSQLTokenMarker extends SQLTokenMarker {
+class PLSQLTokenMarker extends SQLTokenMarker {
     // public members
     public PLSQLTokenMarker() {
         super(getKeywordMap(), true);
     }
 
-    public static KeywordMap getKeywordMap() {
+    private static KeywordMap getKeywordMap() {
         if (plsqlKeywords == null) {
             plsqlKeywords = new KeywordMap(true);
             addKeywords();

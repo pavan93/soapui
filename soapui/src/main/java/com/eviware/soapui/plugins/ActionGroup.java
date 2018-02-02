@@ -18,11 +18,7 @@ package com.eviware.soapui.plugins;
 
 import com.eviware.soapui.model.ModelItem;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * Provides additional Action configuration to action classes in a plugin.
@@ -30,7 +26,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ActionGroup {
+@interface ActionGroup {
     ActionMapping[] actions() default {};
 
     String defaultAction() default "";

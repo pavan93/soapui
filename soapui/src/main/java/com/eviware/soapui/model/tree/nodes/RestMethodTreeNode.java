@@ -62,7 +62,7 @@ public class RestMethodTreeNode extends AbstractModelItemTreeNode<RestMethod> {
         return requestNodes.indexOf(child);
     }
 
-    public void requestAdded(Request request) {
+    private void requestAdded(Request request) {
         RequestTreeNode requestTreeNode = new RequestTreeNode(request, getTreeModel());
         requestNodes.add(requestTreeNode);
         reorder(false);
@@ -70,7 +70,7 @@ public class RestMethodTreeNode extends AbstractModelItemTreeNode<RestMethod> {
         getTreeModel().notifyNodeInserted(requestTreeNode);
     }
 
-    public void requestRemoved(Request request) {
+    private void requestRemoved(Request request) {
         SoapUITreeNode requestTreeNode = getTreeModel().getTreeNode(request);
         if (requestNodes.contains(requestTreeNode)) {
             getTreeModel().notifyNodeRemoved(requestTreeNode);

@@ -30,11 +30,11 @@ public class StringToObjectMap extends HashMap<String, Object> {
         super();
     }
 
-    public StringToObjectMap(int initialCapacity, float loadFactor) {
+    protected StringToObjectMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
     }
 
-    public StringToObjectMap(int initialCapacity) {
+    protected StringToObjectMap(int initialCapacity) {
         super(initialCapacity);
     }
 

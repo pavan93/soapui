@@ -52,7 +52,7 @@ public class CreateWadlDocumentationAction extends AbstractSoapUIAction<RestServ
     private XFormDialog dialog;
     private static Map<String, Transformer> transformers;
 
-    public CreateWadlDocumentationAction() {
+    private CreateWadlDocumentationAction() {
         super("CreateWadlDocumentationAction", "Create Documentation",
                 "Generate simple HTML Documentation for this WADL");
     }
@@ -108,7 +108,7 @@ public class CreateWadlDocumentationAction extends AbstractSoapUIAction<RestServ
         return reportUrl;
     }
 
-    protected static void initTransformers() throws Exception {
+    private static void initTransformers() throws Exception {
         transformers = new HashMap<String, Transformer>();
         TransformerFactory xformFactory = new org.apache.xalan.processor.TransformerFactoryImpl();
 
@@ -121,15 +121,15 @@ public class CreateWadlDocumentationAction extends AbstractSoapUIAction<RestServ
     }
 
     @AForm(description = "Creates an HTML-Report for the current WADL", name = "Create Report", helpUrl = HelpUrls.CREATEWADLDOC_HELP_URL, icon = UISupport.TOOL_ICON_PATH)
-    public interface Form {
+    interface Form {
         @AField(name = "Output Folder", description = "The folder where to create the report", type = AFieldType.FOLDER)
         String OUTPUT_FOLDER = "Output Folder";
     }
 
-    public static class FileUriResolver implements URIResolver {
+    static class FileUriResolver implements URIResolver {
         private final String basePath;
 
-        public FileUriResolver(String basePath) {
+        FileUriResolver(String basePath) {
             this.basePath = basePath;
         }
 

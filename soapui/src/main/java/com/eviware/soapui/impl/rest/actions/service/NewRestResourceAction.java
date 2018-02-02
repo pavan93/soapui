@@ -31,7 +31,7 @@ import java.util.List;
 
 public class NewRestResourceAction extends NewRestResourceActionBase<RestService> {
     public static final String SOAPUI_ACTION_ID = "NewRestResourceAction";
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestResourceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestResourceAction.class);
 
     public NewRestResourceAction() {
         super(messages.get("Title"), messages.get("Description"));

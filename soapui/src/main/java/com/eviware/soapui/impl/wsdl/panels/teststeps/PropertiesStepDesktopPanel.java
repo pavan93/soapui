@@ -29,16 +29,9 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.components.JXToolBar;
 import com.eviware.soapui.ui.support.ModelItemDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -59,8 +52,8 @@ public class PropertiesStepDesktopPanel extends ModelItemDesktopPanel<WsdlProper
     private JTextField targetField;
     private PropertyHolderTable propertiesTable;
     private TestRunComponentEnabler componentEnabler;
-    protected boolean updatingSource;
-    protected boolean updatingTarget;
+    private boolean updatingSource;
+    private boolean updatingTarget;
 
     public PropertiesStepDesktopPanel(WsdlPropertiesTestStep testStep) {
         super(testStep);
@@ -149,7 +142,7 @@ public class PropertiesStepDesktopPanel extends ModelItemDesktopPanel<WsdlProper
         setPreferredSize(new Dimension(600, 400));
     }
 
-    protected PropertyHolderTable createPropertyHolderTable() {
+    private PropertyHolderTable createPropertyHolderTable() {
         return new PropertyHolderTable(getModelItem());
     }
 
@@ -170,7 +163,7 @@ public class PropertiesStepDesktopPanel extends ModelItemDesktopPanel<WsdlProper
     }
 
     private class SetPropertiesSourceAction extends AbstractAction {
-        public SetPropertiesSourceAction() {
+        SetPropertiesSourceAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/set_properties_source.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Selects the properties source file");
         }
@@ -196,7 +189,7 @@ public class PropertiesStepDesktopPanel extends ModelItemDesktopPanel<WsdlProper
     }
 
     private class ReloadPropertiesFromSourceAction extends AbstractAction {
-        public ReloadPropertiesFromSourceAction() {
+        ReloadPropertiesFromSourceAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/reload_properties.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Reloads the current properties from the selected file");
         }
@@ -218,7 +211,7 @@ public class PropertiesStepDesktopPanel extends ModelItemDesktopPanel<WsdlProper
     }
 
     private class SetPropertiesTargetAction extends AbstractAction {
-        public SetPropertiesTargetAction() {
+        SetPropertiesTargetAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/set_properties_target.gif"));
             putValue(Action.SHORT_DESCRIPTION, "Selects the properties target file");
         }

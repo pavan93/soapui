@@ -16,7 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CUSTOM, include = JsonTypeInfo.As.EXISTING_PROPERTY, property = "type", visible = true)
 public abstract class AssertionStruct<T extends WsdlMessageAssertion> {
     public String type;
-    public String name;
+    private String name;
 
     @JsonCreator
     public AssertionStruct(@JsonProperty("type") String type, @JsonProperty("name") String name) {

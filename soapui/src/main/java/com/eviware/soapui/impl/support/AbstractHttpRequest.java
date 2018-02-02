@@ -23,20 +23,12 @@ import com.eviware.soapui.impl.wsdl.HttpAttachmentPart;
 import com.eviware.soapui.impl.wsdl.WsdlRequest;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.HttpResponse;
 import com.eviware.soapui.impl.wsdl.submit.transports.http.support.methods.IAfterRequestInjection;
-import com.eviware.soapui.impl.wsdl.support.CompressedStringSupport;
-import com.eviware.soapui.impl.wsdl.support.ExternalDependency;
-import com.eviware.soapui.impl.wsdl.support.FileAttachment;
-import com.eviware.soapui.impl.wsdl.support.IconAnimator;
-import com.eviware.soapui.impl.wsdl.support.RequestFileAttachment;
+import com.eviware.soapui.impl.wsdl.support.*;
 import com.eviware.soapui.impl.wsdl.support.jms.header.JMSHeaderContainer;
 import com.eviware.soapui.impl.wsdl.support.jms.property.JMSPropertyContainer;
 import com.eviware.soapui.impl.wsdl.teststeps.HttpTestRequestStep.RequestHeaderHolder;
 import com.eviware.soapui.impl.wsdl.teststeps.SettingPathPropertySupport;
-import com.eviware.soapui.model.iface.Attachment;
-import com.eviware.soapui.model.iface.Request;
-import com.eviware.soapui.model.iface.Submit;
-import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.iface.SubmitListener;
+import com.eviware.soapui.model.iface.*;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionsResult;
@@ -49,7 +41,7 @@ import com.eviware.soapui.support.types.StringToStringMap;
 import com.eviware.soapui.support.types.StringToStringsMap;
 import org.apache.xmlbeans.impl.values.XmlValueOutOfRangeException;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -64,7 +56,7 @@ public abstract class AbstractHttpRequest<T extends AbstractRequestConfig> exten
         Request, AbstractHttpRequestInterface<T>, JMSHeaderContainer, JMSPropertyContainer {
     public static final String BASIC_AUTH_PROFILE = "Basic";
     public static final String SELECTED_AUTH_PROFILE_PROPERTY_NAME = "selectedAuthProfile";
-    public static final String CR_ESCAPE_SEQUENCE = "\\\\_r";
+    private static final String CR_ESCAPE_SEQUENCE = "\\\\_r";
 
     private Set<SubmitListener> submitListeners = new HashSet<SubmitListener>();
     private String requestContent;
@@ -554,7 +546,7 @@ public abstract class AbstractHttpRequest<T extends AbstractRequestConfig> exten
         }
     }
 
-    public void addBasicAuthenticationProfile(String authType) {
+    private void addBasicAuthenticationProfile(String authType) {
         List<String> addedBasicAuthenticationTypesList = getCredentialsConfig().getAddedBasicAuthenticationTypesList();
         if (!addedBasicAuthenticationTypesList.contains(authType)) {
             addedBasicAuthenticationTypesList.add(authType);

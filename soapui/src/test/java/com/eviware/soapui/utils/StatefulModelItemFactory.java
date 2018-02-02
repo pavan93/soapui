@@ -50,7 +50,7 @@ public class StatefulModelItemFactory {
         return new RestMethod(restResource, RestMethodConfig.Factory.newInstance());
     }
 
-    public RestMethod makeRestMethod() {
+    private RestMethod makeRestMethod() {
         RestMethodConfig methodConfig = RestMethodConfig.Factory.newInstance();
         methodConfig.setName("Get");
         methodConfig.setMethod("GET");
@@ -70,7 +70,7 @@ public class StatefulModelItemFactory {
         return restMethod;
     }
 
-    public RestResource makeRestResource() {
+    private RestResource makeRestResource() {
         String serviceName = "Interface_" + UUID.randomUUID().toString();
         RestService service = (RestService) project.addNewInterface(serviceName, RestServiceFactory.REST_TYPE);
         service.setName(serviceName);

@@ -29,6 +29,7 @@ import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.resolver.ResolveContext;
 
 import javax.swing.*;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,7 +41,8 @@ import java.util.UUID;
  * @author Ole.Matzura
  */
 
-public abstract class AbstractWsdlModelItem<T extends ModelItemConfig>
+@SuppressWarnings("ALL")
+public abstract class AbstractWsdlModelItem<T>
         extends AbstractModelItem
         implements Releasable, AnimatableItem {
     private XmlBeansSettingsImpl settings;
@@ -83,8 +85,14 @@ public abstract class AbstractWsdlModelItem<T extends ModelItemConfig>
         notifyPropertyChanged(ICON_PROPERTY, oldIcon, icon);
     }
 
+    @Override
+    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
+        super.addPropertyChangeListener(propertyName, listener);
+    }
+
     public String getDescription() {
-        String description = config.getDescription();
+        String description;
+        description = config.getDescription();
         return StringUtils.hasContent(description) ? description : "";
     }
 
@@ -131,9 +139,7 @@ public abstract class AbstractWsdlModelItem<T extends ModelItemConfig>
             settings.release();
         }
 
-        if (!config.isSetSettings()) {
-            config.addNewSettings();
-        }
+        if (!config.isSetSettings()) config.addNewSettings();
 
         settings = new XmlBeansSettingsImpl(this, parent == null ? SoapUI.getSettings() : parent.getSettings(),
                 this.config.getSettings());
@@ -239,6 +245,14 @@ public abstract class AbstractWsdlModelItem<T extends ModelItemConfig>
             if (modelItem instanceof AbstractWsdlModelItem<?>) {
                 ((AbstractWsdlModelItem<?>) modelItem).afterLoad();
             }
+        }
+    }
+
+    private class ModelItemConfig {
+        public String getDescription() {
+        }
+
+        public void setDescription(String description) {
         }
     }
 }

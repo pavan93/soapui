@@ -25,7 +25,7 @@ import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
  * @author Ole.Matzura
  */
 
-public class LoadTestStepSample {
+class LoadTestStepSample {
     private long size;
     private TestStepStatus status;
     private long timeTaken;

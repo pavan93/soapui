@@ -35,7 +35,7 @@ import com.eviware.soapui.support.JsonUtil;
 import junit.framework.ComparisonFailure;
 
 public abstract class JsonPathAssertionBase extends XPathContainsAssertion {
-    public JsonPathAssertionBase(TestAssertionConfig assertionConfig, Assertable assertable) {
+    JsonPathAssertionBase(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable);
     }
 
@@ -70,7 +70,7 @@ public abstract class JsonPathAssertionBase extends XPathContainsAssertion {
         return assertContent(source.getPropertyValue(propertyName), context, propertyName);
     }
 
-    protected PropertyExpansionContext getPropertyExpansionContext() {
+    PropertyExpansionContext getPropertyExpansionContext() {
         return getAssertable().getTestStep() == null ?
                 new DefaultPropertyExpansionContext(getAssertable().getModelItem()) :
                 new WsdlTestRunContext(getAssertable().getTestStep());
@@ -81,7 +81,7 @@ public abstract class JsonPathAssertionBase extends XPathContainsAssertion {
         return false;
     }
 
-    protected void throwAssertionException(String path, Throwable exception) throws AssertionException {
+    void throwAssertionException(String path, Throwable exception) throws AssertionException {
         String msg = "";
 
         if (exception instanceof ComparisonFailure) {
@@ -128,7 +128,7 @@ public abstract class JsonPathAssertionBase extends XPathContainsAssertion {
         return "Expected Result";
     }
 
-    protected String getPathString() {
+    String getPathString() {
         String path = getPathArea() == null || !getPathArea().isVisible() ? getPath() : getPathArea().getSelectedText();
         if (path == null) {
             path = getPathArea() == null ? "" : getPathArea().getText();
@@ -136,7 +136,7 @@ public abstract class JsonPathAssertionBase extends XPathContainsAssertion {
         return path;
     }
 
-    protected String readStringValue(String assertableContent, String expandedPath) {
+    String readStringValue(String assertableContent, String expandedPath) {
         Object result = new JsonPathFacade(assertableContent).readObjectValue(expandedPath);
         return result == null ? null : result.toString();
     }

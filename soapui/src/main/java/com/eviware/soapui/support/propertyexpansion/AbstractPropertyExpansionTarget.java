@@ -26,7 +26,7 @@ import com.eviware.soapui.support.scripting.SoapUIScriptGenerator;
 public abstract class AbstractPropertyExpansionTarget implements PropertyExpansionTarget {
     private ModelItem modelItem;
 
-    public AbstractPropertyExpansionTarget(ModelItem modelItem) {
+    AbstractPropertyExpansionTarget(ModelItem modelItem) {
         this.modelItem = modelItem;
     }
 
@@ -40,11 +40,11 @@ public abstract class AbstractPropertyExpansionTarget implements PropertyExpansi
         return modelItem;
     }
 
-    public ModelItem getModelItem() {
+    private ModelItem getModelItem() {
         return modelItem;
     }
 
-    protected String createContextExpansion(String name, PropertyExpansion expansion) {
+    String createContextExpansion(String name, PropertyExpansion expansion) {
         SoapUIScriptGenerator scriptGenerator = SoapUIScriptEngineRegistry.createScriptGenerator(getModelItem());
         return scriptGenerator.createContextExpansion(name, expansion);
     }

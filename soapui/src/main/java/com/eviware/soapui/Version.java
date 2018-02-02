@@ -18,7 +18,7 @@ package com.eviware.soapui;
 
 public class Version {
 
-    String[] versionComponents;
+    private String[] versionComponents;
 
     public Version(String versionString) {
         if (versionString == null || !versionString.contains(".")) {

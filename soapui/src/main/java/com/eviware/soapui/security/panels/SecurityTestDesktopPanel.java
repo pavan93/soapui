@@ -53,40 +53,15 @@ import com.eviware.soapui.support.DocumentListenerAdapter;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.SwingActionDelegate;
-import com.eviware.soapui.support.components.GroovyEditorComponent;
-import com.eviware.soapui.support.components.GroovyEditorInspector;
-import com.eviware.soapui.support.components.JComponentInspector;
-import com.eviware.soapui.support.components.JFocusableComponentInspector;
-import com.eviware.soapui.support.components.JInspectorPanel;
-import com.eviware.soapui.support.components.JInspectorPanelFactory;
-import com.eviware.soapui.support.components.JUndoableTextArea;
-import com.eviware.soapui.support.components.JXToolBar;
+import com.eviware.soapui.support.components.*;
 import com.eviware.soapui.support.dnd.JListDragAndDropable;
 import com.eviware.soapui.support.swing.ComponentBag;
 import com.eviware.soapui.support.types.StringToObjectMap;
 import com.eviware.soapui.ui.support.KeySensitiveModelItemDesktopPanel;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextArea;
-import javax.swing.JToolBar;
-import javax.swing.ListModel;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.text.Document;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.Date;
 import java.util.List;
@@ -268,12 +243,12 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
         return UISupport.createTabPanel(tabs, true);
     }
 
-    protected JComponent buildTestStepList() {
+    private JComponent buildTestStepList() {
         testStepList = new JSecurityTestTestStepList(getModelItem(), securityTestLog);
         return testStepList;
     }
 
-    protected void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
+    private void addTabs(JTabbedPane tabs, JInspectorPanel inspectorPanel) {
         inspectorPanel.addInspector(new JFocusableComponentInspector<JPanel>(buildDescriptionPanel(), descriptionArea,
                 "Description", "SecurityTest Description", true));
         inspectorPanel.addInspector(new JComponentInspector<JComponent>(buildPropertiesPanel(), "Properties",
@@ -284,24 +259,24 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
                 "Script to run after a SecurityTest Run"));
     }
 
-    protected GroovyEditorComponent buildTearDownScriptPanel() {
+    private GroovyEditorComponent buildTearDownScriptPanel() {
         tearDownGroovyEditor = new GroovyEditorComponent(new TearDownScriptGroovyEditorModel(), null);
         return tearDownGroovyEditor;
     }
 
-    protected GroovyEditorComponent buildSetupScriptPanel() {
+    private GroovyEditorComponent buildSetupScriptPanel() {
         setupGroovyEditor = new GroovyEditorComponent(new SetupScriptGroovyEditorModel(), null);
         return setupGroovyEditor;
     }
 
-    protected JComponent buildPropertiesPanel() {
+    private JComponent buildPropertiesPanel() {
         JPanel panel = new JPanel(new BorderLayout());
         propertiesTable = buildPropertiesTable();
         panel.add(propertiesTable, BorderLayout.CENTER);
         return panel;
     }
 
-    protected PropertyHolderTable buildPropertiesTable() {
+    private PropertyHolderTable buildPropertiesTable() {
         return new PropertyHolderTable(getModelItem());
     }
 
@@ -321,7 +296,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
         return panel;
     }
 
-    protected Component buildToolbar() {
+    private Component buildToolbar() {
         toolbar = UISupport.createToolbar();
 
         runButton = UISupport.createToolbarButton(new RunSecurityTestAction());
@@ -365,7 +340,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
         this.optionsButton = optionsButton;
     }
 
-    protected void addToolbarActions(JToolBar toolbar) {
+    private void addToolbarActions(JToolBar toolbar) {
         toolbar.add(runButton);
         toolbar.add(cancelButton);
         // toolbar.add( loopButton );
@@ -377,7 +352,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
 
     }
 
-    protected void runSecurityTest() {
+    private void runSecurityTest() {
         initializeStatusIcons();
         if (canceled) {
 
@@ -397,47 +372,13 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
         runner = getModelItem().run(properties, true);
     }
 
-    public class RunSecurityTestAction extends AbstractAction {
-        public RunSecurityTestAction() {
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Runs this securitytest");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            canceled = false;
-            // shouldRun is indicator is there any security scan that can be run
-            // meaning security scan have at least one scan and it is not disabled.
-
-            boolean shouldRun = false;
-            for (List<SecurityScan> scanList : securityTest.getSecurityScansMap().values()) {
-                for (SecurityScan scan : scanList) {
-                    if (!scan.isDisabled()) {
-                        shouldRun = true;
-                    }
-                }
-            }
-            if (shouldRun) {
-                Analytics.trackAction(SoapUIActions.RUN_SECURITY_TEST_FROM_SECURITY_TEST_PANEL);
-                runSecurityTest();
-            } else {
-                UISupport.showInfoMessage("No Security Scans available to run.", "Security Test Warning");
-            }
-        }
+    private void beforeRun() {
     }
 
-    public class CancelRunSecuritytestAction extends AbstractAction {
-        public CancelRunSecuritytestAction() {
-            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/stop.png"));
-            putValue(Action.SHORT_DESCRIPTION, "Stops running this securitytest");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            if (runner != null) {
-                runner.cancel("canceled in UI");
-            }
-
-            canceled = true;
-        }
+    private void afterRun() {
+        runButton.setEnabled(true);
+        cancelButton.setEnabled(false);
+        testStepList.setEnabled(true);
     }
 
     @Override
@@ -485,13 +426,47 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
         return release();
     }
 
-    protected void beforeRun() {
+    class RunSecurityTestAction extends AbstractAction {
+        RunSecurityTestAction() {
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Runs this securitytest");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            canceled = false;
+            // shouldRun is indicator is there any security scan that can be run
+            // meaning security scan have at least one scan and it is not disabled.
+
+            boolean shouldRun = false;
+            for (List<SecurityScan> scanList : securityTest.getSecurityScansMap().values()) {
+                for (SecurityScan scan : scanList) {
+                    if (!scan.isDisabled()) {
+                        shouldRun = true;
+                    }
+                }
+            }
+            if (shouldRun) {
+                Analytics.trackAction(SoapUIActions.RUN_SECURITY_TEST_FROM_SECURITY_TEST_PANEL);
+                runSecurityTest();
+            } else {
+                UISupport.showInfoMessage("No Security Scans available to run.", "Security Test Warning");
+            }
+        }
     }
 
-    protected void afterRun() {
-        runButton.setEnabled(true);
-        cancelButton.setEnabled(false);
-        testStepList.setEnabled(true);
+    class CancelRunSecuritytestAction extends AbstractAction {
+        CancelRunSecuritytestAction() {
+            putValue(Action.SMALL_ICON, UISupport.createImageIcon("/stop.png"));
+            putValue(Action.SHORT_DESCRIPTION, "Stops running this securitytest");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            if (runner != null) {
+                runner.cancel("canceled in UI");
+            }
+
+            canceled = true;
+        }
     }
 
     private class SetupScriptGroovyEditorModel extends AbstractGroovyEditorModel {
@@ -514,7 +489,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
             };
         }
 
-        public SetupScriptGroovyEditorModel() {
+        SetupScriptGroovyEditorModel() {
             super(new String[]{"log", "testCase", "context", "testRunner"}, SecurityTestDesktopPanel.this
                     .getModelItem(), "Setup");
         }
@@ -546,7 +521,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
             };
         }
 
-        public TearDownScriptGroovyEditorModel() {
+        TearDownScriptGroovyEditorModel() {
             super(new String[]{"log", "securityTest", "context", "testRunner"}, SecurityTestDesktopPanel.this
                     .getModelItem(), "TearDown");
         }
@@ -612,7 +587,7 @@ public class SecurityTestDesktopPanel extends KeySensitiveModelItemDesktopPanel<
 
     public class InternalSecurityTestRunListener extends SecurityTestRunListenerAdapter {
 
-        public InternalSecurityTestRunListener() {
+        InternalSecurityTestRunListener() {
         }
 
         public void beforeRun(TestCaseRunner testRunner, SecurityTestRunContext runContext) {

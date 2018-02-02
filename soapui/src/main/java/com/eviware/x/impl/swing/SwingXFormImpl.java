@@ -29,10 +29,7 @@ import com.jgoodies.forms.layout.CellConstraints;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 
-import javax.swing.BorderFactory;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JSeparator;
+import javax.swing.*;
 import javax.swing.border.Border;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -52,7 +49,7 @@ public class SwingXFormImpl implements XForm {
         this(name, 5);
     }
 
-    public SwingXFormImpl(String name, int leftIndent) {
+    private SwingXFormImpl(String name, int leftIndent) {
         this.name = name;
         layout = new FormLayout(leftIndent + "px,left:pref,5px,left:default,5px:grow(1.0)");
         panel = new JPanel(layout);

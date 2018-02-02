@@ -21,41 +21,21 @@ import com.eviware.soapui.impl.support.actions.ShowOnlineHelpAction;
 import com.eviware.soapui.impl.wsdl.support.HelpUrls;
 import com.eviware.soapui.impl.wsdl.teststeps.actions.AddAssertionAction;
 import com.eviware.soapui.model.ModelItem;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionsListener;
-import com.eviware.soapui.model.testsuite.TestAssertion;
-import com.eviware.soapui.model.testsuite.TestCase;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.eviware.soapui.support.action.swing.ActionListBuilder;
 import com.eviware.soapui.support.action.swing.ActionSupport;
 import com.eviware.soapui.support.components.JXToolBar;
 
-import javax.swing.AbstractAction;
-import javax.swing.AbstractListModel;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
-import javax.swing.ListCellRenderer;
-import javax.swing.ListSelectionModel;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -247,7 +227,7 @@ public class AssertionsPanel extends JPanel {
         return toolbar;
     }
 
-    protected void addToolbarButtons(JXToolBar toolbar) {
+    private void addToolbarButtons(JXToolBar toolbar) {
         toolbar.addFixed(UISupport.createToolbarButton(addAssertionAction));
         toolbar.addFixed(UISupport.createToolbarButton(configureAssertionAction));
         toolbar.addFixed(UISupport.createToolbarButton(removeAssertionAction));
@@ -259,7 +239,7 @@ public class AssertionsPanel extends JPanel {
         assertionList.setEnabled(enabled);
     }
 
-    protected void selectError(AssertionError error) {
+    void selectError(AssertionError error) {
     }
 
     private static class AssertionCellRenderer extends JLabel implements ListCellRenderer {
@@ -298,6 +278,20 @@ public class AssertionsPanel extends JPanel {
         }
     }
 
+    protected String getHelpUrl() {
+        return HelpUrls.RESPONSE_ASSERTIONS_HELP_URL;
+    }
+
+    public void release() {
+        assertionListModel.release();
+        addAssertionAction.release();
+        assertable = null;
+    }
+
+    public JList getAssertionsList() {
+        return assertionList;
+    }
+
     protected class AssertionListModel extends AbstractListModel implements PropertyChangeListener, AssertionsListener {
         protected List<Object> items = new ArrayList<Object>();
 
@@ -313,7 +307,7 @@ public class AssertionsPanel extends JPanel {
             return index >= items.size() ? null : items.get(index);
         }
 
-        public TestAssertion getAssertionAt(int index) {
+        TestAssertion getAssertionAt(int index) {
             Object object = items.get(index);
             while (!(object instanceof TestAssertion) && index > 0) {
                 object = items.get(--index);
@@ -322,7 +316,7 @@ public class AssertionsPanel extends JPanel {
             return (TestAssertion) ((object instanceof TestAssertion) ? object : null);
         }
 
-        public void refresh() {
+        void refresh() {
             synchronized (this) {
                 release();
                 init();
@@ -339,7 +333,7 @@ public class AssertionsPanel extends JPanel {
             }
         }
 
-        public void release() {
+        void release() {
             items.clear();
 
             for (int c = 0; c < assertable.getAssertionCount(); c++) {
@@ -435,13 +429,7 @@ public class AssertionsPanel extends JPanel {
 
     }
 
-    public void release() {
-        assertionListModel.release();
-        addAssertionAction.release();
-        assertable = null;
-    }
-
-    public class ConfigureAssertionAction extends AbstractAction {
+    class ConfigureAssertionAction extends AbstractAction {
         ConfigureAssertionAction() {
             super("Configure");
             putValue(Action.SHORT_DESCRIPTION, "Configures the selection assertion");
@@ -464,8 +452,8 @@ public class AssertionsPanel extends JPanel {
         }
     }
 
-    public class RemoveAssertionAction extends AbstractAction {
-        public RemoveAssertionAction() {
+    class RemoveAssertionAction extends AbstractAction {
+        RemoveAssertionAction() {
             super("Remove Assertion");
             putValue(Action.SHORT_DESCRIPTION, "Removes the selected assertion");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/remove_assertion.gif"));
@@ -542,7 +530,7 @@ public class AssertionsPanel extends JPanel {
     }
 
     private class MoveAssertionUpAction extends AbstractAction {
-        public MoveAssertionUpAction() {
+        MoveAssertionUpAction() {
             super("Move Assertion Up");
             putValue(Action.SHORT_DESCRIPTION, "Moves selected asertion up one row");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/up_arrow.gif"));
@@ -561,7 +549,7 @@ public class AssertionsPanel extends JPanel {
     }
 
     private class MoveAssertionDownAction extends AbstractAction {
-        public MoveAssertionDownAction() {
+        MoveAssertionDownAction() {
             super("Move Assertion Down");
             putValue(Action.SHORT_DESCRIPTION, "Moves selected asertion down one row");
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/down_arrow.gif"));
@@ -577,13 +565,5 @@ public class AssertionsPanel extends JPanel {
             }
             assertionList.setSelectedValue(assertion, true);
         }
-    }
-
-    public JList getAssertionsList() {
-        return assertionList;
-    }
-
-    public String getHelpUrl() {
-        return HelpUrls.RESPONSE_ASSERTIONS_HELP_URL;
     }
 }

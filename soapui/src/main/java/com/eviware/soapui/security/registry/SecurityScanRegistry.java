@@ -21,11 +21,7 @@ import com.eviware.soapui.model.testsuite.TestStep;
 import com.eviware.soapui.security.ui.SecurityConfigurationDialogBuilder;
 import com.eviware.soapui.support.types.StringToStringMap;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Registry of SecurityScan factories
@@ -34,11 +30,11 @@ import java.util.Map;
  */
 
 public class SecurityScanRegistry {
-    protected static SecurityScanRegistry instance;
+    private static SecurityScanRegistry instance;
     private Map<String, SecurityScanFactory> availableSecurityChecks = new HashMap<String, SecurityScanFactory>();
     private StringToStringMap securityCheckNames = new StringToStringMap();
 
-    public SecurityScanRegistry() {
+    private SecurityScanRegistry() {
         addFactory(new GroovySecurityScanFactory());
         addFactory(new CrossSiteScriptingScanFactory());
         addFactory(new XmlBombSecurityScanFactory());
@@ -94,7 +90,7 @@ public class SecurityScanRegistry {
      *
      * @param factory
      */
-    public void addFactory(SecurityScanFactory factory) {
+    private void addFactory(SecurityScanFactory factory) {
         removeFactory(factory.getSecurityScanType());
         availableSecurityChecks.put(factory.getSecurityScanName(), factory);
         securityCheckNames.put(factory.getSecurityScanName(), factory.getSecurityScanType());
@@ -105,7 +101,7 @@ public class SecurityScanRegistry {
      *
      * @param type
      */
-    public void removeFactory(String type) {
+    private void removeFactory(String type) {
         for (String scfName : availableSecurityChecks.keySet()) {
             SecurityScanFactory csf = availableSecurityChecks.get(scfName);
             if (csf.getSecurityScanType().equals(type)) {

@@ -43,19 +43,19 @@ public class OAuth2Profile implements PropertyExpansionContainer {
     public static final String ACCESS_TOKEN_URI_PROPERTY = "accessTokenURI";
     public static final String REDIRECT_URI_PROPERTY = "redirectURI";
     public static final String ACCESS_TOKEN_PROPERTY = "accessToken";
-    public static final String REFRESH_TOKEN_PROPERTY = "refreshToken";
+    private static final String REFRESH_TOKEN_PROPERTY = "refreshToken";
     public static final String SCOPE_PROPERTY = "scope";
     public static final String ACCESS_TOKEN_STATUS_PROPERTY = "accessTokenStatus";
-    public static final String ACCESS_TOKEN_POSITION_PROPERTY = "accessTokenPosition";
-    public static final String ACCESS_TOKEN_EXPIRATION_TIME = "accessTokenExpirationTime";
-    public static final String ACCESS_TOKEN_ISSUED_TIME = "accessTokenIssuedTime";
-    public static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "manualAccessTokenExpirationTime";
-    public static final String USE_MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "useManualAccessTokenExpirationTime";
+    private static final String ACCESS_TOKEN_POSITION_PROPERTY = "accessTokenPosition";
+    private static final String ACCESS_TOKEN_EXPIRATION_TIME = "accessTokenExpirationTime";
+    private static final String ACCESS_TOKEN_ISSUED_TIME = "accessTokenIssuedTime";
+    private static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "manualAccessTokenExpirationTime";
+    private static final String USE_MANUAL_ACCESS_TOKEN_EXPIRATION_TIME = "useManualAccessTokenExpirationTime";
 
-    public static final String REFRESH_ACCESS_TOKEN_METHOD_PROPERTY = "refreshAccessTokenMethod";
+    private static final String REFRESH_ACCESS_TOKEN_METHOD_PROPERTY = "refreshAccessTokenMethod";
     public static final String OAUTH2_FLOW_PROPERTY = "oAuth2Flow";
-    public static final String JAVA_SCRIPTS_PROPERTY = "javaScripts";
-    public static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME_UNIT_PROPERTY = "manualAccessTokenExpirationTimeUnit";
+    private static final String JAVA_SCRIPTS_PROPERTY = "javaScripts";
+    private static final String MANUAL_ACCESS_TOKEN_EXPIRATION_TIME_UNIT_PROPERTY = "manualAccessTokenExpirationTimeUnit";
 
     public static final String RESOURCE_OWNER_LOGIN_PROPERTY = "resourceOwnerName";
     public static final String RESOURCE_OWNER_PASSWORD_PROPERTY = "resourceOwnerPassword";

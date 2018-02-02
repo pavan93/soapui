@@ -21,15 +21,10 @@ import com.eviware.soapui.security.tools.AttachmentElement;
 import com.eviware.soapui.security.ui.MaliciousAttachmentMutationsPanel.MutationTables;
 import com.eviware.soapui.support.UISupport;
 
-import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 
 public class MaliciousAttachmentFilesListForm extends JPanel {
     private DefaultListModel listModel;
@@ -37,7 +32,7 @@ public class MaliciousAttachmentFilesListForm extends JPanel {
     private AttachmentElement oldSelection;
     private AttachmentElement currentSelection;
     private MaliciousAttachmentSecurityScanConfig config;
-    final MaliciousAttachmentListToTableHolder holder;
+    private final MaliciousAttachmentListToTableHolder holder;
 
     public MaliciousAttachmentFilesListForm(MaliciousAttachmentSecurityScanConfig config,
                                             MaliciousAttachmentListToTableHolder holder) {

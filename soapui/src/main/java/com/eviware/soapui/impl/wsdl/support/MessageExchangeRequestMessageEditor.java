@@ -45,7 +45,7 @@ public class MessageExchangeRequestMessageEditor extends
         setEditable(false);
     }
 
-    public void updateXml() {
+    private void updateXml() {
         try {
             MessageExchange messageExchange = messageExchangeModelItem.getMessageExchange();
             DefaultXmlDocument defaultXmlDocument = getDocument();

@@ -60,22 +60,9 @@ public class SoapUIActionRegistry {
     }
 
 
-    public static class SeperatorAction extends AbstractSoapUIAction {
-        public static final String SOAPUI_ACTION_ID = "SeperatorAction";
-        public static SeperatorAction INSTANCE = new SeperatorAction();
-        private static SoapUIActionMapping defaultMapping = new DefaultActionMapping(SeperatorAction.SOAPUI_ACTION_ID,
-                null, null, false, null);
-
-        public SeperatorAction() {
-            super(null, null);
-        }
-
-        public void perform(ModelItem target, Object param) {
-        }
-
-        public static SoapUIActionMapping getDefaultMapping() {
-            return defaultMapping;
-        }
+    // package protected to facilitate unit testing
+    private SoapUIActionGroup addActionGroup(SoapUIActionGroup actionGroup, String groupId) {
+        return actionGroups.put(groupId, actionGroup);
     }
 
     public static class SoapUIActionGroupAction<T extends ModelItem> extends AbstractSoapUIAction<T> {
@@ -184,9 +171,22 @@ public class SoapUIActionRegistry {
         }
     }
 
-    // package protected to facilitate unit testing
-    SoapUIActionGroup addActionGroup(SoapUIActionGroup actionGroup, String groupId) {
-        return actionGroups.put(groupId, actionGroup);
+    public static class SeperatorAction extends AbstractSoapUIAction {
+        public static final String SOAPUI_ACTION_ID = "SeperatorAction";
+        static SeperatorAction INSTANCE = new SeperatorAction();
+        private static SoapUIActionMapping defaultMapping = new DefaultActionMapping(SeperatorAction.SOAPUI_ACTION_ID,
+                null, null, false, null);
+
+        SeperatorAction() {
+            super(null, null);
+        }
+
+        public static SoapUIActionMapping getDefaultMapping() {
+            return defaultMapping;
+        }
+
+        public void perform(ModelItem target, Object param) {
+        }
     }
 
     private SoapUIActionGroup createActionGroupClassFromConfig(SoapUIActionGroupConfig group)

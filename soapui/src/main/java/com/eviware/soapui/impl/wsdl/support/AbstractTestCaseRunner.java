@@ -22,11 +22,7 @@ import com.eviware.soapui.impl.wsdl.testcase.WsdlTestCase;
 import com.eviware.soapui.impl.wsdl.testcase.WsdlTestRunContext;
 import com.eviware.soapui.impl.wsdl.teststeps.WsdlTestStep;
 import com.eviware.soapui.model.iface.SubmitContext;
-import com.eviware.soapui.model.testsuite.TestCaseRunner;
-import com.eviware.soapui.model.testsuite.TestRunListener;
-import com.eviware.soapui.model.testsuite.TestRunnable;
-import com.eviware.soapui.model.testsuite.TestStep;
-import com.eviware.soapui.model.testsuite.TestStepResult;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.TestStepResult.TestStepStatus;
 import com.eviware.soapui.support.types.StringToObjectMap;
 import org.apache.commons.collections.list.TreeList;
@@ -57,11 +53,11 @@ public abstract class AbstractTestCaseRunner<T extends TestRunnable, T2 extends 
         super(modelItem, properties);
     }
 
-    public int getGotoStepIndex() {
+    protected int getGotoStepIndex() {
         return gotoStepIndex;
     }
 
-    public int getStartStep() {
+    private int getStartStep() {
         return startStep;
     }
 
@@ -204,7 +200,7 @@ public abstract class AbstractTestCaseRunner<T extends TestRunnable, T2 extends 
         return runTestStep(testStep, true, true);
     }
 
-    public TestStepResult runTestStep(TestStep testStep, boolean discard, boolean process) {
+    protected TestStepResult runTestStep(TestStep testStep, boolean discard, boolean process) {
         if (!runBeforeSteps(testStep)) {
             return null;
         }
@@ -320,7 +316,7 @@ public abstract class AbstractTestCaseRunner<T extends TestRunnable, T2 extends 
         return testStepResults;
     }
 
-    public void setResultCount(int resultCount) {
+    protected void setResultCount(int resultCount) {
         this.resultCount = resultCount;
     }
 

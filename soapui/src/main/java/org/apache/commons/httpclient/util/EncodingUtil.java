@@ -43,13 +43,13 @@
  */
 package org.apache.commons.httpclient.util;
 
-import java.io.UnsupportedEncodingException;
-
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.httpclient.HttpClientError;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.io.UnsupportedEncodingException;
 
 /**
  * The home for utility methods that handle various encoding tasks.
@@ -156,7 +156,7 @@ public class EncodingUtil {
      * @return The result of the conversion.
      * @since 3.0
      */
-    public static String getString(
+    private static String getString(
             final byte[] data,
             int offset,
             int length,
@@ -259,7 +259,7 @@ public class EncodingUtil {
      * @return The string representation of the byte array
      * @since 3.0
      */
-    public static String getAsciiString(final byte[] data, int offset, int length) {
+    private static String getAsciiString(final byte[] data, int offset, int length) {
 
         if (data == null) {
             throw new IllegalArgumentException("Parameter may not be null");

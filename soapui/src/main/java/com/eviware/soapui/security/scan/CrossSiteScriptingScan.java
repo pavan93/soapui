@@ -69,9 +69,9 @@ public class CrossSiteScriptingScan extends AbstractSecurityScanWithProperties {
     public static final String TEST_CASE_RUNNER = "testCaseRunner";
     public static final String TEST_STEP = "testStep";
     private CrossSiteScriptingScanConfig cssConfig;
-    StrategyTypeConfig.Enum strategy = StrategyTypeConfig.ONE_BY_ONE;
+    private StrategyTypeConfig.Enum strategy = StrategyTypeConfig.ONE_BY_ONE;
 
-    List<String> defaultParameterExposureStrings = new ArrayList<String>();
+    private List<String> defaultParameterExposureStrings = new ArrayList<String>();
     private JFormDialog dialog;
 
     public CrossSiteScriptingScan(TestStep testStep, SecurityScanConfig config, ModelItem parent, String icon) {
@@ -364,7 +364,7 @@ public class CrossSiteScriptingScan extends AbstractSecurityScanWithProperties {
     }
 
     @AForm(description = "Cross Site Scripting", name = "Cross Site Scripting")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
 
         @AField(description = "Cross Site Scripting Vectors", name = "###Cross Site Scripting", type = AFieldType.STRINGLIST)
         String PARAMETER_EXPOSURE_STRINGS = "###Cross Site Scripting";

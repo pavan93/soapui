@@ -30,7 +30,7 @@ import java.awt.event.KeyListener;
 @SuppressWarnings("serial")
 public abstract class KeySensitiveModelItemDesktopPanel<T extends ModelItem> extends ModelItemDesktopPanel<T> implements
         KeyListener {
-    public KeySensitiveModelItemDesktopPanel(T modelItem) {
+    protected KeySensitiveModelItemDesktopPanel(T modelItem) {
         super(modelItem);
 
         this.addKeyListener(this);

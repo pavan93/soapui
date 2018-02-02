@@ -28,9 +28,7 @@ import com.eviware.soapui.support.UISupport;
 import org.apache.log4j.Logger;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -54,17 +52,17 @@ public abstract class AbstractLoadTestAssertion implements LoadTestAssertion {
     private TestStepPropertyChangeListener testStepPropertyChangeListener = new TestStepPropertyChangeListener();
     private InternalTestSuiteListener testSuiteListener = new InternalTestSuiteListener();
 
-    protected static final String TEST_STEP_ELEMENT = "test-step";
-    protected static final String TEST_STEP_FIELD = "TestStep";
+    static final String TEST_STEP_ELEMENT = "test-step";
+    static final String TEST_STEP_FIELD = "TestStep";
 
-    public AbstractLoadTestAssertion(LoadTestAssertionConfig assertionConfig, WsdlLoadTest loadTest) {
+    AbstractLoadTestAssertion(LoadTestAssertionConfig assertionConfig, WsdlLoadTest loadTest) {
         this.assertionConfig = assertionConfig;
         this.loadTest = loadTest;
 
         loadTest.getTestCase().getTestSuite().addTestSuiteListener(testSuiteListener);
     }
 
-    public void initIcon(String url) {
+    void initIcon(String url) {
         icon = UISupport.createImageIcon(url);
     }
 
@@ -76,7 +74,7 @@ public abstract class AbstractLoadTestAssertion implements LoadTestAssertion {
         assertionConfig = configuration;
     }
 
-    protected void setConfiguration(XmlObject configuration) {
+    void setConfiguration(XmlObject configuration) {
         XmlObject oldConfig = assertionConfig.getConfiguration();
         assertionConfig.setConfiguration(configuration);
         propertyChangeSupport.firePropertyChange(AbstractLoadTestAssertion.CONFIGURATION_PROPERTY, oldConfig,
@@ -87,42 +85,38 @@ public abstract class AbstractLoadTestAssertion implements LoadTestAssertion {
         return assertionConfig.isSetName() ? assertionConfig.getName() : assertionConfig.getType();
     }
 
-    public void setName(String name) {
+    void setName(String name) {
         String old = getName();
         assertionConfig.setName(name);
         propertyChangeSupport.firePropertyChange(NAME_PROPERTY, old, name);
     }
 
-    public WsdlLoadTest getLoadTest() {
+    private WsdlLoadTest getLoadTest() {
         return loadTest;
     }
 
-    public class RenameAssertionAction extends AbstractAction {
-        public RenameAssertionAction() {
-            super("Rename");
-            putValue(Action.SHORT_DESCRIPTION, "Renames this assertion");
+    String returnErrorOrFail(String message, int maxErrors, LoadTestRunner testRunner,
+                             LoadTestRunContext context) {
+        String propertyKey = getClass().getName() + hashCode();
+        Long errorCount = (Long) context.getProperty(propertyKey);
+
+        if (errorCount == null) {
+            errorCount = 1L;
+        } else {
+            errorCount = new Long(errorCount.longValue() + 1);
         }
 
-        public void actionPerformed(ActionEvent e) {
-            String name = UISupport.prompt("Specify name for this assertion", "Rename Assertion",
-                    AbstractLoadTestAssertion.this.getName());
-            if (name == null || name.equals(AbstractLoadTestAssertion.this.getName())) {
-                return;
-            }
-
-            setName(name);
+        if (maxErrors >= 0 && errorCount >= maxErrors) {
+            testRunner.fail("Maximum number of errors [" + maxErrors + "] for assertion [" + getName() + "] exceeded");
         }
+
+        context.setProperty(propertyKey, errorCount);
+
+        return message;
     }
 
-    public class ConfigureAssertionAction extends AbstractAction {
-        public ConfigureAssertionAction() {
-            super("Configure");
-            putValue(Action.SHORT_DESCRIPTION, "Configures this assertion");
-        }
-
-        public void actionPerformed(ActionEvent e) {
-            ((Configurable) AbstractLoadTestAssertion.this).configure();
-        }
+    boolean targetStepMatches(TestStep testStep) {
+        return testStepName == null || testStepName.equals(ANY_TEST_STEP) || testStep.getName().equals(testStepName);
     }
 
     public ImageIcon getIcon() {
@@ -145,24 +139,13 @@ public abstract class AbstractLoadTestAssertion implements LoadTestAssertion {
         propertyChangeSupport.removePropertyChangeListener(propertyName, listener);
     }
 
-    protected String returnErrorOrFail(String message, int maxErrors, LoadTestRunner testRunner,
-                                       LoadTestRunContext context) {
-        String propertyKey = getClass().getName() + hashCode();
-        Long errorCount = (Long) context.getProperty(propertyKey);
-
-        if (errorCount == null) {
-            errorCount = 1L;
+    String[] getTargetStepOptions(boolean includeAll) {
+        if (includeAll) {
+            return ModelSupport.getNames(new String[]{ANY_TEST_STEP, ALL_TEST_STEPS}, getLoadTest().getTestCase()
+                    .getTestStepList());
         } else {
-            errorCount = new Long(errorCount.longValue() + 1);
+            return ModelSupport.getNames(new String[]{ANY_TEST_STEP}, getLoadTest().getTestCase().getTestStepList());
         }
-
-        if (maxErrors >= 0 && errorCount >= maxErrors) {
-            testRunner.fail("Maximum number of errors [" + maxErrors + "] for assertion [" + getName() + "] exceeded");
-        }
-
-        context.setProperty(propertyKey, errorCount);
-
-        return message;
     }
 
     public String getTargetStep() {
@@ -176,16 +159,31 @@ public abstract class AbstractLoadTestAssertion implements LoadTestAssertion {
 
     abstract protected void updateConfiguration();
 
-    protected boolean targetStepMatches(TestStep testStep) {
-        return testStepName == null || testStepName.equals(ANY_TEST_STEP) || testStep.getName().equals(testStepName);
+    private class RenameAssertionAction extends AbstractAction {
+        public RenameAssertionAction() {
+            super("Rename");
+            putValue(Action.SHORT_DESCRIPTION, "Renames this assertion");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            String name = UISupport.prompt("Specify name for this assertion", "Rename Assertion",
+                    AbstractLoadTestAssertion.this.getName());
+            if (name == null || name.equals(AbstractLoadTestAssertion.this.getName())) {
+                return;
+            }
+
+            setName(name);
+        }
     }
 
-    protected String[] getTargetStepOptions(boolean includeAll) {
-        if (includeAll) {
-            return ModelSupport.getNames(new String[]{ANY_TEST_STEP, ALL_TEST_STEPS}, getLoadTest().getTestCase()
-                    .getTestStepList());
-        } else {
-            return ModelSupport.getNames(new String[]{ANY_TEST_STEP}, getLoadTest().getTestCase().getTestStepList());
+    private class ConfigureAssertionAction extends AbstractAction {
+        public ConfigureAssertionAction() {
+            super("Configure");
+            putValue(Action.SHORT_DESCRIPTION, "Configures this assertion");
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            ((Configurable) AbstractLoadTestAssertion.this).configure();
         }
     }
 

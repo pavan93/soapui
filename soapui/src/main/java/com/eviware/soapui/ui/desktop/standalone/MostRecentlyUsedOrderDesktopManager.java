@@ -16,9 +16,7 @@
 
 package com.eviware.soapui.ui.desktop.standalone;
 
-import javax.swing.DesktopManager;
-import javax.swing.JComponent;
-import javax.swing.JInternalFrame;
+import javax.swing.*;
 import java.beans.PropertyVetoException;
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -39,9 +37,9 @@ import java.util.Deque;
  * At anytime, there is one frame selected (unless there are no (open) frames at all) and that frame is the top of
  * stack.
  */
-public class MostRecentlyUsedOrderDesktopManager implements DesktopManager {
+class MostRecentlyUsedOrderDesktopManager implements DesktopManager {
     // Keep desktop panel list (JInternalFrame) of existing internal frames in a most-recently-used order (i.e. a stack).
-    Deque<JInternalFrame> mostRecentlyUsedFrames = new ArrayDeque<JInternalFrame>();
+    private Deque<JInternalFrame> mostRecentlyUsedFrames = new ArrayDeque<JInternalFrame>();
 
     private DesktopManager delegate;
     // this is used to prevent AquaInternalFrameManager from activating another pane when we are closing one on Mac
@@ -148,7 +146,7 @@ public class MostRecentlyUsedOrderDesktopManager implements DesktopManager {
         delegate.endResizingFrame(f);
     }
 
-    protected void selectTopFrame(JInternalFrame previousTopFrame) {
+    private void selectTopFrame(JInternalFrame previousTopFrame) {
         JInternalFrame topFrame;
         try {
             if (mostRecentlyUsedFrames.isEmpty()) {

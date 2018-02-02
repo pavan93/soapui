@@ -40,11 +40,11 @@ import java.awt.event.MouseEvent;
  * @author Santhosh Kumar T
  * @email santhosh@in.fiorano.com
  */
-public class CheckTreeManager extends MouseAdapter implements TreeSelectionListener {
+class CheckTreeManager extends MouseAdapter implements TreeSelectionListener {
     private CheckTreeSelectionModel selectionModel;
     private TreePathSelectable selectable;
-    protected JTree tree = new JTree();
-    int hotspot = new JCheckBox().getPreferredSize().width;
+    private JTree tree = new JTree();
+    private int hotspot = new JCheckBox().getPreferredSize().width;
 
     public CheckTreeManager(JTree tree, boolean dig, TreePathSelectable selectable) {
         this.tree = tree;

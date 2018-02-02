@@ -146,7 +146,7 @@ public class MalformedXmlAdvancedSettingsPanel {
     }
 
     @AForm(description = "Malformed XML Configuration", name = "Malformed XML Configuration")
-    protected interface AdvancedSettings {
+    interface AdvancedSettings {
 
         @AField(description = "", name = "Insert new element", type = AFieldType.BOOLEAN)
         String INSERT_NEW_ELEMENT = "Insert new element";

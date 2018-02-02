@@ -17,23 +17,19 @@
 package com.eviware.soapui.impl.wsdl.support.http;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Proxy;
-import java.net.ProxySelector;
-import java.net.SocketAddress;
-import java.net.URI;
+import java.net.*;
 import java.util.Arrays;
 import java.util.List;
 
 /**
  * @author Joel
  */
-public class ManualProxySelector extends ProxySelector {
+class ManualProxySelector extends ProxySelector {
     private static final List<Proxy> NO_PROXY_LIST = Arrays.asList(Proxy.NO_PROXY);
     private final List<Proxy> proxyList;
     private final String[] excludes;
 
-    public ManualProxySelector(Proxy proxy, String[] excludes) {
+    private ManualProxySelector(Proxy proxy, String[] excludes) {
         this.excludes = excludes;
         this.proxyList = Arrays.asList(proxy);
     }

@@ -51,7 +51,7 @@ public abstract class AbstractPropertyChangeNotifier implements PropertyChangeNo
         }
     }
 
-    public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
+    protected void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
     }
 
@@ -59,7 +59,7 @@ public abstract class AbstractPropertyChangeNotifier implements PropertyChangeNo
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
     }
 
-    public void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
+    protected void firePropertyChange(String propertyName, boolean oldValue, boolean newValue) {
         propertyChangeSupport.firePropertyChange(propertyName, oldValue, newValue);
     }
 

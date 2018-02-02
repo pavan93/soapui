@@ -24,7 +24,7 @@ public class WsdlDefinitionExporter extends AbstractDefinitionExporter {
         this(iface.getWsdlContext().getInterfaceDefinition());
     }
 
-    public WsdlDefinitionExporter(InterfaceDefinition<WsdlInterface> definition) {
+    private WsdlDefinitionExporter(InterfaceDefinition<WsdlInterface> definition) {
         super(definition);
     }
 

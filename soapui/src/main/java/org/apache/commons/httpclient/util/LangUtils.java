@@ -54,13 +54,13 @@ package org.apache.commons.httpclient.util;
 public class LangUtils {
 
     public static final int HASH_SEED = 17;
-    public static final int HASH_OFFSET = 37;
+    private static final int HASH_OFFSET = 37;
 
     private LangUtils() {
         super();
     }
 
-    public static int hashCode(final int seed, final int hashcode) {
+    private static int hashCode(final int seed, final int hashcode) {
         return seed * HASH_OFFSET + hashcode;
     }
 

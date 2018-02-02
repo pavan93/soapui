@@ -38,7 +38,7 @@ public class WsaRequest extends HttpRequest implements WsaContainer, WsrmContain
         this.setWsrmConfig(wsrmConfig);
     }
 
-    public void setWsaConfig(WsaConfig wsaConfig) {
+    private void setWsaConfig(WsaConfig wsaConfig) {
         this.wsaConfig = wsaConfig;
     }
 
@@ -81,7 +81,7 @@ public class WsaRequest extends HttpRequest implements WsaContainer, WsrmContain
 
     }
 
-    public void setWsrmConfig(WsrmConfig wsrmConfig) {
+    private void setWsrmConfig(WsrmConfig wsrmConfig) {
         this.wsrmConfig = wsrmConfig;
     }
 }

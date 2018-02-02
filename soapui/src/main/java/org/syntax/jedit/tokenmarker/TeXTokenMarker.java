@@ -26,8 +26,8 @@ import javax.swing.text.Segment;
  */
 public class TeXTokenMarker extends TokenMarker {
     // public members
-    public static final byte BDFORMULA = Token.INTERNAL_FIRST;
-    public static final byte EDFORMULA = (byte) (Token.INTERNAL_FIRST + 1);
+    private static final byte BDFORMULA = Token.INTERNAL_FIRST;
+    private static final byte EDFORMULA = (byte) (Token.INTERNAL_FIRST + 1);
 
     public byte markTokensImpl(byte token, Segment line, int lineIndex) {
         char[] array = line.array;

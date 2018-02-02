@@ -34,7 +34,7 @@ public abstract class AbstractWsrmInspector extends AbstractXmlInspector {
     private SimpleBindingForm form;
     private final WsrmContainer wsrmContainer;
 
-    protected AbstractWsrmInspector(WsrmContainer wsrmContainer) {
+    AbstractWsrmInspector(WsrmContainer wsrmContainer) {
         super("WS-RM", "WS-Reliable Messaging related settings", true, WsrmInspectorFactory.INSPECTOR_ID);
         this.wsrmContainer = wsrmContainer;
     }
@@ -49,7 +49,7 @@ public abstract class AbstractWsrmInspector extends AbstractXmlInspector {
         return mainPanel;
     }
 
-    public void buildContent(SimpleBindingForm form) {
+    void buildContent(SimpleBindingForm form) {
     }
 
     @Override

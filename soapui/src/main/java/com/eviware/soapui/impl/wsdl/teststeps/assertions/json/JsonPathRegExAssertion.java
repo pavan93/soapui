@@ -31,18 +31,18 @@ import com.eviware.soapui.support.xml.XmlObjectConfigurationBuilder;
 import com.eviware.soapui.support.xml.XmlObjectConfigurationReader;
 import junit.framework.Assert;
 
-import javax.swing.JTextArea;
+import javax.swing.*;
 import java.util.regex.PatternSyntaxException;
 
 public class JsonPathRegExAssertion extends JsonPathAssertionBase implements RequestAssertion, ResponseAssertion {
 
-    public static final String ID = "JsonPath RegEx Match";
-    public static final String LABEL = "JsonPath RegEx Match";
-    public static final String DESCRIPTION = "Uses an JsonPath expression to select content from the target property and compares the result to an specified RegEx. Applicable to any property containing JSON.";
-    public static final String REG_EX_PROPERTY_NAME = "regEx";
+    private static final String ID = "JsonPath RegEx Match";
+    private static final String LABEL = "JsonPath RegEx Match";
+    private static final String DESCRIPTION = "Uses an JsonPath expression to select content from the target property and compares the result to an specified RegEx. Applicable to any property containing JSON.";
+    private static final String REG_EX_PROPERTY_NAME = "regEx";
     private String regularExpression;
 
-    public JsonPathRegExAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private JsonPathRegExAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable);
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
         regularExpression = reader.readString(REG_EX_PROPERTY_NAME, null);

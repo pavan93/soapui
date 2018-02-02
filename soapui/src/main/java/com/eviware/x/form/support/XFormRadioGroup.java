@@ -19,19 +19,10 @@ package com.eviware.x.form.support;
 import com.eviware.x.form.XFormOptionsField;
 import com.eviware.x.impl.swing.AbstractSwingXFormField;
 
-import javax.swing.AbstractButton;
-import javax.swing.BoxLayout;
-import javax.swing.ButtonGroup;
-import javax.swing.ButtonModel;
-import javax.swing.JPanel;
-import javax.swing.JRadioButton;
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Swing-specific RadioGroup
@@ -40,9 +31,9 @@ import java.util.Map;
  */
 
 public class XFormRadioGroup extends AbstractSwingXFormField<JPanel> implements XFormOptionsField {
-    protected ButtonGroup buttonGroup;
-    protected Map<String, ButtonModel> models = new HashMap<String, ButtonModel>();
-    protected List<Object> items = new ArrayList<Object>();
+    ButtonGroup buttonGroup;
+    Map<String, ButtonModel> models = new HashMap<String, ButtonModel>();
+    List<Object> items = new ArrayList<Object>();
 
     public XFormRadioGroup(String[] values) {
         super(new JPanel());

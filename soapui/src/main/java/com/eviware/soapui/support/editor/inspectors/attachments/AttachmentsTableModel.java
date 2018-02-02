@@ -73,7 +73,7 @@ public class AttachmentsTableModel extends AbstractTableModel implements Propert
         }
     }
 
-    public void removeAttachment(int rowIndex) {
+    private void removeAttachment(int rowIndex) {
         if (container instanceof MutableAttachmentContainer) {
             ((MutableAttachmentContainer) container).removeAttachment(container.getAttachmentAt(rowIndex));
             this.fireTableRowsDeleted(rowIndex, rowIndex);

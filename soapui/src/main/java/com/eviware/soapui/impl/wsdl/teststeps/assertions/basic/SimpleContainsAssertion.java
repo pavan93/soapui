@@ -27,11 +27,8 @@ import com.eviware.soapui.model.iface.SubmitContext;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpander;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansion;
 import com.eviware.soapui.model.propertyexpansion.PropertyExpansionUtils;
-import com.eviware.soapui.model.testsuite.Assertable;
+import com.eviware.soapui.model.testsuite.*;
 import com.eviware.soapui.model.testsuite.AssertionError;
-import com.eviware.soapui.model.testsuite.AssertionException;
-import com.eviware.soapui.model.testsuite.RequestAssertion;
-import com.eviware.soapui.model.testsuite.ResponseAssertion;
 import com.eviware.soapui.support.StringUtils;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.types.StringToStringMap;
@@ -47,7 +44,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.RowSpec;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,15 +60,15 @@ public class SimpleContainsAssertion extends WsdlMessageAssertion implements Req
     private XFormDialog dialog;
     private boolean ignoreCase;
     private boolean useRegEx;
-    public static final String ID = "Simple Contains";
+    private static final String ID = "Simple Contains";
     private static final String CONTENT = "Content";
     private static final String IGNORE_CASE = "Ignore Case";
     private static final String USE_REGEX = "Regular Expression";
     public static final String LABEL = "Contains";
-    public static final String DESCRIPTION = "Searches for the existence of a string token in the property value, supports regular expressions. Applicable to any property. ";
+    private static final String DESCRIPTION = "Searches for the existence of a string token in the property value, supports regular expressions. Applicable to any property. ";
     private static CellConstraints cc = new CellConstraints();
 
-    public SimpleContainsAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
+    private SimpleContainsAssertion(TestAssertionConfig assertionConfig, Assertable assertable) {
         super(assertionConfig, assertable, true, true, true, true);
 
         XmlObjectConfigurationReader reader = new XmlObjectConfigurationReader(getConfiguration());
@@ -183,7 +180,7 @@ public class SimpleContainsAssertion extends WsdlMessageAssertion implements Req
         setConfiguration(createConfiguration());
     }
 
-    protected XmlObject createConfiguration() {
+    private XmlObject createConfiguration() {
         XmlObjectConfigurationBuilder builder = new XmlObjectConfigurationBuilder();
         builder.add("token", token);
         builder.add("ignoreCase", ignoreCase);

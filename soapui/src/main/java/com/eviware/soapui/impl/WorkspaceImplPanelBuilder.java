@@ -19,7 +19,7 @@ package com.eviware.soapui.impl;
 import com.eviware.soapui.support.MessageSupport;
 import com.eviware.soapui.support.components.JPropertiesTable;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 /**
  * PanelBuilder for default Workspace implementation
@@ -28,7 +28,7 @@ import javax.swing.JPanel;
  */
 
 public class WorkspaceImplPanelBuilder extends EmptyPanelBuilder<WorkspaceImpl> {
-    public static final MessageSupport messages = MessageSupport.getMessages(WorkspaceImplPanelBuilder.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(WorkspaceImplPanelBuilder.class);
 
     public WorkspaceImplPanelBuilder() {
     }

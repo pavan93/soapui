@@ -29,10 +29,8 @@ import net.sf.json.JSON;
 import org.fife.ui.rsyntaxtextarea.RSyntaxTextArea;
 import org.fife.ui.rtextarea.RTextScrollPane;
 
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import java.awt.Component;
+import javax.swing.*;
+import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -93,7 +91,7 @@ public class JsonResponseMessageExchangeView extends AbstractXmlEditorView<HttpR
         return contentPanel;
     }
 
-    protected void setEditorContent(MessageExchange me) {
+    private void setEditorContent(MessageExchange me) {
         if (me == null) {
             contentEditor.setText("");
         } else {

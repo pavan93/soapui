@@ -36,18 +36,15 @@ import com.eviware.soapui.ui.support.ModelItemDesktopPanel;
 import org.apache.xmlbeans.XmlException;
 import org.apache.xmlbeans.XmlObject;
 
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.beans.PropertyChangeListener;
 
 public class XPathMockOperationDispatcher extends AbstractMockOperationDispatcher {
     private GroovyEditor xpathEditor;
 
-    public XPathMockOperationDispatcher(MockOperation mockOperation) {
+    private XPathMockOperationDispatcher(MockOperation mockOperation) {
         super(mockOperation);
     }
 
@@ -111,7 +108,7 @@ public class XPathMockOperationDispatcher extends AbstractMockOperationDispatche
         return true;
     }
 
-    protected JXToolBar buildXPathEditorToolbar(DispatchXPathGroovyEditorModel editorModel) {
+    private JXToolBar buildXPathEditorToolbar(DispatchXPathGroovyEditorModel editorModel) {
         JXToolBar toolbar = UISupport.createToolbar();
         toolbar.addSpace(3);
         addToolbarActions(editorModel, toolbar);
@@ -121,7 +118,7 @@ public class XPathMockOperationDispatcher extends AbstractMockOperationDispatche
         return toolbar;
     }
 
-    protected void addToolbarActions(DispatchXPathGroovyEditorModel editorModel, JXToolBar toolbar) {
+    private void addToolbarActions(DispatchXPathGroovyEditorModel editorModel, JXToolBar toolbar) {
         toolbar.addFixed(UISupport.createToolbarButton(editorModel.getRunAction()));
     }
 
@@ -170,7 +167,7 @@ public class XPathMockOperationDispatcher extends AbstractMockOperationDispatche
     }
 
     private class RunXPathAction extends AbstractAction {
-        public RunXPathAction() {
+        RunXPathAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/run.png"));
             putValue(Action.SHORT_DESCRIPTION, "Evaluates this xpath expression against the latest request");
         }

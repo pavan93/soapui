@@ -57,7 +57,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
     private final Settings settings;
     private Set<String> boldTexts = new HashSet<String>();
     private boolean follow = true;
-    protected int selectedIndex;
+    private int selectedIndex;
     private XFormDialog optionsDialog;
 
     public JTestRunLog(Settings settings) {
@@ -104,7 +104,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
         return follow;
     }
 
-    protected void addToolbarButtons(JXToolBar toolbar) {
+    private void addToolbarButtons(JXToolBar toolbar) {
         toolbar.addFixed(UISupport.createToolbarButton(new ClearLogAction()));
         toolbar.addFixed(UISupport.createToolbarButton(new SetLogOptionsAction()));
         toolbar.addFixed(UISupport.createToolbarButton(new ExportLogAction()));
@@ -115,7 +115,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
         private Font normalFont;
         private JHyperlinkLabel hyperlinkLabel = new JHyperlinkLabel("");
 
-        public TestLogCellRenderer() {
+        TestLogCellRenderer() {
             setOpaque(true);
             setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
             setIcon(null);
@@ -207,7 +207,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
             }
         }
 
-        public void showPopup(MouseEvent e) {
+        void showPopup(MouseEvent e) {
             int row = testLogList.locationToIndex(e.getPoint());
             if (row == -1) {
                 return;
@@ -288,7 +288,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
     }
 
     private class SetLogOptionsAction extends AbstractAction {
-        public SetLogOptionsAction() {
+        SetLogOptionsAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/preferences.png"));
             putValue(Action.SHORT_DESCRIPTION, "Sets TestCase Log Options");
         }
@@ -329,7 +329,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
     }
 
     private class ClearLogAction extends AbstractAction {
-        public ClearLogAction() {
+        ClearLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/clear.png"));
             putValue(Action.SHORT_DESCRIPTION, "Clears the log");
         }
@@ -340,7 +340,7 @@ public class JTestRunLog extends JPanel implements TestRunLog {
     }
 
     private class ExportLogAction extends AbstractAction {
-        public ExportLogAction() {
+        ExportLogAction() {
             putValue(Action.SMALL_ICON, UISupport.createImageIcon("/export.png"));
             putValue(Action.SHORT_DESCRIPTION, "Exports this log to a file");
         }

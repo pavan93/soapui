@@ -23,15 +23,13 @@ import com.eviware.soapui.support.editor.views.AbstractXmlEditorView;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 import com.eviware.soapui.support.editor.xml.XmlEditor;
 
-import javax.swing.JComponent;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.*;
 
 public abstract class RawXmlEditor<T extends XmlDocument> extends AbstractXmlEditorView<T> {
     private JTextArea textArea;
     private JScrollPane scrollPane;
 
-    public RawXmlEditor(String title, XmlEditor<T> xmlEditor, String tooltip) {
+    RawXmlEditor(String title, XmlEditor<T> xmlEditor, String tooltip) {
         super(title, xmlEditor, RawXmlEditorFactory.VIEW_ID);
 
         textArea = new JTextArea();
@@ -48,7 +46,7 @@ public abstract class RawXmlEditor<T extends XmlDocument> extends AbstractXmlEdi
         textArea.setCaretPosition(0);
     }
 
-    public abstract String getContent();
+    protected abstract String getContent();
 
     public JComponent getComponent() {
         return scrollPane;

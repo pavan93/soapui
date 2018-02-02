@@ -25,8 +25,8 @@ import com.eviware.soapui.model.tree.nodes.PropertyTreeNode.PropertyModelItem;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.support.xml.XmlUtils;
 
-import javax.swing.JTable;
-import java.awt.Point;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.dnd.DropTargetDragEvent;
@@ -34,7 +34,7 @@ import java.awt.dnd.DropTargetDropEvent;
 import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 
-public class JTableTestPropertyDropTarget implements DropTargetListener {
+class JTableTestPropertyDropTarget implements DropTargetListener {
     private final JTable table;
     private final ModelItem modelItem;
 
@@ -100,7 +100,7 @@ public class JTableTestPropertyDropTarget implements DropTargetListener {
     public void dropActionChanged(DropTargetDragEvent dtde) {
     }
 
-    public boolean isAcceptable(Transferable transferable, Point point) {
+    private boolean isAcceptable(Transferable transferable, Point point) {
         int column = table.columnAtPoint(point);
         int row = table.rowAtPoint(point);
         if (!table.isCellEditable(row, column)) {

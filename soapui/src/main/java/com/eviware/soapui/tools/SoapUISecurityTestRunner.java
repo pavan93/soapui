@@ -67,9 +67,9 @@ import static com.eviware.soapui.impl.wsdl.actions.iface.tools.support.ProcessTo
  */
 
 public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements SecurityTestRunListener {
-    public static final String SOAPUI_EXPORT_SEPARATOR = "soapui.export.separator";
+    private static final String SOAPUI_EXPORT_SEPARATOR = "soapui.export.separator";
 
-    public static final String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " Security Test Runner";
+    private static final String TITLE = "SoapUI " + SoapUI.SOAPUI_VERSION + " Security Test Runner";
     private String securityTestName;
     private int securityTestCount;
     private int securityScanCount;
@@ -109,7 +109,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
         return options;
     }
 
-    public SoapUISecurityTestRunner() {
+    private SoapUISecurityTestRunner() {
         super(SoapUISecurityTestRunner.TITLE);
     }
 
@@ -219,7 +219,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
         initProjectProperties(project);
     }
 
-    protected void exportReports(WsdlProject project) throws Exception {
+    protected void exportReports(WsdlProject project) {
         if (isJUnitReport()) {
             exportJUnitReports(reportCollector, getAbsoluteOutputFolder(project), project);
         }
@@ -232,7 +232,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
         }
     }
 
-    public void exportJUnitReports(JUnitSecurityReportCollector collector, String folder, WsdlProject project) {
+    private void exportJUnitReports(JUnitSecurityReportCollector collector, String folder, WsdlProject project) {
         collector.saveReports(folder == null ? "" : folder);
     }
 
@@ -289,7 +289,7 @@ public class SoapUISecurityTestRunner extends SoapUITestCaseRunner implements Se
     /**
      * @param securityTest
      */
-    protected void runSecurityTest(SecurityTest securityTest) {
+    private void runSecurityTest(SecurityTest securityTest) {
         securityTest.addSecurityTestRunListener(new SecurityTestRunListenerAdapter() {
             private int requestIndex = 0;
 

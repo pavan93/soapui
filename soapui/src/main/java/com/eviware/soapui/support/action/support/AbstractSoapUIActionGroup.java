@@ -27,10 +27,10 @@ import com.eviware.soapui.support.action.SoapUIActionMapping;
  */
 
 public abstract class AbstractSoapUIActionGroup<T extends ModelItem> implements SoapUIActionGroup<T> {
-    protected final String id;
-    protected final String name;
+    private final String id;
+    private final String name;
 
-    public AbstractSoapUIActionGroup(String id, String name) {
+    protected AbstractSoapUIActionGroup(String id, String name) {
         this.id = id;
         this.name = name;
     }

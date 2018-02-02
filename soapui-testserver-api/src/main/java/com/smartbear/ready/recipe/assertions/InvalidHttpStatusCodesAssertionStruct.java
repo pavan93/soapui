@@ -13,10 +13,10 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotEmpty;
  * Captures the JSON configuration of an Invalid HTTP Status codes assertion.
  */
 @ApiModel(value = "InvalidHttpStatusCodesAssertion", description = "Invalid Http status codes assertion definition")
-public class InvalidHttpStatusCodesAssertionStruct extends AssertionStruct<InvalidHttpStatusCodesAssertion> {
+class InvalidHttpStatusCodesAssertionStruct extends AssertionStruct<InvalidHttpStatusCodesAssertion> {
 
     @ApiModelProperty(value = "invalidStatusCodes", allowableValues = "range[100, 509]")
-    public String[] invalidStatusCodes;
+    private String[] invalidStatusCodes;
 
     @JsonCreator
     public InvalidHttpStatusCodesAssertionStruct(@JsonProperty("name") String name, @JsonProperty("invalidStatusCodes") String[] codes) {

@@ -19,13 +19,13 @@ package com.eviware.x.form;
 import com.eviware.soapui.support.action.swing.ActionList;
 import com.jgoodies.forms.layout.FormLayout;
 
-import javax.swing.ImageIcon;
+import javax.swing.*;
 import java.util.ArrayList;
 
 public abstract class XFormDialogBuilder {
     private ArrayList<XForm> forms = new ArrayList<XForm>();
 
-    public XFormDialogBuilder() {
+    protected XFormDialogBuilder() {
     }
 
     protected void addForm(XForm form) {

@@ -23,7 +23,7 @@ import javax.swing.table.AbstractTableModel;
 
 public abstract class MaliciousAttachmentTableModel extends AbstractTableModel {
 
-    protected AttachmentHolder holder = new AttachmentHolder();
+    AttachmentHolder holder = new AttachmentHolder();
 
     public int getRowCount() {
         return holder.size();

@@ -27,7 +27,7 @@ import com.eviware.soapui.support.editor.inspectors.AbstractXmlInspector;
 import com.eviware.soapui.support.editor.views.xml.raw.RawXmlEditorFactory;
 import com.eviware.soapui.support.editor.xml.XmlDocument;
 
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
@@ -39,8 +39,8 @@ public abstract class AbstractRestRepresentationsInspector extends AbstractXmlIn
     private final RestMethod restMethod;
     private List<RestRepresentation.Type> types;
 
-    protected AbstractRestRepresentationsInspector(RestMethod restMethod, String name, String description,
-                                                   RestRepresentation.Type[] types) {
+    AbstractRestRepresentationsInspector(RestMethod restMethod, String name, String description,
+                                         RestRepresentation.Type[] types) {
         super(name, description, true, RestRepresentationsInspectorFactory.INSPECTOR_ID);
         this.restMethod = restMethod;
         this.types = Arrays.asList(types);
@@ -57,10 +57,10 @@ public abstract class AbstractRestRepresentationsInspector extends AbstractXmlIn
         return representationTable;
     }
 
-    protected void addToToolbar(JXToolBar toolbar) {
+    void addToToolbar(JXToolBar toolbar) {
     }
 
-    protected void buildUI() {
+    private void buildUI() {
         representationTable = new RestRepresentationsTable(restMethod,
                 types.toArray(new RestRepresentation.Type[]{}), true) {
             protected JXToolBar buildToolbar() {
@@ -71,7 +71,7 @@ public abstract class AbstractRestRepresentationsInspector extends AbstractXmlIn
         };
     }
 
-    public RestMethod getMethod() {
+    RestMethod getMethod() {
         return restMethod;
     }
 

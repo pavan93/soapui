@@ -20,9 +20,7 @@ import com.eviware.soapui.model.ModelItem;
 import com.eviware.soapui.support.UISupport;
 import com.eviware.soapui.ui.desktop.DesktopPanel;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JComponent;
+import javax.swing.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.HashSet;
@@ -62,7 +60,7 @@ public class DefaultDesktopPanel implements DesktopPanel {
         return description;
     }
 
-    public void setTitle(String title) {
+    protected void setTitle(String title) {
         String oldTitle = this.title;
         this.title = title;
 

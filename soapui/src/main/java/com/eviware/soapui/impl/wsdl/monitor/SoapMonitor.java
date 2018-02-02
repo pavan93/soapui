@@ -67,22 +67,11 @@ import org.jdesktop.swingx.decorator.Filter;
 import org.jdesktop.swingx.decorator.FilterPipeline;
 import org.jdesktop.swingx.decorator.PatternFilter;
 
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
-import javax.swing.JScrollPane;
-import javax.swing.ListSelectionModel;
+import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.AbstractTableModel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -363,7 +352,7 @@ public class SoapMonitor extends JPanel {
         return toolbar.getPanel();
     }
 
-    protected void updateRowCountLabel() {
+    private void updateRowCountLabel() {
         rowCountLabel.setText(logTable.getRowCount() + "/" + tableModel.getRowCount() + " entries");
     }
 
@@ -455,7 +444,7 @@ public class SoapMonitor extends JPanel {
     /**
      * Method start
      */
-    public void start() {
+    private void start() {
         int localPort = getLocalPort();
         listenerCallBack = new SoapMonitorListenerCallBack() {
             @Override
@@ -535,16 +524,160 @@ public class SoapMonitor extends JPanel {
         }
     }
 
+    private int getLocalPort() {
+        return listenPort;
+    }
+
+    private synchronized void addMessageExchange(WsdlMonitorMessageExchange messageExchange) {
+        messageExchangeStack.push(messageExchange);
+
+        if (!stackProcessor.isRunning()) {
+            new Thread(stackProcessor, "SoapMonitor StackProcessor for project [" + getProject().getName() + "]")
+                    .start();
+        }
+    }
+
+    private WsdlProject getProject() {
+        return project;
+    }
+
+    protected String getHttpProxyHost() {
+        return httpProxyHost;
+    }
+
+    protected void setHttpProxyHost(String proxyHost) {
+        httpProxyHost = proxyHost;
+    }
+
+    /**
+     * Excludes proxy headers
+     *
+     * @param requestHeaders
+     * @return
+     */
+    private StringToStringsMap excludeProxyHeaders(StringToStringsMap requestHeaders) {
+        StringToStringsMap stsmap = new StringToStringsMap();
+        for (String key : requestHeaders.getKeys()) {
+            if (!(key.contains("Proxy") || key.contains("Content"))) {
+                stsmap.add(key, requestHeaders.get(key, ""));
+            }
+        }
+        return stsmap;
+    }
+
+    protected int getHttpProxyPort() {
+        return httpProxyPort;
+    }
+
+    protected void setHttpProxyPort(int proxyPort) {
+        httpProxyPort = proxyPort;
+    }
+
+    public String getTargetHost() {
+        String host = targetEndpoint;
+
+        try {
+            URL url = new URL(host);
+            return url.getHost();
+        } catch (MalformedURLException e) {
+            return host;
+        }
+    }
+
+    public String getTargetEndpoint() {
+        return targetEndpoint;
+    }
+
+    // protected SlowLinkSimulator getSlowLink()
+    // {
+    // return slowLink;
+    // }
+
+    public int getTargetPort() {
+        try {
+            URL url = new URL(targetEndpoint);
+            return url.getPort() == -1 ? 80 : url.getPort();
+        } catch (MalformedURLException e) {
+            return 80;
+        }
+    }
+
+    public MonitorLogTableModel getLogModel() {
+        return tableModel;
+    }
+
+    public void addSoapMonitorListener(MonitorListener listener) {
+        listenerCallBack.addSoapMonitorListener(listener);
+    }
+
+    public void removeSoapMonitorListener(MonitorListener listener) {
+        listenerCallBack.removeSoapMonitorListener(listener);
+    }
+
+    private final class CreateRequestsAction implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            int[] rows = logTable.getSelectedRows();
+            if (rows.length == 0) {
+                return;
+            }
+
+            if (UISupport.confirm("Create " + rows.length + " requests", "Create Request")) {
+                int withoutOperation = 0;
+                for (int row : rows) {
+                    WsdlMonitorMessageExchange me = tableModel.getMessageExchangeAt(row);
+                    if (me.getOperation() == null) {
+                        withoutOperation++;
+                        continue;
+                    }
+
+                    WsdlRequest request = me.getOperation().addNewRequest("Monitor Request " + (row + 1));
+
+                    request.setRequestContent(me.getRequestContent());
+                    request.setEndpoint(me.getTargetUrl().toString());
+
+                    Attachment[] requestAttachments = me.getRequestAttachments();
+                    if (requestAttachments != null) {
+                        for (Attachment attachment : requestAttachments) {
+                            request.importAttachment(attachment);
+                        }
+                    }
+                }
+                if (withoutOperation > 0) {
+                    UISupport.showInfoMessage("For " + withoutOperation + "request(s) there are no operations",
+                            "Create Request");
+                }
+            }
+        }
+    }
+
+    private final class ClearAction implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            if (logTable.getRowCount() == 0) {
+                return;
+            }
+
+            int[] rows = logTable.getSelectedRows();
+
+            if (rows.length == 0) {
+                if (UISupport.confirm("Clear monitor log?", "Clear Log")) {
+                    tableModel.clear();
+                }
+            } else if (UISupport.confirm("Clear " + rows.length + " rows from monitor log?", "Clear Log")) {
+                tableModel.clearRows(rows);
+            }
+        }
+    }
+
     @AForm(description = "Set options for adding selected requests to a MockService", name = "Add To MockService")
     private final class AddToMockServiceAction implements ActionListener {
         private static final String CREATE_NEW_OPTION = "<Create New>";
         private XFormDialog dialog;
 
         @AField(name = "Target MockService", description = "The target TestSuite", type = AFieldType.ENUMERATION)
-        public final static String MOCKSERVICE = "Target MockService";
+        final static String MOCKSERVICE = "Target MockService";
 
         @AField(name = "Open Editor", description = "Open the created MockService", type = AFieldType.BOOLEAN)
-        public final static String OPENEDITOR = "Open Editor";
+        final static String OPENEDITOR = "Open Editor";
 
         public void actionPerformed(ActionEvent e) {
             int[] rows = logTable.getSelectedRows();
@@ -628,13 +761,13 @@ public class SoapMonitor extends JPanel {
         private XFormDialog dialog;
 
         @AField(name = "Target TestSuite", description = "The target TestSuite", type = AFieldType.ENUMERATION)
-        public final static String TESTSUITE = "Target TestSuite";
+        final static String TESTSUITE = "Target TestSuite";
 
         @AField(name = "Target TestCase", description = "The target TestCase for the requests", type = AFieldType.ENUMERATION)
-        public final static String TESTCASE = "Target TestCase";
+        final static String TESTCASE = "Target TestCase";
 
         @AField(name = "Open Editor", description = "Open the created TestCase", type = AFieldType.BOOLEAN)
-        public final static String OPENEDITOR = "Open Editor";
+        final static String OPENEDITOR = "Open Editor";
 
         TestSuite testSuite;
 
@@ -752,68 +885,14 @@ public class SoapMonitor extends JPanel {
         }
     }
 
-    private final class CreateRequestsAction implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            int[] rows = logTable.getSelectedRows();
-            if (rows.length == 0) {
-                return;
-            }
-
-            if (UISupport.confirm("Create " + rows.length + " requests", "Create Request")) {
-                int withoutOperation = 0;
-                for (int row : rows) {
-                    WsdlMonitorMessageExchange me = tableModel.getMessageExchangeAt(row);
-                    if (me.getOperation() == null) {
-                        withoutOperation++;
-                        continue;
-                    }
-
-                    WsdlRequest request = me.getOperation().addNewRequest("Monitor Request " + (row + 1));
-
-                    request.setRequestContent(me.getRequestContent());
-                    request.setEndpoint(me.getTargetUrl().toString());
-
-                    Attachment[] requestAttachments = me.getRequestAttachments();
-                    if (requestAttachments != null) {
-                        for (Attachment attachment : requestAttachments) {
-                            request.importAttachment(attachment);
-                        }
-                    }
-                }
-                if (withoutOperation > 0) {
-                    UISupport.showInfoMessage("For " + withoutOperation + "request(s) there are no operations",
-                            "Create Request");
-                }
-            }
-        }
-    }
-
-    private final class ClearAction implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            if (logTable.getRowCount() == 0) {
-                return;
-            }
-
-            int[] rows = logTable.getSelectedRows();
-
-            if (rows.length == 0) {
-                if (UISupport.confirm("Clear monitor log?", "Clear Log")) {
-                    tableModel.clear();
-                }
-            } else if (UISupport.confirm("Clear " + rows.length + " rows from monitor log?", "Clear Log")) {
-                tableModel.clearRows(rows);
-            }
-        }
-    }
-
     @SuppressWarnings("unchecked")
     public class MonitorLogTableModel extends AbstractTableModel {
         private List<WsdlMonitorMessageExchange> exchanges = new TreeList();
 
-        public MonitorLogTableModel() {
+        MonitorLogTableModel() {
         }
 
-        public synchronized void clear() {
+        synchronized void clear() {
             int sz = exchanges.size();
             while (exchanges.size() > 0) {
                 WsdlMonitorMessageExchange removed = exchanges.remove(0);
@@ -833,7 +912,7 @@ public class SoapMonitor extends JPanel {
             updateRowCountLabel();
         }
 
-        public synchronized void clearRows(int[] indices) {
+        synchronized void clearRows(int[] indices) {
             for (int c = indices.length; c > 0; c--) {
                 int index = indices[c - 1];
                 WsdlMonitorMessageExchange removed = exchanges.remove(logTable.convertRowIndexToModel(index));
@@ -847,7 +926,7 @@ public class SoapMonitor extends JPanel {
             return 12;
         }
 
-        public WsdlMonitorMessageExchange getMessageExchangeAt(int tableRow) {
+        WsdlMonitorMessageExchange getMessageExchangeAt(int tableRow) {
             return exchanges.get(logTable.convertRowIndexToModel(tableRow));
         }
 
@@ -927,7 +1006,7 @@ public class SoapMonitor extends JPanel {
             return null;
         }
 
-        public synchronized void addMessageExchange(WsdlMonitorMessageExchange exchange) {
+        synchronized void addMessageExchange(WsdlMonitorMessageExchange exchange) {
             exchanges.add(exchange);
             int size = exchanges.size();
             fireTableRowsInserted(size - 1, size - 1);
@@ -947,7 +1026,7 @@ public class SoapMonitor extends JPanel {
             updateRowCountLabel();
         }
 
-        public void fitSizeToMaxRows() {
+        void fitSizeToMaxRows() {
             int removeCnt = 0;
 
             while (exchanges.size() > maxRows) {
@@ -960,80 +1039,6 @@ public class SoapMonitor extends JPanel {
                 fireTableDataChanged();
                 updateRowCountLabel();
             }
-        }
-    }
-
-    protected String getHttpProxyHost() {
-        return httpProxyHost;
-    }
-
-    /**
-     * Excludes proxy headers
-     *
-     * @param requestHeaders
-     * @return
-     */
-    private StringToStringsMap excludeProxyHeaders(StringToStringsMap requestHeaders) {
-        StringToStringsMap stsmap = new StringToStringsMap();
-        for (String key : requestHeaders.getKeys()) {
-            if (!(key.contains("Proxy") || key.contains("Content"))) {
-                stsmap.add(key, requestHeaders.get(key, ""));
-            }
-        }
-        return stsmap;
-    }
-
-    protected void setHttpProxyHost(String proxyHost) {
-        httpProxyHost = proxyHost;
-    }
-
-    protected int getHttpProxyPort() {
-        return httpProxyPort;
-    }
-
-    protected void setHttpProxyPort(int proxyPort) {
-        httpProxyPort = proxyPort;
-    }
-
-    // protected SlowLinkSimulator getSlowLink()
-    // {
-    // return slowLink;
-    // }
-
-    public String getTargetHost() {
-        String host = targetEndpoint;
-
-        try {
-            URL url = new URL(host);
-            return url.getHost();
-        } catch (MalformedURLException e) {
-            return host;
-        }
-    }
-
-    public String getTargetEndpoint() {
-        return targetEndpoint;
-    }
-
-    public int getTargetPort() {
-        try {
-            URL url = new URL(targetEndpoint);
-            return url.getPort() == -1 ? 80 : url.getPort();
-        } catch (MalformedURLException e) {
-            return 80;
-        }
-    }
-
-    public int getLocalPort() {
-        return listenPort;
-    }
-
-    public synchronized void addMessageExchange(WsdlMonitorMessageExchange messageExchange) {
-        messageExchangeStack.push(messageExchange);
-
-        if (!stackProcessor.isRunning()) {
-            new Thread(stackProcessor, "SoapMonitor StackProcessor for project [" + getProject().getName() + "]")
-                    .start();
         }
     }
 
@@ -1078,30 +1083,14 @@ public class SoapMonitor extends JPanel {
             return canceled;
         }
 
-        protected boolean isRunning() {
+        boolean isRunning() {
             return running;
         }
     }
 
-    public MonitorLogTableModel getLogModel() {
-        return tableModel;
-    }
+    class SoapMonitorOptionsAction extends AbstractAction {
 
-    public void addSoapMonitorListener(MonitorListener listener) {
-        listenerCallBack.addSoapMonitorListener(listener);
-    }
-
-    public void removeSoapMonitorListener(MonitorListener listener) {
-        listenerCallBack.removeSoapMonitorListener(listener);
-    }
-
-    public WsdlProject getProject() {
-        return project;
-    }
-
-    public class SoapMonitorOptionsAction extends AbstractAction {
-
-        public SoapMonitorOptionsAction() {
+        SoapMonitorOptionsAction() {
             putValue(SMALL_ICON, UISupport.createImageIcon("/preferences.png"));
         }
 
@@ -1150,16 +1139,16 @@ public class SoapMonitor extends JPanel {
         @AForm(name = "HTTP Monitor Options", description = "Set options for HTTP Monitor", helpUrl = HelpUrls.SOAPMONITOR_MONITOR_OPTIONS, icon = UISupport.OPTIONS_ICON_PATH)
         private class OptionsForm {
             @AField(description = "The local port to listen on", name = "Port", type = AFieldType.INT)
-            public final static String PORT = "Port";
+            final static String PORT = "Port";
 
             @AField(description = "The maximum number of exchanges to log", name = "Max Log", type = AFieldType.INT)
-            public final static String MAXROWS = "Max Log";
+            final static String MAXROWS = "Max Log";
 
             @AField(description = "The Incoming WSS configuration to use for processing requests", name = "Incoming Request WSS", type = AFieldType.ENUMERATION)
-            public final static String REQUEST_WSS = "Incoming Request WSS";
+            final static String REQUEST_WSS = "Incoming Request WSS";
 
             @AField(description = "The Outgoing WSS configuration to use for processing responses", name = "Incoming Response WSS", type = AFieldType.ENUMERATION)
-            public final static String RESPONSE_WSS = "Incoming Response WSS";
+            final static String RESPONSE_WSS = "Incoming Response WSS";
 
             @AField(description = "Content types to monitor", name = "Content types to monitor", type = AFieldType.STRINGAREA)
             public final static String SET_CONTENT_TYPES = "Content types to monitor";

@@ -58,8 +58,8 @@ import java.util.*;
  */
 
 public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
-    public static final String STYLE_DOCUMENT = "Document";
-    public static final String STYLE_RPC = "RPC";
+    private static final String STYLE_DOCUMENT = "Document";
+    private static final String STYLE_RPC = "RPC";
 
     public static final String JBOSSWS_ACTIONS = "jbossws";
     public static final String WSTOOLS_ACTIONS = "wstools";
@@ -74,7 +74,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
     private BeanPathPropertySupport definitionProperty;
     private String interfaceAnonymous;
     private String interfaceWsaVersion;
-    boolean policyFlag = false;
+    private boolean policyFlag = false;
 
     public WsdlInterface(WsdlProject project, WsdlInterfaceConfig interfaceConfig) {
         super(interfaceConfig, project, "/interface.png");
@@ -392,7 +392,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
     }
 
     @SuppressWarnings("unchecked")
-    public void transferOperations(Binding binding, boolean createRequests) {
+    private void transferOperations(Binding binding, boolean createRequests) {
         // prepare for transfer of operations/requests
         List<BindingOperation> newOperations = new ArrayList<BindingOperation>(binding.getBindingOperations());
         Map<String, WsdlOperation> oldOperations = new HashMap<String, WsdlOperation>();
@@ -475,7 +475,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         }
     }
 
-    public void transferEndpoints(Port port) {
+    private void transferEndpoints(Port port) {
         if (port != null) {
             String endpoint = WsdlUtils.getSoapEndpoint(port);
             if (endpoint != null) {
@@ -504,7 +504,7 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         }
     }
 
-    public void deleteOperation(String bindingOperationName) {
+    private void deleteOperation(String bindingOperationName) {
         for (int c = 0; c < operations.size(); c++) {
             WsdlOperation wsdlOperation = operations.get(c);
             if (wsdlOperation.getBindingOperationName().equals(bindingOperationName)) {
@@ -613,11 +613,10 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         return new ArrayList<Operation>(operations);
     }
 
-    public static class BindingTuple {
-        public WsdlContext context = null;
-        public Service service = null;
-        public Port port = null;
-        public Binding binding = null;
+    private List<AbstractWsdlModelItem<?>> getAllMessages() {
+        ArrayList<AbstractWsdlModelItem<?>> list = new ArrayList<AbstractWsdlModelItem<?>>();
+        getAllMessages(getProject(), list);
+        return list;
     }
 
     public boolean isUpdating() {
@@ -642,10 +641,15 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
         notifyPropertyChanged(UPDATING_PROPERTY, oldValue, updating);
     }
 
-    public List<AbstractWsdlModelItem<?>> getAllMessages() {
-        ArrayList<AbstractWsdlModelItem<?>> list = new ArrayList<AbstractWsdlModelItem<?>>();
-        getAllMessages(getProject(), list);
-        return list;
+    private void setAnonymous(String anonymous) {
+        if (anonymous.equals(AnonymousTypeConfig.REQUIRED.toString())) {
+            getConfig().setAnonymous(AnonymousTypeConfig.REQUIRED);
+        } else if (anonymous.equals(AnonymousTypeConfig.PROHIBITED.toString())) {
+            getConfig().setAnonymous(AnonymousTypeConfig.PROHIBITED);
+        } else {
+            getConfig().setAnonymous(AnonymousTypeConfig.OPTIONAL);
+        }
+
     }
 
     private void getAllMessages(ModelItem modelItem, List<AbstractWsdlModelItem<?>> list) {
@@ -748,15 +752,11 @@ public class WsdlInterface extends AbstractInterface<WsdlInterfaceConfig> {
 
     }
 
-    public void setAnonymous(String anonymous) {
-        if (anonymous.equals(AnonymousTypeConfig.REQUIRED.toString())) {
-            getConfig().setAnonymous(AnonymousTypeConfig.REQUIRED);
-        } else if (anonymous.equals(AnonymousTypeConfig.PROHIBITED.toString())) {
-            getConfig().setAnonymous(AnonymousTypeConfig.PROHIBITED);
-        } else {
-            getConfig().setAnonymous(AnonymousTypeConfig.OPTIONAL);
-        }
-
+    public static class BindingTuple {
+        WsdlContext context = null;
+        Service service = null;
+        Port port = null;
+        Binding binding = null;
     }
 
     public String getAnonymous() {

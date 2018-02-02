@@ -30,11 +30,11 @@ import com.eviware.soapui.support.dnd.handlers.DragAndDropSupport;
 import java.util.HashSet;
 
 public abstract class AbstractAddRequestToTestCaseAction<T extends AbstractHttpRequest> extends AbstractAddToTestCaseAction<T> {
-    public AbstractAddRequestToTestCaseAction(String name, String description) {
+    protected AbstractAddRequestToTestCaseAction(String name, String description) {
         super(name, description);
     }
 
-    public static AbstractAddRequestToTestCaseAction findActionForRequest(AbstractHttpRequest source) {
+    private static AbstractAddRequestToTestCaseAction findActionForRequest(AbstractHttpRequest source) {
         String actionId = source instanceof RestRequest ? AddRestRequestToTestCaseAction.SOAPUI_ACTION_ID :
                 AddRequestToTestCaseAction.SOAPUI_ACTION_ID;
         return (AbstractAddRequestToTestCaseAction)
@@ -62,6 +62,6 @@ public abstract class AbstractAddRequestToTestCaseAction<T extends AbstractHttpR
         return findActionForRequest(source).addRequest(testCase, source, index);
     }
 
-    public abstract boolean addRequest(TestCase testCase, T request, int position);
+    protected abstract boolean addRequest(TestCase testCase, T request, int position);
 
 }

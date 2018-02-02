@@ -310,29 +310,24 @@ public class JdbcRequestTestStep extends WsdlTestStepWithProperties implements A
         });
     }
 
-    private class PropertyChangeNotifier {
-        private AssertionStatus oldStatus;
-        private ImageIcon oldIcon;
-
-        public PropertyChangeNotifier() {
-            oldStatus = getAssertionStatus();
-            oldIcon = getIcon();
-        }
-
-        public void notifyChange() {
-            AssertionStatus newStatus = getAssertionStatus();
-            ImageIcon newIcon = getIcon();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+    private void assertResponse(SubmitContext context) {
+        try {
+            if (notifier == null) {
+                notifier = new PropertyChangeNotifier();
             }
 
-            if (oldIcon != newIcon) {
-                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
+            JdbcMessageExchange messageExchange = new JdbcMessageExchange(this, getJdbcRequest().getResponse());
+
+            if (getJdbcRequest().getResponse() != null) {
+                // assert!
+                for (WsdlMessageAssertion assertion : assertionsSupport.getAssertionList()) {
+                    assertion.assertResponse(messageExchange, context);
+                }
             }
 
-            oldStatus = newStatus;
-            oldIcon = newIcon;
+            notifier.notifyChange();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -466,25 +461,8 @@ public class JdbcRequestTestStep extends WsdlTestStepWithProperties implements A
         assertionsSupport.removeAssertionsListener(listener);
     }
 
-    public void assertResponse(SubmitContext context) {
-        try {
-            if (notifier == null) {
-                notifier = new PropertyChangeNotifier();
-            }
-
-            JdbcMessageExchange messageExchange = new JdbcMessageExchange(this, getJdbcRequest().getResponse());
-
-            if (getJdbcRequest().getResponse() != null) {
-                // assert!
-                for (WsdlMessageAssertion assertion : assertionsSupport.getAssertionList()) {
-                    assertion.assertResponse(messageExchange, context);
-                }
-            }
-
-            notifier.notifyChange();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private boolean isDiscardResponse() {
+        return jdbcRequest.isDiscardResponse();
     }
 
     public TestProperty addProperty(String name) {
@@ -666,8 +644,30 @@ public class JdbcRequestTestStep extends WsdlTestStepWithProperties implements A
         assertResponse(context);
     }
 
-    public boolean isDiscardResponse() {
-        return jdbcRequest.isDiscardResponse();
+    private class PropertyChangeNotifier {
+        private AssertionStatus oldStatus;
+        private ImageIcon oldIcon;
+
+        PropertyChangeNotifier() {
+            oldStatus = getAssertionStatus();
+            oldIcon = getIcon();
+        }
+
+        void notifyChange() {
+            AssertionStatus newStatus = getAssertionStatus();
+            ImageIcon newIcon = getIcon();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+            }
+
+            if (oldIcon != newIcon) {
+                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
+            }
+
+            oldStatus = newStatus;
+            oldIcon = newIcon;
+        }
     }
 
     public void setDiscardResponse(boolean discardResponse) {

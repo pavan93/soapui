@@ -23,11 +23,9 @@ import com.eviware.soapui.ui.desktop.standalone.StandaloneDesktopFactory;
 import com.jgoodies.looks.plastic.PlasticXPLookAndFeel;
 import com.jgoodies.looks.plastic.theme.SkyBluer;
 
-import javax.swing.ToolTipManager;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.plaf.ColorUIResource;
-import java.awt.Color;
-import java.awt.Insets;
+import java.awt.*;
 
 public class StandaloneSoapUICore extends SwingSoapUICore {
 
@@ -62,7 +60,7 @@ public class StandaloneSoapUICore extends SwingSoapUICore {
         ToolTipManager.sharedInstance().setEnabled(!getSettings().getBoolean(UISettings.DISABLE_TOOLTIPS));
     }
 
-    public void initSoapUILookAndFeel() {
+    private void initSoapUILookAndFeel() {
         try {
             // Enabling native look & feel by default on Mac OS X
             if (UISupport.isMac()) {
@@ -95,8 +93,8 @@ public class StandaloneSoapUICore extends SwingSoapUICore {
      * @author ole.matzura
      */
 
-    public static class SoapUITheme extends SkyBluer {
-        public static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
+    static class SoapUITheme extends SkyBluer {
+        static final Color BACKGROUND_COLOR = new Color(240, 240, 240);
 
         @Override
         public ColorUIResource getControl() {

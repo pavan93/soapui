@@ -11,13 +11,13 @@ import static com.smartbear.ready.recipe.NullChecker.checkNotNull;
  * Captures the JSON configuration of an XPath contains assertion.
  */
 @ApiModel(value = "XPathContainsAssertion", description = "XPath contains assertion definition")
-public class XPathContainsAssertionStruct extends AssertionStruct<XPathContainsAssertion> {
+class XPathContainsAssertionStruct extends AssertionStruct<XPathContainsAssertion> {
 
-    public final String xpath;
-    public final String expectedContent;
-    public final boolean allowWildcards;
-    public final boolean ignoreNamespaces;
-    public final boolean ignoreComments;
+    private final String xpath;
+    private final String expectedContent;
+    private final boolean allowWildcards;
+    private final boolean ignoreNamespaces;
+    private final boolean ignoreComments;
 
     @JsonCreator
     public XPathContainsAssertionStruct(@JsonProperty("name") String name, @JsonProperty("xpath") String xpath, @JsonProperty("expectedContent") String expectedContent,

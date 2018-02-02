@@ -319,7 +319,7 @@ public class PathUtils {
         return getExpandedResourceRoot(modelItem, null);
     }
 
-    public static String getExpandedResourceRoot(ModelItem modelItem, PropertyExpansionContext context) {
+    private static String getExpandedResourceRoot(ModelItem modelItem, PropertyExpansionContext context) {
         if (!(modelItem instanceof AbstractWsdlModelItem<?>)) {
             return null;
         }

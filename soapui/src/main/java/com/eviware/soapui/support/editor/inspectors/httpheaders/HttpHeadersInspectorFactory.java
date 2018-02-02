@@ -112,7 +112,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class WsdlMessageExchangeRequestHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public WsdlMessageExchangeRequestHeadersModel(MessageExchangeModelItem request) {
+        WsdlMessageExchangeRequestHeadersModel(MessageExchangeModelItem request) {
             super(true, request, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -123,7 +123,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class AMFMessageExchangeRequestHTTPHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public AMFMessageExchangeRequestHTTPHeadersModel(MessageExchangeModelItem request) {
+        AMFMessageExchangeRequestHTTPHeadersModel(MessageExchangeModelItem request) {
             super(true, request, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -137,7 +137,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class AMFMessageExchangeResponseHTTPHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public AMFMessageExchangeResponseHTTPHeadersModel(MessageExchangeModelItem modelItem) {
+        AMFMessageExchangeResponseHTTPHeadersModel(MessageExchangeModelItem modelItem) {
             super(true, modelItem, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -151,7 +151,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class WsdlMessageExchangeResponseHeadersModel extends AbstractHeadersModel<MessageExchangeModelItem> {
-        public WsdlMessageExchangeResponseHeadersModel(MessageExchangeModelItem response) {
+        WsdlMessageExchangeResponseHeadersModel(MessageExchangeModelItem response) {
             super(true, response, MessageExchangeModelItem.MESSAGE_EXCHANGE);
         }
 
@@ -166,7 +166,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
         AbstractHttpRequest<?> request;
         AbstractXmlInspector inspector;
 
-        public WsdlRequestHeadersModel(AbstractHttpRequest<?> abstractHttpRequest) {
+        WsdlRequestHeadersModel(AbstractHttpRequest<?> abstractHttpRequest) {
             super(false, abstractHttpRequest, AbstractHttpRequestInterface.REQUEST_HEADERS_PROPERTY);
             this.request = abstractHttpRequest;
             this.request.addPropertyChangeListener(this);
@@ -202,7 +202,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class AMFRequestHeadersModel extends AbstractHeadersModel<AMFRequestTestStep> {
-        public AMFRequestHeadersModel(AMFRequestTestStep testStep) {
+        AMFRequestHeadersModel(AMFRequestTestStep testStep) {
             super(false, testStep, AMFRequest.AMF_REQUEST);
         }
 
@@ -224,7 +224,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     private class AMFResponseHeadersModel extends AbstractHeadersModel<AMFRequestTestStep> {
         AMFRequestTestStep testStep;
 
-        public AMFResponseHeadersModel(AMFRequestTestStep testStep) {
+        AMFResponseHeadersModel(AMFRequestTestStep testStep) {
             super(true, testStep, AMFResponse.AMF_RESPONSE_HEADERS);
             this.testStep = testStep;
             this.testStep.getAMFRequest().addPropertyChangeListener(AMFRequest.AMF_RESPONSE_PROPERTY, this);
@@ -247,7 +247,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class MockResponseHeadersModel extends AbstractHeadersModel<MockResponse> {
-        public MockResponseHeadersModel(MockResponse mockResponse) {
+        MockResponseHeadersModel(MockResponse mockResponse) {
             super(false, mockResponse, WsdlMockResponse.HEADERS_PROPERTY);
         }
 
@@ -265,7 +265,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
         AbstractHttpRequest<?> request;
         AbstractXmlInspector inspector;
 
-        public WsdlRequestResponseHeadersModel(AbstractHttpRequest<?> request) {
+        WsdlRequestResponseHeadersModel(AbstractHttpRequest<?> request) {
             super(true, request, WsdlRequest.RESPONSE_PROPERTY);
             this.request = request;
             this.request.addPropertyChangeListener(this);
@@ -296,7 +296,7 @@ public class HttpHeadersInspectorFactory implements RequestInspectorFactory, Res
     }
 
     private class WsdlMockResponseRequestHeadersModel extends AbstractHeadersModel<WsdlMockResponse> {
-        public WsdlMockResponseRequestHeadersModel(WsdlMockResponse request) {
+        WsdlMockResponseRequestHeadersModel(WsdlMockResponse request) {
             super(true, request, WsdlMockResponse.MOCKRESULT_PROPERTY);
         }
 

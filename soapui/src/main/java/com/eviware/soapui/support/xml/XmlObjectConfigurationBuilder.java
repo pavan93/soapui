@@ -29,7 +29,7 @@ public class XmlObjectConfigurationBuilder {
     private XmlObject config;
     private XmlCursor cursor;
 
-    public XmlObjectConfigurationBuilder(XmlObject config) {
+    private XmlObjectConfigurationBuilder(XmlObject config) {
         this.config = config;
         cursor = config.newCursor();
         cursor.toNextToken();

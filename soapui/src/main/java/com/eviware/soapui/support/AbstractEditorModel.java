@@ -30,13 +30,13 @@ public abstract class AbstractEditorModel implements EditorModel {
         listeners.remove(editorModelListener);
     }
 
-    public void fireEditorTextChanged(String oldText, String newText) {
+    void fireEditorTextChanged(String oldText, String newText) {
         for (EditorModelListener listener : listeners) {
             listener.editorTextChanged(oldText, newText);
         }
     }
 
-    public void release() {
+    void release() {
         listeners.clear();
     }
 }

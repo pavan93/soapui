@@ -16,19 +16,17 @@
 
 package com.eviware.soapui.support.dnd;
 
-import javax.swing.JComponent;
-import javax.swing.JTree;
-import java.awt.Component;
-import java.awt.Rectangle;
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class JTreeDragAndDropable<T> implements SoapUIDragAndDropable<T> {
     private JTree tree;
 
-    public JTreeDragAndDropable(JTree tree) {
+    JTreeDragAndDropable(JTree tree) {
         this.tree = tree;
     }
 
-    public JTree getTree() {
+    JTree getTree() {
         return tree;
     }
 
@@ -72,8 +70,8 @@ public abstract class JTreeDragAndDropable<T> implements SoapUIDragAndDropable<T
         }
     }
 
-    public abstract int getRowForModelItem(T modelItem);
+    protected abstract int getRowForModelItem(T modelItem);
 
-    public abstract T getModelItemAtRow(int row);
+    protected abstract T getModelItemAtRow(int row);
 
 }

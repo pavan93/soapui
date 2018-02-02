@@ -82,12 +82,12 @@ public class ProAssertionPlaceHolderFactory implements TestAssertionFactory {
 
     private class ProAssertionPlaceHolder extends WsdlMessageAssertion {
 
-        protected ProAssertionPlaceHolder(TestAssertionConfig assertionConfig, Assertable modelItem, boolean cloneable,
-                                          boolean configurable, boolean multiple, boolean requiresResponseContent) {
+        ProAssertionPlaceHolder(TestAssertionConfig assertionConfig, Assertable modelItem, boolean cloneable,
+                                boolean configurable, boolean multiple, boolean requiresResponseContent) {
             super(assertionConfig, modelItem, cloneable, configurable, multiple, requiresResponseContent);
         }
 
-        public ProAssertionPlaceHolder(TestAssertionConfig config, Assertable assertable) {
+        ProAssertionPlaceHolder(TestAssertionConfig config, Assertable assertable) {
             this(config, assertable, false, false, false, false);
         }
 

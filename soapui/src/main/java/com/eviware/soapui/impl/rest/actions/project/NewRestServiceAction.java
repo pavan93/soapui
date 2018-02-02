@@ -37,10 +37,10 @@ import static com.eviware.soapui.analytics.SoapUIActions.ADD_REST_SERVICE_FROM_U
 public class NewRestServiceAction extends AbstractSoapUIAction<WsdlProject> {
     public static final String SOAPUI_ACTION_ID = "NewRestServiceAction";
 
-    public static final MessageSupport messages = MessageSupport.getMessages(NewRestServiceAction.class);
+    private static final MessageSupport messages = MessageSupport.getMessages(NewRestServiceAction.class);
 
 
-    public NewRestServiceAction() {
+    private NewRestServiceAction() {
         super(messages.get("Title"), messages.get("Description"));
     }
 

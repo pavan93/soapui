@@ -23,8 +23,7 @@ import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.junit.internal.matchers.TypeSafeMatcher;
 
-import java.awt.Component;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -198,12 +197,12 @@ public class StubbedDialogs implements XDialogs {
         }
     }
 
-    public static class Prompt {
-        public final String question;
-        public final String title;
-        public final Object value;
+    static class Prompt {
+        final String question;
+        final String title;
+        final Object value;
 
-        public Prompt(String question, String title, Object value) {
+        Prompt(String question, String title, Object value) {
             this.question = question;
             this.title = title;
             this.value = value;
@@ -224,7 +223,7 @@ public class StubbedDialogs implements XDialogs {
         public final String question;
         public final String title;
 
-        public Confirmation(String question, String title) {
+        Confirmation(String question, String title) {
             this.question = question;
             this.title = title;
         }

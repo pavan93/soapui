@@ -29,7 +29,7 @@ public class ModalFrameUtil {
     static class EventPump implements InvocationHandler {
         Frame frame;
 
-        public EventPump(Frame frame) {
+        EventPump(Frame frame) {
             this.frame = frame;
         }
 
@@ -39,7 +39,7 @@ public class ModalFrameUtil {
 
         // when the reflection calls in this method has to be
         // replaced once Sun provides a public API to pump events.
-        public void start() throws Exception {
+        void start() throws Exception {
             Class<?> clazz = Class.forName("java.awt.Conditional");
             Object conditional = Proxy.newProxyInstance(clazz.getClassLoader(), new Class[]{clazz}, this);
             Method pumpMethod = Class.forName("java.awt.EventDispatchThread").getDeclaredMethod("pumpEvents",

@@ -30,7 +30,7 @@ public class ManualTestStepResult extends WsdlTestStepResult {
         return urls;
     }
 
-    protected void setUrls(Object[] urls) {
+    void setUrls(Object[] urls) {
         this.urls.clear();
         for (Object o : urls) {
             this.urls.add(String.valueOf(o));
@@ -38,11 +38,11 @@ public class ManualTestStepResult extends WsdlTestStepResult {
         }
     }
 
-    protected String getResult() {
+    String getResult() {
         return result;
     }
 
-    protected void setResult(String result) {
+    void setResult(String result) {
         this.result = result;
         super.addMessage(result);
     }

@@ -89,7 +89,7 @@ public class SoapUIMetrics extends HttpConnectionMetricsImpl {
         return totalTimer;
     }
 
-    public long getTimestamp() {
+    private long getTimestamp() {
         return timestamp;
     }
 

@@ -16,7 +16,7 @@
 
 package com.eviware.soapui.impl.actions;
 
-public class LabeledItem<T extends Labeled> {
+class LabeledItem<T extends Labeled> {
 
 
     private final Labeled value;

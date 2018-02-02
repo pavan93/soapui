@@ -90,7 +90,7 @@ public class WsdlTestRequest extends WsdlRequest implements Assertable, TestRequ
         return getTestStep();
     }
 
-    protected void initIcons() {
+    private void initIcons() {
         if (validRequestIcon == null) {
             validRequestIcon = UISupport.createImageIcon("/valid_soap_request_step.png");
         }
@@ -176,29 +176,26 @@ public class WsdlTestRequest extends WsdlRequest implements Assertable, TestRequ
         notifier.notifyChange();
     }
 
-    private class PropertyChangeNotifier {
-        private AssertionStatus oldStatus;
-        private ImageIcon oldIcon;
-
-        public PropertyChangeNotifier() {
-            oldStatus = getAssertionStatus();
-            oldIcon = getIcon();
+    protected static class TestRequestIconAnimator extends RequestIconAnimator<WsdlTestRequest> {
+        TestRequestIconAnimator(WsdlTestRequest modelItem) {
+            super(modelItem, "/soap_request.png", "/soap_request.png", 4);
         }
 
-        public void notifyChange() {
-            AssertionStatus newStatus = getAssertionStatus();
-            ImageIcon newIcon = getIcon();
-
-            if (oldStatus != newStatus) {
-                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
+        @Override
+        public boolean beforeSubmit(Submit submit, SubmitContext context) {
+            if (SoapUI.getTestMonitor() != null
+                    && (SoapUI.getTestMonitor().hasRunningLoadTest(getTarget().getTestCase()))) {
+                return true;
             }
 
-            if (oldIcon != newIcon) {
-                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
-            }
+            return super.beforeSubmit(submit, context);
+        }
 
-            oldStatus = newStatus;
-            oldIcon = newIcon;
+        @Override
+        public void afterSubmit(Submit submit, SubmitContext context) {
+            if (submit.getRequest() == getTarget()) {
+                stop();
+            }
         }
     }
 
@@ -359,26 +356,29 @@ public class WsdlTestRequest extends WsdlRequest implements Assertable, TestRequ
         return getOperation().getInterface();
     }
 
-    protected static class TestRequestIconAnimator extends RequestIconAnimator<WsdlTestRequest> {
-        public TestRequestIconAnimator(WsdlTestRequest modelItem) {
-            super(modelItem, "/soap_request.png", "/soap_request.png", 4);
+    private class PropertyChangeNotifier {
+        private AssertionStatus oldStatus;
+        private ImageIcon oldIcon;
+
+        PropertyChangeNotifier() {
+            oldStatus = getAssertionStatus();
+            oldIcon = getIcon();
         }
 
-        @Override
-        public boolean beforeSubmit(Submit submit, SubmitContext context) {
-            if (SoapUI.getTestMonitor() != null
-                    && (SoapUI.getTestMonitor().hasRunningLoadTest(getTarget().getTestCase()))) {
-                return true;
+        void notifyChange() {
+            AssertionStatus newStatus = getAssertionStatus();
+            ImageIcon newIcon = getIcon();
+
+            if (oldStatus != newStatus) {
+                notifyPropertyChanged(STATUS_PROPERTY, oldStatus, newStatus);
             }
 
-            return super.beforeSubmit(submit, context);
-        }
-
-        @Override
-        public void afterSubmit(Submit submit, SubmitContext context) {
-            if (submit.getRequest() == getTarget()) {
-                stop();
+            if (oldIcon != newIcon) {
+                notifyPropertyChanged(ICON_PROPERTY, oldIcon, getIcon());
             }
+
+            oldStatus = newStatus;
+            oldIcon = newIcon;
         }
     }
 
